@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  descripcion: MyString
+  nro_horas: 9.99
+  estado: MyString
+  temas: MyText
+
+two:
+  descripcion: MyString
+  nro_horas: 9.99
+  estado: MyString
+  temas: MyText

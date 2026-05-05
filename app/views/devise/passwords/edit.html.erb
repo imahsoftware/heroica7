@@ -1,0 +1,53 @@
+<script type="text/javascript">
+  document.addEventListener('contextmenu', event => event.preventDefault());
+  function disableF5(e) { if ((e.which || e.keyCode) == 116) e.preventDefault()};
+  $(document).ready(function(){
+       $(document).on("keydown", disableF5);
+  });
+</script>
+
+<div class="login-box">
+  <div class="login-box-body">
+    <%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+      <%= f.input :reset_password_token, as: :hidden %>
+      <%= f.full_error :reset_password_token %>
+      <div class="login-logo login-logo2">
+        <%= image_tag 'logoisvimed2.png', style: 'width: 30%; height: auto;' %>
+      </div>
+      <h4 class="login-box-msg"><b>Cambiar contraseña</b></h4>
+      <div class="form-login">
+        <div class="input-group" style="margin-bottom: 15px;">
+          <span class="input-group-addon"><i class="fa fa-unlock-alt"></i></span>
+          <%= f.input :password,
+                required: true,
+                autofocus: true,
+                label: false,
+                placeholder: 'Nueva contraseña',
+                input_html: { autocomplete: "new-password" } %>
+        </div>
+        <div class="input-group" style="margin-bottom: 15px;">
+          <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+          <%= f.input :password_confirmation,
+                required: true,
+                label: false,
+                placeholder: 'Confirmar contraseña',
+                input_html: { autocomplete: "new-password" } %>
+        </div>
+      </div>
+      <div class="box-footer">
+        <div class="row">
+          <div class="col-md-8 pull-left">
+            <%= render "devise/shared/links" %>
+          </div>
+          <div class="col-md-4 pull-right">
+            <%= f.button :submit, 'Cambiar', class: 'btn-primary btn-flat' %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<%= render 'layouts/flash_messages' %>
+
+

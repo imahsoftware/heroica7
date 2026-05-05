@@ -1,0 +1,106 @@
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+
+
+<div class="box box-danger">
+  <div class="box-body">
+    <% fechas = Fecha.where("fecha between curdate() and date_add(curdate(),interval 5 day )")
+       if @placas
+         @placas.each do |p|
+    %>
+        <legend>Agenda practica <%= p.descripcion %></legend>
+        <% if p.placasdatos.where("date_format(created_at, '%Y-%m-%d') = curdate()").present?
+             fechas.each do |f|
+               datos = is_programacionagenda(p.id, f.fecha)
+        %>
+            <% if datos.any? %>
+              <%= link_to valida_placasdatos_path(a: p.id, e: 'TANQUEO'), title: 'Tanqueo' do %>
+                <button class="btn btn-xs btn-info"><i class="fa fa-key"></i> Tanqueo</button>
+              <% end %>
+              <%= link_to valida_placasdatos_path(a: p.id, e: 'FINAL'), title: 'Finalizar' do %>
+                <button class="btn btn-xs btn-success"><i class="fa fa-key"></i> Finalizar DIA</button>
+              <% end %><br/><br/>
+              <div id="agenda<%= p.id %>_<%= f.fecha %>" class="box box-info collapsed-box">
+                <div class="box-header with-border">
+                  <div class="row">
+                    <div class="col-md-12">
+                    <span class="btn btn-box-tool" data-widget="collapse">
+                      <i class="fa fa-plus"></i>
+                        <h3 class="box-title">Agenda dia --> <%= f.fecha %></h3>
+                    </span>
+                    </div>
+                  </div>
+                </div>
+                <div class="box-body">
+                  <div class="row">
+                    <div class="col-xs-12 col-md-12">
+                      <div class="table-responsive">
+                        <table class="table table-bordered table-condensed table-striped">
+                          <thead>
+                          <tr class="thcolor">
+                            <th width="5%" class="text-center"></th>
+                            <th width="18%" class="text-center">Horario</th>
+                            <th>Usuario</th>
+                          </tr>
+                          </thead>
+                          <tbody id="placas-tbody">
+                          <% datos.each do |pr| %>
+                            <tr>
+                              <td class="text-center">
+                                <% if pr.respuestaclase.to_s == "" %>
+                                  <%= link_to captura_foto_personasbitacoras_path(personastramite_id: pr.personastramite_id, tiposhorario_id: pr.idhorario, placa_id: pr.placa_id, fecha: pr.fecha, telefono: pr.celular),  data: { toggle: 'tooltip' }, title: 'Capturar Foto Inicio' do %>
+                                    <button class="btn btn-xs btn-success"><i class="fa fa-camera"></i></button>
+                                  <% end %>
+                                  <%# ANDRES AQUI NECESITO EL BOTON DE TOMAR LA FOTO CON LA SELFI %>
+                                  <%= link_to new_personasbitacora_path(a: pr.personastramite_id, b: pr.idhorario, c: pr.placa_id, d: pr.fecha, e: pr.celular), title: 'Notificar' do %>
+                                    <button class="btn btn-xs btn-danger"><i class="fa fa-key"></i></button>
+                                  <% end %>
+                                <% elsif pr.respuestaclase.to_s == "PENDIENTE"
+                                     if pr.clase.to_s == 'SMSCodigo' %>
+                                    <i class="fa fa-expeditedssl"></i>
+                                  <% else %>
+                                    <%= link_to clase_personasbitacoras_path(id: pr.personasbitacora_id), remote: true do %>
+                                      <button class="btn btn-xs btn-info"><i class="fa fa-expeditedssl"></i></button>
+                                    <% end %>
+                                    <%= link_to captura_foto_fin_personasbitacoras_path(personasbitacora_id: pr.personasbitacora_id),  data: { toggle: 'tooltip' }, title: 'Capturar Foto Fin' do %>
+                                      <button class="btn btn-xs btn-warning"><i class="fa fa-camera"></i></button>
+                                    <% end %>
+                                  <% end %>
+                                <% else %>
+                                  <button class="btn btn-xs btn-success"><i class="fa fa-check-circle"></i></button>
+                                <% end %>
+                              </td>
+                              <td class="text-center"><small><%= h pr.horario %></small></td>
+                              <td><%= h pr.autobuscar %>
+                                <br/><small><em>Celular: <%= pr.celular %></em></small></td>
+                            </tr>
+                          <% end %>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          <% end %>
+        <% else %>
+          <%= link_to valida_placasdatos_path(a: p.id, e: 'INICIAL'), title: 'Iniciar' do %>
+            <button class="btn btn-xs btn-danger"><i class="fa fa-key"></i> Iniciar DIA</button>
+          <% end %>
+        <% end %>
+      <% end %>
+      </div>
+      </div>
+    <% else %>
+      <div class="alert alert-danger"><h4><i class="icon fa fa-info"></i> <%= t :atencion %></h4>No hay agenda practica
+        asociada..
+      </div>
+    <% end %>
+    <div class="modal fade" id="clase">
+      <div class="modal-dialog" style="width: 300px;">
+        <div class="modal-content" style="width: 300px;">
+        </div>
+      </div>
+    </div>
+

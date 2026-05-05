@@ -1,0 +1,65 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+
+<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet"/>
+<link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+
+<!-- Navbar -->
+<!-- End Navbar -->
+<div class="page-header clear-filter" filter-color="orange">
+  <div class="page-header-image"
+       style="background-image:url('https://www.tecnicaelectromedica.com/wp-content/uploads/2019/03/Fondo-blanco-pagina-01.jpg')"></div>
+  <div class="content">
+    <div class="container">
+      <div class="col-md-4 ml-auto mr-auto">
+        <div class="card card-login card-plain">
+          <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+            <div class="card-header text-center no-border">
+              <div class="logo-container">
+                <%= image_tag "logonuevo.png", style: "width:300px;height:120px;text-align:center;" %>
+              </div>
+               <div class="input-group no-border input-lg">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" style="border:none; background-color: #666666; color: #fff; padding: 13px;">
+                      <i class="fa fa-user"></i>
+                    </span>
+                </div>
+                <%= f.text_field :username, autofocus: true, class: "form-control", placeholder: 'Usuario' %>
+              </div>
+              <div class="input-group no-border input-lg">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" style="border:none; background-color: #666666; color: #fff; padding: 13px;">
+                      <i class="now-ui-icons text_caps-small"></i>
+                    </span>
+                </div>
+                <%= f.password_field :password, autocomplete: "off", class: "form-control", placeholder: 'Contraseña' %>
+              </div>
+            </div>
+          
+           <div class="card-body">
+              <div class="card-footer text-center">
+              <%= f.submit "Iniciar Sesion", class: "btn btn-primary btn-round btn-lg btn-block" %>
+              <div class="pull-right">
+            </div>
+            
+                <h6>
+                  <a href="#pablo" class="link" style="color: red; font-size: 12px;">IMAH</a>
+                </h6>
+              </div>
+            </div>
+          <% end %>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--   Core JS Files   -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+
+
+
+

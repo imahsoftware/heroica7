@@ -1,0 +1,272 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+@import "font-awesome-sprockets";
+@import "font-awesome";
+@import "bootstrap-wysihtml5/bootstrap3-wysihtml5";
+@import 'simple_form_autocomplete';
+@import url('nav.scss');
+
+* html {
+  font-family: "-apple-system", BlinkMacSystemFont, Roboto, Arial, Helvetica, "sans-serif";
+}
+
+body * {
+  font-family: "-apple-system", BlinkMacSystemFont, Roboto, Arial, Helvetica, "sans-serif";
+}
+
+.text-table {
+  font-size: 11px;
+}
+
+.thcolorinfo{
+  background: #24AAE9;
+  color: #fff;
+}
+
+.thcolorred {
+  background: #dd4b39 !important;
+  color: #fff;
+}
+
+.thcolororange {
+  background: #ff851b !important;
+  color: #fff;
+}
+
+.thcolorgreen {
+  background: #00a65a !important;
+  color: #fff;
+}
+
+.thcolorgray {
+  background: #CCCCCC !important;
+  color: #000;
+}
+
+.thcolorgray2 {
+  background: #979797 !important;
+  color: #fff;
+}
+
+
+.divper {
+  background: #fff;
+  padding: 10px;
+  border-radius: 16px;
+  border: 1px solid #ccc!important;
+}
+
+.tdcolorgris {
+  background: #BDBDBD;
+  color: #000;
+  padding: 5px;
+}
+
+.camrednormal {
+  background: #ffcccc;
+  color: #ff0000;
+}
+
+.camredcenter {
+  background: #ffcccc;
+  text-align: center;
+  color: #ff0000;
+}
+
+.tabin {
+ background: #ffcccc;
+ text-align: left;
+ color: #ff0000;
+}
+
+.tabac {
+ background: #ccffe6;
+ text-align: left;
+ color: #009900;
+}
+
+.tabter {
+ background: #f39c12;
+ text-align: left;
+ color: #fff;
+}
+
+
+/* Credit to bootsnipp.com for the css for the color graph
+ ESTO SOLO ES PARA EL FORMULARIO DE LOGIN
+*/
+.colorgraph {
+  height: 5px;
+  border-top: 0;
+  background: #c4e17f;
+  border-radius: 5px;
+  background-image: -webkit-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+  background-image: -moz-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+  background-image: -o-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+  background-image: linear-gradient(to right, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+}
+/*
+.skin-blue-light .sidebar-menu>li.active>a {
+  background-color: #20447d !important;
+  color: #fff !important;
+}
+
+.skin-blue-light .nav-tabs-custom > .nav-tabs > li.active {
+  background-color: #20447d !important;
+}
+*/
+
+
+.divnoti {
+  position: fixed;
+  z-index: 9999;
+  left: 10px;
+  bottom: 45px;
+  min-width: 10%;
+  font-weight: bold;
+}
+
+.cab{
+    background: #D7D7D7;
+    color: #000;
+    font-size: 12px;
+    font-weight: bold;
+  }
+
+.tit{
+    background: #EDEDED;
+    color: #000;
+    font-size: 10px;
+    padding: 2px;
+  }
+
+.gast{
+    background: #FCF2F2;
+    color: #000;
+    font-size: 10px;
+    padding: 2px;
+  }
+
+.fotos{
+    width: 165px;
+    height: 165px;
+    float: left;
+    margin: 5px;
+  }
+
+
+/* CLASES PARA COLOCAR TEXTO VERTICAL */
+th.rotate {
+height: 140px;
+white-space: nowrap;
+}
+
+th.rotate > div {
+  transform: 
+    translate(2px, 260px)
+    rotate(-90deg);
+  width: 20px;
+}
+
+th.rotate > div > span {
+  padding: 5px 10px;
+}
+
+.input_uppercase {
+  text-transform:uppercase;
+}
+
+.input_fechas {
+  width: 30% !important;
+}
+
+.input_g_fechas {
+  margin-right: -112px !important;
+}
+
+
+.tiptext {
+  cursor: help;
+  font-family: 'ProximaNova', Helvetica;
+  font-weight: bold;
+  text-decoration: none;
+  font-size: 14px;
+  line-height: 172%;
+  color: rgb(39, 44, 45);
+}
+
+.description {
+  border-radius: 5px;
+  border: 1px solid #e3e3e3;
+  background: white;
+  width: auto;
+  max-width: 310px;
+  height: auto;
+  padding: 10px;
+  font-family: 'Tahoma', Helvetica;
+  font-weight: 300;
+  color: rgb(39, 44, 45);
+  font-size: 10px;
+  z-index: 500;
+  position: absolute;
+  margin-left: 50px;
+  margin-top: 20px;
+  cursor: default;
+  display: inline-block;
+}
+
+.tiptext > .description {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s linear 0.4s, opacity 0.4s linear;
+}
+
+.tiptext:hover > .description {
+  visibility: visible;
+  opacity: 1;
+  transition-delay: 0.1s;
+  -webkit-transition: opacity 0.1s ease-in;
+  -moz-transition: opacity 0.1s ease-in;
+  -ms-transition: opacity 0.1s ease-in;
+  -o-transition: opacity 0.1s ease-in;
+  transition: opacity 0.1s ease-in;
+}
+
+
+.description_bertha {
+  text-align: left;
+  border-radius: 5px;
+  border: 1px solid #e3e3e3;
+  background: white;
+  width: auto;
+  max-width: 420px;
+  height: auto;
+  padding: 10px;
+  font-family: 'Tahoma', Helvetica;
+  font-weight: 300;
+  color: rgb(39, 44, 45);
+  font-size: 10px;
+  z-index: 500;
+  position: absolute;
+  margin-left: 0px;
+  margin-top: 0px;
+  cursor: default;
+  display: inline-block;
+}
+
+.tiptext_bertha > .description_bertha {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s linear 0.4s, opacity 0.4s linear;
+}
+
+.tiptext_bertha:hover > .description_bertha {
+  visibility: visible;
+  opacity: 1;
+  transition-delay: 0.1s;
+  -webkit-transition: opacity 0.1s ease-in;
+  -moz-transition: opacity 0.1s ease-in;
+  -ms-transition: opacity 0.1s ease-in;
+  -o-transition: opacity 0.1s ease-in;
+  transition: opacity 0.1s ease-in;
+}

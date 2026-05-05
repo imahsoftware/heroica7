@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  teorico: one
+  persona: one
+  pregunta: one
+  respuesta: MyString
+  estado: MyString
+
+two:
+  teorico: two
+  persona: two
+  pregunta: two
+  respuesta: MyString
+  estado: MyString

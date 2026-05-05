@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  persona: one
+  nro_factura: 1
+  categoria: one
+  tipostramite: one
+  personastramite: one
+  valor: 9.99
+  user: one
+  estado: MyString
+  user_anula: 1
+  empresa: one
+  observacion: MyString
+
+two:
+  persona: two
+  nro_factura: 1
+  categoria: two
+  tipostramite: two
+  personastramite: two
+  valor: 9.99
+  user: two
+  estado: MyString
+  user_anula: 1
+  empresa: two
+  observacion: MyString

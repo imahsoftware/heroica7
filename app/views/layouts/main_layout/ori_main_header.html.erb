@@ -1,0 +1,196 @@
+<%
+  isadmin = is_admin
+  user = User.find(isadmin)
+  isportafolio = is_portafolio
+  isimah = is_sygma
+%>
+<header class="main-header">
+  <%
+    permit = Usersmodulo.where(user_id: isadmin, modulo_id: 1).exists?
+  %>
+  <!-- Logo -->
+  <%= link_to root_path, class: 'logo' do %>
+    <span class="logo-mini"><%= image_tag 'logo.png', alt: 'Logo Imah', width: '80%' %></span>
+    <span class="logo-lg" style="font-size: 18px; margin-top: -4px;"><b>IMAH |&nbsp;<%= is_portafolioname rescue nil %></b></span>
+  <% end %>
+
+  <!-- Escritorio -->
+  <nav class="navbar navbar-static-top" role="navigation">
+    <div class="navbar-collapse collapse " id="navbar-collapse" aria-expanded="false">
+      <div class="navbar-custom-menu">
+        <ul class="nav navbar-nav">
+          <li>
+            <% if permiso("disponipractica","A").to_s == "S"%>
+            <%= link_to horarionuevo_programacionesfechas_path, class: 'dropdown-toggle', title: 'Agenda de Programacion'  do %>
+              <i class="fa fa-car" aria-hidden="true"></i>
+            <% end %>
+            <% end %>            
+          </li>
+          <li>
+            <% if permiso("teoricodispo","A").to_s == "S"%>
+                <%= link_to disponibilidad_agendas_path, class: 'dropdown-toggle', onclick: 'window.open(this.href,"new_window","height=600,width=900,scrollbars=yes");return false;', title: 'Disponibilidad'  do %>
+                  <i class="fa fa-calendar"></i>
+                <% end %>
+            <% end %>
+          </li>
+          <%
+            permit = Usersmodulo.where(user_id: isadmin, modulo_id: 1).exists?
+          %>
+          <% if params[:controller].to_s != 'users' %>
+            <% if current_user.user2_id.to_s != "" %>
+              <ul class="nav navbar-nav">
+                <li>
+                  <%= link_to reestablecesusuario_users_path do %>
+                    <span style="font-size: 12px !important; ">Reestablecer</span>
+
+                  <% end %>
+                </li>
+              </ul>
+            <% end %>
+          <% end %>
+          <% if isimah or permit == true %>
+            <% if params[:controller].to_s != 'users'  %>
+              <% if isimah == true and current_user.user2_id.to_s == "" %>
+              <li class="dropdown messages-menu">
+                <ul class="dropdown-menu" style="top: 43px;">
+                  <li>
+                      <%= form_tag cambiousuario_users_path, method: :get, id: "search-form", class: 'navbar-form navbar-left', role: 'search' do %>
+                        <%= hidden_field_tag :user_id %>
+                        <div class="input-group">
+                          <%= autocomplete_field_tag :nombre, '', autocomplete_cambio_user2_users_path(portafolio_id: isportafolio), class: "form-control", id: 'navbar-search-input', id_element: '#user_id', placeholder: "Buscar...", type: "search" %>
+                        </div>
+                      <% end %>
+                      <script type="text/javascript" charset="utf-8">
+                          $('#navbar-search-input').bind('railsAutocomplete.select', function (event, data) {
+                              $('#search-form').submit()
+                          });
+                      </script>
+                  </li>
+                </ul>
+              </li>
+              <% end %>
+            <% end %>
+            <% @modulosseguridad = Usersmodulo.joins(:modulo).where(["usersmodulos.user_id = ? and modulos.nivel = ?", isadmin,4]).select("modulos.*").order("modulos.descripcion")  %>
+            <li class="dropdown messages-menu">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                <i class="fa fa-th-list"></i>
+                <span class="label label-success"></span>
+              </a>
+              <ul class="dropdown-menu" style="width: 439px; height: 250px;">
+                <section class="content-header">
+                  <h1>
+                    <i class="fa fa-th-list"></i>
+                    <small>Administración Modulos</small>
+                  </h1>
+                  <ol class="breadcrumb">
+                    <li class="header">
+                      <%= link_to menu_menus_path, remote: true, data: {toggle: 'tooltip', :"data-turbolinks" => true }, title: 'Ampliar Modulos de Seguridad' do %>
+                        <i class="fa fa-expand-arrows-alt"></i>
+                      <% end %>
+                    </li>
+                  </ol>
+                </section>
+                <br/>
+                <li>
+                  <ul class="menu" style="height: 175px;">
+                    <%
+                      @modulosseguridad.each do |item| %>
+                      <% if item.metodo.to_s == "" %>
+                        <% item.metodo = 'GET' %>
+                      <% end %>
+                      <li style="width: 100%;"><!-- start message -->
+                        <%= link_to item.controlador, class: 'a-control-sidebar' do %>
+                          <div class="pull-left">
+                            <i class="<%= item.imagen.blank? ? 'fa fa-link' : item.imagen %>" style="font-size: 30px; color: #000;"></i>
+                          </div>
+                          <h4>
+                            <%= item.descripcion %>
+                          </h4>
+                          <p><%= item.mensaje.blank? ? 'Modulo de administracion' : truncate(item.mensaje, :length => 55) %></p>
+                        <% end %>
+                      </li>
+                    <% end %>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          <% end %>
+
+            <li class="dropdown user user-menu">
+              <%= link_to '#', class: 'dropdown-toggle', data: {toggle: 'dropdown'} do %>
+                <%= image_tag user.avatar.url(:medium), class: 'user-image', alt: 'User Image' %>
+                <span class="hidden-xs"><%= user.username %></span>
+              <% end %>
+              <ul class="dropdown-menu">
+                <li class="user-header">
+                  <%= image_tag user.avatar.url(:medium), class: 'img-circle', alt: 'User Image' %>
+                  <p style="font-size: 11px;">
+                    <%= user.nombre %>
+                  </p>
+                </li>
+                <li class="user-footer">
+                  <div class="pull-left">
+                    <%= link_to edit_user_registration_path do %>
+                      <button class="btn btn-flat btn-default">
+                        <i class="fa fa-edit"></i></button>
+                    <% end %>
+                  </div>
+                  <div class="pull-right">
+                    <%= link_to logout_path, data: {confirm: '¿Esta seguro ' + "#{user.nombre}" + ' que quiere desconectarse?'} do %>
+                      <button class="btn btn-flat btn-default"><i class="fa fa-sign-out-alt"></i></button>
+                    <% end %>
+                  </div>
+                </li>
+              </ul>
+            </li>
+
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+</header>
+
+
+<div class="modal fade" id="menu">
+  <div class="modal-dialog" style="width: 1000px;">
+    <div class="modal-content" style="width: 1000px;">
+    </div>
+  </div>
+</div>
+
+<style>
+  .bor {
+    border-radius: 10px !important;
+  }
+
+  .main-header .logo {
+    text-align: left;
+    height: 43px !important;
+  }
+
+  .main-header #navbar-search-input.form-control {
+    background: rgba(255, 255, 255, 0.9) !important;
+    border-color: transparent !important;
+  }
+
+  .input-group-btn:last-child > .btn, .input-group-btn:last-child > .btn-group {
+    z-index: -2;
+    margin-left: 0px !important;
+  }
+
+  .navbar-nav > li > a {
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+  }
+
+  .main-header .navbar {
+    -webkit-transition: margin-left .3s ease-in-out !important;
+    -o-transition: margin-left .3s ease-in-out !important;
+    transition: margin-left .3s ease-in-out !important;
+    margin-bottom: 0 !important;
+    border: none !important;
+    min-height: 43px !important;
+    border-radius: 0 !important;
+  }
+</style>

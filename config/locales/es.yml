@@ -1,0 +1,2042 @@
+ # Este es ....
+# Este es ....
+# Este es ....
+es:
+  editar_perfil: Editar Perfil
+  salir: Salir
+  ver_todos: Ver todos
+  hay: Hay
+  buscar: Buscar
+  indicadores_presupuesto_ejecucion: Indicadores de Presupuesto vs Ejecución
+  indicadores_cartera: Indicadores de Cartera
+  presupuesto_mes: Presupuesto Mes
+  recaudos_mes: Recaudos Mes Actual
+  presupuesto_total: Presupuesto Total
+  recaudo_total: Recaudo Total
+  soportes_pendientes: Soportes Pendientes
+  parametros_consulta: Parametros de la Consulta
+  activos: Activos
+  total_activos: Total Activos
+  total_creditos: Total Creditos
+  al_dia: Al Dia
+  en_mora: En Mora
+  recaudo_mes: Recaudo Mes
+  recaudos: Recaudos
+  recaudo_aldia: Recaudos al día
+  recaudomora_30: Recaudos Mora Menor a 30 días
+  recaudosmora_90: Recaudos Mora entre 31 - 90 días
+  recaudosmora_180: Recaudos Mora entre 91 - 180 días
+  recaudosmora_100: Recados Mora Mayor a 180 días
+  ppto_activos: Ppto Activos
+  nuevos_activos: Nuevos Activos
+  ppto_nuevos_activos: Ppto Nuevos Activos
+  antiguos_activos: Antiguos Activos
+  ppto_antiguos_activos: Ppto Antiguos Activos
+  en_proceso: En Proceso
+  inactivos: Inactivos
+  total: Total
+  resumen_de_estados: Resumen de Estados
+  inscripcion_basica: Inscripción Básica
+  pago_cuota_inicial: Pagó Estudio Edupol (No Reembolsable)
+  selecciono_forma_de_pago: Seleccionó Forma de Pago
+  gestion_documental_aprobada: Gestión Documental Aprobada
+  indicadores_recaudo_presupuesto: Indicadores de Recaudo vs Presupuesto
+  antiguos: Antiguos
+  buscador_de_personas: Buscador de Personas
+  buscador_segmentos: Buscador de Segmentos
+  aceptar: Aceptar
+  #
+  # Estandarizado
+  #
+  agregar: Agregar
+  atencion: Atención!
+  atencion_msj: No hay datos aún
+  documento: Ver Documentos
+  documentos_msj: No hay Documentos
+  cierre_msj: NO hay cierre consolidado por lo tanto no se puede registrar nuevos recaudos
+  regresar: Regresar
+  menu: MENÚ DE OPCIONES
+  creacion: Fecha de Creación
+  seguro: Esta seguro?
+  entre: Entre
+  nuevo: Nuevo
+  actualizar: Actualizar
+  asignar: Asignar
+  regresar_obligacion: Regresar a Obligaciones
+
+  notice_crea_msj: Registro Creado con Exito.
+  notice_crearec_msj: Recaudo Creado
+  notice_actualiza_msj: Registro Actualizado con Exito.
+  notice_elimina_msj: Registro Eliminado con Exito.
+  notice_resultado_msj: No hay resultados de la busqueda
+  guardar: Guardar
+  seleccionar: --Seleccionar
+  procesando: Procesando
+  cancelar: Cancelar
+  elimina_confirma: Esta seguro de Borrar?
+  title_elimina: Eliminar
+  title_editar: Editar
+  title_notificaciones_direcciones: Notificacion de Direcciones
+  title_notificaciones_correos: Notificacion de Correos
+  title_soporte_digital: Añadir Soporte Digital
+  title_gerente: Cargue Masivo de Gerentes Regionales
+  title_ver: Ver
+  title_plan_pagos: Plan de Pagos
+  title_recaudos: Recaudos
+  title_otros_recaudos: Otros Recaudos
+  title_observacion_obligacion: Observación de la obligación
+  title_detalle_factura: Detalle de las facturas
+  title_historico_pagaduria: Historico Pagadurias
+  title_historico_fondeadores: Historico Fondeadores
+  title_autoria: Autorizar
+  title_no_autoriza: No autorizar
+  title_ver_certificado_deuda: Ver certificado de deuda
+  title_ver_paz_salvo: Ver Paz y Salvo
+  title_evaluacion_titulo: Evaluación del titulo
+  title_seguimiento_asignaciones: Seguimiento Asignaciones
+
+  menu_gestion: Gestion
+  menu_cargues: Cargues
+  menu_procesos: Procesos
+  menu_parametrizacion: Parametrizar
+  menu_parametrizacionedu: Parametros Educación
+  menu_searchdoc: Buscar por Identificación...
+  menu_principal: MENÚ PRINCIPAL
+  menu_personas: MENÚ PERSONAS
+
+  #
+  # Inmuebles
+  #
+  inmueble: Inmuebles
+  inmueble_buscador: Inmuebles - Buscador
+  inmueble_tab_info: Información
+  inmueble_tab_pri: Primera Instancia
+  inmueble_tab_seg: Segunda Instancia
+  inmueble_tab_tre: Patrimonio
+  inmueble_tab_cua: Ajustes
+  inmueble_tab_pro: Proveedores
+  inmueble_index_codigo: Codigo(PK)
+  inmueble_index_codigo_plus: Codigo Más(PK)
+  inmueble_index_codigo_mas: Codigo +
+  inmueble_index_idinmueble: ID Inmueble
+  inmueble_index_identificacion_deudor: Identificación Deudor
+  inmueble_index_nombre_deudor: Nombre Deudor
+  inmueble_index_tipo_inmueble: Tipo de Inmueble
+  inmueble_index_fecha: Fecha Creación
+  inmueble_index_documentos: Documentos
+  inmueble_index_tipo_dir: Dirección
+  inmueble_index_avalcat: Avalúo Catastral
+  inmueble_index_tascom: Tasación Comercial
+  inmueble_index_avalcom: Avalúo Comercial
+  inmueble_index_ubica: Ubicación
+  inmueble_index_oferente: Oferente
+  inmueble_index_broker: Broker
+  inmueble_index_fchprop: Fecha propuesta
+  inmueble_index_valor: Valor
+  inmueble_adjudicacion: Auction Tracker
+
+  inmueble_menu_informacion: Información
+  inmueble_menu_tasacion: Tasaciones
+  inmueble_menu_propietarios: Propietarios
+  inmueble_menu_brokers: Brokers
+  inmueble_menu_gastos: Gastos
+  inmueble_menu_gestion: Gestion
+  inmueble_menu_propuesta: Propuesta
+  inmueble_menu_documentos: Documentos Digitales
+  inmueble_menu_ingreso: Ingresos
+  inmueble_menu_patrimonio: Patrimonio
+  inmueble_menu_ajuste: Ajustes
+  inmueble_menu_generated: Gestion Reo Generated
+  inmueble_menu_tramite: Tramite de Venta
+  inmueble_menu_arrendatarios: Arrendatarios
+  inmueble_menu_estado: Estado
+
+
+  inmueble_datos: Datos básicos del inmueble
+  inmueble_hipoteca: Datos de la Hipoteca
+  inmueble_complement: Datos Complementarios
+  inmueble_porcentaje_propiedad: Porcentaje Propiedad
+  inmueble_area_construida: Area construida
+  inmueble_area_terreno: Area terreno
+  inmueble_embargo: Datos de Embargos
+  inmueble_afectaciones: Datos de Afectaciones
+
+  #
+  # Inmuebles Gestion
+  #
+  inmueblesgestion: Gestiones
+  inmueblesgestion_index_fecha: Fecha de Creación
+  inmueblesgestion_index_tipo_gestion: Tipo Gestión
+  inmueblesgestion_index_fecha_gestion: Fecha Gestión
+  inmueblesgestion_index_observacion: Observación
+  #
+  # Inmuebles Comerciales
+  #
+  inmueblescomercial_index_comercial: Gestiones
+  inmueblescomercial_index_propiedades: Gestión Propiedades
+  inmueblescomercial_index_legal: Gestión Legal
+  inmueblescomercial_index_fecha_creacion: Fecha de Gestión
+  inmueblescomercial_index_identificacion: Identificación
+  inmueblescomercial_index_nombre_apellidos: Nombre y Apellidos
+  inmueblescomercial_index_direccion: Dirección
+  inmueblescomercial_index_telefono: Teléfono
+  inmueblescomercial_index_observacion: Observación
+
+  inmueblescomercial_email: Email
+  inmueblescomercial_telefono: Teléfono
+  #
+  # Inmuebles Gastos
+  #
+  inmueblesgasto: Gastos
+  inmueblesgasto_index_accion: Acciones
+  inmueblesgasto_index_documento: Documento
+  inmueblesgasto_index_periodicidad: Periodicidad
+  inmueblesgasto_index_cuenta: Cuenta
+  inmueblesgasto_index_pagado: Pagado
+  inmueblesgasto_index_valor: Valor
+  inmueblesgasto_index_fecha: Fecha
+  inmueblesgasto_index_observacion: Observación
+  inmueblesgasto_index_total: TOTAL
+  inmueblesgasto_index_estado: Estado
+
+  inmueblesgasto_valor_gasto: Area Construida
+  inmueblesgasto_valor_gasto2: Valor Pagado
+  #
+  # Inmuebles Ingresos
+  #
+  inmueblesingreso: Ingresos
+  inmueblesingreso_index_concepto: Concepto
+  inmueblesingreso_index_valor_ingreso: Valor Ingreso
+  inmueblesingreso_index_fecha_ingreso: Fecha Ingreso
+  inmueblesingreso_index_fecha_minuta: Fecha Minuta
+  inmueblesingreso_index_fecha_venta: Fecha Venta
+  inmueblesingreso_index_documento: Documentos
+
+  inmueblesingreso_valor_ingreso: Valor del Ingreso
+  #
+  # Inmuebles Ajustes
+  #
+  inmueblesajuste: Ajustes
+  inmueblesajuste_index_valor: Valor
+  inmueblesajuste_index_fecha: Fecha
+  inmueblesajuste_index_concepto: Concepto
+  inmueblesajuste_index_observaciones: Observaciones
+  #
+  # Inmuebles Patrimonio
+  #
+  inmueblespatrimonio: Patrimonio
+  inmueblespatrimonio_index_valor: Valor
+  inmueblespatrimonio_index_fecha: Fecha
+  inmueblespatrimonio_index_concepto: Concepto
+  inmueblespatrimonio_index_patrimonio: Patrimonio
+
+  inmueblespatrimonio_valor: Valor
+  #
+  # Inmuebles Avaluos
+  #
+  inmueblesavaluo: Tasaciones
+  inmueblesavaluo_index_documento: Documentos
+  inmueblesavaluo_index_valor: Valor
+  inmueblesavaluo_index_fecha: Fecha
+  inmueblesavaluo_index_avaluador: Tasador
+  inmueblesavaluo_index_comentarios: Comentarios BPO
+  #
+  # Inmuebles Propietarios
+  #
+  inmueblespropietario: Propietarios
+  inmueblespropietario_index_identificacion: Identificación
+  inmueblespropietario_index_nombre: Nombre o Razon Social
+  inmueblespropietario_index_direccion: Dirección
+  inmueblespropietario_index_telefono: Teléfono
+  inmueblespropietario_index_porc: Porc. Titularidad
+  #
+  # Inmuebles Ofertas
+  #
+  inmueblesoferta: Propuestas
+  inmueblesoferta_index_oferente: Oferente
+  inmueblesoferta_index_broker: Broker
+  inmueblesoferta_index_fecha: Fecha Propuesta
+  inmueblesoferta_index_valor: Valor
+  inmueblesoferta_index_estado: Estado
+  inmueblesoferta_index_vlrtasa: Valor Ult. Tasación
+  inmueblesoferta_index_fchtasa: Fecha Ult. Tasación
+  inmueblesoferta_index_areaterr: Area Terreno
+  inmueblesoferta_index_areacons: Area Construida
+  inmueblesoferta_oferente: Oferente
+  inmueblesoferta_broker: Broker
+  inmueblesoferta_propuesta: Propuesta
+  inmueblesoferta_forma: Forma de pago
+  inmueblesoferta_comentario: Comentarios de la oferta
+  inmueblesoferta_evaluacion: Evaluación primera instancia
+  inmueblesoferta_evaluacion_segunda: Evaluación segunda instancia
+  inmueblesoferta_valor_oferta: Valor Oferta
+  inmueblesoferta_valor: Valor
+  #
+  # Inmuebles Tramites
+  #
+  inmueblestramite: Tramite de Venta
+  inmueblestramite_index_minuta: Minuta
+  inmueblestramite_index_escritura: Escritura
+  inmueblestramite_index_entrega: Fecha Entrega
+  inmueblestramite_index_fechas: Fechas
+  #
+  # Brokers
+  #
+  broker: Brokers
+  broker_index_identificacion: Identificación
+  broker_index_nombre: Nombre
+  broker_index_telefono: Teléfono
+  broker_index_direccion: Dirección
+  #
+  # Inmuebles Brokers
+  #
+  inmueblesbroker: Broker
+  inmueblesbroker_index_identificacion: Identificación
+  inmueblesbroker_index_nombre: Nombre
+  inmueblesbroker_index_fecha_inicio: Fecha Inicio
+  inmueblesbroker_index_fecha_fin: Fecha Fin
+  #
+  # Inmuebles Arrendatarios
+  #
+  inmueblesarrendatario: Arrendatarios
+  inmueblesarrendatario_index_nombre: Nombre del Arrandatario
+  inmueblesarrendatario_index_telefono: Teléfono
+  inmueblesarrendatario_index_direccion: Dirección
+  inmueblesarrendatario_index_valor_canon: Valor Canon
+  inmueblesarrendatario_index_fecha_inicio: Fecha Inicio
+  inmueblesarrendatario_index_fecha_fin: Fecha Fin
+
+  inmueblesarrendatario_valor_canon: Valor Canon
+  inmueblesarrendatario_email: Correo Electrónico
+  inmueblesarrendatario_telefono: Teléfono
+  inmueblesarrendatario_celular: Celular
+  #
+  # Inmuebles Estados
+  #
+  inmueblesestado: Estados de inmuebles REO
+  inmueblesestado_index_estado: Estado Reo
+  inmueblesestado_index_fecha: Fecha
+  inmueblesestado_index_grupo: Grupo
+  inmueblesestado_index_observacion: Observación
+  #
+  # Inmuebles Precio de lista
+  #
+  inmueblesprecio: Precios de Lista
+  inmueblesprecio_index_valor: Valor
+  inmueblesprecio_index_unidad_denominacion: Unidad de Denominación
+  inmueblesprecio_index_fecha_inicio: Fecha Inicio
+  inmueblesprecio_index_fecha_fin: Fecha Fin
+  inmueblesprecio_index_registro: Fecha Registra
+
+  #
+  # Comites
+  #
+  comite_index_comites: Comites
+  comite_index_nuevo: Nuevo Comité
+  comite_index_fecha: Fecha Comité
+  comite_index_comite: Comité
+  comite_index_solicitud_tercera_instancia: Solicitudes Tercera Instancia
+  comite_index_solicitud_segunda_instancia: Solicitudes Segunda Instancia
+  comite_index_tercera_instancia: Tercera Instancia
+  comite_index_segunda_instancia: Segunda Instancia
+  comite_index_fecha_creacion: Fecha Creación
+  comite_index_deudor: Deudor
+  comite_index_tipo: Tipo
+  comite_index_valor_propuesta: Valor Propuesta
+  comite_index_evaluado_por: Evaluado por
+  comite_index_consecutivo: Consecutivo
+  comite_index_fecha_radicado: Fecha Radicado
+  comite_index_responsable_solicitud: Responsable solicitud
+  comite_index_nro_obligacion_nueva: Nro obligacion Nueva
+  comite_index_plazo: Plazo
+  comite_index_estado_proceso: Estado del Proceso
+  comite_index_temas: Temas
+  comite_index_tema: Tema
+  comite_index_cantidad_solicitudes: Cant. Solicitudes
+  comite_index_estado: Estado
+  comite_index_listado_comites: Listado de Comites
+  comite_index_ver_acta_comite: Ver Acta de comité
+  comite_index_solicitud_pendiente: Solicitudes Pendientes
+  comite_index_anadir_observacion: Añadir Observación
+  comite_index_data_title: Solicitud con observación del consultor
+  comite_index_data_title2: Propuesta modificada por comité
+  comite_index_observacion: Observación
+  comite_index_tipo_comite: Tipo de Comité
+  comite_index_fecha_vencimiento: Fecha Vencimiento
+  comite_index_nro_comite: Nro Comité
+  comite_index_reporte_comite: Reporte Comité
+  comite_index_fecha_tarea: Fecha Tarea
+  comite_index_fecha_inicial: Fecha Inicial
+  comite_index_fecha_final: Fecha Final
+  comite_index_asignado_a: Asignado a
+  comite_index_fecha_limite: Fecha Límite
+  comite_index_pendientes_comite: Pendientes Comité
+  comite_index_tarea: Tarea
+  comite_index_fecha_ultima_revision: Fecha Ult. Revisión
+  comite_index_fecha_solucion: Fecha Solución
+  comite_index_verificacion: Verificación
+  comite_index_instancia: Instancia
+  #
+  # Comites imagenes
+  #
+  comitesimagenes: Documentos Digitalizados
+  comitesimagenes_index_agregar_documento: Agregar Documento
+  comitesimagenes_index_fecha: Fecha
+  comitesimagenes_index_descripcion: Descripción
+  comitesimagen_index_archivo: Archivo
+  #
+  # Comites users
+  #
+  comitesusers: Usuarios
+  comitesuser_index_user: Usuario
+  #
+  # Comites Observaciones
+  #
+  comite_index_observaciones: Observaciones
+
+  comite_numero_comite: Comité Nro
+  comite_comite: COMITE
+  comite_instancia: INSTANCIA
+  comite_creado_por: Creado por
+  comite_segunda: SEGUNDA
+  comite_tercera: TERCERA
+  comite_ver_acta: Ver Acta
+  comite_fecha: Fecha
+  comite_aprobado: Aprobado
+  comite_rechazado: Rechazado
+  comite_recomendar: Recomendar
+  comite_evaluar: Evaluar
+  comite_ver_acuerdo: Ver Acuerdo
+  #
+  # Personas: render _alistamiento
+  #
+  personas_alistamiento_alistamiento_judicial: Alistamiento Juridicial
+  personas_alistamiento_obligacion: Obligación
+  personas_alistamiento_salto_total_deuda: Saldo total deuda
+  personas_alistamiento_garantia: Garantía
+  personas_alistamiento_real: Real
+  personas_alistamiento_viabilidad_pagare: Viabilidad Pagaré
+  personas_alistamiento_investigacion_bienes: Investigación Bienes
+  personas_alistamiento_viabilidad_embargo_b: Viabilidad Embargo Bienes
+  personas_alistamiento_investigacion_laboral: Investigación Laboral
+  personas_alistamiento_viabilidad_embargo_s: Viabilidad Embargo Salario
+  personas_alistamiento_abogado: Abogado
+  personas_alistamiento_responsable: Responsable
+  personas_alistamiento_deudor_solidario: Deudor solidario
+  personas_alistamiento_deudor_principal: Deudor principal
+  personas_alistamiento_positiva: POSITIVA
+  personas_alistamiento_negativa: NEGATIVA
+  personas_alistamiento_deudor_salario: Deudor solidario
+  personas_alistamiento_no_viable: NO VIABLE
+  personas_alistamiento_marcela_lombana: MARCELA LOMBANA
+  personas_alistamiento_fecha: Fecha
+  personas_alistamiento_clase: Clase
+  personas_alistamiento_datos: Datos
+  personas_alistamiento_fecha_investigacion: Fecha investigación
+  personas_alistamiento_oficina_registro: Oficina Registro
+  personas_alistamiento_matricula_inmobiliaria: Matrícula Inmobiliaria
+  personas_alistamiento_direccion: Dirección
+  personas_alistamiento_municipio_departamento: Municipio - Departamento
+  personas_alistamiento_suceptible_embargo: Suceptible a embargo
+  personas_alistamiento_viable: Viable
+  personas_alistamiento_soporte_digital: Soporte Digital
+  personas_alistamiento_nombre_empresa: Nombre Empresa
+  personas_alistamiento_contacto: Contacto
+  personas_alistamiento_cargo_contacto: Cargo Contacto
+  personas_alistamiento_salario: Salario
+  #
+  # Personas: render _coactivo
+  #
+  personas_coactivo_solicitudes: Solicitudes
+  personas_coactivo_nro_radicado: Nro de radicación
+  personas_coactivo_fecha_radicado: Fecha radicado
+  personas_coactivo_obligaciones: Obligaciónes
+  personas_coactivo_estado_proceso: Estado del proceso
+  personas_coactivo_nro_resolucion: Nro resolución
+  personas_coactivo_origen: Origen
+  personas_coactivo_valor: Valor
+  #
+  # Personas: render _cobranzajuridica
+  #
+  personas_cobranzajuri_demandados: Demandados
+  personas_cobranzajuri_inciar_proceso: Iniciar nuevo proceso
+  personas_cobranzajuri_digite_cedula: Digite la cédula de la persona
+  personas_cobranzajuri_identificacion: Identificación
+  personas_cobranzajuri_nombres: Nombres
+  personas_cobranzajuri_genero: Género
+  personas_cobranzajuri_email: Email
+  personas_cobranzajuri_estado_civil: Estado civil
+  #
+  # Personas: render _consolidadocliente
+  #
+  personas_consolidadocliente: Consolidado cliente
+  personas_consolidadocliente_saldo_consolidado: SALDOS CONSOLIDADOS
+  personas_consolidadocliente_saldo_deuda: Saldo Deuda
+  personas_consolidadocliente_saldo_capital: Saldo Capital
+  personas_consolidadocliente_saldo_actual: Saldo Actual
+  personas_consolidadocliente_capital_migrado: Capital Migrado
+  personas_consolidadocliente_recaudo: Recaudo
+  personas_consolidadocliente_credito: Creditos
+  personas_consolidadocliente_al_dia: Al día
+  personas_consolidadocliente_mora: En mora
+  personas_consolidadocliente_cancelados: Cancelados
+  personas_consolidadocliente_estado_deudor: Estado Deudor
+  personas_consolidadocliente_calificacion: Calificación
+  personas_consolidadocliente_vmn: VMN
+  personas_consolidadocliente_tipo_acuerdo: Tipo Acuerdo
+  personas_consolidadocliente_valor_acuerdo: Valor Acuerdo
+  personas_consolidadocliente_estado_acuerdo: Estado Acuerdo
+  personas_consolidadocliente_fecha_aprobacion: Fecha Aprobación
+  personas_consolidadocliente_sin_info: SIN INFO
+  #
+  # Personas: render _consolidadocredito
+  #
+  personas_consolidadocredito: Consolidado cliente
+  personas_consolidadocredito_saldo_cons: Saldos Consolidados
+  personas_consolidadocredito_credito: Créditos
+  personas_consolidadocredito_estado_credito: Estado Acuerdo
+  personas_consolidadocredito_saldo_deuda: Saldo Deuda
+  personas_consolidadocredito_saldo_capital: Saldo Capital
+  personas_consolidadocredito_recaudo: Recados
+  personas_consolidadocredito_vmn: VMN
+  personas_consolidadocredito_al_dia: Al Día
+  personas_consolidadocredito_en_mora: En Mora
+  personas_consolidadocredito_cancelados: Cancelados
+  personas_consolidadocredito_sin_info: SIN INFO
+  #
+  # Personas: render _consolidadoedupol
+  #
+  personas_consolidadoedupol: Consolidado
+  personas_consolidadoedupol_total_deuda: Total Deuda
+  personas_consolidadoedupol_total_pagado: Total Pagado
+  personas_consolidadoedupol_total_pagar: Total Por Pagar
+  personas_consolidadoedupol_obligaciones: OBLIGACIONES
+  personas_consolidadoedupol_programa: Programa
+  personas_consolidadoedupol_concepto: Concepto
+  personas_consolidadoedupol_obligacion: Obligación
+  personas_consolidadoedupol_fecha_limite: Fecha límite
+  personas_consolidadoedupol_valor: Valor
+  personas_consolidadoedupol_pagado: Pagado
+  personas_consolidadoedupol_saldo: Saldo
+  personas_consolidadoedupol_total: TOTAL
+  personas_consolidadoedupol_pago_cuotas: PAGO A CUOTAS
+  personas_consolidadoedupol_programa: Programa
+  personas_consolidadoedupol_saldo_vencido: Saldo Vencido
+  personas_consolidadoedupol_saldo_vigente: Saldo Vigente
+  personas_consolidadoedupol_saldo_pagar: Saldo por Pagar
+  personas_consolidadoedupol_saldo_deuda: Saldo Deuda
+  personas_consolidadoedupol_creditos_academidos_ad: CRÉDITOS ACADÉMICOS ADICIONALES
+  personas_consolidadoedupol_nro_credito: Nro Créditos
+  personas_consolidadoedupol_convenios: CONVENIOS
+  personas_consolidadoedupol_convenio: Convenio
+  #
+  # Personas: render _consolidadoedupolmodal
+  #
+  personas_consolidadoedupolmodal_consolidado: Consolidado
+  personas_consolidadoedupolmodal_total_deuda: Total Deuda
+  personas_consolidadoedupolmodal_total_pagado: Total Pagado
+  personas_consolidadoedupolmodal_total_pagar: Total Por Pagar
+  personas_consolidadoedupolmodal_obligaciones: OBLIGACIONES
+  personas_consolidadoedupolmodal_programa: Programa
+  personas_consolidadoedupolmodal_concepto: Concepto
+  personas_consolidadoedupolmodal_obligacion: Obligación
+  personas_consolidadoedupolmodal_fecha_limite: Fecha límite
+  personas_consolidadoedupolmodal_valor: Valor
+  personas_consolidadoedupolmodal_pagado: Pagado
+  personas_consolidadoedupolmodal_saldo: Saldo
+  personas_consolidadoedupolmodal_total: TOTAL
+  personas_consolidadoedupolmodal_saldo_vencido: Saldo Vencido
+  personas_consolidadoedupolmodal_saldo_vigente: Saldo Vigente
+  personas_consolidadoedupolmodal_saldo_pagar: Saldo por Pagar
+  personas_consolidadoedupolmodal_nro_credito: Nro Créditos
+  personas_consolidadoedupolmodal_bonificacion: Bonificación
+  personas_consolidadoedupolmodal_saldo_deuda: Saldo Deuda
+  personas_consolidadoedupolmodal_convenio: Convenio
+  personas_consolidadoedupolmodal_convenios: CONVENIOS
+  personas_consolidadoedupolmodal_pago_cuotas: PAGO A CUOTAS
+  personas_consolidadoedupolmodal_creditos_acad: CRÉDITOS ACADÉMICOS ADICIONALES
+  #
+  # Persona_fom
+  #
+  personas_asesor_asignado: Asesor Asignado
+  personas_nuevo_asesor: Nuevo asesor
+  personas_telefono: Teléfonos
+  personas_direcciones: Direcciones
+  personas_correos: Correos
+  personas_laboral: Laboral
+  personas_obligaciones: Obligaciones
+  personas_prorrata: Aplicación pago Prorrata
+  personas_gestion: Gestión
+  personas_facilidades_pago: Facilidades de pago
+  personas_consolidado: Consolidado
+  personas_solicitudes: Solicitudes
+  personas_entidades: Entidades
+  #
+  # menus personas
+  #
+  personas_menu_regreso: Regresar a Personas
+  personas_menu_demografico: Demográficos
+  personas_menu_estado_cuenta: Estado de Cuenta
+  personas_menu_programas: Programas
+  personas_menu_renovaciones: Renovaciones
+  personas_menu_habilitar_renovaciones: Habilitar Renovaciones
+  personas_menu_otros_deudores: Otros Deudores
+  personas_menu_bienes_deudores: Bienes Deudores
+  personas_menu_obligaciones: Obligaciones
+  personas_menu_academico: Academico
+  personas_menu_consolidado_cliente: Consolidado Cliente
+  personas_menu_credito: Créditos
+  personas_menu_acuerdos: Acuerdos
+  personas_menu_normalizaciones: Normalizaciones
+  personas_menu_gestion_pagaduria: Gestión Pagadurias
+  personas_menu_gestion_comercial: Gestión Comercial
+  personas_menu_cobro_persu: Cobro Persuasivo
+  personas_menu_gestion_cobro: Gestión Cobro
+  personas_menu_cobranza_juridica: Cobranza Juridica
+  personas_menu_credit_bid: Credit BID
+  personas_menu_cobro_coactivo: Cobro Coactivo
+  personas_menu_digital: Digital
+  personas_menu_campanas: Campañas
+  personas_menu_credito_educativo: Créditos Educativos
+  #
+  # personas buscador Segmento
+  #
+  personas_search_buscador_segemento: Buscador segmentos
+  personas_search_tipo_atencion: Tipo de Atención
+  personas_search_estado_deudor: Estado del deudor
+  personas_search_rango_saldo: Rango Saldo Capital
+  personas_search_portafolio: Portafolio
+  personas_search_propietario: Propietario
+  personas_search_vehiculo: Vehiculo
+  personas_search_saldo_capital_usd: Saldo Capital USD
+  personas_search_saldo_capital_sol: Saldo Capital SOLES
+  personas_search_anno_castigo: Año de Castigo
+  personas_search_segmento: Segmento
+  personas_search_rango_saldo_capital: Rango Saldo Capital
+  personas_search_dias_mora: Dias Mora
+  personas_search_estado_decision: Estado decisión
+  personas_search_clase_normalizacion: Clase de Normalización
+  personas_search_estado_normalizacion: Estado de normalización
+  personas_search_originador: Originador
+  personas_search_pagaduria: Pagaduría
+  personas_search_asesor_asignado: Asesor Asignado
+  personas_search_sucursal: Sucursal
+  personas_search_uol: UOL
+  personas_search_clasificacion_prescripcion: Clasificación Prescripción
+  personas_search_estado_credito: Estado Credito
+  personas_search_analista_judicial: Analista Judicial
+  personas_search_forma_generacion: Forma de Generación
+  personas_search_caracteristicas_titulo: Caracteristica título
+  personas_search_estado_proceso: Estado del proceso
+  personas_search_etapa_proceso: Etapa del proceso
+  personas_search_abogado_asignado: Abogado asignado
+  personas_search_proceso_juridico: Buscador procesos juridicos
+  personas_search_no_tiene_sucursal: NO tiene sucursal
+  personas_search_tipo_proceso: Tipo Proceso
+  personas_search_actuacion: Actuacion
+  personas_search_abogado: Abogados
+  personas_search_director: Directores
+  personas_search_analista: Analistas
+  #
+  # Personascodeudores
+  #
+  personascodeudores_otros_deudores: Otros Deudores
+  personascodeudores_acciones: Acciones
+  personascodeudores_identificacion_nombre: Identificación - Nombres
+  personascodeudores_datos_adicionales: Datos Adicionales
+  personascodeudores_nro_obligacion: Nro Obligación(es)
+  personascodeudores_msj: Reporte Centrales de Riesgo - NO AUTORIZADA
+  #
+  # Personas renter _garantias
+  #
+  personas_garantia_otros: Otros
+  personas_garantia_remanente: Remanentes
+  personas_garantia_empresa: Empresas
+  personas_garantia_info_laboral: Información Laboral
+  personas_garantia_activos_financiero: Activos Financieros
+  personas_garantia_vehiculo: Vehiculos
+  personas_garantia_inmueble: Inmuebles
+  personas_garantia_inmueble_hipo: Inmuebles con Hipoteca
+  personas_garantia_bienes_deudor: Bienes Deudores
+  #
+  # Personas render _invinmueble
+  #
+  personas_invinmueble_inmueble: Inmuebles
+  personas_invinmueble_tipo: Tipo
+  personas_invinmueble_condicion_juridica: Condición jurídica
+  personas_invinmueble_observacion: Observaciones
+  #
+  # Persona - Personasinvinmuebles
+  #
+  personasinvinmueble_direccion: Dirección
+  personasinvinmueble_municipio: Municipio
+  personasinvinmueble_matricula: Matrícula
+  personasinvinmueble_inmueble_asociado: Inmueble asociado a
+  personasinvinmueble_valor_avaluo: Valor avaluo
+  personasinvinmueble_fecha_avaluo: Fecha avaluo
+  #
+  # Persona - Personasinvinmuebles - tabla
+  #
+  personasinvinmueble_inmueble: Inmuebles
+  personasinvinmueble_tipo: Tipo
+  personasinvinmueble_condicion_juridica: Condición jurídica
+  personasinvinmueble_observacion: Observaciones
+  #
+  # Persona - personasinmpropietarios - form
+  #
+  personasinmpropietarios: Propietarios
+  personasinmpropietario_porc_participacion: Porc. Participación
+  personasinmpropietario_acciones: Acciones
+  personasinmpropietario_propietario: Propietario
+  #
+  # Persona render _hipotecaria
+  #
+  personas_hipotecaria: Inmuebles con Hipoteca
+  personas_hipotecaria_documento: Documentos
+  personas_hipotecaria_fecha_creacion: Fecha creación
+  personas_hipotecaria_tipo_inmueble: Tipo de inmueble
+  personas_hipotecaria_direccion: Dirección
+  personas_hipotecaria_avaluo_catastral: Avalúo Catastral
+  personas_hipotecaria_tasacion_comercial: Tasación Comercial
+  personas_hipotecaria_avaluo_comercial: Avalúo Comercial
+  personas_hipotecaria_confirma: Señor usuario, Esta seguro que desea eliminar esta Garantia Hipotecaria?
+  personas_hipotecaria_ver_ubicacion: Ver Ubicación Geográficaón
+  personas_hipotecaria_georefenciacion: Georefenciación
+  personas_hipotecaria_nro_matricula: Nro Matricula
+  personas_hipotecaria_municipio: Municipio
+  #
+  # personasinvvehiculos
+  #
+  personasinvvehiculos: Vehiculos
+  personasinvvehiculos_tipo: Tipo
+  personasinvvehiculos_datos: Datos
+  personasinvvehiculos_observaciones: Observaciones
+  personasinvvehiculos_marca: Marca
+  personasinvvehiculos_linea: Linea
+  personasinvvehiculos_modelo: Modelo
+  personasinvvehiculos_placa: Placa
+  personasinvvehiculos_vehiculo_asociado: Vehiculo asociado a
+  #
+  # personasinventidades
+  #
+  personasinventidades: Activos Financieros
+  personasinventidades_tipo: Tipo
+  personasinventidades_entidad: Entidad
+  personasinventidades_nro_cuenta: Nro cuenta
+  personasinventidades_oficina: Oficina
+  personasinventidades_saldo: Saldo
+  personasinventidades_activo_asociado: Activo asociado a
+  #
+  # personaslaborales
+  #
+  personaslaborales: Información Laboral
+  personaslaborales_entidad: Entidad
+  personaslaborales_recurso_humano: Recursos Humanos
+  personaslaborales_observaciones: Observaciones
+  personaslaborales_nit: NIT
+  personaslaborales_direccion: Dirección
+  personaslaborales_municipio: Municipio
+  personaslaborales_cargo: Cargo
+  personaslaborales_salario: Salario
+  personaslaborales_informacion_asociada: Información asociada a
+  personaslaborales_nombre: Nombre
+  personaslaborales_telefono: Teléfono
+  personaslaborales_email: Email
+  #
+  # personasinvotros
+  #
+  personasinvotros: Otros
+  personasinvotros_observaciones: Observaciones
+  personasinvotros_informacion_asociada: Información asociada a
+  #
+  # personasinvempresas
+  #
+  personasinvempresas: Empresas
+  personasinvempresas_origen: Origen
+  personasinvempresas_dato: Datos
+  personasinvempresas_observaciones: Observaciones
+  personasinvempresas_empresa: Empresa
+  personasinvempresas_nit: NIT
+  personasinvempresas_empresa_asociada: Empresa asociado a
+  #
+  # personasinvremanentes
+  #
+  personasinvremanentes: Remanentes
+  personasinvremanentes_tipo_proceso: Tipo Proceso
+  personasinvremanentes_juzgado: Juzgado
+  personasinvremanentes_tipo_bien: Tipo de Bien
+  personasinvremanentes_valor_presentacion: Valor Presentación
+  personasinvremanentes_valor_embargar: Valor Act a Embargar
+  personasinvremanentes_valor_diferencia: Valor ( Diferencia )
+  #
+  # personasacademicos
+  #
+  personasacademicos: Academicos
+  personasacademicos_ies: IES
+  personasacademicos_direccion: Dirección
+  personasacademicos_ciudad: Ciudad
+  personasacademicos_departamento: Departamento
+  personasacademicos_pais: Pais
+  personasacademicos_programa: PROGRAMA
+  personasacademicos_duracion_programa: Duración del programa
+  personasacademicos_semestre_ingresa: Semestre en el que ingresa
+  personasacademicos_periodos_financiar: Periodos a financiar
+  personasacademicos_nivel_formacion: Nivel de Formación
+  personasacademicos_periodicidad_programa: Periodicidad Programa
+  personasacademicos_motivo_pac: Motivo PAC
+  #
+  # personasgiros
+  #
+  personasgiros: Giros
+  personasgiros_fecha_aprobacion_credito: Fecha Aprobación Crédito
+  personasgiros_fondos_recursos: Fondo Recursos
+  personasgiros_modalidad: Modalidad
+  personasgiros_fecha_legalizacion: Fecha Legalización o Renovación
+  personasgiros_fecha_giro: Fecha Giro
+  personasgiros_valor_giro: Valor Giro
+  personasgiros_entidad_gira: Entidad que Gira
+  personasgiros_soporte_giro: Soporte Giro
+  personasgiros_beneficiario_giro: Beneficiario Giro
+  personasgiros_giro_adicional: Es Giro Adicional
+  personasgiros_estado_actual: Estado Actual
+  personasgiros_motivo_estado: Motivo Estado
+  personasgiros_fecha_inicio_estado: Fecha Inicio Estado
+  personasgiros_fecha_finaliza_estado: Fecha Finalización Estado
+  #
+  # personasobligaciones _cesion.html.erb
+  #
+  personasobligaciones_cesion: Cesión
+  personasobligaciones_cesiongps: Sucesión Procesal
+  personasobligaciones_autorizaciones: Marcaciones
+  personasobligaciones_judicializar: Judicializar
+  personasobligaciones_cesion_tipo_doc: Tipo Documento
+  personasobligaciones_cesion_descripcion: Descripción
+  personasobligaciones_cesion_nombre_archivo: Nombre del Archivo
+  personasobligaciones_cesion_cargo: Cargó
+  #
+  # personasobligaciones part1.html.erb
+  #
+  personasobligaciones_p1_nro_obligacion: Nro Obligación
+  personasobligaciones_p1_fecha_desembolso: Fecha Desembolso
+  personasobligaciones_p1_valor_desembolso: Valor Desembolso
+  personasobligaciones_p1_codigo_unico: Código Único
+  personasobligaciones_p1_provision: Provisión
+  personasobligaciones_p1_tipo_cartera: Tipo Cartera
+  personasobligaciones_p1_linea_credito: Linea Credito
+  personasobligaciones_p1_tasa_interes: Tasa Interes
+  personasobligaciones_p1_tasa_final: Tasa Final
+  personasobligaciones_p1_tasa_mora: Tasa Mora
+  personasobligaciones_p1_fch_ultimo_pago: Fch Ult. Pago
+  personasobligaciones_p1_vlr_ultimo_pago: Vlr Ult. Pago
+  personasobligaciones_p1_presupuesto: Presupuesto
+  personasobligaciones_p1_vlr_bonificacion: Vlr Bonificación
+  personasobligaciones_p1_nro_factura: Nro Factura
+  personasobligaciones_p1_fch_inicio_mora: Fecha Inicio Mora
+  personasobligaciones_p1_fecha_factura: Fecha Factura
+  personasobligaciones_p1_fecha_matricula: Fecha Matricula
+  personasobligaciones_p1_fecha_sancion: Fecha Sanción
+  personasobligaciones_p1_valor_sancion: Valor Sanción
+  #
+  # personasobligaciones part2.html.erb
+  #
+  personasobligaciones_p2_vencidos: VENCIDOS
+  personasobligaciones_p2_vigentes: VIGENTES
+  personasobligaciones_p2_valor_pagar: VALORES POR PAGAR
+  personasobligaciones_p2_saldo_total: SALDO TOTAL
+  personasobligaciones_p2_deuda: DEUDA
+  personasobligaciones_p2_capital: Capital
+  personasobligaciones_p2_corriente: Corriente
+  personasobligaciones_p2_interes: Interes
+  personasobligaciones_p2_otros: Otros
+  personasobligaciones_p2_igv: Igv Int
+  personasobligaciones_p2_comp: Comp
+  personasobligaciones_p2_igvcomp: Igv Comp
+  personasobligaciones_p2_seguro: Seguro
+  personasobligaciones_p2_mora: Mora
+  personasobligaciones_p2_total: Total
+  personasobligaciones_p2_vencidos_hoy: VENCIDOS (VALOR UVR HOY ...
+  personasobligaciones_p2_vlr_pesos_colombianos: VALOR EN PESOS COLOMBIANOS (VALOR UVR HOY ...
+  #
+  # personasobligaciones part3.html.erb
+  #
+  personasobligaciones_p3_portafolio: Portafolio
+  personasobligaciones_p3_contadores: Contadores
+  personasobligaciones_p3_estado_credito: Estado del Credito
+  personasobligaciones_p3_plazo: Plazo
+  personasobligaciones_p3_altura: Altura
+  personasobligaciones_p3_pagadas: Pagadas
+  personasobligaciones_p3_mora: En Mora
+  personasobligaciones_p3_facturar: Por Facturar
+  personasobligaciones_p3_dias_vencidos: Días Vencidos
+  personasobligaciones_p3_clasificacion_cartera: Calificación Cartera
+  personasobligaciones_p3_estado_obligacion: Estado Obligación
+  personasobligaciones_p3_nro_pazysalvo: P y S
+  personasobligaciones_p3_pagaduria: Pagaduria
+  personasobligaciones_p3_fondeador: Fondeador
+  personasobligaciones_p3_verificacion: VERIFICACIÓN
+  personasobligaciones_p3_documentacion: DE DOCUMENTACION
+  personasobligaciones_p3_pagare: Prueba Entrega Notificación
+  personasobligaciones_p3_pagare_sistemcobro: Prueba Entrega Notificación
+  personasobligaciones_p3_autorizacion: Autorización
+  personasobligaciones_p3_notificacion: Notificación 1266
+  personasobligaciones_p3_existe: EXISTE
+  personasobligaciones_p3_no_existe: NO EXISTE
+  personasobligaciones_p3_con_autorizacion: CON AUTORIZACIÓN
+  personasobligaciones_p3_sin_autorizacion: SIN AUTORIZACIÓN
+  personasobligaciones_p3_con_notificacion: CON NOTIFICACIÓN
+  personasobligaciones_p3_sin_notificacion: SIN NOTIFICACIÓN
+  personasobligaciones_p3_obligacion_gps: Obligación GPS
+  personasobligaciones_p3_estado_credito2: Estado Credito 2
+  personasobligaciones_p3_marcacion_acuerdo: Marcación Acuerdo
+  personasobligaciones_p3_close_flag: Close Flag
+  personasobligaciones_p3_fecha_cancelacion: Fecha Canc
+  personasobligaciones_p3_id_obligacion: ID Obligación
+  personasobligaciones_p3_nro_cisa: Número CISA
+  personasobligaciones_p3_paquete: Paquete
+  personasobligaciones_p3_contrato: Contrato
+  personasobligaciones_p3_oficina: Oficina
+  personasobligaciones_p3_radicacion: Radicación
+  personasobligaciones_p3_id_estado_obligacion: ID EstadoObligacion
+  personasobligaciones_p3_saldo_inicial: Saldo Inicial
+  personasobligaciones_p3_saldo_favor: Saldo a Favor
+  personasobligaciones_p3_motivo_sancion: Motivo de la sanción
+  personasobligaciones_p3_nro_resolucion_sancionatorio: Nro Resolución Sancionatoria
+  personasobligaciones_p3_fecha_ejecutoria: Fecha Ejecutoria
+  personasobligaciones_p3_clasificacion_prescripcion: Clasificación por Prescripción
+  personasobligaciones_p3_manual: Manual
+  personasobligaciones_p3_fecha_originacion: Fecha Originación
+  personasobligaciones_p3_fecha_vencimiento: Fecha Vencimiento
+
+  # Parte 4
+  personasobligaciones_p4_cifin_nombre: Cifin
+  personasobligaciones_p4_datac_nombre: Data Crédito
+
+
+  #
+  # personasobligaciones estado de deuda GPS
+  #
+  personasobligaciones_estadodeuda_fecha_liquida: Fecha de Liquidación
+  personasobligaciones_estadodeuda_sennor: Señor(a)
+  personasobligaciones_estadodeuda_liquidacion: LIQUIDACIÓN
+  personasobligaciones_estadodeuda_contrato_deuda: CONTRATO DEUDA
+  personasobligaciones_estadodeuda_producto: PRODUCTO
+  personasobligaciones_estadodeuda_subproducto: SUBPRODUCTO
+  personasobligaciones_estadodeuda_moneda: MONEDA
+  personasobligaciones_estadodeuda_cuenta_sac: CUENTA SAC
+  personasobligaciones_estadodeuda_tasa_int: TASA DE INTERÉS EFECTIVA ANUAL
+  personasobligaciones_estadodeuda_capital_adecuado: CAPITAL ADEUDADO VENCIDO
+  personasobligaciones_estadodeuda_intereres_comp: INTERESES COMPENSATORIOS
+  personasobligaciones_estadodeuda_intereres_mora: INTERESES MORATORIOS
+  personasobligaciones_estadodeuda_otros: OTROS
+  personasobligaciones_estadodeuda_seguros: SEGUROS
+  personasobligaciones_estadodeuda_total_saldo: TOTAL SALDO DEUDOR
+  personasobligaciones_estadodeuda_contrato_gasto: CONTRATO GASTO
+  personasobligaciones_estadodeuda_gastos_jud: GASTOS JUDICIALES
+  personasobligaciones_estadodeuda_honorario: HONORARIOS ESTUDIO
+  personasobligaciones_estadodeuda_total_deuda: TOTAL DEUDA + GASTOS
+  personasobligaciones_estadodeuda_abogado: BOGADO
+  personasobligaciones_estadodeuda_juzgado: JUZGADO
+  personasobligaciones_estadodeuda_text1: Puede realizar el pago de su deuda, acercándose a cualquier agencia del
+  personasobligaciones_estadodeuda_text2: BANCO
+  personasobligaciones_estadodeuda_text3: y solicitar el pago a favor de
+  personasobligaciones_estadodeuda_text4: PAT- FID. TIT CUSCO 2018
+  personasobligaciones_estadodeuda_text5: indicando el código de la cuenta SAC
+  #
+  # personasobligaciones paz y salvo credito2
+  #
+  personasobligaciones_pazysalvo_c2: PAZ Y SALVO
+  personasobligaciones_pazysalvo_c2_credito2: CREDITO 2
+  personasobligaciones_pazysalvo_c2_certifica: Certifica que
+  personasobligaciones_pazysalvo_c2_cedula: Cédula de Ciudadanía No.
+  personasobligaciones_pazysalvo_c2_text1: Se encuentra(n) a PAZ y SALVO con el(los) crédito(s) No(s).
+  personasobligaciones_pazysalvo_c2_text2: el(los) cual(es) fue(ron) cedido(s) a CREDITO 2, quien actúa en calidad de Acreedor Cesionario.
+  personasobligaciones_pazysalvo_c2_text3: La(s) obligación(es) fue(ron) cancelado(s) por lo anterior, se declara(n) a PAZ Y SALVO por los créditos arriba mencionados.
+  personasobligaciones_pazysalvo_c2_text4: El presente PAZ Y SALVO se expide el
+  personasobligaciones_pazysalvo_c2_text5: en la ciudad de
+  personasobligaciones_pazysalvo_c2_text6: NOS RESERVAMOS EL DERECHO DE ENMIENDA Y CORRECCION, DE ACUERDO CON EL CODIGO DEL COMERCIO ARTICULO 880
+  personasobligaciones_pazysalvo_c2_text7: Atentamente
+  personasobligaciones_pazysalvo_c2_nombre: TAMARA PINZON
+  personasobligaciones_pazysalvo_c2_departamento: Departamento verificación
+  personasobligaciones_pazysalvo_c2_tel: (1) 7565030
+  #
+  # personasobligaciones paz y salvo four
+  #
+  personasobligaciones_pazysalvo_four_imprimir: Imprimir
+  #
+  # SistemCobro Campos adicionales
+  #
+  personasobligaciones_si_mora: Fch. inicio mora
+  personasobligaciones_si_castigo: Fch. castigo
+  personasobligaciones_si_compra: Fch. compra
+  personasobligaciones_si_corte: Fch. corte base de compra
+  personasobligaciones_si_proceso: Proceso actual
+  personasobligaciones_si_procesoinicio: Proceso iniciado por?
+  personasobligaciones_ha: Honorarios Abogado
+  personasobligaciones_capital_compra: Capital
+  personasobligaciones_corriente_compra: Corriente
+  personasobligaciones_otros_compra: Otros
+  personasobligaciones_mora_compra: Mora
+  personasobligaciones_total_compra: Total
+  personasobligaciones_datos_compra: Datos de Compra
+  personasobligaciones_otrosdatos_compra: Otros
+  personasobligaciones_origensystem: Origen
+  #
+  # Tanques Masivo
+  #
+  tanquesmasobligacion: Tanque Obligaciones
+  tanquesmasobligacion_obligacion: Obligación
+  tanquesmasobligacion_nombre: Nombre
+  tanquesmasobligacion_valor: Valor
+  tanquesmasobligacion_estado: Estado
+  tanquesmasobligacion_observacion: Observación
+  #
+  # Proveedores
+  #
+  proveedor_creacion: Creacion
+  proveedor_documento: Documento
+  proveedor_nombre: Nombre
+  proveedor_cuenta: Cuenta
+  proveedor: Proveedores
+
+
+  gpsajuste_index_valor: Valor
+  gpsajuste_index_fecha: Fecha
+  gpsajuste_index_concepto: Concepto
+  gpsajuste_index_observaciones: Observaciones
+
+  will_paginate:
+    previous_label: "&#8592; Anterior"
+    next_label: "Siguiente &#8594;"
+    page_gap: "&hellip;"
+  activerecord:
+    attributes:
+      comite:
+        temas: Temas
+        fecha: Fecha
+      comitesuser:
+        user_id: Usuario
+      comitesobservacion:
+        observaciones: Observaciones
+      comitesimagen:
+        descripcion: Descripción
+      broker:
+        identificacion: Identificación
+        nombre: Nombre
+        telefono: Teléfono
+        direccion: Dirección
+      inmueblesbroker:
+        broker_id: Broker
+        fecha_inicio: Fecha Inicio
+      coactivoscontrol:
+       causal_devolucion: 'Causal de devolución'
+       coactivostipo: 'Tipo'
+       empresa_correo: 'Empresa de correo'
+       fecha: 'Fecha de notificación'
+       fecha_devolucion: 'Fecha de devolución'
+       fecha_recibo_correo: 'Fecha en que se recibio el correo'
+      coactivosinvinmueble:
+        ciudad_notaria: 'Ciudad de la notaria'
+        direccion: 'Dirección'
+        fecha_anotacion: 'Fecha de la anotación'
+        fecha_escritura: 'Fecha escritura de compra venta'
+        matricula: 'Matrícula inmobiliaria'
+        nro_anotacion: 'Número de la anotación'
+        nro_escritura: 'Número de escritura de compra venta'
+        oficina_instrumentos: 'Oficina de instrumentos públicos'
+      coactivosinvlaboral:
+        direccion: 'Dirección'
+        email_rh: 'Email'
+        nit: 'NIT'
+        nombre_rh: 'Nombre jefe recursos humanos'
+        telefono_rh: 'Teléfono'
+      coactivosinvvehiculo:
+        oficina: 'Cuidad de la placa'
+      coactivostramite:
+        coactivospospropone: 'Propuesta'
+        decision: 'Decisión'
+        fecha_decision: 'Fecha decisión'
+        observaciones: 'Considerando'
+        user_decision_id: 'Usuario decisión'
+      procesosactuacion:
+        actuacion_requeridad: Actuaciones previas requeridas
+        inmhipoteca: Inmuebles con hipoteca
+        inmueble: Inmuebles
+        vehiculo: Vehiculos
+        activos: Activos Financieros
+        laboral: Información Laboral
+        empresa: Empresa
+        otros: Otros
+      procesosetapa:
+        descripcion: Descripción
+        medida_cautelar: Medida Cautelar?
+      cohorte:
+        periodosconvocatoria_id: Periodo Académico
+        nombre: Cohorte
+        descripcion: Descripcion detallada
+        fecha_inicio: Fecha inicio
+        fecha_fin: Fecha terminacion
+        fecha1: Fecha límite de pago
+        inicial1: Valor inscripción
+        valor1: Valor cuota inicial
+        fecha2: Fecha límite de pago
+        inicial2: Valor inscripción
+        valor2: Valor cuota inicial
+        fecha3: Fecha límite de pago
+        inicial3: Valor inscripción
+        valor3: Valor cuota inicial
+      cohortesprogreincredito:
+        identificacion: identificación
+        maximo_credito: Creditos Maximos
+      portafoliossucursal:
+        cuenta_proveedor: Cuenta del estudio
+        firmo_gps: Firmó con GPS?
+      cohortesprograma:
+        opc_valor: Pago parcial
+        opc_inicial1: Pago parcial
+        opc_inicial2: Pago parcial
+        opc_inicial3: Pago parcial
+        opc_rinicial1: Pago parcial
+        opc_rinicial2: Pago parcial
+        opc_rinicial1: Pago parcial
+        opc_valor1: Pago parcial
+        opc_valor2: Pago parcial
+        opc_valor3: Pago parcial
+        opc_rvalor1: Pago parcial
+        opc_rvalor2: Pago parcial
+        opc_rvalor3: Pago parcial
+        estado: Estado del programa
+        universidadesprograma_id: Universidad y programa
+        valor: Valor Contado
+        valor_financiacion: Valor a Cuotas
+        tasa_corriente: Interes E.A.
+        fecha_inicio: Fecha inicio Financiación
+        plazo_financiacion: Plazo Financiación
+        fecha1: Fecha Límite
+        fecha2: Fecha Límite
+        fecha3: Fecha Límite
+        rfecha1: Fecha Límite
+        rfecha2: Fecha Límite
+        rfecha3: Fecha Límite
+        inicial1: Estudio Edupol (No Reembolsable)
+        inicial2: Estudio Edupol (No Reembolsable)
+        inicial3: Estudio Edupol (No Reembolsable)
+        rinicial1: Estudio Edupol (No Reembolsable)
+        rinicial2: Estudio Edupol (No Reembolsable)
+        rinicial1: Estudio Edupol (No Reembolsable)
+        valor1: Valor Inscripción
+        valor2: Valor Inscripción
+        valor3: Valor Inscripción
+        rvalor1: Valor Inscripción
+        rvalor2: Valor Inscripción
+        rvalor3: Valor Inscripción
+        aplica_pp: Aplica Pronto Pago
+        aplica_pp_dias: Días Pronto Pago
+      formulario:
+        tiposdocumento_id: Tipo de documento
+        direccion: Dirección residencia
+        email: Correo electrónico
+        clv: Digite la clave con la cual usted podrá ingresar a su formulario de inscripción
+        nacimiento_municipio_id: Municipio de nacimiento
+        email_institucional: Correo Institucional
+        discapacidad: ¿Tiene alguna discapacidad?
+        tiposdiscapacidad_id: Tipo de discapacidad
+        medio: ¿Por cuál medio se enteró de EDUPOL?
+        zona: Zona de residencia
+        residencia_municipio_id: Municipio de la residencia
+        universidadesprograma_id: Programa Académico
+        cohorte_id: Periodo Académico
+        centro_id: Centro de Apoyo
+        comercial_user_id: Cazador
+        ciudadexpedicion_id: 'Ciudad de Expedición'
+        contac_parentesco: Parentesco
+        contac_nombres: Nombres
+        contac_apellidos: Apellidos
+        contac_telefono: Teléfono
+      personasprocauactuacion:
+        observacion: Observación
+        procesosactuacion_id: Actuaciones
+      persona:
+        tiposdocumento_id: Documento
+        identificacion: Identificación
+        digito: DV
+        primer_nombre: Primer nombre
+        segundo_nombre: Segundo nombre
+        primer_apellido: Primer apellido
+        segundo_apellido: Segundo apellido
+        genero: Género
+        estado_civil: Estado Civil
+        fecha_nacimiento: Fecha nacimiento
+        tipo_persona: Tipo de Persona
+        situacion_econo: Situación economica
+        ocupacion: Ocupación ó cargo
+        salario: Salario
+        nombre_empresa: Nombre empresa donde labora
+        direccion_empresa: Dirección empresa
+        telefono_empresa: Telefono empresa
+        situacion_titular: Situación del Titular
+        tipo_deudor: Tipo de deudor
+        porc_descuento: Porcentaje descuento pago contado
+        porc_descuento_plazo: Porcentaje descuento pago plazo
+        calificacion: Calificación cliente
+        codclavecic: Codclavecic
+        idc: Idc
+        nacionalidad: Nacionalidad
+        gps_codigo_sensible: Codigo Sensible
+        gps_fch_deteccion: Fecha de Detección
+        useranalista_id: Analista Judicial
+        representante_legal: Representante Legal
+        direccion: Dirección residencia
+        email: Correo electrónico
+        email_institucional: Correo Institucional
+        clv: Digite la clave con la cual usted podrá ingresar a su formulario de inscripción
+        nacimiento_municipio_id: Municipio de nacimiento
+        zona: Zona de residencia
+        discapacidad: ¿Tiene alguna discapacidad?
+        tiposdiscapacidad_id: Tipo de discapacidad
+        residencia_municipio_id: Municipio de la residencia
+        universidadesprograma_id: Universidad y programa
+        cohorte_id: Cohorte
+        centro_id: Centro de Apoyo
+        medio: ¿Por cuál medio se enteró de EDUPOL?
+        ciudadexpedicion_id: 'Ciudad de Expedición'
+        zona: Zona
+        parnaturalezadeudor_id: Naturaleza del Deudor
+        parsituaciondeudor_id: Situación del Deudor
+        contac_parentesco: Parentesco
+        contac_nombres: Nombres
+        contac_apellidos: Apellidos
+        contac_telefono: Teléfono
+      personasprograma:
+        universidadesprograma_id: Programa Académico
+        cohorte_id: Periodo Académico a Cursar
+        centro_id: Centro de Apoyo
+        comercial_user_id: Cazador
+        ciudad_colegio_bachiller: Ciudad donde se graduó de bachiller
+        nombre_colegio_bachiller: Nombre del Colegio
+        fecha_finalizacion_bachiller: Fecha de Finalización bachiller
+        codigo_snp_examen_estado: Código snp del examen de estado
+        fecha_presentacion_examen: Fecha Presentación del examen
+        puntuacion_lenguaje: Lenguaje
+        puntuacion_matematicas: Matemáticas
+        puntuacion_cienciassociales: Ciencias Sociales
+        puntuacion_electiva: Electiva
+        puntuacion_biologia: Biología
+        puntuacion_quimica: Química
+        puntuacion_ingles: Inglés
+        puntuacion_filosofia: Filosofía
+        origen_dineropago: Origen del Dinero para pago de Estudios
+        actividad_economica: Actividad Económica
+        nombre_empresa: Nombre de Empresa
+        telefono_empresa: Teléfono de la empresa
+        direccion_empresa: Dirección de la Empresa
+        ciudad_empresa: Ciudad de la Empresa
+        cargo_empresa: Cargo
+        salario: Salario Y/O Ingresos
+        tiempo_vinculacion: Tiempo Vinculación en Meses
+        entidad_salud: Entidad Promotora de Salud
+        fondo_pensiones: Fondo de Pensiones y Cesantias
+        tipo_vivienda: Tipo de Vivienda
+        servicios_publicos: Servicios Públicos
+        requiere_ayudafinanciera: ¿Requiere Ayuda Financiera?
+        padece_enfermedad_cronica: ¿Padece Alguna Enfermedad Crónica?
+        enfermedad: ¿Que enfermedad?
+      personasdireccion:
+        coordenada_x: Coordenada X
+        coordenada_y: Coordenada Y
+        origen_dato: Procedencia del dato
+      personastelefono:
+        origen_dato: Procedencia del dato
+      personashipotecaria:
+        garantia_liberada: Type of Resolution – Collateral
+        tipo_inmueble: Tipo Inmueble
+        direccion: Dirección
+        municipio: Municipio
+        numero_matricula: Número Matrícula
+        oficina_intrumentos: Oficina Instrumentos
+        nombre_propietario: Nombre Propietario
+        identificacion_propietario: Identificación Propietario
+        fecha_adq: Fecha Adquisición
+        escritura_adq: Escritura Adquisición
+        valor_avaluo: Valor Avalúo
+        fecha_avaluo: Fecha Avalúo
+        deuda_adm: Deuda de Administración
+        fecha_deuda: Fecha Deuda
+        tipo_garantia: Tipo de Hipoteca
+        garantia_compartida: Garantía Compartida
+        tipo_viv: Tipo de Vivienda
+        perumunicipio: Municipio
+        ciudad_nothipoteca: Ciudad notaria hipoteca
+        hipoteca_afavor: Hipoteca a favor de
+        garantia_retirada: La garantía ha sido retirada
+        garantia_retira_fecha: Fecha en la cual se levantó la garantía
+        valor_tasacion: Ult. monto afectación
+        origen: Origen del dato
+        referencia_catastral: Referencia Catastral
+        situacion_juridica: Situación Juridica del inmueble
+        codigo: Código(PK)
+        codigo_plus: Código Mas(PK)
+        codigo_mas: Codigo +
+        unidad_inm: Unidad Inmobiliaria
+        fecha_desalojo: Estimated eviction date
+        year_built: Year Built/Renovated
+        distance: Distance (km)
+        physical_rating: Physical Rating
+        location_rating: Location Rating
+        listing_date: Listing Date
+        listing_price: Listing Price / Value (USD)
+        price_m2: Price / m2
+        gps_uw_value: GPS UW Value
+        gps_valuation: GPS Valuation Date
+        valor_area_terreno: Valor del area de terreno
+        valor_area_construida: Valor de área construida
+        enviromental_review: Enviromental review needed?
+        occupied: Occupied?
+        est_disposition: Est. Disposition Exit (Mos)
+        sales_costs: Sales Costs (% of sale price)
+        enviromental_reviewid: Enviromental Review ID
+        strategy: Strategy
+        winning_bid: Winning bid (USD)
+        winning_bid_org: Winning bid (Original Currency)
+        winning_bid_currency: Winning bid Currency
+        tipo_toma: Tipo de toma de posesión
+        collection_date: Collection Date (Awarded by 3RD)
+        collection_amount: Collection Amount (3RD)
+        possible_collections: Possible collections date (3RD)
+        status: Status
+        comments_gps: Comments GPS
+      personashipocompara:
+        year_built: Year Built/Renovated
+        distance: Distance (km)
+        physical_rating: Physical Rating
+        location_rating: Location Rating
+        listing_date: Listing Date
+        listing_price: Listing Price / Value (USD)
+        price_m2: Price / m2
+        perumunicipio_id: Municipio
+        municipio_id: Municipio
+        size: Size (m2)
+      personasinvinmueble:
+        tipo: Tipo de inmueble
+        direccion: Dirección
+        perumunicipio: Municipio
+        municipio: Municipio
+        matricula: Matrícula
+        condicion_judicial: Condición judicial
+        valor_avaluo: Valor avaluo
+        fecha_avaluo: Fecha avaluo
+        oficina_instrumentos: Oficina instrumentos
+        nro_escritura: Nro. escritura
+        fecha_escritura: Fecha escritura
+        notaria: Notaria
+        ciudad_notaria: Ciudad notaria
+        nro_anotacion: Nro. anotación
+        fecha_anotacion: Fecha anotación
+        origen: Origen del dato
+        referencia_catastral: Referencia catastral
+        situacion_juridica: Situación Juridica del inmueble
+        personascodeudor_id: Dato asociado a
+        observaciones: Observaciones
+      personasinmpropietario:
+        personascodeudor_id: Propietarios
+      personasinvvehiculo:
+        tipo: Tipo
+        marca: Marca
+        linea: Linea
+        modelo: Modelo
+        placa: Placa
+        origen: Origen del dato
+        organismo: Organismo de Transito
+        direccion_organismo: Dirección Organismo de Transito
+        municipio_org: Municipio Organismo
+        valor_avaluo: Valor Avaluo
+        fecha_avaluo: Fecha Avaluo
+        fuente_avaluo: Fuente del Avaluo
+        estado_cons_vehiculo: Estado Conservacion Vehiculo
+        tipo_servicio: Tipo de Servicio
+        personascodeudor_id: Dato asociado a
+        observaciones: Observaciones
+        nombre_parq: Nombre
+        direccion_parq: Dirección
+        ciudad_parq: Ciudad
+        telefono_parq: Telefono
+      inmueble:
+        idprestatario: ID Prestatario
+        nombre_prestatario: Nombre Prestatario
+        parqueadero: Cantidad de Cocheras
+        fecha_adq: Fecha Adquisición
+        escritura_adq: Escritura Adquisición
+        valor_avaluo: Valor Avalúo
+        fecha_avaluo: Fecha Avalúo
+        deuda_adm: Deuda de Administración
+        fecha_deuda: Fecha Deuda
+        tipo_garantia: Tipo de Hipoteca
+        garantia_compartida: Garantía Compartida
+        tipo_viv: Tipo de Vivienda
+        ciudad_nothipoteca: Ciudad notaria hipoteca
+        hipoteca_afavor: Hipoteca a favor de
+        garantia_retirada: La garantía ha sido retirada
+        garantia_retira_fecha: Fecha en la cual se levantó la garantía
+        valor_tasacion: Ult. monto afectación
+        valor_adquisicion: Valor Adquisición
+        register_loan: Registered in GS REO/GS Loan
+        register_loan_date: Registered in GS REO/Loan Date
+        registro_patrimonio: Registered in PST
+        fecha_regpatrimonio: Registered in PST Date
+        estado_listado: Listed Status
+        estado_disponibilidad: Disponibilidad del inmueble
+        reo_statuses: REO Statuses
+        fecha_convertir_reo: Fecha en que se convirtio en REO
+        idinmueble: ID Inmueble
+        tiposdocumento_id: Documento
+        identificacion_deudor: Identificación
+        nombre_deudor: Nombre Deudor
+        originador: Nombre Originador
+        origen: Origen
+        tiposinmueble_id: Category - SubCategory
+        portafolio_gps: Portafolio
+        fecha_migracion: Fecha Migracion
+        destinacion_inmueble: Destinacion Inmueble
+        direccion: Dirección
+        perumunicipio_id: Municipio
+        municipio_id: Municipio
+        zona: Zona
+        coordenada_x: Coordenada X
+        coordenada_y: Coordenada Y
+        porcentaje_propiedad: Porcentaje Propiedad
+        numero_matricula: Número de Registro Público
+        valor_adquisicion: Valor Adquisición
+        unidad_adquisicion : Unidad Adquisición
+        oficina_intrumentos: Oficina Instrumentos
+        fecha_adq: Fecha Adquisición
+        fecha_posesion: Fecha posesion
+        estrato: Estrato
+        garantia_compartida: Garantía Compartida
+        area_terreno: Area terreno
+        area_construida: Area construida
+        nivel: Cantidad de Pisos
+        piso: Piso
+        alcoba: Cantidad de Dormitorios
+        cocina: Cocina
+        bano: Cantidad de Baños
+        sala: Sala
+        comedor: Comedor
+        patio: Patio
+        balcon: Balcon
+        estado_conservacion: Estado conservacion
+        tipo_seguridad: Tipo seguridad
+        periodicidad_limpieza: Periodicidad limpieza
+        precio_lista: Precio de Lista
+        precio_moneda: Unidad Precio
+        codigo: Código(PK)
+        codigo_plus: Código Mas(PK)
+        codigo_mas: Codigo +
+        unidad_inm: Unidad Inmobiliaria
+        fecha_desalojo: Estimated eviction date
+        expediente_corto: Case file
+        confirmacion_visita: Confirmado AAHH/PPJJ
+        confirmacion_fecha: Fecha Confirmado AAHH/PPJJ
+        fecha_estventa: Estimated sales period
+        userabogado_id: Abogado que lleva el proceso
+        portafoliossucursal_id: Estudio que lleva el proceso
+        year_built: Year Built/Renovated
+        distance: Distance (km)
+        physical_rating: Physical Rating
+        location_rating: Location Rating
+        listing_date: Listing Date
+        listing_price: Listing Price / Value (USD)
+        price_m2: Price / m2
+        gps_uw_value: GPS UW Value
+        gps_valuation: GPS Valuation Date
+        valor_area_terreno: Valor del area de terreno
+        valor_area_construida: Valor de área construida
+        enviromental_review: Enviromental review needed?
+        occupied: Occupied?
+        est_disposition: Est. Disposition Exit (Mos)
+        sales_costs: Sales Costs (% of sale price)
+        tipospatrimonio_id: Patrimonio
+      portafoliosvehiculo:
+        porcentaje_negociacion: '% Negociación 1'
+        porcentaje2_negociacion: '% Negociación 2'
+        porcentaje3_negociacion: '% Negociación 3'
+        porcentaje4_negociacion: '% Negociación 4'
+      personascredito:
+        originador: Originador
+        fecha_compra: Fecha Compra
+        tipo_producto: Tipo de Producto
+        linea_credito: Linea de Credito
+        denominacion: Denominacion
+        tasa_corriente: Interes Corriente E.A.
+        tasa_mora: Mora E.A.
+        fecha_desembolso: Fecha Desembolso
+        fecha_vencimiento: Fecha Vencmto
+        valor_desembolsado: Valor Desembolsado
+        plazo: Plazo
+        altura: Altura
+        pagadas: Pagadas
+        en_mora: En Mora
+        por_facturar: Por Facturar
+        fecha_inicio_mora: Fecha Inicio Mora
+        dias_mora: Dias Mora
+        calificacion: Calificación
+        estado: Estado
+        vencido_cuota: Valor Cuota Vencida
+        vencido_mora: Valor Mora
+        vencido_seguro: Valor Seguro Vencido
+        vencido_total: Saldo en Mora
+        mes_capital: Valor Cuota
+        mes_corriente: Valor Intereses
+        mes_seguro: Valor Seguro
+        mes_total: Cuota Neta
+        final_capital: Saldo Capital
+        final_corriente: Intereses Corrientes
+        final_mora: Interes de Mora
+        final_seguros: Seguros
+        final_deuda: Saldo Deuda
+      cohortesprogreingreso:
+        valor: Valor Contado
+        valor_financiacion: Valor a Cuotas
+        tasa_corriente: Interes E.A.
+        fecha_inicio: Fecha inicio Financiación
+        plazo_financiacion: Plazo Financiación
+        periodosconvocatoria_id: Periodo Académico
+        aplica_pp: Aplica Pronto Pago
+        aplica_pp_dias: Días Pronto Pago
+      cohortesprogperiodo:
+        valor: Valor Contado
+        valor_financiacion: Valor a Cuotas
+        tasa_corriente: Interes E.A.
+        fecha_inicio: Fecha inicio Financiación
+        plazo_financiacion: Plazo Financiación
+        periodosconvocatoria_id: Periodo Académico
+        aplica_pp: Aplica Pronto Pago
+        aplica_pp_dias: Días Pronto Pago
+      personasacuerdo:
+        situacion_econo: Situación Económica
+        ocupacion: Ocupación
+        salario: Salario
+        nombre_empresa: Nombre Empresa
+        direccion_empresa: Dirección de la Empresa
+        telefono_empresa: Teléfono de la Empresa
+        inv_nombres: Nombre Completo
+        inv_identificacion: Identificación
+        inv_telefono: Teléfono
+        inv_email: Correo Electrónico
+        antecedentes_resolucion: Resolution Strategy
+      personasacuerdosdetalle:
+        amortiza: Capital
+        plazo: Nro de cuotas
+        tasa_final: Interes E.A.
+      personasprogasto:
+        igv: IGV (en Soles)
+        valor: Valor (en Soles)
+        igv_lega: IGV (en Soles)
+        valor_lega: Valor (en Soles)
+        ruc_emisor: RUC Emisor
+        fch_pago: Fecha pago
+        cuenta_detraccion: Cuenta de tracción proveedor
+      personashipoavaluo:
+        valor: Valor avaluo
+        denominacion: Denominación
+        fecha: Fecha avaluo
+        valor_soles: Valor en Soles
+        valor_dolares: Valor en Dolares
+        valor_euros: Valor en Euros
+        valor_construccion: Valor construcción
+        deno_construccion: Moneda construcción
+        valor_terreno: Valor terreno
+        deno_terreno: Moneda terreno
+        valor_anexo: Valor anexo
+        deno_anexo: Moneda anexo
+        avaluador: Nombre avaluador
+        observaciones: Comentarios BPO
+        valor_reconstruccion: Valor Reconstrucción
+        deno_reconstruccion: Moneda Reconstrucción
+      inmueblesoferta:
+        identificacion_oferente: Identificación
+        nombre_oferente: Nombre
+        telefono_oferente: Telefono
+        direccion_oferente: Dirección
+        email_oferente: Correo Electrónico
+        oupacion_oferente: Ocupación
+        ingresos_oferente: Ingresos
+        broker_user_id: Broker
+        porcentaje_comision: Porc. Comisión
+        valor_comision: Valor Comisión
+        fecha_propuesta: Fecha Oferta
+        valor_oferta: Valor Oferta
+        unidad_denominacion: Denominación
+        calculo1: v1
+        calculo2: v2
+        calculo3: v3
+        cuota1_fecha: Cuota 1 - Fecha
+        cuota1_valor: Valor
+        cuota2_fecha: Cuota 2 - Fecha
+        cuota2_valor: Valor
+        cuota3_fecha: Cuota 3 - Fecha
+        cuota3_valor: Valor
+        cuota4_fecha: Cuota 4 - Fecha
+        cuota4_valor: Valor
+        cuota5_fecha: Cuota 5 - Fecha
+        cuota5_valor: Valor
+        observaciones: Observaciones de la Oferta
+        comentario_mercado: Comentarios Mercado
+        comentario_propiedad: Comentarios Propiedad
+        desafios: Desafios
+        estrategia_venta: Estragia de Venta
+        banco_financiador: Financing Bank
+        banco_porcfin: Financing %
+      personascodeudor:
+        tipo: Tipo Deudor
+        tiposdocumento_id: Documento
+        identificacion: Identificación
+        digito: DV
+        primer_nombre: Primer nombre
+        segundo_nombre: Segundo nombre
+        primer_apellido: Primer apellido
+        segundo_apellido: Segundo apellido
+        direccion_casa: Dirección casa
+        telefono_casa: Teléfono Casa
+        celular: Celular
+        direccion_trabajo: Dirección Trabajo
+        telefono_oficina: Teléfono Oficina
+        celular_secundario: Celular secundaria
+        email: Email
+        perumunicipio: Municipio
+        municipio: Municipio
+        nacionalidad: Nacionalidad
+        codclavecic_fiador: Codclavecic fiador
+        tipo_cliente: Tipo de Persona
+      inmueblescomercial:
+        identificacion: Identificación
+        nombre: Nombre
+        direccion: Dirección
+        fecha: Fecha de Gestión
+        perumunicipio_id: Municipio
+        municipio_id: Municipio
+        observacion: Observación
+        clasificacion: Clasificación
+      inmueblesgasto:
+        tiposgasto_id: Tipo de Gasto
+        periodicidad: Periodicidad
+        moneda: Unidad Pago
+        fecha: Fecha de Pago
+        observacion: Observaciones
+      inmueblesingreso:
+        concepto: Concepto
+        ingreso_moneda: Unidad del Ingreso
+        fecha_ingreso: Fecha del Ingreso
+        fecha_minuta: Fecha Minuta
+        fecha_venta: Fecha Venta
+        nro_cheque: Nro de Cheques
+      inmueblesajuste:
+        valor: Valor
+        moneda: Unidad
+        fecha: Fecha
+        concepto: Concepto
+        observaciones: Observaciones
+      inmueblespatrimonio:
+        moneda: Unidad
+        fecha: Fecha
+        patrimonio: Tipo de Patrimonio
+        tipospatrimonio_id: Concepto
+      inmueblesgestion:
+        fecha_gestion: Fecha Gestión
+        observacion: Observación
+        tipo_gestion: Tipo Gestión
+      inmueblespropietario:
+        identificacion: Identificación
+        nombre: Nombre ó Razon Social
+        telefono: Teléfono
+        direccion: Dirección
+        email: Correo Electrónico
+        porcentaje_part: Porcentaje de Titularidad
+      inmueblestramite:
+        minuta_nro: Nro de Minuta
+        minuta_fecha: Fecha Minuta
+        escritura_nro: Nro. de Escritura
+        escritura_notaria: Notaria
+        municipio_id: Municipio
+        perumunicipio_id: Municipio
+        escritura_fecha: Fecha Escritura
+        fecha_entrega: Fecha de Entrega
+        fecha_ingresoucn: UCN (inicio)
+        dias_ucn: UCN (días)
+        resultado_ucn: UCN (Compliance)
+        fecha_salidaucn: UCN (Fin)
+        seguimento_ucn: UCN (Seguimiento)
+        fecha_seguimientoucn: Fecha seguimiento UCN
+        venta_concluida: Venta Concluida
+      inmueblesarrendatario:
+        trabajo: Empresa donde labora actualmente
+        telefono: Teléfono
+        celular: Celular
+        fecha_inicio: Fecha Inicio
+        direccion: Dirección
+        tel_trabajo: Teléfono Empresa
+      personasproceso:
+        suspencion_inicio: Suspensión Inicio
+        suspencion_fin: Suspensión Fin
+        causal_terminacion: Causal Terminación
+        comentarios_prestamo: Loan / Borrower Comments
+        comentarios_colateral: Collateral Comments
+        desafias: Key Challenges / Objectives
+        estrategias: Resolution Strategy
+        number_auction: Number of auction
+        minimum_bid: Minimum Starting Bid
+        expected_date: Expected resolution date
+        discount_rate: Discount Rate VNA (%)
+        loan_underwriter: Loan Underwriter
+        collateral_underwriter: Collateral underwriter
+        exhorto: Exhorto
+        fecha: Fecha inicio proceso
+      portafolio:
+        recaudo_prorrata: Recaudo Prorrata?
+        forma_aplicacion: Forma Aplicación
+        aplicaregla1: Valida Obligación + Identificación
+        aplicaregla2: Valida solo Obligación
+        aplicaregla3: Valida solo Identificación
+        valida_cierre: Control de Recaudos por Cierre
+        aplica_recaudo: Como aplicar Recaudos por identificación?
+        bloqueo_recaudo: Bloqueo Recaudos
+        genera_mora: Liquida Mora?
+        nacional: Colombia
+        act_dash: Activar Dashboard
+        acuerdos_fechas: Permitir Acuerdos con Fechas Anteriores
+      personasinventidad:
+        tipo: Tipo
+        entidad: Entidad
+        nro_cuenta: Nro Cuenta
+        oficina: Oficina
+        saldo: Saldo
+        personascodeudor_id: Dato asociado a
+      personaslaboral:
+        entidad: Entidad
+        nit: NIT Empleador
+        direccion: Dirección
+        municipio_id: Municipio
+        cargo: Cargo
+        salario: Salario
+        nombre_rh: Nombre
+        telefono_rh: Teléfono
+        email_rh: Email
+        fecha_vinculacion: Fecha Vinculación
+        fecha_finalizacion: Fecha Financiación
+        personascodeudor_id: Dato asociado a
+        observaciones: Observaciones
+      personasinvotro:
+        personascodeudor_id: Dato asociado a
+        observaciones: Observaciones
+      personasinvempresa:
+        origen: Origen
+        nro_matricula: Nro matricula
+        nit: Nit
+        nombre: Nombre
+        camara_comercio: Camara y comercio
+        direccion: Dirección
+        municipio_id: Municipio
+        representante_legal: Representante legal
+        porc_participacion: Porc Participación
+        personascodeudor_id: Dato asociado a
+        observaciones: Observaciones
+      personasinvremanente:
+        juzgado_id: Juzgado
+        tiposproceso_id: Tipos de Proceso
+        tipo_bien: Tipo Bien
+      personasobligacion:
+        recibida_pa: Recibida PA
+        radicado_juzgado: Radicado Juzgado
+        aceptada: Aceptada
+        subida_activo: Subida a Activo
+        tasa_final: Tasa Final
+        tasa_mora: Tasa Mora
+        corte_plan: Dia Corte
+        tasa_desgravamen: Tasa Desgravamen Anual
+        tasa_igv: Tasa IGV
+        tipotitulo: Tipo de Título
+      portafolioscuenta:
+        propietario: Propietario
+        banco: Banco
+        cuenta: Cuenta
+        unidad_denominacion: Unidad denominación
+        codigo_reporte: Codigo reporte
+        portafoliossucursal_id: Sucursal
+        cod_cuenta: Codigo cuenta
+        nit_titular: Nit Titular
+        tipo_cuenta: Tipo cuenta
+        convenio: Convenio
+        portafoliosvehiculo_id: Vehiculo
+        tipospatrimonio_id: Patrimonio
+      inmueblesestado:
+        estado: Estado Reo
+        fecha_estado: Fecha
+        grupo: Grupo
+        fecha_ingresoucn: UCN (inicio)
+        dias_ucn: UCN (días)
+        resultado_ucn: UCN (Compliance)
+      tanque:
+        fecha_mov: Fecha Deposito
+        obligacion: Obligación
+        identificacion: Identificación
+        cuenta: Cuenta
+        codigo: Codigo
+        valor_recaudo: Valor Recaudo
+        unidad_denominacion: Unidad Denominación
+        nombre_archivo: Nombre del Archivo
+        parorigenespago_id: Origen del pago
+      personasacuerdosdato:
+        created_at: Fecha Aprobación
+      portafoliostasascambio:
+        hnl_dolar: Lempira por Dolar
+        soles_dolar: Soles por Dolar
+      gpsajuste:
+        patrimonio: Tipo de Patrimonio
+      personasproetapasdato:
+        strategy: Strategy
+        winning_bid: Winning bid (USD)
+        winning_bid_org: Winning bid (Original Currency)
+        winning_bid_currency: Winning bid Currency
+        tipo_toma: Tipo de toma de posesión
+        collection_date: Collection Date (Awarded by 3RD)
+        collection_amount: Collection Amount (3RD)
+        possible_collections: Possible collections date (3RD)
+        status: Status
+        comments_gps: Comments GPS
+        dpd_attimeofaction: DPD at Time of action
+        date_lastprocedural_action: Date last procedural action
+        minimun_startingbid: Minumun Starting Bid
+      personasprojudicial:
+        fecha_resol_estudio: Fecha resolución estudio
+        valor_resol_estudio: Valor resolución estudio
+        unidad_estudio: Denominación
+        fecha_resol_gps: Fecha resolución GPS
+        valor_resol_gps: Valor resolución GPS
+        unidad_gps: Denominación
+        tipo_resol: Tipo de resolución
+        tipoobs_resol: Tipo de observación resolución
+        observacion: Observación de la resolución
+        accion_inmediata: Acción inmediata
+        fecha_accion: Fecha accion inmediata
+        observacion_accion: Observación de acción inmediata
+        #AQUI VA !!!!!!!!
+    errors:
+      messages:
+        password:
+          password_strength: "Es una contraseña demasiado debil, ¡inténtalo de nuevo!"
+        record_invalid: "La validación falló: %{errors}"
+        restrict_dependent_destroy:
+          has_one: No se puede eliminar el registro porque existe un %{record} dependiente
+          has_many: No se puede eliminar el registro porque existen %{record} dependientes
+  date:
+    abbr_day_names:
+    - dom
+    - lun
+    - mar
+    - mié
+    - jue
+    - vie
+    - sáb
+    abbr_month_names:
+    -
+    - ene
+    - feb
+    - mar
+    - abr
+    - may
+    - jun
+    - jul
+    - ago
+    - sep
+    - oct
+    - nov
+    - dic
+    day_names:
+    - domingo
+    - lunes
+    - martes
+    - miércoles
+    - jueves
+    - viernes
+    - sábado
+    formats:
+      default: "%d/%m/%Y"
+      long: "%A, %d de %B de %Y"
+      short: "%d de %b"
+    month_names:
+    -
+    - enero
+    - febrero
+    - marzo
+    - abril
+    - mayo
+    - junio
+    - julio
+    - agosto
+    - septiembre
+    - octubre
+    - noviembre
+    - diciembre
+    order:
+    - :day
+    - :month
+    - :year
+  datetime:
+    distance_in_words:
+      about_x_hours:
+        one: cerca de 1 hora
+        other: cerca de %{count} horas
+      about_x_months:
+        one: cerca de 1 mes
+        other: cerca de %{count} meses
+      about_x_years:
+        one: cerca de 1 año
+        other: cerca de %{count} años
+      almost_x_years:
+        one: casi 1 año
+        other: casi %{count} años
+      half_a_minute: medio minuto
+      less_than_x_minutes:
+        one: menos de 1 minuto
+        other: menos de %{count} minutos
+      less_than_x_seconds:
+        one: menos de 1 segundo
+        other: menos de %{count} segundos
+      over_x_years:
+        one: más de 1 año
+        other: más de %{count} años
+      x_days:
+        one: 1 día
+        other: "%{count} días"
+      x_minutes:
+        one: 1 minuto
+        other: "%{count} minutos"
+      x_months:
+        one: 1 mes
+        other: "%{count} meses"
+      x_seconds:
+        one: 1 segundo
+        other: "%{count} segundos"
+    prompts:
+      day: Día
+      hour: Hora
+      minute: Minuto
+      month: Mes
+      second: Segundos
+      year: Año
+  errors:
+    format: "%{attribute} %{message}"
+    messages:
+      accepted: debe ser aceptado
+      blank: no puede estar en blanco
+      present: debe estar en blanco
+      confirmation: no coincide
+      empty: no puede estar vacío
+      equal_to: debe ser igual a %{count}
+      even: debe ser un número par
+      exclusion: está reservado
+      greater_than: debe ser mayor que %{count}
+      greater_than_or_equal_to: debe ser mayor o igual que %{count}
+      inclusion: no está incluido en la lista
+      invalid: es inválido
+      less_than: debe ser menor que %{count}
+      less_than_or_equal_to: debe ser menor o igual que %{count}
+      model_invalid: "La validación falló: %{errors}"
+      not_a_number: solo números
+      not_an_integer: debe ser un entero
+      odd: debe ser un número impar
+      required: debe existir
+      taken: ya ha sido tomado
+      too_long:
+        one: es demasiado largo (máximo 1 caracter)
+        other: es demasiado largo (máximo %{count} caracteres)
+      too_short:
+        one: es demasiado corto (mínimo 1 caracter)
+        other: es demasiado corto (mínimo %{count} caracteres)
+      wrong_length:
+        one: longitud errónea (debe ser de 1 caracter)
+        other: longitud errónea (debe ser de %{count} caracteres)
+      other_than: debe ser distinto de %{count}
+    template:
+      body: 'Revise que los siguientes campos sean válidos:'
+      header:
+        one: "%{model} no pudo guardarse debido a 1 error"
+        other: "%{model} no pudo guardarse debido a %{count} errores"
+  helpers:
+    select:
+      prompt: Por favor selecciona
+    submit:
+      create: Crear %{model}
+      submit: Guardar %{model}
+      update: Actualizar %{model}
+  number:
+    # Used in number_to_currency()
+    currency:
+      format:
+        # Where is the currency sign? %u is the currency unit, %n the number (default: $5.00)
+        format: "%n %u"
+        unit: "$"
+        # These three are to override number.format and are optional
+        separator: ","
+        delímiter: "."
+        precision: 2
+    format:
+      delímiter: ","
+      precision: 2
+      separator: "."
+      significant: false
+      strip_insignificant_zeros: false
+    human:
+      decimal_units:
+        format: "%n %u"
+        units:
+          billion: mil millones
+          million:
+            one: millón
+            other: millones
+          quadrillion: mil billones
+          thousand: mil
+          trillion:
+            one: billón
+            other: billones
+          unit: ''
+      format:
+        delímiter: ","
+        precision: 3
+        significant: true
+        strip_insignificant_zeros: true
+      storage_units:
+        format: "%n %u"
+        units:
+          byte:
+            one: Byte
+            other: Bytes
+          gb: GB
+          kb: KB
+          mb: MB
+          tb: TB
+    percentage:
+      format:
+        delímiter: ","
+        format: "%n%"
+    precision:
+      format:
+        delímiter: ","
+  support:
+    array:
+      last_word_connector: " y "
+      two_words_connector: " y "
+      words_connector: ", "
+  time:
+    am: am
+    formats:
+      default: "%a, %d de %b de %Y a las %H:%M:%S %Z"
+      long: "%A, %d de %B de %Y a las %I:%M %p"
+      short: "%d de %b a las %H:%M hrs"
+    pm: pm
+
+  views:
+    pagination:
+      first: "&laquo; Primero"
+      last: "Último &raquo;"
+      previous: "&lsaquo; Anterior"
+      next: "Siguiente &rsaquo;"
+      truncate: "..."

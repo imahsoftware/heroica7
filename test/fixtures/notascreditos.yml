@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  factura: one
+  user: one
+  user_anula: 1
+  valor: 1
+  saldo: 1
+  observacion: MyString
+  estado: MyString
+
+two:
+  factura: two
+  user: two
+  user_anula: 1
+  valor: 1
+  saldo: 1
+  observacion: MyString
+  estado: MyString

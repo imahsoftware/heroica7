@@ -1,0 +1,45 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  periodosliquidacion: one
+  salario: 9.99
+  quincena: 9.99
+  horas_auto: 1
+  horas_minus: 1
+  horas_bus: 1
+  dias: 1
+  bonificacion: 9.99
+  incapacidad: 9.99
+  subtotal: 9.99
+  ajuste: 9.99
+  salud: 9.99
+  pension: 9.99
+  auxilio: 9.99
+  seguro: 9.99
+  dotacion: 9.99
+  prestamo: 9.99
+  total: 9.99
+  observacion: MyString
+
+two:
+  user: two
+  periodosliquidacion: two
+  salario: 9.99
+  quincena: 9.99
+  horas_auto: 1
+  horas_minus: 1
+  horas_bus: 1
+  dias: 1
+  bonificacion: 9.99
+  incapacidad: 9.99
+  subtotal: 9.99
+  ajuste: 9.99
+  salud: 9.99
+  pension: 9.99
+  auxilio: 9.99
+  seguro: 9.99
+  dotacion: 9.99
+  prestamo: 9.99
+  total: 9.99
+  observacion: MyString

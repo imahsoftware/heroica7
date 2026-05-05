@@ -1,0 +1,31 @@
+<aside class="main-sidebar">
+  <section class="sidebar">
+    <div class="user-panel">
+      <div class="row">
+        <div align="center"><%= image_tag 'logonuevo.png', class: 'user-image', size: '190x90' %></div>
+      </div>
+    </div>
+    <!-- Sidebar Menu -->
+    <ul class="sidebar-menu" data-widget="tree">
+      <li>
+        <%= link_to personas_path do %>
+          <i class="fa fa-arrow-left text-success"></i> Regresar a Personas
+        <% end %>
+      </li>
+    </ul>
+    <% unless @persona.new_record? %>
+      <% if @persona.personasimagenes.where(descripcion: "FOTO").exists? %>
+        <div align="center"><%=@persona.img_foto rescue nil %></div>
+      <% end -%>
+    <% end -%>
+    <div align="center"><%=@persona.img_firma rescue nil %></div>
+    <div align="center"><%=@persona.img_huellad rescue nil %></div>
+  </section>
+</aside>
+<div class="modal fade" id="camara">
+  <div class="modal-dialog" style="width: 700px;">
+    <div class="modal-content" style="width: 700px;">
+    </div>
+  </div>
+</div>
+

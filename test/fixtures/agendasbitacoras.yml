@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  agenda: one
+  persona: one
+  personastramite: one
+  user: one
+  estado: MyString
+  factura_id: 1
+
+two:
+  agenda: two
+  persona: two
+  personastramite: two
+  user: two
+  estado: MyString
+  factura_id: 1

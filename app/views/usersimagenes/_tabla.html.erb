@@ -1,0 +1,17 @@
+<div class="table-responsive">
+  <table class="table table-bordered table-condensed table-striped">
+	  <thead class="thcolor">
+      <tr>
+        <td width="10%"></td>
+        <th width="15%" class="text-left">Fecha</th>
+        <th width="25%" class="text-left">Descripcion</th>
+        <th class="text-left">Documento</th>
+      </tr>
+    </thead>
+	  <tbody id="tbody_usersimagenes">
+	    <% @user.usersimagenes.order(id: :desc).each do |usersimagen| %>
+	      <%= render 'usersimagenes/tr', usersimagen: usersimagen %>
+	    <% end %>
+	  </tbody>
+	</table>
+</div>

@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  teoricosmateria: one
+  categoria: one
+  tipostramite: one
+
+two:
+  teoricosmateria: two
+  categoria: two
+  tipostramite: two

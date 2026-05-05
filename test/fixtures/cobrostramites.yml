@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  tipostramite: one
+  categoria: one
+  concepto: one
+  user: one
+
+two:
+  tipostramite: two
+  categoria: two
+  concepto: two
+  user: two

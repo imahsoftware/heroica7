@@ -1,0 +1,157 @@
+  <div class="box-body">
+    <div class="row">
+      <div class="hidden-xs col-md-1 col-lg-1"></div>
+      <div class="col-md-10">
+        <legend>Bienvenido, <%= current_user.persona.autobuscar rescue nil %></legend>
+        <%
+          personaid = current_user.persona_id
+          @personastramites.each do |p|
+            teoricosmaterias = Teoricosmateriascategoria.joins(:teoricosmateria).where("teoricosmateriascategorias.categoria_id = #{p.categoria_id}").select("distinct teoricosmaterias.id, teoricosmaterias.descripcion")
+        %>
+          <div id="personasobligacion_<%= p.id %>" class="box box-info collapsed-box">
+            <div class="box-header with-border">
+              <div class="row">
+                <div class="col-md-12">
+                  <span class="btn btn-box-tool" data-widget="collapse">
+                    <i class="fa fa-plus"></i>
+                      <h3 class="box-title"><%=p.categoria.nombre %> - <%=p.tipostramite.descripcion %>
+                        <label class='label label-danger'>(Ver)</label>
+                      </h3>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="box-body">
+              <div class="row">
+                <div class="col-xs-12 col-md-12">
+                  <div class="nav-tabs-custom">
+                    <ul class="nav nav-tabs">
+                      <li class="active"><a href="#informes" data-toggle="tab" aria-expanded="true">Agenda Teoria</a></li>
+                      <li><a href="#siigo" data-toggle="tab" aria-expanded="true">Agenda Practica</a></li>
+                      <li><a href="#abono" data-toggle="tab" aria-expanded="true">Facturacion - Abonos</a></li>
+                    </ul>
+                    <div class="tab-content">
+                      <div class="tab-pane active" id="informes">
+                        <div class="table-responsive">
+                          <table class="table table-bordered table-striped">
+                            <tr class="thcolor">
+                              <th width="40%" class="text-left" style="font-size: 11px;">Materia</th>
+                              <th class="text-justify" style="font-size: 11px;">Horarios</th>
+                            </tr>
+                            <% teoricosmaterias.each do |t|
+                                agendaseleccionada = Agendaspersona.where(["persona_id = #{personaid} and personastramite_id = #{p.id} and agenda_id in (select id from agendas where teoricosmateria_id = #{t.id})"])[0]
+                                if agendaseleccionada.to_s == ""
+                                  agendas = Agenda.where(["disponible > 0 AND teoricosmateria_id = #{t.id} and fecha BETWEEN DATE_ADD(CURDATE(),INTERVAL 0 DAY) AND DATE_ADD(CURDATE(),INTERVAL 45 DAY) "]).order("fecha asc")
+                                end
+                            %>
+                                <%= render '/agendas/tr', agendaseleccionada: agendaseleccionada, agendas: agendas, personaid: personaid, p: p, t: t %>
+                            <% end %>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                      <div class="tab-pane" id="siigo">
+                        <%
+                          programacion = is_programacionpersona(p.id)
+                          if programacion.count.to_i > 0
+                        %>
+                          <table class="table table-bordered table-condensed table-striped">
+                            <tr valign="middle" class="thcolor">
+                              <td width="10%" class="text-center" style="font-size: 11px;">Placa</td>
+                              <td width="30%" class="text-left" style="font-size: 11px;">Fecha</td>
+                              <td class="text-left" style="font-size: 11px;">Instructor</td>
+                              <td width="10%" class="text-center" style="font-size: 11px;">Hora</td>
+                              <td width="15%" class="text-center" style="font-size: 11px;">Estado</td>
+                            </tr>
+                            <% programacion.each do |f|%>
+                              <tr>
+                                <td class="text-center" style="font-size: 11px;"><%= f.placa rescue 0 %></td>
+                                <td class="text-left" style="font-size: 11px;"><%= namedate(f.fecha) rescue 0 %></td>
+                                <td class="text-left" style="font-size: 11px;"><%= Placa.find(f.placa_id).user.nombre rescue 0 %></td>
+                                <td class="text-center" style="font-size: 11px;"><%= f.horario rescue 0 %></td>
+                                <td class="text-center" style="font-size: 11px;"><%= f.estado rescue 0 %></td>
+                              </tr>
+                            <% end %>
+                          </table>
+                        <% else %>
+                          NO hay info
+                        <% end %>
+                      </div>
+                      <div class="tab-pane" id="abono">
+                        <% if Factura.exists?(["personastramite_id = #{p.id} and estado in ('P','C')"]) %>
+                          <table class="table table-bordered table-striped">
+                            <tr valign="middle" class="thcolor">
+                              <td width="10%" class="text-center" style="font-size: 11px;">Fecha</td>
+                              <td width="10%" class="text-center" style="font-size: 11px;">Nro Factura</td>
+                              <td width="15%" class="text-right" style="font-size: 11px;">Total Factura</td>
+                              <td width="15%" class="text-right" style="font-size: 11px;">Total Pagado</td>
+                              <td width="15%" class="text-right" style="font-size: 11px;">Saldo</td>
+                              <td width="10%" class="text-center" style="font-size: 11px;">Estado</td>
+                            </tr>
+                            <% Factura.where(["personastramite_id = #{p.id} and estado in ('P','C')"]).each do |f|
+                               pagado =  f.abonos.where(estado: 'C').sum("valor") rescue 0
+                            %>
+                              <tr>
+                                <td class="text-center" rowspan="2" style="font-size: 11px;"><%= f.created_at.strftime("%Y-%m-%d %X") rescue 0 %>
+                                <% if f.estado = 'P' %>
+                                    <br/><br/>
+                                    <button class="btn btn-xs btn-success"><i class="fa fa-money"></i>&nbsp;Realizar abono</button>
+                                <% end %>
+                                </td>
+                                <td class="text-center"style="font-size: 11px;"><%= f.nro_factura rescue 0 %></td>
+                                <td class="text-right" style="font-size: 11px;"><%=camponumerico f.valor rescue nil %></td>
+                                <td class="text-right" style="font-size: 11px;"><%=camponumerico pagado %></td>
+                                <td class="text-right"><strong>
+                                  <label class='label label-danger'><%=camponumerico f.valor-pagado rescue nil %></label></strong></td>
+                                <td class="text-center" style="font-size: 11px;"><%= f.destado rescue nil %></td>
+                              </tr>
+                              <tr>
+                                <td class="text-center" style="font-size: 11px;" colspan="5">
+                                  <% if f.abonos.exists? %>
+                                    <table class="table table-bordered table-striped">
+                                      <tr class="thcolor">
+                                        <td width="25%" style="font-size: 11px;">Usuario</td>
+                                        <td width="15%" style="font-size: 11px;">Forma Pago</td>
+                                        <td width="10%" class="text-center" style="font-size: 11px;">Nro Abono</td>
+                                        <td width="15%" class="text-right" style="font-size: 11px;">Valor Abono</td>
+                                        <td width="15%"><div align="center" style="font-size: 11px;">Estado</div></td>
+                                      </tr>
+                                    <% f.abonos.where(estado: 'C').order("created_at desc").each do |ff|  %>
+                                        <tr>
+                                          <td><div align="left" style="font-size: 11px;"><%= ff.created_at.strftime("%Y-%m-%d %X") rescue nil %>- <%= ff.user.username rescue nil %></div></td>
+                                          <td><div align="left" style="font-size: 11px;"><%= ff.forma_pago rescue nil %></div></td>
+                                          <td class="text-center" style="font-size: 11px;"><%= facturacero(ff.nro_abono) rescue nil %></td>
+                                          <td class="text-right" style="font-size: 11px;"><%= camponumerico(ff.valor) rescue nil %></td>
+                                          <td class="text-center" style="font-size: 11px;"><%= ff.destado rescue nil %></td>
+                                        </tr>
+                                    <% end %>
+                                    </table>
+                                  <% else %>
+                                    NO hay info de Abonos
+                                  <% end %>
+                                </td>
+                              </tr>
+                            <% end %>
+                          </table>
+                          <%  %>
+                        <% else %>
+                          NO hay info de abonos
+                        <% end %>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+      <div class="hidden-xs col-md-1 col-lg-1"></div>
+    </div>
+  </div>
+
+  <style>
+    .activo{
+        display: none;
+    }
+  </style>

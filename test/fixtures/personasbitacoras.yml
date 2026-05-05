@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  personastramite: one
+  tiposhorario: one
+  placa: one
+  user: one
+  fecha: 2020-11-28
+  codigo: MyString
+  respuesta: MyString
+
+two:
+  personastramite: two
+  tiposhorario: two
+  placa: two
+  user: two
+  fecha: 2020-11-28
+  codigo: MyString
+  respuesta: MyString

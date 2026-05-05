@@ -1,0 +1,24 @@
+<%
+  user = User.find(is_admin)
+  ispersona = is_persona
+  isestudiante = is_estudiante
+
+%>
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= content_for?(:title) ? yield(:title) : 'App' %> | <%= ENV['NOMBRE_APLICACION'] %></title>
+  <%= csrf_meta_tags %>
+  <%= action_cable_meta_tag %>
+  <%= favicon_link_tag 'logo1.png' %>
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
+  <body class="sidebar-mini skin-blue-light" style="font-family: Helvetica, Arial, 'sans-serif', !important;">
+  <div class="wrapper">
+    <%= render 'layouts/without_seg_layout/main_header_per' %>
+    <%= render 'layouts/without_seg_layout/content_wrapper' %>
+  </div>
+  </body>
+</html>

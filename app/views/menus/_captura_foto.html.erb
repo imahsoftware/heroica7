@@ -1,0 +1,91 @@
+<div class="alert alert-danger" align="justify" style="margin-left: 100px; margin-right: 100px;">
+  <h4>Hola, <%= @usr.nombre.upcase rescue nil %></h4>
+  <p>Antes de continuar con el acceso a la plataforma debes de tomarte la foto
+  <p>
+  </p>
+</div>
+
+<section class="content-header">
+  <h1>
+    Captura de imagen
+    <small>Rostro</small>
+  </h1>
+</section>
+<hr>
+<div class="row">
+  <div class="col-md-6">
+    <div class="box box-primary">
+      <div class="box-header with-border text-center">
+        <h3 class="box-title">Cámara</h3>
+      </div>
+      <div class="box-body">
+        <div>
+          <video id="video" width="100%" height="480" autoplay></video>
+
+          <div style="display: flex; align-items: flex-end;" align="center">
+            <div align="center">
+              <button id="snap" class="btn btn-primary">
+                <i class="fa fa-camera"></i> Tomar Foto
+              </button>
+            </div>
+            <div align="center" style="margin-left: 10px;" id="continuar">
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="box box-primary">
+      <div class="box-header with-border text-center">
+        <h3 class="box-title">Resultado</h3>
+      </div>
+      <div class="box-body">
+        <div class="text-center">
+          <canvas id="canvas" width="640%" height="480"></canvas>
+          <%= form_for @image, url: '/captura_rostro', method: :post, html: { id: 'image-form' } do |form| %>
+            <%= form.hidden_field :descripcion, id: 'image-title' %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<br/>
+
+
+<script>
+
+    var video = document.getElementById('video');
+    var canvas = document.getElementById('canvas');
+    var context = canvas.getContext('2d');
+    var snap = document.getElementById('snap');
+    var titleInput = document.getElementById('image-title');
+
+    navigator.mediaDevices.getUserMedia({video: true})
+        .then(function (stream) {
+            video.srcObject = stream;
+            video.play();
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+
+    snap.addEventListener('click', function () {
+        $("#continuar").html("<div align='center' style='cursor: pointer; '>" +
+            "<a href='<%= root_path %>' class='btn btn-success' style='color: white'> <i class='fa fa-check'></i> Continuar </a>" +
+            "</div>");;
+        context.drawImage(video, 0, 0, canvas.width, canvas.height);
+        var image_data = canvas.toDataURL('image/png');
+        var form_data = new FormData(document.getElementById('image-form'));
+        form_data.append('image[image_data]', image_data.split(',')[1]);
+        $.ajax({
+            type: 'POST',
+            url: 'menus/captura_rostro',
+            data: form_data,
+            processData: false,
+            contentType: false
+        });
+    });
+</script>

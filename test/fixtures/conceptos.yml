@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  descripcion: MyString
+  valor: 9.99
+  user: one
+  propio: MyString
+  codigo_contabilidad: MyString
+
+two:
+  descripcion: MyString
+  valor: 9.99
+  user: two
+  propio: MyString
+  codigo_contabilidad: MyString

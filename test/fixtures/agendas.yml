@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  teoricossalon: one
+  teoricosmateria: one
+  capacidad: 1
+  fecha: 2020-10-31
+  horainicio: MyString
+  horafin: MyString
+  instructor: MyString
+
+two:
+  teoricossalon: two
+  teoricosmateria: two
+  capacidad: 1
+  fecha: 2020-10-31
+  horainicio: MyString
+  horafin: MyString
+  instructor: MyString

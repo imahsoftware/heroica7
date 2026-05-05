@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  nombre: MyString
+  codigo_nuevo: MyString
+  codigo: MyString
+  tipo_servicio: MyString
+
+two:
+  nombre: MyString
+  codigo_nuevo: MyString
+  codigo: MyString
+  tipo_servicio: MyString

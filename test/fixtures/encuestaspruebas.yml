@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  persona: one
+  encuesta: one
+  personastramite_id: 1
+  estado: MyString
+
+two:
+  persona: two
+  encuesta: two
+  personastramite_id: 1
+  estado: MyString

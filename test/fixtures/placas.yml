@@ -1,0 +1,67 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  portafolio: one
+  descripcion: MyString
+  marca: MyString
+  linea: MyString
+  modelo: MyString
+  tipo_vehiculo: MyString
+  cilindraje: MyString
+  motor: MyString
+  serie: MyString
+  nro_matricula: MyString
+  instructor_id: 1
+  tarjeta_nro: MyString
+  tarjeta_expedicion: 2020-08-09
+  tarjeta_vencimiento: 2020-08-09
+  soat_nro: MyString
+  soat_expedicion: 2020-08-09
+  soat_vencimiento: 2020-08-09
+  revision_nro: MyString
+  revision_expedicion: 2020-08-09
+  revision_vencimiento: 2020-08-09
+  liquidacion_nro: MyString
+  liquidacion_fecha: 2020-08-09
+  picoyplaca: MyString
+  estado: MyString
+  soat_alerta: 2020-08-09
+  revision_alerta: 2020-08-09
+  tarjeta_alerta: 2020-08-09
+  propietario: MyString
+  observaciones: MyString
+  pico_placa: MyString
+  pico_placan: MyString
+
+two:
+  portafolio: two
+  descripcion: MyString
+  marca: MyString
+  linea: MyString
+  modelo: MyString
+  tipo_vehiculo: MyString
+  cilindraje: MyString
+  motor: MyString
+  serie: MyString
+  nro_matricula: MyString
+  instructor_id: 1
+  tarjeta_nro: MyString
+  tarjeta_expedicion: 2020-08-09
+  tarjeta_vencimiento: 2020-08-09
+  soat_nro: MyString
+  soat_expedicion: 2020-08-09
+  soat_vencimiento: 2020-08-09
+  revision_nro: MyString
+  revision_expedicion: 2020-08-09
+  revision_vencimiento: 2020-08-09
+  liquidacion_nro: MyString
+  liquidacion_fecha: 2020-08-09
+  picoyplaca: MyString
+  estado: MyString
+  soat_alerta: 2020-08-09
+  revision_alerta: 2020-08-09
+  tarjeta_alerta: 2020-08-09
+  propietario: MyString
+  observaciones: MyString
+  pico_placa: MyString
+  pico_placan: MyString

@@ -1,0 +1,79 @@
+/*
+ *= require base
+ *= require plugins/select2/select2.min
+ *= require bootstrap-datetimepicker.min
+ *= require dist/css/AdminLTE.min
+ *= require dist/css/skins/_all-skins.min
+ *= require jquery-ui/datepicker
+ *= require font_awesome5_webfont
+ *= require_tree .
+ *= require_self
+*/
+
+html { height: 100% !important; }
+body { min-height: 100% !important; }
+
+.select2-container--default .select2-selection--single {
+    background-color: #fff;
+    border: 1px solid #aaa;
+    border-radius: 0px;
+    height: 34px;
+}
+
+div.paleBlueRows {
+    font-family: "Times New Roman", Times, serif;
+    border: 1px solid #FFFFFF;
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+}
+.divTable.paleBlueRows .divTableCell, .divTable.paleBlueRows .divTableHead {
+    border: 1px solid #FFFFFF;
+    padding: 3px 2px;
+}
+.divTable.paleBlueRows .divTableBody .divTableCell {
+    font-size: 13px;
+}
+.divTable.paleBlueRows .divTableBody .divTableCell2 {
+    font-size: 13px;
+    text-align: left;
+}
+.divTable.paleBlueRows .divTableRow:nth-child(even) {
+    background: #f0f0f0;
+}
+.divTable.paleBlueRows .divTableHeading {
+    background: #394959 !important;
+    color: #fff !important;
+    border-bottom: 5px solid #FFFFFF;
+}
+.divTable.paleBlueRows .divTableHeading .divTableHead {
+    font-size: 12px;
+    color: #FFFFFF;
+    text-align: left;
+    padding: 7px;
+    border-left: 2px solid #FFFFFF;
+}
+
+.divTable.paleBlueRows .divTableHeading .divTableHead2 {
+    font-size: 12px;
+    color: #FFFFFF;
+    text-align: center;
+    padding: 7px;
+    border-left: 2px solid #FFFFFF;
+}
+
+.divTable.paleBlueRows .divTableHeading .divTableHead:first-child {
+    border-left: none;
+}
+
+.paleBlueRows .tableFootStyle {
+    font-size: 14px;
+}
+/* DivTable.com */
+.divTable{ display: table; }
+.divTableRow { display: table-row; }
+.divTableHeading { display: table-header-group;}
+.divTableCell, .divTableHead { display: table-cell;}
+.divTableHeading { display: table-header-group;}
+.divTableFoot { display: table-footer-group;}
+.divTableBody { display: table-row-group;}

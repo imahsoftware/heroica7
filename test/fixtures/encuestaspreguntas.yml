@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  encuesta: one
+  pregunta: MyString
+  imagen: MyString
+
+two:
+  encuesta: two
+  pregunta: MyString
+  imagen: MyString

@@ -1,0 +1,69 @@
+<div class="box box-primary">
+  <%= simple_form_for(@portafolio) do |f| %>
+    <div class="box-header">
+      <legend>
+        <% if @portafolio.new_record? %>
+          <%= link_to portafolios_path, data: { toggle: 'tooltip', :"data-turbolinks" => true  }, title: 'Regresar a portafolios' do %>
+            <i class="fa fa-arrow-left fa-fw text-success" aria-hidden="true"></i>
+          <% end %>
+        <% end %>
+        <%= @portafolio.new_record? ? 'Nueva' : 'Editar' %> Compañia
+      </legend>
+      <% unless @portafolio.new_record? %>
+        <div class="box-tools pull-right">
+          <span class="label label-danger">Creacion: <%=@portafolio.created_at.strftime("%Y-%m-%d %X") rescue nil%></span>
+        </div>
+      <% end %>
+    </div><!-- /.box-header -->
+    <div class="box-body">
+      <div class="row">
+        <div class="col-md-4"><%= f.input :nombre, input_html: {onChange: 'javascript:this.value=this.value.toUpperCase();', class: 'input_uppercase'} %></div>
+        <div class="col-md-2"><%= f.input :nombrecorto, input_html: {onChange: 'javascript:this.value=this.value.toUpperCase();', class: 'input_uppercase'}, label: 'Nombre Corto' %></div>
+        <div class="col-md-4"><%= f.input :email, input_html: {onChange: 'javascript:this.value=this.value.toUpperCase();', class: 'input_uppercase'} %></div>
+        <div class="col-md-2"><%= f.input :estado, collection: select_estado_portafolios, as: :select, input_html: { data: { width: '100%' }, class: 'select2' }%></div>
+      </div>
+      <div class="row">
+        <div class="col-md-3">
+          <%= f.input :logo, as: :file %>
+        </div>
+      </div>
+    </div>
+    <div class="box-footer">
+      <div class="box-tools pull-right">
+        <%= f.button :submit, "#{t :guardar}", class: 'btn btn-danger' %>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<div class="box box-primary">
+  <%= simple_form_for(@portafolio) do |f| %>
+    <div class="box-header">
+      <legend>Parametros Payu:</legend>
+    </div>
+    <div class="box-body">
+      <div class="row">
+        <div class="col-md-4"><%= f.input :apikey, label: 'API KEY' %></div>
+        <div class="col-md-4"><%= f.input :apilogin, label: 'API LOGIN' %></div>
+        <div class="col-md-4"><%= f.input :llavepublica, label: 'Llave Pública' %></div>
+      </div>
+      <div class="row">
+        <div class="col-md-2"><%= f.input :idcomercio, label: 'ID Comercio' %></div>
+        <div class="col-md-2"><%= f.input :idcuenta, label: 'ID Cuenta' %></div>
+        <div class="col-md-2"><%= f.input :expirationdate, label: 'Días Expira' %></div>
+        <div class="col-md-3"><%= f.input :payumoneda, as: :select, label: 'Moneda', input_html: { class: 'select2' }, collection: select_monedapayu %></div>
+        <div class="col-md-3"><%= f.input :bitprueba, as: :select, label: 'Prueba', input_html: { class: 'select2' }, collection: select_sinopayu %></div>
+      </div>
+      <div class="row">
+        <div class="col-md-4"><%= f.input :urlpayu, label: 'URL Payu' %></div>
+        <div class="col-md-4"><%= f.input :urlconfirmacion, label: 'URL Confirmación' %></div>
+        <div class="col-md-4"><%= f.input :urlrespuesta, label: 'URL Respuesta' %></div>
+      </div>
+    </div>
+    <div class="box-footer">
+      <div class="box-tools pull-right">
+        <%= f.button :submit, "#{t :guardar}", class: 'btn btn-danger' %>
+      </div>
+    </div>
+  <% end %>
+</div>

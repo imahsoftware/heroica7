@@ -1,0 +1,101 @@
+<%= simple_form_for(@user) do |f| %>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="box box-primary">
+        <div class="box-header">
+          <legend>
+            <% if @user.new_record? %>
+              <%= link_to users_path, data: { toggle: 'tooltip', :"data-turbolinks" => true  }, title: 'Regresar a usuarios' do %>
+        				<i class="fa fa-arrow-left fa-fw text-success" aria-hidden="true"></i>
+        			<% end %>
+            <% end %>
+            <%= @user.new_record? ? 'Agregar nuevo' : 'Editar' %> Usuario
+          </legend>
+          <div class="box-tools pull-right">
+            <%= link_to new_user_path, class: 'btn btn-sm btn-success' do %>
+              <i class="fa fa-plus-square"> </i> <span>Nuevo usuario</span>
+            <% end %>
+          </div>
+        </div><!-- /.box-header -->
+        <div class="box-body">
+          <div class="row">
+            <div class="col-md-2"><%= f.input :identificacion, label: 'Identificación' %></div>
+            <div class="col-md-5"><%= f.input :nombre, input_html: {onChange: 'javascript:this.value=this.value.toUpperCase();', class: 'input_uppercase'} %></div>
+            <div class="col-md-1"><%= f.input :activo, as: :select, collection: select_sinocorto, input_html: {class: 'select2'}, label: "Activo?" %></div>
+            <div class="col-md-4"><%= f.input :email %></div>
+          </div>
+          <div class="row">
+            <div class="col-md-4"><%= f.input :username, label: 'Usuario' %></div>
+            <div class="col-md-2"><%= f.input :password, label: 'Clave' %></div>
+            <div class="col-md-2"><%= f.input :password_confirmation, label: 'Confirmar Clave' %></div>
+            <div class="col-md-4"><%= f.input :portafolio_id, collection: Portafolio.where("id = 4").order(:nombre).collect {|p| [ p.nombre, p.id ] }, input_html: { class: 'select2' }, as: :select, label: 'Compañia', wrapper: false, include_blank: true%></div>
+          </div>
+          <div class="row">
+            <div class="col-md-2"><%= f.input :tipoconsulta, as: :select, collection: select_tipoconsulta, input_html: {data: {width: '100%'}, class: 'select2', include_blank: true}, label: 'Tipo Consulta' %></div>
+            <div class="col-md-2"><%= f.input :celular %></div>
+            <div class="col-md-2"><%= f.input :tipocliente, as: :select, collection: select_oficina, input_html: {data: {width: '100%'}, class: 'select2', include_blank: true}, label: 'Oficina' %></div>
+            <div class="col-md-3"><%= f.input :extension, label: 'Nro. Licencia' %></div>
+          </div>
+          <legend>Datos Nomina</legend>
+          <div class="row">
+            <div class="col-md-2"><%= f.input :instructor, as: :select, collection: select_sino, input_html: {data: {width: '100%'}, class: 'select2', include_blank: true}, label: 'Instructor' %></div>
+            <div class="col-md-4"><%= f.input :cargo, input_html: {onChange: 'javascript:this.value=this.value.toUpperCase();', class: 'input_uppercase'} %></div>
+            <div class="col-md-2"><%= f.input :salario, as: :moneda %></div>
+            <div class="col-md-2"><%= f.input :nro_cuenta %></div>
+            <div class="col-md-2"><%= f.input :banco, input_html: {onChange: 'javascript:this.value=this.value.toUpperCase();', class: 'input_uppercase'} %></div>
+          </div>
+          <div class="row">
+            <div class="col-md-3"><%= f.input :salud, input_html: {onChange: 'javascript:this.value=this.value.toUpperCase();', class: 'input_uppercase'} %></div>
+            <div class="col-md-3"><%= f.input :pension, input_html: {onChange: 'javascript:this.value=this.value.toUpperCase();', class: 'input_uppercase'} %></div>
+          </div>
+
+          <div class="row"><div class="col-md-2"><%= f.input :avatar, as: :file %></div></div>
+        </div>
+        <div class="box-footer">
+          <div class="box-tools pull-right">
+            <%= f.button :submit, 'Aceptar', class: 'btn-flat btn-danger' %>
+          </div><!-- /.box-tools -->
+        </div><!-- box-footer -->
+      </div><!-- /.box -->
+    </div>
+  </div>
+<% end %>
+<% unless @user.new_record? %>
+  <div class="box box-primary">
+    <div class="box-header">
+      <legend>Portafolios asignados - Cargos</legend>
+    </div>
+    <div class="box-body">
+      <%# if @clientes %>
+          <%# @clientes.each do |c|%>
+            <!--<div class="text-left"><%#=Cliente.find(c.cliente).nombre rescue nil %></div>-->
+            <!--<div class="text-center"><%#=c.cantidad%></div>-->
+          <%#   end %>
+      <%# end %>
+      <% if @user.portafolio_id.to_s != ""%>
+        <% if @portafolioscargos.nil? == false %>
+          <div class="btn-group">
+            <% @portafolioscargos.each do |c|%>
+              <% if @user.portafolioscargo_id.to_s != "" %>
+                <% if c.id == @user.portafolioscargo.id %>
+                  <%= link_to cambiarperfil_users_path(id: @user.id, portafolioscargo_id: c.id), data: { toggle: 'tooltip', :"data-turbolinks" => true  }, title: 'Asignado', disabled: true do %>
+                    <button class="btn btn-sm btn-primary disabled"><%= c.descripcion %></button>
+                  <% end %>
+                <% else %>
+                  <%= link_to cambiarperfil_users_path(id: @user.id, portafolioscargo_id: c.id), data: { toggle: 'tooltip', :"data-turbolinks" => true , confirm: "Seguro que desea asignar este perfil al usuario #{@user.nombre}?" }, title: 'Asignar' do %>
+                    <button class="btn btn-sm btn-primary"><%= c.descripcion %></button>
+                  <% end %>
+                <% end %>
+              <% else %>
+                <%= link_to cambiarperfil_users_path(id: @user.id, portafolioscargo_id: c.id), data: { toggle: 'tooltip', :"data-turbolinks" => true , confirm: "Seguro que desea asignar este perfil al usuario #{@user.nombre}?" }, title: 'Asignar' do %>
+                  <button class="btn btn-sm btn-primary"><%= c.descripcion %></button>
+                <% end %>
+              <% end %>
+            <% end %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+

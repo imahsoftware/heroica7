@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  descripcion: MyText
+  opcion1: MyText
+  opcion2: MyText
+  opcion3: MyText
+  opcion4: MyText
+  opcion5: MyText
+  grafica: MyString
+  grupo: MyString
+  codigo: 1
+  multiple: MyString
+
+two:
+  descripcion: MyText
+  opcion1: MyText
+  opcion2: MyText
+  opcion3: MyText
+  opcion4: MyText
+  opcion5: MyText
+  grafica: MyString
+  grupo: MyString
+  codigo: 1
+  multiple: MyString

@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  fecha: 2020-11-13
+  nro_egreso: MyString
+  valor: 9.99
+  user: one
+  user_actualiza: 1
+  observacion: MyString
+
+two:
+  fecha: 2020-11-13
+  nro_egreso: MyString
+  valor: 9.99
+  user: two
+  user_actualiza: 1
+  observacion: MyString

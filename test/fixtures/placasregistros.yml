@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  placa: one
+  fecha: 2020-08-09
+  kilometraje: MyString
+  galones: 9.99
+  valor: 9.99
+
+two:
+  placa: two
+  fecha: 2020-08-09
+  kilometraje: MyString
+  galones: 9.99
+  valor: 9.99

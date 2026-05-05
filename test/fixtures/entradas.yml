@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  portafolio: one
+  user: one
+  identificacion: MyString
+  nombre: 
+  celular: MyString
+
+two:
+  portafolio: two
+  user: two
+  identificacion: MyString
+  nombre: 
+  celular: MyString

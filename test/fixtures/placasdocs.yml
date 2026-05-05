@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  placa: one
+  user: one
+  placadoc: 
+
+two:
+  placa: two
+  user: two
+  placadoc: 

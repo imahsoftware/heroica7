@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  persona: one
+  personastramite_id: 1
+  tiposhorario: one
+  placa: one
+  instructor_id: 1
+  recoje: MyString
+  user_programa: 1
+  user_actualiza: 1
+  observacion: MyString
+  estado: MyString
+
+two:
+  persona: two
+  personastramite_id: 1
+  tiposhorario: two
+  placa: two
+  instructor_id: 1
+  recoje: MyString
+  user_programa: 1
+  user_actualiza: 1
+  observacion: MyString
+  estado: MyString

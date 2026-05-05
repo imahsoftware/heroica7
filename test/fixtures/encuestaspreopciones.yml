@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  encuestaspregunta: MyString
+  respuesta: MyString
+  foto: MyString
+  clase: MyString
+
+two:
+  encuestaspregunta: MyString
+  respuesta: MyString
+  foto: MyString
+  clase: MyString

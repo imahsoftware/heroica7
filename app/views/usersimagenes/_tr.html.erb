@@ -1,0 +1,15 @@
+<tr id="usersimagen_<%= usersimagen.id %>">
+  <td class="text-center">
+    <% if is_auth_e("usersimagen")%>
+      <%= link_to user_usersimagen_path(@user, usersimagen), remote: true, method: :delete, data: { confirm: "#{t :elimina_confirma}", toggle: 'tooltip', :"data-turbolinks" => true  }, title: "#{t :title_elimina}" do %>
+         <button class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></button>
+      <% end %>
+    <% end %>
+    <%= link_to usersimagen.docuser.url(:original, false), data: { toggle: 'tooltip', :"data-turbolinks" => true  },title: "Ver Documento", onclick: 'window.open(this.href,"new_window","height=450,width=600,scrollbars=yes");return false;' do %>
+      <button class="btn btn-xs btn-primary"><i class="fa fa-file"></i></button>
+    <% end %>
+  </td>
+  <td align="left"><%= usersimagen.created_at.strftime("%Y-%m-%d %X") rescue nil %></td>
+  <td align="left"><%= usersimagen.descripcion rescue nil %></td>
+  <td align="left"><%= usersimagen.docuser_file_name rescue nil %></td>
+</tr>

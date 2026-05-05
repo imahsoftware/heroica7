@@ -1,0 +1,12 @@
+<div class="box box-default color-palette-box">
+  <div class="box-body">
+    <div class="row">
+      <div class="col-sm-12 col-md-12">
+        <% if controlfirma.url == "examen_retiro_temporal" %>
+          <%= render "formatos/examen_retiro_temporal", id_registro: controlfirma.id_registro, controlfirma_id: controlfirma.id %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+

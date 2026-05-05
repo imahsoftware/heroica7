@@ -1,0 +1,31 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  factura: one
+  categoria: one
+  tipostramite: one
+  concepto: one
+  valor: 9.99
+  user: one
+  user_actualiza: 1
+  cantidad: 1
+  nro_factura: 1
+  liquidacion_id: 1
+  valor_original: 9.99
+  descuento: 9.99
+  observacion: MyString
+
+two:
+  factura: two
+  categoria: two
+  tipostramite: two
+  concepto: two
+  valor: 9.99
+  user: two
+  user_actualiza: 1
+  cantidad: 1
+  nro_factura: 1
+  liquidacion_id: 1
+  valor_original: 9.99
+  descuento: 9.99
+  observacion: MyString

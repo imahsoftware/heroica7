@@ -1,0 +1,102 @@
+create index asear_IDX_10001 on antecedentes (portafolio_id);
+create index asear_IDX_10002 on personas (portafolio_id,id);
+create index asear_IDX_10003 on antecedentes (portafolio_id,created_at);
+create index asear_IDX_10004 on personasevaluaciones (persona_id);
+
+
+create index asear_IDX_10005 on infgrupostablascampos (infgrupostabla_id);
+create index asear_IDX_10006 on infgrupostablas (infgrupo_id);
+
+create index asear_IDX_10007 on personas (identificacion);
+create index asear_IDX_10008 on personas (nombre);
+
+create index asear_IDX_10009 on personasevaluaciones (created_at);
+create index asear_IDX_10010 on antecedentes (created_at);
+create index asear_IDX_10011 on personasevaluaciones (eva_1,eva_2,eva_3,eva_4,eva_5,eva_6,eva_7,eva_8);
+
+create index asear_IDX_10012 on personas (identificacion,portafolio_id);
+
+create index asear_IDX_10013 on antecedentes (persona_id);
+create index asear_IDX_10014 on users (persona_id);
+
+create index asear_IDX_10015 on personas (nombre);
+
+create index asear_IDX_10016 on usersmodulos (user_id);
+create index asear_IDX_10017 on usersmodulos (modulo_id);
+
+create index asear_IDX_10018 on personasobservaciones (persona_id);
+create index asear_IDX_10019 on personasobservaciones (user_id);
+
+create index asear_IDX_10020 on usersmodulos (user_id,modulo_id);
+create index asear_IDX_10021 on personasevaluaciones (persona_id,cantidad);
+create index asear_IDX_10022 on personasevaluaciones (cantidad,descartado);
+
+create index asear_IDX_10023 on personasevaluaciones (persona_id,centro_id);
+create index asear_IDX_10024 on personasevaluaciones (portafolio);
+create index asear_IDX_10025 on personasevaluaciones (portafolio,cantidad);
+create index asear_IDX_10026 on personasevaluaciones (portafolio,created_at);
+
+create index asear_IDX_10027 on placasregistros (fecha);
+create index asear_IDX_10028 on placas (estado);
+
+create index IDX_10029 on preguntasrespuestas (pregunta_id,respuesta);
+create index IDX_10030 on personas (portafolio_id,id_evial);
+create index IDX_10031 on teoricos (personastramite_id);
+
+create index IDX_10032 on personasevapracticas (estado);
+
+create index IDX_10033 on preguntas (id,grupo,multiple);
+create index IDX_10034 on preguntascategorias (pregunta_id,categoria_id);
+
+create index IDX_10035 on preguntasrespuestas (pregunta_id,respuesta);
+create index IDX_10036 on personas (id_evial);
+create index IDX_10038 on agendaspersonas (agenda_id,estado);
+create index IDX_10037 on agendas (fecha);
+
+create index IDX_10039 on programacionesfechas (hora1,placa_id);
+create index IDX_10040 on programacionesfechas (hora2,placa_id);
+create index IDX_10041 on programacionesfechas (hora3,placa_id);
+create index IDX_10042 on programacionesfechas (hora4,placa_id);
+create index IDX_10043 on programacionesfechas (hora5,placa_id);
+create index IDX_10044 on programacionesfechas (hora6,placa_id);
+create index IDX_10045 on programacionesfechas (hora7,placa_id);
+create index IDX_10046 on programacionesfechas (hora8,placa_id);
+create index IDX_10047 on programacionesfechas (hora9,placa_id);
+create index IDX_10048 on programacionesfechas (hora10,placa_id);
+create index IDX_10049 on programacionesfechas (hora11,placa_id);
+create index IDX_10050 on programacionesfechas (hora12,placa_id);
+create index IDX_10051 on programacionesfechas (hora13,placa_id);
+create index IDX_10052 on programacionesfechas (hora14,placa_id);
+create index IDX_10053 on programacionesfechas (hora15,placa_id);
+create index IDX_10054 on programacionesfechas (hora16,placa_id);
+
+
+SELECT `agendaspersonas`.* FROM `agendaspersonas` INNER JOIN `agendas` ON `agendas`.`id` = `agendaspersonas`.`agenda_id`
+WHERE (agendaspersonas.persona_id = 54130 AND agendaspersonas.personastramite_id = 106823 AND agendas.teoricosmateria_id = 3)
+
+SELECT `programacionesfechas`.* FROM `programacionesfechas` WHERE (fecha between '2021-01-24' and '2021-07-23' and placa_id = 11) ORDER BY fecha asc
+
+create index IDX_10055 on agendaspersonas (agenda_id,persona_id,personastramite_id,teoricosmateria_id);
+create index IDX_10056 on agendas (fecha,disponible,teoricosmateria_id);
+create index IDX_10057 on personastrapractica (personastramite_id);
+
+create index IDX_10058 on programacionesfechas (fecha,placa_id);
+create index IDX_10059 on festivos (fecha);
+
+create index IDX_10060 on personasbitacoras (personastramite_id,placa_id,fecha,tiposhorario_id);
+create index IDX_10061 on liquidaciones (vehiculo_id,estado);
+create index IDX_10062 on users (tipocliente);
+create index IDX_10063 on facturas (created_at,user_id);
+create index IDX_10064 on abonos (created_at,user_id);
+create index IDX_10065 on egresos (created_at,user_id);
+
+create index IDX_10066 on tabla (campo);
+create index IDX_10067 on tabla (campo);
+create index IDX_10068 on tabla (campo);
+create index IDX_10069 on tabla (campo);
+create index IDX_10070 on tabla (campo);
+
+
+
+
+

@@ -1,0 +1,498 @@
+DECODE(IFNULL(p.hora1,''),',',
+IFNULL(p.hora2,''),',',
+IFNULL(p.hora3,''),',',
+IFNULL(p.hora4,''),',',
+IFNULL(p.hora5,''),',',
+IFNULL(p.hora6,''),',',
+IFNULL(p.hora7,''),',',
+IFNULL(p.hora8,''),',',
+IFNULL(p.hora9,''),',',
+IFNULL(p.hora10,''),',',
+IFNULL(p.hora11,''),',',
+IFNULL(p.hora12,''),',',
+IFNULL(p.hora13,''),',',
+IFNULL(p.hora14,''),',',
+IFNULL(p.hora15,''),',',
+IFNULL(p.hora16,''),',',
+IFNULL(p.hora17,'')) dato,
+
+--inscripcion
+railsgscaffoldantecedenteidentificacion:string{20} nombre:string edad:string{5} menores5:string{5} mayores60:string{5} sexo:string{5} 'peso:decimal{11,2}' 'talla:decimal{11,2}' 'imc:decimal{11,2}' ant_1:string{5} ant_2:string{5} ant_3:string{5} ant_3a:string{5} ant_3b:string{5} ant_3c:string{5} ant_3d:string{5} ant_3e:string{5} ant_4:string{5} ant_4a:string{5} ant_5:string{5} ant_5a:string{5} ant_6:string{5} ant_7:string{5} ant_8:string{5} ant_9:string{5} ant_10:string{5} ant_11:string{5} ant_12:string{5} ant_13:string{5} persona_id:integer
+rails g scaffold persona identificacion:string{20} nombre:string
+
+cuando se crea el antecedente se crea el usuario y la persona.
+ç
+
+
+rails g scaffold personasimagen persona:references user:references documentos:attachment
+
+
+rails g scaffold personasevaluacion persona:references eva_1:string{5} eva_2:string{5} eva_3:string{5} eva_4:string{5} eva_5:string{5} eva_6:string{5} eva_7:string{5} eva_8:string{5} eva_9:string{5}
+
+
+rails g scaffold periodosliquidacion inicio:date fin:date estado:string{10} periodo:string{2}
+
+rails g scaffold usersnomina user:references periodosliquidacion:references 'salario:decimal{11,2}' 'quincena:decimal{11,2}' horas_auto:integer horas_minus:integer horas_bus:integer dias:integer 'bonificacion:decimal{11,2}' 'incapacidad:decimal{11,2}' 'subtotal:decimal{11,2}' 'ajuste:decimal{11,2}' 'salud:decimal{11,2}' 'pension:decimal{11,2}' 'auxilio:decimal{11,2}' 'seguro:decimal{11,2}' 'dotacion:decimal{11,2}' 'prestamo:decimal{11,2}' 'total:decimal{11,2}' observacion:string{1000}
+
+SELECT e.periodosliquidacion_id,
+ 0 'user', e.salario, e.quincena, e.horas_auto, e.horas_minus, e.horas_bus, e.dias, e.bonificacion,
+ e.incapacidad, e.subtotal, e.ajuste, e.salud, e.pension, e.auxilio, e.seguro, e.dotacion,
+ e.prestamo, e.total, e.observacion
+FROMrm -r ceasoft_20210130.empleadosnominas e;
+
+rails g migration AddArchivoToMigracionescrmes archivo_id:integer
+rails g migration AddArchivo2ToMigracionesreportes archivo_id:integer
+
+rake db:rollback version=20200623020053
+rake db:migrate:down VERSION=20200623020053
+
+
+20200623020053_create_entradas.rb
+
+
+rails g scaffold centro codigo:string{20} descripcion:string
+rails g migration AddCentroToAntecedentes centro_id:integer
+
+
+
+INSERT INTO users (id,email,nombre,etapa,persona_id,username,activo,identificacion,portafolio_id,tipoconsulta,failed_attempts,celular)
+SELECT 0,CONCAT(identificacion,'@asear.esp.com'),nombre,'A',id,identificacion,'S',identificacion,portafolio_id,'PERSONA',0,0
+FROM personas WHERE identificacion = '43277494';
+
+
+
+rails g migration AddDireccionToEntradas direccion:string
+rails g migration AddClaseToEntradas clase:string
+
+rails g scaffold barrio comuna:string descripcion:string
+
+rails g migration AddBarrioToEntradas barrio_id:integer
+
+rails g scaffold fecha fecha:date
+
+rails g scaffold placa portafolio:references descripcion:string marca:string linea:string modelo:string tipo_vehiculo:string cilindraje:string motor:string serie:string nro_matricula:string instructor_id:integer tarjeta_nro:string tarjeta_expedicion:date tarjeta_vencimiento:date soat_nro:string soat_expedicion:date soat_vencimiento:date revision_nro:string revision_expedicion:date revision_vencimiento:date liquidacion_nro:string liquidacion_fecha:date picoyplaca:string estado:string soat_alerta:date revision_alerta:date tarjeta_alerta:date propietario:string observaciones:string pico_placa:string pico_placan:string
+rails g scaffold placasuser placa:references user:references fecha_inicio:date fecha_fin:date
+rails g scaffold placasregistro placa:references fecha:date kilometraje:string{10} 'galones:decimal{11,2}' 'valor:decimal{11,2}'
+
+rails g migration AddClasesToPlacasregistros nro_clases:integer
+
+
+
+rails g scaffold categoria nombre:string codigo_nuevo:string codigo:string tipo_servicio:string
+
+rails g scaffold pregunta descripcion:text opcion1:text opcion2:text opcion3:text opcion4:text opcion5:text grafica:string{2} grupo:string{2} codigo:integer multiple:string{2}
+rails g scaffold preguntascategoria pregunta:references categoria:references
+rails g scaffold preguntasrespuesta pregunta:references respuesta:string{5}
+
+rails g scaffold teorico portafolio:references persona:references user:references categoria:references correctas:integer incorrectas:integer estado:string
+rails g scaffold teoricosresultado teorico:references persona:references pregunta:references respuesta:string{2} estado:string{50}
+
+
+rails g migration AddIdvialToPersonas id_evial:integer
+
+rake db:rollback version=20200819205330
+rake db:migrate:down VERSION=20200819205330
+
+
+20200819205330_create_teoricosresultados.rb
+
+rails g migration AddTramiteToTeoricos personastramite_id:integer
+
+
+rails g scaffold personasevapractica persona:references personastramite_id:integer conocimiento_dato1:integer conocimiento_dato2:integer conocimiento_dato3:integer conocimiento_dato4:integer conocimiento_dato5:integer conocimiento_dato6:integer conocimiento_dato7:integer conocimiento_dato8:integer conocimiento_dato9:integer conocimiento_dato10:integer destreza_dato1:integer destreza_dato2:integer destreza_dato3:integer destreza_dato4:integer destreza_dato5:integer destreza_dato6:integer destreza_dato7:integer destreza_dato8:integer destreza_dato9:integer destreza_dato10:integer destreza_dato11:integer destreza_dato12:integer destreza_dato13:integer destreza_dato14:integer destreza_dato15:integer comportamiento_dato1:integer comportamiento_dato2:integer comportamiento_dato3:integer comportamiento_dato4:integer comportamiento_dato5:integer comportamiento_dato6:integer comportamiento_dato7:integer comportamiento_dato8:integer comportamiento_dato9:integer comportamiento_dato10:integer total_conocimiento:integer total_destreza:integer total_comportamiento:integer puntaje_conocimiento:string{11} puntaje_destreza:string{11} puntaje_comportamiento:string{11} total:string{11} evaluacion:string user_id:integer observaciones:string{4000}
+rails g migration AddDatosToPersonasevapracticas categoria_id:integer estado:string{20}
+
+rails g scaffold tiposhorario descripcion:string
+rails g scaffold programacionesfecha placa:references fecha:date hora1:integer estado1:string{1} hora2:integer estado2:string{1} hora3:integer estado3:string{1} hora4:integer estado4:string{1} hora5:integer estado5:string{1} hora6:integer estado6:string{1} hora7:integer estado7:string{1} hora8:integer estado8:string{1} hora9:integer estado9:string{1} hora10:integer estado10:string{1} hora11:integer estado11:string{1} hora12:integer estado12:string{1} hora13:integer estado13:string{1} hora14:integer estado14:string{1} hora15:integer estado15:string{1} hora16:integer estado16:string{1} hora17:integer estado17:string{1}
+rails g scaffold programacioneshorario persona:references personastramite_id:integer tiposhorario:references placa:references instructor_id:integer recoje:string{2} user_programa:integer user_actualiza:integer observacion:string{500} estado:string{2}
+
+rails g scaffold tipostramite descripcion:string ministerio:string estado:string programa:string
+rails g scaffold personastramite persona:references categoria:references tipostramite:references placa:references user:references factura_id:integer user_actualiza:integer empresa_id:integer autorizado:string{20} autorizado_user:integer autorizado_usado:string{20} usado:string{2} liquidacion_id:integer nro_pin:string{30} restriccion_01:string{2} restriccion_02:string{2} restriccion_03:string{2} restriccion_04:string{2} restriccion_05:string{2} restriccion_06:string{2} restriccion_07:string{2} restriccion_99:string{2} documento_anterior:string{20} identificacion_anterior:string{20}
+
+-----
+
+rails g scaffold teoricosmodulo descripcion:string objetivo:string{4000}
+rails g scaffold teoricossalon descripcion:string estado:string{50}
+rails g scaffold teoricosmateria descripcion:string nro_horas:decimal estado:string temas:text
+
+rails g scaffold teoricosmateriascategoria teoricosmateria:references categoria:references tipostramite:references
+rails g scaffold teoricosmateriasmodulo teoricosmateria:references teoricosmodulo:references
+
+rails g scaffold agenda teoricossalon:references teoricosmateria:references capacidad:integer fecha:date horainicio:string{10} horafin:string{10} instructor:string
+rails g scaffold agendaspersona agenda:references persona:references
+
+rails g scaffold agendasbitacora agenda:references persona:references personastramite:references user:references estado:string{20} factura_id:integer
+
+-----
+
+rails g scaffold concepto descripcion:string 'valor:decimal{11,2}' user:references propio:string{1} codigo_contabilidad:string{20}
+rails g scaffold cobrostramite tipostramite:references categoria:references concepto:references user:references
+rails g scaffold empresa documento:string identificacion:string nombre:string direccion:string telefono:string
+rails g scaffold factura persona:references nro_factura:integer categoria:references tipostramite:references personastramite:references 'valor:decimal{11,2}' user:references estado:string{50} user_anula:integer empresa:references observacion:string{1000}
+rails g scaffold detallesfactura factura:references categoria:references tipostramite:references concepto:references 'valor:decimal{11,2}' user:references user_actualiza:integer cantidad:integer nro_factura:integer liquidacion_id:integer 'valor_original:decimal{11,2}' 'descuento:decimal{11,2}' observacion:string{1000}
+rails g scaffold abono factura:references nro_abono:string{20} 'valor:decimal{11,2}' 'saldo:decimal{11,2}' estado:string forma_pago:string user:references user_anula:integer nro_factura:integer
+
+rails g scaffold lugar descripcion:string descripcion_ampliada:string
+
+rails g scaffold concepto descripcion:string 'valor:decimal{11,2}' user:references propio:string{1} codigo_contabilidad:string{20}
+rails g scaffold cobrostramite tipostramite:references categoria:references concepto:references user:references
+rails g scaffold empresa documento:string identificacion:string nombre:string direccion:string telefono:string
+rails g scaffold factura persona:references nro_factura:integer categoria:references tipostramite:references personastramite:references 'valor:decimal{11,2}' user:references estado:string{50} user_anula:integer empresa:references observacion:string{1000}
+rails g scaffold detallesfactura factura:references categoria:references tipostramite:references concepto:references 'valor:decimal{11,2}' user:references user_actualiza:integer cantidad:integer nro_factura:integer liquidacion_id:integer 'valor_original:decimal{11,2}' 'descuento:decimal{11,2}' observacion:string{1000}
+rails g scaffold abono factura:references nro_abono:string{20} 'valor:decimal{11,2}' 'saldo:decimal{11,2}' estado:string forma_pago:string user:references user_anula:integer nro_factura:integer
+rails g scaffold municipio descripcion:string
+rails g scaffold egreso fecha:date nro_egreso:string 'valor:decimal{11,2}' user:references user_actualiza:integer observacion:string{2000}
+
+rails g scaffold liquidacion empresa:references factura:references persona:references nro_liquidacion:integer categoria:references tipostramite:references personastramite:references 'valor:decimal{11,2}' user:references user_anula:integerrm -r  estado:string
+rails g scaffold liquidacionesdetalle liquidacion:references categoria:references tipostramite:references concepto:references 'valor:decimal{11,2}' user:references user_actualiza:integer cantidad:integer
+
+
+rails g scaffold notascredito factura:references user:references user_anula:integer valor:integer saldo:integer observacion:string{4000} estado:string{2}
+rails g scaffold personasclase persona:references tiposhorario:references placa:references instructor_id:integer fecha_clase:date recoje:string user:references
+
+rails g scaffold festivo fecha:date
+
+rails g scaffold personasbitacora personastramite:references tiposhorario:references placa:references user:references fecha:date codigo:string{20} respuesta:string{50}
+
+rake db:migrate:down VERSION=20201128170326
+
+
+<div class="col-md-2"><%= f.input :documento, as: :select, collection: select_documento, input_html: {class: 'select2'} %></div>
+
+
+
+SELECT a.id,a.placa_id,a.placa,a.fecha,a.idhorario,a.horario,a.personastramite_id,a.estado
+FROM (SELECT p.id,p.placa_id,pl.descripcion placa,p.fecha,1 idhorario, (SELECT descripcion FROM tiposhorarios WHERE id = 1) horario, p.hora1 personastramite_id,p.estado1 estado
+rm -r   FROM   programacionesfechas p, personastramites t, placas pl
+    WHERE  p.hora1 = t.id
+    AND    p.placa_id = pl.id
+    UNION ALL
+    SELECT p.id,p.placa_id,pl.descripcion,p.fecha,2 idhorario, (SELECT descripcion FROM tiposhorarios WHERE id = 2) horario, p.hora2 personastramite_id,p.estado2
+    FROM   programacionesfechas p, personastramites t, placas pl
+    WHERE  p.hora2 = t.id
+    AND    p.placa_id = pl.id
+    UNION ALL
+    SELECT p.id,p.placa_id,pl.descripcion,p.fecha,3 idhorario, (SELECT descripcion FROM tiposhorarios WHERE id = 3) horario, p.hora3 personastramite_id,p.estado3
+    FROM   programacionesfechas p, personastramites t, placas pl
+    WHERE  p.hora3 = t.id
+    AND    p.placa_id = pl.id
+    UNION ALL
+    SELECT p.id,p.placa_id,pl.descripcion,p.fecha,4 idhorario, (SELECT descripcion FROM tiposhorarios WHERE id = 4) horario, p.hora4 personastramite_id,p.estado4
+    FROM   programacionesfechas p, personastramites t, placas pl
+    WHERE  p.hora4 = t.id
+    AND    p.placa_id = pl.id
+    UNION ALL
+    SELECT p.id,p.placa_id,pl.descripcion,p.fecha,5 idhorario, (SELECT descripcion FROM tiposhorarios WHERE id = 5) horario, p.hora5 personastramite_id,p.estado5
+    FROM   programacionesfechas p, personastramites t, placas pl
+    WHERE  p.hora5 = t.id
+    AND    p.placa_id = pl.id
+    UNION ALL
+    SELECT p.id,p.placa_id,pl.descripcion,p.fecha,6 idhorario, (SELECT descripcion FROM tiposhorarios WHERE id = 6) horario, p.hora6 personastramite_id,p.estado6
+    FROM   programacionesfechas p, personastramites t, placas pl
+    WHERE  p.hora6 = t.id
+    AND    p.placa_id = pl.id
+    UNION ALL
+    SELECT p.id,p.placa_id,pl.descripcion,p.fecha,7 idhorario, (SELECT descripcion FROM tiposhorarios WHERE id = 7) horario, p.hora7 personastramite_id,p.estado7
+    FROM   programacionesfechas p, personastramites t, placas pl
+    WHERE  p.hora7 = t.id
+    AND    p.placa_id = pl.id
+    UNION ALL
+    SELECT p.id,p.placa_id,pl.descripcion,p.fecha,8 idhorario, (SELECT descripcion FROM tiposhorarios WHERE id = 8) horario, p.hora8 personastramite_id,p.estado8
+    FROM   programacionesfechas p, personastramites t, placas pl
+    WHERE  p.hora8 = t.id
+    AND    p.placa_id = pl.id
+    UNION ALL
+    SELECT p.id,p.placa_id,pl.descripcion,p.fecha,9 idhorario, (SELECT descripcion FROM tiposhorarios WHERE id = 9) horario, p.hora9 personastramite_id,p.estado9
+    FROM   programacionesfechas p, personastramites t, placas pl
+    WHERE  p.hora9 = t.id
+    AND    p.placa_id = pl.id
+    UNION ALL
+    SELECT p.id,p.placa_id,pl.descripcion,p.fecha,10 idhorario, (SELECT descripcion FROM tiposhorarios WHERE id = 10) horario, p.hora10 personastramite_id,p.estado10
+    FROM   programacionesfechas p, personastramites t, placas pl
+    WHERE  p.hora10 = t.id
+    AND    p.placa_id = pl.id
+    UNION ALL
+    SELECT p.id,p.placa_id,pl.descripcion,p.fecha,11 idhorario, (SELECT descripcion FROM tiposhorarios WHERE id = 11) horario, p.hora11 personastramite_id,p.estado11
+    FROM   programacionesfechas p, personastramites t, placas pl
+    WHERE  p.hora11 = t.id
+    AND    p.placa_id = pl.id
+    UNION ALL
+    SELECT p.id,p.placa_id,pl.descripcion,p.fecha,12 idhorario, (SELECT descripcion FROM tiposhorarios WHERE id = 12) horario, p.hora12 personastramite_id,p.estado12
+    FROM   programacionesfechas p, personastramites t, placas pl
+    WHERE  p.hora12 = t.id
+    AND    p.placa_id = pl.id
+    UNION ALL
+    SELECT p.id,p.placa_id,pl.descripcion,p.fecha,13 idhorario, (SELECT descripcion FROM tiposhorarios WHERE id = 13) horario, p.hora13 personastramite_id,p.estado13
+    FROM   programacionesfechas p, personastramites t, placas pl
+    WHERE  p.hora13 = t.id
+    AND    p.placa_id = pl.id
+    UNION ALL
+    SELECT p.id,p.placa_id,pl.descripcion,p.fecha,14 idhorario, (SELECT descripcion FROM tiposhorarios WHERE id = 14) horario, p.hora14 personastramite_id,p.estado14
+    FROM   programacionesfechas p, personastramites t, placas pl
+    WHERE  p.hora14 = t.id
+    AND    p.placa_id = pl.id
+    UNION ALL
+    SELECT p.id,p.placa_id,pl.descripcion,p.fecha,15 idhorario, (SELECT descripcion FROM tiposhorarios WHERE id = 15) horario, p.hora15 personastramite_id,p.estado15
+    FROM   programacionesfechas p, personastramites t, placas pl
+    WHERE  p.hora15 = t.id
+    AND    p.placa_id = pl.id
+    UNION ALL
+    SELECT p.id,p.placa_id,pl.descripcion,p.fecha,16 idhorario, (SELECT descripcion FROM tiposhorarios WHERE id = 16) horario, p.hora16 personastramite_id,p.estado16
+    FROM   programacionesfechas p, personastramites t, personas pe
+    WHERE  p.hora16 = t.id
+    AND    p.placa_id = pl.id
+    UNION ALL
+    SELECT p.id,p.placa_id,pl.descripcion,p.fecha,17 idhorario, (SELECT descripcion FROM tiposhorarios WHERE id = 17) horario, p.hora17 personastramite_id,p.estado17
+    FROM   programacionesfechas p, personastramites t, placas pl
+    WHERE  p.hora17 = t.id
+    AND    p.placa_id = pl.id) a
+WHERE  a.personastramite_id = 106856
+
+   SELECT p.id,p.placa_id, pl.descripcion placa, p.fecha,7 idhorario, (SELECT descripcion FROM tiposhorarios WHERE id = 7) horario, p.hora7 personastramite_id,p.estado1 estado
+   FROM   programacionesfechas p, personastramites t, placas pl
+   WHERE  p.hora7 = t.id
+   AND    t.id = 106856
+   AND    p.placa_id = pl.id
+
+
+21 ENERO 2021
+
+OBSERVACIONES ESCUELA VIAL
+      NOTAS
+
+    >>>>>PENDIENTE REPORTES <<< 
+
+    PERSONAS 
+-Creacion personas (CIUDAD) problema visualizacion
+-No esta el campo ESTRATO
+-Cambiar en Documento COPA telefono por celular
+
+    TRAMITES 
+-Cuadro tramites corregir posicion
+-Tramites muestra valores modificados pero no realiza operacion, el valor tampoco cambia en la base de datos
+-Los datos solo se muestran en DETALLES FACTURAS pero no modifican en PROCESO FACTURACION 
+-Agregar Total general de la factura  en DETALLES FCATURAS
+    
+    ABONOS 
+-Al guardar un abono, no muestra confirmacion de realizado, queda en la misma pantalla, se debe refrescar la pagina para que muestre el abono 
+-En detalles abonos Esta sumando el total de los saldos que debe.
+-Hacer aviso para que no permita hacer pagos mayores al valor de la factura.
+-Permitir visualizar las facturas anuladas(Para impresion).
+
+    AGENDA
+-Tope 10, parametrizar segun el tramite 
+
+
+
+
+
+<div id="productheader">
+  <span class="tit_gr_azul">&nbsp;&nbsp;INFORME DIARIO</span>
+</div>
+<br/>
+<% form_tag informe_facturas_path, :method => 'get' do %>
+<div align="center">
+<table width="60%" border="0" align="center" cellpadding="0" cellspacing="0" id="one-column-emphasis">
+  <tr valign="middle">
+    <td height="30" class="camposDescN10"><div align="right">Fecha Informe: &nbsp;&nbsp;</div></td>
+    <td height="30" class="camposDesc">Inicial:&nbsp;&nbsp;
+      <%= calendar_date_select "ubicacion", "inicial", :year_range => 50.years.ago..0.years.ago, :class=> "campo", :size => 10, :time => false%>
+  &nbsp;&nbsp; - &nbsp;Final:&nbsp;&nbsp;
+  <%= calendar_date_select "ubicacion", "final", :year_range => 50.years.ago..0.years.ago, :class=> "campo", :size => 10, :time => false%>
+    </td>
+  </tr>
+  <tr valign="middle">
+    <td height="30" class="camposDesc"></td>
+    <td height="30" class="camposDesc">
+      <%= submit_tag "Generar", :name => nil, :disable_with => "Buscando..." , :class=>"buttonAsLink"%></td>
+  </tr>
+</table>
+</div>
+<% end %>
+<br/>
+<table width="100%" height="0" border="0" cellpadding="0" cellspacing="0">
+  <tr><td height="10"><hr size="1" noshade class="hrlinea"/></td></tr>
+</table>
+<div id="productheader">
+  <span class="tit_gr_azul">&nbsp;&nbsp;INFORME DIARIO CONSOLIDADO</span>
+</div>
+<br/>
+<% form_tag informeconsolidado_facturas_path, :method => 'get' do %>
+<div align="center">
+<table width="60%" border="0" align="center" cellpadding="0" cellspacing="0" id="one-column-emphasis">
+  <tr valign="middle">
+    <td height="30" class="camposDescN10"><div align="right">Fecha Informe: &nbsp;&nbsp;</div></td>
+    <td height="30" class="camposDesc">Inicial:&nbsp;&nbsp;
+      <%= calendar_date_select "ubicacion", "inicial", :year_range => 50.years.ago..0.years.ago, :class=> "campo", :size => 10, :time => false%>
+  &nbsp;&nbsp; - &nbsp;Final:&nbsp;&nbsp;
+  <%= calendar_date_select "ubicacion", "final", :year_range => 50.years.ago..0.years.ago, :class=> "campo", :size => 10, :time => false%>
+    </td>
+  </tr>
+  <tr valign="middle">
+    <td height="30" class="camposDesc"></td>
+    <td height="30" class="camposDesc">
+      <%= submit_tag "Generar", :name => nil, :disable_with => "Buscando..." , :class=>"buttonAsLink"%></td>
+  </tr>
+</table>
+</div>
+<% end %>
+<br/>
+<table width="100%" height="0" border="0" cellpadding="0" cellspacing="0">
+  <tr><td height="10"><hr size="1" noshade class="hrlinea"/></td></tr>
+</table>
+<div id="productheader">
+  <span class="tit_gr_azul">&nbsp;&nbsp;INFORMACION LIQUIDACIONES</span>
+</div>
+<br/>
+<% form_tag buscar_liquidaciones_path, :method => 'get' do %>
+<div align="center">
+<table width="60%" border="0" align="center" cellpadding="0" cellspacing="0" id="one-column-emphasis">
+  <tr valign="middle">
+    <td width="30%" height="30" class="camposDesc"><div align="right"><strong>Identificacion:&nbsp;&nbsp;</strong></div></td>
+    <td width="70%" height="30" class="camposDesc"> <%= text_field_tag :buscarident, params[:buscarident{ :class => "campo", :size => 40,
+                :onFocus => "this.style.border='1px solid #f00'",
+                :onBlur => "this.style.border='1px solid #bbb'" } %></td>
+  </tr>
+  <tr valign="middle">
+    <td width="30%" height="30" class="camposDesc"><div align="right"><strong>Nombre:&nbsp;&nbsp;</strong></div></td>
+    <td width="70%" height="30" class="camposDesc"> <%= text_field_tag :buscarnombre, params[:buscarnombre],{ :class => "campo", :size => 40,
+                :onFocus => "this.style.border='1px solid #f00'",
+                :onBlur => "this.style.border='1px solid #bbb'" } %></td>
+  </tr>
+  <tr valign="middle">
+    <td height="30" class="camposDesc"><div align="right"><strong>Numero de liquidacion:&nbsp;&nbsp;</strong></div></td>
+    <td height="30" class="camposDesc"> <%= text_field_tag :buscarliq, params[:buscarliq],{ :class => "campo", :size => 40,
+                :onFocus => "this.style.border='1px solid #f00'",
+                :onBlur => "this.style.border='1px solid #bbb'" } %></td>
+  </tr>
+  <tr valign="middle">
+    <td height="30" class="camposDesc"><div align="right"><strong>Empresa:&nbsp;&nbsp;</strong></div></td>
+    <td height="30" class="camposDesc"><%=select("ubicacion", "empresa_id", select_empresa.collect {|p| [ p.nombre + ' - ' + p.identificacion, p.id ] }, { :include_blank => true },
+      { :style=>"width:450px", :class => "campo", :onFocus => "this.style.border='1px solid #f00'", :onBlur => "this.style.border='1px solid #bbb'" }) %></td>
+  </tr>
+  <tr valign="middle">
+    <td height="30" class="camposDesc"></td>
+    <td height="30" class="camposDesc">
+      <%= submit_tag "Buscar", :name => nil, :disable_with => "Buscando..." , :class=>"buttonAsLink"%></td>
+  </tr>
+</table>
+</div>
+<% end %>
+<br/>
+<table width="100%" height="0" border="0" cellpadding="0" cellspacing="0">
+  <tr><td height="10"><hr size="1" noshade class="hrlinea"/></td></tr>
+</table>
+<div id="productheader">
+  <span class="tit_gr_azul">&nbsp;&nbsp;FACTURACION DE LIQUIDACIONES POR EMPRESA</span>
+</div>
+<br/>
+<% form_tag buscarf_liquidaciones_path, :method => 'get' do %>
+<div align="center">
+<table width="70%" border="0" align="center" cellpadding="0" cellspacing="0" id="one-column-emphasis">
+  <tr valign="middle">
+    <td height="30" class="camposDesc"><div align="right"><strong>Seleccione la Empresa:&nbsp;&nbsp;</strong></div></td>
+    <td height="30" class="camposDesc"><%=select("ubicacion", "empresa_id", select_empresa.collect {|p| [ p.nombre + ' - ' + p.identificacion, p.id ] }, { :include_blank => true },
+      { :style=>"width:450px", :class => "campo"}) %></td>
+  </tr>
+  <tr valign="middle">
+    <td height="30" class="camposDesc"></td>
+    <td height="30" class="camposDesc">
+      <%= submit_tag "Buscar", :name => nil, :disable_with => "Buscando..." , :class=>"buttonAsLink"%></td>
+  </tr>
+</table>
+</div>
+<% end %>
+<br/>
+<table width="100%" height="0" border="0" cellpadding="0" cellspacing="0">
+  <tr><td height="10"><hr size="1" noshade class="hrlinea"/></td></tr>
+</table>
+<%= render 'dtinterface' %>
+<br/>
+<table width="100%" height="0" border="0" cellpadding="0" cellspacing="0">
+  <tr><td height="10"><hr size="1" noshade class="hrlinea"/></td></tr>
+</table>
+<%= render 'dcartera' %>
+<br/>
+
+
+update conceptos set siigo_codigo = '1134 where descripcion = 'CLASE TEORICA';
+update conceptos set siigo_codigo = 'A1 where descripcion = 'CATEGORIA A1';
+update conceptos set siigo_codigo = 'A2 where descripcion = 'CATEGORIA A2';
+update conceptos set siigo_codigo = 'ANSV where descripcion = 'AGENCIA NACIONAL DE SEGURIDAD VIAL';
+update conceptos set siigo_codigo = 'B1 where descripcion = 'CATEGORIA B1';
+update conceptos set siigo_codigo = 'B2 where descripcion = 'CATEGORIA B2';
+update conceptos set siigo_codigo = 'B3 where descripcion = 'CATEGORIA B3';
+update conceptos set siigo_codigo = 'C1 where descripcion = 'CATEGORIA C1';
+update conceptos set siigo_codigo = 'C2 where descripcion = 'CATEGORIA C2';
+update conceptos set siigo_codigo = 'C3 where descripcion = 'CATEGORIA C3';
+update conceptos set siigo_codigo = 'CI where descripcion = 'CURSO INSTRUCTOR';
+update conceptos set siigo_codigo = 'CP where descripcion = 'CLASES PRACTICAS';
+update conceptos set siigo_codigo = 'LI where descripcion = 'LICENCIA INTERNACIONAL';
+update conceptos set siigo_codigo = 'PT where descripcion = 'PRUEBA TEORICO PRACTICA';
+update conceptos set siigo_codigo = 'RC1 where descripcion = 'CATEGORIA RC1';
+update conceptos set siigo_codigo = 'RECAUDOS where descripcion = 'RECAUDOS';
+update conceptos set siigo_codigo = 'RegistroManual where descripcion = 'Registro manual';
+update conceptos set siigo_codigo = 'SICOV where descripcion = 'SICOV';
+
+
+
+
+
+rails g migration AddDatosToPortafolios identificacion:string{20} sitio_web:string{50} direccion:string telefonos:string{50} fax:string{50}
+
+
+
+
+rails g scaffold categoria descripcion:string estado:integer
+rails g scaffold subcategoria categoria:references descripcion:string estado:integer
+rails g scaffold tiposenvio descripcion:string
+rails g scaffold tipospago descripcion:string estado:integer
+rails g scaffold tipospalabra descripcion:string estado:integer
+rails g scaffold tiposmarca descripcion:string estado:integer
+rails g scaffold municipio codigo:string pais:string departamento:string municipio:string 'valor_envio:decimal{11,2}'
+rails g scaffold proveedor documento:string{20} identificacion:string{20} digito:string{2} nombres:string municipio:references direccion:string sitio_web:string email:string telefono:string{50} celular:string{50} contacto_nombre:string contacto_celular:string{50} contacto_email:string estado:integer observacion:string{4000} user:references
+rails g scaffold cliente documento:string{20} identificacion:string{20} digito:string{2} nombres:string apellidos:string municipio:references direccion:string email:string telefono:string{50} celular:string{50} observacion:string{4000} user:references
+
+rails g scaffold producto codigo:string{50} descripcion:string descripcion_larga:string detalle:string{4000} tiposmarca:references linea:string color:string{20} talla:string{20} tipo_producto:string{50} tipo_articulo:string{50} cantidad_disponible:integer estado:integer fecha_inicio:date fecha_fin:date detalle_garantia:string{1000} comentarios_envio:string{1000} user:references
+rails g scaffold productossubcategoria producto:references categoria:references subcategoria:references
+rails g scaffold productosenvio producto:references tiposenvio:references observacion:string
+rails g scaffold productospalabra producto:references tipospalabra:references observacion:string
+rails g scaffold productospago producto:references tipospago:references observacion:string
+rails g scaffold productosinventario anno:string{4} mes:string{2} producto:references cantidad_anterior:integer entradas:integer salidas:integer disponible:integer
+rails g scaffold productosdocumento producto:references user:references documentos:attachment
+
+rails g scaffold entrada proveedor:references nro_factura:string{20} fecha:date 'valor_total:decimal{11,2}'
+rails g scaffold entradasproducto entrada:references producto:references fecha:date cantidad:integer 'valor_unitario:decimal{11,2}' 'valor_iva:decimal{11,2}' 'valor_descuento:decimal{11,2}' 'subtotal:decimal{11,2}' 'total:decimal{11,2}' user:references
+
+rails g scaffold solicitud cliente:references fecha:date total_produtos:integer 'valor_total:decimal{11,2}' 'recaudo:decimal{11,2}' 'saldo:decimal{11,2}' estado:integer
+rails g scaffold solicitudesproducto solicitud:references producto:references fecha:date cantidad:integer 'valor_unitario:decimal{11,2}' 'valor_iva:decimal{11,2}' 'valor_descuento:decimal{11,2}' 'subtotal:decimal{11,2}' 'total:decimal{11,2}' user:references
+rails g scaffold solicitudesabono solicitud:references tipospago:references 'valor:decimal{11,2}' estado:integer user:references user_anula:integer fecha_anula:date
+
+
+
+labizi = tema de inventarios (1)
+	 - categorias tabla maestra (OK..)
+	 - subcategoria que esta asociada a la categoria. (OK..)
+	 	- proveedores - maestra (OK..)
+	- marca - maestra (OK..)
+	- forma de envio - maestra (OK..)
+	- forma de pago - maestra (OK..)
+	- palabras maestra (OK..)
+	-  tabla parametrizada de los productos (es igual a publications) - Categoria - subcategorias (titulo, descripcion, descricion larga, cantidad_disponible, codigo, estado, usario, detalle del producto, marca_id, fecha inicio, fecha_fin, tipo producto (servicio- producto), tipo de articulo (usado, nuevo), garantia, obs_comentariode enevio, talla, color  )
+	- produtospalabras (producto, palabra_id) (OK..)
+	- productossubcategorias asociada a productos (OK..)
+	- productosentradas (producto, fecha, proveedor_id, cantidad, valor unitario, iva, valor total, descuento,subtotal, user) (OK..)
+	- productosimagenes (OK..)
+	- productosinventarios(anno , mes, producto, cantidad_ant, ventas, final, entradas ) (OK..)
+	- solicitudes(cliente_id, fecha, nro total de productos, valor total de los productos, estado, formapago_id) (OK..)
+	- solicitudesdetalles (producto_id, cantidad, valor unitario, iva, descuento, descu3nto, total) (OK..)
+	- clientes (OK..)
+
+
+
+
+
+
+
+
+

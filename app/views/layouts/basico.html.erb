@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= ENV['NOMBRE_APLICACION'] %></title>
+    <%= csrf_meta_tags %>
+    <%= action_cable_meta_tag %>
+    <%= favicon_link_tag asset_path('favicon.png') %>
+		<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+  <body class="sidebar-mini skin-blue-light">
+    <div class="wrapper">
+      <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+          <%= render 'layouts/flash_messages' %>
+        </section>
+        <!-- /.content header -->
+
+        <section class="content">
+
+          <%= yield %>
+
+        </section>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,88 @@
+<%
+  isadmin = is_admin
+  user = User.find(isadmin)
+  isportafolio = is_portafolio
+  issygma = is_sygma
+%>
+<aside class="main-sidebar">
+  <section class="sidebar">
+    <div class="user-panel">
+      <div class="row">
+        <% unless @persona.new_record? %>
+          <% if @persona.id %>
+            <% if @persona.image.to_s == "" %>
+              <div align="center"><%= image_tag("no_photo.png", size: "150x150") rescue nil %></div>
+            <% else %>
+              <div align="center" style="padding: 10px;"><%= image_tag @persona.image.url, class: 'img-thumbnail img-responsive' %></div>
+            <% end -%>
+          <% end -%>
+        <% else %>
+          <div align="center"><%= image_tag("no_photo.png", size: "200x200") rescue nil %></div>
+        <% end -%>
+      </div>
+    </div>
+    <ul class="sidebar-menu" data-widget="tree">
+      <li class="treeview" style="font-size: 12px !important;">
+        <%= link_to camara_personas_path(id: @persona.id), remote: true do %>
+          <i class="fa fa-camera"></i> Tomar Foto
+        <% end %>
+      </li>
+      <% if issygma %>
+        <% portafolios = Portafolio.all.where("estado = 'ACTIVO' and id != #{isportafolio}").order("nombre") %>
+        <li class="treeview" style="font-size: 12px !important;">
+          <a href="#"><i class="fa fa fa-institution"></i> <span><%= is_portafolioname rescue nil %></span>
+            <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+          </a>
+          <ul class="treeview-menu">
+            <li>
+              <% portafolios.each do |p| %>
+                <%= link_to cambioportafolio_users_path(id: isadmin, p: p.id) do %>
+                  <span style="font-size: 12px !important; "><%= p.nombre rescue nil %></span>
+                <% end %>
+              <% end %>
+            </li>
+          </ul>
+        </li>
+      <% elsif user.usersportafolios.any? %>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+            <%= user.portafolio.nombre rescue nil %> <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu" role="menu">
+            <li>
+              <% user.usersportafolios.where(["portafolio_id != #{isportafolio}"]).each do |s| %>
+                <%= link_to cambioportafolio_users_path(id: isadmin, p: s.portafolio.id) do %>
+                  <span style="font-size: 12px !important; "><%= s.portafolio.nombre rescue nil %></span>
+                <% end %>
+              <% end %>
+            </li>
+          </ul>
+        </li>
+      <% end %>
+    </ul>
+
+    <!-- Sidebar Menu -->
+    <ul class="sidebar-menu" data-widget="tree">
+      <li>
+        <%= link_to personas_path do %>
+          <i class="fa fa-arrow-left text-success"></i> Regresar a Personas
+        <% end %>
+      </li>
+      <li class="header"><%= t :menu %></li>
+      <!-- Optionally, you can add icons to the links -->
+      <li class="<%= active_class(edit_persona_path(etapa: "A", id: @persona.id)) %>">
+        <%= link_to edit_persona_path(etapa: "A", id: @persona.id) do %>
+          <i class="fa fa-bullseye"></i> <span>Datos básicos</span>
+        <% end %>
+      </li>
+    </ul>
+  </section>
+</aside>
+<div class="modal fade" id="camara">
+  <div class="modal-dialog" style="width: 700px;">
+    <div class="modal-content" style="width: 700px;">
+    </div>
+  </div>
+</div>

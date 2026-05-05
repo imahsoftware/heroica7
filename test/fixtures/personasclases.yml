@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  persona: one
+  tiposhorario: one
+  placa: one
+  instructor_id: 1
+  fecha_clase: 2020-11-14
+  recoje: MyString
+  user: one
+
+two:
+  persona: two
+  tiposhorario: two
+  placa: two
+  instructor_id: 1
+  fecha_clase: 2020-11-14
+  recoje: MyString
+  user: two

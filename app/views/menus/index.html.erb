@@ -1,0 +1,13 @@
+<% if is_estudiante %>
+  <% if @existeFotos == 'SI' %>
+    <%= render 'captura_foto' %>
+  <% elsif @existeFirmaPendiente == 'SI' %>
+    <%= render 'firma_otp_otros' %>
+  <% elsif @existeEncuestaPendiente == 'SI' %>
+    <%= render 'encuesta' %>
+  <% else %>
+    <%= render 'opcional2' %>
+  <% end %>
+<% else %>
+  <%= render 'opcional' %>
+<% end %>

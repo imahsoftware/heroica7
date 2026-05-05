@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  liquidacion: one
+  categoria: one
+  tipostramite: one
+  concepto: one
+  valor: 9.99
+  user: one
+  user_actualiza: 1
+  cantidad: 1
+
+two:
+  liquidacion: two
+  categoria: two
+  tipostramite: two
+  concepto: two
+  valor: 9.99
+  user: two
+  user_actualiza: 1
+  cantidad: 1

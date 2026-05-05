@@ -1,0 +1,85 @@
+<script type="text/javascript">
+  document.addEventListener('contextmenu', event => event.preventDefault());
+  
+  function disableF5(e) { if ((e.which || e.keyCode) == 116) e.preventDefault()};
+  $(document).ready(function(){
+       $(document).on("keydown", disableF5);
+  });
+</script>
+<div class="login-box" style="width: 995px !important;">
+  <div class="login-box-body col-md-2" style="min-height: 434px; background-color: #1b86a5;border-top-left-radius: 10px;border-bottom-left-radius: 10px;">
+    <%= image_tag('logowhite.png',style: "width: 100%;margin-top: 150px;") %>
+  </div>
+  <div class="login-box-body col-md-10" style="-min-height: 434px;border-top-right-radius: 10px;border-bottom-right-radius: 10px;">
+    <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, id: 'idforminit', autocomplete: 'off' }) do |f| %>
+      <h3 class="login-box-msg">Actualiza tus Datos</h3>
+      <div class="form-login col-md-6">
+        <br>
+        <label>*Nombre Completo<span style="color: red;font-size: 10px">(obligatorio)</span></label>
+        <div class="input-group" style="margin-bottom: 15px;">
+          <span class="input-group-addon"><i class="fa fa-user"></i></span>
+          <%= f.input :nombre , required: true, class: 'form-control',
+          placeholder: 'Nombre Completo',label: false %>
+        </div>
+        <label>*Identificacion<span style="color: red;font-size: 10px"></span></label>
+        <div class="input-group" style="margin-bottom: 15px;">
+          <span class="input-group-addon"><i class="fa fa-id-card"></i></span>
+          <%= f.input :identificacion ,disabled: true, required: false, class: 'form-control',
+          placeholder: 'Identificacion',label: false %>
+        </div>
+        <label>*Fecha de Nacimiento <span style="color: red;font-size: 10px">(obligatorio)</span></label>
+        <div class="input-group" style="margin-bottom: 15px;">
+          <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+          <%= f.date_field :fecha_nacimiento , required: true, class: 'form-control',
+          placeholder: 'Fecha de Nacimiento',label: false %>
+        </div>
+        <label>*Correo Electrónico <span style="color: red;font-size: 10px"></span></label>
+        <div class="input-group" style="margin-bottom: 15px;">
+          <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+          <%= f.input :email ,disabled: true , required: true, class: 'form-control',
+          placeholder: 'Email',label: false %>
+        </div>
+      </div>
+      <div class="form-login col-md-6">
+        <br>
+        <label>*Dirección <span style="color: red;font-size: 10px">(obligatorio)</span></label>
+        <div class="input-group" style="margin-bottom: 15px;">
+          <span class="input-group-addon"><i class="fa fa-home"></i></span>
+          <%= f.input :direccion , required: true, class: 'form-control',
+          placeholder: 'Dirección',label: false %>
+        </div>
+        <label>*Telefono <span style="color: red;font-size: 10px">(obligatorio)</span></label>
+        <div class="input-group" style="margin-bottom: 15px;">
+          <span class="input-group-addon"><i class="fa fa-phone"></i></span>
+          <%= f.input :telefonos , required: true, class: 'form-control',
+          placeholder: 'Telefono',label: false %>
+        </div>
+        <label>*Celular <span style="color: red;font-size: 10px">(obligatorio)</span></label>
+        <div class="input-group" style="margin-bottom: 15px;">
+          <span class="input-group-addon"><i class="fa fa-mobile"></i></span>
+          <%= f.input :celular , required: true, class: 'form-control',
+          placeholder: 'Celular',label: false %>
+        </div>
+        <label>*Género <span style="color: red;font-size: 10px">(obligatorio)</span></label>
+        <div class="input-group" style="margin-bottom: 15px;">
+          <span class="input-group-addon"><i class="fa fa-venus-mars"></i></span>
+          <%= f.input_field :genero, as: :select, collection: select_genero , required: true, class: 'form-control',
+          placeholder: 'Género',label: false %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 pull-right">
+          <%= f.button :submit, 'Guardar', class: 'btn-primary btn-flat pull-right' %>
+          <% if current_user.sign_in_count != 1 %>
+            <%= link_to "#{t :cancelar}", :back, class: 'btn btn-flat pull-right btn-default', style: 'margin-right:5px' %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+<%= render 'layouts/flash_messages' %>
+
+
+
+

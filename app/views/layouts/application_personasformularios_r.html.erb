@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>EVC</title>
+  <%= csrf_meta_tags %>
+  <%= action_cable_meta_tag %>
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <%= stylesheet_link_tag 'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
+</head>
+<body style="background: url('/assets/background.png');background-repeat: no-repeat;background-size: 100% 100%;opacity: 5; background-size: cover;">
+<div class="wrapper">
+  <div align="center">
+    <%= image_tag("logonuevo.png", size: "200x100") %>
+  </div>
+  <section class="content-header">
+    <%= render 'layouts/flash_messages', flash: flash %>
+  </section>
+  <div class="container">
+    <%= yield %>
+  </div>
+</div>
+
+<style>
+    .help-block {
+        display: block;
+        margin-top: 5px;
+        margin-bottom: 10px;
+        color: #737373;
+        margin-left: 5px;
+        font-size: 10px;
+        color: red;
+    }
+
+    .form-check-label {
+        display: inline-block;
+        margin-left: 10px;
+    }
+</style>
+
+<script type="text/javascript" charset="utf-8">
+    $('#correo').on('keyup', function () {
+        var re = /([A-Z0-9a-z_-][^@])+?@[^$#<>?]+?\.[\w]{2,4}/.test(this.value);
+        if (!re) {
+            $('#error').show();
+            $('#success').hide();
+        } else {
+            $('#error').hide();
+            $('#success').show();
+        }
+    })
+
+    /// Javascript mostrar password en input
+    $(document).ready(function () {
+        $('.showPassword').on("click", function () {
+            var x = document.getElementById("textInput");
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
+            }
+        });
+    });
+
+    /// Javascript mostrar password en input
+    $(document).ready(function () {
+        $('.showPassword2').on("click", function () {
+            var x = document.getElementById("textInput2");
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
+            }
+        });
+    });
+
+    $('input[name="openmodal"]').on('change', function (e) {
+        if (e.target.checked) {
+            $('#myModal').modal();
+        }
+    });
+
+    $('#borrarcheck').on("click", function () {
+        $(".checkbox input:checked").prop('checked', false);
+
+    });
+
+    $('#aceptarcheck').on("click", function () {
+        $("label[for='tratamiento_datos_check']").html("<div style='color: #752D67; background-color: #F6B400; height: 30px;padding: 5px;border-radius: 10px;'><i class='fa fa-check'></i> Tratamiendo de datos Aceptado</div>");
+    });
+</script>
+</body>
+</html>
+

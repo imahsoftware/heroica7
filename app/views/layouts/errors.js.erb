@@ -1,0 +1,9 @@
+$(".form-group").removeClass("has-error");
+$(".form-group > .help-block.help-block-error").remove();
+<% if object.errors.any? %>
+	<% object.errors.each do |attr, msg| %>
+		console.log(".<%= object.model_name.param_key %>_<%= attr %>")
+		$(".<%= object.model_name.param_key %>_<%= attr %>").addClass("has-error");
+		$(".<%= object.model_name.param_key %>_<%= attr %>").append("<span class='help-block help-block-error'><%= msg %></span>");
+	<% end %>
+<% end %>

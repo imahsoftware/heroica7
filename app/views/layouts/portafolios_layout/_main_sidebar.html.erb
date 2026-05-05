@@ -1,0 +1,74 @@
+
+<%
+  isadmin = is_admin
+  user = User.find(isadmin)
+  isportafolio = is_portafolio
+  issygma = is_sygma
+%>
+<aside class="main-sidebar">
+  <section class="sidebar">
+    <ul class="sidebar-menu" data-widget="tree">
+      <% if issygma %>
+        <% portafolios = Portafolio.all.where("estado = 'ACTIVO' and id != #{isportafolio}").order("nombre") %>
+        <li class="treeview" style="font-size: 12px !important;">
+          <a href="#"><i class="fa fa fa-institution"></i> <span><%= is_portafolioname  rescue nil%></span>
+            <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+          </a>
+          <ul class="treeview-menu">
+            <li>
+              <% portafolios.each do |p| %>
+                <%= link_to cambioportafolio_users_path(id: isadmin, p: p.id) do %>
+                  <span style="font-size: 12px !important; "><%= p.nombre rescue nil %></span>
+                <% end %>
+              <% end %>
+            </li>
+          </ul>
+        </li>
+      <% elsif user.usersportafolios.any? %>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+            <%= user.portafolio.nombre rescue nil %> <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu" role="menu">
+            <li>
+              <% user.usersportafolios.where(["portafolio_id != #{isportafolio}"]).each do |s| %>
+                <%= link_to cambioportafolio_users_path(id: isadmin, p: s.portafolio.id) do %>
+                  <span style="font-size: 12px !important; "><%= s.portafolio.nombre rescue nil %></span>
+                <% end %>
+              <% end %>
+            </li>
+          </ul>
+        </li>
+      <% end %>
+    </ul>
+    <%#= render 'personas/buscadorrapido' %>
+    <ul class="sidebar-menu" data-widget="tree">
+      <% if is_sygma %>
+        <li>
+          <%= link_to portafolios_path do %>
+            <i class="fa fa-arrow-left text-success"></i> Regresar a portafolios
+          <% end %>
+        </li>
+      <% else %>
+        <li>
+          <%= link_to root_path do %>
+            <i class="fa fa-arrow-left text-success"></i> Regresar
+          <% end %>
+        </li>
+      <% end -%>
+      <li class="header"><%= t :menu %></li>
+      <!-- Optionally, you can add icons to the links -->
+      <% unless @portafolio.new_record? %>
+        <li class="treeview">
+        <li class="<%= active_class(edit_portafolio_path(etapa: "A", id: @portafolio.id)) %>">
+          <%= link_to edit_portafolio_path(etapa: "A", id: @portafolio.id) do %>
+            <i class="fa fa-bullseye"></i><span>Compañia</span>
+          <% end %>
+        </li>
+      <% end %>
+      </li>
+    </ul>
+  </section>
+</aside>
