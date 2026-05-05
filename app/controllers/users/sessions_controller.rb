@@ -14,8 +14,6 @@ class Users::SessionsController < Devise::SessionsController
 
   def create
     self.resource = warden.authenticate!(auth_options)
-    byebug
-    byebug
     if self.resource.activo == "S"
       sign_in(resource_name, resource, store: true)
       warden.set_user(resource, scope: resource_name, store: true)
