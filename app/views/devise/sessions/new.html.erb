@@ -1,65 +1,492 @@
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Iniciar Sesión</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
+    html, body {
+      height: 100%;
+      font-family: 'Inter', sans-serif;
+    }
 
-<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet"/>
-<link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+    /* ── Layout principal ── */
+    .login-wrapper {
+      display: flex;
+      min-height: 100vh;
+    }
 
-<!-- Navbar -->
-<!-- End Navbar -->
-<div class="page-header clear-filter" filter-color="orange">
-  <div class="page-header-image"
-       style="background-image:url('https://www.tecnicaelectromedica.com/wp-content/uploads/2019/03/Fondo-blanco-pagina-01.jpg')"></div>
-  <div class="content">
-    <div class="container">
-      <div class="col-md-4 ml-auto mr-auto">
-        <div class="card card-login card-plain">
-          <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-            <div class="card-header text-center no-border">
-              <div class="logo-container">
-                <%= image_tag "logonuevo.png", style: "width:300px;height:120px;text-align:center;" %>
-              </div>
-               <div class="input-group no-border input-lg">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" style="border:none; background-color: #666666; color: #fff; padding: 13px;">
-                      <i class="fa fa-user"></i>
-                    </span>
-                </div>
-                <%= f.text_field :username, autofocus: true, class: "form-control", placeholder: 'Usuario' %>
-              </div>
-              <div class="input-group no-border input-lg">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" style="border:none; background-color: #666666; color: #fff; padding: 13px;">
-                      <i class="now-ui-icons text_caps-small"></i>
-                    </span>
-                </div>
-                <%= f.password_field :password, autocomplete: "off", class: "form-control", placeholder: 'Contraseña' %>
-              </div>
-            </div>
-          
-           <div class="card-body">
-              <div class="card-footer text-center">
-              <%= f.submit "Iniciar Sesion", class: "btn btn-primary btn-round btn-lg btn-block" %>
-              <div class="pull-right">
-            </div>
-            
-                <h6>
-                  <a href="#pablo" class="link" style="color: red; font-size: 12px;">IMAH</a>
-                </h6>
-              </div>
-            </div>
-          <% end %>
+    /* ── Panel izquierdo: logo ── */
+    .login-left {
+      flex: 1;
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem;
+      position: relative;
+      overflow: hidden;
+    }
 
-        </div>
-      </div>
+    /* Círculos decorativos sutiles en el panel izquierdo */
+    .login-left::before {
+      content: '';
+      position: absolute;
+      width: 420px;
+      height: 420px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(180, 20, 20, 0.06) 0%, transparent 70%);
+      top: -100px;
+      left: -100px;
+      pointer-events: none;
+    }
+
+    .login-left::after {
+      content: '';
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(180, 20, 20, 0.05) 0%, transparent 70%);
+      bottom: -80px;
+      right: -60px;
+      pointer-events: none;
+    }
+
+    .logo-wrapper {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+    }
+
+    .logo-wrapper img {
+      max-width: 320px;
+      width: 100%;
+      height: auto;
+      filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.10));
+      transition: transform 0.4s ease;
+    }
+
+    .logo-wrapper img:hover {
+      transform: scale(1.03);
+    }
+
+    .logo-tagline {
+      margin-top: 1.5rem;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #94a3b8;
+    }
+
+    /* Divisor vertical */
+    .login-divider {
+      width: 1px;
+      background: linear-gradient(to bottom, transparent, #e2e8f0 20%, #e2e8f0 80%, transparent);
+      flex-shrink: 0;
+    }
+
+    /* ── Panel derecho: formulario ── */
+    .login-right {
+      flex: 1;
+      background: #f1f5f9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Acento de color en esquina superior derecha */
+    .login-right::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 200px;
+      height: 200px;
+      background: linear-gradient(135deg, rgba(180, 20, 20, 0.12), transparent);
+      border-radius: 0 0 0 100%;
+      pointer-events: none;
+    }
+
+    .login-right::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 160px;
+      height: 160px;
+      background: linear-gradient(315deg, rgba(180, 20, 20, 0.08), transparent);
+      border-radius: 0 100% 0 0;
+      pointer-events: none;
+    }
+
+    /* Tarjeta del formulario */
+    .login-card {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 2.8rem 2.5rem;
+      width: 100%;
+      max-width: 420px;
+      box-shadow:
+        0 4px 6px -1px rgba(0, 0, 0, 0.07),
+        0 20px 60px -10px rgba(185, 28, 28, 0.12);
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Barra de acento superior de la tarjeta */
+    .login-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 2rem;
+      right: 2rem;
+      height: 3px;
+      background: linear-gradient(90deg, #b91c1c, #ef4444, #b91c1c);
+      border-radius: 0 0 4px 4px;
+    }
+
+    .card-header-text {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .card-header-text h2 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 0.4rem;
+    }
+
+    .card-header-text p {
+      font-size: 0.875rem;
+      color: #64748b;
+      font-weight: 400;
+    }
+
+    /* Grupos de inputs */
+    .form-group {
+      margin-bottom: 1.25rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #374151;
+      margin-bottom: 0.45rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .input-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .input-icon {
+      position: absolute;
+      left: 1rem;
+      color: #94a3b8;
+      font-size: 0.95rem;
+      pointer-events: none;
+      transition: color 0.2s;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 0.75rem 1rem 0.75rem 2.75rem;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      font-family: 'Inter', sans-serif;
+      color: #1e293b;
+      background: #f8fafc;
+      transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+      outline: none;
+    }
+
+    .form-control::placeholder {
+      color: #cbd5e1;
+    }
+
+    .form-control:focus {
+      border-color: #ef4444;
+      background: #ffffff;
+      box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.12);
+    }
+
+    .form-control:focus + .input-icon,
+    .input-wrapper:focus-within .input-icon {
+      color: #ef4444;
+    }
+
+    /* Toggle contraseña */
+    .toggle-password {
+      position: absolute;
+      right: 1rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #94a3b8;
+      font-size: 0.9rem;
+      padding: 0;
+      transition: color 0.2s;
+    }
+
+    .toggle-password:hover {
+      color: #ef4444;
+    }
+
+    /* Botón principal */
+    .btn-login {
+      width: 100%;
+      padding: 0.85rem;
+      background: linear-gradient(135deg, #b91c1c 0%, #ef4444 100%);
+      color: #ffffff;
+      border: none;
+      border-radius: 10px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      font-family: 'Inter', sans-serif;
+      letter-spacing: 0.03em;
+      cursor: pointer;
+      margin-top: 0.5rem;
+      transition: transform 0.15s ease, box-shadow 0.2s ease, opacity 0.2s;
+      box-shadow: 0 4px 14px rgba(185, 28, 28, 0.35);
+    }
+
+    .btn-login:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(185, 28, 28, 0.45);
+      opacity: 0.95;
+    }
+
+    .btn-login:active {
+      transform: translateY(0);
+      box-shadow: 0 2px 8px rgba(185, 28, 28, 0.3);
+    }
+
+    /* Links de ayuda */
+    .login-links {
+      text-align: center;
+      margin-top: 1.5rem;
+    }
+
+    .login-links a {
+      font-size: 0.8rem;
+      color: #64748b;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .login-links a:hover {
+      color: #ef4444;
+    }
+
+    /* Mensajes de error/alerta de Devise */
+    .alert-box {
+      border-radius: 10px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 1.25rem;
+      font-size: 0.82rem;
+      font-weight: 500;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+
+    .alert-danger {
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      color: #dc2626;
+    }
+
+    .alert-notice {
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      color: #16a34a;
+    }
+
+    /* Footer de la tarjeta */
+    .card-footer-text {
+      text-align: center;
+      margin-top: 1.75rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid #f1f5f9;
+      font-size: 0.75rem;
+      color: #94a3b8;
+      letter-spacing: 0.05em;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      .login-wrapper {
+        flex-direction: column;
+      }
+
+      .login-left {
+        padding: 2.5rem 2rem 2rem;
+        flex: none;
+        min-height: 220px;
+      }
+
+      .logo-wrapper img {
+        max-width: 200px;
+      }
+
+      .logo-tagline {
+        font-size: 0.75rem;
+      }
+
+      .login-divider {
+        width: 100%;
+        height: 1px;
+        background: linear-gradient(to right, transparent, #e2e8f0 20%, #e2e8f0 80%, transparent);
+      }
+
+      .login-right {
+        flex: none;
+        padding: 2rem 1.25rem 3rem;
+      }
+
+      .login-card {
+        padding: 2rem 1.5rem;
+        box-shadow: none;
+        background: transparent;
+      }
+
+      .login-card::before {
+        display: none;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .login-card {
+        padding: 1.5rem 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="login-wrapper">
+
+  <!-- ══ Panel izquierdo ══ -->
+  <div class="login-left">
+    <div class="logo-wrapper">
+      <%= image_tag "logo_heroica.png", alt: "Logo Heroica", title: "Sistema Institucional" %>
+      <p class="logo-tagline">Sistema Institucional</p>
     </div>
   </div>
+
+  <!-- Divisor vertical -->
+  <div class="login-divider"></div>
+
+  <!-- ══ Panel derecho ══ -->
+  <div class="login-right">
+    <div class="login-card">
+
+      <!-- Encabezado -->
+      <div class="card-header-text">
+        <h2>Bienvenido</h2>
+        <p>Ingresa tus credenciales para continuar</p>
+      </div>
+
+      <!-- Alertas de Devise -->
+      <% if flash[:alert].present? %>
+        <div class="alert-box alert-danger">
+          <i class="fa-solid fa-circle-exclamation"></i>
+          <span><%= flash[:alert] %></span>
+        </div>
+      <% end %>
+
+      <% if flash[:notice].present? %>
+        <div class="alert-box alert-notice">
+          <i class="fa-solid fa-circle-check"></i>
+          <span><%= flash[:notice] %></span>
+        </div>
+      <% end %>
+
+      <!-- Formulario -->
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+
+        <div class="form-group">
+          <label for="user_username">Usuario</label>
+          <div class="input-wrapper">
+            <%= f.text_field :username,
+                autofocus: true,
+                class: "form-control",
+                placeholder: "Ingresa tu usuario",
+                id: "user_username",
+                autocomplete: "username" %>
+            <i class="fa-solid fa-user input-icon"></i>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="user_password">Contraseña</label>
+          <div class="input-wrapper">
+            <%= f.password_field :password,
+                autocomplete: "current-password",
+                class: "form-control",
+                placeholder: "••••••••",
+                id: "user_password" %>
+            <i class="fa-solid fa-lock input-icon"></i>
+            <button type="button" class="toggle-password" onclick="togglePassword()" aria-label="Mostrar contraseña">
+              <i class="fa-solid fa-eye" id="toggle-icon"></i>
+            </button>
+          </div>
+        </div>
+
+        <%= f.submit "Iniciar Sesión", class: "btn-login" %>
+
+      <% end %>
+
+      <!-- Links -->
+      <div class="login-links">
+        <% if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+          <%= link_to "¿Olvidaste tu contraseña?", new_password_path(resource_name) %>
+        <% end %>
+      </div>
+
+      <!-- Footer -->
+      <div class="card-footer-text">
+        IMAH &nbsp;·&nbsp; <%= Time.now.year %>
+      </div>
+
+    </div>
+  </div>
+
 </div>
-<!--   Core JS Files   -->
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 
+<script>
+  function togglePassword() {
+    const input = document.getElementById('user_password');
+    const icon  = document.getElementById('toggle-icon');
+    if (input.type === 'password') {
+      input.type = 'text';
+      icon.classList.replace('fa-eye', 'fa-eye-slash');
+    } else {
+      input.type = 'password';
+      icon.classList.replace('fa-eye-slash', 'fa-eye');
+    }
+  }
+</script>
 
-
-
+</body>
+</html>

@@ -8,13 +8,13 @@
 <header class="main-header">
   <% permit = Usersmodulo.where(user_id: isadmin, modulo_id: 1).exists? %>
   <%= link_to root_path, class: 'logo' do %>
-    <span class="logo-mini"><%= image_tag 'logo.png', alt: 'Logo Imah', width: '80%' %></span>
-    <span class="logo-lg" style="font-size: 18px; margin-top: -4px;"><b>IMAH |&nbsp;<%= is_portafolioname rescue nil %></b></span>
+    <span class="logo-mini"><%= image_tag 'logo_heroica.png', alt: 'Logo', style: 'height: 30px; width: auto; object-fit: contain;' %></span>
+    <span class="logo-lg"><%= image_tag 'logo_heroica.png', alt: 'Logo Heroica', style: 'height: 34px; width: auto; object-fit: contain; max-width: 160px;' %></span>
   <% end %>
 
-  <!-- Header Navbar: style can be found in header.less -->
+  <!-- Header Navbar -->
   <nav class="navbar navbar-static-top">
-    <div class="navbar-header" style="background-color: #394959;">
+    <div class="navbar-header" style="background-color: #b91c1c;">
       <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
         <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
@@ -25,7 +25,7 @@
         <i class="fa fa-gears"></i>
       </button>
     </div>
-    <div class="navbar-collapse collapse" id="navbar-collapse" aria-expanded="false" style="background-color: #394959;">
+    <div class="navbar-collapse collapse" id="navbar-collapse" aria-expanded="false" style="background-color: #b91c1c;">
       <!-- Navbar Right Menu -->
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
@@ -176,28 +176,104 @@
 
 
 <style>
-    .main-header .logo {
-        background-color: #fff !important;
-        color: #C9392B !important;
-        height: 43px !important;
-    }
+  /* ── Logo area ── */
+  .main-header .logo {
+    background-color: #ffffff !important;
+    color: #b91c1c !important;
+    height: 50px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 6px 12px !important;
+    border-bottom: 3px solid #ef4444 !important;
+  }
 
-    .navbar-nav > li > a {
-        padding-top: 10px !important;
-        padding-bottom: 10px !important;
-        height: 47px;
-    }
+  /* AdminLTE: logo-mini solo visible cuando sidebar colapsado, logo-lg cuando expandido */
+  .main-header .logo .logo-mini {
+    display: none;
+  }
+  .main-header .logo .logo-lg {
+    display: block;
+  }
+  .sidebar-collapse .main-header .logo .logo-mini {
+    display: block !important;
+  }
+  .sidebar-collapse .main-header .logo .logo-lg {
+    display: none !important;
+  }
 
-    .main-header .navbar {
-        -webkit-transition: margin-left .3s ease-in-out !important;
-        -o-transition: margin-left .3s ease-in-out !important;
-        transition: margin-left .3s ease-in-out !important;
-        margin-bottom: 0 !important;
-        border: none !important;
-        min-height: 43px !important;
-        border-radius: 0 !important;
-    }
+  /* ── Navbar ── */
+  .main-header .navbar {
+    background-color: #b91c1c !important;
+    -webkit-transition: margin-left .3s ease-in-out !important;
+    -o-transition: margin-left .3s ease-in-out !important;
+    transition: margin-left .3s ease-in-out !important;
+    margin-bottom: 0 !important;
+    border: none !important;
+    min-height: 50px !important;
+    border-radius: 0 !important;
+    box-shadow: 0 2px 8px rgba(185, 28, 28, 0.35) !important;
+  }
 
+  .navbar-nav > li > a {
+    padding-top: 14px !important;
+    padding-bottom: 14px !important;
+    height: 50px;
+    color: #ffffff !important;
+    opacity: 0.9;
+    transition: opacity 0.2s, background-color 0.2s;
+  }
+
+  .navbar-nav > li > a:hover {
+    opacity: 1;
+    background-color: rgba(255,255,255,0.12) !important;
+  }
+
+  /* Íconos del navbar en blanco */
+  .main-header .navbar .nav > li > a > .fa,
+  .main-header .navbar .nav > li > a > .glyphicon {
+    color: #ffffff !important;
+  }
+
+  /* Username en navbar */
+  .main-header .navbar .nav > li.user > a > span {
+    color: #ffffff !important;
+    font-weight: 500;
+  }
+
+  /* Avatar borde blanco */
+  .main-header .navbar .user-image {
+    border: 2px solid rgba(255,255,255,0.5) !important;
+  }
+
+  /* Dropdown del usuario */
+  .main-header .navbar .user-menu .dropdown-menu {
+    border-top: 3px solid #ef4444 !important;
+  }
+
+  .main-header .navbar .user-menu .dropdown-menu .user-header {
+    background: linear-gradient(135deg, #b91c1c, #ef4444) !important;
+  }
+
+  /* Label badge */
+  .main-header .navbar .label-danger {
+    background-color: #ffffff !important;
+    color: #b91c1c !important;
+    font-weight: 700;
+  }
+
+  /* Sidebar toggle icon bars en blanco */
+  .main-header .sidebar-toggle .icon-bar {
+    background-color: #ffffff !important;
+  }
+
+  .main-header .sidebar-toggle {
+    color: #ffffff !important;
+  }
+
+  .main-header .sidebar-toggle:hover {
+    background-color: rgba(255,255,255,0.12) !important;
+  }
 </style>
 
 

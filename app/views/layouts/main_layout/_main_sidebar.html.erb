@@ -6,9 +6,16 @@
   isimah = is_sygma
 %>
 <aside class="main-sidebar">
-  <!-- sidebar: style can be found in sidebar.less -->
   <section class="sidebar">
-    <div align="center"><%= image_tag 'logonuevo.png', class: 'user-image', size: '200x100' %></div>
+
+    <!-- Logo en sidebar -->
+    <div class="sidebar-logo-wrapper">
+      <%= link_to root_path do %>
+        <%= image_tag 'logo_heroica.png', alt: 'Logo Heroica', class: 'sidebar-logo-img' %>
+      <% end %>
+      <div class="sidebar-logo-divider"></div>
+    </div>
+
     <!-- Sidebar Menu -->
     <ul class="sidebar-menu" data-widget="tree">
       <li class="header"><%= t :menu_principal %></li>
@@ -82,3 +89,36 @@
     </ul>
   </section>
 </aside>
+
+<style>
+  /* ── Sidebar base ── */
+  /* Se respeta el skin original de AdminLTE (skin-blue-light) */
+
+  /* ── Logo en sidebar ── */
+  .sidebar-logo-wrapper {
+    padding: 14px 16px 0;
+    text-align: center;
+    background-color: #ffffff;
+    border-bottom: 2px solid #ef4444;
+  }
+
+  .sidebar-logo-wrapper a {
+    display: inline-block;
+  }
+
+  .sidebar-logo-img {
+    max-width: 170px;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    transition: opacity 0.2s;
+  }
+
+  .sidebar-logo-img:hover {
+    opacity: 0.85;
+  }
+
+  .sidebar-logo-divider {
+    display: none;
+  }
+</style>
