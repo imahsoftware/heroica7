@@ -112,7 +112,6 @@ Rails.application.routes.draw do
 
       resources :usersmodulos,    only: [:index, :show, :new, :edit, :create, :update, :destroy]
       resources :userspermisos,   only: [:show, :new, :edit, :create, :update, :destroy]
-      resources :usersportafolios, only: [:show, :new, :edit, :create, :update, :destroy]
       resources :usersreportes,   only: [:show, :new, :edit, :create, :update, :destroy]
       resources :usersimagenes,   only: [:index, :show, :new, :edit, :create, :update, :destroy]
     end

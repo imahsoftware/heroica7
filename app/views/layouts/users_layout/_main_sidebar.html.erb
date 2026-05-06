@@ -26,21 +26,6 @@
             </li>
           </ul>
         </li>
-      <% elsif user.usersportafolios.any? %>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
-            <%= user.portafolio.nombre rescue nil %> <span class="caret"></span>
-          </a>
-          <ul class="dropdown-menu" role="menu">
-            <li>
-              <% user.usersportafolios.where(["portafolio_id != #{isportafolio}"]).each do |s| %>
-                <%= link_to cambioportafolio_users_path(id: isadmin, p: s.portafolio.id) do %>
-                  <span style="font-size: 12px !important; "><%= s.portafolio.nombre rescue nil %></span>
-                <% end %>
-              <% end %>
-            </li>
-          </ul>
-        </li>
       <% end %>
     </ul>
 

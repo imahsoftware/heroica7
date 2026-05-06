@@ -202,9 +202,15 @@ class UsersController < ApplicationController
       @users = @q.result.paginate(:page => params[:page], :per_page => 10)
     else
       isportafolio = is_portafolio
+      if isportafolio.blank?
+        flash[:warning] = 'No se pudo determinar el portafolio del usuario.'
+        redirect_to root_path and return
+      end
       @blockedusers = User.where(failed_attempts: 3, portafolio_id: isportafolio)
       @q = User.ransack(params[:q])
-      @users = @q.result.paginate(:page => params[:page], :per_page => 10).where(["portafolio_id= #{isportafolio} and (geintac = 'N' or geintac is null)"])
+      @users = @q.result
+                 .where("portafolio_id = ? AND (geintac = 'N' OR geintac IS NULL)", isportafolio)
+                 .paginate(:page => params[:page], :per_page => 10)
     end
   end
 
@@ -381,9 +387,6 @@ class UsersController < ApplicationController
     else
       @usersmodulo = Usersmodulo.new
       @userspermiso = Userspermiso.new
-      @usersportafolio = Usersportafolio.new
-      #@usersfecha = Usersfecha.new
-      #@usersimagen = Usersimagen.new
       render "user_form"
     end
   end

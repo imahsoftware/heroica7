@@ -1245,7 +1245,10 @@ class ApplicationController < ActionController::Base
       rescue StandardError
         nil
       end
-      if Usersmodulo.where(user_id: is_admin, modulo_id: mod.id).exists?
+      if mod.nil?
+        flash[:warning] = 'Usted no tiene Acceso a este modulo'
+        redirect_to root_path
+      elsif Usersmodulo.where(user_id: is_admin, modulo_id: mod.id).exists?
         true
       else
         flash[:warning] = 'Usted no tiene Acceso a este modulo'

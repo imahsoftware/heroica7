@@ -66,4 +66,7 @@ Rails.application.configure do
   # routes, locales, etc. This feature depends on the listen gem.
   # config.file_watcher = ActiveSupport::EventedFileUpdateChecker
   config.i18n.available_locales = :es
+
+  # Permitir acceso a web console desde redes internas (Docker, VM)
+  config.web_console.whitelisted_ips = ['172.31.0.0/16', '192.168.0.0/16', '10.0.0.0/8']
 end

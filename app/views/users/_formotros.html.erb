@@ -1,101 +1,202 @@
 <%= simple_form_for(@user) do |f| %>
   <div class="row">
     <div class="col-md-12">
-      <div class="box box-primary">
-        <div class="box-header">
-          <legend>
-            <% if @user.new_record? %>
-              <%= link_to users_path, data: { toggle: 'tooltip', :"data-turbolinks" => true  }, title: 'Regresar a usuarios' do %>
-        				<i class="fa fa-arrow-left fa-fw text-success" aria-hidden="true"></i>
-        			<% end %>
-            <% end %>
-            <%= @user.new_record? ? 'Agregar nuevo' : 'Editar' %> Usuario
-          </legend>
-          <div class="box-tools pull-right">
-            <%= link_to new_user_path, class: 'btn btn-sm btn-success' do %>
-              <i class="fa fa-plus-square"> </i> <span>Nuevo usuario</span>
-            <% end %>
-          </div>
-        </div><!-- /.box-header -->
-        <div class="box-body">
-          <div class="row">
-            <div class="col-md-2"><%= f.input :identificacion, label: 'Identificación' %></div>
-            <div class="col-md-5"><%= f.input :nombre, input_html: {onChange: 'javascript:this.value=this.value.toUpperCase();', class: 'input_uppercase'} %></div>
-            <div class="col-md-1"><%= f.input :activo, as: :select, collection: select_sinocorto, input_html: {class: 'select2'}, label: "Activo?" %></div>
-            <div class="col-md-4"><%= f.input :email %></div>
-          </div>
-          <div class="row">
-            <div class="col-md-4"><%= f.input :username, label: 'Usuario' %></div>
-            <div class="col-md-2"><%= f.input :password, label: 'Clave' %></div>
-            <div class="col-md-2"><%= f.input :password_confirmation, label: 'Confirmar Clave' %></div>
-            <div class="col-md-4"><%= f.input :portafolio_id, collection: Portafolio.where("id = 4").order(:nombre).collect {|p| [ p.nombre, p.id ] }, input_html: { class: 'select2' }, as: :select, label: 'Compañia', wrapper: false, include_blank: true%></div>
-          </div>
-          <div class="row">
-            <div class="col-md-2"><%= f.input :tipoconsulta, as: :select, collection: select_tipoconsulta, input_html: {data: {width: '100%'}, class: 'select2', include_blank: true}, label: 'Tipo Consulta' %></div>
-            <div class="col-md-2"><%= f.input :celular %></div>
-            <div class="col-md-2"><%= f.input :tipocliente, as: :select, collection: select_oficina, input_html: {data: {width: '100%'}, class: 'select2', include_blank: true}, label: 'Oficina' %></div>
-            <div class="col-md-3"><%= f.input :extension, label: 'Nro. Licencia' %></div>
-          </div>
-          <legend>Datos Nomina</legend>
-          <div class="row">
-            <div class="col-md-2"><%= f.input :instructor, as: :select, collection: select_sino, input_html: {data: {width: '100%'}, class: 'select2', include_blank: true}, label: 'Instructor' %></div>
-            <div class="col-md-4"><%= f.input :cargo, input_html: {onChange: 'javascript:this.value=this.value.toUpperCase();', class: 'input_uppercase'} %></div>
-            <div class="col-md-2"><%= f.input :salario, as: :moneda %></div>
-            <div class="col-md-2"><%= f.input :nro_cuenta %></div>
-            <div class="col-md-2"><%= f.input :banco, input_html: {onChange: 'javascript:this.value=this.value.toUpperCase();', class: 'input_uppercase'} %></div>
-          </div>
-          <div class="row">
-            <div class="col-md-3"><%= f.input :salud, input_html: {onChange: 'javascript:this.value=this.value.toUpperCase();', class: 'input_uppercase'} %></div>
-            <div class="col-md-3"><%= f.input :pension, input_html: {onChange: 'javascript:this.value=this.value.toUpperCase();', class: 'input_uppercase'} %></div>
-          </div>
+      <div class="box" style="border-top: none; border-radius: 6px; box-shadow: 0 2px 12px rgba(0,0,0,0.08);">
 
-          <div class="row"><div class="col-md-2"><%= f.input :avatar, as: :file %></div></div>
+        <!-- Header -->
+        <div class="box-form-header">
+          <span class="box-title">
+            <i class="fa fa-<%= @user.new_record? ? 'user-plus' : 'user-edit' %>"></i>
+            <%= @user.new_record? ? 'Nuevo Usuario' : "Editando: #{@user.nombre}" %>
+          </span>
+          <div class="pull-right" style="margin-top: -2px;">
+            <%= link_to users_path, class: 'btn btn-xs btn-default', title: 'Volver al listado' do %>
+              <i class="fa fa-arrow-left"></i> Volver
+            <% end %>
+            <%= link_to new_user_path, class: 'btn btn-xs btn-success', title: 'Nuevo usuario' do %>
+              <i class="fa fa-plus"></i> Nuevo
+            <% end %>
+          </div>
         </div>
+
+        <!-- Tabs -->
+        <div class="box-body" style="padding-top: 0;">
+          <ul class="nav nav-tabs nav-tabs-form" style="margin-bottom: 0; margin-top: 12px;">
+            <li class="active"><a href="#tab-datos-o" data-toggle="tab"><i class="fa fa-id-card"></i> Datos Personales</a></li>
+            <li><a href="#tab-acceso-o" data-toggle="tab"><i class="fa fa-lock"></i> Acceso</a></li>
+            <li><a href="#tab-foto-o" data-toggle="tab"><i class="fa fa-camera"></i> Foto</a></li>
+          </ul>
+
+          <div class="tab-content" style="padding: 16px 4px 8px;">
+
+            <!-- ── Tab: Datos Personales ── -->
+            <div class="tab-pane active" id="tab-datos-o">
+              <p class="section-label">Identificación y contacto</p>
+              <div class="row">
+                <div class="col-md-2">
+                  <%= f.input :identificacion, label: 'Identificación',
+                      input_html: { class: 'form-control' } %>
+                </div>
+                <div class="col-md-4">
+                  <%= f.input :nombre, label: 'Nombre completo',
+                      input_html: { onChange: 'this.value=this.value.toUpperCase()', class: 'form-control input_uppercase' } %>
+                </div>
+                <div class="col-md-3">
+                  <%= f.input :email, label: 'Correo electrónico',
+                      input_html: { class: 'form-control' } %>
+                </div>
+                <div class="col-md-1">
+                  <%= f.input :activo, as: :select, label: 'Activo',
+                      collection: select_sinocorto,
+                      input_html: { class: 'select2 form-control' } %>
+                </div>
+                <div class="col-md-2">
+                  <%= f.input :genero, as: :select, label: 'Género',
+                      collection: [['Masculino','M'],['Femenino','F'],['Otro','O']],
+                      include_blank: 'Seleccionar',
+                      input_html: { class: 'select2 form-control' } %>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-2">
+                  <%= f.input :celular, label: 'Celular',
+                      input_html: { class: 'form-control' } %>
+                </div>
+                <div class="col-md-2">
+                  <%= f.input :telefonos, label: 'Teléfono',
+                      input_html: { class: 'form-control' } %>
+                </div>
+                <div class="col-md-3">
+                  <%= f.input :direccion, label: 'Dirección',
+                      input_html: { onChange: 'this.value=this.value.toUpperCase()', class: 'form-control input_uppercase' } %>
+                </div>
+                <div class="col-md-2">
+                  <%= f.input :fecha_nacimiento, as: :date_picker, label: 'Fecha de nacimiento',
+                      input_html: { class: 'form-control' } %>
+                </div>
+                <div class="col-md-3">
+                  <%= f.input :extension, label: 'Nro. Licencia / Extensión',
+                      input_html: { class: 'form-control' } %>
+                </div>
+              </div>
+
+              <p class="section-label">Asignación</p>
+              <div class="row">
+                <div class="col-md-3">
+                  <%= f.input :portafolio_id, as: :select, label: 'Compañía',
+                      collection: Portafolio.order(:nombre).collect { |p| [p.nombre, p.id] },
+                      include_blank: 'Seleccionar',
+                      input_html: { class: 'select2 form-control' } %>
+                </div>
+                <div class="col-md-2">
+                  <%= f.input :tipoconsulta, as: :select, label: 'Tipo Consulta',
+                      collection: select_tipoconsulta,
+                      include_blank: 'Seleccionar',
+                      input_html: { class: 'select2 form-control' } %>
+                </div>
+                <div class="col-md-2">
+                  <%= f.input :tipoconsulta2, as: :select, label: 'Tipo Consulta 2',
+                      collection: select_tipoconsulta,
+                      include_blank: 'Seleccionar',
+                      input_html: { class: 'select2 form-control' } %>
+                </div>
+                <div class="col-md-3">
+                  <%= f.input :observaciones, label: 'Observaciones',
+                      input_html: { class: 'form-control' } %>
+                </div>
+              </div>
+            </div>
+
+            <!-- ── Tab: Acceso ── -->
+            <div class="tab-pane" id="tab-acceso-o">
+              <p class="section-label">Credenciales</p>
+              <div class="row">
+                <div class="col-md-3">
+                  <%= f.input :username, label: 'Usuario',
+                      input_html: { class: 'form-control', autocomplete: 'off' } %>
+                </div>
+                <div class="col-md-3">
+                  <%= f.input :password, label: 'Contraseña',
+                      input_html: { class: 'form-control', autocomplete: 'new-password' },
+                      hint: @user.new_record? ? nil : 'Dejar en blanco para no cambiar' %>
+                </div>
+                <div class="col-md-3">
+                  <%= f.input :password_confirmation, label: 'Confirmar Contraseña',
+                      input_html: { class: 'form-control', autocomplete: 'new-password' } %>
+                </div>
+              </div>
+            </div>
+
+            <!-- ── Tab: Foto ── -->
+            <div class="tab-pane" id="tab-foto-o">
+              <p class="section-label">Foto de perfil</p>
+              <div class="row">
+                <div class="col-md-3 text-center">
+                  <% if @user.avatar_file_name.present? %>
+                    <%= image_tag @user.avatar.url(:medium), class: 'avatar-preview' %>
+                  <% else %>
+                    <div class="avatar-placeholder">
+                      <i class="fa fa-user"></i>
+                    </div>
+                  <% end %>
+                  <small class="text-muted">Foto actual</small>
+                </div>
+                <div class="col-md-5">
+                  <%= f.input :avatar, as: :file, label: 'Seleccionar nueva foto',
+                      hint: 'Formatos permitidos: JPG, PNG, GIF. Tamaño recomendado: 300×300px' %>
+                </div>
+              </div>
+            </div>
+
+          </div><!-- /.tab-content -->
+        </div><!-- /.box-body -->
+
+        <!-- Footer -->
         <div class="box-footer">
-          <div class="box-tools pull-right">
-            <%= f.button :submit, 'Aceptar', class: 'btn-flat btn-danger' %>
-          </div><!-- /.box-tools -->
-        </div><!-- box-footer -->
+          <div class="pull-right">
+            <%= link_to users_path, class: 'btn btn-default', style: 'margin-right: 8px;' do %>
+              <i class="fa fa-times"></i> Cancelar
+            <% end %>
+            <%= f.button :submit, class: 'btn-guardar' do %>
+              <i class="fa fa-save"></i> Guardar cambios
+            <% end %>
+          </div>
+        </div>
+
       </div><!-- /.box -->
     </div>
   </div>
 <% end %>
+
+<!-- ── Sección Portafolios / Perfiles (solo en edición) ── -->
 <% unless @user.new_record? %>
-  <div class="box box-primary">
-    <div class="box-header">
-      <legend>Portafolios asignados - Cargos</legend>
+  <div class="box" style="border-top: 3px solid #b91c1c; border-radius: 6px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); margin-top: 16px;">
+    <div class="box-header" style="border-bottom: 1px solid #f1f5f9;">
+      <h3 class="box-title" style="font-size: 13px; font-weight: 600; color: #374151;">
+        <i class="fa fa-briefcase" style="color: #b91c1c; margin-right: 6px;"></i>
+        Perfiles asignados
+      </h3>
     </div>
     <div class="box-body">
-      <%# if @clientes %>
-          <%# @clientes.each do |c|%>
-            <!--<div class="text-left"><%#=Cliente.find(c.cliente).nombre rescue nil %></div>-->
-            <!--<div class="text-center"><%#=c.cantidad%></div>-->
-          <%#   end %>
-      <%# end %>
-      <% if @user.portafolio_id.to_s != ""%>
-        <% if @portafolioscargos.nil? == false %>
-          <div class="btn-group">
-            <% @portafolioscargos.each do |c|%>
-              <% if @user.portafolioscargo_id.to_s != "" %>
-                <% if c.id == @user.portafolioscargo.id %>
-                  <%= link_to cambiarperfil_users_path(id: @user.id, portafolioscargo_id: c.id), data: { toggle: 'tooltip', :"data-turbolinks" => true  }, title: 'Asignado', disabled: true do %>
-                    <button class="btn btn-sm btn-primary disabled"><%= c.descripcion %></button>
-                  <% end %>
-                <% else %>
-                  <%= link_to cambiarperfil_users_path(id: @user.id, portafolioscargo_id: c.id), data: { toggle: 'tooltip', :"data-turbolinks" => true , confirm: "Seguro que desea asignar este perfil al usuario #{@user.nombre}?" }, title: 'Asignar' do %>
-                    <button class="btn btn-sm btn-primary"><%= c.descripcion %></button>
-                  <% end %>
-                <% end %>
-              <% else %>
-                <%= link_to cambiarperfil_users_path(id: @user.id, portafolioscargo_id: c.id), data: { toggle: 'tooltip', :"data-turbolinks" => true , confirm: "Seguro que desea asignar este perfil al usuario #{@user.nombre}?" }, title: 'Asignar' do %>
-                  <button class="btn btn-sm btn-primary"><%= c.descripcion %></button>
-                <% end %>
-              <% end %>
+      <% if @user.portafolio_id.present? && @portafolioscargos.present? %>
+        <div style="display: flex; flex-wrap: wrap; gap: 4px;">
+          <% @portafolioscargos.each do |c| %>
+            <% es_activo = @user.portafolioscargo_id.present? && c.id == @user.portafolioscargo_id %>
+            <%= link_to cambiarperfil_users_path(id: @user.id, portafolioscargo_id: c.id),
+                data: { confirm: es_activo ? nil : "¿Asignar el perfil '#{c.descripcion}' a #{@user.nombre}?" },
+                title: es_activo ? 'Perfil actual' : 'Asignar perfil' do %>
+              <button type="button" class="btn btn-sm perfil-btn <%= es_activo ? 'activo' : 'btn-default' %>">
+                <i class="fa fa-<%= es_activo ? 'check-circle' : 'circle-o' %>"></i>
+                <%= c.descripcion %>
+              </button>
             <% end %>
-          </div>
-        <% end %>
+          <% end %>
+        </div>
+      <% else %>
+        <p class="text-muted" style="font-size: 12px; margin: 0;">
+          <i class="fa fa-info-circle"></i> No hay perfiles disponibles para este portafolio.
+        </p>
       <% end %>
     </div>
   </div>
 <% end %>
-

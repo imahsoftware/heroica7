@@ -270,3 +270,431 @@ th.rotate > div > span {
   -o-transition: opacity 0.1s ease-in;
   transition: opacity 0.1s ease-in;
 }
+
+
+// ============================================================
+//  VARIABLES DE COLOR PRINCIPAL
+// ============================================================
+$red-dark:   #b91c1c;
+$red-main:   #ef4444;
+$red-light:  #fee2e2;
+$red-border: #fecaca;
+
+// ============================================================
+//  COMPONENTES GLOBALES — HEADER DE BOX (rojo)
+// ============================================================
+.box-form-header {
+  background: linear-gradient(135deg, $red-dark 0%, $red-main 100%);
+  border-radius: 4px 4px 0 0;
+  padding: 12px 16px;
+
+  .box-title {
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 600;
+    i { margin-right: 8px; }
+  }
+}
+
+// Box index con cabecera roja (usuarios, listados)
+.box-usuarios {
+  border-top: none;
+  border-radius: 6px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+
+  .box-header {
+    background: linear-gradient(135deg, $red-dark 0%, $red-main 100%);
+    border-radius: 4px 4px 0 0;
+    padding: 12px 16px;
+
+    .box-title {
+      color: #ffffff;
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      i { margin-right: 8px; opacity: 0.9; }
+    }
+  }
+}
+
+.users-count-badge {
+  display: inline-block;
+  background: rgba(255,255,255,0.25);
+  color: #ffffff;
+  border-radius: 20px;
+  padding: 2px 10px;
+  font-size: 11px;
+  font-weight: 600;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+
+// ============================================================
+//  TABS DE FORMULARIOS
+// ============================================================
+.nav-tabs-form {
+  > li > a {
+    font-size: 12px;
+    font-weight: 500;
+    color: #64748b;
+    border-radius: 4px 4px 0 0;
+    &:hover { color: $red-dark; background: #fff5f5; }
+  }
+
+  > li.active > a,
+  > li.active > a:focus,
+  > li.active > a:hover {
+    color: $red-dark;
+    border-top: 2px solid $red-dark;
+    font-weight: 600;
+  }
+}
+
+// ============================================================
+//  SECTION LABEL (separador de secciones dentro de forms)
+// ============================================================
+.section-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #94a3b8;
+  border-bottom: 1px solid #f1f5f9;
+  padding-bottom: 6px;
+  margin: 16px 0 12px;
+
+  &:first-child { margin-top: 4px; }
+}
+
+// ============================================================
+//  AVATAR EN FORMULARIOS
+// ============================================================
+.avatar-preview {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #e2e8f0;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.avatar-placeholder {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: #f1f5f9;
+  border: 3px solid #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
+
+  i { font-size: 2rem; color: #cbd5e1; }
+}
+
+// ============================================================
+//  BOTÓN GUARDAR PRINCIPAL
+// ============================================================
+.btn-guardar {
+  background: linear-gradient(135deg, $red-dark, $red-main);
+  color: #fff;
+  border: none;
+  padding: 8px 24px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 13px;
+  transition: opacity 0.2s, transform 0.1s;
+  box-shadow: 0 3px 10px rgba(185,28,28,0.3);
+
+  &:hover, &:focus {
+    opacity: 0.9;
+    transform: translateY(-1px);
+    color: #fff;
+  }
+
+  &:active { transform: translateY(0); }
+}
+
+// ============================================================
+//  TABLA DE USUARIOS (index)
+// ============================================================
+.table-usuarios {
+  thead tr th {
+    background-color: $red-dark;
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    border-color: #991b1b !important;
+    vertical-align: middle;
+    white-space: nowrap;
+  }
+
+  tbody {
+    tr {
+      font-size: 12px;
+      transition: background-color 0.15s;
+      &:hover { background-color: #fff5f5 !important; }
+
+      &.blocked-row {
+        background-color: #fff7ed !important;
+        border-left: 3px solid #f97316;
+        &:hover { background-color: #ffedd5 !important; }
+      }
+    }
+
+    td { vertical-align: middle !important; font-size: 12px; }
+  }
+}
+
+// Badge activo/inactivo
+.badge-activo {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 20px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+
+  &.si {
+    background-color: #dcfce7;
+    color: #16a34a;
+    border: 1px solid #bbf7d0;
+  }
+
+  &.no {
+    background-color: $red-light;
+    color: #dc2626;
+    border: 1px solid $red-border;
+  }
+}
+
+// Botones de acción en tablas
+.btn-accion {
+  border-radius: 4px;
+  padding: 3px 7px;
+  font-size: 11px;
+  margin: 1px;
+  border: none;
+  transition: opacity 0.15s, transform 0.1s;
+
+  &:hover { opacity: 0.85; transform: translateY(-1px); }
+}
+
+// ============================================================
+//  BARRA DE BÚSQUEDA
+// ============================================================
+.search-bar {
+  .form-control {
+    border-color: #e2e8f0;
+    border-radius: 6px 0 0 6px;
+    font-size: 13px;
+    height: 34px;
+
+    &:focus {
+      border-color: $red-main;
+      box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 4px rgba(239,68,68,.3);
+    }
+  }
+
+  .btn-search {
+    background-color: $red-dark;
+    border-color: $red-dark;
+    color: #ffffff;
+    border-radius: 0 6px 6px 0;
+    height: 34px;
+    transition: background-color 0.2s;
+
+    &:hover { background-color: #991b1b; border-color: #991b1b; }
+  }
+}
+
+// ============================================================
+//  PAGINACIÓN
+// ============================================================
+.pagination {
+  > li > a,
+  > li > span {
+    color: $red-dark;
+    border-color: #e2e8f0;
+    font-size: 12px;
+  }
+
+  > .active > a,
+  > .active > span,
+  > .active > a:hover,
+  > .active > span:hover {
+    background-color: $red-dark;
+    border-color: $red-dark;
+    color: #ffffff;
+  }
+
+  > li > a:hover {
+    background-color: $red-light;
+    color: $red-dark;
+  }
+}
+
+// ============================================================
+//  EMPTY STATE
+// ============================================================
+.empty-state {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: #94a3b8;
+
+  i {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: #e2e8f0;
+    display: block;
+  }
+
+  p { font-size: 14px; }
+}
+
+// ============================================================
+//  PERFILES / CARGOS (formotros)
+// ============================================================
+.perfil-btn {
+  border-radius: 20px;
+  font-size: 12px;
+  padding: 5px 14px;
+  margin: 3px;
+  transition: transform 0.1s;
+
+  &:hover { transform: translateY(-1px); }
+
+  &.activo {
+    background: linear-gradient(135deg, $red-dark, $red-main);
+    border-color: $red-dark;
+    color: #fff;
+  }
+}
+
+// ============================================================
+//  NAVBAR — AVATAR PLACEHOLDER
+// ============================================================
+.navbar-user-avatar-placeholder {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.2);
+  border: 2px solid rgba(255,255,255,0.5);
+  margin-right: 4px;
+  vertical-align: middle;
+  float: left;
+  margin-top: 3px;
+
+  .fa { font-size: 1rem; color: #ffffff !important; line-height: 1; }
+
+  &--lg {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.2);
+    border: 3px solid rgba(255,255,255,0.6);
+    margin: 0 auto 8px;
+    display: flex;
+    float: none;
+
+    .fa { font-size: 2.4rem; color: #ffffff !important; }
+  }
+}
+
+// ============================================================
+//  SIDEBAR — LOGO
+// ============================================================
+.sidebar-logo-wrapper {
+  padding: 14px 16px 0;
+  text-align: center;
+  background-color: #ffffff;
+  border-bottom: 2px solid $red-main;
+
+  a { display: inline-block; }
+}
+
+.sidebar-logo-img {
+  max-width: 170px;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  transition: opacity 0.2s;
+
+  &:hover { opacity: 0.85; }
+}
+
+// ============================================================
+//  NAVBAR — HEADER PRINCIPAL
+// ============================================================
+.main-header .logo {
+  background-color: #ffffff !important;
+  color: $red-dark !important;
+  height: 50px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 6px 12px !important;
+  border-bottom: 3px solid $red-main !important;
+
+  .logo-mini { display: none; }
+  .logo-lg   { display: block; }
+}
+
+.sidebar-collapse .main-header .logo {
+  .logo-mini { display: block !important; }
+  .logo-lg   { display: none !important; }
+}
+
+.main-header .navbar {
+  background-color: $red-dark !important;
+  transition: margin-left .3s ease-in-out !important;
+  margin-bottom: 0 !important;
+  border: none !important;
+  min-height: 50px !important;
+  border-radius: 0 !important;
+  box-shadow: 0 2px 8px rgba(185,28,28,0.35) !important;
+}
+
+.navbar-nav > li > a {
+  padding-top: 14px !important;
+  padding-bottom: 14px !important;
+  height: 50px;
+  color: #ffffff !important;
+  opacity: 0.9;
+  transition: opacity 0.2s, background-color 0.2s;
+
+  &:hover { opacity: 1; background-color: rgba(255,255,255,0.12) !important; }
+}
+
+.main-header .navbar {
+  .nav > li > a > .fa,
+  .nav > li > a > .glyphicon { color: #ffffff !important; }
+
+  .nav > li.user > a > span { color: #ffffff !important; font-weight: 500; }
+
+  .user-image { border: 2px solid rgba(255,255,255,0.5) !important; }
+
+  .user-menu .dropdown-menu { border-top: 3px solid $red-main !important; }
+
+  .user-menu .dropdown-menu .user-header {
+    background: linear-gradient(135deg, $red-dark, $red-main) !important;
+  }
+
+  .label-danger {
+    background-color: #ffffff !important;
+    color: $red-dark !important;
+    font-weight: 700;
+  }
+}
+
+.main-header .sidebar-toggle {
+  color: #ffffff !important;
+  .icon-bar { background-color: #ffffff !important; }
+  &:hover { background-color: rgba(255,255,255,0.12) !important; }
+}

@@ -18,24 +18,11 @@ class User < ApplicationRecord
 #    c.logged_in_timeout(1.minutes)
 #  end
   has_many :registros
-  belongs_to :persona
-  has_many :portafoliosreportes
   has_many :usersmodulos, dependent: :destroy
   has_many :userspermisos, dependent: :destroy
-  #has_many :usersproyectos, dependent: :destroy
-  has_many :usersportafolios, dependent: :destroy
-  has_many :usersfechas, dependent: :destroy
   has_many :usersimagenes, dependent: :destroy
-  has_many :usersvehiculos
   belongs_to :portafolio
-  belongs_to :portafoliossucursal
-  belongs_to :portafolioscargo
-  has_many :gruposusers
-  has_many :userssucursales
   has_many :usersreportes
-  has_many :personasevapracticas
-  has_many :placas
-  has_many :programacionesfechas
 
   has_attached_file :avatar, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/assets/user_img.png"
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
