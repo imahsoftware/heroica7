@@ -133,12 +133,24 @@
 
           <li class="dropdown user user-menu">
             <%= link_to '#', class: 'dropdown-toggle', data: {toggle: 'dropdown'} do %>
-              <%= image_tag user.avatar.url(:medium), class: 'user-image', alt: 'User Image' %>
+              <% if user.avatar.url(:medium).include?('user_img') || user.avatar_file_name.blank? %>
+                <span class="navbar-user-avatar-placeholder">
+                  <i class="fa fa-user-circle"></i>
+                </span>
+              <% else %>
+                <%= image_tag user.avatar.url(:medium), class: 'user-image', alt: 'User Image' %>
+              <% end %>
               <span class="hidden-xs"><%= user.username %></span>
             <% end %>
             <ul class="dropdown-menu">
               <li class="user-header">
-                <%= image_tag user.avatar.url(:medium), class: 'img-circle', alt: 'User Image' %>
+                <% if user.avatar.url(:medium).include?('user_img') || user.avatar_file_name.blank? %>
+                  <span class="navbar-user-avatar-placeholder navbar-user-avatar-placeholder--lg">
+                    <i class="fa fa-user-circle"></i>
+                  </span>
+                <% else %>
+                  <%= image_tag user.avatar.url(:medium), class: 'img-circle', alt: 'User Image' %>
+                <% end %>
                 <p style="font-size: 11px;">
                   <%= user.nombre %>
                 </p>
@@ -273,6 +285,45 @@
 
   .main-header .sidebar-toggle:hover {
     background-color: rgba(255,255,255,0.12) !important;
+  }
+
+  /* ── Avatar placeholder (sin imagen) ── */
+  .navbar-user-avatar-placeholder {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.2);
+    border: 2px solid rgba(255,255,255,0.5);
+    margin-right: 4px;
+    vertical-align: middle;
+    float: left;
+    margin-top: 3px;
+  }
+
+  .navbar-user-avatar-placeholder .fa {
+    font-size: 1rem;
+    color: #ffffff !important;
+    line-height: 1;
+  }
+
+  /* Versión grande en el dropdown header */
+  .navbar-user-avatar-placeholder--lg {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.2);
+    border: 3px solid rgba(255,255,255,0.6);
+    margin: 0 auto 8px;
+    display: flex;
+    float: none;
+  }
+
+  .navbar-user-avatar-placeholder--lg .fa {
+    font-size: 2.4rem;
+    color: #ffffff !important;
   }
 </style>
 
