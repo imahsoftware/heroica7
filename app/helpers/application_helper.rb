@@ -3828,13 +3828,6 @@ module ApplicationHelper
     ]
   end
 
-  def select_sinocorto
-    [
-      %w[SI S],
-      %w[NO N]
-    ]
-  end
-
   def select_oficina
     [
       %w[MINORISTA 1],

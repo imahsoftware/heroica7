@@ -646,6 +646,17 @@ $red-border: #fecaca;
   .logo-lg   { display: block; }
 }
 
+// El skin de AdminLTE tiene su propio fondo en .main-header — lo blanqueamos
+.main-header {
+  background-color: #ffffff !important;
+  border-bottom: none !important;
+}
+
+// La franja roja que separa logo de navbar la ponemos nosotros
+.main-header .logo {
+  border-right: 1px solid #f1f5f9 !important;
+}
+
 .sidebar-collapse .main-header .logo {
   .logo-mini { display: block !important; }
   .logo-lg   { display: none !important; }

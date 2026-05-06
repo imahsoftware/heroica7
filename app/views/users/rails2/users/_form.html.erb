@@ -1,0 +1,52 @@
+<% form_for @user do |f| %>
+<%= f.error_messages %>
+<table width="80%" align="center" id="one-column-emphasis">
+  <tr>
+    <td class="campos" height="30">Identificacion</td>
+    <td><%= f.text_field :identificacion,{ :class => "campo",
+                :onFocus => "this.style.border='1px solid #f00'",
+                :onBlur => "this.style.border='1px solid #bbb'" } %></td>
+  </tr>  
+  <tr>
+    <td class="campos" width="294" height="30">Nombre</td>
+    <td width="664"><%= f.text_field :nombre,{ :class => "campo", :size => "80",
+  :onChange=> "javascript:this.value=this.value.toUpperCase();",
+                :onFocus => "this.style.border='1px solid #f00'",
+                :onBlur => "this.style.border='1px solid #bbb'" } %></td>
+  </tr>
+  <tr>
+    <td class="campos" width="294" height="30">Usuario</td>
+    <td width="664"><%= f.text_field :username,{ :class => "campo",
+                :onFocus => "this.style.border='1px solid #f00'",
+                :onBlur => "this.style.border='1px solid #bbb'" } %></td>
+  </tr>
+  <tr>
+    <td class="campos" height="30">Clave</td>
+    <td><%= f.password_field :password,{ :class => "campo",
+                :onFocus => "this.style.border='1px solid #f00'",
+                :onBlur => "this.style.border='1px solid #bbb'" } %></td>
+  </tr>
+    <tr>
+    <td class="campos" height="30">Confirmación de clave</td>
+    <td><%= f.password_field :password_confirmation,{ :class => "campo",
+                :onFocus => "this.style.border='1px solid #f00'",
+                :onBlur => "this.style.border='1px solid #bbb'" } %></td>
+  </tr>
+    <tr>
+    <td class="campos" height="30">Email</td>
+    <td><%= f.text_field :email,{ :class => "campo",
+                :onFocus => "this.style.border='1px solid #f00'",
+                :onBlur => "this.style.border='1px solid #bbb'" } %></td>
+  </tr>
+  <tr>
+    <td class="campos" height="30">Extension</td>
+    <td><%= f.text_field :extension,{ :class => "campo",
+                :onFocus => "this.style.border='1px solid #f00'",
+                :onBlur => "this.style.border='1px solid #bbb'" } %></td>
+  </tr>
+  <tr>
+    <td height="30" colspan="2">
+<%= submit_tag "Guardar", :disable_with => "Guardando...", :class=>"buttonAsLink"%></td>
+  </tr>
+</table>
+   <% end %>

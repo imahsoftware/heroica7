@@ -6,7 +6,7 @@ $("#usersmodulo_form").empty();
 	$("#usersmodulo_<%= @active_record.id %>").replaceWith("<%= j render 'tr', usersmodulo: @active_record %>");
 <% end %>
 
-$("#usersmodulo_<%= @usersmodulo.id %>").html("<td colspan='2'><%= j render 'form' %></td>");
+$("#usersmodulo_<%= @usersmodulo.id %>").html("<td colspan='5'><%= j render 'form' %></td>");
 
 $("#usersmodulo_<%= @usersmodulo.id %>").addClass("active_usersmodulo");
 

@@ -1,0 +1,108 @@
+<%= stylesheet_link_tag 'tabs'%>
+<%= javascript_include_tag 'fabtabulous' %>
+<div id="productheader">
+  <h2>&nbsp;<img src="/images/informacionusuarios.png"></h2>
+  <div align="right">
+   <%= link_to 'Buscar Usuario', users_path, :class=>"regresarlink" %>&nbsp;&nbsp;</div>
+</div>
+<div id="container">
+    <div id="mainmenu">
+      <ul id="tabs">
+        <li><a href="#tab1"><img src="/images/users.png" border="0" title="Usuarios"></img></a></li>
+        <li><a href="#tab3"><img src="/images/modulos.png" border="0" title="Modulos"></img></a></li>
+        <li><a href="#tab2"><img src="/images/permisos.png" border="0" title="Permisos"></img></a></li>
+      </ul>
+    </div>
+</div>
+      <div class="panel" id="tab1">
+        <fieldset>
+<% form_for @user do |f| %>
+<div id="productheader">
+  <h2>&nbsp;<img src="/images/datosusuarios.png"></h2>
+</div>
+<div align="center">
+<table width="626" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><table width="100%" border="0" cellspacing="2" cellpadding="0">
+        <tr>
+          <td width="30%" class="campos">Identificacion</td>
+           <td width="70%" class="campos">Nombre</td>
+        </tr>
+        <tr>
+          <td class="camposDesc"><%= f.text_field :identificacion,{ :class => "campo", :size => "20",
+                :onFocus => "this.style.border='1px solid #f00'",
+                :onBlur => "this.style.border='1px solid #bbb'" } %></td>
+          <td class="camposDesc"><%= f.text_field :nombre,{ :class => "campo", :size => "80",
+                :onChange=> "javascript:this.value=this.value.toUpperCase();",
+                :onFocus => "this.style.border='1px solid #f00'",
+                :onBlur => "this.style.border='1px solid #bbb'" } %></td>
+        </tr>
+      </table>
+        <table width="100%" border="0" cellspacing="2" cellpadding="0">
+          <tr>
+            <td width="20%" class="campos">Usuario</td>
+            <td width="13%" class="campos">Clave</td>
+            <td width="18%" class="campos">Confirma Clave </td>
+          </tr>
+          <tr>
+            <td class="camposDesc"><%= f.text_field :username,{ :class => "campo", :size => "40",
+                :onFocus => "this.style.border='1px solid #f00'",
+                :onBlur => "this.style.border='1px solid #bbb'" } %></td>
+            <td valign="top" class="camposDesc"><%= f.password_field :password,{ :class => "campo", :size => "30",
+                :onFocus => "this.style.border='1px solid #f00'",
+                :onBlur => "this.style.border='1px solid #bbb'" } %></td>
+            <td valign="top" class="camposDesc"><%= f.password_field :password_confirmation,{ :class => "campo", :size => "30",
+                :onFocus => "this.style.border='1px solid #f00'",
+                :onBlur => "this.style.border='1px solid #bbb'" } %></td>
+          </tr>
+        </table>        <table width="100%" border="0" cellpadding="0" cellspacing="2">
+          <tr>
+            <td width="53%" class="campos">Correo Electronico </td>
+            <td width="30%" class="campos">Extension </td>
+          </tr>
+          <tr valign="top">
+            <td class="camposDesc"><%= f.text_field :email,{ :class => "campo", :size => "60",
+                :onFocus => "this.style.border='1px solid #f00'",
+                :onBlur => "this.style.border='1px solid #bbb'" } %></td>
+            <td class="camposDesc"><%= f.text_field :extension,{ :class => "campo", :size => "20",
+                :onFocus => "this.style.border='1px solid #f00'",
+                :onBlur => "this.style.border='1px solid #bbb'" } %></td>
+          </tr>
+        </table>
+<table width="100%" height="0" border="0" cellpadding="0" align="center" cellspacing="0">
+      <tr>
+        <td height="10"><hr size="1" noshade class="hrlinea"></td>
+      </tr>
+    </table>
+<table width="100%" border="0" cellpadding="2" align="center" cellspacing="2">
+  <tr>
+    <td  height="30"><div align="right">
+        <%= f.submit "Guardar",:disable_with => "Guardando...", :class=>"buttonAsLink"%>
+</div></td>
+  </tr>
+</table>
+    </td>
+  </tr>
+</table>
+</div>
+   <% end %>
+</fieldset>
+        </div>
+    <div class="panel" id="tab3">
+    <fieldset>
+<% unless @user.new_record? %>
+   <div id="userspermisos_form">
+      <%= render :partial => "/userspermisos/userspermisos" %>
+   </div>
+<% end %>
+    </fieldset>
+    </div>
+  <div class="panel" id="tab2">
+    <fieldset>
+<% unless @user.new_record? %>
+   <div id="usersmodulos_form">
+      <%= render :partial => "/usersmodulos/usersmodulos" %>
+   </div>
+<% end %>
+    </fieldset>
+</div>

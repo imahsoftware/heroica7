@@ -1,22 +1,41 @@
 <%= simple_form_for([@user, @usersmodulo], remote: true) do |f| %>
-   <div class="row">
-    <% if is_sygma %>
-      <div class="col-md-12"><%= f.input :modulo_id, collection: Modulo.where(["id not in (select modulo_id from usersmodulos where user_id = #{@user.id})"]).collect {|p| [ p.descripcion.to_s + ' ('+p.mensaje.to_s+')', p.id ] }, input_html: { multiple: true, class: 'select2' }, label: 'Modulo' %></div>
+  <div class="row">
+    <% if @usersmodulo.new_record? %>
+      <%# ── Nuevo: módulos no asignados aún, selección múltiple ── %>
+      <div class="col-md-12">
+        <% modulos_disponibles = Modulo.where("id not in (select modulo_id from usersmodulos where user_id = ?)", @user.id)
+                                       .collect { |p| ["#{p.descripcion} (#{p.mensaje})", p.id] } %>
+        <%= f.input :modulo_id,
+            label: 'Módulo',
+            collection: modulos_disponibles,
+            input_html: { multiple: true, class: 'select2', style: 'width:100%' } %>
+      </div>
     <% else %>
-      <div class="col-md-12"><%= f.input :modulo_id, collection: Modulo.where(["id in (select modulo_id from portafoliosmodulos where portafolio_id = #{is_portafolio}) and id not in (select modulo_id from usersmodulos where user_id = #{@user.id})"]).collect {|p| [ p.descripcion.to_s + ' ('+p.mensaje.to_s+')', p.id ] }, input_html: { multiple: true, class: 'clean select2' } %></div>
+      <%# ── Editar: todos los módulos con el actual preseleccionado ── %>
+      <div class="col-md-12">
+        <% modulos_todos = Modulo.all.collect { |p| ["#{p.descripcion} (#{p.mensaje})", p.id] } %>
+        <%= f.input :modulo_id,
+            label: 'Módulo',
+            collection: modulos_todos,
+            selected: @usersmodulo.modulo_id,
+            input_html: { class: 'select2', style: 'width:100%' } %>
+      </div>
     <% end %>
-   </div>
-   <div class="row">
-     <div class="col-md-6">
-       <% if @usersmodulo.new_record? %>
-         <%= button_tag "#{t :cancelar}", type: 'button', data: { target: '#usersmodulo_form' }, class: 'cancel_button btn btn-flat btn-default pull-left', aria_hidden: true %>
-       <% else %>
-         <%= link_to "#{t :cancelar}", user_usersmodulo_path(@user, @usersmodulo), class: 'btn btn-flat btn-default pull-left', aria_hidden: true, remote: true %>
-       <% end %>
-     </div>
-     <div class="col-md-6">
-       <%= f.button :submit, "#{t :guardar}", class: "btn btn-danger pull-right" %>
-     </div>
-   </div>
-   <br>
+  </div>
+  <div class="row" style="margin-top: 10px;">
+    <div class="col-md-6">
+      <% if @usersmodulo.new_record? %>
+        <%= button_tag t(:cancelar), type: 'button',
+            data: { target: '#usersmodulo_form' },
+            class: 'cancel_button btn btn-flat btn-default' %>
+      <% else %>
+        <%= link_to t(:cancelar), user_usersmodulo_path(@user, @usersmodulo),
+            class: 'btn btn-flat btn-default', remote: true %>
+      <% end %>
+    </div>
+    <div class="col-md-6 text-right">
+      <%= f.button :submit, t(:guardar), class: 'btn-guardar' %>
+    </div>
+  </div>
+  <br>
 <% end %>

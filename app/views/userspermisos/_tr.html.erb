@@ -1,14 +1,33 @@
 <tr id="userspermiso_<%= userspermiso.id %>">
-	<td>
-		<%= link_to edit_user_userspermiso_path(@user, userspermiso), remote: true, class: 'btn btn-flat btn-warning btn-xs' do %>
-		 <i class="fa fa-edit"></i> <span></span>
-		<% end %>
-		<%= link_to user_userspermiso_path(@user, userspermiso), remote: true, method: :delete, data: { confirm: "#{t :elimina_confirma}" }, class: 'btn btn-flat btn-danger btn-xs' do %>
-		 <i class="fa fa-trash"></i> <span></span>
-		<% end %>
-	</td>
-	<td><%= userspermiso.objeto.descripcionamp rescue nil %></td>
-	<td><%= userspermiso.crea %></td>
-	<td><%= userspermiso.actualiza %></td>
-	<td><%= userspermiso.elimina %></td>
+  <td class="text-center">
+    <%= link_to edit_user_userspermiso_path(@user, userspermiso), remote: true,
+        class: 'btn btn-xs btn-warning btn-accion',
+        title: t(:title_editar),
+        data: { toggle: 'tooltip' } do %>
+      <i class="fa fa-edit"></i>
+    <% end %>
+    <%= link_to user_userspermiso_path(@user, userspermiso), remote: true,
+        method: :delete,
+        class: 'btn btn-xs btn-danger btn-accion',
+        title: t(:title_elimina),
+        data: { confirm: t(:elimina_confirma), toggle: 'tooltip' } do %>
+      <i class="fa fa-trash"></i>
+    <% end %>
+  </td>
+  <td><%= userspermiso.objeto.descripcionamp rescue '—' %></td>
+  <td class="text-center">
+    <span class="badge-activo <%= userspermiso.crea == 'S' ? 'si' : 'no' %>">
+      <%= userspermiso.crea == 'S' ? 'Sí' : 'No' %>
+    </span>
+  </td>
+  <td class="text-center">
+    <span class="badge-activo <%= userspermiso.actualiza == 'S' ? 'si' : 'no' %>">
+      <%= userspermiso.actualiza == 'S' ? 'Sí' : 'No' %>
+    </span>
+  </td>
+  <td class="text-center">
+    <span class="badge-activo <%= userspermiso.elimina == 'S' ? 'si' : 'no' %>">
+      <%= userspermiso.elimina == 'S' ? 'Sí' : 'No' %>
+    </span>
+  </td>
 </tr>

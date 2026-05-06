@@ -48,9 +48,13 @@
                   <%= f.input :identificacion, label: 'Identificación',
                       input_html: { class: 'form-control' } %>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                   <%= f.input :nombre, label: 'Nombre completo',
                       input_html: { onChange: 'this.value=this.value.toUpperCase()', class: 'form-control input_uppercase' } %>
+                </div>
+                <div class="col-md-2">
+                  <%= f.input :username, label: 'Usuario',
+                      input_html: { class: 'form-control', autocomplete: 'off' } %>
                 </div>
                 <div class="col-md-3">
                   <%= f.input :email, label: 'Correo electrónico',
@@ -61,10 +65,10 @@
                       collection: select_sinocorto,
                       input_html: { class: 'select2 form-control' } %>
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-1">
                   <%= f.input :genero, as: :select, label: 'Género',
-                      collection: [['Masculino','M'],['Femenino','F'],['Otro','O']],
-                      include_blank: 'Seleccionar',
+                      collection: [['M','M'],['F','F'],['O','O']],
+                      include_blank: '-',
                       input_html: { class: 'select2 form-control' } %>
                 </div>
               </div>
@@ -82,7 +86,7 @@
                       input_html: { onChange: 'this.value=this.value.toUpperCase()', class: 'form-control input_uppercase' } %>
                 </div>
                 <div class="col-md-2">
-                  <%= f.input :fecha_nacimiento, as: :date_picker, label: 'Fecha de nacimiento',
+                  <%= f.input :fecha_nacimiento, as: :date_picker, label: 'Fecha nacimiento',
                       input_html: { class: 'form-control' } %>
                 </div>
                 <div class="col-md-3">
@@ -125,14 +129,10 @@
 
             <!-- ── Tab: Acceso ── -->
             <div class="tab-pane" id="tab-acceso">
-              <p class="section-label">Credenciales</p>
+              <p class="section-label">Contraseña</p>
               <div class="row">
                 <div class="col-md-3">
-                  <%= f.input :username, label: 'Usuario',
-                      input_html: { class: 'form-control', autocomplete: 'off' } %>
-                </div>
-                <div class="col-md-3">
-                  <%= f.input :password, label: 'Contraseña',
+                  <%= f.input :password, label: 'Nueva Contraseña',
                       input_html: { class: 'form-control', autocomplete: 'new-password' },
                       hint: @user.new_record? ? nil : 'Dejar en blanco para no cambiar' %>
                 </div>

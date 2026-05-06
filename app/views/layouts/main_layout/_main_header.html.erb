@@ -5,9 +5,9 @@
   isimah = is_sygma
 %>
 
-<header class="main-header">
+<header class="main-header" style="background-color: #ffffff !important;">
   <% permit = Usersmodulo.where(user_id: isadmin, modulo_id: 1).exists? %>
-  <%= link_to root_path, class: 'logo' do %>
+  <%= link_to root_path, class: 'logo', style: 'background-color: #ffffff !important; border-bottom: 3px solid #ef4444 !important; height: 50px !important; display: flex !important; align-items: center !important; justify-content: center !important;' do %>
     <span class="logo-mini"><%= image_tag 'logo_heroica.png', alt: 'Logo', style: 'height: 30px; width: auto; object-fit: contain;' %></span>
     <span class="logo-lg"><%= image_tag 'logo_heroica.png', alt: 'Logo Heroica', style: 'height: 34px; width: auto; object-fit: contain; max-width: 160px;' %></span>
   <% end %>

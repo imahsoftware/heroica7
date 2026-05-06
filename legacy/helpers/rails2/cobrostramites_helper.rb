@@ -1,0 +1,2 @@
+module CobrostramitesHelper
+end
