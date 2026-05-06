@@ -1,0 +1,70 @@
+<div class="user-section-header">
+  <!-- Avatar -->
+  <div class="user-section-avatar">
+    <% if @user.avatar_file_name.present? %>
+      <%= image_tag @user.avatar.url(:thumb), alt: @user.nombre %>
+    <% else %>
+      <i class="fa fa-user-circle"></i>
+    <% end %>
+  </div>
+
+  <!-- Info -->
+  <div class="user-section-info">
+    <span class="user-section-name"><%= @user.nombre %></span>
+    <span class="user-section-meta">
+      <i class="fa fa-at"></i> <%= @user.username %>
+      <% if @user.email.present? %>
+        &nbsp;·&nbsp; <i class="fa fa-envelope"></i> <%= @user.email %>
+      <% end %>
+      <% if @user.tipoconsulta.present? %>
+        &nbsp;·&nbsp; <i class="fa fa-tag"></i> <%= @user.tipoconsulta %>
+      <% end %>
+    </span>
+  </div>
+
+  <!-- Badges -->
+  <div class="user-section-badges">
+    <span class="badge-activo <%= @user.activo == 'S' ? 'si' : 'no' %>">
+      <%= @user.activo == 'S' ? 'Activo' : 'Inactivo' %>
+    </span>
+    <% if @user.unlock_token.present? %>
+      <span class="badge-activo no" style="margin-left: 4px;">
+        <i class="fa fa-lock"></i> Bloqueado
+      </span>
+    <% end %>
+  </div>
+
+  <!-- Navegación de etapas -->
+  <div class="user-section-nav">
+    <%= link_to edit_user_path(id: @user.id, etapa: 'A'),
+        class: "user-nav-btn #{'active' if @user.etapa == 'A'}",
+        title: 'Datos' do %>
+      <i class="fa fa-id-card"></i> Datos
+    <% end %>
+    <%= link_to edit_user_path(id: @user.id, etapa: 'B'),
+        class: "user-nav-btn #{'active' if @user.etapa == 'B'}",
+        title: 'Módulos' do %>
+      <i class="fa fa-cubes"></i> Módulos
+    <% end %>
+    <%= link_to edit_user_path(id: @user.id, etapa: 'C'),
+        class: "user-nav-btn #{'active' if @user.etapa == 'C'}",
+        title: 'Permisos' do %>
+      <i class="fa fa-shield-alt"></i> Permisos
+    <% end %>
+    <%= link_to edit_user_path(id: @user.id, etapa: 'I'),
+        class: "user-nav-btn #{'active' if @user.etapa == 'I'}",
+        title: 'Reportes' do %>
+      <i class="fa fa-file-alt"></i> Reportes
+    <% end %>
+    <%= link_to edit_user_path(id: @user.id, etapa: 'E'),
+        class: "user-nav-btn #{'active' if @user.etapa == 'E'}",
+        title: 'Imágenes' do %>
+      <i class="fa fa-images"></i> Imágenes
+    <% end %>
+    <%= link_to users_path,
+        class: "user-nav-btn",
+        title: 'Volver al listado' do %>
+      <i class="fa fa-arrow-left"></i> Volver
+    <% end %>
+  </div>
+</div>

@@ -50,6 +50,15 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  # ── Memoización del usuario admin activo ──────────────────────────────────
+  # Centraliza el User.find en un solo método memoizado por request.
+  # Todos los helpers que necesiten datos del usuario deben usar current_admin_user
+  # en lugar de hacer User.find(is_admin) individualmente.
+  helper_method :current_admin_user
+  def current_admin_user
+    @current_admin_user ||= User.find(is_admin)
+  end
+
   helper_method :is_admin
   def is_admin
     if !current_user.user2_id.nil?
@@ -66,19 +75,19 @@ class ApplicationController < ActionController::Base
 
   helper_method :is_cohorte
   def is_cohorte
-    User.find(is_admin).cohorte_id
+    current_admin_user.cohorte_id
   end
 
   helper_method :is_portafolioname
   def is_portafolioname
-    User.find(is_admin).portafolio.nombrecorto
+    current_admin_user.portafolio.nombrecorto
   rescue StandardError
     nil
   end
 
   helper_method :is_usuario
   def is_usuario
-    User.find(is_admin).nombre
+    current_admin_user.nombre
   end
 
   helper_method :is_nextmandamiento
@@ -666,7 +675,7 @@ class ApplicationController < ActionController::Base
 
   helper_method :is_portafolio
   def is_portafolio
-    return User.find(is_admin).portafolio_id if user_signed_in?
+    return current_admin_user.portafolio_id if user_signed_in?
   end
 
   helper_method :is_authport
@@ -678,7 +687,7 @@ class ApplicationController < ActionController::Base
 
   helper_method :is_garantia
   def is_garantia
-    User.find(is_admin).portafolio.garantia.to_s
+    current_admin_user.portafolio.garantia.to_s
   rescue StandardError
     nil
   end
@@ -691,11 +700,11 @@ class ApplicationController < ActionController::Base
 
   helper_method :is_obligaciones
   def is_obligaciones
-    if User.find(is_admin).geintac.to_s == 'SI'
+    if current_admin_user.geintac.to_s == 'SI'
       'SI'
     else
       begin
-        User.find(is_admin).portafolio.obligaciones.to_s
+        current_admin_user.portafolio.obligaciones.to_s
       rescue StandardError
         nil
       end
@@ -704,11 +713,11 @@ class ApplicationController < ActionController::Base
 
   helper_method :is_consolidado
   def is_consolidado
-    if User.find(is_admin).geintac.to_s == 'SI'
+    if current_admin_user.geintac.to_s == 'SI'
       'SI'
     else
       begin
-        User.find(is_admin).portafolio.consolidado.to_s
+        current_admin_user.portafolio.consolidado.to_s
       rescue StandardError
         nil
       end
@@ -717,11 +726,11 @@ class ApplicationController < ActionController::Base
 
   helper_method :is_credito
   def is_credito
-    if User.find(is_admin).geintac.to_s == 'SI'
+    if current_admin_user.geintac.to_s == 'SI'
       'SI'
     else
       begin
-        User.find(is_admin).portafolio.credito.to_s
+        current_admin_user.portafolio.credito.to_s
       rescue StandardError
         nil
       end
@@ -730,11 +739,11 @@ class ApplicationController < ActionController::Base
 
   helper_method :is_normalizacion
   def is_normalizacion
-    if User.find(is_admin).geintac.to_s == 'SI'
+    if current_admin_user.geintac.to_s == 'SI'
       'SI'
     else
       begin
-        User.find(is_admin).portafolio.normalizacion.to_s
+        current_admin_user.portafolio.normalizacion.to_s
       rescue StandardError
         nil
       end
@@ -743,11 +752,11 @@ class ApplicationController < ActionController::Base
 
   helper_method :is_gestionpagaduria
   def is_gestionpagaduria
-    if User.find(is_admin).geintac.to_s == 'SI'
+    if current_admin_user.geintac.to_s == 'SI'
       'SI'
     else
       begin
-        User.find(is_admin).portafolio.gestionpagaduria.to_s
+        current_admin_user.portafolio.gestionpagaduria.to_s
       rescue StandardError
         nil
       end
@@ -756,11 +765,11 @@ class ApplicationController < ActionController::Base
 
   helper_method :is_gestioncobro
   def is_gestioncobro
-    if User.find(is_admin).geintac.to_s == 'SI'
+    if current_admin_user.geintac.to_s == 'SI'
       'SI'
     else
       begin
-        User.find(is_admin).portafolio.gestioncobro.to_s
+        current_admin_user.portafolio.gestioncobro.to_s
       rescue StandardError
         nil
       end
@@ -769,11 +778,11 @@ class ApplicationController < ActionController::Base
 
   helper_method :is_cobranzajuridica
   def is_cobranzajuridica
-    if User.find(is_admin).geintac.to_s == 'SI'
+    if current_admin_user.geintac.to_s == 'SI'
       'SI'
     else
       begin
-        User.find(is_admin).portafolio.cobranzajuridica.to_s
+        current_admin_user.portafolio.cobranzajuridica.to_s
       rescue StandardError
         nil
       end
@@ -782,11 +791,11 @@ class ApplicationController < ActionController::Base
 
   helper_method :is_coactivo
   def is_coactivo
-    if User.find(is_admin).geintac.to_s == 'SI'
+    if current_admin_user.geintac.to_s == 'SI'
       'SI'
     else
       begin
-        User.find(is_admin).portafolio.coactivo.to_s
+        current_admin_user.portafolio.coactivo.to_s
       rescue StandardError
         nil
       end
@@ -795,11 +804,11 @@ class ApplicationController < ActionController::Base
 
   helper_method :is_digital
   def is_digital
-    if User.find(is_admin).geintac.to_s == 'SI'
+    if current_admin_user.geintac.to_s == 'SI'
       'SI'
     else
       begin
-        User.find(is_admin).portafolio.digital.to_s
+        current_admin_user.portafolio.digital.to_s
       rescue StandardError
         nil
       end
@@ -808,11 +817,11 @@ class ApplicationController < ActionController::Base
 
   helper_method :is_campanas
   def is_campanas
-    if User.find(is_admin).geintac.to_s == 'SI'
+    if current_admin_user.geintac.to_s == 'SI'
       'SI'
     else
       begin
-        User.find(is_admin).portafolio.campanas.to_s
+        current_admin_user.portafolio.campanas.to_s
       rescue StandardError
         nil
       end
@@ -821,11 +830,11 @@ class ApplicationController < ActionController::Base
 
   helper_method :is_academico
   def is_academico
-    if User.find(is_admin).geintac.to_s == 'SI'
+    if current_admin_user.geintac.to_s == 'SI'
       'SI'
     else
       begin
-        User.find(is_admin).portafolio.academico.to_s
+        current_admin_user.portafolio.academico.to_s
       rescue StandardError
         nil
       end
@@ -834,11 +843,11 @@ class ApplicationController < ActionController::Base
 
   helper_method :is_giros
   def is_giros
-    if User.find(is_admin).geintac.to_s == 'SI'
+    if current_admin_user.geintac.to_s == 'SI'
       'SI'
     else
       begin
-        User.find(is_admin).portafolio.giros.to_s
+        current_admin_user.portafolio.giros.to_s
       rescue StandardError
         nil
       end
@@ -847,11 +856,11 @@ class ApplicationController < ActionController::Base
 
   helper_method :is_liquidacionpac
   def is_liquidacionpac
-    if User.find(is_admin).geintac.to_s == 'SI'
+    if current_admin_user.geintac.to_s == 'SI'
       'SI'
     else
       begin
-        User.find(is_admin).portafolio.liquidacionpac.to_s
+        current_admin_user.portafolio.liquidacionpac.to_s
       rescue StandardError
         nil
       end
@@ -860,11 +869,11 @@ class ApplicationController < ActionController::Base
 
   helper_method :is_gestionmundial
   def is_gestionmundial
-    if User.find(is_admin).geintac.to_s == 'SI'
+    if current_admin_user.geintac.to_s == 'SI'
       'SI'
     else
       begin
-        User.find(is_admin).portafolio.gestionmundial.to_s
+        current_admin_user.portafolio.gestionmundial.to_s
       rescue StandardError
         nil
       end
@@ -873,11 +882,11 @@ class ApplicationController < ActionController::Base
 
   helper_method :is_gestioncovinoc
   def is_gestioncovinoc
-    if User.find(is_admin).geintac.to_s == 'SI'
+    if current_admin_user.geintac.to_s == 'SI'
       'SI'
     else
       begin
-        User.find(is_admin).portafolio.gestioncovinoc.to_s
+        current_admin_user.portafolio.gestioncovinoc.to_s
       rescue StandardError
         nil
       end
@@ -886,11 +895,11 @@ class ApplicationController < ActionController::Base
 
   helper_method :is_gestionkfg
   def is_gestionkfg
-    if User.find(is_admin).geintac.to_s == 'SI'
+    if current_admin_user.geintac.to_s == 'SI'
       'SI'
     else
       begin
-        User.find(is_admin).portafolio.gestionkfg.to_s
+        current_admin_user.portafolio.gestionkfg.to_s
       rescue StandardError
         nil
       end
@@ -899,11 +908,11 @@ class ApplicationController < ActionController::Base
 
   helper_method :is_gestiongintac
   def is_gestiongintac
-    if User.find(is_admin).geintac.to_s == 'SI'
+    if current_admin_user.geintac.to_s == 'SI'
       'SI'
     else
       begin
-        User.find(is_admin).portafolio.gestiongintac.to_s
+        current_admin_user.portafolio.gestiongintac.to_s
       rescue StandardError
         nil
       end
@@ -912,11 +921,11 @@ class ApplicationController < ActionController::Base
 
   helper_method :is_helenas
   def is_helenas
-    if User.find(is_admin).geintac.to_s == 'SI'
+    if current_admin_user.geintac.to_s == 'SI'
       'SI'
     else
       begin
-        User.find(is_admin).portafolio.helenas.to_s
+        current_admin_user.portafolio.helenas.to_s
       rescue StandardError
         nil
       end
@@ -926,7 +935,7 @@ class ApplicationController < ActionController::Base
   helper_method :is_nextpagare
   def is_nextpagare
     maxpagar = begin
-      Personasacuerdo.where("portafolio_id = #{User.find(is_admin).portafolio_id} and numero_pagare is not null ").maximum('numero_pagare')
+      Personasacuerdo.where("portafolio_id = #{current_admin_user.portafolio_id} and numero_pagare is not null ").maximum('numero_pagare')
     rescue StandardError
       0
     end
@@ -941,7 +950,7 @@ class ApplicationController < ActionController::Base
   helper_method :is_dash
   def is_dash
     if is_portafolio != 10100
-      User.find(is_admin).dashboard.to_s != 'NO'
+      current_admin_user.dashboard.to_s != 'NO'
     else
       true
     end
@@ -949,12 +958,12 @@ class ApplicationController < ActionController::Base
 
   helper_method :is_tipoconsulta
   def is_tipoconsulta
-    User.find(is_admin).tipoconsulta.to_s
+    current_admin_user.tipoconsulta.to_s
   end
 
   helper_method :is_portafoliossucursal
   def is_portafoliossucursal
-    User.find(is_admin).portafoliossucursal_id
+    current_admin_user.portafoliossucursal_id
   end
 
   helper_method :is_select_originador
@@ -973,7 +982,7 @@ class ApplicationController < ActionController::Base
 
   helper_method :is_adminext
   def is_adminext
-    User.find(is_admin).extension.to_s
+    current_admin_user.extension.to_s
   end
 
   helper_method :is_consecutivootrosrecaudo
@@ -986,7 +995,7 @@ class ApplicationController < ActionController::Base
 
   helper_method :is_bloqueo
   def is_bloqueo
-    User.find(is_admin).portafolio.bloqueo.to_s == 'SI'
+    current_admin_user.portafolio.bloqueo.to_s == 'SI'
   end
 
   helper_method :is_agenda
@@ -996,12 +1005,12 @@ class ApplicationController < ActionController::Base
 
   helper_method :is_sygma
   def is_sygma
-    User.find(is_admin).geintac.to_s == 'S'
+    current_admin_user.geintac.to_s == 'S'
   end
 
   helper_method :is_supersygma
   def is_supersygma
-    User.find(is_admin).supersygma.to_s == 'YES'
+    current_admin_user.supersygma.to_s == 'YES'
   end
 
   helper_method :is_edupol
@@ -1011,7 +1020,7 @@ class ApplicationController < ActionController::Base
 
   helper_method :is_etapa
   def is_etapa
-    User.find(is_admin).etapa.to_s
+    current_admin_user.etapa.to_s
   end
 
   helper_method :is_select_portafolioscuenta
@@ -1349,7 +1358,7 @@ class ApplicationController < ActionController::Base
 
   helper_method :is_estudiantepersonaid
   def is_estudiantepersonaid
-    return User.find(is_admin).cliente_id if is_tipoconsulta.to_s == 'CLIENTE'
+    return current_admin_user.cliente_id if is_tipoconsulta.to_s == 'CLIENTE'
   end
 
   helper_method :is_disabled
@@ -1786,14 +1795,14 @@ class ApplicationController < ActionController::Base
 
   helper_method :is_ambito
   def is_ambito
-    User.find(is_admin).ambito
+    current_admin_user.ambito
   rescue StandardError
     nil
   end
 
   helper_method :is_personaid
   def is_personaid
-    User.find(is_admin).persona_id
+    current_admin_user.persona_id
   rescue StandardError
     nil
   end
