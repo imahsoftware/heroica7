@@ -59,8 +59,8 @@ gem 'ransack', '~> 3.2'
 
 gem "audited", "~> 5.7"
 
-gem 'will_paginate'
-gem 'will_paginate-bootstrap'
+gem 'will_paginate',            '~> 3.2'
+gem 'will_paginate-bootstrap',  '~> 1.0'
 gem 'remotipart'
 
 #GEMAS DATEPICKER
