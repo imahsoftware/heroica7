@@ -1,0 +1,59 @@
+<% title 'Cobros por Trámite' %>
+
+<div class="box box-usuarios">
+  <div class="box-header">
+    <span class="box-title">
+      <i class="fa fa-dollar"></i> Cobros por Trámite
+    </span>
+    <div class="box-tools pull-right" style="margin-top: -2px;">
+      <%= link_to new_cobrostramite_path, remote: true, id: 'new_cobrostramite_button',
+          class: 'btn btn-sm btn-success',
+          title: 'Agregar cobro' do %>
+        <i class="fa fa-plus"></i> Nuevo
+      <% end %>
+    </div>
+  </div>
+
+  <div class="box-body">
+
+    <div class="flash_messages"></div>
+    <div id="cobrostramite_form" class="collapse" style="margin-bottom: 12px;"></div>
+
+    <div id="cobrostramites">
+      <% if @cobrostramites_por_categoria.any? %>
+        <% @cobrostramites_por_categoria.each do |categoria, cobros| %>
+          <div class="panel panel-default" style="margin-bottom: 16px;">
+            <div class="panel-heading" style="background: #f1f5f9; padding: 8px 14px;">
+              <strong><i class="fa fa-tag"></i> <%= categoria.nombre %></strong>
+              <span class="badge" style="margin-left: 8px;"><%= cobros.count %></span>
+            </div>
+            <div class="table-responsive">
+              <table class="table table-bordered table-condensed table-striped table-usuarios" style="margin-bottom: 0;">
+                <thead>
+                  <tr>
+                    <th width="8%" class="text-center">Acciones</th>
+                    <th width="30%">Trámite</th>
+                    <th width="30%">Concepto</th>
+                    <th width="12%" class="text-right">Valor</th>
+                    <th width="20%">Última modificación</th>
+                  </tr>
+                </thead>
+                <tbody id="tbody_cobrostramites_<%= categoria.id %>">
+                  <% cobros.each do |cobrostramite| %>
+                    <%= render 'cobrostramites/tr', cobrostramite: cobrostramite %>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        <% end %>
+      <% else %>
+        <div class="empty-state">
+          <i class="fa fa-dollar"></i>
+          <p>No se han configurado cobros por trámite.</p>
+        </div>
+      <% end %>
+    </div>
+
+  </div>
+</div>

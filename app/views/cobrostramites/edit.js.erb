@@ -1,0 +1,9 @@
+$("#cobrostramite_form").collapse("hide");
+$("#cobrostramite_form").empty();
+
+$("#cobrostramite_<%= @cobrostramite.id %>").html("<td colspan='5'><%= j render 'form' %></td>");
+$("#cobrostramite_<%= @cobrostramite.id %>").addClass("active_cobrostramite");
+
+$(".select2").select2();
+$(".tooltip").tooltip("hide");
+$('[data-toggle="tooltip"]').tooltip();

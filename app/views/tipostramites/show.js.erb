@@ -1,0 +1,4 @@
+$("#tipostramite_<%= @tipostramite.id %>").replaceWith("<%= j render 'tr', tipostramite: @tipostramite %>");
+$("#tipostramite_form").collapse("hide");
+$("#tipostramite_form").empty();
+$(".tooltip").tooltip("hide");

@@ -1,0 +1,8 @@
+$("#concepto_form").collapse("hide");
+$("#concepto_form").empty();
+<% if flash[:notice] %>
+  $(".flash_messages").html("<div class='alert alert-success alert-dismissible'><button type='button' class='close' data-dismiss='alert'>&times;</button><%= j flash[:notice] %></div>");
+  <% flash.discard(:notice) %>
+<% end %>
+$("#tbody_conceptos").prepend("<%= j render 'tr', concepto: @concepto %>");
+$('[data-toggle="tooltip"]').tooltip();

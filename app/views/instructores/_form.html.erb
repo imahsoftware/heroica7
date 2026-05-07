@@ -1,0 +1,81 @@
+<%= simple_form_for @instructor, remote: true do |f| %>
+  <div class="bs-callout">
+
+    <p class="section-label">Datos personales</p>
+    <div class="row">
+      <div class="col-md-3">
+        <%= f.input :identificacion, label: 'Identificación',
+            input_html: { class: 'form-control' } %>
+      </div>
+      <div class="col-md-6">
+        <%= f.input :nombre, label: 'Nombre completo',
+            input_html: { onChange: 'this.value=this.value.toUpperCase()', class: 'form-control input_uppercase' } %>
+      </div>
+      <div class="col-md-3">
+        <%= f.input :anno_evaluacion, label: 'Año evaluación',
+            input_html: { class: 'form-control' } %>
+      </div>
+    </div>
+
+    <p class="section-label" style="margin-top: 16px;">Licencia de conducción</p>
+    <div class="row">
+      <div class="col-md-4">
+        <%= f.input :nro_licencia, label: 'Nro. Licencia',
+            input_html: { class: 'form-control' } %>
+      </div>
+      <div class="col-md-4">
+        <%= f.input :fecha_exp_lic, as: :string, label: 'Fecha expedición',
+            input_html: { class: 'datepicker', data: { date_options: { format: 'DD/MM/YYYY', ignoreReadonly: true } }, readonly: true } %>
+      </div>
+      <div class="col-md-4">
+        <%= f.input :fecha_ven_lic, as: :string, label: 'Fecha vencimiento',
+            input_html: { class: 'datepicker', data: { date_options: { format: 'DD/MM/YYYY', ignoreReadonly: true } }, readonly: true } %>
+      </div>
+    </div>
+
+    <p class="section-label" style="margin-top: 16px;">Licencia de instructor</p>
+    <div class="row">
+      <div class="col-md-4">
+        <%= f.input :nro_licenciai, label: 'Nro. Licencia Instructor',
+            input_html: { class: 'form-control' } %>
+      </div>
+      <div class="col-md-4">
+        <%= f.input :fecha_exp_lici, as: :string, label: 'Fecha expedición',
+            input_html: { class: 'datepicker', data: { date_options: { format: 'DD/MM/YYYY', ignoreReadonly: true } }, readonly: true } %>
+      </div>
+      <div class="col-md-4">
+        <%= f.input :fecha_ven_lici, as: :string, label: 'Fecha vencimiento',
+            input_html: { class: 'datepicker', data: { date_options: { format: 'DD/MM/YYYY', ignoreReadonly: true } }, readonly: true } %>
+      </div>
+    </div>
+
+    <p class="section-label" style="margin-top: 16px;">Contrato</p>
+    <div class="row">
+      <div class="col-md-3">
+        <%= f.input :fecha_exp_cont, as: :string, label: 'Fecha expedición',
+            input_html: { class: 'datepicker', data: { date_options: { format: 'DD/MM/YYYY', ignoreReadonly: true } }, readonly: true } %>
+      </div>
+      <div class="col-md-3">
+        <%= f.input :fecha_ven_cont, as: :string, label: 'Fecha vencimiento',
+            input_html: { class: 'datepicker', data: { date_options: { format: 'DD/MM/YYYY', ignoreReadonly: true } }, readonly: true } %>
+      </div>
+    </div>
+
+    <div class="row" style="margin-top: 12px;">
+      <div class="col-md-6">
+        <% if @instructor.new_record? %>
+          <%= button_tag t(:cancelar), type: 'button',
+              data: { toggle: 'collapse', target: '#instructor_form' },
+              class: 'cancel_button btn btn-flat btn-default' %>
+        <% else %>
+          <%= link_to t(:cancelar), instructor_path(@instructor),
+              class: 'btn btn-flat btn-default', remote: true %>
+        <% end %>
+      </div>
+      <div class="col-md-6 text-right">
+        <%= f.button :submit, t(:guardar), class: 'btn-guardar' %>
+      </div>
+    </div>
+
+  </div>
+<% end %>

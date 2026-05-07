@@ -1,0 +1,24 @@
+<tr id="cobrostramite_<%= cobrostramite.id %>">
+  <td class="text-center">
+    <%= link_to edit_cobrostramite_path(cobrostramite), remote: true,
+        title: t(:title_editar),
+        data: { toggle: 'tooltip' } do %>
+      <button class="btn btn-xs btn-warning btn-accion"><i class="fa fa-edit"></i></button>
+    <% end %>
+    <%= link_to cobrostramite_path(cobrostramite), remote: true,
+        method: :delete,
+        title: t(:title_elimina),
+        data: { confirm: t(:elimina_confirma), toggle: 'tooltip' } do %>
+      <button class="btn btn-xs btn-danger btn-accion"><i class="fa fa-trash"></i></button>
+    <% end %>
+  </td>
+  <td><%= cobrostramite.tipostramite&.descripcion || '—' %></td>
+  <td><%= cobrostramite.concepto&.descripcion || '—' %></td>
+  <td class="text-right">
+    <%= number_to_currency(cobrostramite.concepto&.valor, precision: 0, unit: '$', delimiter: '.') if cobrostramite.concepto&.valor.present? %>
+  </td>
+  <td style="font-size: 11px; color: #64748b;">
+    <%= cobrostramite.updated_at.strftime('%Y-%m-%d %H:%M') rescue '—' %>
+    <% if cobrostramite.user.present? %> — <%= cobrostramite.user.username %><% end %>
+  </td>
+</tr>

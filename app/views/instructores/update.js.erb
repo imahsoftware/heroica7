@@ -1,0 +1,8 @@
+$("#instructor_form").collapse("hide");
+$("#instructor_form").empty();
+<% if flash[:notice] %>
+  $(".flash_messages").html("<div class='alert alert-success alert-dismissible'><button type='button' class='close' data-dismiss='alert'>&times;</button><%= j flash[:notice] %></div>");
+  <% flash.discard(:notice) %>
+<% end %>
+$("#instructor_<%= @instructor.id %>").replaceWith("<%= j render 'tr', instructor: @instructor %>");
+$('[data-toggle="tooltip"]').tooltip();

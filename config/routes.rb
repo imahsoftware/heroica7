@@ -146,5 +146,10 @@ Rails.application.routes.draw do
   resources :grupos
   resources :placas
   resources :tiposcombustibles
+  resources :instructores
+  resources :categorias
+  resources :tipostramites
+  resources :conceptos
+  resources :cobrostramites
 
 end

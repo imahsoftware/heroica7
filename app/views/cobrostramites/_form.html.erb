@@ -1,0 +1,43 @@
+<%= simple_form_for @cobrostramite, remote: true do |f| %>
+  <div class="bs-callout">
+
+    <p class="section-label">Datos del cobro por trámite</p>
+    <div class="row">
+      <div class="col-md-3">
+        <%= f.input :categoria_id, as: :select, label: 'Categoría',
+            collection: @categorias.map { |c| [c.nombre, c.id] },
+            include_blank: 'Seleccionar...',
+            input_html: { class: 'select2 form-control' } %>
+      </div>
+      <div class="col-md-4">
+        <%= f.input :tipostramite_id, as: :select, label: 'Tipo de Trámite',
+            collection: @tipostramites.map { |t| [t.descripcion, t.id] },
+            include_blank: 'Seleccionar...',
+            input_html: { class: 'select2 form-control' } %>
+      </div>
+      <div class="col-md-4">
+        <%= f.input :concepto_id, as: :select, label: 'Concepto',
+            collection: @conceptos.map { |c| [c.descripcion, c.id] },
+            include_blank: 'Seleccionar...',
+            input_html: { class: 'select2 form-control' } %>
+      </div>
+    </div>
+
+    <div class="row" style="margin-top: 12px;">
+      <div class="col-md-6">
+        <% if @cobrostramite.new_record? %>
+          <%= button_tag t(:cancelar), type: 'button',
+              data: { toggle: 'collapse', target: '#cobrostramite_form' },
+              class: 'cancel_button btn btn-flat btn-default' %>
+        <% else %>
+          <%= link_to t(:cancelar), cobrostramite_path(@cobrostramite),
+              class: 'btn btn-flat btn-default', remote: true %>
+        <% end %>
+      </div>
+      <div class="col-md-6 text-right">
+        <%= f.button :submit, t(:guardar), class: 'btn-guardar' %>
+      </div>
+    </div>
+
+  </div>
+<% end %>

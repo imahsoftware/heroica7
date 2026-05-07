@@ -1,0 +1,4 @@
+$("#cobrostramite_<%= @cobrostramite.id %>").replaceWith("<%= j render 'tr', cobrostramite: @cobrostramite %>");
+$("#cobrostramite_form").collapse("hide");
+$("#cobrostramite_form").empty();
+$(".tooltip").tooltip("hide");

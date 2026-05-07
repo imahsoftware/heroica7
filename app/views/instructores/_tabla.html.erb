@@ -1,0 +1,27 @@
+<div class="table-responsive">
+  <table class="table table-bordered table-condensed table-striped table-usuarios">
+    <thead>
+      <tr>
+        <th width="8%" class="text-center">Acciones</th>
+        <th width="12%">Identificación</th>
+        <th>Nombre</th>
+        <th width="12%">Nro. Licencia</th>
+        <th width="10%" class="text-center">Venc. Licencia</th>
+        <th width="12%">Nro. Lic. Instructor</th>
+        <th width="10%" class="text-center">Venc. Lic. Inst.</th>
+        <th width="10%" class="text-center">Venc. Contrato</th>
+      </tr>
+    </thead>
+    <tbody id="tbody_instructores">
+      <% @instructores.each do |instructor| %>
+        <%= render 'instructores/tr', instructor: instructor %>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<div class="row" style="margin-top: 12px;">
+  <div class="col-xs-12 text-right">
+    <%= will_paginate @instructores, renderer: BootstrapPagination::Rails %>
+  </div>
+</div>

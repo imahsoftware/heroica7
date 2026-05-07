@@ -1,0 +1,14 @@
+$("#cobrostramite_form").collapse("hide");
+$("#cobrostramite_form").empty();
+<% if flash[:notice] %>
+  $(".flash_messages").html("<div class='alert alert-success alert-dismissible'><button type='button' class='close' data-dismiss='alert'>&times;</button><%= j flash[:notice] %></div>");
+  <% flash.discard(:notice) %>
+<% end %>
+// Agrega la fila al grupo de la categoría correspondiente, o recarga si no existe el grupo
+<% cat_id = @cobrostramite.categoria_id %>
+if ($("#tbody_cobrostramites_<%= cat_id %>").length) {
+  $("#tbody_cobrostramites_<%= cat_id %>").append("<%= j render 'tr', cobrostramite: @cobrostramite %>");
+} else {
+  location.reload();
+}
+$('[data-toggle="tooltip"]').tooltip();

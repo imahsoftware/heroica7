@@ -1,0 +1,49 @@
+<tr id="instructor_<%= instructor.id %>">
+  <td class="text-center">
+    <%= link_to edit_instructor_path(instructor), remote: true,
+        title: t(:title_editar),
+        data: { toggle: 'tooltip' } do %>
+      <button class="btn btn-xs btn-warning btn-accion"><i class="fa fa-edit"></i></button>
+    <% end %>
+    <%= link_to instructor_path(instructor), remote: true,
+        method: :delete,
+        title: t(:title_elimina),
+        data: { confirm: t(:elimina_confirma), toggle: 'tooltip' } do %>
+      <button class="btn btn-xs btn-danger btn-accion"><i class="fa fa-trash"></i></button>
+    <% end %>
+  </td>
+  <td><%= instructor.identificacion.presence || '—' %></td>
+  <td><strong><%= instructor.nombre %></strong></td>
+  <td><%= instructor.nro_licencia.presence || '—' %></td>
+  <td class="text-center">
+    <% if instructor.fecha_ven_lic.present? %>
+      <% vencida = instructor.fecha_ven_lic < Date.today %>
+      <span class="badge-activo <%= vencida ? 'no' : 'si' %>">
+        <%= instructor.fecha_ven_lic.strftime('%d/%m/%Y') %>
+      </span>
+    <% else %>
+      —
+    <% end %>
+  </td>
+  <td><%= instructor.nro_licenciai.presence || '—' %></td>
+  <td class="text-center">
+    <% if instructor.fecha_ven_lici.present? %>
+      <% vencida_i = instructor.fecha_ven_lici < Date.today %>
+      <span class="badge-activo <%= vencida_i ? 'no' : 'si' %>">
+        <%= instructor.fecha_ven_lici.strftime('%d/%m/%Y') %>
+      </span>
+    <% else %>
+      —
+    <% end %>
+  </td>
+  <td class="text-center">
+    <% if instructor.fecha_ven_cont.present? %>
+      <% vencido_c = instructor.fecha_ven_cont < Date.today %>
+      <span class="badge-activo <%= vencido_c ? 'no' : 'si' %>">
+        <%= instructor.fecha_ven_cont.strftime('%d/%m/%Y') %>
+      </span>
+    <% else %>
+      —
+    <% end %>
+  </td>
+</tr>

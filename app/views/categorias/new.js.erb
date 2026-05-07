@@ -1,0 +1,7 @@
+<% if @active_record.present? %>
+  $("#categoria_<%= @active_record.id %>").replaceWith("<%= j render 'tr', categoria: @active_record %>");
+<% end %>
+$("#categoria_form").html("<%= j render 'form' %>");
+$("#categoria_form").collapse("show");
+$(".tooltip").tooltip("hide");
+$('[data-toggle="tooltip"]').tooltip();

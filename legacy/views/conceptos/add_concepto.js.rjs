@@ -1,0 +1,1 @@
+page.replace_html 'concepto_list', :partial => 'list'

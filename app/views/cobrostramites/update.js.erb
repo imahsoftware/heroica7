@@ -1,0 +1,14 @@
+$("#cobrostramite_form").collapse("hide");
+$("#cobrostramite_form").empty();
+<% if flash[:notice] %>
+  $(".flash_messages").html("<div class='alert alert-success alert-dismissible'><button type='button' class='close' data-dismiss='alert'>&times;</button><%= j flash[:notice] %></div>");
+  <% flash.discard(:notice) %>
+<% end %>
+// Si cambió de categoría, recarga la página para re-agrupar
+<% cat_id = @cobrostramite.categoria_id %>
+if ($("#tbody_cobrostramites_<%= cat_id %>").length) {
+  $("#cobrostramite_<%= @cobrostramite.id %>").replaceWith("<%= j render 'tr', cobrostramite: @cobrostramite %>");
+} else {
+  location.reload();
+}
+$('[data-toggle="tooltip"]').tooltip();

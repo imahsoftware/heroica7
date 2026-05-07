@@ -1,0 +1,13 @@
+$("#instructor_form").collapse("hide");
+$("#instructor_form").empty();
+
+<% if @active_record.present? %>
+  $("#instructor_<%= @active_record.id %>").replaceWith("<%= j render 'tr', instructor: @active_record %>");
+<% end %>
+
+$("#instructor_<%= @instructor.id %>").html("<td colspan='8'><%= j render 'form' %></td>");
+$("#instructor_<%= @instructor.id %>").addClass("active_instructor");
+
+$(".datepicker").datepicker();
+$(".tooltip").tooltip("hide");
+$('[data-toggle="tooltip"]').tooltip();

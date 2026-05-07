@@ -1,0 +1,36 @@
+<div id="productheader">
+  <span class="tit_gr_azul">&nbsp;&nbsp;INFORMACION TRAMITES</span>
+</div>
+<br/>
+<div align="center">
+<% if permiso("tipostramite","C").to_s == "S" %>
+<table width="50%" height="40" border="0" cellpadding="0" cellspacing="0">
+   <tr>
+    <td><% form_remote_tag :url => {:action => 'add_tipostramite'}, :complete => "tipostramite_descripcion.value=nil" do %>
+<table width="100%" height="40" border="0" cellpadding="0" cellspacing="0">
+   <tr>
+     <td width="80%" class="campos">Descripcion</td>
+     <td width="20%"></td>
+   </tr>
+   <tr>
+     <td><%= text_field 'tipostramite', 'descripcion',{ :class => "campo",
+                :size => 60,
+                :onFocus => "this.style.border='1px solid #f00',this.value=''",
+                :onBlur => "this.style.border='1px solid #bbb'",
+                :onChange=> "javascript:this.value=this.value.toUpperCase();"
+                 }  %></td>
+      <td><%= submit_tag "Guardar", :class=>"buttonAsLink"%></td>
+   </tr>
+</table>
+
+     <% end %></td>
+  </tr>
+</table>
+<br />
+<% end %>
+<div id="tipostramite_list">
+<%= render :partial => 'list' %>
+  <div id="notice"><%= flash[:notice] %></div>
+</div>
+<br/>
+</div>

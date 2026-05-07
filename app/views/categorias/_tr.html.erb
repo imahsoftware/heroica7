@@ -1,0 +1,23 @@
+<tr id="categoria_<%= categoria.id %>">
+  <td class="text-center">
+    <%= link_to edit_categoria_path(categoria), remote: true,
+        title: t(:title_editar),
+        data: { toggle: 'tooltip' } do %>
+      <button class="btn btn-xs btn-warning btn-accion"><i class="fa fa-edit"></i></button>
+    <% end %>
+    <%= link_to categoria_path(categoria), remote: true,
+        method: :delete,
+        title: t(:title_elimina),
+        data: { confirm: t(:elimina_confirma), toggle: 'tooltip' } do %>
+      <button class="btn btn-xs btn-danger btn-accion"><i class="fa fa-trash"></i></button>
+    <% end %>
+  </td>
+  <td><strong><%= categoria.nombre %></strong></td>
+  <td><%= categoria.codigo_nuevo.presence || '—' %></td>
+  <td><%= categoria.codigo.presence || '—' %></td>
+  <td><%= categoria.tipo_servicio.presence || '—' %></td>
+  <td class="text-center"><%= categoria.practicas.presence || '—' %></td>
+  <td class="text-center"><%= categoria.teoricas.presence || '—' %></td>
+  <td class="text-center"><%= categoria.taller.presence || '—' %></td>
+  <td class="text-center"><%= categoria.alertpracticas.presence || '—' %></td>
+</tr>

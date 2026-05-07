@@ -1,0 +1,17 @@
+<tr id="tipostramite_<%= tipostramite.id %>">
+  <td class="text-center">
+    <%= link_to edit_tipostramite_path(tipostramite), remote: true,
+        title: t(:title_editar),
+        data: { toggle: 'tooltip' } do %>
+      <button class="btn btn-xs btn-warning btn-accion"><i class="fa fa-edit"></i></button>
+    <% end %>
+    <%= link_to tipostramite_path(tipostramite), remote: true,
+        method: :delete,
+        title: t(:title_elimina),
+        data: { confirm: t(:elimina_confirma), toggle: 'tooltip' } do %>
+      <button class="btn btn-xs btn-danger btn-accion"><i class="fa fa-trash"></i></button>
+    <% end %>
+  </td>
+  <td><strong><%= tipostramite.descripcion %></strong></td>
+  <td><%= tipostramite.ministerio.presence || '—' %></td>
+</tr>

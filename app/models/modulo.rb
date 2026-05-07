@@ -5,6 +5,9 @@ class Modulo < ApplicationRecord
   has_many :portafolioscargosmodulos
   has_many :permisos
 
+  validates :descripcion, presence: true
+  validates :controlador, presence: true
+
   enum grupo_option: {gestion: 'Gestion', parametro: 'Parametrizacion', factura: 'Facturacion', seguridad: 'Seguridad', informes: 'Informes'}
 
   after_save :despuesdeguardar

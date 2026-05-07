@@ -1,0 +1,4 @@
+$("#instructor_<%= @instructor.id %>").replaceWith("<%= j render 'tr', instructor: @instructor %>");
+$("#instructor_form").collapse("hide");
+$("#instructor_form").empty();
+$(".tooltip").tooltip("hide");

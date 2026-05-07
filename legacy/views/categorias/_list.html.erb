@@ -1,0 +1,27 @@
+  <div align="center">
+<table width="60%" border="0" align="center" cellpadding="0" cellspacing="0" id="one-column-emphasis">
+  <tr valign="middle">
+    <td width="30%" height="30" class="oce-first">Nombre</td>
+    <td width="20%" height="30" class="oce-first">Codigo Nuevo</td>
+    <td width="20%" class="oce-first">Codigo</td>
+    <td width="20%" class="oce-first">Tipo Servicio</td>
+    <td width="10%" class="oce-first"></td>
+  </tr>
+<% for categoria in @categorias%>
+  <tr class="<%=cycle('even1', 'odd1')%>" postS_<%=categoria.id%>>
+    <td  class="camposDesc"><%=h categoria.nombre %></td>
+    <td  class="camposDesc"><%=h categoria.codigo_nuevo %></td>
+    <td  class="camposDesc"><%=h categoria.codigo %></td>
+    <td  class="camposDesc"><%=h categoria.tipo_servicio %></td>
+    <td  class="camposDesc"><div align="center">
+        <% if permiso("categoria","A").to_s == "S" %>
+        <%= link_to 'Editar', edit_categoria_path(categoria), :class=>"editarlink" %>
+        <% end %>
+        </div>
+   </td>
+  </tr>
+<% end %>
+</table>
+</div>
+
+

@@ -1,0 +1,23 @@
+<tr id="concepto_<%= concepto.id %>">
+  <td class="text-center">
+    <%= link_to edit_concepto_path(concepto), remote: true,
+        title: t(:title_editar),
+        data: { toggle: 'tooltip' } do %>
+      <button class="btn btn-xs btn-warning btn-accion"><i class="fa fa-edit"></i></button>
+    <% end %>
+    <%= link_to concepto_path(concepto), remote: true,
+        method: :delete,
+        title: t(:title_elimina),
+        data: { confirm: t(:elimina_confirma), toggle: 'tooltip' } do %>
+      <button class="btn btn-xs btn-danger btn-accion"><i class="fa fa-trash"></i></button>
+    <% end %>
+  </td>
+  <td><strong><%= concepto.descripcion %></strong></td>
+  <td class="text-right">
+    <%= number_to_currency(concepto.valor, precision: 0, unit: '$', delimiter: '.') if concepto.valor.present? %>
+  </td>
+  <td style="font-size: 11px; color: #64748b;">
+    <%= concepto.updated_at.strftime('%Y-%m-%d %H:%M') rescue '—' %>
+    <% if concepto.user.present? %> — <%= concepto.user.username %><% end %>
+  </td>
+</tr>

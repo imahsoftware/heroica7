@@ -1,0 +1,33 @@
+  <div align="center">
+<table width="90%" border="0" align="center" cellpadding="0" cellspacing="0" id="one-column-emphasis">
+  <tr valign="middle">
+    <td width="25%" height="30" class="oce-first">Usuario</td>
+    <td width="40%" height="30" class="oce-first">Nombre</td>
+    <td width="15%" height="30" class="oce-first">Valor</td>
+    <td width="20%" class="oce-first"></td>
+  </tr>
+<% for concepto in @conceptos%>
+  <tr class="postS_<%=concepto.id%>">
+    <td  class="camposDesc">
+      <%=concepto.updated_at.strftime("%Y-%m-%d %X")%> - <%=concepto.user.username rescue nil%>
+    </td>
+    <td  class="camposDesc"><%=h concepto.descripcion %></td>
+    <td  class="camposDesc"><%=h camponumerico(concepto.valor)%></td>
+    <td  class="camposDesc"><div align="center">
+        <% if permiso("concepto","A").to_s == "S" %>
+        <%= link_to 'Editar', edit_concepto_path(concepto), :class=>"editarlink" %>
+         <%= link_to_remote 'Borrar',{
+                :url => concepto_path(concepto),
+                :method => :delete,
+                :confirm => "¿Seguro?",
+                :before => "$(this).up('.postS_#{concepto.id}').remove()"},
+                :class=>"borrarlink"%>
+        <% end %>
+        </div>
+   </td>
+  </tr>
+<% end %>
+</table>
+</div>
+
+

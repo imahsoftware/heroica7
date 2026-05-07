@@ -1,0 +1,61 @@
+<%= simple_form_for @categoria, remote: true do |f| %>
+  <div class="bs-callout">
+
+    <p class="section-label">Datos de la categoría</p>
+    <div class="row">
+      <div class="col-md-5">
+        <%= f.input :nombre, label: 'Nombre',
+            input_html: { onChange: 'this.value=this.value.toUpperCase()', class: 'form-control input_uppercase' } %>
+      </div>
+      <div class="col-md-2">
+        <%= f.input :codigo_nuevo, label: 'Código Nuevo',
+            input_html: { class: 'form-control' } %>
+      </div>
+      <div class="col-md-2">
+        <%= f.input :codigo, label: 'Código',
+            input_html: { class: 'form-control' } %>
+      </div>
+      <div class="col-md-3">
+        <%= f.input :tipo_servicio, label: 'Tipo Servicio',
+            input_html: { onChange: 'this.value=this.value.toUpperCase()', class: 'form-control input_uppercase' } %>
+      </div>
+    </div>
+
+    <p class="section-label" style="margin-top: 16px;">Horas</p>
+    <div class="row">
+      <div class="col-md-2">
+        <%= f.input :practicas, label: 'Prácticas',
+            input_html: { class: 'form-control' } %>
+      </div>
+      <div class="col-md-2">
+        <%= f.input :teoricas, label: 'Teóricas',
+            input_html: { class: 'form-control' } %>
+      </div>
+      <div class="col-md-2">
+        <%= f.input :taller, label: 'Taller',
+            input_html: { class: 'form-control' } %>
+      </div>
+      <div class="col-md-2">
+        <%= f.input :alertpracticas, label: 'Alerta Prácticas',
+            input_html: { class: 'form-control' } %>
+      </div>
+    </div>
+
+    <div class="row" style="margin-top: 12px;">
+      <div class="col-md-6">
+        <% if @categoria.new_record? %>
+          <%= button_tag t(:cancelar), type: 'button',
+              data: { toggle: 'collapse', target: '#categoria_form' },
+              class: 'cancel_button btn btn-flat btn-default' %>
+        <% else %>
+          <%= link_to t(:cancelar), categoria_path(@categoria),
+              class: 'btn btn-flat btn-default', remote: true %>
+        <% end %>
+      </div>
+      <div class="col-md-6 text-right">
+        <%= f.button :submit, t(:guardar), class: 'btn-guardar' %>
+      </div>
+    </div>
+
+  </div>
+<% end %>

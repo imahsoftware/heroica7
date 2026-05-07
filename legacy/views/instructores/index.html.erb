@@ -1,0 +1,42 @@
+<div id="productheader">
+  <h2><img src="/images/instructores.png"></h2>&nbsp;&nbsp;
+</div>
+  <div align="center">
+<table width="70%" height="40" border="0" cellpadding="0" cellspacing="0">
+   <tr>
+    <td><% form_remote_tag :url => {:action => 'add_instructor'}, :complete => "instructor_cedula.value=nil instructor_nombre.value=nil" do %>
+<table width="100%" height="40" border="0" cellpadding="0" cellspacing="0">
+   <tr>
+     <td width="20%" class="campos">Identificacion</td>
+     <td width="60%" class="campos">Nombre</td>
+     <td width="20%"></td>
+   </tr>
+   <tr>
+     <td><%= text_field 'instructor', 'identificacion',{ :class => "campo",
+                :size => 20,
+                :onFocus => "this.style.border='1px solid #f00',this.value=''",
+                :onBlur => "this.style.border='1px solid #bbb'",
+                :onChange=> "javascript:this.value=this.value.toUpperCase();"
+                 }  %></td>
+<td><%= text_field 'instructor', 'nombre',{ :class => "campo",
+                :size => 60,
+                :onFocus => "this.style.border='1px solid #f00',this.value=''",
+                :onBlur => "this.style.border='1px solid #bbb'",
+                :onChange=> "javascript:this.value=this.value.toUpperCase();"
+                 }  %></td>
+      <td><%= submit_tag "Guardar", :class=>"buttonAsLink"%></td>
+   </tr>
+</table>
+
+     <% end %></td>
+  </tr>
+</table>
+
+<br />
+<div id="instructor_list">
+<%= render :partial => 'list' %>
+  <div id="notice"><%= flash[:notice] %></div>
+</div>
+<br/>
+</div>
+

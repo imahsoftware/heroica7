@@ -1,0 +1,12 @@
+$("#tipostramite_form").collapse("hide");
+$("#tipostramite_form").empty();
+
+<% if @active_record.present? %>
+  $("#tipostramite_<%= @active_record.id %>").replaceWith("<%= j render 'tr', tipostramite: @active_record %>");
+<% end %>
+
+$("#tipostramite_<%= @tipostramite.id %>").html("<td colspan='3'><%= j render 'form' %></td>");
+$("#tipostramite_<%= @tipostramite.id %>").addClass("active_tipostramite");
+
+$(".tooltip").tooltip("hide");
+$('[data-toggle="tooltip"]').tooltip();

@@ -1,0 +1,12 @@
+$("#categoria_form").collapse("hide");
+$("#categoria_form").empty();
+
+<% if @active_record.present? %>
+  $("#categoria_<%= @active_record.id %>").replaceWith("<%= j render 'tr', categoria: @active_record %>");
+<% end %>
+
+$("#categoria_<%= @categoria.id %>").html("<td colspan='9'><%= j render 'form' %></td>");
+$("#categoria_<%= @categoria.id %>").addClass("active_categoria");
+
+$(".tooltip").tooltip("hide");
+$('[data-toggle="tooltip"]').tooltip();

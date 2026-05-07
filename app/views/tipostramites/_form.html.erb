@@ -1,0 +1,33 @@
+<%= simple_form_for @tipostramite, remote: true do |f| %>
+  <div class="bs-callout">
+
+    <p class="section-label">Datos del tipo de trámite</p>
+    <div class="row">
+      <div class="col-md-6">
+        <%= f.input :descripcion, label: 'Descripción',
+            input_html: { onChange: 'this.value=this.value.toUpperCase()', class: 'form-control input_uppercase' } %>
+      </div>
+      <div class="col-md-4">
+        <%= f.input :ministerio, label: 'Ministerio',
+            input_html: { onChange: 'this.value=this.value.toUpperCase()', class: 'form-control input_uppercase' } %>
+      </div>
+    </div>
+
+    <div class="row" style="margin-top: 12px;">
+      <div class="col-md-6">
+        <% if @tipostramite.new_record? %>
+          <%= button_tag t(:cancelar), type: 'button',
+              data: { toggle: 'collapse', target: '#tipostramite_form' },
+              class: 'cancel_button btn btn-flat btn-default' %>
+        <% else %>
+          <%= link_to t(:cancelar), tipostramite_path(@tipostramite),
+              class: 'btn btn-flat btn-default', remote: true %>
+        <% end %>
+      </div>
+      <div class="col-md-6 text-right">
+        <%= f.button :submit, t(:guardar), class: 'btn-guardar' %>
+      </div>
+    </div>
+
+  </div>
+<% end %>

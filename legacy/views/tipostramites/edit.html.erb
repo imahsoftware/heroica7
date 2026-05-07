@@ -1,0 +1,33 @@
+<div id="productheader">
+  <span class="tit_gr_azul">&nbsp;&nbsp;INFORMACION TRAMITES</span>
+  <div align="right">
+   <%= link_to 'Regresar', tipostramites_path, :class=>"regresarlink" %>&nbsp;&nbsp;</div>
+</div>
+<br/>
+<div align="center">
+<% form_for(@tipostramite) do |f| %>
+<table width="60%" height="40" border="0" cellpadding="0" cellspacing="0">
+   <tr>
+    <td>
+<table width="100%" height="40" border="0" cellpadding="0" cellspacing="0">
+   <tr>
+     <td width="20%" height="30" class="campos">Id :</td>
+     <td width="80%"><%=@tipostramite.id%></td>
+   </tr>
+   <tr>
+     <td height="30" class="campos">Descripcion :</td>
+     <td><%= f.text_field :descripcion,{ :class => "campo", :size => 50,
+                :onChange=> "javascript:this.value=this.value.toUpperCase();",
+              :onFocus => "this.style.border='1px solid #f00'",
+              :onBlur => "this.style.border='1px solid #bbb'" }%></td>
+   </tr>
+   <tr>
+     <td></td>
+      <td><%= f.submit "Guardar", :class=>"buttonAsLink"%></td>
+   </tr>
+</table>
+</td>
+  </tr>
+</table>
+<% end %>
+</div>

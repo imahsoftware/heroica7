@@ -1,0 +1,4 @@
+$("#categoria_<%= @categoria.id %>").replaceWith("<%= j render 'tr', categoria: @categoria %>");
+$("#categoria_form").collapse("hide");
+$("#categoria_form").empty();
+$(".tooltip").tooltip("hide");
