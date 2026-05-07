@@ -19,6 +19,7 @@ gem 'secondbase'
 gem 'time_difference'
 gem 'autonumeric-rails'
 gem 'bootstrap-tooltip-rails'
+gem 'sassc', '>= 2.4.0'
 gem 'bootstrap-sass'
 # temporal off for Rails 6.1 migration (thor conflict)
 # gem "select2-rails"
