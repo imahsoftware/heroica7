@@ -34,7 +34,6 @@
           <ul class="nav nav-tabs nav-tabs-form" style="margin-bottom: 0; margin-top: 12px;">
             <li class="active"><a href="#tab-datos" data-toggle="tab"><i class="fa fa-id-card"></i> Datos Personales</a></li>
             <li><a href="#tab-acceso" data-toggle="tab"><i class="fa fa-lock"></i> Acceso</a></li>
-            <li><a href="#tab-nomina" data-toggle="tab"><i class="fa fa-money-bill"></i> Nómina</a></li>
             <li><a href="#tab-foto" data-toggle="tab"><i class="fa fa-camera"></i> Foto</a></li>
           </ul>
 
@@ -202,31 +201,6 @@
                   </div>
                 </div>
               <% end %>
-            </div>
-
-            <!-- ── Tab: Nómina ── -->
-            <div class="tab-pane" id="tab-nomina">
-              <p class="section-label">Datos salariales</p>
-              <div class="row">
-                <div class="col-md-2">
-                  <%= f.input :salario, as: :moneda, label: 'Salario',
-                      input_html: { class: 'form-control' } %>
-                </div>
-                <div class="col-md-2">
-                  <%= f.input :tipo_cuenta, as: :select, label: 'Tipo de cuenta',
-                      collection: [['Ahorros','AHORROS'],['Corriente','CORRIENTE']],
-                      include_blank: 'Seleccionar',
-                      input_html: { class: 'select2 form-control' } %>
-                </div>
-                <div class="col-md-3">
-                  <%= f.input :nro_cuenta, label: 'Nro. Cuenta',
-                      input_html: { class: 'form-control' } %>
-                </div>
-                <div class="col-md-3">
-                  <%= f.input :banco, label: 'Banco',
-                      input_html: { onChange: 'this.value=this.value.toUpperCase()', class: 'form-control input_uppercase' } %>
-                </div>
-              </div>
             </div>
 
             <!-- ── Tab: Foto ── -->
