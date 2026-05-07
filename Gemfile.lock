@@ -485,7 +485,7 @@ DEPENDENCIES
   zeitwerk (>= 2.6.0, < 2.7)
 
 RUBY VERSION
-   ruby 2.7.8p225
+   ruby 3.3.4p94
 
 BUNDLED WITH
-   2.1.4
+   2.5.9
