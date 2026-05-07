@@ -12,8 +12,6 @@ class WsController < ApplicationController
   require 'openssl'
   require 'open-uri'
 
-  extend WsHelper
-
   def self.smscolombiared(nroTel, messageSend)
     to = "#{nroTel}"
     username = Parametro.find(48).valor.to_s
