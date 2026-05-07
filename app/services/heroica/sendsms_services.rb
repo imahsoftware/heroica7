@@ -1,4 +1,4 @@
-class Evcsms::SendsmsServices
+class Heroica::SendsmsServices
 
   #Evcsms::SendsmsServices.new.send_sms_notificacion(@user.id, mensaje)
 
