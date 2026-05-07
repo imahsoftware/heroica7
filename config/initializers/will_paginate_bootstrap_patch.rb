@@ -2,8 +2,6 @@
 # La firma de prepare cambió de (collection, options, template) a (collection, options)
 
 ActiveSupport.on_load(:action_view) do
-  require 'will_paginate/action_view'
-
   module BootstrapPagination
     class Rails < WillPaginate::ActionView::LinkRenderer
       def prepare(collection, options)
