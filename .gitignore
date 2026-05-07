@@ -42,6 +42,7 @@ app/views/.DS_Store
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+/config/puma.rb
 /config/secrets.yml
 .idea/workspace.xml
 .idea/encodings.xml
