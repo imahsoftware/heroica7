@@ -1,0 +1,8 @@
+<% if @active_record.present? %>
+  $("#proveedor_<%= @active_record.id %>").replaceWith("<%= j render 'tr', proveedor: @active_record %>");
+<% end %>
+$("#proveedor_form").html("<%= j render 'form' %>");
+$("#proveedor_form").collapse("show");
+$(".select2").select2();
+$(".tooltip").tooltip("hide");
+$('[data-toggle="tooltip"]').tooltip();

@@ -151,5 +151,6 @@ Rails.application.routes.draw do
   resources :tipostramites
   resources :conceptos
   resources :cobrostramites
+  resources :proveedores
 
 end

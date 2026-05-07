@@ -1,0 +1,26 @@
+<div class="table-responsive">
+  <table class="table table-bordered table-condensed table-striped table-usuarios">
+    <thead>
+      <tr>
+        <th width="8%" class="text-center">Acciones</th>
+        <th width="8%">Doc.</th>
+        <th width="12%">Identificación</th>
+        <th>Nombre / Razón Social</th>
+        <th width="15%">Contacto</th>
+        <th width="12%">Teléfonos</th>
+        <th width="15%">Email</th>
+      </tr>
+    </thead>
+    <tbody id="tbody_proveedores">
+      <% @proveedores.each do |proveedor| %>
+        <%= render 'proveedores/tr', proveedor: proveedor %>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<div class="row" style="margin-top: 12px;">
+  <div class="col-xs-12 text-right">
+    <%= will_paginate @proveedores, renderer: BootstrapPagination::Rails %>
+  </div>
+</div>

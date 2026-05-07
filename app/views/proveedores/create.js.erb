@@ -1,0 +1,8 @@
+$("#proveedor_form").collapse("hide");
+$("#proveedor_form").empty();
+<% if flash[:notice] %>
+  $(".flash_messages").html("<div class='alert alert-success alert-dismissible'><button type='button' class='close' data-dismiss='alert'>&times;</button><%= j flash[:notice] %></div>");
+  <% flash.discard(:notice) %>
+<% end %>
+$("#tbody_proveedores").prepend("<%= j render 'tr', proveedor: @proveedor %>");
+$('[data-toggle="tooltip"]').tooltip();

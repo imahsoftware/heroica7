@@ -1,0 +1,30 @@
+<tr id="proveedor_<%= proveedor.id %>">
+  <td class="text-center">
+    <%= link_to edit_proveedor_path(proveedor), remote: true,
+        title: t(:title_editar),
+        data: { toggle: 'tooltip' } do %>
+      <button class="btn btn-xs btn-warning btn-accion"><i class="fa fa-edit"></i></button>
+    <% end %>
+    <%= link_to proveedor_path(proveedor), remote: true,
+        method: :delete,
+        title: t(:title_elimina),
+        data: { confirm: t(:elimina_confirma), toggle: 'tooltip' } do %>
+      <button class="btn btn-xs btn-danger btn-accion"><i class="fa fa-trash"></i></button>
+    <% end %>
+  </td>
+  <td>
+    <span class="badge" style="background:#64748b; font-size:10px;">
+      <%= proveedor.documento.presence || '—' %>
+    </span>
+  </td>
+  <td><code style="font-size:11px;"><%= proveedor.identificacion.presence || '—' %></code></td>
+  <td>
+    <strong><%= proveedor.autobuscar.presence || '—' %></strong>
+    <% if proveedor.contacto.present? %>
+      <br><small style="color:#64748b;"><%= proveedor.contacto %></small>
+    <% end %>
+  </td>
+  <td><%= proveedor.contacto.presence || '—' %></td>
+  <td><%= proveedor.telefonos.presence || '—' %></td>
+  <td style="font-size:11px;"><%= proveedor.email.presence || '—' %></td>
+</tr>

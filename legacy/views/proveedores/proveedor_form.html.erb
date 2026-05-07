@@ -1,0 +1,147 @@
+<%= stylesheet_link_tag 'tabs'%>
+<%= javascript_include_tag 'fabtabulous' %>
+<div id="productheader">
+  <span class="tit_gr_azul">&nbsp;&nbsp;PROVEEDORES</span>
+  <div align="right">
+   <%= link_to 'Listado', proveedores_path, :class=>"regresarlink" %>&nbsp;&nbsp;
+  </div>
+</div>
+<br/>
+<fieldset>
+<%  form_for @proveedor do |f| %>
+<div align="center">
+<table width="80%" border="0" align="center" cellpadding="0" cellspacing="0" id="one-column-emphasis">
+  <tr valign="middle">
+    <td height="30" ><div align="right"><strong>Tipo Documento :&nbsp;* &nbsp;</strong></div></td>
+    <td> <%= select(:proveedor, :documento, { "C.C." => "CC", "T.I." => "TI", "NIT" => "NIT", "PAS" => "PAS", "C.E." => "CE"},
+                    { :include_blank => true }, { :style=>"width:70px", :class => "campo", :onFocus => "this.style.border='1px solid #f00'", :onBlur => "this.style.border='1px solid #bbb'" })%>
+      <%= f.error_message_on :documento, :css_class =>"cerror"%></td>
+  </tr>
+  <tr valign="middle">
+    <td width="20%" height="30" ><div align="right"><strong>Identificacion : *&nbsp;&nbsp;</strong></div></td>
+    <td width="80%" height="30" ><%= f.text_field :identificacion,{ :class => "campo",:size => 20,
+                                                                    :onFocus => "this.style.border='1px solid #f00'",
+                                                                    :onBlur => "this.style.border='1px solid #bbb'",
+                                                                    :onChange=> "javascript:this.value=this.value.toUpperCase();"
+    }  %>
+      <%= f.error_message_on :identificacion, :css_class =>"cerror"%></td>
+  </tr>
+  <tr valign="middle">
+    <td height="30" ><div align="right"><strong>Primer nombre :&nbsp; &nbsp;</strong></div></td>
+    <td height="30" ><%= f.text_field :primer_nombre,{ :class => "campo",:size => 60,:onFocus => "this.style.border='1px solid #f00'",:onBlur => "this.style.border='1px solid #bbb'",:onChange=> "javascript:this.value=this.value.toUpperCase();"}  %>
+      <%= f.error_message_on :primer_nombre, :css_class =>"cerror"%></td>
+  </tr>
+  <tr valign="middle">
+    <td height="30" ><div align="right"><strong>Segundo nombre :&nbsp; &nbsp;</strong></div></td>
+    <td height="30" ><%= f.text_field :segundo_nombre,{ :class => "campo",:size => 60,:onFocus => "this.style.border='1px solid #f00'",:onBlur => "this.style.border='1px solid #bbb'",:onChange=> "javascript:this.value=this.value.toUpperCase();"}  %>
+      <%= f.error_message_on :segundo_nombre, :css_class =>"cerror"%></td>
+  </tr>
+  <tr valign="middle">
+    <td height="30" ><div align="right"><strong>Primer apellido :&nbsp; &nbsp;</strong></div></td>
+    <td height="30" ><%= f.text_field :primer_apellido,{ :class => "campo",:size => 60,:onFocus => "this.style.border='1px solid #f00'",:onBlur => "this.style.border='1px solid #bbb'",:onChange=> "javascript:this.value=this.value.toUpperCase();"}  %>
+      <%= f.error_message_on :primer_apellido, :css_class =>"cerror"%></td>
+  </tr>
+  <tr valign="middle">
+    <td height="30" ><div align="right"><strong>Segundo apellido :&nbsp; &nbsp;</strong></div></td>
+    <td height="30" ><%= f.text_field :segundo_apellido,{ :class => "campo",:size => 60,:onFocus => "this.style.border='1px solid #f00'",:onBlur => "this.style.border='1px solid #bbb'",:onChange=> "javascript:this.value=this.value.toUpperCase();"}  %>
+      <%= f.error_message_on :segundo_apellido, :css_class =>"cerror"%></td>
+  </tr>
+  <tr valign="middle">
+    <td height="30" ><div align="right"><strong>Razon social :&nbsp; &nbsp;</strong></div></td>
+    <td height="30" ><%= f.text_field :razon_social,{ :class => "campo",:size => 60,:onFocus => "this.style.border='1px solid #f00'",:onBlur => "this.style.border='1px solid #bbb'",:onChange=> "javascript:this.value=this.value.toUpperCase();"}  %>
+      <%= f.error_message_on :razon_social, :css_class =>"cerror"%></td>
+  </tr>
+  <tr valign="middle">
+    <td height="30" ><div align="right"><strong>Contacto :&nbsp;&nbsp;</strong></div></td>
+    <td height="30" ><%= f.text_field :contacto,{ :class => "campo",
+                :size => 60,
+                :onFocus => "this.style.border='1px solid #f00'",
+                :onBlur => "this.style.border='1px solid #bbb'",
+                :onChange=> "javascript:this.value=this.value.toUpperCase();"
+                 }  %></td>
+  </tr>
+  <tr valign="middle">
+    <td height="30" ><div align="right"><strong>Dirección :&nbsp;&nbsp;</strong></div></td>
+    <td><%= f.text_field :direccion ,{ :class => "campo", :size => 80, :onFocus => "this.style.border='1px solid #f00'", :onBlur => "this.style.border='1px solid #bbb'" }%>
+      <%= f.error_message_on :direccion, :css_class =>"cerror"%></td>
+  </tr>
+  <tr valign="middle">
+    <td height="30" ><div align="right"><strong>Departamento :&nbsp;&nbsp;</strong></div></td>
+    <td><%= f.text_field :departamento ,{ :class => "campo", :size => 40, :onFocus => "this.style.border='1px solid #f00'", :onBlur => "this.style.border='1px solid #bbb'" }%></td>
+  </tr>
+  <tr valign="middle">
+    <td height="30" ><div align="right"><strong>Ciudad :&nbsp;&nbsp;</strong></div></td>
+    <td height="30" ><%= f.text_field :ciudad,{ :class => "campo",
+                :size => 30,
+                :onFocus => "this.style.border='1px solid #f00'",
+                :onBlur => "this.style.border='1px solid #bbb'",
+                :onChange=> "javascript:this.value=this.value.toUpperCase();"
+                 }  %></td>
+  </tr>
+  <tr valign="middle">
+    <td height="30" ><div align="right"><strong>Telefonos :&nbsp;&nbsp;</strong></div></td>
+    <td height="30" ><%= f.text_field :telefonos,{ :class => "campo",
+                :size => 50,
+                :onFocus => "this.style.border='1px solid #f00'",
+                :onBlur => "this.style.border='1px solid #bbb'",
+                :onChange=> "javascript:this.value=this.value.toUpperCase();"
+                 }  %>
+      <%= f.error_message_on :telefonos, :css_class =>"cerror"%></td>
+  </tr>
+  <tr valign="middle">
+    <td height="30" ><div align="right"><strong>Celular :&nbsp;&nbsp;</strong></div></td>
+    <td height="30" ><%= f.text_field :celular,{ :class => "campo",
+                :size => 30,
+                :onFocus => "this.style.border='1px solid #f00'",
+                :onBlur => "this.style.border='1px solid #bbb'",
+                :onChange=> "javascript:this.value=this.value.toUpperCase();"
+                 }  %></td>
+  </tr>
+  <tr valign="middle">
+    <td height="30" ><div align="right"><strong>Fax :&nbsp;&nbsp;</strong></div></td>
+    <td height="30" ><%= f.text_field :fax,{ :class => "campo",
+                :size => 30,
+                :onFocus => "this.style.border='1px solid #f00'",
+                :onBlur => "this.style.border='1px solid #bbb'",
+                :onChange=> "javascript:this.value=this.value.toUpperCase();"
+                 }  %></td>
+  </tr>
+  <tr valign="middle">
+    <td height="30" ><div align="right"><strong>Correo Electronico :&nbsp;&nbsp;</strong></div></td>
+    <td height="30" ><%= f.text_field :email,{ :class => "campo",
+                :size => 60,
+                :onFocus => "this.style.border='1px solid #f00'",
+                :onBlur => "this.style.border='1px solid #bbb'",
+                :onChange=> "javascript:this.value=this.value.toUpperCase();"
+                 }  %>
+      <%= f.error_message_on :email, :css_class =>"cerror"%></td>
+  </tr>
+  <tr valign="middle">
+    <td height="30" ><div align="right"><strong>Productos y/o servicios :&nbsp;&nbsp;</strong></div></td>
+   <td height="30" ><%= f.text_area(:productos, :cols => 80, :rows => 4, :class => 'campo', :maxlength => 4000,
+:onChange=> "javascript:this.value=this.value.toUpperCase();") %></td>
+  </tr>
+  <tr valign="middle">
+    <td height="30" ><div align="right"><strong>Especificaciones del producto :&nbsp;&nbsp;</strong></div></td>
+   <td height="30" ><%= f.text_area(:especificaciones, :cols => 80, :rows => 4, :class => 'campo', :maxlength => 4000,
+:onChange=> "javascript:this.value=this.value.toUpperCase();") %></td>
+  </tr>
+<% unless @proveedor.new_record? %>
+  <tr valign="middle">
+    <td height="30" ><div align="right"><strong>Creacion :&nbsp;&nbsp;</strong></div></td>
+    <td height="30" ><%=@proveedor.created_at.strftime("%Y-%m-%d %X")%> - <%=@proveedor.user.username rescue nil%></td>
+  </tr>
+  <tr valign="middle">
+    <td height="30" ><div align="right"><strong>Ult.Act :&nbsp;&nbsp;</strong></div></td>
+    <td height="30" ><%=@proveedor.updated_at.strftime("%Y-%m-%d %X")%> - <%=User.find(@proveedor.user_actualiza).username rescue nil%></td>
+  </tr>
+<% end %>
+  <tr valign="middle">
+    <td height="30"></td>
+    <td height="30"><%= submit_tag "Guardar", :name => nil, :disable_with => "Guardando" , :class=>"buttonAsLink"%></td>
+  </tr>
+</table>
+</div>
+<% end %>
+</fieldset>
+<br/>

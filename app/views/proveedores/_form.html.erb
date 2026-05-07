@@ -1,0 +1,125 @@
+<%= simple_form_for @proveedor, remote: true do |f| %>
+  <div class="bs-callout">
+
+    <p class="section-label">Identificación</p>
+    <div class="row">
+      <div class="col-md-2">
+        <%= f.input :documento, as: :select, label: 'Tipo Doc.',
+            collection: Proveedor::DOCUMENTOS,
+            include_blank: 'Seleccionar...',
+            input_html: { class: 'select2 form-control' } %>
+      </div>
+      <div class="col-md-3">
+        <%= f.input :identificacion, label: 'Identificación',
+            input_html: { class: 'form-control' } %>
+      </div>
+    </div>
+
+    <p class="section-label" style="margin-top: 16px;">Nombre / Razón Social</p>
+    <div class="row">
+      <div class="col-md-3">
+        <%= f.input :primer_nombre, label: 'Primer Nombre',
+            input_html: { onChange: 'this.value=this.value.toUpperCase()', class: 'form-control input_uppercase' } %>
+      </div>
+      <div class="col-md-3">
+        <%= f.input :segundo_nombre, label: 'Segundo Nombre',
+            input_html: { onChange: 'this.value=this.value.toUpperCase()', class: 'form-control input_uppercase' } %>
+      </div>
+      <div class="col-md-3">
+        <%= f.input :primer_apellido, label: 'Primer Apellido',
+            input_html: { onChange: 'this.value=this.value.toUpperCase()', class: 'form-control input_uppercase' } %>
+      </div>
+      <div class="col-md-3">
+        <%= f.input :segundo_apellido, label: 'Segundo Apellido',
+            input_html: { onChange: 'this.value=this.value.toUpperCase()', class: 'form-control input_uppercase' } %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <%= f.input :razon_social, label: 'Razón Social (empresa)',
+            input_html: { onChange: 'this.value=this.value.toUpperCase()', class: 'form-control input_uppercase' } %>
+      </div>
+      <div class="col-md-4">
+        <%= f.input :contacto, label: 'Contacto',
+            input_html: { onChange: 'this.value=this.value.toUpperCase()', class: 'form-control input_uppercase' } %>
+      </div>
+    </div>
+
+    <p class="section-label" style="margin-top: 16px;">Ubicación</p>
+    <div class="row">
+      <div class="col-md-5">
+        <%= f.input :direccion, label: 'Dirección',
+            input_html: { class: 'form-control' } %>
+      </div>
+      <div class="col-md-3">
+        <%= f.input :departamento, label: 'Departamento',
+            input_html: { onChange: 'this.value=this.value.toUpperCase()', class: 'form-control input_uppercase' } %>
+      </div>
+      <div class="col-md-3">
+        <%= f.input :ciudad, label: 'Ciudad',
+            input_html: { onChange: 'this.value=this.value.toUpperCase()', class: 'form-control input_uppercase' } %>
+      </div>
+    </div>
+
+    <p class="section-label" style="margin-top: 16px;">Contacto</p>
+    <div class="row">
+      <div class="col-md-3">
+        <%= f.input :telefonos, label: 'Teléfonos',
+            input_html: { class: 'form-control' } %>
+      </div>
+      <div class="col-md-2">
+        <%= f.input :celular, label: 'Celular',
+            input_html: { class: 'form-control' } %>
+      </div>
+      <div class="col-md-2">
+        <%= f.input :fax, label: 'Fax',
+            input_html: { class: 'form-control' } %>
+      </div>
+      <div class="col-md-4">
+        <%= f.input :email, label: 'Correo Electrónico',
+            input_html: { class: 'form-control' } %>
+      </div>
+    </div>
+
+    <p class="section-label" style="margin-top: 16px;">Productos y Servicios</p>
+    <div class="row">
+      <div class="col-md-6">
+        <%= f.input :productos, as: :text, label: 'Productos y/o Servicios',
+            input_html: { rows: 3, onChange: 'this.value=this.value.toUpperCase()', class: 'form-control input_uppercase' } %>
+      </div>
+      <div class="col-md-6">
+        <%= f.input :especificaciones, as: :text, label: 'Especificaciones del Producto',
+            input_html: { rows: 3, onChange: 'this.value=this.value.toUpperCase()', class: 'form-control input_uppercase' } %>
+      </div>
+    </div>
+
+    <% unless @proveedor.new_record? %>
+      <div class="row" style="margin-top: 8px;">
+        <div class="col-md-12">
+          <small style="color: #64748b;">
+            <strong>Creación:</strong> <%= @proveedor.created_at.strftime('%Y-%m-%d %H:%M') rescue '—' %>
+            &nbsp;|&nbsp;
+            <strong>Últ. actualización:</strong> <%= @proveedor.updated_at.strftime('%Y-%m-%d %H:%M') rescue '—' %>
+          </small>
+        </div>
+      </div>
+    <% end %>
+
+    <div class="row" style="margin-top: 12px;">
+      <div class="col-md-6">
+        <% if @proveedor.new_record? %>
+          <%= button_tag t(:cancelar), type: 'button',
+              data: { toggle: 'collapse', target: '#proveedor_form' },
+              class: 'cancel_button btn btn-flat btn-default' %>
+        <% else %>
+          <%= link_to t(:cancelar), proveedor_path(@proveedor),
+              class: 'btn btn-flat btn-default', remote: true %>
+        <% end %>
+      </div>
+      <div class="col-md-6 text-right">
+        <%= f.button :submit, t(:guardar), class: 'btn-guardar' %>
+      </div>
+    </div>
+
+  </div>
+<% end %>
