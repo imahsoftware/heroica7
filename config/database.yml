@@ -7,3 +7,13 @@ development:
   username: root
   password: J3r0n1m02o17
   host: 45.55.69.143
+
+production:
+  adapter: mysql2
+  encoding: utf8
+  reconnect: false
+  database: escuela
+  pool: 5
+  username: root
+  password: J3r0n1m02o17
+  host: 45.55.69.143
