@@ -9,8 +9,8 @@ class User < ApplicationRecord
 
   devise :recoverable, :trackable, :validatable, :timeoutable, :lockable
 
-  # Validacion de contraseña segura por la gema de strong_password
-  validates :password, password_strength: true
+  # Validacion de contraseña segura — solo cuando se está cambiando
+  validates :password, password_strength: true, allow_blank: true
 
   has_many :login_activities, as: :user
 #  acts_as_authentic
@@ -27,14 +27,14 @@ class User < ApplicationRecord
   has_attached_file :avatar, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/assets/user_img.png"
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
 
-  validates :nombre, :username, :email, :tipoconsulta, :celular,  presence: true
+  validates :nombre, :username, :email, presence: true
 
   validates :email, format: { with: /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i, :multiline => true, message: "* Correo electrónico invalido" }
   #validate :codeudor
   validates :email, :username, uniqueness: true
-  validates :identificacion, uniqueness: true
+  validates :identificacion, uniqueness: true, allow_blank: true
 
-  validates :identificacion, uniqueness: { scope: :portafolio_id, message: "Ya hay un username" }, on: :create
+  validates :identificacion, uniqueness: { scope: :portafolio_id, message: "Ya hay un username" }, on: :create, allow_blank: true
 
 #validates :identificacion, uniqueness: { scope: :portafolio_id,
 #   message: "Ya hay una misma cedula registrada en este portafolio" }, on: :create

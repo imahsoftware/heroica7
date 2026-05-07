@@ -365,10 +365,18 @@ class UsersController < ApplicationController
   end
 
   def update
+    # No actualizar identificacion si viene vacío — conservar el valor actual
+    params[:user].delete(:identificacion) if params[:user][:identificacion].blank?
+
+    # No actualizar password si viene vacío — Devise :validatable lo requeriría
     if params[:user][:password].blank?
       params[:user].delete(:password)
       params[:user].delete(:password_confirmation)
+      result = @user.update_without_password(user_params)
+    else
+      result = @user.update(user_params)
     end
+
     if params[:user][:ingresoseguro].to_s == "NO"
       @user.encrypted_otp_secret = nil
       @user.encrypted_otp_secret_iv = nil
@@ -377,7 +385,8 @@ class UsersController < ApplicationController
       @user.otp_required_for_login = nil
       @user.unconfirmed_otp_secret = nil
     end
-    if @user.update(user_params)
+
+    if result
       flash['success'] = "Usuario actualizado"
       if is_permit('admin/users') == true
         redirect_to edit_user_path(id: @user.id, etapa: 'A')

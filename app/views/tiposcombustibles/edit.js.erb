@@ -1,0 +1,12 @@
+$("#tiposcombustible_form").collapse("hide");
+$("#tiposcombustible_form").empty();
+
+<% if @active_record.present? %>
+  $("#tiposcombustible_<%= @active_record.id %>").replaceWith("<%= j render 'tr', tiposcombustible: @active_record %>");
+<% end %>
+
+$("#tiposcombustible_<%= @tiposcombustible.id %>").html("<td colspan='2'><%= j render 'form' %></td>");
+$("#tiposcombustible_<%= @tiposcombustible.id %>").addClass("active_tiposcombustible");
+
+$(".tooltip").tooltip("hide");
+$('[data-toggle="tooltip"]').tooltip();

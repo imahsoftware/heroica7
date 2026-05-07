@@ -1,0 +1,29 @@
+<%= simple_form_for @tiposcombustible, remote: true do |f| %>
+  <div class="bs-callout">
+
+    <p class="section-label">Datos del tipo de combustible</p>
+    <div class="row">
+      <div class="col-md-6">
+        <%= f.input :descripcion, label: 'Descripción',
+            input_html: { onChange: 'this.value=this.value.toUpperCase()', class: 'form-control input_uppercase' } %>
+      </div>
+    </div>
+
+    <div class="row" style="margin-top: 12px;">
+      <div class="col-md-6">
+        <% if @tiposcombustible.new_record? %>
+          <%= button_tag t(:cancelar), type: 'button',
+              data: { toggle: 'collapse', target: '#tiposcombustible_form' },
+              class: 'cancel_button btn btn-flat btn-default' %>
+        <% else %>
+          <%= link_to t(:cancelar), tiposcombustible_path(@tiposcombustible),
+              class: 'btn btn-flat btn-default', remote: true %>
+        <% end %>
+      </div>
+      <div class="col-md-6 text-right">
+        <%= f.button :submit, t(:guardar), class: 'btn-guardar' %>
+      </div>
+    </div>
+
+  </div>
+<% end %>

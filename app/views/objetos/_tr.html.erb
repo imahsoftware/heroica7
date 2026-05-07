@@ -1,17 +1,22 @@
 <tr id="objeto_<%= objeto.id %>">
   <td class="text-center">
-    <%# if is_auth_a('objeto') %>
-      <%= link_to edit_objeto_path(objeto), remote: true, class: 'edit_objeto_button', data: { toggle: 'tooltip', :"data-turbolinks" => true  }, title: "#{t :title_editar}" do %>
-         <button class="btn btn-xs btn-warning"><i class="fa fa-edit"></i></button>
-      <% end %>
-    <%# end %>
-    <%# if is_auth_e('objeto') %>
-      <%= link_to objeto, remote: true, method: :delete, data: { confirm: "#{t :elimina_confirma}", toggle: 'tooltip', :"data-turbolinks" => true  }, title: "#{t :title_elimina}" do %>
-          <button class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></button>
-      <% end %>
-    <%# end %>
-   </td>
-  <td><%= objeto.descripcion %></td>
-  <td><%= objeto.descripcion_ampliada %></td>
-  <td><%= objeto.autorizado %></td>
+    <%= link_to edit_objeto_path(objeto), remote: true,
+        class: 'edit_objeto_button',
+        title: t(:title_editar),
+        data: { toggle: 'tooltip' } do %>
+      <button class="btn btn-xs btn-warning btn-accion"><i class="fa fa-edit"></i></button>
+    <% end %>
+    <%= link_to objeto_path(objeto), remote: true,
+        method: :delete,
+        title: t(:title_elimina),
+        data: { confirm: t(:elimina_confirma), toggle: 'tooltip' } do %>
+      <button class="btn btn-xs btn-danger btn-accion"><i class="fa fa-trash"></i></button>
+    <% end %>
+  </td>
+  <td>
+    <code style="font-size: 11px; background: #f1f5f9; color: #394959; padding: 2px 6px; border-radius: 4px;">
+      <%= objeto.descripcion %>
+    </code>
+  </td>
+  <td style="font-size: 12px;"><%= objeto.descripcion_ampliada.presence || '—' %></td>
 </tr>

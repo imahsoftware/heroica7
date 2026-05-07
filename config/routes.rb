@@ -144,5 +144,7 @@ Rails.application.routes.draw do
   end
 
   resources :grupos
+  resources :placas
+  resources :tiposcombustibles
 
 end

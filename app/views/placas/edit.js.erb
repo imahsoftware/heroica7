@@ -1,0 +1,21 @@
+$("#placa_form").collapse("hide");
+$("#placa_form").empty();
+
+<% if @active_record.present? %>
+  $("#placa_<%= @active_record.id %>").replaceWith("<%= j render 'tr', placa: @active_record %>");
+<% end %>
+
+$("#placa_<%= @placa.id %>").html("<td colspan='8'><%= j render 'form' %></td>");
+$("#placa_<%= @placa.id %>").addClass("active_placa");
+
+$(".select2").select2();
+$(".tooltip").tooltip("hide");
+$('[data-toggle="tooltip"]').tooltip();
+$('.datepicker').datepicker({
+    dayNamesMin: [ "Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sáb" ],
+    monthNamesShort: [ "Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic" ],
+    dateFormat: "yy-mm-dd",
+    yearRange: '2000:2050',
+    changeMonth: true,
+    changeYear: true,
+});

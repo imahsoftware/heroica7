@@ -1,0 +1,159 @@
+<div id="productheader">
+  <h2><img src="/images/placas.png"></h2>&nbsp;&nbsp;
+  <div align="right">
+   <%= link_to 'Regresar', placas_path, :class=>"regresarlink" %>&nbsp;&nbsp;</div>
+</div>
+<div align="center">
+<% form_for(@placa) do |f| %>
+<table width="80%" height="40" border="0" cellpadding="0" cellspacing="0">
+   <tr>
+    <td>
+<table width="100%" height="40" border="0" cellpadding="0" cellspacing="0">
+   <tr>
+     <td width="20%" height="30" class="campos">Id :</td>
+     <td width="80%"><%= f.text_field :id,{ :class => "campo", :size => 10,
+                :onChange=> "javascript:this.value=this.value.toUpperCase();",
+              :onFocus => "this.style.border='1px solid #f00'",
+              :onBlur => "this.style.border='1px solid #bbb'" }%></td>
+   </tr>
+   <tr>
+     <td height="30" class="campos">Placa :</td>
+     <td ><%= f.text_field :descripcion,{ :class => "campo", :size => 60,
+                :onChange=> "javascript:this.value=this.value.toUpperCase();",
+              :onFocus => "this.style.border='1px solid #f00'",
+              :onBlur => "this.style.border='1px solid #bbb'" }%></td>
+   </tr>
+   <tr>
+     <td height="30" class="campos">Marca :</td>
+     <td ><%= f.text_field :marca,{ :class => "campo", :size => 60,
+                :onChange=> "javascript:this.value=this.value.toUpperCase();",
+              :onFocus => "this.style.border='1px solid #f00'",
+              :onBlur => "this.style.border='1px solid #bbb'" }%></td>
+   </tr>
+   <tr>
+     <td height="30" class="campos">Linea :</td>
+     <td ><%= f.text_field :linea,{ :class => "campo", :size => 60,
+                :onChange=> "javascript:this.value=this.value.toUpperCase();",
+              :onFocus => "this.style.border='1px solid #f00'",
+              :onBlur => "this.style.border='1px solid #bbb'" }%></td>
+   </tr>
+   <tr>
+     <td height="30" class="campos">Modelo :</td>
+     <td ><%= f.text_field :modelo,{ :class => "campo", :size => 60,
+                :onChange=> "javascript:this.value=this.value.toUpperCase();",
+              :onFocus => "this.style.border='1px solid #f00'",
+              :onBlur => "this.style.border='1px solid #bbb'" }%></td>
+   </tr>
+   <tr>
+     <td height="30" class="campos">Tipo de Vehiculo :</td>
+     <td ><%= f.text_field :tipo_vehiculo,{ :class => "campo", :size => 60,
+                :onChange=> "javascript:this.value=this.value.toUpperCase();",
+              :onFocus => "this.style.border='1px solid #f00'",
+              :onBlur => "this.style.border='1px solid #bbb'" }%></td>
+   </tr>
+   <tr>
+     <td height="30" class="campos">Cilindraje :</td>
+     <td ><%= f.text_field :cilindraje,{ :class => "campo", :size => 60,
+                :onChange=> "javascript:this.value=this.value.toUpperCase();",
+              :onFocus => "this.style.border='1px solid #f00'",
+              :onBlur => "this.style.border='1px solid #bbb'" }%></td>
+   </tr>
+   <tr>
+     <td height="30" class="campos">Motor :</td>
+     <td ><%= f.text_field :motor,{ :class => "campo", :size => 60,
+                :onChange=> "javascript:this.value=this.value.toUpperCase();",
+              :onFocus => "this.style.border='1px solid #f00'",
+              :onBlur => "this.style.border='1px solid #bbb'" }%></td>
+   </tr>
+   <tr>
+     <td height="30" class="campos">Serie :</td>
+     <td ><%= f.text_field :serie,{ :class => "campo", :size => 60,
+                :onChange=> "javascript:this.value=this.value.toUpperCase();",
+              :onFocus => "this.style.border='1px solid #f00'",
+              :onBlur => "this.style.border='1px solid #bbb'" }%></td>
+   </tr>
+   <tr>
+     <td height="30" class="campos">Matricula Nro :</td>
+     <td ><%= f.text_field :nro_matricula,{ :class => "campo", :size => 60,
+                :onChange=> "javascript:this.value=this.value.toUpperCase();",
+              :onFocus => "this.style.border='1px solid #f00'",
+              :onBlur => "this.style.border='1px solid #bbb'" }%></td>
+   </tr>
+   <tr>
+     <td height="30" class="campos">Instructor :</td>
+     <td ><%=f.select(:instructor_id, Instructor.find(:all,:order=>"nombre").collect {|p| [ p.nombre, p.id ] }, { :include_blank => true },
+      { :style=>"width:500px", :class => "campo", :onFocus => "this.style.border='1px solid #f00'", :onBlur => "this.style.border='1px solid #bbb'" }) %>
+     </td>
+   </tr>
+   <tr>
+     <td height="30" class="campos">Tarjeta de Servicio :</td>
+     <td >Nro: &nbsp;<%= f.text_field :tarjeta_nro,{ :class => "campo", :size => 15,
+                :onChange=> "javascript:this.value=this.value.toUpperCase();",
+              :onFocus => "this.style.border='1px solid #f00'",
+              :onBlur => "this.style.border='1px solid #bbb'" }%>
+     &nbsp;Expedicion:&nbsp;
+     <%= calendar_date_select "placa", "tarjeta_expedicion", :year_range =>[1930,2026], :class=> "campo", :size => 10, :time => false%>
+     &nbsp;Vencimiento:&nbsp;
+     <%= calendar_date_select "placa", "tarjeta_vencimiento", :year_range =>[1930,2026], :class=> "campo", :size => 10, :time => false%>
+</td>
+   </tr>
+   <tr>
+     <td height="30" class="campos">SOAT :</td>
+     <td >Nro: &nbsp;<%= f.text_field :soat_nro,{ :class => "campo", :size => 15,
+                :onChange=> "javascript:this.value=this.value.toUpperCase();",
+              :onFocus => "this.style.border='1px solid #f00'",
+              :onBlur => "this.style.border='1px solid #bbb'" }%>
+     &nbsp;Expedicion:&nbsp;
+<%= calendar_date_select "placa", "soat_expedicion", :year_range =>[1930,2026], :class=> "campo", :size => 10, :time => false%>
+     &nbsp;Vencimiento:&nbsp;
+     <%= calendar_date_select "placa", "soat_vencimiento", :year_range =>[1930,2026], :class=> "campo", :size => 10, :time => false%>
+</td>
+   </tr>
+   <tr>
+     <td height="30" class="campos">Revision Tecnico Mecanica :</td>
+     <td >Nro: &nbsp;<%= f.text_field :revision_nro,{ :class => "campo", :size => 15,
+                :onChange=> "javascript:this.value=this.value.toUpperCase();",
+              :onFocus => "this.style.border='1px solid #f00'",
+              :onBlur => "this.style.border='1px solid #bbb'" }%>
+     &nbsp;Expedicion:&nbsp;
+<%= calendar_date_select "placa", "revision_expedicion", :year_range =>[1930,2026], :class=> "campo", :size => 10, :time => false%>
+     &nbsp;Vencimiento:&nbsp;
+     <%= calendar_date_select "placa", "revision_vencimiento", :year_range =>[1930,2026], :class=> "campo", :size => 10, :time => false%>
+</td>
+   </tr>
+   <tr>
+     <td height="30" class="campos">Liquidacion Impuestos :</td>
+     <td >Nro: &nbsp;<%= f.text_field :liquidacion_nro,{ :class => "campo", :size => 15,
+                :onChange=> "javascript:this.value=this.value.toUpperCase();",
+              :onFocus => "this.style.border='1px solid #f00'",
+              :onBlur => "this.style.border='1px solid #bbb'" }%>
+     &nbsp;Fecha:&nbsp;
+<%= calendar_date_select "placa", "liquidacion_fecha", :year_range =>[1930,2026], :class=> "campo", :size => 10, :time => false%>
+</td>
+   </tr>
+   <tr>
+     <td height="30" class="campos">Pico y placa :</td>
+     <td ><%= f.text_field :picoyplaca,{ :class => "campo", :size => 60,
+                :onChange=> "javascript:this.value=this.value.toUpperCase();",
+              :onFocus => "this.style.border='1px solid #f00'",
+              :onBlur => "this.style.border='1px solid #bbb'" }%></td>
+   </tr>
+      <tr>
+     <td height="30" class="campos">Estado Programacion:</td>
+     <td ><%= select('placa',
+                'estado', { "ACTIVO" => "A",
+                           "INACTIVO" => "I"},
+                        { :include_blank => true },
+                      { :style=>"width:150px", :class => "campo", :onFocus => "this.style.border='1px solid #f00'", :onBlur => "this.style.border='1px solid #bbb'" })%></td>
+   </tr>
+   <tr>
+     <td></td>
+      <td><%= f.submit "Guardar", :class=>"buttonAsLink"%></td>
+   </tr>
+</table>
+</td>
+  </tr>
+</table>
+<% end %>
+<br/>
+</div>

@@ -1,0 +1,1 @@
+page.replace_html 'placa_list', :partial => 'list'

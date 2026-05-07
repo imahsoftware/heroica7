@@ -281,10 +281,10 @@ $red-light:  #fee2e2;
 $red-border: #fecaca;
 
 // ============================================================
-//  COMPONENTES GLOBALES — HEADER DE BOX (rojo)
+//  COMPONENTES GLOBALES — HEADER DE BOX
 // ============================================================
 .box-form-header {
-  background: linear-gradient(135deg, $red-dark 0%, $red-main 100%);
+  background: linear-gradient(135deg, #2c3a47 0%, #394959 100%);
   border-radius: 4px 4px 0 0;
   padding: 12px 16px;
 
@@ -296,14 +296,14 @@ $red-border: #fecaca;
   }
 }
 
-// Box index con cabecera roja (usuarios, listados)
+// Box index con cabecera (usuarios, listados)
 .box-usuarios {
   border-top: none;
   border-radius: 6px;
   box-shadow: 0 2px 12px rgba(0,0,0,0.08);
 
   .box-header {
-    background: linear-gradient(135deg, $red-dark 0%, $red-main 100%);
+    background: linear-gradient(135deg, #2c3a47 0%, #394959 100%);
     border-radius: 4px 4px 0 0;
     padding: 12px 16px;
 
@@ -421,13 +421,13 @@ $red-border: #fecaca;
 // ============================================================
 .table-usuarios {
   thead tr th {
-    background-color: $red-dark;
+    background-color: #394959;
     color: #ffffff;
     font-size: 11px;
     font-weight: 600;
     letter-spacing: 0.05em;
     text-transform: uppercase;
-    border-color: #991b1b !important;
+    border-color: #2c3a47 !important;
     vertical-align: middle;
     white-space: nowrap;
   }
@@ -611,16 +611,16 @@ $red-border: #fecaca;
 //  SIDEBAR — LOGO
 // ============================================================
 .sidebar-logo-wrapper {
-  padding: 14px 16px 0;
+  padding: 20px 16px 12px;
   text-align: center;
   background-color: #ffffff;
-  border-bottom: 2px solid $red-main;
+  border-bottom: none;
 
   a { display: inline-block; }
 }
 
 .sidebar-logo-img {
-  max-width: 170px;
+  max-width: 160px;
   width: 100%;
   height: auto;
   object-fit: contain;
@@ -629,18 +629,28 @@ $red-border: #fecaca;
   &:hover { opacity: 0.85; }
 }
 
+.sidebar-logo-name {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #394959;
+  margin: 6px 0 10px;
+  line-height: 1.2;
+}
+
 // ============================================================
 //  NAVBAR — HEADER PRINCIPAL
 // ============================================================
 .main-header .logo {
   background-color: #ffffff !important;
-  color: $red-dark !important;
+  color: #394959 !important;
   height: 50px !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
   padding: 6px 12px !important;
-  border-bottom: 3px solid $red-main !important;
+  border-bottom: none !important;
 
   .logo-mini { display: none; }
   .logo-lg   { display: block; }
@@ -663,13 +673,13 @@ $red-border: #fecaca;
 }
 
 .main-header .navbar {
-  background-color: $red-dark !important;
+  background-color: #394959 !important;
   transition: margin-left .3s ease-in-out !important;
   margin-bottom: 0 !important;
   border: none !important;
   min-height: 50px !important;
   border-radius: 0 !important;
-  box-shadow: 0 2px 8px rgba(185,28,28,0.35) !important;
+  box-shadow: 0 2px 8px rgba(57, 73, 89, 0.35) !important;
 }
 
 .navbar-nav > li > a {
@@ -691,15 +701,15 @@ $red-border: #fecaca;
 
   .user-image { border: 2px solid rgba(255,255,255,0.5) !important; }
 
-  .user-menu .dropdown-menu { border-top: 3px solid $red-main !important; }
+  .user-menu .dropdown-menu { border-top: 3px solid #394959 !important; }
 
   .user-menu .dropdown-menu .user-header {
-    background: linear-gradient(135deg, $red-dark, $red-main) !important;
+    background: linear-gradient(135deg, #2c3a47, #394959) !important;
   }
 
   .label-danger {
     background-color: #ffffff !important;
-    color: $red-dark !important;
+    color: #394959 !important;
     font-weight: 700;
   }
 }

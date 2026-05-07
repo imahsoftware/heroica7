@@ -98,5 +98,6 @@ ActiveSupport::Inflector.inflections(:en) do |inflect|
   inflect.irregular('placasdoc', 'placasdocs')
   inflect.irregular('placasdato', 'placasdatos')
   inflect.irregular('login_activity', 'login_activities')
+  inflect.irregular('tiposcombustible', 'tiposcombustibles')
 
 end

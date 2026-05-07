@@ -1,0 +1,21 @@
+<div class="table-responsive">
+  <table class="table table-bordered table-condensed table-striped table-usuarios">
+    <thead>
+      <tr>
+        <th width="10%" class="text-center">Acciones</th>
+        <th>Descripción</th>
+      </tr>
+    </thead>
+    <tbody id="tbody_tiposcombustibles">
+      <% @tiposcombustibles.each do |tiposcombustible| %>
+        <%= render 'tiposcombustibles/tr', tiposcombustible: tiposcombustible %>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<div class="row" style="margin-top: 12px;">
+  <div class="col-xs-12 text-right">
+    <%= will_paginate @tiposcombustibles, renderer: BootstrapPagination::Rails %>
+  </div>
+</div>

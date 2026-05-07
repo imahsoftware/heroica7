@@ -1,0 +1,4 @@
+$("#placa_<%= @placa.id %>").replaceWith("<%= j render 'tr', placa: @placa %>");
+$("#placa_form").collapse("hide");
+$("#placa_form").empty();
+$(".tooltip").tooltip("hide");

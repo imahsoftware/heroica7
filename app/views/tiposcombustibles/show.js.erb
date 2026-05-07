@@ -1,0 +1,4 @@
+$("#tiposcombustible_<%= @tiposcombustible.id %>").replaceWith("<%= j render 'tr', tiposcombustible: @tiposcombustible %>");
+$("#tiposcombustible_form").collapse("hide");
+$("#tiposcombustible_form").empty();
+$(".tooltip").tooltip("hide");

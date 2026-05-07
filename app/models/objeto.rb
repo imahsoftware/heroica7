@@ -5,6 +5,15 @@ class Objeto < ApplicationRecord
 
   after_save :despuesdeguardar
 
+  # Ransack 3.x — permitir atributos buscables explícitamente
+  def self.ransackable_attributes(auth_object = nil)
+    %w[descripcion descripcion_ampliada]
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    []
+  end
+
   def descripcionamp
   	 return self.descripcion_ampliada.to_s + ' ('+self.descripcion.to_s+')'
   end

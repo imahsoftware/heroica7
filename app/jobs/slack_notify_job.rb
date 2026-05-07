@@ -9,7 +9,10 @@ class SlackNotifyJob < ApplicationJob
     message << "*Error:* ```#{error_message}``` \n"
     message << "*Source:* ```#{source_extract}``` \n"
     message << "*Backtrace*: ```#{backtrace}``` \n"
-    notifier = Slack::Notifier.new Rails.application.secrets.slack_url
+    slack_url = Rails.application.secrets.slack_url
+    return if slack_url.blank?
+
+    notifier = Slack::Notifier.new slack_url
     username = "Heroica7 - Username: #{user.username}"
     notifier.ping message, username: username, channel: '#errors-heroica7'
   end

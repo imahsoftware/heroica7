@@ -9,6 +9,17 @@ class Modulo < ApplicationRecord
 
   after_save :despuesdeguardar
 
+  # Ransack 3.x — permitir atributos buscables explícitamente
+  def self.ransackable_attributes(auth_object = nil)
+    %w[descripcion mensaje controlador nivel imagen grupo]
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    []
+  end
+
+  after_save :despuesdeguardar
+
   def self.grupo_opciones_select
     grupo_options.map {|k, v| [v, v]}
   end

@@ -1,22 +1,22 @@
 <div class="table-responsive">
-  <table class="table table-bordered">
+  <table class="table table-bordered table-condensed table-striped table-usuarios">
     <thead>
-      <tr class="thcolor">
-        <th class="text-center">Acciones</th>
-        <th>Descripción</th>
+      <tr>
+        <th width="8%" class="text-center">Acciones</th>
+        <th width="25%">Descripción</th>
         <th>Descripción Ampliada</th>
-        <th>Autorizado</th>
       </tr>
     </thead>
     <tbody id="tbody_objetos">
-      <% @objetos.order(created_at: :desc).each do |objeto| %>
-	      <%= render 'objetos/tr', objeto: objeto %>
-	    <% end %>
+      <% @objetos.each do |objeto| %>
+        <%= render 'objetos/tr', objeto: objeto %>
+      <% end %>
     </tbody>
   </table>
 </div>
-<div class="box-footer clear-fix">
-  <div class="box-tools pull-right">
+
+<div class="row" style="margin-top: 12px;">
+  <div class="col-xs-12 text-right">
     <%= will_paginate @objetos, renderer: BootstrapPagination::Rails %>
   </div>
-</div><!-- box-footer -->
+</div>

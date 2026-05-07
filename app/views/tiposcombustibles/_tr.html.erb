@@ -1,0 +1,17 @@
+<tr id="tiposcombustible_<%= tiposcombustible.id %>">
+  <td class="text-center">
+    <%= link_to edit_tiposcombustible_path(tiposcombustible), remote: true,
+        class: 'edit_tiposcombustible_button',
+        title: t(:title_editar),
+        data: { toggle: 'tooltip' } do %>
+      <button class="btn btn-xs btn-warning btn-accion"><i class="fa fa-edit"></i></button>
+    <% end %>
+    <%= link_to tiposcombustible_path(tiposcombustible), remote: true,
+        method: :delete,
+        title: t(:title_elimina),
+        data: { confirm: t(:elimina_confirma), toggle: 'tooltip' } do %>
+      <button class="btn btn-xs btn-danger btn-accion"><i class="fa fa-trash"></i></button>
+    <% end %>
+  </td>
+  <td><%= tiposcombustible.descripcion %></td>
+</tr>

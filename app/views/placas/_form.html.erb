@@ -1,0 +1,148 @@
+<%= simple_form_for @placa, remote: true do |f| %>
+  <div class="bs-callout">
+
+    <p class="section-label">Datos del vehículo</p>
+    <div class="row">
+      <div class="col-md-2">
+        <%= f.input :descripcion, label: 'Placa',
+            input_html: { onChange: 'this.value=this.value.toUpperCase()', class: 'form-control input_uppercase' } %>
+      </div>
+      <div class="col-md-3">
+        <%= f.input :marca, label: 'Marca',
+            input_html: { onChange: 'this.value=this.value.toUpperCase()', class: 'form-control input_uppercase' } %>
+      </div>
+      <div class="col-md-3">
+        <%= f.input :linea, label: 'Línea',
+            input_html: { onChange: 'this.value=this.value.toUpperCase()', class: 'form-control input_uppercase' } %>
+      </div>
+      <div class="col-md-2">
+        <%= f.input :modelo, label: 'Modelo',
+            input_html: { onChange: 'this.value=this.value.toUpperCase()', class: 'form-control input_uppercase' } %>
+      </div>
+      <div class="col-md-2">
+        <%= f.input :tipo_vehiculo, label: 'Tipo Vehículo',
+            input_html: { onChange: 'this.value=this.value.toUpperCase()', class: 'form-control input_uppercase' } %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-2">
+        <%= f.input :cilindraje, label: 'Cilindraje',
+            input_html: { onChange: 'this.value=this.value.toUpperCase()', class: 'form-control input_uppercase' } %>
+      </div>
+      <div class="col-md-3">
+        <%= f.input :motor, label: 'Motor',
+            input_html: { onChange: 'this.value=this.value.toUpperCase()', class: 'form-control input_uppercase' } %>
+      </div>
+      <div class="col-md-3">
+        <%= f.input :serie, label: 'Serie',
+            input_html: { onChange: 'this.value=this.value.toUpperCase()', class: 'form-control input_uppercase' } %>
+      </div>
+      <div class="col-md-2">
+        <%= f.input :nro_matricula, label: 'Nro. Matrícula',
+            input_html: { onChange: 'this.value=this.value.toUpperCase()', class: 'form-control input_uppercase' } %>
+      </div>
+      <div class="col-md-2">
+        <%= f.input :picoyplaca, label: 'Pico y Placa',
+            input_html: { class: 'form-control' } %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-2">
+        <%= f.input :estado, as: :select, label: 'Estado',
+            collection: [['Activo', 'A'], ['Inactivo', 'I']],
+            include_blank: 'Seleccionar',
+            input_html: { class: 'select2 form-control' } %>
+      </div>
+    </div>
+
+    <p class="section-label" style="margin-top: 16px;">Documentos</p>
+    <div class="row">
+      <div class="col-md-4">
+        <label class="control-label" style="font-size: 11px; font-weight: 600; color: #64748b;">Tarjeta de Servicio</label>
+        <div class="row">
+          <div class="col-md-4">
+            <%= f.input :tarjeta_nro, label: 'Nro.',
+                input_html: { class: 'form-control' } %>
+          </div>
+          <div class="col-md-4">
+            <%= f.input :tarjeta_expedicion, as: :string, label: 'Expedición',
+                input_html: { class: 'datepicker', data: { date_options: { format: 'DD/MM/YYYY', ignoreReadonly: true } }, readonly: true } %>
+          </div>
+          <div class="col-md-4">
+            <%= f.input :tarjeta_vencimiento, as: :string, label: 'Vencimiento',
+                input_html: { class: 'datepicker', data: { date_options: { format: 'DD/MM/YYYY', ignoreReadonly: true } }, readonly: true } %>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <label class="control-label" style="font-size: 11px; font-weight: 600; color: #64748b;">SOAT</label>
+        <div class="row">
+          <div class="col-md-4">
+            <%= f.input :soat_nro, label: 'Nro.',
+                input_html: { class: 'form-control' } %>
+          </div>
+          <div class="col-md-4">
+            <%= f.input :soat_expedicion, as: :string, label: 'Expedición',
+                input_html: { class: 'datepicker', data: { date_options: { format: 'DD/MM/YYYY', ignoreReadonly: true } }, readonly: true } %>
+          </div>
+          <div class="col-md-4">
+            <%= f.input :soat_vencimiento, as: :string, label: 'Vencimiento',
+                input_html: { class: 'datepicker', data: { date_options: { format: 'DD/MM/YYYY', ignoreReadonly: true } }, readonly: true } %>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <label class="control-label" style="font-size: 11px; font-weight: 600; color: #64748b;">Revisión Técnico Mecánica</label>
+        <div class="row">
+          <div class="col-md-4">
+            <%= f.input :revision_nro, label: 'Nro.',
+                input_html: { class: 'form-control' } %>
+          </div>
+          <div class="col-md-4">
+            <%= f.input :revision_expedicion, as: :string, label: 'Expedición',
+                input_html: { class: 'datepicker', data: { date_options: { format: 'DD/MM/YYYY', ignoreReadonly: true } }, readonly: true } %>
+          </div>
+          <div class="col-md-4">
+            <%= f.input :revision_vencimiento, as: :string, label: 'Vencimiento',
+                input_html: { class: 'datepicker', data: { date_options: { format: 'DD/MM/YYYY', ignoreReadonly: true } }, readonly: true } %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4">
+        <label class="control-label" style="font-size: 11px; font-weight: 600; color: #64748b;">Liquidación Impuestos</label>
+        <div class="row">
+          <div class="col-md-4">
+            <%= f.input :liquidacion_nro, label: 'Nro.',
+                input_html: { class: 'form-control' } %>
+          </div>
+          <div class="col-md-4">
+            <%= f.input :liquidacion_fecha, as: :string, label: 'Fecha',
+                input_html: { class: 'datepicker', data: { date_options: { format: 'DD/MM/YYYY', ignoreReadonly: true } }, readonly: true } %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row" style="margin-top: 12px;">
+      <div class="col-md-6">
+        <% if @placa.new_record? %>
+          <%= button_tag t(:cancelar), type: 'button',
+              data: { toggle: 'collapse', target: '#placa_form' },
+              class: 'cancel_button btn btn-flat btn-default' %>
+        <% else %>
+          <%= link_to t(:cancelar), placa_path(@placa),
+              class: 'btn btn-flat btn-default', remote: true %>
+        <% end %>
+      </div>
+      <div class="col-md-6 text-right">
+        <%= f.button :submit, t(:guardar), class: 'btn-guardar' %>
+      </div>
+    </div>
+
+  </div>
+<% end %>

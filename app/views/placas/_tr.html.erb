@@ -1,0 +1,35 @@
+<tr id="placa_<%= placa.id %>">
+  <td class="text-center">
+    <%= link_to edit_placa_path(placa), remote: true,
+        class: 'edit_placa_button',
+        title: t(:title_editar),
+        data: { toggle: 'tooltip' } do %>
+      <button class="btn btn-xs btn-warning btn-accion"><i class="fa fa-edit"></i></button>
+    <% end %>
+    <%= link_to placa_path(placa), remote: true,
+        method: :delete,
+        title: t(:title_elimina),
+        data: { confirm: t(:elimina_confirma), toggle: 'tooltip' } do %>
+      <button class="btn btn-xs btn-danger btn-accion"><i class="fa fa-trash"></i></button>
+    <% end %>
+  </td>
+  <td>
+    <code style="font-size: 11px; background: #f1f5f9; color: #394959; padding: 2px 6px; border-radius: 4px;">
+      <%= placa.descripcion %>
+    </code>
+  </td>
+  <td><%= placa.marca.presence || '—' %></td>
+  <td><%= placa.linea.presence || '—' %></td>
+  <td><%= placa.modelo.presence || '—' %></td>
+  <td><%= placa.tipo_vehiculo.presence || '—' %></td>
+  <td class="text-center">
+    <% estado = placa.estado.to_s %>
+    <span class="badge-activo <%= estado == 'A' ? 'si' : 'no' %>">
+      <%= estado == 'A' ? 'Activo' : 'Inactivo' %>
+    </span>
+  </td>
+  <td style="font-size: 11px; color: #64748b;">
+    <% if placa.motor.present? %><strong>Motor:</strong> <%= placa.motor %><br><% end %>
+    <% if placa.serie.present? %><strong>Serie:</strong> <%= placa.serie %><% end %>
+  </td>
+</tr>

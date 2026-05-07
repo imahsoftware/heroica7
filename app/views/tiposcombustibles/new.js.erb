@@ -1,0 +1,7 @@
+<% if @active_record.present? %>
+  $("#tiposcombustible_<%= @active_record.id %>").replaceWith("<%= j render 'tr', tiposcombustible: @active_record %>");
+<% end %>
+$("#tiposcombustible_form").html("<%= j render 'form' %>");
+$("#tiposcombustible_form").collapse("show");
+$(".tooltip").tooltip("hide");
+$('[data-toggle="tooltip"]').tooltip();
