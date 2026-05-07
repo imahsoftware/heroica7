@@ -1,51 +1,50 @@
-# Patch para will_paginate-bootstrap 1.0.2 con will_paginate 3.2+
-# La firma de prepare cambió de (collection, options, template) a (collection, options)
+# will_paginate-bootstrap 1.0.2 usa un método interno llamado `tag` que
+# colisiona con el helper `tag` de Rails 7 (que ahora es un TagBuilder).
+# Este patch renombra el método interno para evitar el conflicto.
 
-ActiveSupport.on_load(:action_view) do
-  module BootstrapPagination
-    class Rails < WillPaginate::ActionView::LinkRenderer
-      def prepare(collection, options)
-        super
+Rails.application.config.after_initialize do
+  if defined?(BootstrapPagination::BootstrapRenderer)
+    BootstrapPagination::BootstrapRenderer.module_eval do
+
+      def to_html
+        list_items = pagination.map do |item|
+          case item
+          when Integer
+            page_number(item)
+          else
+            send(item)
+          end
+        end.join(@options[:link_separator])
+        html_tag("ul", list_items, class: ul_class)
       end
 
       protected
 
-      def html_container(html)
-        tag(:nav, tag(:ul, html, class: ul_class), aria: { label: 'Page navigation' })
-      end
-
-      def ul_class
-        ['pagination', container_attributes[:class]].compact.join(' ')
-      end
-
       def page_number(page)
+        link_options = @options[:link_options] || {}
         if page == current_page
-          tag(:li, tag(:a, page, href: '#'), class: 'active')
+          html_tag("li", html_tag("span", page), class: "active")
         else
-          tag(:li, link(page, page, rel: rel_value(page)))
+          html_tag("li", link(page, page, link_options.merge(rel: rel_value(page))))
         end
       end
 
       def previous_or_next_page(page, text, classname)
+        link_options = @options[:link_options] || {}
         if page
-          tag(:li, link(text, page), class: classname)
+          html_tag("li", link(text, page, link_options), class: classname)
         else
-          tag(:li, tag(:a, text, href: '#'), class: "#{classname} disabled")
+          html_tag("li", html_tag("span", text), class: "%s disabled" % classname)
         end
       end
 
       def gap
-        tag(:li, tag(:a, '&hellip;'.html_safe, href: '#'), class: 'disabled')
+        html_tag("li", html_tag("span", BootstrapPagination::BootstrapRenderer::ELLIPSIS), class: "disabled")
       end
 
-      def tag(name, value, attributes = {})
+      def html_tag(name, value, attributes = {})
         string_attributes = attributes.inject('') do |memo, (k, v)|
-          if v.is_a?(Hash)
-            v.each { |vk, vv| memo += %( #{k}-#{vk}="#{vv}") }
-          else
-            memo += %( #{k}="#{v}")
-          end
-          memo
+          memo + %( #{k}="#{v}")
         end
         "<#{name}#{string_attributes}>#{value}</#{name}>".html_safe
       end
