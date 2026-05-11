@@ -146,6 +146,11 @@ Rails.application.routes.draw do
   resources :grupos
   resources :productos
   resources :placas
+  resources :empresas do
+    collection do
+      post 'add_empresa'
+    end
+  end
 
   resources :egresos do
     collection do

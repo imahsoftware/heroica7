@@ -1,0 +1,26 @@
+<tr id="empresa_<%= empresa.id %>">
+  <td class="text-center">
+    <% if permiso('empresa', 'A').to_s == 'S' %>
+      <%= link_to edit_empresa_path(empresa), remote: true,
+          class: 'edit_empresa_button',
+          title: t(:title_editar),
+          data: { toggle: 'tooltip' } do %>
+        <button class="btn btn-xs btn-warning btn-accion"><i class="fa fa-edit"></i></button>
+      <% end %>
+    <% end %>
+    <%= link_to empresa_path(empresa), remote: true,
+        method: :delete,
+        title: t(:title_elimina),
+        data: { confirm: t(:elimina_confirma), toggle: 'tooltip' } do %>
+      <button class="btn btn-xs btn-danger btn-accion"><i class="fa fa-trash"></i></button>
+    <% end %>
+  </td>
+  <td>
+    <code style="font-size: 11px; background: #f1f5f9; color: #394959; padding: 2px 6px; border-radius: 4px;">
+      <%= empresa.documento %> - <%= empresa.identificacion %>
+    </code>
+  </td>
+  <td><%= empresa.nombre.presence || '—' %></td>
+  <td style="font-size: 11px; color: #64748b;"><%= empresa.direccion.presence || '—' %></td>
+  <td style="font-size: 11px; color: #64748b;"><%= empresa.telefono.presence || '—' %></td>
+</tr>

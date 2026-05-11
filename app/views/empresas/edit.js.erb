@@ -1,0 +1,13 @@
+$("#empresa_form").collapse("hide");
+$("#empresa_form").empty();
+
+<% if @active_record.present? %>
+  $("#empresa_<%= @active_record.id %>").replaceWith("<%= j render 'tr', empresa: @active_record %>");
+<% end %>
+
+$("#empresa_<%= @empresa.id %>").html("<td colspan='5'><%= j render 'form' %></td>");
+$("#empresa_<%= @empresa.id %>").addClass("active_empresa");
+
+$(".select2").select2();
+$(".tooltip").tooltip("hide");
+$('[data-toggle="tooltip"]').tooltip();

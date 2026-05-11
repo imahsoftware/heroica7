@@ -1,0 +1,4 @@
+$("#empresa_<%= @empresa.id %>").replaceWith("<%= j render 'tr', empresa: @empresa %>");
+$("#empresa_form").collapse("hide");
+$("#empresa_form").empty();
+$(".tooltip").tooltip("hide");

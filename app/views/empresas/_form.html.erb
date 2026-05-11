@@ -1,0 +1,53 @@
+<%= simple_form_for @empresa, remote: true do |f| %>
+  <div class="bs-callout">
+
+    <p class="section-label">Datos de la empresa</p>
+    <div class="row">
+      <div class="col-md-2">
+        <%= f.input :documento, as: :select, label: 'Tipo Doc.',
+            collection: Empresa::DOCUMENTOS,
+            include_blank: 'Seleccionar',
+            input_html: { class: 'select2 form-control' } %>
+      </div>
+      <div class="col-md-3">
+        <%= f.input :identificacion, label: 'Identificación',
+            input_html: { onChange: 'this.value=this.value.toUpperCase()',
+                          class: 'form-control input_uppercase' } %>
+      </div>
+      <div class="col-md-5">
+        <%= f.input :nombre, label: 'Razón Social',
+            input_html: { onChange: 'this.value=this.value.toUpperCase()',
+                          class: 'form-control input_uppercase' } %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-5">
+        <%= f.input :direccion, label: 'Dirección',
+            input_html: { onChange: 'this.value=this.value.toUpperCase()',
+                          class: 'form-control input_uppercase' } %>
+      </div>
+      <div class="col-md-3">
+        <%= f.input :telefono, label: 'Teléfono',
+            input_html: { class: 'form-control' } %>
+      </div>
+    </div>
+
+    <div class="row" style="margin-top: 12px;">
+      <div class="col-md-6">
+        <% if @empresa.new_record? %>
+          <%= button_tag t(:cancelar), type: 'button',
+              data: { toggle: 'collapse', target: '#empresa_form' },
+              class: 'cancel_button btn btn-flat btn-default' %>
+        <% else %>
+          <%= link_to t(:cancelar), empresa_path(@empresa),
+              class: 'btn btn-flat btn-default', remote: true %>
+        <% end %>
+      </div>
+      <div class="col-md-6 text-right">
+        <%= f.button :submit, t(:guardar), class: 'btn-guardar' %>
+      </div>
+    </div>
+
+  </div>
+<% end %>
