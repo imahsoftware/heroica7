@@ -1,0 +1,45 @@
+<div id="productheader">
+  <span class="tit_gr_azul">&nbsp;&nbsp;EGRESOS</span>
+  <div align="right">
+   <%= link_to 'Buscar Egreso', busqueda_egresos_path, :class=>"regresarlink" %>&nbsp;&nbsp;
+  </div>
+</div>
+<br/>
+<table width="80%" border="0" align="center" cellpadding="0" cellspacing="0" id="one-column-emphasis">
+   <tr>
+     <td width="10%" class="oce-first">Fecha</td>
+     <td width="12%" class="oce-first">Nro Egreso</td>
+     <td width="13%" class="oce-first">Valor</td>
+     <td width="55%" class="oce-first">Observacion</td>
+     <td width="10%" class="oce-first"></td>
+   </tr>
+<% for egreso in @egresos%>
+  <tr class="<%=cycle('even1', 'odd1')%> postS_<%=egreso.id%>">
+    <td class="camposDesc"><%=h egreso.fecha %></td>
+    <td class="camposDesc"><%=h egreso.nro_egreso %></td>
+    <td class="camposDesc"><%=h egreso.valor %></td>
+    <td class="camposDesc"><%=h egreso.observacion %></td>
+    <td class="camposDesc"><div align="center">
+        <%= link_to 'Editar', edit_egreso_path(egreso), :class=>"editarlink" %>
+        <% if permiso("egreso","E").to_s == "S" %>
+        <%= link_to_remote 'Borrar',
+                {:url => egreso_path(egreso),
+                :method => :delete,
+                :confirm => "¿Seguro?",
+                :before => "$(this).up('.postS_#{egreso.id}').remove()"},:class=>"borrarlink"%>
+        <%end%>
+        </div>
+   </td>
+  </tr>
+<% end %>
+</table>
+<table width="80%" height="0" align="center" border="0" cellpadding="0" cellspacing="0">
+  <tr>
+    <td height="10"><hr size="1" noshade class="hrlinea"></td>
+  </tr>
+</table>
+<table width="80%" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr valign="middle">
+    <td width="100%" height="30" class="camposDescN"><div align="center">Nro Total de Registro : <%=@egresos.count%></div></td>
+  </tr>
+</table> 

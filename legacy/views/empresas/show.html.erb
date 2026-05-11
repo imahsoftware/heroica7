@@ -1,0 +1,28 @@
+<p>
+  <b>Documento:</b>
+  <%=h @empresa.documento %>
+</p>
+
+<p>
+  <b>Identificacion:</b>
+  <%=h @empresa.identificacion %>
+</p>
+
+<p>
+  <b>Nombre:</b>
+  <%=h @empresa.nombre %>
+</p>
+
+<p>
+  <b>Direccion:</b>
+  <%=h @empresa.direccion %>
+</p>
+
+<p>
+  <b>Telefono:</b>
+  <%=h @empresa.telefono %>
+</p>
+
+
+<%= link_to 'Edit', edit_empresa_path(@empresa) %> |
+<%= link_to 'Back', empresas_path %>

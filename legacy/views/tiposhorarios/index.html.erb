@@ -1,0 +1,20 @@
+<h1>Listing tiposhorarios</h1>
+
+<table>
+  <tr>
+    <th>Descripcion</th>
+  </tr>
+
+<% @tiposhorarios.each do |tiposhorario| %>
+  <tr>
+    <td><%=h tiposhorario.descripcion %></td>
+    <td><%= link_to 'Show', tiposhorario %></td>
+    <td><%= link_to 'Edit', edit_tiposhorario_path(tiposhorario) %></td>
+    <td><%= link_to 'Destroy', tiposhorario, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New tiposhorario', new_tiposhorario_path %>

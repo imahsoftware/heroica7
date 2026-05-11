@@ -1,0 +1,16 @@
+<h1>Editing tiposhorario</h1>
+
+<% form_for(@tiposhorario) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :descripcion %><br />
+    <%= f.text_field :descripcion %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @tiposhorario %> |
+<%= link_to 'Back', tiposhorarios_path %>

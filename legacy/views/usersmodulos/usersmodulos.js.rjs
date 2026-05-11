@@ -1,0 +1,1 @@
+page.replace_html :usersmodulos_form, :partial => "usersmodulos", :object => @usersmodulo

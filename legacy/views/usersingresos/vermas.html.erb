@@ -1,0 +1,20 @@
+<div id="productheader">
+  <h2>&nbsp;<img src="/images/controlingreso.png"></h2>&nbsp;&nbsp;&nbsp;&nbsp;<%=User.find(@userid).nombre%>
+</div>
+<br/>
+<table width="50%" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr valign="middle">
+    <td width="50%" height="30" class="oce-first" align="center">Fecha</td>
+    <td width="50%" class="oce-first" align="center">Tipo</td>
+  </tr>
+<% valor = ""
+   @usersingresos.each do |usersingreso|
+   fch1 = usersingreso.created_at
+%>
+  <tr valign="middle">
+    <td align="center"><%=h fch1.strftime("%m/%d/%Y %I:%M:%S") %></td>
+    <td align="left"><%=usersingreso.dtipo%></td>
+  </tr>
+<% end %>
+</table>
+<br />

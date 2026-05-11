@@ -1,0 +1,92 @@
+<%= stylesheet_link_tag 'tabs'%>
+<%= javascript_include_tag 'fabtabulous' %>
+<div id="productheader">
+  <span class="tit_gr_azul">&nbsp;&nbsp;INFORMACION FACTURA</span>
+  <div align="right">
+   <%= link_to 'Buscar Factura', busqueda_facturas_path, :class=>"regresarlink" %>&nbsp;&nbsp;</div>
+</div>
+<div id="container">
+    <div id="mainmenu">
+      <ul id="tabs">
+        <li><a href="#tab1"><img src="/images/datosbasicos.png" border="0" title="Factura"></img></a></li>
+        <% unless @factura.new_record? %>
+        <li><a href="#tab2"><img src="/images/modulos.png" border="0" title="Abonos"></img></a></li>
+        <% end %>
+      </ul>
+    </div>
+</div>
+<div class="panel" id="tab1">
+  <fieldset>
+<%  form_for(@factura) do |f| %>
+        <div id="productheader">
+          <span class="tit_gr_azul">&nbsp;&nbsp;DATOS GENERALES FACTURA</span>
+        </div>
+<BR/>
+      <div align="center">
+     <table width="90%" border="0" cellpadding="0" cellspacing="2"  id="one-column-emphasis">
+      <tr>
+        <td width="10%"><div class="camposDescN12">Nro Factura</div></td>
+        <td width="40%"><div class="camposDescN12">Persona</div></td>
+        <td width="20%"><div class="camposDescN12">Categoria</div></td>
+        <td width="20%"><div class="camposDescN12">Tramite</div></td>
+        <td width="10%"><div class="camposDescN12">Estado</div></td>
+      </tr>
+      <tr>
+        <td>
+           <%= link_to facturacero(@factura.nro_factura),
+                                   {:controller=>"facturas", :action =>"verfactura", :factura_id =>@factura.id},
+                                   :popup => ['new_window','height=500,width=1000,scrollbars=yes'],
+                                 :title => "Ver Factura"%></td>
+        <td><%=@factura.persona.identificacion rescue nil%> - <%=@factura.persona.nombres rescue nil%></td>
+        <td><%=@factura.categoria.nombre rescue nil%></td>
+        <td><%=@factura.tipostramite.descripcion rescue nil%></td>
+        <td><%=@factura.destado rescue nil%></td>
+      </tr>
+    </table>
+    <table width="90%" height="0" border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td height="10"><hr size="1" noshade class="hrlinea"></td>
+      </tr>
+    </table>
+        <table width="90%" border="0" cellpadding="2" cellspacing="2" id="one-column-emphasis">
+  <tr>
+    <td align="left" width="50%">
+      <% unless @factura.new_record? %>
+      Usuario y Fecha Creación: <%=User.find(@factura.user_id).username rescue nil%> - <%=@factura.created_at.strftime("%Y-%m-%d %X")%>
+    <% end %></td>
+    <td width="50%"><div align="right">
+        <% if @factura.estado.to_s == 'A' %>
+          <div class="camposDescN11">
+          Usuario y Fecha Anulacion: <%=User.find(@factura.user_anula).username rescue nil%> - <%=@factura.updated_at.strftime("%Y-%m-%d %X")%>
+          </div>
+        <% else %>
+          <% if permiso("facturaanular","A").to_s == "S" %>
+          <%= f.submit "Anular",:confirm=>"Esta seguro que desea realizar la anulacion de la Fatura?", :disable_with => "Anulando...", :class=>"buttonAsLink"%>
+          <% end %>
+        <% end %>
+        
+        </div>
+    </td>
+  </tr>
+</table>
+      </div>
+<% end %>
+<br/>
+<% unless @factura.new_record? %>
+        <div id="detallesfacturas_form">
+           <%= render :partial => "/detallesfacturas/detallesfacturas" %>
+        </div>
+<% end %>
+</fieldset>
+</div>
+<div class="panel" id="tab3">
+
+</div>
+<div class="panel" id="tab2">
+<% unless @factura.new_record? %>
+        <div id="abonos_form">
+           <%= render :partial => "/abonos/abonos" %>
+        </div>
+<% end %>
+</div>
+

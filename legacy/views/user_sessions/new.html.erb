@@ -1,0 +1,62 @@
+<% form_for @user_session, :url => user_session_path do |f| %>
+<%#=controller.active_layout.to_s%>
+<%# if controller.active_layout.to_s == "layouts/application.html.erb" %>
+<table width="100%" height="450" border="0" cellpadding="0" cellspacing="0">
+  <tr>
+    <td valign="center">
+      <table width="800" height="243" border="0" align="center" cellpadding="0" cellspacing="0">
+      <tr>
+        <td><img src="/images/<%=Parametro.find(11).valor.to_s%>"></img></td>
+        <td width="410"><div align="center"><br/><table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+             <tr>
+               <td colspan="2" height="10">&nbsp;</td>
+             </tr>
+             <tr>
+               <td colspan="2" height="10">&nbsp;</td>
+             </tr>
+             <tr>
+               <td width="130"><div align="right"><strong>Usuario : </strong></div></td>
+               <td width="240"><%= f.text_field :username,{ :class => "campologin", :size => 20,
+                :onFocus => "this.style.border='1px solid #f00'",
+                :onBlur => "this.style.border='1px solid #bbb'", :placeholder=>"Usuario", :autofocus=>"true", :required=>"true" } %></td>
+             </tr>
+             <tr>
+               <td><div align="right"><strong>Contrase&ntilde;a : </strong></div></td>
+               <td><%= f.password_field :password,{ :class => "campologin", :size => 20,
+                :onFocus => "this.style.border='1px solid #f00'",
+                :onBlur => "this.style.border='1px solid #bbb'", :placeholder=>"Contraseña",:required=>"true" }%></td>
+             </tr>
+             <tr>
+               <td colspan="2" height="10"><hr size="1" noshade class="hrlinea"></td>
+             </tr>
+             <% if flash[:warninglogin] %>
+             <tr>
+               <td colspan="2"><div align="center">
+                    <div id="footer_wrap1">
+                    <table width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#FFFF99">
+                          <tr>
+                            <td width="5%"><div align="right"><img src="/images/cancel.png"></div></td>
+                            <td width="95%" class="campos">&nbsp;&nbsp;<%= flash[:warninglogin] %></td>
+                         </tr>
+                      </table>
+                    </div>
+                    <script type="text/javascript">
+                        setTimeout("new Effect.Fade('footer_wrap1');", 5000)
+                    </script>
+                 </div></td>
+             </tr>
+             <% end %>
+             <tr>
+               <td colspan="2"><div align="right"><div class="uiButton"><span class="uiButtonText"><%= f.submit "Entrar",:class=>"buttonAsLink",
+:onClick=>"Element.show('imagenlogin')"%>
+        <%= image_tag "load.gif", :id =>'imagenlogin', :style => 'display:none;'%></span></div></div></td>
+             </tr>
+           </table>
+        </div></td>
+      </tr>
+    </table>
+</td>
+      </tr>
+    </table>
+  <br />
+<% end %>

@@ -1,0 +1,53 @@
+<p>
+  <b>Fecha:</b>
+  <%=h @combustible.fecha %>
+</p>
+
+<p>
+  <b>Placa:</b>
+  <%=h @combustible.placa_id %>
+</p>
+
+<p>
+  <b>Tiposcombustible:</b>
+  <%=h @combustible.tiposcombustible_id %>
+</p>
+
+<p>
+  <b>Kilometraje:</b>
+  <%=h @combustible.kilometraje %>
+</p>
+
+<p>
+  <b>Odometro:</b>
+  <%=h @combustible.odometro %>
+</p>
+
+<p>
+  <b>Horometro:</b>
+  <%=h @combustible.horometro %>
+</p>
+
+<p>
+  <b>Galones:</b>
+  <%=h @combustible.galones %>
+</p>
+
+<p>
+  <b>Valor galon:</b>
+  <%=h @combustible.valor_galon %>
+</p>
+
+<p>
+  <b>Valor total:</b>
+  <%=h @combustible.valor_total %>
+</p>
+
+<p>
+  <b>Nro clases:</b>
+  <%=h @combustible.nro_clases %>
+</p>
+
+
+<%= link_to 'Edit', edit_combustible_path(@combustible) %> |
+<%= link_to 'Back', combustibles_path %>

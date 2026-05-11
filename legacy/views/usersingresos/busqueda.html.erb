@@ -1,0 +1,27 @@
+<div id="productheader">
+  <h2>&nbsp;<img src="/images/controlingreso.png"></h2>
+</div>
+<br/>
+<% form_tag buscar_usersingresos_path, :method => 'get' do %>
+<table width="80%" border="0" align="center" cellpadding="0" cellspacing="0" id="one-column-emphasis">
+  <tr valign="middle">
+    <td width="30%" height="30" ><div align="right">Usuario: &nbsp;&nbsp;</div></td>
+    <td width="70%" height="30" ><%=select("ubicacion", "user_id", User.all.collect {|p| [ p.nombre, p.id ] }, { :include_blank => true },
+      { :style=>"width:400px", :class => "campo", :onFocus => "this.style.border='1px solid #f00'", :onBlur => "this.style.border='1px solid #bbb'" }) %></td>
+  </tr>
+  <tr valign="middle">
+    <td height="30" ><div align="right">Fecha: &nbsp;&nbsp;</div></td>
+    <td height="30" >
+      <%= calendar_date_select "ubicacion", "fchinicio", :year_range => 50.years.ago..0.years.ago, :class=> "campo", :size => 10, :time => false%>
+    </td>
+  </tr>
+  <tr valign="middle">
+    <td height="30"></td>
+    <td height="30">
+<%= submit_tag "Buscar", :name => 'nil', :value => 'Buscar', :disable_with => "Buscando...", :class=>"buttonAsLink" %></td>
+  </tr>
+</table>
+<% end %>
+<br/>
+
+

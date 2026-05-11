@@ -1,0 +1,109 @@
+<div align="center">
+<br/>
+  <table width="760"  border="0" cellspacing="0" cellpadding="1">
+  <tr>
+    <td width="150" valign="center"><div align="center"><img src="/images/<%=Parametro.find(10).valor.to_s%>"></img></div></td>
+    <td><table width="100%"  border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td class="camposDescN12"><div align="center"><%=Parametro.find(1).valor.to_s%></div></td>
+        </tr>
+        <tr>
+          <td class="camposDescN11"><div align="center">NIT: <%=Parametro.find(2).valor.to_s%></div></td>
+        </tr>
+        <tr>
+          <td class="camposDescN11"><div align="center"><%=Parametro.find(13).valor.to_s%></div></td>
+        </tr>
+        <tr>
+          <td class="camposDescN11"><div align="center">Sede Bocagrande: <%=Parametro.find(14).valor.to_s%></div></td>
+        </tr>
+                <tr>
+          <td class="camposDescN11"><div align="center">Sede Turbaco: <%=Parametro.find(15).valor.to_s%></div></td>
+        </tr>
+        <tr>
+          <td class="camposDescN11"><div align="center">Sitio Web: <%=Parametro.find(9).valor.to_s%></div></td>
+        </tr>
+    </table></td>
+  </tr>
+</table>
+<br/>
+  <table width="800"  border="0" cellspacing="0" cellpadding="0" class="sample">
+    <thead>
+      <tr>
+        <td height="40" colspan="5" class="camposDescN16"><div align="center">INFORME CONSOLIDADO RANGO DE FECHAS   <%=@fch1%> - <%=@fch2%></div></td>
+      </tr>
+    </thead>
+  </table>
+<br/>
+<table width="500"  border="0" cellspacing="0" cellpadding="0" class="sample">
+    <thead>
+      <tr>
+        <td height="20" colspan="4" class="camposDescN11">DETALLE DE ACTIVIDAD RELACIONADA / CONEXAS</td>
+      </tr>
+      <tr>
+        <td width="70%" height="20" class="camposDescN11"><div align="left">Descripcion</div></td>
+        <td width="10%" class="camposDescN11"><div align="center">Cant.</div></td>
+        <td width="20%" class="camposDescN11"><div align="center">Valor</div></td>
+      </tr>
+    </thead>
+<%
+     saldoactividad = 0
+     for objeto in @objetos
+     saldoactividad = saldoactividad + objeto.val.to_i
+%>
+    <tr>
+      <td class="camposDesc11"><div align="left"><%=objeto.descripcion%></div></td>
+      <td class="camposDesc11"><div align="center"><%=objeto.cant%></div></td>
+      <td class="camposDesc11"><div align="right"><%=camponumerico(objeto.val)%>&nbsp;</div></td>
+    </tr>
+    <% end %>
+    <thead>
+      <tr>
+        <td height="20" class="camposDescN12"><div align="left">&nbsp;&nbsp;</div></td>
+        <td height="20" class="camposDescN12"><div align="left">&nbsp;&nbsp;</div></td>
+        <td height="20" class="camposDescN12"><div align="right"><%=camponumerico(saldoactividad)%>&nbsp;</div></td>
+      </tr>
+    </thead>
+  </table>
+<br/>
+  <table width="800"  border="0" cellspacing="0" cellpadding="0" class="sample">
+    <thead>
+      <tr>
+        <td height="20" colspan="4" class="camposDescN11">INFORMACION EGRESOS </td>
+      </tr>
+      <tr>
+        <td width="10%" height="20" class="camposDescN11"><div align="center">Nro Egreso</div></td>
+        <td width="15%" class="camposDescN11"><div align="center">Fecha</div></td>
+        <td width="60%" class="camposDescN11">Observacion</td>
+        <td width="15%" class="camposDescN11"><div align="center">Valor</div></td>
+      </tr>
+    </thead>
+<%
+     saldoegreso = 0
+     for egreso in @egresos
+     saldoegreso = saldoegreso + egreso.valor.to_i
+%>
+    <tr>
+      <td class="camposDesc11"><div align="center"><%=egreso.nro_egreso%></div></td>
+      <td class="camposDesc11"><div align="center"><%=egreso.fecha%></div></td>
+      <td class="camposDesc11"><%=egreso.observacion%></td>
+      <td class="camposDesc11"><div align="right"><%=camponumerico(egreso.valor)%>&nbsp;&nbsp;</div></td>
+    </tr>
+    <% end %>
+    <thead>
+      <tr>
+        <td height="20" colspan="3" class="camposDescN12"><div align="right">SUBTOTAL EGRESOS &nbsp;&nbsp;</div></td>
+        <td height="20" class="camposDescN12"><div align="right"><%=camponumerico(saldoegreso)%>&nbsp;&nbsp;</div></td>
+      </tr>
+    </thead>
+  </table>
+<br/>
+<table width="800"  border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td width="60%" height="20" class="camposDesc11"><div align="left"><%=Time.now.strftime("%Y-%m-%d %X")%> - <%=User.find(is_admin).nombre rescue nil%></div></td>
+        <td width="40%" height="20" class="camposDesc11"><div align="right">
+            <a href="javascript:window.print()" class="imprimirlink">Imprimir</a>&nbsp;&nbsp;</div></td>
+      </tr>
+  </table>
+</div>
+<br/>
+<br/>

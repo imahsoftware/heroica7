@@ -1,0 +1,38 @@
+<h1>Listing combustibles</h1>
+
+<table>
+  <tr>
+    <th>Fecha</th>
+    <th>Placa</th>
+    <th>Tiposcombustible</th>
+    <th>Kilometraje</th>
+    <th>Odometro</th>
+    <th>Horometro</th>
+    <th>Galones</th>
+    <th>Valor galon</th>
+    <th>Valor total</th>
+    <th>Nro clases</th>
+  </tr>
+
+<% @combustibles.each do |combustible| %>
+  <tr>
+    <td><%=h combustible.fecha %></td>
+    <td><%=h combustible.placa_id %></td>
+    <td><%=h combustible.tiposcombustible_id %></td>
+    <td><%=h combustible.kilometraje %></td>
+    <td><%=h combustible.odometro %></td>
+    <td><%=h combustible.horometro %></td>
+    <td><%=h combustible.galones %></td>
+    <td><%=h combustible.valor_galon %></td>
+    <td><%=h combustible.valor_total %></td>
+    <td><%=h combustible.nro_clases %></td>
+    <td><%= link_to 'Show', combustible %></td>
+    <td><%= link_to 'Edit', edit_combustible_path(combustible) %></td>
+    <td><%= link_to 'Destroy', combustible, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New combustible', new_combustible_path %>

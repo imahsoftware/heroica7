@@ -1,0 +1,1 @@
+page.replace_html 'egreso_list', :partial => 'list'

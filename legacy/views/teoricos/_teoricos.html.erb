@@ -1,0 +1,86 @@
+<div id="productheader">
+  <span class="tit_gr_azul">&nbsp;&nbsp;INFORMACION PRUEBA TEORICA</span>
+</div>
+<BR/>
+<div align="center">
+<% remote_form_for [@persona, @teorico] do |form| %>
+<% if @persona.teoricos.exists? %>
+<table width="90%" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr valign="middle">
+    <td width="25%" height="30" class="oce-first"><div align="center">Fecha</div></td>
+    <td width="20%" height="30" class="oce-first">Categoria</td>
+    <td width="15%" height="30" class="oce-first">Correctas</td>
+    <td width="15%" class="oce-first">Incorrectas</td>
+    <td width="15%" class="oce-first">Estado</td>
+    <td width="10%" class="oce-first"></td>
+  </tr>
+</table>
+<%  @persona.teoricos.each do |teorico|
+%>
+   <% if teorico.id != @teorico.id %>
+  <table width="90%" border="0" align="center" cellpadding="0" cellspacing="0" id="one-column-emphasis">
+   <tr  valign="middle" class="<%=cycle('even1', 'odd1')%>" id="teorico_<%=teorico.id%>">
+     <td width="25%" class="camposDesc">
+       <table width="100%" border="0" cellspacing="0" cellpadding="0">
+         <tr>
+           <td><%=teorico.created_at.strftime("%Y-%m-%d %X")%> - <%=teorico.user.username rescue nil%></td>
+         </tr>
+       </table>
+     </td>
+    <td width="20%" height="30" class="camposDesc"><%=teorico.categoria.codigo_nuevo rescue nil%></td>
+    <td width="15%" class="camposDesc"><%=teorico.correctas rescue nil%></td>
+    <td width="15%" class="camposDesc"><%=teorico.incorrectas rescue nil%></td>
+    <td width="15%" class="camposDesc"><%=teorico.estado%></td>
+    <td width="10%" class="camposDesc"><div align="center">
+        <%= link_to image_tag('documento.png', { :border => 0, :title => "Informe Prueba"}),
+                                {:controller=>"teoricos", :action =>"informe", :id =>teorico.id},
+                                :popup => ['new_window','height=500,width=800,scrollbars=yes'],
+                                :title => "Informe Prueba"%>
+
+                <% if permiso("teorico","E").to_s == "S" %>
+            <%= link_to_remote ('Borrar',{:url => persona_teorico_path(@persona, teorico),
+                    :method => :delete, :confirm => "¿Seguro?"}, :class=>"borrarlink",
+                :before => "$(this).up('.teorico_#{teorico.id}').remove()")%>
+             <%  end %>
+            </div>
+            </td>
+ </tr>
+</table>
+<% else %>
+      <fieldset>
+      <table width="90%" border="0" cellpadding="2" cellspacing="2">
+  <tr>
+    <td  height="30"><div class="col_enc">EDITAR CREDITOS</div></td>
+  </tr>
+</table>
+    <tr class="<%=cycle('even', 'odd')%>" id="teorico_<%=@teorico.id%>">
+     <%= render :partial => "teoricos_form" %>
+    </tr>
+    </fieldset>
+<% end %>
+        <% end %>
+<% else %>
+<table width="40%" border="0" cellpadding="0" align="center" cellspacing="0" bgcolor="#E5E5E5">
+      <tr>
+        <td width="10%"><div align="right"><img src="/images/alerta.png"></div></td>
+        <td width="90%" class="campos">&nbsp;&nbsp;No hay datos asociados.</td>
+     </tr>
+</table>
+<% end %>
+            <%= hidden_field :persona, :id %>
+<% end %>
+<br/>
+<% if flash[:teorico] %>
+<div id="teorico">
+  <table width="90%" border="0" cellpadding="0" cellspacing="0" bgcolor="#E5E5E5">
+   <tr>
+        <td width="5%"><div align="right"><img src="/images/connect.png"></div></td>
+        <td width="95%" class="campos" align="left" >&nbsp;&nbsp;<%= flash[:teorico] %></td>
+   </tr>
+  </table>
+</div>
+<script type="text/javascript">
+  setTimeout("new Effect.Fade('teorico');", 5000)
+</script>
+<% end %>
+</div>

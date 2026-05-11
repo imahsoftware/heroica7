@@ -1,0 +1,21 @@
+  <table class="table table-bordered table-striped">
+    <tr>
+    <th>Descripcion del Archivo</th>
+    <td><%= f.text_field :descripcion,{ :class => "campo",
+                                       :size => 50,
+                                       :onFocus => "this.style.border='1px solid #f00',this.value=''",
+                                       :onBlur => "this.style.border='1px solid #bbb'",
+                                       :onChange=> "javascript:this.value=this.value.toUpperCase();"
+    }  %>
+        <%= f.error_message_on :descripcion, :css_class =>"cerror"%></td>
+  </tr>
+  <tr>
+    <th>Archivo a cargar</th>
+     <td><%= f.file_field :egreso, { :class => "campo",
+              :size => 46,
+              :maxlength => 1000,
+              :onFocus => "this.style.border='1px solid #f00'",
+              :onBlur => "this.style.border='1px solid #bbb'" } %>
+     <%= f.error_message_on :egreso, :css_class =>"cerror"%></td>
+  </tr>
+</table>

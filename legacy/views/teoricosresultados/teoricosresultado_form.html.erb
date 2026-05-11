@@ -1,0 +1,285 @@
+<div id="productheader">
+  <span class="tit_gr_azul">&nbsp;&nbsp;PRUEBA TEORICA</span> - <%=@teoricosresultado.persona.nombres rescue nil%>
+</div>
+<% form_for(@teoricosresultado) do |f|
+  @pregunta = Pregunta.find(@teoricosresultado.pregunta_id)
+%>
+  <div align="right"><span class="tit_gr_red">&nbsp;&nbsp;<%=h @teoricosresultado.consecutivo %>&nbsp;&nbsp;</span>&nbsp;&nbsp;</div>
+  <br/>
+  <div align="center">
+    <table width="90%" border="0" cellspacing="1" cellpadding="1">
+      <tr>
+        <td class="tit_gr_red2">
+         <div align="left"><%=h @pregunta.descripcion %></div>
+        </td>
+      </tr>
+    </table>
+    <br/>
+<% if @pregunta.grafica.to_s == 'N' %>
+    <table width="90%" border="1" cellspacing="1" cellpadding="1">
+      <%  if @teoricosresultado.respuesta.to_s == '1' %>
+      <tr bgcolor="#00FF00">
+        <td width="9%" height="60"><strong><div align="left">Opcion 1:</div></strong></td>
+        <td width="86%"><strong><div align="left"><%=h @pregunta.opcion1 %></div></strong></td>
+        <td width="5%"><div align="center">
+            <%= link_to image_tag('teoricor.png', { :border => 0, :title => "pulse para borrar esta opcion!"}),
+                                {:controller=>"teoricosresultados", :action =>"desmarcar", :id =>@teoricosresultado.id}%>
+          </div></td>
+      </tr>
+      <%  else %>
+      <tr>
+        <td width="8%" height="60"><div align="left">Opcion 1:</div></td>
+        <td width="87%"><div align="left"><%=h @pregunta.opcion1 %></div></td>
+        <td width="5%"><div align="center">
+            <%= link_to image_tag('teoricop.png', { :border => 0, :title => "pulse para elegir esta opcion!"}),
+                                {:controller=>"teoricosresultados", :action =>"marcar", :id =>@teoricosresultado.id, :consecutivo=>@teoricosresultado.consecutivo, :opc=>1}%>
+          </div></td>
+      </tr>
+      <%  end %>
+      <%  if @teoricosresultado.respuesta.to_s == '2' %>
+      <tr bgcolor="#00FF00">
+        <td width="9%" height="60"><strong><div align="left">Opcion 2:</div></strong></td>
+        <td width="86%"><strong><div align="left"><%=h @pregunta.opcion2 %></div></strong></td>
+        <td width="5%"><div align="center">
+            <%= link_to image_tag('teoricor.png', { :border => 0, :title => "pulse para borrar esta opcion!"}),
+                                {:controller=>"teoricosresultados", :action =>"desmarcar", :id =>@teoricosresultado.id}%>
+          </div></td>
+      </tr>
+      <%  else %>
+      <tr>
+        <td width="8%" height="60"><div align="left">Opcion 2:</div></td>
+        <td width="87%"><div align="left"><%=h @pregunta.opcion2 %></div></td>
+        <td width="5%"><div align="center">
+            <%= link_to image_tag('teoricop.png', { :border => 0, :title => "pulse para elegir esta opcion!"}),
+                                {:controller=>"teoricosresultados", :action =>"marcar", :id =>@teoricosresultado.id, :consecutivo=>@teoricosresultado.consecutivo, :opc=>2}%>
+          </div></td>
+      </tr>
+      <%  end %>
+      <%  if @teoricosresultado.respuesta.to_s == '3' %>
+      <tr bgcolor="#00FF00">
+        <td width="9%" height="60"><strong><div align="left">Opcion 3:</div></strong></td>
+        <td width="86%"><strong><div align="left"><%=h @pregunta.opcion3 %></div></strong></td>
+        <td width="5%"><div align="center">
+            <%= link_to image_tag('teoricor.png', { :border => 0, :title => "pulse para borrar esta opcion!"}),
+                                {:controller=>"teoricosresultados", :action =>"desmarcar", :id =>@teoricosresultado.id}%>
+          </div></td>
+      </tr>
+      <%  else %>
+      <tr>
+        <td width="8%" height="60"><div align="left">Opcion 3:</div></td>
+        <td width="87%"><div align="left"><%=h @pregunta.opcion3 %></div></td>
+        <td width="5%"><div align="center">
+            <%= link_to image_tag('teoricop.png', { :border => 0, :title => "pulse para elegir esta opcion!"}),
+                                {:controller=>"teoricosresultados", :action =>"marcar", :id =>@teoricosresultado.id, :consecutivo=>@teoricosresultado.consecutivo, :opc=>3}%>
+          </div></td>
+      </tr>
+      <%  end %>
+      <% if @pregunta.opcion4 %>
+      <%  if @teoricosresultado.respuesta.to_s == '4' %>
+      <tr bgcolor="#00FF00">
+        <td width="9%" height="60"><strong><div align="left">Opcion 4:</div></strong></td>
+        <td width="86%"><strong><div align="left"><%=h @pregunta.opcion4 %></div></strong></td>
+        <td width="5%"><div align="center">
+            <%= link_to image_tag('teoricor.png', { :border => 0, :title => "pulse para borrar esta opcion!"}),
+                                {:controller=>"teoricosresultados", :action =>"desmarcar", :id =>@teoricosresultado.id}%>
+          </div></td>
+      </tr>
+      <%  else %>
+      <tr>
+        <td width="8%" height="60"><div align="left">Opcion 4:</div></td>
+        <td width="87%"><div align="left"><%=h @pregunta.opcion4 %></div></td>
+        <td width="5%"><div align="center">
+            <%= link_to image_tag('teoricop.png', { :border => 0, :title => "pulse para elegir esta opcion!"}),
+                                {:controller=>"teoricosresultados", :action =>"marcar", :id =>@teoricosresultado.id, :consecutivo=>@teoricosresultado.consecutivo, :opc=>4}%>
+          </div></td>
+      </tr>
+      <%  end %>
+      <% end %>
+      <% if @pregunta.opcion5 %>
+      <%  if @teoricosresultado.respuesta.to_s == '5' %>
+      <tr bgcolor="#00FF00">
+        <td width="9%" height="60"><strong><div align="left">Opcion 5:</div></strong></td>
+        <td width="86%"><strong><div align="left"><%=h @pregunta.opcion5 %></div></strong></td>
+        <td width="5%"><div align="center">
+            <%= link_to image_tag('teoricor.png', { :border => 0, :title => "pulse para borrar esta opcion!"}),
+                                {:controller=>"teoricosresultados", :action =>"desmarcar", :id =>@teoricosresultado.id}%>
+          </div></td>
+      </tr>
+      <%  else %>
+      <tr>
+        <td width="8%" height="60"><div align="left">Opcion 5:</div></td>
+        <td width="87%"><div align="left"><%=h @pregunta.opcion5 %></div></td>
+        <td width="5%"><div align="center">
+            <%= link_to image_tag('teoricop.png', { :border => 0, :title => "pulse para elegir esta opcion!"}),
+                                {:controller=>"teoricosresultados", :action =>"marcar", :id =>@teoricosresultado.id, :consecutivo=>@teoricosresultado.consecutivo, :opc=>5}%>
+          </div></td>
+      </tr>
+      <%  end %>
+      <% end %>
+    </table>
+    <br/>
+<% else %>
+    <br/>
+    <table width="90%" height="250" border="0" cellspacing="1" cellpadding="1">
+      <tr>
+      <% if @teoricosresultado.respuesta.to_s == '1' %>
+        <td width="20%" bgcolor="#00FF00"><div align="center">
+            <table width="100%" height="250" border="1" cellspacing="1" cellpadding="1">
+              <tr><td height="20"><div align="center"><strong>Opcion 1:</strong></div></td></tr>
+              <tr><td height="180"><div align="center"><img src="/preguntas/<%=@pregunta.opcion1.to_s%>.JPG" width="150" height="110"></div></td></tr>
+              <tr><td height="50" ><div align="center">
+                    <%= link_to image_tag('teoricor.png', { :border => 0, :title => "pulse para elegir esta opcion!"}),
+                                        {:controller=>"teoricosresultados", :action =>"desmarcar", :id =>@teoricosresultado.id}%>
+                  </div></td>
+              </tr>
+           </table>
+          </div></td>
+      <% else %>
+        <td width="20%" ><div align="center">
+            <table width="100%" height="250" border="1" cellspacing="1" cellpadding="1">
+              <tr><td height="20"><div align="center">Opcion 1:</div></td></tr>
+              <tr><td height="180"><div align="center"><img src="/preguntas/<%=@pregunta.opcion1.to_s%>.JPG" width="150" height="110"></div></td></tr>
+              <tr><td height="50" ><div align="center">
+                    <%= link_to image_tag('teoricop.png', { :border => 0, :title => "pulse para elegir esta opcion!"}),
+                                        {:controller=>"teoricosresultados", :action =>"marcar", :id =>@teoricosresultado.id, :consecutivo=>@teoricosresultado.consecutivo, :opc=>1}%>
+                  </div></td>
+              </tr>
+           </table>
+          </div></td>
+      <% end %>
+      <% if @teoricosresultado.respuesta.to_s == '2' %>
+        <td width="20%" bgcolor="#00FF00"><div align="center">
+            <table width="100%" height="250" border="1" cellspacing="1" cellpadding="1">
+              <tr><td height="20"><div align="center"><strong>Opcion 2:</strong></div></td></tr>
+              <tr><td height="180"><div align="center"><img src="/preguntas/<%=@pregunta.opcion2.to_s%>.JPG" width="150" height="110"></div></td></tr>
+              <tr><td height="50" ><div align="center">
+                    <%= link_to image_tag('teoricor.png', { :border => 0, :title => "pulse para elegir esta opcion!"}),
+                                        {:controller=>"teoricosresultados", :action =>"desmarcar", :id =>@teoricosresultado.id}%>
+                  </div></td>
+              </tr>
+           </table>
+          </div></td>
+      <% else %>
+        <td width="20%" ><div align="center">
+            <table width="100%" height="250" border="1" cellspacing="1" cellpadding="1">
+              <tr><td height="20"><div align="center">Opcion 2:</div></td></tr>
+              <tr><td height="180"><div align="center"><img src="/preguntas/<%=@pregunta.opcion2.to_s%>.JPG" width="150" height="110"></div></td></tr>
+              <tr><td height="50" ><div align="center">
+                    <%= link_to image_tag('teoricop.png', { :border => 0, :title => "pulse para elegir esta opcion!"}),
+                                        {:controller=>"teoricosresultados", :action =>"marcar", :id =>@teoricosresultado.id, :consecutivo=>@teoricosresultado.consecutivo, :opc=>2}%>
+                  </div></td>
+              </tr>
+           </table>
+          </div></td>
+      <% end %>
+      <% if @teoricosresultado.respuesta.to_s == '3' %>
+        <td width="20%" bgcolor="#00FF00"><div align="center">
+            <table width="100%" height="250" border="1" cellspacing="1" cellpadding="1">
+              <tr><td height="20"><div align="center"><strong>Opcion 3:</strong></div></td></tr>
+              <tr><td height="180"><div align="center"><img src="/preguntas/<%=@pregunta.opcion3.to_s%>.JPG" width="150" height="110"></div></td></tr>
+              <tr><td height="50" ><div align="center">
+                    <%= link_to image_tag('teoricor.png', { :border => 0, :title => "pulse para elegir esta opcion!"}),
+                                        {:controller=>"teoricosresultados", :action =>"desmarcar", :id =>@teoricosresultado.id}%>
+                  </div></td>
+              </tr>
+           </table>
+          </div></td>
+      <% else %>
+        <td width="20%" ><div align="center">
+            <table width="100%" height="250" border="1" cellspacing="1" cellpadding="1">
+              <tr><td height="20"><div align="center">Opcion 3:</div></td></tr>
+              <tr><td height="180"><div align="center"><img src="/preguntas/<%=@pregunta.opcion3.to_s%>.JPG" width="150" height="110"></div></td></tr>
+              <tr><td height="50" ><div align="center">
+                    <%= link_to image_tag('teoricop.png', { :border => 0, :title => "pulse para elegir esta opcion!"}),
+                                        {:controller=>"teoricosresultados", :action =>"marcar", :id =>@teoricosresultado.id, :consecutivo=>@teoricosresultado.consecutivo, :opc=>3}%>
+                  </div></td>
+              </tr>
+           </table>
+          </div></td>
+      <% end %>
+      <% if @pregunta.opcion4 %>
+      <% if @teoricosresultado.respuesta.to_s == '4' %>
+        <td width="20%" bgcolor="#00FF00"><div align="center">
+            <table width="100%" height="250" border="1" cellspacing="1" cellpadding="1">
+              <tr><td height="20"><div align="center"><strong>Opcion 4:</strong></div></td></tr>
+              <tr><td height="180"><div align="center"><img src="/preguntas/<%=@pregunta.opcion4.to_s%>.JPG" width="150" height="110"></div></td></tr>
+              <tr><td height="50" ><div align="center">
+                    <%= link_to image_tag('teoricor.png', { :border => 0, :title => "pulse para elegir esta opcion!"}),
+                                        {:controller=>"teoricosresultados", :action =>"desmarcar", :id =>@teoricosresultado.id}%>
+                  </div></td>
+              </tr>
+           </table>
+          </div></td>
+      <% else %>
+        <td width="20%" ><div align="center">
+            <table width="100%" height="250" border="1" cellspacing="1" cellpadding="1">
+              <tr><td height="20"><div align="center">Opcion 4:</div></td></tr>
+              <tr><td height="180"><div align="center"><img src="/preguntas/<%=@pregunta.opcion4.to_s%>.JPG" width="150" height="110"></div></td></tr>
+              <tr><td height="50" ><div align="center">
+                    <%= link_to image_tag('teoricop.png', { :border => 0, :title => "pulse para elegir esta opcion!"}),
+                                        {:controller=>"teoricosresultados", :action =>"marcar", :id =>@teoricosresultado.id, :consecutivo=>@teoricosresultado.consecutivo, :opc=>4}%>
+                  </div></td>
+              </tr>
+           </table>
+          </div></td>
+      <% end %>
+      <% end %>
+      <% if @pregunta.opcion5 %>
+      <% if @teoricosresultado.respuesta.to_s == '5' %>
+        <td width="20%" bgcolor="#00FF00"><div align="center">
+            <table width="100%" height="250" border="1" cellspacing="1" cellpadding="1">
+              <tr><td height="20"><div align="center"><strong>Opcion 5:</strong></div></td></tr>
+              <tr><td height="180"><div align="center"><img src="/preguntas/<%=@pregunta.opcion5.to_s%>.JPG" width="150" height="110"></div></td></tr>
+              <tr><td height="50" ><div align="center">
+                    <%= link_to image_tag('teoricor.png', { :border => 0, :title => "pulse para elegir esta opcion!"}),
+                                        {:controller=>"teoricosresultados", :action =>"desmarcar", :id =>@teoricosresultado.id}%>
+                  </div></td>
+              </tr>
+           </table>
+          </div></td>
+      <% else %>
+        <td width="20%" ><div align="center">
+            <table width="100%" height="250" border="1" cellspacing="1" cellpadding="1">
+              <tr><td height="20"><div align="center">Opcion 5:</div></td></tr>
+              <tr><td height="180"><div align="center"><img src="/preguntas/<%=@pregunta.opcion5.to_s%>.JPG" width="150" height="110"></div></td></tr>
+              <tr><td height="50" ><div align="center">
+                    <%= link_to image_tag('teoricop.png', { :border => 0, :title => "pulse para elegir esta opcion!"}),
+                                        {:controller=>"teoricosresultados", :action =>"marcar", :id =>@teoricosresultado.id, :consecutivo=>@teoricosresultado.consecutivo, :opc=>5}%>
+                  </div></td>
+              </tr>
+           </table>
+          </div></td>
+      <% end %>
+      <% end %>
+      </tr>
+    </table>
+   <br/>
+<% end %>
+  <table width="100%" border="0" cellspacing="1" cellpadding="1">
+      <tr>
+        <% if @teoricosresultado.consecutivo.to_i == 1 %>
+        <td>
+          <div align="left">&nbsp;&nbsp;<img src="/images/preguntaizquierda.png"></img></div>
+        </td>
+        <% else %>
+        <td>
+          <div align="left">&nbsp;&nbsp;<%= link_to image_tag('preguntaizquierda.png', { :border => 0, :title => "Retroceder"}),
+                                {:controller=>"teoricosresultados", :action =>"previous", :id =>@teoricosresultado.teorico_id, :consecutivo=>(@teoricosresultado.consecutivo - 1)}%></div>
+
+        </td>
+        <% end %>
+        <% if @teoricosresultado.consecutivo.to_i == 40 %>
+        <td>
+          <div align="right"><%= link_to image_tag('preguntaderecha.png', { :border => 0, :title => "Ultima Pregunta"}),
+                                {:controller=>"teoricosresultados", :action =>"finalizar", :id =>@teoricosresultado.id}, :confirm=>"Esta es la ultima pregunta. Seguro que desea finalizar la prueba teorica?"%>&nbsp;&nbsp;</div>
+        </td>
+        <% else %>
+        <td>
+          <div align="right"><%= link_to image_tag('preguntaderecha.png', { :border => 0, :title => "Siguiente"}),
+                                {:controller=>"teoricosresultados", :action =>"next", :id =>@teoricosresultado.teorico_id, :consecutivo=>(@teoricosresultado.consecutivo + 1)}%>&nbsp;&nbsp;</div>
+        </td>
+        <% end %>
+      </tr>
+    </table>
+  </div>
+<% end %>

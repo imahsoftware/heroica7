@@ -1,0 +1,95 @@
+<% title 'Búsqueda de Egresos' %>
+
+<div class="box box-usuarios">
+  <div class="box-header">
+    <span class="box-title">
+      <i class="fa fa-search"></i> Búsqueda de Egresos
+    </span>
+    <div class="box-tools pull-right" style="margin-top: -2px;">
+      <%= link_to new_egreso_path, class: 'btn btn-sm btn-success', title: 'Nuevo egreso' do %>
+        <i class="fa fa-plus"></i> Nuevo
+      <% end %>
+    </div>
+  </div>
+
+  <div class="box-body">
+    <div class="bs-callout">
+      <%= form_tag buscar_egresos_path, method: :get do %>
+
+        <div class="row">
+          <div class="col-xs-12 col-sm-4 col-md-2">
+            <div class="form-group">
+              <label class="control-label">Nro. Egreso</label>
+              <%= text_field_tag :buscarnroegreso, params[:buscarnroegreso],
+                  class: 'form-control input_uppercase',
+                  onChange: 'this.value=this.value.toUpperCase()' %>
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-6">
+            <div class="form-group">
+              <label class="control-label">Proveedor</label>
+              <%= select_tag 'ubicacion[proveedor_id]',
+                             options_for_select(
+                               Proveedor.where('id IN (SELECT DISTINCT proveedor_id FROM egresos WHERE proveedor_id IS NOT NULL)')
+                                        .order(:autobuscar)
+                                        .map { |p| [p.autobuscar, p.id] },
+                               params.dig(:ubicacion, :proveedor_id)
+                             ),
+                             include_blank: true,
+                             class: 'form-control select2' %>
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-3 col-md-2">
+            <div class="form-group">
+              <label class="control-label">Fecha Inicial</label>
+              <%= text_field_tag 'ubicacion[fchinicial]', params.dig(:ubicacion, :fchinicial),
+                                 class: 'form-control datepicker', placeholder: 'YYYY-MM-DD', readonly: true %>
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-3 col-md-2">
+            <div class="form-group">
+              <label class="control-label">Fecha Final</label>
+              <%= text_field_tag 'ubicacion[fchfinal]', params.dig(:ubicacion, :fchfinal),
+                                 class: 'form-control datepicker', placeholder: 'YYYY-MM-DD', readonly: true %>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+              <label class="control-label">Observación</label>
+              <%= text_field_tag :buscarobs, params[:buscarobs],
+                  class: 'form-control input_uppercase',
+                  onChange: 'this.value=this.value.toUpperCase()' %>
+            </div>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top: 8px;">
+          <div class="col-md-12">
+            <%= submit_tag 'Buscar', name: nil, class: 'btn btn-primary',
+                data: { disable_with: 'Buscando...' } %>
+            &nbsp;
+            <%= submit_tag 'Exportar XLS', name: 'format', value: 'xls',
+                class: 'btn btn-success' %>
+          </div>
+        </div>
+
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<script>
+  $('.datepicker').datepicker({
+    dayNamesMin: ["Dom","Lun","Mar","Mie","Jue","Vie","Sáb"],
+    monthNamesShort: ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"],
+    dateFormat: "yy-mm-dd",
+    yearRange: '2000:2030',
+    changeMonth: true,
+    changeYear: true
+  });
+  $('.select2').select2();
+</script>

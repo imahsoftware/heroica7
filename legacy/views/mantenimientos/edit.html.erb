@@ -1,0 +1,48 @@
+<h1>Editing mantenimiento</h1>
+
+<% form_for(@mantenimiento) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :placa_id %><br />
+    <%= f.text_field :placa_id %>
+  </p>
+  <p>
+    <%= f.label :descripcion %><br />
+    <%= f.text_field :descripcion %>
+  </p>
+  <p>
+    <%= f.label :fecha %><br />
+    <%= f.date_select :fecha %>
+  </p>
+  <p>
+    <%= f.label :eficacia %><br />
+    <%= f.text_field :eficacia %>
+  </p>
+  <p>
+    <%= f.label :kilometraje %><br />
+    <%= f.text_field :kilometraje %>
+  </p>
+  <p>
+    <%= f.label :taller %><br />
+    <%= f.text_field :taller %>
+  </p>
+  <p>
+    <%= f.label :costo %><br />
+    <%= f.text_field :costo %>
+  </p>
+  <p>
+    <%= f.label :fecha_salida %><br />
+    <%= f.date_select :fecha_salida %>
+  </p>
+  <p>
+    <%= f.label :instructor_id %><br />
+    <%= f.text_field :instructor_id %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @mantenimiento %> |
+<%= link_to 'Back', mantenimientos_path %>

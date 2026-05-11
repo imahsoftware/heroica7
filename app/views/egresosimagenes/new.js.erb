@@ -1,0 +1,7 @@
+<% if @active_record.present? %>
+  $("#egresosimagen_<%= @active_record.id %>").replaceWith("<%= j render 'tr', egresosimagen: @active_record %>");
+<% end %>
+$("#egresosimagen_form").html("<%= j render 'form' %>");
+$(".tooltip").tooltip("hide");
+$('[data-toggle="tooltip"]').tooltip();
+$("#egresosimagen_form").collapse("show");

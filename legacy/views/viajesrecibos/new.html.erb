@@ -1,0 +1,19 @@
+<h1>New viajesrecibo</h1>
+
+<% form_for(@viajesrecibo) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :viaje_id %><br />
+    <%= f.text_field :viaje_id %>
+  </p>
+  <p>
+    <%= f.label :nro_recibo %><br />
+    <%= f.text_field :nro_recibo %>
+  </p>
+  <p>
+    <%= f.submit 'Create' %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', viajesrecibos_path %>

@@ -1,0 +1,16 @@
+<h1>Editing festivo</h1>
+
+<% form_for(@festivo) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :fecha %><br />
+    <%= f.date_select :fecha %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @festivo %> |
+<%= link_to 'Back', festivos_path %>

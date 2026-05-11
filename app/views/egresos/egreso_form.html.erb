@@ -1,0 +1,114 @@
+<% title @egreso.new_record? ? 'Nuevo Egreso' : "Egreso #{@egreso.nro_egreso}" %>
+
+<%= simple_form_for @egreso do |f| %>
+  <div class="box box-usuarios">
+    <div class="box-header">
+      <span class="box-title">
+        <%= link_to busqueda_egresos_path, data: { toggle: 'tooltip' }, title: 'Buscar Egreso',
+            style: 'color: inherit; text-decoration: none; background: none;' do %>
+          <i class="fa fa-arrow-left fa-fw text-danger"></i>
+        <% end %>
+        <i class="fa fa-money"></i>
+        <%= @egreso.new_record? ? 'Nuevo Egreso' : "Egreso #{@egreso.nro_egreso}" %>
+      </span>
+    </div>
+
+    <div class="box-body">
+      <div class="bs-callout">
+
+        <p class="section-label">Datos del egreso</p>
+        <div class="row">
+          <div class="col-xs-12 col-sm-3 col-md-2">
+            <%= f.input :fecha, as: :string, label: 'Fecha', input_html: { class: 'form-control datepicker', readonly: true, placeholder: 'YYYY-MM-DD' } %>
+          </div>
+          <div class="col-xs-12 col-sm-4 col-md-2">
+            <%= f.input :nro_egreso, label: 'Nro. Egreso',
+                input_html: { onChange: 'this.value=this.value.toUpperCase()',
+                              class: 'form-control input_uppercase' } %>
+          </div>
+          <div class="col-xs-12 col-sm-3 col-md-2">
+            <%= f.input :forma_pago, as: :select, label: 'Forma de Pago',
+                collection: Egreso::FORMAS_PAGO.map { |fp| [fp, fp] },
+                include_blank: 'Seleccionar',
+                input_html: { class: 'select2 form-control' } %>
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-6">
+            <%= f.input :proveedor_id, as: :select, label: 'Proveedor',
+                        collection: Proveedor.order(:autobuscar).map { |p| [p.autobuscar, p.id] },
+                        include_blank: 'Seleccionar',
+                        input_html: { class: 'select2 form-control', style: 'width:100%' } %>
+          </div>
+        </div>
+
+
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12">
+            <%= f.input :observacion, as: :text, label: 'Observación / Concepto',
+                input_html: { rows: 4, maxlength: 4000,
+                              onChange: 'this.value=this.value.toUpperCase()',
+                              class: 'form-control input_uppercase' } %>
+          </div>
+        </div>
+
+        <p class="section-label" style="margin-top: 16px;">Valores</p>
+        <div class="row">
+          <div class="col-xs-12 col-sm-4 col-md-2">
+            <%= f.input :valor_bruto, as:  :moneda, label: 'Valor Bruto',
+                input_html: { class: 'form-control' } %>
+          </div>
+          <div class="col-xs-12 col-sm-4 col-md-2">
+            <%= f.input :valor_iva, as:  :moneda, label: 'Valor IVA',
+                input_html: { class: 'form-control' } %>
+          </div>
+          <div class="col-xs-12 col-sm-4 col-md-2">
+            <%= f.input :valor, as:  :moneda, label: 'Valor',
+                input_html: { class: 'form-control' } %>
+          </div>
+        </div>
+
+        <% unless @egreso.new_record? %>
+          <div class="row" style="margin-top: 12px;">
+            <div class="col-md-6">
+              <small class="text-muted">
+                <strong>Creación:</strong>
+                <%= @egreso.created_at.strftime('%Y-%m-%d %H:%M:%S') rescue '—' %>
+                — <%= @egreso.user&.username %>
+              </small>
+            </div>
+            <div class="col-md-6">
+              <small class="text-muted">
+                <strong>Últ. actualización:</strong>
+                <%= @egreso.updated_at.strftime('%Y-%m-%d %H:%M:%S') rescue '—' %>
+                — <%= User.find(@egreso.user_actualiza).username rescue nil %>
+              </small>
+            </div>
+          </div>
+        <% end %>
+
+        <div class="row" style="margin-top: 16px;">
+          <div class="col-md-12 text-right">
+            <%= f.button :submit, 'Guardar', class: 'btn-guardar',
+                data: { disable_with: 'Guardando...' } %>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<% unless @egreso.new_record? %>
+  <%= render 'egresosimagenes/egresosimagenes' %>
+<% end %>
+
+<script>
+  $('.datepicker').datepicker({
+    dayNamesMin: ["Dom","Lun","Mar","Mie","Jue","Vie","Sáb"],
+    monthNamesShort: ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"],
+    dateFormat: "yy-mm-dd",
+    yearRange: '2010:2030',
+    changeMonth: true,
+    changeYear: true
+  });
+  $('.select2').select2();
+</script>

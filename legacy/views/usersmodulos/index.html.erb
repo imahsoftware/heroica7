@@ -1,0 +1,22 @@
+<h1>Listing usersmodulos</h1>
+
+<table>
+  <tr>
+    <th>User</th>
+    <th>Modulo</th>
+  </tr>
+
+<% @usersmodulos.each do |usersmodulo| %>
+  <tr>
+    <td><%=h usersmodulo.user_id %></td>
+    <td><%=h usersmodulo.modulo_id %></td>
+    <td><%= link_to 'Show', usersmodulo %></td>
+    <td><%= link_to 'Edit', edit_usersmodulo_path(usersmodulo) %></td>
+    <td><%= link_to 'Destroy', usersmodulo, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New usersmodulo', new_usersmodulo_path %>

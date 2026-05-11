@@ -1,0 +1,31 @@
+<%= simple_form_for([@egreso, @egresosimagen], remote: true) do |f| %>
+  <div class="bs-callout">
+    <p class="section-label">Documento Digital</p>
+    <div class="row">
+      <div class="col-xs-12 col-sm-6 col-md-6">
+        <%= f.input :descripcion, label: 'Descripción del Archivo',
+            input_html: { onChange: 'this.value=this.value.toUpperCase()',
+                          class: 'form-control input_uppercase' } %>
+      </div>
+      <div class="col-xs-12 col-sm-6 col-md-6">
+        <%= f.input :docfile, as: :file, label: 'Archivo a Cargar' %>
+      </div>
+    </div>
+    <div class="row" style="margin-top: 8px;">
+      <div class="col-md-6">
+        <% if @egresosimagen.new_record? %>
+          <%= button_tag t(:cancelar), type: 'button',
+              data: { target: '#egresosimagen_form' },
+              class: 'cancel_button btn btn-flat btn-default' %>
+        <% else %>
+          <%= link_to t(:cancelar),
+              egreso_egresosimagen_path(@egreso, @egresosimagen),
+              class: 'btn btn-flat btn-default', remote: true %>
+        <% end %>
+      </div>
+      <div class="col-md-6 text-right">
+        <%= f.button :submit, t(:guardar), class: 'btn-guardar' %>
+      </div>
+    </div>
+  </div>
+<% end %>

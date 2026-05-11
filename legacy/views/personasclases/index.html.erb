@@ -1,0 +1,30 @@
+<h1>Listing personasclases</h1>
+
+<table>
+  <tr>
+    <th>Persona</th>
+    <th>Tiposhorario</th>
+    <th>Placa</th>
+    <th>Fecha clase</th>
+    <th>Recoje</th>
+    <th>User</th>
+  </tr>
+
+<% @personasclases.each do |personasclase| %>
+  <tr>
+    <td><%=h personasclase.persona_id %></td>
+    <td><%=h personasclase.tiposhorario_id %></td>
+    <td><%=h personasclase.placa_id %></td>
+    <td><%=h personasclase.fecha_clase %></td>
+    <td><%=h personasclase.recoje %></td>
+    <td><%=h personasclase.user_id %></td>
+    <td><%= link_to 'Show', personasclase %></td>
+    <td><%= link_to 'Edit', edit_personasclase_path(personasclase) %></td>
+    <td><%= link_to 'Destroy', personasclase, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New personasclase', new_personasclase_path %>

@@ -1,0 +1,62 @@
+<h1>Listing empleadosnominas</h1>
+
+<table>
+  <tr>
+    <th>Periodosliquidacion</th>
+    <th>Empleado</th>
+    <th>Salario</th>
+    <th>Horas auto</th>
+    <th>Valor auto</th>
+    <th>Horas minus</th>
+    <th>Valor minus</th>
+    <th>Horas bus</th>
+    <th>Valor bus</th>
+    <th>Dias</th>
+    <th>Bonificacion</th>
+    <th>Incapacidad</th>
+    <th>Subtotal</th>
+    <th>Ajuste</th>
+    <th>Salud</th>
+    <th>Pension</th>
+    <th>Auxilio</th>
+    <th>Seguro</th>
+    <th>Dotacion</th>
+    <th>Prestamo</th>
+    <th>Total</th>
+    <th>Observacion</th>
+  </tr>
+
+<% @empleadosnominas.each do |empleadosnomina| %>
+  <tr>
+    <td><%=h empleadosnomina.periodosliquidacion_id %></td>
+    <td><%=h empleadosnomina.empleado_id %></td>
+    <td><%=h empleadosnomina.salario %></td>
+    <td><%=h empleadosnomina.horas_auto %></td>
+    <td><%=h empleadosnomina.valor_auto %></td>
+    <td><%=h empleadosnomina.horas_minus %></td>
+    <td><%=h empleadosnomina.valor_minus %></td>
+    <td><%=h empleadosnomina.horas_bus %></td>
+    <td><%=h empleadosnomina.valor_bus %></td>
+    <td><%=h empleadosnomina.dias %></td>
+    <td><%=h empleadosnomina.bonificacion %></td>
+    <td><%=h empleadosnomina.incapacidad %></td>
+    <td><%=h empleadosnomina.subtotal %></td>
+    <td><%=h empleadosnomina.ajuste %></td>
+    <td><%=h empleadosnomina.salud %></td>
+    <td><%=h empleadosnomina.pension %></td>
+    <td><%=h empleadosnomina.auxilio %></td>
+    <td><%=h empleadosnomina.seguro %></td>
+    <td><%=h empleadosnomina.dotacion %></td>
+    <td><%=h empleadosnomina.prestamo %></td>
+    <td><%=h empleadosnomina.total %></td>
+    <td><%=h empleadosnomina.observacion %></td>
+    <td><%= link_to 'Show', empleadosnomina %></td>
+    <td><%= link_to 'Edit', edit_empleadosnomina_path(empleadosnomina) %></td>
+    <td><%= link_to 'Destroy', empleadosnomina, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New empleadosnomina', new_empleadosnomina_path %>

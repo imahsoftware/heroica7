@@ -1,0 +1,64 @@
+<div id="productheader">
+  <span class="tit_gr_azul">&nbsp;&nbsp;INFORMACION EMPRESAS</span>
+  <div align="right">
+   <%= link_to 'Regresar', empresas_path, :class=>"regresarlink" %>&nbsp;&nbsp;</div>
+</div>
+<br/>
+<div align="center">
+<% form_for(@empresa) do |f| %>
+<table width="60%" height="40" border="0" cellpadding="0" cellspacing="0">
+   <tr>
+    <td>
+<table width="100%" height="40" border="0" cellpadding="0" cellspacing="0">
+   <tr>
+     <td width="20%" height="30" class="campos">Id :</td>
+     <td width="80%"><%=@empresa.id%></td>
+   </tr>
+   <tr>
+     <td height="30" class="campos">Documento :</td>
+     <td><%= f.select(:documento, { "C.C." => "CC",
+                                     "T.I." => "TI",
+                                   "NIT" => "NIT",
+                                 "PAS" => "PAS",
+                                 "C.E." => "CE"},
+                                  { :include_blank => true },
+                                { :style=>"width:70px", :class => "campo", :onFocus => "this.style.border='1px solid #f00'", :onBlur => "this.style.border='1px solid #bbb'" })%> - </td>
+   </tr>
+   <tr>
+     <td height="30" class="campos">Identificacion :</td>
+     <td><%= f.text_field :identificacion,{ :class => "campo", :size => 20,
+                :onChange=> "javascript:this.value=this.value.toUpperCase();",
+              :onFocus => "this.style.border='1px solid #f00'",
+              :onBlur => "this.style.border='1px solid #bbb'" }%></td>
+   </tr>
+   <tr>
+     <td height="30" class="campos">Razon Social :</td>
+     <td><%= f.text_field :nombre,{ :class => "campo", :size => 50,
+                :onChange=> "javascript:this.value=this.value.toUpperCase();",
+              :onFocus => "this.style.border='1px solid #f00'",
+              :onBlur => "this.style.border='1px solid #bbb'" }%></td>
+   </tr>
+   <tr>
+     <td height="30" class="campos">Direccion :</td>
+     <td><%= f.text_field :direccion,{ :class => "campo", :size => 50,
+                :onChange=> "javascript:this.value=this.value.toUpperCase();",
+              :onFocus => "this.style.border='1px solid #f00'",
+              :onBlur => "this.style.border='1px solid #bbb'" }%></td>
+   </tr>
+   <tr>
+     <td height="30" class="campos">Telefono :</td>
+     <td><%= f.text_field :telefono,{ :class => "campo", :size =>40,
+                :onChange=> "javascript:this.value=this.value.toUpperCase();",
+              :onFocus => "this.style.border='1px solid #f00'",
+              :onBlur => "this.style.border='1px solid #bbb'" }%></td>
+   </tr>
+   <tr>
+     <td></td>
+      <td><%= f.submit "Guardar", :class=>"buttonAsLink"%></td>
+   </tr>
+</table>
+</td>
+  </tr>
+</table>
+<% end %>
+</div>

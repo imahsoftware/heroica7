@@ -1,0 +1,73 @@
+<div id="productheader">
+  <span class="tit_gr_azul">&nbsp;&nbsp;INFORMACION TRAMITE [<%=@personastramite.persona.nombres rescue nil%>]</span>
+</div>
+<table width="70%" border="0" align="center" cellpadding="0" cellspacing="0" id="one-column-emphasis">
+  <tr valign="middle">
+    <td width="30%" height="30" class="oce-first">Categoria</td>
+    <td width="50%" class="oce-first">Tramite</td>
+    <td width="20%" class="oce-first">Placa</td>
+  </tr>
+  <tr valign="middle">
+    <td><%=@personastramite.categoria.nombre rescue nil%></td>
+    <td><%=@personastramite.tipostramite.descripcion rescue nil%></td>
+    <td><%=@personastramite.placa.descripcion rescue nil%></td>
+   </tr>
+</table>
+<br/>
+<% form_for :personastramiteshora, :url => { :action => "create2" } do |f| %>
+<div id="productheader">
+  <span class="tit_gr_azul">&nbsp;&nbsp;REGISTRO RAPIDO DE HORAS</span>
+</div>
+<%= f.hidden_field :personastramite_id %>
+   <div align="center">
+<table width="60%">
+  <tr>
+    <td class="campos" align="left">Fecha : *</td>
+    <td align="left"><%= calendar_date_select "personastramiteshora", "fecha", :year_range => 50.years.ago..0.years.ago, :class=> "campo", :size => 10, :time => false%>
+      <%= f.error_message_on :fecha, :css_class =>"cerror"%></td>
+  </tr>
+  <tr>
+    <td class="campos" align="left">Horas Practicas : *</td>
+    <td align="left"><%= f.text_field :practicas,{ :class => "campo", :size => 30,
+                :onChange=> "javascript:this.value=this.value.toUpperCase();",
+                :onFocus => "this.style.border='1px solid #f00'",
+                :onBlur => "this.style.border='1px solid #bbb'" }%>
+    <%= f.error_message_on :practicas, :css_class =>"cerror"%></td>
+  </tr>
+  <tr>
+    <td class="campos" align="left">Horas Teoricas : *</td>
+    <td align="left"><%= f.text_field :teoricas,{ :class => "campo", :size => 30,
+                :onChange=> "javascript:this.value=this.value.toUpperCase();",
+                :onFocus => "this.style.border='1px solid #f00'",
+                :onBlur => "this.style.border='1px solid #bbb'" }%>
+    <%= f.error_message_on :teoricas, :css_class =>"cerror"%></td>
+  </tr>
+  <tr>
+    <td class="campos" align="left">Horas Taller : *</td>
+    <td align="left"><%= f.text_field :taller,{ :class => "campo", :size => 30,
+                :onChange=> "javascript:this.value=this.value.toUpperCase();",
+                :onFocus => "this.style.border='1px solid #f00'",
+                :onBlur => "this.style.border='1px solid #bbb'" }%>
+    <%= f.error_message_on :taller, :css_class =>"cerror"%></td>
+  </tr>
+ <tr>
+    <td class="campos" align="left">Instructor:</td>
+     <td align="left"><%=select("personastramiteshora", "instructor_id", Instructor.find(:all,:order=>"nombre").collect {|p| [ p.nombre, p.id ] }, { :include_blank => true },
+      { :style=>"width:300px", :class => "campo", :onFocus => "this.style.border='1px solid #f00'", :onBlur => "this.style.border='1px solid #bbb'" }) %>
+          <%= f.error_message_on :instructor_id, :css_class =>"cerror"%></td>
+  </tr>
+</table>
+</div>
+<div align="center">
+<table width="90%" height="0" border="0" cellpadding="0" cellspacing="0">
+  <tr>
+    <td height="20"><hr size="1" noshade class="hrlinea"></td>
+  </tr>
+</table>
+<table width="90%" height="20" border="0" cellpadding="0" cellspacing="0">
+   <tr>
+     <td>  <div align="right"><%= f.submit "Guardar",:class=>"buttonAsLink" %></div></td>
+  </tr>
+</table>
+</div>
+<% end %>

@@ -1,0 +1,34 @@
+<table width="60%" border="0" align="center" cellpadding="1" cellspacing="1">
+  <tr>
+    <td width="35%" height="32"  class="campos">Valor del Abono</td>
+    <td width="35%" class="campos">Forma de Pago</td>
+    <td width="30%" class="campos"></td>
+  </tr>
+  <tr>
+      <td  class="campos"><%= text_field :abono, :valor,{ :class => "campo", :size => 20,
+                  :onChange=> "javascript:this.value=this.value.toUpperCase();",
+                :onFocus => "this.style.border='1px solid #f00'",
+                :onBlur => "this.style.border='1px solid #bbb'" }%>
+          <%= error_message_on :abono, :valor, :css_class =>"cerror"%></td>
+    <td height="32"  class="campos">
+      <%= select(:abono,
+                          :forma_pago, { "EFECTIVO" => "EFECTIVO",
+                                     "CONSIGNACION" => "CONSIGNACION",
+                                   "TRANSFERENCIA" => "TRANSFERENCIA",
+                                 "CHEQUE" => "CHEQUE"},
+                                  { :include_blank => true },
+                                { :style=>"width:200px", :class => "campo", :onFocus => "this.style.border='1px solid #f00'", :onBlur => "this.style.border='1px solid #bbb'" })%>
+          <%= error_message_on :abono, :forma_pago, :css_class =>"cerror"%></td>
+    <td  height="30"><div align="right">
+        <% if permiso("abono","A").to_s == "S" %>
+        <%= hidden_field :abono, :id %>
+        <%= submit_tag "Guardar",:disable_with => "Guardando...", :class=>"buttonAsLink"%>
+        <% end %>
+</div></td>
+  </tr>
+</table>
+<table width="90%" height="0" border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td height="10"><hr size="1" noshade class="hrlinea"></td>
+      </tr>
+  </table>

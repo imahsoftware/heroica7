@@ -1,0 +1,22 @@
+<h1>Listing preguntasrespuestas</h1>
+
+<table>
+  <tr>
+    <th>Pregunta</th>
+    <th>Respuesta</th>
+  </tr>
+
+<% @preguntasrespuestas.each do |preguntasrespuesta| %>
+  <tr>
+    <td><%=h preguntasrespuesta.pregunta_id %></td>
+    <td><%=h preguntasrespuesta.respuesta %></td>
+    <td><%= link_to 'Show', preguntasrespuesta %></td>
+    <td><%= link_to 'Edit', edit_preguntasrespuesta_path(preguntasrespuesta) %></td>
+    <td><%= link_to 'Destroy', preguntasrespuesta, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New preguntasrespuesta', new_preguntasrespuesta_path %>

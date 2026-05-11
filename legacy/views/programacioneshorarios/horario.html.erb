@@ -1,0 +1,177 @@
+<br/>
+<div id="productheader">
+  <span class="tit_gr_azul">&nbsp;&nbsp;PROGRAMACION DE HORARIOS</span>
+</div>
+<table border="0" cellpadding="0" cellspacing="10" align="center" >
+        <tr valign="top">
+<% @placas = Placa.find(:all, :conditions=>["estado = 'A'"], :order=>"descripcion")
+   @placas.each do |placa|%>
+          <td>
+  <table width="350" border="0" cellspacing="0" cellpadding="0" class="sample">
+    <tr>
+      <td colspan="2" width="100%" height ="50">
+            <table width="100%"  border="0" cellspacing="0" cellpadding="0"class="sample">
+              <tr>
+                <td class="camposDescN16"><div align="center"><%=placa.descripcion%></div></td>
+              </tr>
+              <tr>
+                <td class="error2"><div align="center"><%=placa.instructor.nombre rescue nil%></div></td>
+              </tr>
+              <tr>
+                <td class="camposDesc12"><div align="center">PICO Y PLACA : <%=placa.picoyplaca%></div></td>
+              </tr>
+            </table>
+        </td>
+    </tr>
+      <% @tiposhorarios = Tiposhorario.all
+         @tiposhorarios.each do |tiposhorario|%>
+    <tr>
+          <td width="70" height="40" class="oce-first"><div align="center"><%=tiposhorario.descripcion%></div></td>
+          <td width="230" valign="top" class="camposDesc11">
+             <%= link_to image_tag('asistente.png', { :border => 0, :title => "Crear Registro"}),
+                                   {:controller=>"programacioneshorarios", :action =>"new", :tiposhorario_id =>tiposhorario.id, :placa_id => placa.id},
+                               :onClick=>"Element.show('tiposhorario#{placa.id}#{tiposhorario.id}')"%>
+            <%= image_tag "load.gif", :id =>'tiposhorario'+placa.id.to_s+tiposhorario.id.to_s, :style => 'display:none;'%>
+            <br/>
+            <% @programacioneshorarios = Programacioneshorario.find(:all, :conditions=>["tiposhorario_id = ? and placa_id = ? and estado = 'A'",tiposhorario.id,placa.id])
+               @programacioneshorarios.each do |programacioneshorario|%>
+               <div class="oce-firsthorario post1S_<%=programacioneshorario.id%>">
+                   <strong><%=programacioneshorario.fecha_inicial%> -
+                   <%=programacioneshorario.fecha_final rescue nil%> </strong><br/>
+                   <img src="/images/link_archivo.png" border="0"></img>&nbsp;<%=programacioneshorario.persona.nombres rescue nil%>
+                        &nbsp;
+                        <%= link_to image_tag('link_edit.png', { :border => 0, :title => "Editar Programacion"}),
+                              edit_programacioneshorario_path(programacioneshorario.id),
+                              :onClick=>"Element.show('imagenrecorda#{programacioneshorario.id}')"%>
+                              <%= image_tag "load.gif", :id =>'imagenrecorda'+programacioneshorario.id.to_s, :style => 'display:none;'%>&nbsp;
+                         <%= link_to image_tag('connect2.png', { :border => 0, :title => "Marcar Clase"}),
+                              {:controller=>"programacioneshorarios", :action =>"marcarclase", :id =>programacioneshorario.id},
+                              :confirm => "¿Seguro que desea registrar clase el dia de hoy para este usuario?",
+                              :popup => ['registroclase','height=200,width=400,scrollbars=yes']%>
+                              <%= image_tag "load.gif", :id =>'imagenrecorda'+programacioneshorario.id.to_s, :style => 'display:none;'%>&nbsp;
+                         <%= link_to_remote image_tag('link_delete.png', { :border => 0, :title => "Eliminar Programacion"}),
+                              :url => programacioneshorario_url(:id => programacioneshorario), :method => :delete,
+                              :confirm => "¿Seguro?",:before => "$(this).up('.post1S_#{programacioneshorario.id}').remove()"%>
+                              <% if programacioneshorario.observacion.to_s != "" %>
+                              <p><strong>OBS: </strong><%=programacioneshorario.observacion%></p>
+                              <%  end %>
+                              <% if programacioneshorario.enespera.to_s != "" %>
+                              <p><strong>EN ESPERA: </strong><%=programacioneshorario.enespera%></p>
+                              <%  end
+                              cantclases = Personasclase.count(:conditions =>["persona_id = #{programacioneshorario.persona_id}"]) %>
+                              <% if cantclases.to_i > 0 %>
+                              <p><strong>NRO CLASES DICTADAS : </strong><%=cantclases%></p>
+                              <%  end %>
+               </div>
+            <% end%>
+          </td>
+    </tr>
+     <%end%>
+    <tr>
+        <td colspan="2" width="100%" height ="50">
+            <table width="100%"  border="0" cellspacing="0" cellpadding="0"class="sample">
+              <tr>
+                <td class="camposDescN16"><div align="center"><%=placa.descripcion%></div></td>
+              </tr>
+              <tr>
+                <td class="error2"><div align="center"><%=placa.instructor.nombre rescue nil%></div></td>
+              </tr>
+              <tr>
+                <td class="camposDesc12"><div align="center">PICO Y PLACA : <%=placa.picoyplaca%></div></td>
+              </tr>
+            </table>
+        </td>
+    </tr>
+  </table>
+          </td>
+<% end %>
+          </tr>
+      </table>
+<br/>
+<div align="center">
+<table width="95%" height="0" border="0" cellpadding="0" cellspacing="0">
+  <tr>
+    <td height="10"><hr size="1" noshade class="hrlinea"></td>
+  </tr>
+</table>
+</div>
+<br/>
+<div id="productheader">
+  <span class="tit_gr_azul">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;INFORME DE CLASES POR PERIODO</span>
+</div>
+<br/>
+<% form_tag informe_programacioneshorarios_path, :method => 'get' do %>
+<table width="60%" border="0" align="center" cellpadding="0" cellspacing="0" id="one-column-emphasis">
+  <tr valign="middle">
+    <td class="camposDescN10"><div align="right">Fecha Informe: &nbsp;&nbsp;</div></td>
+    <td class="camposDesc">Inicial:&nbsp;&nbsp;
+      <%= calendar_date_select "ubicacion", "inicial", :year_range => 50.years.ago..0.years.ago, :class=> "campo", :size => 10, :time => false%>
+  &nbsp;&nbsp; - &nbsp;Final:&nbsp;&nbsp;
+  <%= calendar_date_select "ubicacion", "final", :year_range => 50.years.ago..0.years.ago, :class=> "campo", :size => 10, :time => false%>
+    </td>
+  </tr>
+  <tr valign="middle">
+    <td class="camposDescN10"><div align="right">Instructor: &nbsp;&nbsp;</div></td>
+    <td class="camposDesc"><%=select("ubicacion", "instructor_id", Instructor.find(:all, :order=>"nombre").collect {|p| [ p.nombre, p.id ] }, { :include_blank => true },
+      { :style=>"width:300px", :class => "campo", :onFocus => "this.style.border='1px solid #f00'", :onBlur => "this.style.border='1px solid #bbb'" }) %></td>
+  </tr>
+  <tr valign="middle">
+    <td class="camposDescN10"><div align="right"> &nbsp;&nbsp;</div></td>
+    <td class="camposDesc"><%= submit_tag "Generar", :name => nil, :class=>"buttonAsLink"%></td>
+  </tr>
+</table>
+
+<% end %>
+<br/>
+<div align="center">
+<table width="95%" height="0" border="0" cellpadding="0" cellspacing="0">
+  <tr>
+    <td height="10"><hr size="1" noshade class="hrlinea"></td>
+  </tr>
+</table>
+</div>
+<br/>
+<div id="productheader">
+  <span class="tit_gr_azul">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;INFORME PROGRAMACION DE CLASES POR PERIODO</span>
+</div>
+<br/>
+<% form_tag progclases_programacioneshorarios_path, :method => 'get' do %>
+<table width="60%" border="0" align="center" cellpadding="0" cellspacing="0" id="one-column-emphasis">
+  <tr valign="middle">
+    <td class="camposDescN10"><div align="right">Fecha Informe: &nbsp;&nbsp;</div></td>
+    <td class="camposDesc">Inicial:&nbsp;&nbsp;
+      <%= calendar_date_select "ubicacion", "inicial", :year_range => 50.years.ago..0.years.ago, :class=> "campo", :size => 10, :time => false%>
+  &nbsp;&nbsp; - &nbsp;Final:&nbsp;&nbsp;
+  <%= calendar_date_select "ubicacion", "final", :year_range => 50.years.ago..0.years.ago, :class=> "campo", :size => 10, :time => false%>
+    </td>
+  </tr>
+  <tr valign="middle">
+    <td class="camposDescN10"><div align="right">Instructor: &nbsp;&nbsp;</div></td>
+    <td class="camposDesc"><%=select("ubicacion", "instructor_id", Instructor.find(:all, :order=>"nombre").collect {|p| [ p.nombre, p.id ] }, { :include_blank => true },
+      { :style=>"width:300px", :class => "campo", :onFocus => "this.style.border='1px solid #f00'", :onBlur => "this.style.border='1px solid #bbb'" }) %></td>
+  </tr>
+  <tr valign="middle">
+    <td class="camposDescN10"><div align="right"> &nbsp;&nbsp;</div></td>
+    <td class="camposDesc"><%= submit_tag "Generar", :name => nil, :class=>"buttonAsLink"%></td>
+  </tr>
+</table>
+
+<% end %>
+<br/>
+<div align="center">
+<table width="95%" height="0" border="0" cellpadding="0" cellspacing="0">
+  <tr>
+    <td height="10"><hr size="1" noshade class="hrlinea"></td>
+  </tr>
+</table>
+</div>
+<br/>
+<div id="globalfooter">
+    <div class="gf-sosumi">
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;© Copyright 2012, Todos los Derechos Reservados - Powered Fabian Fernandez 2012, Antioquia</p>
+    </div>
+</div><!--/globalfooter-->
+<br/><br/>
+
+
+

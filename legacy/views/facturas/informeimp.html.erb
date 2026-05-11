@@ -1,0 +1,228 @@
+<div align="center">
+<br/>
+  <table width="760"  border="0" cellspacing="0" cellpadding="1">
+  <tr>
+    <td width="150" valign="center"><div align="center"><img src="/images/<%=Parametro.find(10).valor.to_s%>"></img></div></td>
+    <td><table width="100%"  border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td class="camposDescN12"><div align="center"><%=Parametro.find(1).valor.to_s%></div></td>
+        </tr>
+        <tr>
+          <td class="camposDescN11"><div align="center">NIT: <%=Parametro.find(2).valor.to_s%></div></td>
+        </tr>
+        <tr>
+          <td class="camposDescN11"><div align="center"><%=Parametro.find(13).valor.to_s%></div></td>
+        </tr>
+        <tr>
+          <td class="camposDescN11"><div align="center">Sede Bocagrande: <%=Parametro.find(14).valor.to_s%></div></td>
+        </tr>
+                <tr>
+          <td class="camposDescN11"><div align="center">Sede Turbaco: <%=Parametro.find(15).valor.to_s%></div></td>
+        </tr>
+        <tr>
+          <td class="camposDescN11"><div align="center">Sitio Web: <%=Parametro.find(9).valor.to_s%></div></td>
+        </tr>
+    </table></td>
+  </tr>
+</table>
+<br/>
+  <table width="800"  border="0" cellspacing="0" cellpadding="0" class="sample">
+    <thead>
+      <tr>
+        <td height="40" colspan="5" class="camposDescN16"><div align="center">INFORME RANGO DE FECHAS   <%=@fch1%> - <%=@fch2%></div></td>
+      </tr>
+    </thead>
+  </table>
+<br/>
+  <table width="800"  border="0" cellspacing="0" cellpadding="0" class="sample">
+    <thead>
+      <tr>
+        <td height="20" colspan="5" class="camposDescN11">INFORMACION FACTURAS </td>
+      </tr>
+      <tr>
+        <td width="44" height="20" class="camposDescN11"><div align="center">Nro</div></td>
+        <td width="96" class="camposDescN11"><div align="center">Nro Factura </div></td>
+        <td width="442" class="camposDescN11"><div align="left">Identificacion - Nombre Completo.</div></td>
+        <td width="100" class="camposDescN11"><div align="center">Estado</div></td>
+        <td width="118" class="camposDescN11"><div align="center">Valor</div></td>
+      </tr>
+    </thead>
+    <%
+      i = 0
+      totalfactura = 0
+      for factura in @facturas
+        i = i + 1
+        if factura.estado != 'A'
+          totalfactura = totalfactura + factura.valor.to_i
+        end
+    %>
+    <tr>
+      <td height="20" class="camposDesc11"><div align="center"><%=i%></div></td>
+      <td class="camposDesc11"><div align="center"><%=factura.nro_factura%></div></td>
+      <td class="camposDesc11"><div align="left"><%=factura.persona.identificacion rescue nil%> - <%=factura.persona.nombres rescue nil%></div></td>
+      <td class="camposDesc11"><div align="center"><%=factura.destado%>&nbsp;&nbsp;</div></td>
+      <td class="camposDesc11"><div align="right"><%=camponumerico(factura.valor.to_i)%>&nbsp;&nbsp;</div></td>
+    </tr>
+    <% end %>
+    <thead>
+      <tr>
+        <td height="20" colspan="4" class="camposDescN12"><div align="right">TOTAL FACTURACION&nbsp;&nbsp;</div></td>
+        <td height="20" class="camposDescN12"><div align="right"><%=camponumerico(totalfactura)%>&nbsp;&nbsp;</div></td>
+      </tr>
+    </thead>
+  </table>
+<br/>
+
+<table width="500"  border="0" cellspacing="0" cellpadding="0" class="sample">
+    <thead>
+      <tr>
+        <td height="20" colspan="4" class="camposDescN11">DETALLE DE ACTIVIDAD RELACIONADA / CONEXAS</td>
+      </tr>
+      <tr>
+        <td width="70%" height="20" class="camposDescN11"><div align="left">Descripcion</div></td>
+        <td width="10%" class="camposDescN11"><div align="center">Cant.</div></td>
+        <td width="20%" class="camposDescN11"><div align="center">Valor</div></td>
+      </tr>
+    </thead>
+<%
+     saldoactividad = 0
+     for objeto in @objetos
+     saldoactividad = saldoactividad + objeto.val.to_i
+%>
+    <tr>
+      <td class="camposDesc11"><div align="left"><%=objeto.descripcion%></div></td>
+      <td class="camposDesc11"><div align="center"><%=objeto.cant%></div></td>
+      <td class="camposDesc11"><div align="right"><%=camponumerico(objeto.val)%>&nbsp;</div></td>
+    </tr>
+    <% end %>
+    <thead>
+      <tr>
+        <td height="20" class="camposDescN12"><div align="left">&nbsp;&nbsp;</div></td>
+        <td height="20" class="camposDescN12"><div align="left">&nbsp;&nbsp;</div></td>
+        <td height="20" class="camposDescN12"><div align="right"><%=camponumerico(saldoactividad)%>&nbsp;</div></td>
+      </tr>
+    </thead>
+  </table>
+<br/>
+  <table width="800"  border="0" cellspacing="0" cellpadding="0" class="sample">
+    <thead>
+      <tr>
+        <td height="20" colspan="6" class="camposDescN11">INFORMACION ABONOS </td>
+      </tr>
+      <tr>
+        <td width="41" height="20" class="camposDescN11"><div align="center">Nro</div></td>
+        <td width="75" class="camposDescN11"><div align="center">Nro Abono </div></td>
+        <td width="381" class="camposDescN11"><div align="left">Identificacion - Nombre Completo.</div></td>
+        <td width="106" class="camposDescN11"><div align="center">Forma de Pago </div></td>
+        <td width="96" class="camposDescN11"><div align="center">Estado</div></td>
+        <td width="101" class="camposDescN11"><div align="center">Valor</div></td>
+      </tr>
+    </thead>
+<%
+      i = 0
+      sub1 = 0
+      sub2 = 0
+      sub3 = 0
+      sub4 = 0
+      for abono in @abonos
+        i = i + 1
+        if abono.estado != 'A' and abono.forma_pago.to_s == 'EFECTIVO'
+          sub1 = sub1 + abono.valor.to_i
+        end
+        if abono.estado != 'A' and abono.forma_pago.to_s == 'TRANSFERENCIA'
+          sub2 = sub2 + abono.valor.to_i
+        end
+        if abono.estado != 'A' and abono.forma_pago.to_s == 'CHEQUE'
+          sub3 = sub3 + abono.valor.to_i
+        end
+        if abono.estado != 'A' and abono.forma_pago.to_s == 'CONSIGNACION'
+          sub4 = sub4 + abono.valor.to_i
+        end
+%>
+    <tr>
+      <td height="20" class="camposDesc11"><div align="center"><%=i%></div></td>
+	  <td class="camposDesc11"><div align="center"><%=abono.nro_abono%></div></td>
+      <td class="camposDesc11"><div align="left"><%=Persona.find(abono.factura.persona_id).identificacion rescue nil%> - <%=Persona.find(abono.factura.persona_id).nombres rescue nil%></div></td>
+      <td class="camposDesc11"><div align="center"><%=abono.forma_pago%></div></td>
+      <td class="camposDesc11"><div align="center"><%=abono.destado%></div></td>
+      <td class="camposDesc11"><div align="right"><%=camponumerico(abono.valor)%>&nbsp;&nbsp;</div></td>
+    </tr>
+    <% end %>
+    <thead>
+      <tr>
+        <td height="20" colspan="5" class="camposDescN11"><div align="right">SUBTOTAL EFECTIVO &nbsp;&nbsp;</div></td>
+        <td height="20" class="camposDescN11"><div align="right"><%=camponumerico(sub1)%>&nbsp;&nbsp;</div></td>
+      </tr>
+      <tr>
+        <td height="20" colspan="5" class="camposDescN11"><div align="right">SUBTOTAL TRANSFERENCIA &nbsp;&nbsp;</div></td>
+        <td height="20" class="camposDescN11"><div align="right"><%=camponumerico(sub2)%>&nbsp;&nbsp;</div></td>
+      </tr>
+      <tr>
+        <td height="20" colspan="5" class="camposDescN11"><div align="right">SUBTOTAL CHEQUE &nbsp;&nbsp;</div></td>
+        <td height="20" class="camposDescN11"><div align="right"><%=camponumerico(sub3)%>&nbsp;&nbsp;</div></td>
+      </tr>
+      <tr>
+        <td height="20" colspan="5" class="camposDescN11"><div align="right">SUBTOTAL CONSIGNACION &nbsp;&nbsp;</div></td>
+        <td height="20" class="camposDescN11"><div align="right"><%=camponumerico(sub4)%>&nbsp;&nbsp;</div></td>
+      </tr>
+      <tr>
+        <td height="20" colspan="5" class="camposDescN12"><div align="right">SUBTOTAL OFICINA &nbsp;&nbsp;</div></td>
+        <td height="20" class="camposDescN12"><div align="right"><%=camponumerico(sub1+sub2+sub3+sub4)%>&nbsp;&nbsp;</div></td>
+      </tr>
+    </thead>
+  </table>
+<br/>
+  <table width="800"  border="0" cellspacing="0" cellpadding="0" class="sample">
+    <thead>
+      <tr>
+        <td height="20" colspan="5" class="camposDescN11">INFORMACION EGRESOS </td>
+      </tr>
+      <tr>
+        <td width="10%" height="20" class="camposDescN11"><div align="center">Nro Egreso</div></td>
+        <td width="15%" class="camposDescN11"><div align="center">Fecha</div></td>
+        <td class="camposDescN11">Observacion</td>
+        <td width="15%" class="camposDescN11"><div align="center">Forma de Pago</div></td>
+        <td width="15%" class="camposDescN11"><div align="center">Valor</div></td>
+      </tr>
+    </thead>
+<%
+     saldoegreso = 0
+     for egreso in @egresos
+       if egreso.forma_pago.to_s == 'EFECTIVO'
+         saldoegreso = saldoegreso + egreso.valor.to_i
+       end
+%>
+    <tr>
+      <td class="camposDesc11"><div align="center"><%=egreso.nro_egreso%></div></td>
+      <td class="camposDesc11"><div align="center"><%=egreso.fecha%></div></td>
+      <td class="camposDesc11"><%=egreso.observacion%></td>
+      <td class="camposDesc11"><div align="center"><%=egreso.forma_pago%></div></td>
+      <td class="camposDesc11"><div align="right"><%=camponumerico(egreso.valor)%>&nbsp;&nbsp;</div></td>
+    </tr>
+    <% end %>
+    <thead>
+      <tr>
+        <td height="20" colspan="4" class="camposDescN12"><div align="right">SUBTOTAL EGRESOS &nbsp;&nbsp;</div></td>
+        <td height="20" class="camposDescN12"><div align="right"><%=camponumerico(saldoegreso)%>&nbsp;&nbsp;</div></td>
+      </tr>
+    </thead>
+  </table>
+<br/>
+  <table width="800"  border="0" cellspacing="0" cellpadding="0" class="sample">
+    <thead>
+      <tr>
+        <td width="80%" height="20" colspan="3" class="camposDescN12"><div align="right">TOTAL OFICINA &nbsp;&nbsp;</div></td>
+        <td width="20%" height="20" class="camposDescN12"><div align="right"><%=camponumerico(sub1+sub2+sub3+sub4-saldoegreso)%>&nbsp;&nbsp;</div></td>
+      </tr>
+    </thead>
+  </table>
+<table width="800"  border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td width="60%" height="20" class="camposDesc11"><div align="left"><%=Time.now.strftime("%Y-%m-%d %X")%> - <%=User.find(is_admin).nombre rescue nil%></div></td>
+        <td width="40%" height="20" class="camposDesc11"><div align="right">
+            <a href="javascript:window.print()" class="imprimirlink">Imprimir</a>&nbsp;&nbsp;</div></td>
+      </tr>
+  </table>
+</div>
+<br/>
+<br/>

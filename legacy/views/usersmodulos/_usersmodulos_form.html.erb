@@ -1,0 +1,14 @@
+<div align="center"><table width="70%" border="0" cellpadding="0" cellspacing="0" align="center">
+  <tr valign="middle">
+    <td width="20%" height="20" class="campos"><div align="right">Modulo : &nbsp;&nbsp;</div></td>
+    <td width="20%"><%=select("usersmodulo", "modulo_id", Modulo.all.collect {|p| [ p.descripcion, p.id ] }, { :include_blank => true },
+      { :style=>"width:300px", :class => "campo", :onFocus => "this.style.border='1px solid #f00'", :onBlur => "this.style.border='1px solid #bbb'" }) %>
+      <%= error_message_on :usersmodulo, :modulo_id, :css_class =>"cerror"%>
+      </td>
+    <td width="60%" align="left">
+      &nbsp;&nbsp;<%= hidden_field :usersmodulo, :id %><%= submit_tag "Guardar", :disable_with => "Guardando...", :class=>"buttonAsLink"%>
+    </td>
+  </tr>
+</table>
+  </div>
+<br/>

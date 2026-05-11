@@ -1,0 +1,53 @@
+<% title 'Productos' %>
+
+<div class="box box-usuarios">
+  <div class="box-header">
+    <span class="box-title">
+      <i class="fa fa-cube"></i> Productos
+      <span class="users-count-badge"><%= @productos.total_entries rescue @productos.count %> registros</span>
+    </span>
+    <div class="box-tools pull-right" style="margin-top: -2px;">
+      <%= link_to new_producto_path, remote: true, id: 'new_producto_button',
+          class: 'btn btn-sm btn-success',
+          title: 'Agregar producto' do %>
+        <i class="fa fa-plus"></i> Nuevo
+      <% end %>
+    </div>
+  </div>
+
+  <div class="box-body">
+
+    <!-- Barra de búsqueda -->
+    <div class="row" style="margin-bottom: 16px;">
+      <div class="col-md-5 col-sm-7 col-xs-12 search-bar">
+        <%= search_form_for @q do |f| %>
+          <div class="input-group">
+            <%= f.search_field :descripcion_cont,
+                class: 'form-control',
+                placeholder: 'Buscar por descripción...' %>
+            <div class="input-group-btn">
+              <%= button_tag type: "submit", class: "btn btn-search" do %>
+                <i class="fa fa-search"></i>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="flash_messages"></div>
+    <div id="producto_form" class="collapse" style="margin-bottom: 12px;"></div>
+
+    <div id="productos">
+      <% if @productos.any? %>
+        <%= render 'productos/tabla' %>
+      <% else %>
+        <div class="empty-state">
+          <i class="fa fa-cube"></i>
+          <p>No se encontraron productos con los criterios de búsqueda.</p>
+        </div>
+      <% end %>
+    </div>
+
+  </div>
+</div>

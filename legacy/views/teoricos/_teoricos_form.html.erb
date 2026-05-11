@@ -1,0 +1,23 @@
+<div align="center">
+<table  width="50%" border="0" align="center" cellpadding="1" cellspacing="1">
+  <tr>
+    <td height="32" class="camposDescN11">Seleccione la fecha para programar la prueba</td>
+    <td  class="campos">
+      <%= calendar_date_select "teorico", "fecha", :year_range => 50.years.ago..0.years.ago, :class=> "campo", :size => 10, :time => false%>
+          <%= error_message_on :teorico, :fecha, :css_class =>"cerror"%></td>
+  </tr>
+</table>
+<table width="90%" height="0" border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td height="10"><hr size="1" noshade class="hrlinea"></td>
+      </tr>
+    </table>
+<table width="90%" border="0" cellpadding="2" cellspacing="2">
+  <tr>
+    <td  height="30"><div align="right">
+        <%= hidden_field :teorico, :id %>
+        <%= submit_tag "Guardar",:disable_with => "Guardando...", :class=>"buttonAsLink"%>
+</div></td>
+  </tr>
+</table>
+</div>

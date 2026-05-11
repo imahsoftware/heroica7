@@ -1,0 +1,148 @@
+<style type="text/css">
+<!--
+  H1.SaltoDePagina { PAGE-BREAK-AFTER: always  }
+-->
+</style>
+<div align="center">
+<% @empleadosnominas.each do |empleadosnomina| %>
+<br/>
+  <table width="760"  border="0" cellspacing="0" cellpadding="1">
+  <tr>
+    <td width="150" valign="center"><div align="center"><img src="/images/<%=Parametro.find(10).valor.to_s%>" width="190" height="75"></img></div></td>
+    <td><table width="100%"  border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td class="camposDescN16"><div align="center"><%=Parametro.find(1).valor.to_s%></div></td>
+        </tr>
+        <tr>
+          <td class="camposDescN11"><div align="center">NIT: <%=Parametro.find(2).valor.to_s%></div></td>
+        </tr>
+        <tr>
+          <td class="camposDescN11"><div align="center">Dirección: <%=Parametro.find(13).valor.to_s%></div></td>
+        </tr>
+        <tr>
+          <td class="camposDescN11"><div align="center">PBX: <%=Parametro.find(7).valor.to_s%> - FAX: <%=Parametro.find(8).valor.to_s%></div></td>
+        </tr>
+        <tr>
+          <td class="camposDescN11"><div align="center"><%=Parametro.find(9).valor.to_s%></div></td>
+        </tr>
+    </table></td>
+  </tr>
+</table>
+  <br/>
+<table width="80%" border="0" cellpadding="0" cellspacing="0" class="sample">
+    <tr>
+      <td width="26%" height="0" class="camposDescN11">EMPLEADO : </td>
+      <td width="74%" height="0" class="camposDesc11">&nbsp;<%=empleadosnomina.empleado.identificacion rescue nil%> - <%=empleadosnomina.empleado.nombre rescue nil%></td>
+    </tr>
+    <tr>
+      <td height="0" class="camposDescN11">CARGO : </td>
+      <td height="0" class="camposDesc11">&nbsp;<%=empleadosnomina.empleado.cargo rescue nil%></td>
+    </tr>
+    <tr>
+      <td height="0" class="camposDescN11">PERIODO DE PAGO : </td>
+      <td height="0" class="camposDesc11">&nbsp;<%=@periodosliquidacion.inicio%> - <%=@periodosliquidacion.fin%></td>
+    </tr>
+    <tr>
+      <td height="0" class="camposDescN11">NRO CUENTA : </td>
+      <td height="0" class="camposDesc11">&nbsp;<%=empleadosnomina.empleado.banco rescue nil%> - <%=empleadosnomina.empleado.cuenta rescue nil%></td>
+    </tr>
+    <tr>
+      <td height="0" class="camposDescN11">SALARIO BASICO : </td>
+      <td height="0" class="camposDesc11">&nbsp;<%=camponumerico(empleadosnomina.empleado.salario) rescue nil%></td>
+    </tr>
+  </table>
+<br/>
+
+<table width="80%" border="0" cellpadding="0" cellspacing="0" class="sample">
+  <thead>
+        <td colspan="4" class="camposDescN11" height="20">COMPROBANTE DE NOMINA </td>
+  </thead>
+  <thead>
+    <tr>
+      <td width="48%" height="20" class="camposDescN11">CONCEPTO</td>
+      <td width="8%" class="camposDescN11"><div align="center">DIAS</div></td>
+      <td width="22%" class="camposDescN11"><div align="center">DEVENGADO</div></td>
+      <td width="22%" class="camposDescN11"><div align="center">DEDUCCIONES</div></td>
+    </tr>
+  </thead>
+    <tr>
+      <td height="0" class="camposDescN11">SALARIO BASICO </td>
+      <td class="camposDesc11"><div align="center"><%=empleadosnomina.dias%></div></td>
+      <td class="camposDesc11"><div align="right"><%=camponumerico(empleadosnomina.subtotal.to_i - empleadosnomina.bonificacion.to_i) rescue nil%></div></td>
+      <td class="camposDesc11"><div align="right">0</div></td>
+    </tr>
+    <tr>
+      <td height="0" class="camposDescN11">BONIFICACIONES</td>
+      <td class="camposDesc11"><div align="center"><%=empleadosnomina.dias%></div></td>
+      <td class="camposDesc11"><div align="right"><%=camponumerico(empleadosnomina.bonificacion) rescue nil%></div></td>
+      <td class="camposDesc11"><div align="right">0</div></td>
+    </tr>
+    <tr>
+      <td height="0" class="camposDescN11">AUXILIO DE TRANSPORTE </td>
+      <td class="camposDesc11"><div align="center"><%=empleadosnomina.dias%></div></td>
+      <td class="camposDesc11"><div align="right"><%=camponumerico(empleadosnomina.auxilio) rescue nil%></div></td>
+      <td class="camposDesc11"><div align="right">0</div></td>
+    </tr>
+    <tr>
+      <td height="0" class="camposDescN11">DOTACION</td>
+      <td class="camposDesc11"><div align="center"><%=empleadosnomina.dias%></div></td>
+      <td class="camposDesc11"><div align="right"><%=camponumerico(empleadosnomina.dotacion) rescue nil%></div></td>
+      <td class="camposDesc11"><div align="right">0</div></td>
+    </tr>
+    <tr>
+      <td height="0" class="camposDescN11">SALUD (<%=empleadosnomina.empleado.salud rescue nil%>) </td>
+      <td class="camposDesc11"><div align="center"><%=empleadosnomina.dias%></div></td>
+      <td class="camposDesc11"><div align="right">0</div></td>
+      <td class="camposDesc11"><div align="right"><%=camponumerico(empleadosnomina.salud) rescue nil%></div></td>
+    </tr>
+    <tr>
+      <td height="0" class="camposDescN11">PENSION (<%=empleadosnomina.empleado.pension rescue nil%>) </td>
+      <td class="camposDesc11"><div align="center"><%=empleadosnomina.dias%></div></td>
+      <td class="camposDesc11"><div align="right">0</div></td>
+      <td class="camposDesc11"><div align="right"><%=camponumerico(empleadosnomina.pension) rescue nil%></div></td>
+    </tr>
+    <tr>
+      <td height="0" class="camposDescN11">PRESTAMO</td>
+      <td class="camposDesc11"><div align="center"><%=empleadosnomina.dias%></div></td>
+      <td class="camposDesc11"><div align="right">0</div></td>
+      <td class="camposDesc11"><div align="right"><%=camponumerico(empleadosnomina.prestamo) rescue nil%></div></td>
+    </tr>
+    <tr>
+      <td height="0" class="camposDescN11">VALOR AJUSTE AL MINIMO</td>
+      <td class="camposDesc11"><div align="center"><%=empleadosnomina.dias%></div></td>
+      <td class="camposDesc11"><div align="right"><%=camponumerico(empleadosnomina.ajuste) rescue nil%></div></td>
+      <td class="camposDesc11"><div align="right">0</div></td>      
+    </tr>
+    <thead>
+    <tr>
+      <td height="20" colspan="2" class="camposDescN11"><div align="right">TOTAL DEVENGADO PERIODO :&nbsp;&nbsp;</div></td>
+      <td colspan="2" class="camposDescN11"><div align="right"><%=camponumerico(empleadosnomina.total) rescue nil%>&nbsp;</div></td>
+    </tr>
+    </thead>
+  </table>
+<br/>
+    <table width="80%" border="0" cellpadding="0" cellspacing="0">
+      <tr valign="top">
+        <td width="15%" height="50" class="camposDescN11">Observaciones:</td>
+        <td width="85%" class="camposDescN11">
+          <% if empleadosnomina.empleado.cargo.to_s == "Instructor de Conduccion" %>
+             Horas Dictadas: Automovil --> <%=empleadosnomina.horas_auto rescue 0%>, Bus --> <%=empleadosnomina.horas_bus rescue 0%>, Mula --> <%=empleadosnomina.horas_minus rescue 0%>.<br/>
+          <% end %>
+          <%=empleadosnomina.observacion%></td>
+        </tr>
+    </table>
+    <table width="80%" border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td width="40%">__________________________________</td>
+        <td>&nbsp;</td>
+        <td width="40%">__________________________________</td>
+      </tr>
+      <tr>
+        <td class="camposDescN11">Firma Aprobado</td>
+        <td>&nbsp;</td>
+        <td class="camposDescN11">Firma Aceptado</td>
+      </tr>
+    </table>
+<H1 class=SaltoDePagina>........................................................................</H1>
+<%end%>
+</div>

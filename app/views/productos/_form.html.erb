@@ -1,0 +1,51 @@
+<%= simple_form_for @producto, remote: true do |f| %>
+  <div class="bs-callout">
+
+    <p class="section-label">Datos del producto</p>
+    <div class="row">
+      <div class="col-md-8">
+        <%= f.input :descripcion, label: 'Descripción',
+            input_html: {
+              onChange: 'this.value=this.value.toUpperCase()',
+              class: 'form-control input_uppercase'
+            } %>
+      </div>
+    </div>
+
+    <% unless @producto.new_record? %>
+      <div class="row" style="margin-top: 8px;">
+        <div class="col-md-6">
+          <small class="text-muted">
+            <strong>Creación:</strong>
+            <%= @producto.created_at.strftime('%Y-%m-%d %H:%M') rescue '—' %>
+            — <%= @producto.user.try(:username) %>
+          </small>
+        </div>
+        <div class="col-md-6">
+          <small class="text-muted">
+            <strong>Últ. actualización:</strong>
+            <%= @producto.updated_at.strftime('%Y-%m-%d %H:%M') rescue '—' %>
+            — <%= User.find(@producto.user_actualiza).username rescue nil %>
+          </small>
+        </div>
+      </div>
+    <% end %>
+
+    <div class="row" style="margin-top: 12px;">
+      <div class="col-md-6">
+        <% if @producto.new_record? %>
+          <%= button_tag t(:cancelar), type: 'button',
+              data: { toggle: 'collapse', target: '#producto_form' },
+              class: 'cancel_button btn btn-flat btn-default' %>
+        <% else %>
+          <%= link_to t(:cancelar), producto_path(@producto),
+              class: 'btn btn-flat btn-default', remote: true %>
+        <% end %>
+      </div>
+      <div class="col-md-6 text-right">
+        <%= f.button :submit, t(:guardar), class: 'btn-guardar' %>
+      </div>
+    </div>
+
+  </div>
+<% end %>

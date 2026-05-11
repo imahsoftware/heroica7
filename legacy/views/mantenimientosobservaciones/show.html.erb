@@ -1,0 +1,18 @@
+<p>
+  <b>Mantenimiento:</b>
+  <%=h @mantenimientosobservacion.mantenimiento_id %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%=h @mantenimientosobservacion.user_id %>
+</p>
+
+<p>
+  <b>Observaciones:</b>
+  <%=h @mantenimientosobservacion.observaciones %>
+</p>
+
+
+<%= link_to 'Edit', edit_mantenimientosobservacion_path(@mantenimientosobservacion) %> |
+<%= link_to 'Back', mantenimientosobservaciones_path %>

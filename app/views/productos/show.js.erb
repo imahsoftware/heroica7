@@ -1,0 +1,4 @@
+$("#producto_<%= @producto.id %>").replaceWith("<%= j render 'tr', producto: @producto %>");
+$("#producto_form").collapse("hide");
+$("#producto_form").empty();
+$(".tooltip").tooltip("hide");

@@ -1,0 +1,39 @@
+  <div align="center">
+<table width="90%" border="0" cellpadding="0" cellspacing="0" id="one-column-emphasis">
+  <tr>
+    <td class="oce-first" width="20%">Usuario</td>
+    <td class="oce-first" width="10%">Fecha</td>
+    <td class="oce-first" width="10%">Nro Egreso</td>
+    <td class="oce-first" width="10%">Valor</td>
+    <td class="oce-first" width="35%">Observacion</td>
+    <td class="oce-first" width="15%"></td>
+  </tr>
+<% for egreso in @egresos%>
+  <tr class="<%=cycle('even1', 'odd1')%> postS_<%=egreso.id%>">
+    <td class="camposDesc">
+       <table width="100%" border="0" cellspacing="0" cellpadding="0">
+         <tr>
+           <td><%=egreso.created_at.strftime("%Y-%m-%d %X")%> - <%=egreso.user.username rescue nil%></td>
+         </tr>
+         <tr>
+           <td><%=egreso.updated_at.strftime("%Y-%m-%d %X")%> - <%=User.find(egreso.user_actualiza).username rescue nil%></td>
+         </tr>
+       </table>
+    </td>
+    <td class="camposDesc"><%=h egreso.fecha %></td>
+    <td class="camposDesc"><%=h egreso.nro_egreso %></td>
+    <td class="camposDesc"><%=h egreso.valor %></td>
+    <td class="camposDesc"><%=h egreso.observacion %></td>
+    <td class="camposDesc"><div align="center">
+                <%= link_to 'Editar', edit_egreso_path(egreso), :class=>"editarlink" %>
+        <%= link_to_remote 'Borrar',
+                {:url => egreso_path(egreso),
+                :method => :delete,
+                :confirm => "¿Seguro?",
+                :before => "$(this).up('.postS_#{egreso.id}').remove()"},:class=>"borrarlink"%>
+        </div>
+   </td>
+  </tr>
+<% end %>
+</table>
+</div>

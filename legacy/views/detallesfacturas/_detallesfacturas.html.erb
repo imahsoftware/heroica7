@@ -1,0 +1,136 @@
+<div id="productheader">
+  <span class="tit_gr_azul">&nbsp;&nbsp;DETALLE DE LA FACTURA</span>
+</div>
+<div align="center">
+<% remote_form_for [@factura, @detallesfactura] do |form| %>
+  <% if permiso("detallesfactura","C").to_s == "S" %>
+        <% if !@detallesfactura.id
+          if @factura.estado == 'C'
+        %>
+          <div align="center">
+            <table width="40%" border="0" align="center" cellpadding="0" cellspacing="0">
+          <tr valign="middle">
+            <td height="30" class="oce-first"><div align="center">LA FACTURA SE ENCUENTRA CANCELADA</div></td>
+          </tr>
+        </table>
+          </div>
+          <br/>
+       <% elsif @factura.estado == 'A' %>
+          <div align="center">
+            <table width="40%" border="0" align="center" cellpadding="0" cellspacing="0">
+          <tr valign="middle">
+            <td height="30" class="oce-first"><div align="center">LA FACTURA SE ENCUENTRA ANULADA</div></td>
+          </tr>
+        </table>
+          </div>
+          <br/>
+       <% else %>
+	<%= render :partial => "/detallesfacturas/detallesfacturas_form" %>
+  <% end %>
+    <% end %>
+ <% end %>
+<% if @factura.detallesfacturas.exists? %>
+<table width="95%" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr valign="middle">
+    <td width="25%" height="30" class="oce-first">Usuario</td>
+    <td width="23%" height="30" class="oce-first">Categoria / Tramite</td>
+    <td width="22%" class="oce-first">Concepto</td>
+    <td width="5%" class="oce-first">Cant.</td>
+    <td width="15%" class="oce-first">Valor</td>
+    <td width="10%" class="oce-first"></td>
+  </tr>
+</table>
+<% @factura.detallesfacturas.each do |detallesfactura| %>
+   <% if detallesfactura.id != @detallesfactura.id %>
+  <table width="95%" border="0" align="center" cellpadding="0" cellspacing="0" id="one-column-emphasis">
+   <tr  valign="middle" class="<%=cycle('even1', 'odd1')%>" id="detallesfactura_<%=detallesfactura.id%>">
+     <td width="25%" class="camposDesc">
+       <table width="100%" border="0" cellspacing="0" cellpadding="0">
+         <tr>
+           <td><%=detallesfactura.created_at.strftime("%Y-%m-%d %X")%> - <%=detallesfactura.user.username rescue nil%></td>
+         </tr>
+         <tr>
+           <td><%=detallesfactura.updated_at.strftime("%Y-%m-%d %X")%> - <%=User.find(detallesfactura.user_actualiza).username rescue nil%></td>
+         </tr>
+       </table>
+     </td>
+    <td width="23%" height="30" class="camposDesc">
+       <table width="100%" border="0" cellspacing="0" cellpadding="0">
+         <tr>
+           <td><%=detallesfactura.categoria.nombre rescue nil%></td>
+         </tr>
+         <tr>
+           <td><%=detallesfactura.tipostramite.descripcion rescue nil%></td>
+         </tr>
+       </table>
+        </td>
+    <td width="22%" class="camposDesc"><%=detallesfactura.concepto.descripcion rescue nil%></td>
+    <td width="5%" class="camposDesc"><div align="center">
+        <% if detallesfactura.cantidad.to_s == "" %>
+          1
+        <% else %>
+          <%=detallesfactura.cantidad%>
+        <% end %>
+      </div></td>
+    <td width="10%" class="camposDesc"><%=camponumerico(detallesfactura.valor)%></td>
+    <td width="15%" class="camposDesc"><div align="center">
+        <% if permiso("detallesfactura","A").to_s == "S"
+             if @factura.estado == 'P' %>
+        <%= link_to_remote ('Editar',{:url => edit_factura_detallesfactura_path(@factura, detallesfactura),
+		:method => :get}, :class=>"editarlink")%>
+        <%   end
+           end %>
+        <% if permiso("detallesfactura","E").to_s == "S"
+             if @factura.estado.to_s == 'P' %>
+        |&nbsp;<%= link_to_remote ('Borrar',{:url => factura_detallesfactura_path(@factura, detallesfactura),
+		:method => :delete, :confirm => "¿Seguro?"}, :class=>"borrarlink")%>
+         <%   end
+           end %>
+      </div></td>
+ </tr>
+</table>
+<% else %>
+      <fieldset>
+        <div id="productheader">
+  <span class="tit_gr_azul">&nbsp;&nbsp;EDITAR DETALLE DE LA FACTURA</span>
+</div>
+    <tr class="<%=cycle('even', 'odd')%>" id="detallesfactura_<%=@detallesfactura.id%>">
+     <%= render :partial => "detallesfacturas_form" %>
+    </tr>
+    </fieldset>
+<% end %>
+        <% end %>
+  <br/>
+  <div align="center">
+    <table width="40%" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr valign="middle">
+    <td height="30" class="oce-first"><div align="center">VALOR TOTAL FACTURA : <%=camponumerico(@factura.detallesfacturas.sum('valor'))%></div></td>
+  </tr>
+</table>
+  </div>
+  
+<% else %>
+<table width="40%" border="0" cellpadding="0" align="center" cellspacing="0" bgcolor="#E5E5E5">
+      <tr>
+        <td width="10%"><div align="right"><img src="/images/alerta.png"></div></td>
+        <td width="90%" class="campos">&nbsp;&nbsp;No hay datos asociados.</td>
+     </tr>
+</table>
+<% end %>
+            <%= hidden_field :factura, :id %>
+<% end %>
+<br/>
+<% if flash[:detallesfactura] %>
+<div id="detallesfactura">
+  <table width="90%" border="0" cellpadding="0" cellspacing="0" bgcolor="#E5E5E5">
+   <tr>
+        <td width="5%"><div align="right"><img src="/images/connect.png"></div></td>
+        <td width="95%" class="campos" align="left" >&nbsp;&nbsp;<%= flash[:detallesfactura] %></td>
+   </tr>
+  </table>
+</div>
+<script type="text/javascript">
+  setTimeout("new Effect.Fade('detallesfactura');", 5000)
+</script>
+<% end %>
+</div>

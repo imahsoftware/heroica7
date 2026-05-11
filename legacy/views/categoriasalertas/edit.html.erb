@@ -1,0 +1,36 @@
+<h1>Editing categoriasalerta</h1>
+
+<% form_for(@categoriasalerta) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :persona_id %><br />
+    <%= f.text_field :persona_id %>
+  </p>
+  <p>
+    <%= f.label :categoria_id %><br />
+    <%= f.text_field :categoria_id %>
+  </p>
+  <p>
+    <%= f.label :alertaspracticas %><br />
+    <%= f.text_field :alertaspracticas %>
+  </p>
+  <p>
+    <%= f.label :cantclases %><br />
+    <%= f.text_field :cantclases %>
+  </p>
+  <p>
+    <%= f.label :estado %><br />
+    <%= f.text_field :estado %>
+  </p>
+  <p>
+    <%= f.label :user_id %><br />
+    <%= f.text_field :user_id %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @categoriasalerta %> |
+<%= link_to 'Back', categoriasalertas_path %>

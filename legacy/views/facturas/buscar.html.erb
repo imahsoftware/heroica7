@@ -1,0 +1,40 @@
+<%= stylesheet_link_tag 'tabs'%>
+<%= javascript_include_tag 'fabtabulous' %>
+<div id="productheader">
+  <span class="tit_gr_azul">&nbsp;&nbsp;INFORMACION FACTURA</span>
+  <div align="right">
+   <%= link_to 'Buscar Factura', busqueda_facturas_path, :class=>"regresarlink" %>&nbsp;&nbsp;</div>
+</div>
+<br/>
+<div align="center">
+<table width="80%" border="0" align="center" cellpadding="0" cellspacing="0" id="one-column-emphasis">
+  <tr valign="middle">
+    <td width="40%" height="30" class="oce-first">Usuario</td>
+    <td width="20%" class="oce-first">Nro Factura</td>
+    <td width="20%" class="oce-first">Valor</td>
+    <td width="10%" class="oce-first">Estado</td>
+    <td width="10%" class="oce-first">&nbsp;</td>
+  </tr>
+  <% @facturas.each do |factura| %>
+  <tr valign="middle">
+    <td height="30" class="camposDesc"><%=h factura.persona.identificacion rescue nil%> - <%=h factura.persona.nombres rescue nil%></td>
+    <td class="camposDesc"><%=h facturacero(factura.nro_factura)%></td>
+    <td class="camposDesc"><%=h camponumerico(factura.valor)%></td>
+    <td class="camposDesc"><%=h factura.destado%></td>
+    <td ><div align="center">
+        <%= link_to 'Ver', edit_factura_path(factura),:class=>"editarlink"%>
+    </div></td>
+  </tr>
+  <% end %>
+</table>
+<table width="80%" height="0" align="center" border="0" cellpadding="0" cellspacing="0">
+  <tr>
+    <td height="10"><hr size="1" noshade class="hrlinea"></td>
+  </tr>
+</table>
+<table width="80%" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr valign="middle">
+    <td width="100%" height="30" class="camposDescN"><div align="center">Nro Total de Registro : <%=@facturas.count%></div></td>
+  </tr>
+</table> 
+</div>

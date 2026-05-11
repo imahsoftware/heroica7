@@ -1,0 +1,2 @@
+page.replace_html :usersmodulos_form, :partial => "/usersmodulos/usersmodulos"
+

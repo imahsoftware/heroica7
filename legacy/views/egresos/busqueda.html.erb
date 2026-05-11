@@ -1,0 +1,49 @@
+<div id="productheader">
+  <span class="tit_gr_azul">&nbsp;&nbsp;EGRESOS</span>
+  <div align="right">
+   <%= link_to "Nuevo",new_egreso_path,:class=>"nuevolink"%>&nbsp;&nbsp;
+  </div>
+</div>
+<br/>
+<% form_tag buscar_egresos_path, :method => 'get' do %>
+<table width="80%" border="0" align="center" cellpadding="0" cellspacing="0" id="one-column-emphasis">
+  <tr valign="middle">
+    <td width="30%" height="30" ><div align="right"><strong>Nro Egreso :&nbsp;&nbsp;</strong></div></td>
+    <td width="70%" height="30" >
+      <%= text_field_tag :buscarnroegreso, params[:buscarnroegreso],{ :class => "campo", :size => 40,
+                :onFocus => "this.style.border='1px solid #f00'",
+                :onBlur => "this.style.border='1px solid #bbb'" } %>
+    </td>
+  </tr>
+  <tr valign="middle">
+    <td width="30%" height="30" ><div align="right"><strong>Proveedor :&nbsp;&nbsp;</strong></div></td>
+    <td><div align="left"><%=select("ubicacion", "proveedor_id", Proveedor.find(:all,:conditions=>["id in (select distinct proveedor_id from egresos)"],:order =>"autobuscar asc").collect {|p| [ p.autobuscar, p.id ] }, { :include_blank => true },
+                                                       { :style=>"width:500px", :class => "campo", :onFocus => "this.style.border='1px solid #f00'", :onBlur => "this.style.border='1px solid #bbb'" }) %></div>
+    </td>
+  </tr>
+  <tr valign="middle">
+    <td width="30%" height="30" ><div align="right"><strong>Fecha Egreso :&nbsp;&nbsp;</strong></div></td>
+    <td width="70%" height="30" >
+      Inicial <%= calendar_date_select "ubicacion", "fchinicial", :year_range => 50.years.ago..0.years.ago, :class=> "campo", :size => 10, :time => false%>
+      &nbsp;&nbsp;Final <%= calendar_date_select "ubicacion", "fchfinal", :year_range => 50.years.ago..0.years.ago, :class=> "campo", :size => 10, :time => false%>
+    </td>
+  </tr>
+  <tr valign="middle">
+    <td width="30%" height="30" ><div align="right"><strong>Observacion :&nbsp;&nbsp;</strong></div></td>
+    <td width="70%" height="30" >
+      <%= text_field_tag :buscarobs, params[:buscarobs],{ :class => "campo", :size => 80,
+                :onFocus => "this.style.border='1px solid #f00'",
+                :onBlur => "this.style.border='1px solid #bbb'" } %>
+    </td>
+  </tr>
+  <tr valign="middle">
+    <td height="30"></td>
+    <td height="30">
+<%= submit_tag "Buscar", :name => nil, :disable_with => "Buscando..." , :class=>"buttonAsLink"%>
+      <%= submit_tag "Buscar", :name => 'format', :value => 'xls', :class=>"buttonAsLink" %></td>
+  </tr>
+</table>
+<% end %>
+<br/>
+
+

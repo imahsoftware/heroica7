@@ -1,0 +1,38 @@
+<p>
+  <b>Fecha hora:</b>
+  <%=h @parqueadero.fecha_hora %>
+</p>
+
+<p>
+  <b>Tipo:</b>
+  <%=h @parqueadero.tipo %>
+</p>
+
+<p>
+  <b>Placa:</b>
+  <%=h @parqueadero.placa_id %>
+</p>
+
+<p>
+  <b>Instructor:</b>
+  <%=h @parqueadero.instructor_id %>
+</p>
+
+<p>
+  <b>Kilometraje entrada:</b>
+  <%=h @parqueadero.kilometraje_entrada %>
+</p>
+
+<p>
+  <b>Kilometraje salida:</b>
+  <%=h @parqueadero.kilometraje_salida %>
+</p>
+
+<p>
+  <b>Cant combustible:</b>
+  <%=h @parqueadero.cant_combustible %>
+</p>
+
+
+<%= link_to 'Edit', edit_parqueadero_path(@parqueadero) %> |
+<%= link_to 'Back', parqueaderos_path %>

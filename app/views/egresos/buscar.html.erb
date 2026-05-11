@@ -1,0 +1,66 @@
+<% title 'Resultados — Egresos' %>
+
+<div class="box box-usuarios">
+  <div class="box-header">
+    <span class="box-title">
+      <i class="fa fa-money"></i> Egresos
+      <span class="users-count-badge"><%= @egresos.count %> registros</span>
+    </span>
+    <div class="box-tools pull-right" style="margin-top: -2px;">
+      <%= link_to busqueda_egresos_path, class: 'btn btn-sm btn-default' do %>
+        <i class="fa fa-arrow-left"></i> Buscar Egreso
+      <% end %>
+    </div>
+  </div>
+
+  <div class="box-body">
+    <% if @egresos.any? %>
+      <div class="table-responsive">
+        <table class="table table-bordered table-condensed table-striped table-usuarios">
+          <thead>
+            <tr>
+              <th width="8%" class="text-center">Acciones</th>
+              <th width="10%">Fecha</th>
+              <th width="12%">Nro. Egreso</th>
+              <th width="12%" class="text-right">Valor</th>
+              <th width="58%">Observación</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @egresos.each do |egreso| %>
+              <tr id="egreso_<%= egreso.id %>">
+                <td class="text-center">
+                  <%= link_to edit_egreso_path(egreso),
+                      title: t(:title_editar),
+                      data: { toggle: 'tooltip' } do %>
+                    <button class="btn btn-xs btn-warning btn-accion"><i class="fa fa-edit"></i></button>
+                  <% end %>
+                  <% if permiso('egreso', 'E').to_s == 'S' %>
+                    <%= link_to egreso_path(egreso), method: :delete,
+                        title: t(:title_elimina),
+                        data: { confirm: t(:elimina_confirma), toggle: 'tooltip' } do %>
+                      <button class="btn btn-xs btn-danger btn-accion"><i class="fa fa-trash"></i></button>
+                    <% end %>
+                  <% end %>
+                </td>
+                <td><%= egreso.fecha %></td>
+                <td>
+                  <code style="font-size: 11px; background: #f1f5f9; color: #394959; padding: 2px 6px; border-radius: 4px;">
+                    <%= egreso.nro_egreso %>
+                  </code>
+                </td>
+                <td class="text-right"><%= number_with_delimiter(egreso.valor.to_i, delimiter: '.') %></td>
+                <td style="font-size: 11px;"><%= egreso.observacion %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    <% else %>
+      <div class="empty-state">
+        <i class="fa fa-money"></i>
+        <p>No se encontraron egresos con los criterios de búsqueda.</p>
+      </div>
+    <% end %>
+  </div>
+</div>

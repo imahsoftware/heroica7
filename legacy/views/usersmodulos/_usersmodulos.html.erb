@@ -1,0 +1,32 @@
+<div id="productheader">
+  <h2>&nbsp;<img src="/images/modulosautorizados.png"></h2>
+</div>
+<% remote_form_for [@user, @usersmodulo] do |form| %>
+<% if !@usersmodulo.id %>
+	<%= render :partial => "/usersmodulos/usersmodulos_form" %>
+<% end %>
+      <div align="center">
+<table width="60%" border="0" align="center" cellpadding="0" cellspacing="0"  id="one-column-emphasis">
+  <tr valign="middle">
+    <td width="10%" height="30" class="oce-first">Id</td>
+    <td width="85%" height="30" class="oce-first">Modulo</td>
+    <td width="5%" height="30" class="oce-first"></td>
+  </tr>
+<% for usersmodulo in @user.usersmodulos.find(:all, :order => 'modulo_id') %>
+   <% if usersmodulo.id != @usersmodulo.id %>
+   <tr id="usersmodulo_<%=usersmodulo.id%>">
+     <td><%=usersmodulo.modulo.id%></td>
+     <td><%=usersmodulo.modulo.descripcion%></td>
+     <td>
+      <%= link_to_remote ('Borrar',{:url => user_usersmodulo_path(@user, usersmodulo),
+		:method => :delete, :confirm => "¿Seguro?"}, :class=>"borrarlink")%>
+     </td>
+ </tr>
+   <% end %>
+<% end %>
+</table>
+            <%= hidden_field :user, :id %>
+
+</div>     
+<% end %>
+<br/>

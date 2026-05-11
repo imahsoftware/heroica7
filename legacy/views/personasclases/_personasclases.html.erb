@@ -1,0 +1,90 @@
+<div id="productheader">
+  <span class="tit_gr_azul">&nbsp;&nbsp;INFORMACION CLASES DICTADAS</span>
+</div>
+<BR/>
+<div align="center">
+<% remote_form_for [@persona, @personasclase] do |form| %>
+<% if @persona.personasclases.exists? %>
+<table width="90%" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr valign="middle">
+    <td width="10%" height="30" class="oce-first"><div align="center">Nro Clases</div></td>
+    <td width="30%" height="30" class="oce-first">Usuario</td>
+    <td width="10%" height="30" class="oce-first">Horario</td>
+    <td width="10%" class="oce-first">Placa</td>
+    <td width="20%" class="oce-first">Instructor</td>
+    <td width="10%" class="oce-first"><div align="center">Fecha Clase</div></td>
+    <td width="10%" class="oce-first"></td>
+  </tr>
+</table>
+<%  i = 0
+    @persona.personasclases.each do |personasclase| 
+      i = i + 1
+%>
+   <% if personasclase.id != @personasclase.id %>
+  <table width="90%" border="0" align="center" cellpadding="0" cellspacing="0" id="one-column-emphasis">
+   <tr  valign="middle" class="<%=cycle('even1', 'odd1')%>" id="personasclase_<%=personasclase.id%>">
+     <td width="10%" class="camposDescN12"><div align="center"><%=i%></div></td>
+     <td width="30%" class="camposDesc">
+       <table width="100%" border="0" cellspacing="0" cellpadding="0">
+         <tr>
+           <td><%=personasclase.created_at.strftime("%Y-%m-%d %X")%> - <%=personasclase.user.username rescue nil%></td>
+         </tr>
+         <tr>
+           <td><%=personasclase.updated_at.strftime("%Y-%m-%d %X")%> - <%=User.find(personasclase.user_actualiza).username rescue nil%></td>
+         </tr>
+       </table>
+     </td>
+    <td width="10%" height="30" class="camposDesc"><%=personasclase.tiposhorario.descripcion rescue nil%></td>
+    <td width="10%" class="camposDesc"><%=personasclase.placa.descripcion rescue nil%></td>
+    <td width="20%" class="camposDesc"><%=personasclase.instructor.nombre rescue nil%></td>
+    <td width="10%" class="camposDesc"><%=personasclase.fecha_clase%></td>
+    <td width="10%" class="camposDesc"><div align="center">
+                <% if permiso("personasclase","E").to_s == "S" %>
+              <%= link_to_remote('Editar',{:url => edit_persona_personasclase_path(@persona, personasclase),
+		:method => :get}, :class=>"editarlink")%>
+            <%= link_to_remote('Borrar',{:url => persona_personasclase_path(@persona, personasclase),
+                    :method => :delete, :confirm => "¿Seguro?"}, :class=>"borrarlink",
+                :before => "$(this).up('.personasclase_#{personasclase.id}').remove()")%>
+             <%  end %>
+            </div>
+            </td>
+ </tr>
+</table>
+<% else %>
+      <fieldset>
+      <table width="90%" border="0" cellpadding="2" cellspacing="2">
+  <tr>
+    <td  height="30"><div class="col_enc">EDITAR CLASES</div></td>
+  </tr>
+</table>
+    <tr class="<%=cycle('even', 'odd')%>" id="personasclase_<%=@personasclase.id%>">
+     <%= render :partial => "personasclases_form" %>
+    </tr>
+    </fieldset>
+<% end %>
+        <% end %>
+<% else %>
+<table width="40%" border="0" cellpadding="0" align="center" cellspacing="0" bgcolor="#E5E5E5">
+      <tr>
+        <td width="10%"><div align="right"><img src="/images/alerta.png"></div></td>
+        <td width="90%" class="campos">&nbsp;&nbsp;No hay datos asociados.</td>
+     </tr>
+</table>
+<% end %>
+            <%= hidden_field :persona, :id %>
+<% end %>
+<br/>
+<% if flash[:personasclase] %>
+<div id="personasclase">
+  <table width="90%" border="0" cellpadding="0" cellspacing="0" bgcolor="#E5E5E5">
+   <tr>
+        <td width="5%"><div align="right"><img src="/images/connect.png"></div></td>
+        <td width="95%" class="campos" align="left" >&nbsp;&nbsp;<%= flash[:personasclase] %></td>
+   </tr>
+  </table>
+</div>
+<script type="text/javascript">
+  setTimeout("new Effect.Fade('personasclase');", 5000)
+</script>
+<% end %>
+</div>

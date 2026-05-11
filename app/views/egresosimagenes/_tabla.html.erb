@@ -1,0 +1,17 @@
+<div class="table-responsive">
+  <table class="table table-bordered table-condensed table-striped table-usuarios">
+    <thead>
+      <tr>
+        <th width="10%" class="text-center">Acciones</th>
+        <th width="15%">Fecha</th>
+        <th width="35%">Descripción</th>
+        <th>Archivo</th>
+      </tr>
+    </thead>
+    <tbody id="tbody_egresosimagenes">
+      <% @egreso.egresosimagenes.order(id: :desc).each do |egresosimagen| %>
+        <%= render 'egresosimagenes/tr', egresosimagen: egresosimagen %>
+      <% end %>
+    </tbody>
+  </table>
+</div>

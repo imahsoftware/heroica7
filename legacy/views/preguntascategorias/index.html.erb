@@ -1,0 +1,22 @@
+<h1>Listing preguntascategorias</h1>
+
+<table>
+  <tr>
+    <th>Pregunta</th>
+    <th>Categoria</th>
+  </tr>
+
+<% @preguntascategorias.each do |preguntascategoria| %>
+  <tr>
+    <td><%=h preguntascategoria.pregunta_id %></td>
+    <td><%=h preguntascategoria.categoria_id %></td>
+    <td><%= link_to 'Show', preguntascategoria %></td>
+    <td><%= link_to 'Edit', edit_preguntascategoria_path(preguntascategoria) %></td>
+    <td><%= link_to 'Destroy', preguntascategoria, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New preguntascategoria', new_preguntascategoria_path %>

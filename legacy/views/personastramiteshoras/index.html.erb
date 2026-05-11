@@ -1,0 +1,65 @@
+<div id="productheader">
+  <span class="tit_gr_azul">&nbsp;&nbsp;INFORMACION TRAMITE [<%=@personastramite.persona.nombres rescue nil%>]</span>
+  <div align="right">
+   <%= link_to 'Regresar Tramite', edit_persona_path(@personastramite.persona_id), :class=>"regresarlink" %>&nbsp;&nbsp;</div>
+</div>
+<table width="70%" border="0" align="center" cellpadding="0" cellspacing="0" id="one-column-emphasis">
+  <tr valign="middle">
+    <td width="30%" height="30" class="oce-first">Categoria</td>
+    <td width="50%" class="oce-first">Tramite</td>
+    <td width="20%" class="oce-first">Placa</td>
+  </tr>
+  <tr valign="middle">
+    <td><%=@personastramite.categoria.nombre rescue nil%></td>
+    <td><%=@personastramite.tipostramite.descripcion rescue nil%></td>
+    <td><%=@personastramite.placa.descripcion rescue nil%></td>
+   </tr>
+</table>
+<div id="productheader">
+  <span class="tit_gr_azul">&nbsp;&nbsp;REGISTRO DE HORAS</span>
+  <div align="right">
+   <%= link_to 'Nuevo', new_hora_personastramiteshora_path, :class=>"nuevolink" %>&nbsp;&nbsp;</div>
+</div>
+<table width="90%" border="0" align="center" cellspacing="1" cellpadding="1" id="one-column-emphasis">
+  <tr>
+    <td class="oce-first" width="25%">Usuario</td>
+    <td class="oce-first" width="10%"><div align="center">Fecha</div></td>
+    <td class="oce-first" width="8%"><div align="center">Horas Practicas</div></td>
+    <td class="oce-first" width="7%"><div align="center">Horas Teoricas</div></td>
+    <td class="oce-first" width="5%"><div align="center">Horas Taller</div></td>
+    <td class="oce-first" width="5%"><div align="center">Total</div></td>
+    <td class="oce-first" width="25%">Instructor</td>
+    <td class="oce-first" width="15%">&nbsp;</td>
+  </tr>
+<% @personastramiteshoras.each do |personastramiteshora| %>
+  <tr class="<%=cycle('even1', 'odd1')%>">
+    <td>
+       <table width="100%" border="0" cellspacing="0" cellpadding="0">
+         <tr>
+           <td><%=personastramiteshora.created_at.strftime("%Y-%m-%d %X")%> - <%=personastramiteshora.user.username rescue nil%></td>
+         </tr>
+         <tr>
+           <td><%=personastramiteshora.updated_at.strftime("%Y-%m-%d %X")%> - <%=User.find(personastramiteshora.user_actualiza).username rescue nil%></td>
+         </tr>
+       </table>
+     </td>
+    <td><div align="center"><%=personastramiteshora.fecha%></div></td>
+    <td><div align="center"><%=personastramiteshora.practicas%></div></td>
+    <td><div align="center"><%=personastramiteshora.teoricas%></div></td>
+    <td><div align="center"><%=personastramiteshora.taller%></div></td>
+    <td><div align="center" class="camposDescN11"><%=personastramiteshora.dtotal rescue nil%></div></td>
+    <td><%=personastramiteshora.instructor.nombre rescue nil%></td>
+    <td><div align="center">
+      <% if permiso("personastramiteshora","A").to_s == "S" %>
+       <%= link_to 'Editar', edit_hora_personastramiteshora_path(@personastramite, personastramiteshora), :class=>"editarlink"%>
+        <%end%>
+        <% if permiso("personastramiteshora","E").to_s == "S" %>&nbsp;|
+       <%= link_to 'Borrar', hora_personastramiteshora_path(@personastramite, personastramiteshora),
+                :confirm => 'Esta Seguro de Eliminar?', :method => :delete, :class=>"borrarlink"%>
+        <%end%>
+        </div>
+    </td>
+  </tr>
+<% end %>
+</table>
+<br />

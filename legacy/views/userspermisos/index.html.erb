@@ -1,0 +1,28 @@
+<h1>Listing userspermisos</h1>
+
+<table>
+  <tr>
+    <th>User</th>
+    <th>Objeto</th>
+    <th>Actualiza</th>
+    <th>Elimina</th>
+    <th>Crea</th>
+  </tr>
+
+<% @userspermisos.each do |userspermiso| %>
+  <tr>
+    <td><%=h userspermiso.user_id %></td>
+    <td><%=h userspermiso.objeto_id %></td>
+    <td><%=h userspermiso.actualiza %></td>
+    <td><%=h userspermiso.elimina %></td>
+    <td><%=h userspermiso.crea %></td>
+    <td><%= link_to 'Show', userspermiso %></td>
+    <td><%= link_to 'Edit', edit_userspermiso_path(userspermiso) %></td>
+    <td><%= link_to 'Destroy', userspermiso, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New userspermiso', new_userspermiso_path %>

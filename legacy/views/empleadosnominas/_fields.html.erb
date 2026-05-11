@@ -1,0 +1,198 @@
+<% @empleado = Empleado.find(fa) %>
+   <tr>
+        <td><div align="left">&nbsp;&nbsp;<%= fi%></div></td>
+        <td><div align="center"><%= f.text_field :salario ,{ :class => "campodisabled", :size => 15, :readonly=>"yes",
+                :onFocus => "this.style.border='1px solid #f00'",
+                :onBlur => "this.style.border='1px solid #bbb'" }%></div></td>
+        <td><div align="center"><%= f.text_field :quincena ,{ :class => "campodisabled", :size => 15, :readonly=>"yes",
+                :onFocus => "this.style.border='1px solid #f00'",
+                :onBlur => "this.style.border='1px solid #bbb'" }%></div></td>
+        <%if @empleado.instructor.to_s == 'SI'%>
+        <td><div align="center"><%= f.text_field :horas_auto,{ :class => "camposnumeros", :size => 5,
+                :onFocus => "this.style.border='1px solid #f00'",
+                :onBlur => "this.style.border='1px solid #bbb'"}%>
+          <%= observe_field "empleadosnominas_#{fu}_horas_auto", :url => { :action => :calcularvalor },
+                :frequency => 0.25,
+                :on => 'blur',
+                :with => "'pvr0=#{fa}'
+                          +'&pvr1=#{fu}'
+                          +'&pvr2='+encodeURIComponent(value)
+                          +'&pvr3='+$F('empleadosnominas_#{fu}_horas_minus')
+                          +'&pvr4='+$F('empleadosnominas_#{fu}_horas_bus')
+                          +'&pvr5='+$F('empleadosnominas_#{fu}_dias')
+                          +'&pvr6='+$F('empleadosnominas_#{fu}_bonificacion')
+                          +'&pvr7='+$F('empleadosnominas_#{fu}_ajuste')
+                          +'&pvr8='+$F('empleadosnominas_#{fu}_seguro')
+                          +'&pvr9='+$F('empleadosnominas_#{fu}_dotacion')
+                          +'&pvr10='+$F('empleadosnominas_#{fu}_prestamo')"%>
+          </div></td>
+        <td><div align="center"><%= f.text_field :horas_bus,{ :class => "camposnumeros", :size => 5,
+                :onFocus => "this.style.border='1px solid #f00'",
+                :onBlur => "this.style.border='1px solid #bbb'" }%>
+          <%= observe_field "empleadosnominas_#{fu}_horas_bus", :url => { :action => :calcularvalor },
+                :frequency => 0.25,
+                :on => 'blur',
+                :with => "'pvr0=#{fa}'
+                          +'&pvr1=#{fu}'
+                          +'&pvr2='+$F('empleadosnominas_#{fu}_horas_auto')
+                          +'&pvr3='+$F('empleadosnominas_#{fu}_horas_minus')
+                          +'&pvr4='+encodeURIComponent(value)
+                          +'&pvr5='+$F('empleadosnominas_#{fu}_dias')
+                          +'&pvr6='+$F('empleadosnominas_#{fu}_bonificacion')
+                          +'&pvr7='+$F('empleadosnominas_#{fu}_ajuste')
+                          +'&pvr8='+$F('empleadosnominas_#{fu}_seguro')
+                          +'&pvr9='+$F('empleadosnominas_#{fu}_dotacion')
+                          +'&pvr10='+$F('empleadosnominas_#{fu}_prestamo')"%>
+          </div></td>
+        <td><div align="center"><%= f.text_field :horas_minus,{ :class => "camposnumeros", :size => 5,
+                :onFocus => "this.style.border='1px solid #f00'",
+                :onBlur => "this.style.border='1px solid #bbb'" }%>
+          <%= observe_field "empleadosnominas_#{fu}_horas_minus", :url => { :action => :calcularvalor },
+                :frequency => 0.25,
+                :on => 'blur',
+                :with => "'pvr0=#{fa}'
+                          +'&pvr1=#{fu}'
+                          +'&pvr2='+$F('empleadosnominas_#{fu}_horas_auto')
+                          +'&pvr3='+encodeURIComponent(value)
+                          +'&pvr4='+$F('empleadosnominas_#{fu}_horas_bus')
+                          +'&pvr5='+$F('empleadosnominas_#{fu}_dias')
+                          +'&pvr6='+$F('empleadosnominas_#{fu}_bonificacion')
+                          +'&pvr7='+$F('empleadosnominas_#{fu}_ajuste')
+                          +'&pvr8='+$F('empleadosnominas_#{fu}_seguro')
+                          +'&pvr9='+$F('empleadosnominas_#{fu}_dotacion')
+                          +'&pvr10='+$F('empleadosnominas_#{fu}_prestamo')"%>
+          </div></td>
+        <td><div align="center"><%= f.text_field :dias,{ :class => "campodisabled", :size => 5, :readonly=>"yes"}%></div></td>
+        <% else %>
+        <td><div align="center"><%= f.text_field :horas_auto,{ :class => "campodisabled", :size => 5, :readonly=>"yes"}%></div></td>
+        <td><div align="center"><%= f.text_field :horas_bus,{ :class => "campodisabled", :size => 5, :readonly=>"yes"}%></div></td>
+        <td><div align="center"><%= f.text_field :horas_minus,{ :class => "campodisabled", :size => 5, :readonly=>"yes"}%></div></td>
+        <td><div align="center"><%= f.text_field :dias,{ :class => "camposnumeros", :size => 5,
+                :onFocus => "this.style.border='1px solid #f00'",
+                :onBlur => "this.style.border='1px solid #bbb'" }%>
+          <%= observe_field "empleadosnominas_#{fu}_dias", :url => { :action => :calcularvalor },
+                :frequency => 0.25,
+                :on => 'blur',
+                :with => "'pvr0=#{fa}'
+                          +'&pvr1=#{fu}'
+                          +'&pvr2='+$F('empleadosnominas_#{fu}_horas_auto')
+                          +'&pvr3='+$F('empleadosnominas_#{fu}_horas_minus')
+                          +'&pvr4='+$F('empleadosnominas_#{fu}_horas_bus')
+                          +'&pvr5='+encodeURIComponent(value)
+                          +'&pvr6='+$F('empleadosnominas_#{fu}_bonificacion')
+                          +'&pvr7='+$F('empleadosnominas_#{fu}_ajuste')
+                          +'&pvr8='+$F('empleadosnominas_#{fu}_seguro')
+                          +'&pvr9='+$F('empleadosnominas_#{fu}_dotacion')
+                          +'&pvr10='+$F('empleadosnominas_#{fu}_prestamo')"%>
+          </div></td>
+        <% end%>
+        <td><div align="center"><%= f.text_field :bonificacion,{ :class => "campo", :size => 15,
+                :onFocus => "this.style.border='1px solid #f00'",
+                :onBlur => "this.style.border='1px solid #bbb'" }%>
+          <%= observe_field "empleadosnominas_#{fu}_bonificacion", :url => { :action => :calcularvalor },
+                :frequency => 0.25,
+                :on => 'blur',
+                :with => "'pvr0=#{fa}'
+                          +'&pvr1=#{fu}'
+                          +'&pvr2='+$F('empleadosnominas_#{fu}_horas_auto')
+                          +'&pvr3='+$F('empleadosnominas_#{fu}_horas_minus')
+                          +'&pvr4='+$F('empleadosnominas_#{fu}_horas_bus')
+                          +'&pvr5='+$F('empleadosnominas_#{fu}_dias')
+                          +'&pvr6='+encodeURIComponent(value)
+                          +'&pvr7='+$F('empleadosnominas_#{fu}_ajuste')
+                          +'&pvr8='+$F('empleadosnominas_#{fu}_seguro')
+                          +'&pvr9='+$F('empleadosnominas_#{fu}_dotacion')
+                          +'&pvr10='+$F('empleadosnominas_#{fu}_prestamo')"%>
+          </div></td>
+        <td><div align="center"><%= f.text_field :incapacidad,{ :class => "campo", :size => 15,
+                :onFocus => "this.style.border='1px solid #f00'",
+                :onBlur => "this.style.border='1px solid #bbb'" }%></div></td>
+        <td><div align="center"><%= f.text_field :subtotal,{ :class => "campodisabled", :size => 15, :readonly=>"yes"}%></div></td>
+        <%if @empleado.instructor.to_s == 'SI'%>
+         <td><div align="center"><%= f.text_field :ajuste,{ :class => "campo", :size => 15,
+                :onFocus => "this.style.border='1px solid #f00'",
+                :onBlur => "this.style.border='1px solid #bbb'" }%>
+          <%= observe_field "empleadosnominas_#{fu}_ajuste", :url => { :action => :calcularvalor },
+                :frequency => 0.25,
+                :on => 'blur',
+                :with => "'pvr0=#{fa}'
+                          +'&pvr1=#{fu}'
+                          +'&pvr2='+$F('empleadosnominas_#{fu}_horas_auto')
+                          +'&pvr3='+$F('empleadosnominas_#{fu}_horas_minus')
+                          +'&pvr4='+$F('empleadosnominas_#{fu}_horas_bus')
+                          +'&pvr5='+$F('empleadosnominas_#{fu}_dias')
+                          +'&pvr6='+$F('empleadosnominas_#{fu}_bonificacion')
+                          +'&pvr7='+encodeURIComponent(value)
+                          +'&pvr8='+$F('empleadosnominas_#{fu}_seguro')
+                          +'&pvr9='+$F('empleadosnominas_#{fu}_dotacion')
+                          +'&pvr10='+$F('empleadosnominas_#{fu}_prestamo')"%>
+          </div></td>
+        <%else%>
+          <td><div align="center"><%= f.text_field :ajuste,{ :class => "campodisabled", :size => 15, :readonly=>"yes"}%></div></td>
+        <%end%>
+        <td><div align="center"><%= f.text_field :salud,{ :class => "campodisabled", :size => 15, :readonly=>"yes"}%></div></td>
+        <td><div align="center"><%= f.text_field :pension,{ :class => "campodisabled", :size => 15, :readonly=>"yes"}%></div></td>
+        <td><div align="center"><%= f.text_field :auxilio,{ :class => "campodisabled", :size => 15, :readonly=>"yes"}%></div></td>
+        <td><div align="center"><%= f.text_field :seguro,{ :class => "campo", :size => 15,
+                :onFocus => "this.style.border='1px solid #f00'",
+                :onBlur => "this.style.border='1px solid #bbb'" }%>
+          <%= observe_field "empleadosnominas_#{fu}_ajuste", :url => { :action => :calcularvalor },
+                :frequency => 0.25,
+                :on => 'blur',
+                :with => "'pvr0=#{fa}'
+                          +'&pvr1=#{fu}'
+                          +'&pvr2='+$F('empleadosnominas_#{fu}_horas_auto')
+                          +'&pvr3='+$F('empleadosnominas_#{fu}_horas_minus')
+                          +'&pvr4='+$F('empleadosnominas_#{fu}_horas_bus')
+                          +'&pvr5='+$F('empleadosnominas_#{fu}_dias')
+                          +'&pvr6='+$F('empleadosnominas_#{fu}_bonificacion')
+                          +'&pvr7='+encodeURIComponent(value)
+                          +'&pvr8='+$F('empleadosnominas_#{fu}_seguro')
+                          +'&pvr9='+$F('empleadosnominas_#{fu}_dotacion')
+                          +'&pvr10='+$F('empleadosnominas_#{fu}_prestamo')"%>
+          </div></td>
+        <td><div align="center"><%= f.text_field :dotacion,{ :class => "campo", :size => 15,
+                :onFocus => "this.style.border='1px solid #f00'",
+                :onBlur => "this.style.border='1px solid #bbb'" }%>
+          <%= observe_field "empleadosnominas_#{fu}_dotacion", :url => { :action => :calcularvalor },
+                :frequency => 0.25,
+                :on => 'blur',
+                :with => "'pvr0=#{fa}'
+                          +'&pvr1=#{fu}'
+                          +'&pvr2='+$F('empleadosnominas_#{fu}_horas_auto')
+                          +'&pvr3='+$F('empleadosnominas_#{fu}_horas_minus')
+                          +'&pvr4='+$F('empleadosnominas_#{fu}_horas_bus')
+                          +'&pvr5='+$F('empleadosnominas_#{fu}_dias')
+                          +'&pvr6='+$F('empleadosnominas_#{fu}_bonificacion')
+                          +'&pvr7='+$F('empleadosnominas_#{fu}_ajuste')
+                          +'&pvr8='+$F('empleadosnominas_#{fu}_seguro')
+                          +'&pvr9='+encodeURIComponent(value)
+                          +'&pvr10='+$F('empleadosnominas_#{fu}_prestamo')"%>
+          </div></td>
+        <td><div align="center"><%= f.text_field :prestamo,{ :class => "campo", :size => 15,
+                :onFocus => "this.style.border='1px solid #f00'",
+                :onBlur => "this.style.border='1px solid #bbb'" }%>
+          <%= observe_field "empleadosnominas_#{fu}_prestamo", :url => { :action => :calcularvalor },
+                :frequency => 0.25,
+                :on => 'blur',
+                :with => "'pvr0=#{fa}'
+                          +'&pvr1=#{fu}'
+                          +'&pvr2='+$F('empleadosnominas_#{fu}_horas_auto')
+                          +'&pvr3='+$F('empleadosnominas_#{fu}_horas_minus')
+                          +'&pvr4='+$F('empleadosnominas_#{fu}_horas_bus')
+                          +'&pvr5='+$F('empleadosnominas_#{fu}_dias')
+                          +'&pvr6='+$F('empleadosnominas_#{fu}_bonificacion')
+                          +'&pvr7='+$F('empleadosnominas_#{fu}_ajuste')
+                          +'&pvr8='+$F('empleadosnominas_#{fu}_seguro')
+                          +'&pvr9='+$F('empleadosnominas_#{fu}_dotacion')
+                          +'&pvr10='+encodeURIComponent(value)"%>
+          </div></td>
+        <td><div align="center"><%= f.text_field :total,{ :class => "campodisabled", :size => 15, :readonly=>"yes"}%></div></td>
+        <td><div align="center"><%= f.text_field :observacion,{ :class => "campo", :size => 30,
+                :onFocus => "this.style.border='1px solid #f00'",
+                :onBlur => "this.style.border='1px solid #bbb'" }%></div></td>
+        <td><div align="left">&nbsp;&nbsp;<%= fi%></div></td>
+      </tr>
+
+
+

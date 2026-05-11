@@ -1,0 +1,23 @@
+<div class="table-responsive">
+  <table class="table table-bordered table-condensed table-striped table-usuarios">
+    <thead>
+      <tr>
+        <th width="10%" class="text-center">Acciones</th>
+        <th>Descripción</th>
+        <th width="20%">Creado por</th>
+        <th width="15%">Fecha creación</th>
+      </tr>
+    </thead>
+    <tbody id="tbody_productos">
+      <% @productos.each do |producto| %>
+        <%= render 'productos/tr', producto: producto %>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<div class="row" style="margin-top: 12px;">
+  <div class="col-xs-12 text-right">
+    <%= will_paginate @productos, renderer: BootstrapPagination::Rails %>
+  </div>
+</div>

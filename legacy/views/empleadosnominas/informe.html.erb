@@ -1,0 +1,82 @@
+<div align="center">
+<table width="760"  border="0" cellspacing="0" cellpadding="1">
+  <tr>
+    <td width="150" valign="center"><div align="center"><img src="/images/<%=Parametro.find(10).valor.to_s%>" width="190" height="75"></img></div></td>
+    <td><table width="100%"  border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td class="camposDescN16"><div align="center"><%=Parametro.find(1).valor.to_s%></div></td>
+        </tr>
+        <tr>
+          <td class="camposDescN11"><div align="center">NIT: <%=Parametro.find(2).valor.to_s%></div></td>
+        </tr>
+        <tr>
+          <td class="camposDescN11"><div align="center">Dirección: <%=Parametro.find(13).valor.to_s%></div></td>
+        </tr>
+        <tr>
+          <td class="camposDescN11"><div align="center">PBX: <%=Parametro.find(7).valor.to_s%> - FAX: <%=Parametro.find(8).valor.to_s%></div></td>
+        </tr>
+        <tr>
+          <td class="camposDescN11"><div align="center"><%=Parametro.find(9).valor.to_s%></div></td>
+        </tr>
+    </table></td>
+  </tr>
+</table>
+<br/>
+<table width="1500" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td>
+      <div id="productheader">
+         <span class="tit_gr_azul">&nbsp;&nbsp;Periodo de pago <%=@periodosliquidacion.inicio%> - <%=@periodosliquidacion.fin%></span>
+      </div>
+      <br/><div align="center">
+      <table width="98%" border="0" align="center" class="sample">
+      <tr>
+        <td width="300"><div align="center"><strong>Nombre</strong></div></td>
+        <td><div align="center"><strong>Salario<br>Basico</strong></div></td>
+        <td><div align="center"><strong>Quincena</strong></div></td>
+        <td><div align="center"><strong>Horas<br>Auto </strong></div></td>
+        <td><div align="center"><strong>Horas<br>Bus </strong></div></td>
+        <td><div align="center"><strong>Horas<br>Mula </strong></div></td>
+        <td><div align="center"><strong>Nro.<br>Dias </strong></div></td>
+        <td><div align="center"><strong>Valor<br>Bonificacion</strong></div></td>
+        <td><div align="center"><strong>Valor<br>Incapacidad</strong></div></td>
+        <td><div align="center"><strong>Subtotal</strong></div></td>
+        <td><div align="center"><strong>Ajuste<br>al Minimo</strong></div></td>
+        <td><div align="center"><strong>Salud</strong></div></td>
+        <td><div align="center"><strong>Pension</strong></div></td>
+        <td><div align="center"><strong>Auxilio</strong></div></td>
+        <td><div align="center"><strong>Seguro</strong></div></td>
+        <td><div align="center"><strong>Dotacion</strong></div></td>
+        <td><div align="center"><strong>Prestamo</strong></div></td>
+        <td><div align="center"><strong>TOTAL</strong></div></td>
+      </tr>
+<% @empleadosnominas.each do |empleadosnomina| %>
+   <tr>
+        <td><div align="left"><%=empleadosnomina.empleado.identificacion%> - <%=empleadosnomina.empleado.nombre%></div></td>
+        <td><div align="center"><%=camponumerico(empleadosnomina.salario)%></div></td>
+        <td><div align="center"><%=camponumerico(empleadosnomina.quincena)%></div></td>
+        <td><div align="center"><%=empleadosnomina.horas_auto%></div></td>
+        <td><div align="center"><%=empleadosnomina.horas_bus%></div></td>
+        <td><div align="center"><%=empleadosnomina.horas_minus%></div></td>
+        <td><div align="center"><%=empleadosnomina.dias%></div></td>
+        <td><div align="center"><%=camponumerico(empleadosnomina.bonificacion)%></div></td>
+        <td><div align="center"><%=camponumerico(empleadosnomina.incapacidad)%></div></td>
+        <td><div align="center"><%=camponumerico(empleadosnomina.subtotal)%></div></td>
+        <td><div align="center"><%=camponumerico(empleadosnomina.ajuste)%></div></td>
+        <td><div align="center"><%=camponumerico(empleadosnomina.salud)%></div></td>
+        <td><div align="center"><%=camponumerico(empleadosnomina.pension)%></div></td>
+        <td><div align="center"><%=camponumerico(empleadosnomina.auxilio)%></div></td>
+        <td><div align="center"><%=camponumerico(empleadosnomina.seguro)%></div></td>
+        <td><div align="center"><%=camponumerico(empleadosnomina.dotacion)%></div></td>
+        <td><div align="center"><%=camponumerico(empleadosnomina.prestamo)%></div></td>
+        <td><div align="center"><%=camponumerico(empleadosnomina.total)%></div></td>
+      </tr>
+<%end%>
+      </table>
+</div>
+    </td>
+  </tr>
+</table>
+<br/>
+</div>
+

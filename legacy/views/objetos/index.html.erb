@@ -1,0 +1,20 @@
+<h1>Listing objetos</h1>
+
+<table>
+  <tr>
+    <th>Descripcion</th>
+  </tr>
+
+<% @objetos.each do |objeto| %>
+  <tr>
+    <td><%=h objeto.descripcion %></td>
+    <td><%= link_to 'Show', objeto %></td>
+    <td><%= link_to 'Edit', edit_objeto_path(objeto) %></td>
+    <td><%= link_to 'Destroy', objeto, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New objeto', new_objeto_path %>

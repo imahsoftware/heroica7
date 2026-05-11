@@ -1,0 +1,17 @@
+<%
+  datoFch = Parametro.find(24).valor.to_date rescue nil
+  if datoFch.present? == false
+    datoFch = Time.now()
+  end
+%>
+<div id="contenedorcontrato">
+  <div style="left: 130px !important;top: 400px !important;position: absolute !important;"><%=@personastramite.persona.nombres rescue nil%></div>
+  <div style="left: 230px !important;top: 420px !important;position: absolute !important;"><%=@personastramite.persona.tipodocumento rescue nil%></div>
+  <div style="left: 450px !important;top: 420px !important;position: absolute !important;"><%=@personastramite.persona.identificacion rescue nil%></div>
+  <div style="left: 730px !important;top: 420px !important;position: absolute !important;"><%=@personastramite.persona.expedida rescue nil%></div>
+  <div style="left: 450px !important;top: 438px !important;position: absolute !important;"><%=@nombre%></div>
+  <div style="left: 370px !important;top: 490px !important;position: absolute !important;"><%=datoFch.strftime("%d")%></div>
+  <div style="left: 540px !important;top: 490px !important;position: absolute !important;"><%=descmes(datoFch.strftime("%m"))%></div>
+  <div style="left: 660px !important;top: 490px !important;position: absolute !important;"><%=datoFch.strftime("%Y")%>&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:window.print()" class="imprimirlink"></a></div>
+</div>
+<br/>

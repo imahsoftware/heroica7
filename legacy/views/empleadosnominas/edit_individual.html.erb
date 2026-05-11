@@ -1,0 +1,60 @@
+<div id="productheader"><h2><img src="/images/evial1.png" alt="iPad"></h2></div>
+<div id="productheader">
+  <span class="tit_gr_azul">INFORMACION NOMINA - Periodo de Liquidacion <%= @periodosliquidacion.inicio rescue nil%> - <%= @periodosliquidacion.fin rescue nil%></span>
+</div>
+<br/>
+<% form_tag update_individual_empleadosnominas_path, :method => :put do %>
+<div align="center">
+<table width="2700" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><div align="center">
+      <table width="98%" border="0" align="center" class="sample">
+      <tr>
+        <td width="200"><div align="center"><strong>Nombre</strong></div></td>
+        <td width="10"><div align="center"><strong>Salario Basico</strong></div></td>
+        <td width="10"><div align="center"><strong>Quincena</strong></div></td>
+        <td width="10"><div align="center"><strong>Horas<br>Auto </strong></div></td>
+        <td width="10"><div align="center"><strong>Horas<br>Bus </strong></div></td>
+        <td width="10"><div align="center"><strong>Horas<br>Mula </strong></div></td>
+        <td width="10"><div align="center"><strong>Nro. Dias </strong></div></td>
+        <td width="10"><div align="center"><strong>Valor Bonificacion</strong></div></td>
+        <td width="10"><div align="center"><strong>Valor<br>Incapacidad</strong></div></td>
+        <td width="10"><div align="center"><strong>Subtotal</strong></div></td>
+        <td width="10"><div align="center"><strong>Ajuste al Minimo</strong></div></td>
+        <td width="10"><div align="center"><strong>Salud</strong></div></td>
+        <td width="10"><div align="center"><strong>Pension</strong></div></td>
+        <td width="10"><div align="center"><strong>Auxilio</strong></div></td>
+        <td width="10"><div align="center"><strong>Seguro</strong></div></td>
+        <td width="10"><div align="center"><strong>Dotacion</strong></div></td>
+        <td width="10"><div align="center"><strong>Prestamo</strong></div></td>
+        <td width="10"><div align="center"><strong>TOTAL</strong></div></td>
+        <td width="200"><div align="center"><strong>Observaciones</strong></div></td>
+        <td width="200"><div align="center"><strong>Nombre</strong></div></td>
+      </tr>
+          <% for empleadosnomina in @empleadosnominas %>
+              <% fields_for "empleadosnominas[]", empleadosnomina do |f| %>
+                <%= render "fields", :f => f, :fi => empleadosnomina.empleado.nombre, :fo =>empleadosnomina.periodosliquidacion_id, :fu=>empleadosnomina.id, :fa=>empleadosnomina.empleado.id%>
+              <% end %>
+          <% end %>
+      </table>
+
+<table width="95%" height="0" border="0" cellpadding="0" align="center" cellspacing="0">
+      <tr>
+        <td height="10"><hr size="1" noshade class="hrlinea"></td>
+      </tr>
+</table>
+<table width="95%" border="0" cellpadding="2" align="center" cellspacing="2">
+  <tr>
+    <td width="50%" ><div align="left"><%= submit_tag "Guardar", :disable_with => "Guardando...", :class=>"buttonAsLink"%> <%= link_to 'Regresar', buscar_empleadosnominas_path, :class=>"regresarlink"%> <%= link_to 'Tirilla', {:controller=>"empleadosnominas", :action=>"tirilla", :periodosliquidacion_id =>@periodosliquidacion.id}, :popup => ['new_window','height=500,width=800,scrollbars=yes'], :class=>"regresarlink"%> <%= link_to 'Informe', {:controller=>"empleadosnominas", :action=>"informe", :periodosliquidacion_id =>@periodosliquidacion.id}, :popup => ['new_window','height=700,width=1000,scrollbars=yes'], :class=>"regresarlink"%></div></td>
+    <td width="50%" ><div align="right"> <%= link_to 'Regresar', buscar_empleadosnominas_path, :class=>"regresarlink"%> <%= submit_tag "Guardar", :disable_with => "Guardando...", :class=>"buttonAsLink"%></div></td>
+  </tr>
+</table>
+
+        </div>
+    </td>
+  </tr>
+</table>
+<br/>
+</div>
+<% end %>
+

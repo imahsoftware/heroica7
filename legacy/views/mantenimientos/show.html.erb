@@ -1,0 +1,48 @@
+<p>
+  <b>Placa:</b>
+  <%=h @mantenimiento.placa_id %>
+</p>
+
+<p>
+  <b>Descripcion:</b>
+  <%=h @mantenimiento.descripcion %>
+</p>
+
+<p>
+  <b>Fecha:</b>
+  <%=h @mantenimiento.fecha %>
+</p>
+
+<p>
+  <b>Eficacia:</b>
+  <%=h @mantenimiento.eficacia %>
+</p>
+
+<p>
+  <b>Kilometraje:</b>
+  <%=h @mantenimiento.kilometraje %>
+</p>
+
+<p>
+  <b>Taller:</b>
+  <%=h @mantenimiento.taller %>
+</p>
+
+<p>
+  <b>Costo:</b>
+  <%=h @mantenimiento.costo %>
+</p>
+
+<p>
+  <b>Fecha salida:</b>
+  <%=h @mantenimiento.fecha_salida %>
+</p>
+
+<p>
+  <b>Instructor:</b>
+  <%=h @mantenimiento.instructor_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_mantenimiento_path(@mantenimiento) %> |
+<%= link_to 'Back', mantenimientos_path %>

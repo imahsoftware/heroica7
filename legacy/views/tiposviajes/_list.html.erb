@@ -1,0 +1,26 @@
+  <div align="center">
+<table width="50%" border="0" cellpadding="0" cellspacing="0" id="one-column-emphasis">
+  <tr>
+    <td class="oce-first" width="10%">Id</td>
+    <td class="oce-first" width="50%">Placa</td>
+    <td class="oce-first" width="20%">Valor</td>
+    <td class="oce-first" width="20%"></td>
+  </tr>
+<% for tiposviaje in @tiposviajes%>
+  <tr class="<%=cycle('even1', 'odd1')%> postS_<%=tiposviaje.id%>">
+    <td ><%=h tiposviaje.id %></td>
+    <td ><%=h tiposviaje.descripcion %></td>
+    <td ><%=h tiposviaje.valor %></td>
+    <td ><div align="center">
+        <%= link_to 'Editar', edit_tiposviaje_path(tiposviaje), :class=>"editarlink" %>
+        <%= link_to_remote 'Borrar',
+                :url => tiposviaje_path(tiposviaje),
+                :method => :delete,
+                :confirm => "¿Seguro?",
+                :before => "$(this).up('.postS_#{tiposviaje.id}').remove()"%>
+        </div>
+   </td>
+  </tr>
+<% end %>
+</table>
+</div>

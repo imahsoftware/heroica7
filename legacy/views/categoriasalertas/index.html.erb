@@ -1,0 +1,30 @@
+<h1>Listing categoriasalertas</h1>
+
+<table>
+  <tr>
+    <th>Persona</th>
+    <th>Categoria</th>
+    <th>Alertaspracticas</th>
+    <th>Cantclases</th>
+    <th>Estado</th>
+    <th>User</th>
+  </tr>
+
+<% @categoriasalertas.each do |categoriasalerta| %>
+  <tr>
+    <td><%=h categoriasalerta.persona_id %></td>
+    <td><%=h categoriasalerta.categoria_id %></td>
+    <td><%=h categoriasalerta.alertaspracticas %></td>
+    <td><%=h categoriasalerta.cantclases %></td>
+    <td><%=h categoriasalerta.estado %></td>
+    <td><%=h categoriasalerta.user_id %></td>
+    <td><%= link_to 'Show', categoriasalerta %></td>
+    <td><%= link_to 'Edit', edit_categoriasalerta_path(categoriasalerta) %></td>
+    <td><%= link_to 'Destroy', categoriasalerta, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New categoriasalerta', new_categoriasalerta_path %>

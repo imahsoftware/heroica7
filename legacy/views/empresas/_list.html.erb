@@ -1,0 +1,27 @@
+  <div align="center">
+<table width="90%" border="0" align="center" cellpadding="0" cellspacing="0" id="one-column-emphasis">
+  <tr valign="middle">
+    <td width="15%" height="30" class="oce-first">Identificacion</td>
+    <td width="30%" height="30" class="oce-first">Razon Social</td>
+    <td width="30%" class="oce-first">Direccion</td>
+    <td width="15%" class="oce-first">Telefono</td>
+    <td width="10%" class="oce-first"></td>
+  </tr>
+<% for empresa in @empresas %>
+  <tr class="<%=cycle('even1', 'odd1')%>" postS_<%=empresa.id%>>
+    <td  class="camposDesc"><%=h empresa.documento %> - <%=h empresa.identificacion %></td>
+    <td  class="camposDesc"><%=h empresa.nombre %></td>
+    <td  class="camposDesc"><%=h empresa.direccion %></td>
+    <td  class="camposDesc"><%=h empresa.telefono %></td>
+    <td  class="camposDesc"><div align="center">
+        <% if permiso("empresa","A").to_s == "S" %>
+        <%= link_to 'Editar', edit_empresa_path(empresa), :class=>"editarlink" %>
+        <% end %>
+        </div>
+   </td>
+  </tr>
+<% end %>
+</table>
+</div>
+
+

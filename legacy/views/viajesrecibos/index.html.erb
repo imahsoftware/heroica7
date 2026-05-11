@@ -1,0 +1,22 @@
+<h1>Listing viajesrecibos</h1>
+
+<table>
+  <tr>
+    <th>Viaje</th>
+    <th>Nro recibo</th>
+  </tr>
+
+<% @viajesrecibos.each do |viajesrecibo| %>
+  <tr>
+    <td><%=h viajesrecibo.viaje_id %></td>
+    <td><%=h viajesrecibo.nro_recibo %></td>
+    <td><%= link_to 'Show', viajesrecibo %></td>
+    <td><%= link_to 'Edit', edit_viajesrecibo_path(viajesrecibo) %></td>
+    <td><%= link_to 'Destroy', viajesrecibo, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New viajesrecibo', new_viajesrecibo_path %>

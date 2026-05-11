@@ -1,0 +1,114 @@
+<div id="productheader">
+  <span class="tit_gr_azul">&nbsp;&nbsp;ABONOS</span>
+</div>
+<div align="center">
+<% remote_form_for [@factura, @abono] do |form| %>
+  <% if permiso("abono","C").to_s == "S" %>
+        <% if !@abono.id %>
+        <% if @factura.estado == 'C' %>
+        <div align="center">
+            <table width="40%" border="0" align="center" cellpadding="0" cellspacing="0">
+          <tr valign="middle">
+            <td height="30" class="oce-first"><div align="center">LA FACTURA SE ENCUENTRA CANCELADA</div></td>
+          </tr>
+        </table>
+          </div>
+          <br/>
+       <% elsif @factura.estado == 'A' %>
+          <div align="center">
+            <table width="40%" border="0" align="center" cellpadding="0" cellspacing="0">
+          <tr valign="middle">
+            <td height="30" class="oce-first"><div align="center">LA FACTURA SE ENCUENTRA ANULADA</div></td>
+          </tr>
+        </table>
+          </div>
+          <br/>
+        <% else %>
+  	  <%= render :partial => "/abonos/abonos_form" %>
+        <% end %>
+    <% end %>
+ <% end %>
+<% if @factura.abonos.exists? %>
+<table width="90%" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr valign="middle">
+    <td width="30%" height="30" class="oce-first">Usuario</td>
+    <td width="10%" height="30" class="oce-first">Nro Abono</td>
+    <td width="15%" class="oce-first">Valor Abono</td>
+    <td width="15%" class="oce-first">Saldo</td>
+    <td width="10%" class="oce-first">Estado</td>
+    <td width="20%" class="oce-first"></td>
+  </tr>
+</table>
+<% @factura.abonos.each do |abono| %>
+   <% if abono.id != @abono.id %>
+  <table width="90%" border="0" align="center" cellpadding="0" cellspacing="0" id="one-column-emphasis">
+   <tr  valign="middle" class="<%=cycle('even1', 'odd1')%>" id="abono_<%=abono.id%>">
+     <td width="30%" class="camposDesc">
+       <table width="100%" border="0" cellspacing="0" cellpadding="0">
+         <tr>
+           <td><%=abono.created_at.strftime("%Y-%m-%d %X")%> - <%=abono.user.username rescue nil%></td>
+         </tr>
+         <tr>
+           <td><%=abono.updated_at.strftime("%Y-%m-%d %X")%> - <%=User.find(abono.user_anula).username rescue nil%></td>
+         </tr>
+       </table>
+     </td>
+    <td width="10%" height="30" class="camposDesc"><%=facturacero(abono.nro_abono)%></td>
+    <td width="15%" class="camposDesc"><%=camponumerico(abono.valor)%></td>
+    <td width="15%" class="camposDesc"><%=camponumerico(abono.saldo)%></td>
+    <td width="10%" class="camposDesc"><%=abono.destado%></td>
+    <td width="20%" class="camposDesc"><div align="center">
+        <% if abono.estado.to_s != 'A' %>
+     <%= link_to 'Ver Abono',
+                     {:controller=>"abonos", :action =>"verabono", :abono_id =>abono.id},
+                      :popup => ['new_window','height=500,width=1000,scrollbars=yes'],
+                      :title => "Ver Abono"%>
+        <% if permiso("abono","E").to_s == "S"
+              %>
+        |&nbsp;<%= link_to_remote ('Anular Abono', {:url => anula_factura_abono_path(@factura, abono),
+                                              :confirm =>"Seguro?", :method => :get}, :class=>"borrarlink")%>
+         <%  
+           end
+         end%>
+
+      </div></td>
+ </tr>
+</table>
+<% else %>
+      <fieldset>
+      <table width="90%" border="0" cellpadding="2" cellspacing="2">
+  <tr>
+    <td  height="30"><div class="col_enc">EDITAR ABONOS</div></td>
+  </tr>
+</table>
+    <tr class="<%=cycle('even', 'odd')%>" id="abono_<%=@abono.id%>">
+     <%= render :partial => "abonos_form" %>
+    </tr>
+    </fieldset>
+<% end %>
+        <% end %>
+<% else %>
+<table width="40%" border="0" cellpadding="0" align="center" cellspacing="0" bgcolor="#E5E5E5">
+      <tr>
+        <td width="10%"><div align="right"><img src="/images/alerta.png"></div></td>
+        <td width="90%" class="campos">&nbsp;&nbsp;No hay datos asociados.</td>
+     </tr>
+</table>
+<% end %>
+            <%= hidden_field :factura, :id %>
+<% end %>
+<br/>
+<% if flash[:abono] %>
+<div id="abono">
+  <table width="90%" border="0" cellpadding="0" cellspacing="0" bgcolor="#E5E5E5">
+   <tr>
+        <td width="5%"><div align="right"><img src="/images/connect.png"></div></td>
+        <td width="95%" class="campos" align="left" >&nbsp;&nbsp;<%= flash[:abono] %></td>
+   </tr>
+  </table>
+</div>
+<script type="text/javascript">
+  setTimeout("new Effect.Fade('abono');", 5000)
+</script>
+<% end %>
+</div>

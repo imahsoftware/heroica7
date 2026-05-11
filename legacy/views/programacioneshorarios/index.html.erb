@@ -1,0 +1,32 @@
+<h1>Listing programacioneshorarios</h1>
+
+<table>
+  <tr>
+    <th>Persona</th>
+    <th>Horario</th>
+    <th>Placa</th>
+    <th>Fecha inicial</th>
+    <th>Fecha final</th>
+    <th>Recoje</th>
+    <th>User</th>
+  </tr>
+
+<% @programacioneshorarios.each do |programacioneshorario| %>
+  <tr>
+    <td><%=h programacioneshorario.persona_id %></td>
+    <td><%=h programacioneshorario.horario_id %></td>
+    <td><%=h programacioneshorario.placa_id %></td>
+    <td><%=h programacioneshorario.fecha_inicial %></td>
+    <td><%=h programacioneshorario.fecha_final %></td>
+    <td><%=h programacioneshorario.recoje %></td>
+    <td><%=h programacioneshorario.user_id %></td>
+    <td><%= link_to 'Show', programacioneshorario %></td>
+    <td><%= link_to 'Edit', edit_programacioneshorario_path(programacioneshorario) %></td>
+    <td><%= link_to 'Destroy', programacioneshorario, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New programacioneshorario', new_programacioneshorario_path %>

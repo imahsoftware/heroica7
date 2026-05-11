@@ -1,0 +1,120 @@
+<div align="center">
+<table  width="95%" border="0" align="center" cellpadding="1" cellspacing="1">
+  <tr>
+    <td width="17%" height="32" class="camposDescN11">Categoria</td>
+    <td width="45%"  class="campos"><%=select("personastramite", "categoria_id", Categoria.all.collect {|p| [ p.nombre, p.id ] }, { :include_blank => true },
+      { :style=>"width:300px", :class => "campo", :onFocus => "this.style.border='1px solid #f00'", :onBlur => "this.style.border='1px solid #bbb'" }) %>
+          <%= error_message_on :personastramite, :categoria_id, :css_class =>"cerror"%></td>
+    <td width="38%" rowspan="6"><table width="100%" border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td  class="camposDescN11">Restricciones</td>
+      </tr>
+      <tr>
+        <td class="camposDesc11"><%= select(:personastramite,
+                :restriccion_01, {"SI" => "SI", "NO" => "NO"},
+                { :include_blank => true },
+                      { :style=>"width:50px", :class => "campo", :onFocus => "this.style.border='1px solid #f00'", :onBlur => "this.style.border='1px solid #bbb'" })%>&nbsp;
+Debe conducir con lentes</td>
+      </tr>
+      <tr>
+        <td class="camposDesc11"><%= select(:personastramite,
+                :restriccion_02, {"SI" => "SI", "NO" => "NO"},
+                { :include_blank => true },
+                      { :style=>"width:50px", :class => "campo", :onFocus => "this.style.border='1px solid #f00'", :onBlur => "this.style.border='1px solid #bbb'" })%>&nbsp;
+No puede conducir de noche</td>
+      </tr>
+      <tr>
+        <td class="camposDesc11"><%= select(:personastramite,
+                :restriccion_03, {"SI" => "SI", "NO" => "NO"},
+                { :include_blank => true },
+                      { :style=>"width:50px", :class => "campo", :onFocus => "this.style.border='1px solid #f00'", :onBlur => "this.style.border='1px solid #bbb'" })%>&nbsp;
+Menor de 18 anos. No puede conducir por carretera</td>
+      </tr>
+      <tr>
+        <td class="camposDesc11"><%= select(:personastramite,
+                :restriccion_04, {"SI" => "SI", "NO" => "NO"},
+                { :include_blank => true },
+                      { :style=>"width:50px", :class => "campo", :onFocus => "this.style.border='1px solid #f00'", :onBlur => "this.style.border='1px solid #bbb'" })%>&nbsp;
+Dise&ntilde;o especial de veh&iacute;culo</td>
+      </tr>
+      <tr>
+        <td class="camposDesc11"><%= select(:personastramite,
+                :restriccion_05, {"SI" => "SI", "NO" => "NO"},
+                { :include_blank => true },
+                      { :style=>"width:50px", :class => "campo", :onFocus => "this.style.border='1px solid #f00'", :onBlur => "this.style.border='1px solid #bbb'" })%>&nbsp;
+Debe conducir con aparato ortop&eacute;dico</td>
+      </tr>
+      <tr>
+        <td class="camposDesc11"><%= select(:personastramite,
+                :restriccion_06, {"SI" => "SI", "NO" => "NO"},
+                { :include_blank => true },
+                      { :style=>"width:50px", :class => "campo", :onFocus => "this.style.border='1px solid #f00'", :onBlur => "this.style.border='1px solid #bbb'" })%>&nbsp;
+No puede conducir conjunto de veh&iacute;culos</td>
+      </tr>
+      <tr>
+        <td class="camposDesc11"><%= select(:personastramite,
+                :restriccion_07, {"SI" => "SI", "NO" => "NO"},
+                { :include_blank => true },
+                      { :style=>"width:50px", :class => "campo", :onFocus => "this.style.border='1px solid #f00'", :onBlur => "this.style.border='1px solid #bbb'" })%>&nbsp;
+No puede conducir otro tipo de veh&iacute;culo</td>
+      </tr>
+      <tr>
+        <td class="camposDesc11"><%= select(:personastramite,
+                :restriccion_99, {"SI" => "SI", "NO" => "NO"},
+                { :include_blank => true },
+                      { :style=>"width:50px", :class => "campo", :onFocus => "this.style.border='1px solid #f00'", :onBlur => "this.style.border='1px solid #bbb'" })%>&nbsp;
+Otra</td>
+      </tr>
+    </table></td>
+  </tr>
+  <tr>
+    <td height="32" class="camposDescN11">Tramite</td>
+    <td  class="campos"><%=select("personastramite", "tipostramite_id", Tipostramite.all.collect {|p| [ p.descripcion, p.id ] }, { :include_blank => true },
+      { :style=>"width:300px", :class => "campo", :onFocus => "this.style.border='1px solid #f00'", :onBlur => "this.style.border='1px solid #bbb'" }) %>
+          <%= error_message_on :personastramite, :tipostramite_id, :css_class =>"cerror"%></td>
+  </tr>
+  <tr>
+    <td height="32" class="camposDescN11">Documento Anterior </td>
+    <td  class="campos"><%= text_field :personastramite, :documento_anterior,{ :class => "campo", :size => 20,
+                  :onChange=> "javascript:this.value=this.value.toUpperCase();",
+                :onFocus => "this.style.border='1px solid #f00'",
+                :onBlur => "this.style.border='1px solid #bbb'" }%>
+          <%= error_message_on :personastramite, :documento_anterior, :css_class =>"cerror"%></td>
+  </tr>
+  <tr>
+    <td height="32" class="camposDescN11">Identificacion Anterior</td>
+    <td  class="campos"><%= text_field :personastramite, :identificacion_anterior,{ :class => "campo", :size => 20,
+                  :onChange=> "javascript:this.value=this.value.toUpperCase();",
+                :onFocus => "this.style.border='1px solid #f00'",
+                :onBlur => "this.style.border='1px solid #bbb'" }%>
+          <%= error_message_on :personastramite, :identificacion_anterior, :css_class =>"cerror"%></td>
+  </tr>
+  <tr>
+    <td height="32"  class="camposDescN11">Placa - Instructor</td>
+    <td  class="campos"><%=select("personastramite", "placa_id", Placa.find(:all, :conditions=>["instructor_id is not null and estado = 'A'"]).collect {|p| [ p.descripcion + ' - ' + p.instructor.nombre, p.id ] }, { :include_blank => true },
+      { :style=>"width:300px", :class => "campo", :onFocus => "this.style.border='1px solid #f00'", :onBlur => "this.style.border='1px solid #bbb'" }) %>
+          <%= error_message_on :personastramite, :placa_id, :css_class =>"cerror"%></td>
+  </tr>
+  <tr>
+    <td height="32"  class="camposDescN11">Empresa</td>
+    <td  class="campos"><%=select("personastramite", "empresa_id", Empresa.find(:all,:order=>"nombre" ).collect {|p| [ p.nombre + ' - ' + p.identificacion, p.id ] }, { :include_blank => true },
+      { :style=>"width:350px", :class => "campo", :onFocus => "this.style.border='1px solid #f00'", :onBlur => "this.style.border='1px solid #bbb'" }) %>
+          <%= error_message_on :personastramite, :empresa_id, :css_class =>"cerror"%></td>
+  </tr>
+</table>
+<table width="90%" height="0" border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td height="10"><hr size="1" noshade class="hrlinea"></td>
+      </tr>
+    </table>
+<table width="90%" border="0" cellpadding="2" cellspacing="2">
+  <tr>
+    <td  height="30"><div align="right">
+        <% if permiso("personastramite","A").to_s == "S" %>
+        <%= hidden_field :personastramite, :id %>
+        <%= submit_tag "Guardar",:disable_with => "Guardando...", :class=>"buttonAsLink"%>
+        <% end %>
+</div></td>
+  </tr>
+</table>
+</div>

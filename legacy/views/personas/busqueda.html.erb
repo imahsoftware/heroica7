@@ -1,0 +1,95 @@
+<div id="productheader">
+  <span class="tit_gr_azul">&nbsp;&nbsp;INFORMACION USUARIOS</span>
+  <div align="right">
+    <%= link_to "Nuevo",new_persona_path,:class=>"nuevolink"%>&nbsp;&nbsp;
+  </div>
+</div>
+<br/>
+<% form_tag buscar_personas_path, :method => 'get' do %>
+<div align="center">
+<table width="60%" border="0" align="center" cellpadding="0" cellspacing="0" id="one-column-emphasis">
+  <tr valign="middle">
+    <td width="30%" height="30" class="camposDesc"><div align="right"><strong>Identificacion:&nbsp;&nbsp;</strong></div></td>
+    <td width="70%" height="30" class="camposDesc"> <%= text_field_tag :buscarident, params[:buscarident],{ :class => "campo", :size => 40,
+                :onFocus => "this.style.border='1px solid #f00'",
+                :onBlur => "this.style.border='1px solid #bbb'" } %></td>
+  </tr>
+  <tr valign="middle">
+    <td height="30" class="camposDesc"><div align="right"><strong>Nombre:&nbsp;&nbsp;</strong></div></td>
+    <td height="30" class="camposDesc"> <%= text_field_tag :buscarnombre, params[:buscarnombre],{ :class => "campo", :size => 40,
+                :onFocus => "this.style.border='1px solid #f00'",
+                :onBlur => "this.style.border='1px solid #bbb'" } %></td>
+  </tr>
+  <tr valign="middle">
+    <td height="30" class="camposDesc"></td>
+    <td height="30" class="camposDesc">
+      <%= submit_tag "Buscar", :name => nil, :disable_with => "Buscando..." , :class=>"buttonAsLink"%></td>
+  </tr>
+</table>
+</div>
+<% end %>
+<br/>
+<div id="productheader">
+  <span class="tit_gr_azul">&nbsp;&nbsp;INFORME DE CLASES</span>
+</div>
+<br/>
+<% form_tag informeclases_facturas_path, :method => 'get' do %>
+<table width="60%" border="0" align="center" cellpadding="0" cellspacing="0" id="one-column-emphasis">
+  <tr valign="middle">
+    <td class="camposDescN10"><div align="right">Fecha Informe: &nbsp;&nbsp;</div></td>
+    <td class="camposDesc">Inicial:&nbsp;&nbsp;
+      <%= calendar_date_select "ubicacion", "inicial", :year_range => 50.years.ago..0.years.ago, :class=> "campo", :size => 10, :time => false%>
+  &nbsp;&nbsp; - &nbsp;Final:&nbsp;&nbsp;
+  <%= calendar_date_select "ubicacion", "final", :year_range => 50.years.ago..0.years.ago, :class=> "campo", :size => 10, :time => false%>
+  &nbsp;&nbsp;<%= submit_tag "Generar", :name => nil, :class=>"buttonAsLink"%>
+    </td>
+  </tr>
+</table>
+<% end %>
+<div id="productheader">
+  <span class="tit_gr_azul">&nbsp;&nbsp;INFORME SIET</span>
+</div>
+<br/>
+<% form_tag informesiet_personas_path, :method => 'get' do %>
+  <table width="70%" border="0" align="center" cellpadding="0" cellspacing="0" id="one-column-emphasis">
+    <tr valign="middle">
+      <td class="camposDescN10" width="50%"><div align="left">Fecha Informe</div></td>
+      <td class="camposDescN10" width="30%"><div align="left">Categoria</div></td>
+      <td class="camposDescN10" width="20%"><div align="left">&nbsp;</div></td>
+    </tr>
+    <tr valign="middle">
+      <td class="camposDesc">Inicial:&nbsp;&nbsp;
+        <%= calendar_date_select "ubicacion", "inicial", :year_range => 50.years.ago..0.years.ago, :class=> "campo", :size => 10, :time => false%>
+    &nbsp;&nbsp; - &nbsp;Final:&nbsp;&nbsp;
+    <%= calendar_date_select "ubicacion", "final", :year_range => 50.years.ago..0.years.ago, :class=> "campo", :size => 10, :time => false%>
+      </td>
+      <td class="camposDescN10"><div align="right">
+          <%=select("ubicacion", "categoria_id", Categoria.all.collect {|p| [ p.nombre, p.id ] }, { :include_blank => true },
+        { :style=>"width:200px", :class => "campo", :onFocus => "this.style.border='1px solid #f00'", :onBlur => "this.style.border='1px solid #bbb'" }) %>
+        </div></td>
+      <td class="camposDescN10"><div align="center"><%= submit_tag "Generar", :name => nil, :class=>"buttonAsLink"%></div></td>
+    </tr>
+  </table>
+<% end %>
+<br/>
+<div id="productheader">
+  <span class="tit_gr_azul">&nbsp;&nbsp;INFORME DATOS BASICOS</span>
+</div>
+<br/>
+<% form_tag informeper_personas_path, :method => 'get' do %>
+  <table width="70%" border="0" align="center" cellpadding="0" cellspacing="0" id="one-column-emphasis">
+    <tr valign="middle">
+      <td class="camposDescN10" width="50%"><div align="left">Fecha registro en el sistema</div></td>
+      <td class="camposDescN10" width="20%"><div align="left">&nbsp;</div></td>
+    </tr>
+    <tr valign="middle">
+      <td class="camposDesc">Inicial:&nbsp;&nbsp;
+        <%= calendar_date_select "ubicacion", "inicial1", :year_range => 50.years.ago..0.years.ago, :class=> "campo", :size => 10, :time => false%>
+        &nbsp;&nbsp; - &nbsp;Final:&nbsp;&nbsp;
+        <%= calendar_date_select "ubicacion", "final1", :year_range => 50.years.ago..0.years.ago, :class=> "campo", :size => 10, :time => false%>
+      </td>
+      <td class="camposDescN10"><div align="center"><%= submit_tag "Generar", :name => nil, :class=>"buttonAsLink"%></div></td>
+    </tr>
+  </table>
+<% end %>
+

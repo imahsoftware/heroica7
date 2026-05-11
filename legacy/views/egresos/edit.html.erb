@@ -1,0 +1,42 @@
+<div id="productheader">
+  <h2><img src="/images/instructores.png"></h2>&nbsp;&nbsp;
+  <div align="right">
+   <%= link_to 'Regresar', instructores_path, :class=>"regresarlink" %>&nbsp;&nbsp;</div>
+</div>
+<div align="center">
+<% form_for(@instructor) do |f| %>
+<table width="60%" height="40" border="0" cellpadding="0" cellspacing="0">
+   <tr>
+    <td>
+<table width="100%" height="40" border="0" cellpadding="0" cellspacing="0">
+   <tr>
+     <td width="20%" height="30" class="campos">Id :</td>
+     <td width="80%"><%= f.text_field :id,{ :class => "campo", :size => 10,
+                :onChange=> "javascript:this.value=this.value.toUpperCase();",
+              :onFocus => "this.style.border='1px solid #f00'",
+              :onBlur => "this.style.border='1px solid #bbb'" }%></td>
+   </tr>
+   <tr>
+     <td height="30" class="campos">Cedula :</td>
+     <td ><%= f.text_field :identificacion,{ :class => "campo", :size => 20,
+                :onChange=> "javascript:this.value=this.value.toUpperCase();",
+              :onFocus => "this.style.border='1px solid #f00'",
+              :onBlur => "this.style.border='1px solid #bbb'" }%></td>
+   </tr>
+<tr>
+     <td height="30" class="campos">Nombre :</td>
+     <td ><%= f.text_field :nombre,{ :class => "campo", :size => 60,
+                :onChange=> "javascript:this.value=this.value.toUpperCase();",
+              :onFocus => "this.style.border='1px solid #f00'",
+              :onBlur => "this.style.border='1px solid #bbb'" }%></td>
+   </tr>
+   <tr>
+     <td></td>
+      <td><%= f.submit "Guardar", :class=>"buttonAsLink"%></td>
+   </tr>
+</table>
+</td>
+  </tr>
+</table>
+<% end %>
+</div>

@@ -1,0 +1,30 @@
+<div id="productheader">
+  <h2>&nbsp;<img src="/images/mantenimientos.png"></h2>
+  <% if permiso("mantenimiento","C").to_s == "S" %>
+  <div align="right">
+     <%= link_to "Nuevo",new_mantenimiento_path,:class=>"nuevolink"%>&nbsp;&nbsp;
+  </div>
+  <% end  %>
+</div>
+<br/>
+<% form_tag buscar_mantenimientos_path, :method => 'get' do %>
+<table width="80%" border="0" align="center" cellpadding="0" cellspacing="0" id="one-column-emphasis">
+  <tr valign="middle">
+    <td width="30%" height="30" ><div align="right"><strong>Placa :&nbsp;&nbsp;</strong></div></td>
+    <td width="70%" height="30" ><%=select("ubicacion", "placa", Placa.find(:all,:order=>'descripcion').collect {|p| [ p.descripcion, p.id ] }, { :include_blank => true },
+      { :style=>"width:100px", :class => "campo", :onFocus => "this.style.border='1px solid #f00'", :onBlur => "this.style.border='1px solid #bbb'" }) %></td>
+  </tr>
+  <tr valign="middle">
+    <td height="30" ><div align="right"><strong>Nombre:&nbsp;&nbsp;</strong></div></td>
+    <td height="30" > </td>
+  </tr>
+  <tr valign="middle">
+    <td height="30"></td>
+    <td height="30">
+<%= submit_tag "Buscar", :name => nil, :disable_with => "Buscando..." , :class=>"buttonAsLink"%></td>
+  </tr>
+</table>
+<% end %>
+<br/>
+
+

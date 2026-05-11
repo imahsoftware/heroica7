@@ -1,0 +1,12 @@
+$("#egresosimagen_form").collapse("hide");
+$("#egresosimagen_form").empty();
+
+<% if @active_record.present? %>
+  $("#egresosimagen_<%= @active_record.id %>").replaceWith("<%= j render 'tr', egresosimagen: @active_record %>");
+<% end %>
+
+$("#egresosimagen_<%= @egresosimagen.id %>").html("<td colspan='4'><%= j render 'form' %></td>");
+$("#egresosimagen_<%= @egresosimagen.id %>").addClass("active_egresosimagen");
+
+$(".tooltip").tooltip("hide");
+$('[data-toggle="tooltip"]').tooltip();

@@ -1,0 +1,58 @@
+<table width="600"  border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+    <td><table width="100%"  border="0" align="center" cellpadding="2" cellspacing="0">
+      <tr>
+        <td height="76" colspan="4"><img src="/images/evial1.png" alt="a"></td>
+      </tr>
+      <tr>
+        <td height="0" colspan="4"><div align="right">Consecutivo Nro. <strong><%=@viajesrecibo.nro_recibo%></strong></div></td>
+      </tr>
+      <tr>
+        <td width="20%">&nbsp;</td>
+        <td width="50%">&nbsp;</td>
+        <td width="17%">&nbsp;</td>
+        <td width="12%">&nbsp;</td>
+      </tr>
+      <tr>
+        <td height="30" >Tour : </td>
+        <td><strong><%=@viajesrecibo.viaje.tiposviaje.descripcion rescue nil%></strong></td>
+        <td>Valor : </td>
+        <td><strong>$ 
+<%=number_to_currency(@viajesrecibo.valor,{:precision => 0, :unit=>"", :delimiter =>"."})%></strong></td>
+      </tr>
+      <tr>
+        <td height="30" >Nombre :</td>
+        <td colspan="3"><strong><%=@viajesrecibo.viaje.nombre%> <%=@viajesrecibo.viaje.apellido rescue nil%></strong></td>
+        </tr>
+      <tr>
+        <td height="30" >ID :</td>
+        <td colspan="3"><strong><%=@viajesrecibo.viaje.identificacion rescue nil%></strong></td>
+        </tr>
+      <tr>
+        <td height="30" >Peso :</td>
+        <td><strong><%=@viajesrecibo.viaje.peso rescue nil%></strong></td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td height="30" >Fecha y Hora :</td>
+        <td><strong><%=Time.now().strftime("%Y-%m-%d %H:%M:%S")%></strong></td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+      </tr>
+    </table></td>
+  </tr>
+</table>
+aqui

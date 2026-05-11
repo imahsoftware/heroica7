@@ -1,0 +1,52 @@
+<h1>Editing combustible</h1>
+
+<% form_for(@combustible) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :fecha %><br />
+    <%= f.datetime_select :fecha %>
+  </p>
+  <p>
+    <%= f.label :placa_id %><br />
+    <%= f.text_field :placa_id %>
+  </p>
+  <p>
+    <%= f.label :tiposcombustible_id %><br />
+    <%= f.text_field :tiposcombustible_id %>
+  </p>
+  <p>
+    <%= f.label :kilometraje %><br />
+    <%= f.text_field :kilometraje %>
+  </p>
+  <p>
+    <%= f.label :odometro %><br />
+    <%= f.text_field :odometro %>
+  </p>
+  <p>
+    <%= f.label :horometro %><br />
+    <%= f.text_field :horometro %>
+  </p>
+  <p>
+    <%= f.label :galones %><br />
+    <%= f.text_field :galones %>
+  </p>
+  <p>
+    <%= f.label :valor_galon %><br />
+    <%= f.text_field :valor_galon %>
+  </p>
+  <p>
+    <%= f.label :valor_total %><br />
+    <%= f.text_field :valor_total %>
+  </p>
+  <p>
+    <%= f.label :nro_clases %><br />
+    <%= f.text_field :nro_clases %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @combustible %> |
+<%= link_to 'Back', combustibles_path %>

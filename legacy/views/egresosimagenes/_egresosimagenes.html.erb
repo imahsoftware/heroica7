@@ -1,0 +1,44 @@
+<br/>
+<div id="productheader">
+  <span class="tit_gr_azul">&nbsp;&nbsp;SOPORTE DIGITAL</span>
+  <div align="right">
+    <%= link_to 'Cargar Información', new_egreso_egresosimagen_path(@egreso.id), :class=>"nuevolink" %>&nbsp;&nbsp;
+  </div>
+</div>
+<br/>
+<% remote_form_for [@egreso, @egresosimagen] do |form| %>
+<% if !@egresosimagen.id %>
+<% end %>
+<% if @egreso.egresosimagenes.exists? %>
+<div align="center">
+  <table width="80%" border="0" align="center" cellpadding="0" cellspacing="0" id="one-column-emphasis">
+    <tr>
+      <td class="oce-first"></td>
+      <td width="50%" class="oce-first">Descripcion</td>
+      <td width="40%" class="oce-first">Nombre del Archivo</td>
+    </tr>
+    <% for egresosimagen in @egreso.egresosimagenes.find(:all, :order => 'created_at DESC') %>
+     <tr  valign="middle" class="egresosimagen_<%=egresosimagen.id%>">
+        <td>
+         <%= link_to 'Ver', egresosimagen.egreso.url(:original, false),
+                       { :popup => ['new_window','height=450,width=600,scrollbars=yes']}, :class=>"editarlink"%>
+            <%= link_to_remote( 'Borrar',{:url => egreso_egresosimagen_path(@egreso, egresosimagen),
+                            :method => :delete, :confirm => "¿Seguro?",
+                          :before => "$(this).up('.egresosimagen_#{egresosimagen.id}').remove()"}, :class=>"borrarlink")%>
+       </td>
+       <td ><%=egresosimagen.descripcion rescue nil%></td>
+       <td ><%=egresosimagen.egreso_file_name%></td>
+     </tr>
+    <% end %>
+  </table>
+  <% else %>
+    <table width="40%" border="0" cellpadding="0" align="center" cellspacing="0" bgcolor="#E5E5E5">
+      <tr>
+        <td width="10%"><div align="right"><img src="/images/alerta.png"></div></td>
+        <td width="90%" class="campos">&nbsp;&nbsp;No hay datos asociados.</td>
+      </tr>
+    </table>
+</div>
+<% end %>
+   <%= hidden_field :egreso, :id %>
+<% end %>

@@ -144,7 +144,18 @@ Rails.application.routes.draw do
   end
 
   resources :grupos
+  resources :productos
   resources :placas
+
+  resources :egresos do
+    collection do
+      get  'buscar'
+      get  'busqueda'
+      post 'add_egreso'
+    end
+    resources :egresosimagenes, only: [:index, :show, :new, :edit, :create, :update, :destroy]
+  end
+
   resources :tiposcombustibles
   resources :instructores
   resources :categorias

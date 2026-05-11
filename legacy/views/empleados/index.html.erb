@@ -1,0 +1,27 @@
+<div id="productheader">
+  <span class="tit_gr_azul">&nbsp;&nbsp;INFORMACION EMPLEADOS</span>
+  <div align="right">
+    <%= link_to "Nuevo",new_empleado_path,:class=>"nuevolink"%>&nbsp;&nbsp;
+  </div>
+</div>
+<br/>
+<table width="80%" border="0" align="center" cellpadding="0" cellspacing="0" id="one-column-emphasis">
+  <tr>
+    <th class="oce-first">Identificacion</th>
+    <th class="oce-first">Nombre</th>
+    <th class="oce-first">Cargo</th>
+    <th class="oce-first">Estado</th>
+    <th class="oce-first"></th>
+  </tr>
+<% @empleados.each do |empleado| %>
+  <tr>
+    <td class="camposDesc"><%=h empleado.identificacion %></td>
+    <td class="camposDesc"><%=h empleado.nombre %></td>
+    <td class="camposDesc"><%=h empleado.cargo %></td>
+    <td class="camposDesc"><%=h empleado.destado %></td>
+    <td class="camposDesc"><%= link_to 'Editar', edit_empleado_path(empleado),:class=>"editarlink"%></td>
+  </tr>
+<% end %>
+</table>
+<br/>
+<br/>

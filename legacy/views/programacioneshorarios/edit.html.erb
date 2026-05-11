@@ -1,0 +1,40 @@
+<h1>Editing programacioneshorario</h1>
+
+<% form_for(@programacioneshorario) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :persona_id %><br />
+    <%= f.text_field :persona_id %>
+  </p>
+  <p>
+    <%= f.label :horario_id %><br />
+    <%= f.text_field :horario_id %>
+  </p>
+  <p>
+    <%= f.label :placa_id %><br />
+    <%= f.text_field :placa_id %>
+  </p>
+  <p>
+    <%= f.label :fecha_inicial %><br />
+    <%= f.date_select :fecha_inicial %>
+  </p>
+  <p>
+    <%= f.label :fecha_final %><br />
+    <%= f.date_select :fecha_final %>
+  </p>
+  <p>
+    <%= f.label :recoje %><br />
+    <%= f.text_field :recoje %>
+  </p>
+  <p>
+    <%= f.label :user_id %><br />
+    <%= f.text_field :user_id %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @programacioneshorario %> |
+<%= link_to 'Back', programacioneshorarios_path %>

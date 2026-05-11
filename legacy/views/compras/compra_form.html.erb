@@ -1,0 +1,86 @@
+<%= stylesheet_link_tag 'tabs'%>
+<%= javascript_include_tag 'fabtabulous' %>
+<div id="productheader">
+  <span class="tit_gr_azul">&nbsp;&nbsp;COMPRAS</span>
+  <div align="right">
+   <%= link_to 'Listado', compras_path, :class=>"regresarlink" %>&nbsp;&nbsp;
+  </div>
+</div>
+<fieldset>
+<%  form_for @compra do |f| %>
+<div align="center">
+<table width="80%" border="0" align="center" cellpadding="0" cellspacing="0" id="one-column-emphasis">
+  <tr valign="middle">
+    <td width="20%" height="30" ><div align="right"><strong>Consecutivo :&nbsp;&nbsp;</strong></div></td>
+    <td width="80%" height="30" ><%= f.text_field :consecutivo,{ :class => "campo",:size => 10,
+                :onFocus => "this.style.border='1px solid #f00'",
+                :onBlur => "this.style.border='1px solid #bbb'",
+                :onChange=> "javascript:this.value=this.value.toUpperCase();"
+                 }  %></td>
+  </tr>
+  <tr valign="middle">
+    <td height="30" ><div align="right"><strong>Fecha orden :&nbsp;&nbsp;</strong></div></td>
+    <td><%= calendar_date_select "compra", "fecha_orden", :year_range =>[1930,2013], :class=> "campo", :size => 10, :time => false%>
+        <%= f.error_message_on :fecha_orden, :css_class =>"cerror"%></td>
+  </tr>
+   <tr valign="middle">
+    <td height="30" ><div align="right"><strong>Proveedor :&nbsp;&nbsp;</strong></div></td>
+    <td><%=select("compra", "proveedor_id", Proveedor.find(:all,:order=>'razon_social').collect {|p| [ p.razon_social, p.id ] }, { :include_blank => true },
+      { :style=>"width:500px", :class => "campo", :onFocus => "this.style.border='1px solid #f00'", :onBlur => "this.style.border='1px solid #bbb'" }) %>
+        <%= f.error_message_on :proveedor_id, :css_class =>"cerror"%></td>
+  </tr>
+  <tr valign="middle">
+    <td height="30" ><div align="right"><strong>Proceso Solicita :&nbsp;&nbsp;</strong></div></td>
+    <td height="30" ><%= f.text_field :proceso_solicita,{ :class => "campo",
+                :size => 90,
+                :onFocus => "this.style.border='1px solid #f00'",
+                :onBlur => "this.style.border='1px solid #bbb'",
+                :onChange=> "javascript:this.value=this.value.toUpperCase();"
+                 }  %></td>
+  </tr>
+  <tr valign="middle">
+    <td height="30" ><div align="right"><strong>Persona Solicita :&nbsp;&nbsp;</strong></div></td>
+    <td height="30" ><%= f.text_field :persona_solicita,{ :class => "campo",
+                :size => 90,
+                :onFocus => "this.style.border='1px solid #f00'",
+                :onBlur => "this.style.border='1px solid #bbb'",
+                :onChange=> "javascript:this.value=this.value.toUpperCase();"
+                 }  %></td>
+  </tr>
+  <tr valign="middle">
+    <td height="30" ><div align="right"><strong>Justificacion :&nbsp;&nbsp;</strong></div></td>
+   <td height="30" ><%= f.text_area(:justificacion, :cols => 90, :rows => 5, :class => 'campo', :maxlength => 4000,
+:onChange=> "javascript:this.value=this.value.toUpperCase();") %></td>
+  </tr>
+  <tr valign="middle">
+    <td height="30" ><div align="right"><strong>Fecha Entrega :&nbsp;&nbsp;</strong></div></td>
+    <td><%= calendar_date_select "compra", "fecha_proentrega", :year_range =>[1930,2013], :class=> "campo", :size => 10, :time => false%>
+        <%= f.error_message_on :fecha_orden, :css_class =>"cerror"%></td>
+  </tr>
+
+<% unless @compra.new_record? %>
+  <tr valign="middle">
+    <td height="30" ><div align="right"><strong>Creacion :&nbsp;&nbsp;</strong></div></td>
+    <td height="30" ><%=@compra.created_at.strftime("%Y-%m-%d %X")%> - <%=@compra.user.username rescue nil%></td>
+  </tr>
+  <tr valign="middle">
+    <td height="30" ><div align="right"><strong>Ult.Act :&nbsp;&nbsp;</strong></div></td>
+    <td height="30" ><%=@compra.updated_at.strftime("%Y-%m-%d %X")%> - <%=User.find(@compra.user_actualiza).username rescue nil%></td>
+  </tr>
+<% end %>
+  <tr valign="middle">
+    <td height="30"></td>
+    <td height="30"><%= submit_tag "Guardar", :name => nil, :disable_with => "Guardando" , :class=>"buttonAsLink"%></td>
+  </tr>
+</table>
+</div>
+<% end %>
+</fieldset>
+  <br/>
+<% unless @compra.new_record? %>
+        <div id="comprasdetalles_form">
+           <%= render :partial => "/comprasdetalles/comprasdetalles" %>
+        </div>
+<% end %>
+
+<br/>

@@ -1,0 +1,51 @@
+<div id="productheader">
+  <h2>&nbsp;<img src="/images/perfilautorizado.png"></h2>
+</div>
+<% remote_form_for [@user, @userspermiso] do |form| %>
+<% if !@userspermiso.id %>
+	<%= render :partial => "/userspermisos/userspermisos_form" %>
+<% end %>
+      <div align="center">
+<table width="70%" border="0" align="center" cellpadding="0" cellspacing="0" id="one-column-emphasis">
+  <tr valign="middle">
+    <td width="10%" height="30" class="oce-first">Id</td>
+    <td width="40%" height="30" class="oce-first">Modulo</td>
+    <td width="10%" height="30" class="oce-first"><div align="center">Actualiza</div></td>
+    <td width="10%" height="30" class="oce-first"><div align="center">Elimina</div></td>
+    <td width="10%" height="30" class="oce-first"><div align="center">Crea</div></td>
+    <td width="20%" height="30" class="oce-first"></td>
+  </tr>
+<% for userspermiso in @user.userspermisos.find(:all, :order => 'objeto_id') %>
+   <% if userspermiso.id != @userspermiso.id %>
+   <tr  valign="middle" id="userspermiso_<%=userspermiso.id%>">
+     <td ><%=userspermiso.objeto_id%></td>
+     <td ><%=userspermiso.objeto.descripcion%></td>
+     <td ><div align="center"><%=userspermiso.actualiza%></div></td>
+     <td ><div align="center"><%=userspermiso.elimina%></div></td>
+     <td ><div align="center"><%=userspermiso.crea%></div></td>
+     <td >
+<%= link_to_remote ('Editar',{:url => edit_user_userspermiso_path(@user, userspermiso),
+		:method => :get}, :class=>"editarlink")%>
+<%= link_to_remote ('Borrar',{:url =>user_userspermiso_path(@user, userspermiso),
+		:method => :delete, :confirm => "¿Seguro?"}, :class=>"borrarlink")%>
+</td>
+ </tr>
+
+<% else %>
+      <fieldset>
+      <table width="100%" border="0" cellpadding="2" cellspacing="2">
+  <tr>
+    <td  height="30"><div class="col_enc">EDITAR permisos</div></td>
+  </tr>
+  </table>
+    <tr class="<%=cycle('even', 'odd')%>" id="userspermiso_<%=@userspermiso.id%>">
+      <%= render :partial => "userspermisos_form" %>
+    </tr>
+    </fieldset>
+<% end %>
+<% end %>
+</table>
+        </div>
+            <%= hidden_field :user, :id %>
+<% end %>
+<br/>

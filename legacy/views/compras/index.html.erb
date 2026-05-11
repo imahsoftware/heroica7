@@ -1,0 +1,33 @@
+<div id="productheader">
+  <span class="tit_gr_azul">&nbsp;&nbsp;COMPRAS</span>
+  <div align="right">
+   <%= link_to "Nuevo",new_compra_path,:class=>"nuevolink"%>&nbsp;&nbsp;
+  </div>
+</div>
+<br/>
+<div align="center">
+<table width="90%" border="0" align="center" cellpadding="0" cellspacing="0" id="one-column-emphasis">
+  <tr valign="middle">
+    <td width="10%" height="30" class="oce-first">Consecutivo</td>
+    <td width="15%" class="oce-first">Fecha orden</td>
+    <td width="60%" class="oce-first">compra</td>
+    <td width="15%" class="oce-first">&nbsp;</td>
+  </tr>
+<% @compras.each do |compra| %>
+  <tr valign="middle" class="<%=cycle('even1', 'odd1')%>">
+    <td class="camposDesc"><%=h compra.consecutivo %></td>
+    <td class="camposDesc"><%=h compra.fecha_orden %></td>
+    <td class="camposDesc"><%=h compra.proveedor_id %></td>
+    <td class="camposDesc"><%= link_to 'Editar', edit_compra_path(compra), :class=>"editarlink" %>
+<%= link_to 'Borrar', compra, :confirm => 'Are you sure?', :method => :delete, :class=>"borrarlink" %></td>
+  </tr>
+<% end %>
+</table>
+<br/>
+<table width="90%" border="0" align="center" cellpadding="0" cellspacing="0" id="one-column-emphasis">
+   <tr>
+     <td width="100%" class="oce-first"><div align="center">Total Registros: <%= @compras.count %></div></td>
+   </tr>
+</table>
+<br/>
+</div>

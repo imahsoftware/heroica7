@@ -1,0 +1,12 @@
+$("#producto_form").collapse("hide");
+$("#producto_form").empty();
+
+<% if @active_record.present? %>
+  $("#producto_<%= @active_record.id %>").replaceWith("<%= j render 'tr', producto: @active_record %>");
+<% end %>
+
+$("#producto_<%= @producto.id %>").html("<td colspan='4'><%= j render 'form' %></td>");
+$("#producto_<%= @producto.id %>").addClass("active_producto");
+
+$(".tooltip").tooltip("hide");
+$('[data-toggle="tooltip"]').tooltip();

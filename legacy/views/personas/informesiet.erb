@@ -1,0 +1,81 @@
+<%= stylesheet_link_tag 'scaffold'%>
+<div class="page-header">
+  <h3>Informe SIET</h3>
+</div>
+<table border="1">
+  <tr valign="middle" style="font-family: Tahoma; font-size: 10px;">
+    <td width="20%"><strong></strong></td>
+    <td colspan="2"><strong><div align="center">DATOS DE PROGRAMA</div></strong></td>
+    <td colspan="13"><strong><div align="center">DATOS PERSONALES</div></strong></td>
+    <td colspan="7"><strong><div align="center">MULTICULTURALIDAD</div></strong></td>
+  </tr>
+  <tr valign="middle" style="font-family: Tahoma; font-size: 10px;">
+    <td width="20%"><strong>CONSECUTIVO</strong></td>
+    <td width="20%"><strong>FECHA DE INGRESO</strong></td>
+    <td width="20%"><strong>JORNADA</strong></td>
+    <td width="20%"><strong>TIPO DE IDENTIFICACIÓN</strong></td>
+    <td width="20%"><strong>NÚMERO DE IDENTIFICACIÓN</strong></td>
+    <td width="20%"><strong>NOMBRES</strong></td>
+    <td width="20%"><strong>APELLIDOS</strong></td>
+    <td width="20%"><strong>GÉNERO</strong></td>
+    <td width="20%"><strong>ESTADO CIVIL</strong></td>
+    <td width="20%"><strong>FECHA NACIMIENTO</strong></td>
+    <td width="20%"><strong>LUGAR DE ORIGEN</strong></td>
+    <td width="20%"><strong>ESTRATO</strong></td>
+    <td width="20%"><strong>RÉGIMEN DE SALUD</strong></td>
+    <td width="20%"><strong>NIVEL DE FORMACIÓN</strong></td>
+    <td width="20%"><strong>OCUPACIÓN</strong></td>
+    <td width="20%"><strong>DISCAPACIDAD</strong></td>
+    <td width="20%"><strong>INDÍGENA</strong></td>
+    <td width="20%"><strong>AFRODESCENDIENTE</strong></td>
+    <td width="20%"><strong>DESPLAZADO</strong></td>
+    <td width="20%"><strong>POBLACIÓN DE FRONTERA</strong></td>
+    <td width="20%"><strong>CABEZA DE FAMILIA</strong></td>
+    <td width="20%"><strong>REINSERTADO</strong></td>
+    <td width="20%"><strong>POBLACIÓN ROOM</strong></td>
+  </tr>
+<%  i = 0
+    @personas.each do |persona|
+     i = i + 1
+%>
+  <tr valign="middle" style="font-family: Tahoma; font-size: 10px;">
+    <td><%=i%></td>
+    <td><%=persona.created_at rescue nil%></td>
+    <td><%=persona.jornada rescue nil%></td>
+    <td><%=persona.siet_tipodocumento rescue nil%></td>
+    <td><%=persona.identificacion rescue nil%></td>
+    <td><%=persona.siet_nombres rescue nil%></td>
+    <td><%=persona.siet_apellidos rescue nil%></td>
+    <td><%=persona.siet_genero rescue nil%></td>
+    <td><%=persona.estado_civil rescue nil%></td>
+    <td><%=persona.fecha_nacimiento rescue nil%></td>
+    <td><%=persona.lugar_origen rescue nil%></td>
+    <td><%=persona.estrato rescue nil%></td>
+    <td><%=persona.regimen rescue nil%></td>
+    <td><%=persona.nivel_formacion rescue nil%></td>
+    <td><%=persona.ocupacion rescue nil%></td>
+    <td><%=persona.discapacidad rescue nil%></td>
+    <td><div align="center"><% if persona.multi_indigena.to_s == 'SI'  %>
+          X
+        <% end %></div></td>
+    <td><div align="center"><% if persona.multi_afro.to_s == 'SI'  %>
+          X
+        <% end %></div></td>
+    <td><div align="center"><% if persona.multi_desplazado.to_s == 'SI'  %>
+          X
+        <% end %></div></td>
+    <td><div align="center"><% if persona.multi_pobfrontera.to_s == 'SI'  %>
+          X
+        <% end %></div></td>
+    <td><div align="center"><% if persona.multi_cabeza.to_s == 'SI'  %>
+          X
+        <% end %></div></td>
+    <td><div align="center"><% if persona.multi_reinsertado.to_s == 'SI'  %>
+          X
+        <% end %></div></td>
+    <td><div align="center"><% if persona.multi_pobroom.to_s == 'SI'  %>
+          X
+        <% end %></div></td>
+  </tr>
+<% end %>
+</table>

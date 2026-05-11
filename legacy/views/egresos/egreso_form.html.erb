@@ -1,0 +1,78 @@
+<%= stylesheet_link_tag 'tabs'%>
+<%= javascript_include_tag 'fabtabulous' %>
+<div id="productheader">
+  <span class="tit_gr_azul">&nbsp;&nbsp;EGRESOS</span>
+  <div align="right">
+   <%= link_to 'Buscar Egreso', busqueda_egresos_path, :class=>"regresarlink" %>&nbsp;&nbsp;
+  </div>
+</div>
+<br/>
+<fieldset>
+<%  form_for @egreso do |f| %>
+<div align="center">
+<table width="80%" border="0" align="center" cellpadding="0" cellspacing="0" id="one-column-emphasis">
+  <tr valign="middle">
+    <td width="20%" height="30" ><div align="right"><strong>Fecha :&nbsp;&nbsp;</strong></div></td>
+    <td width="80%" height="30" ><%= calendar_date_select "egreso", "fecha", :year_range =>[2010,2026], :time => false, :class=> "campo", :size => 10%>
+      <%= error_message_on :egreso, :fecha, :css_class =>"cerror"%></td>
+  </tr>
+  <tr valign="middle">
+    <td height="30" ><div align="right"><strong>Nro Egreso :&nbsp;&nbsp;</strong></div></td>
+    <td><%= f.text_field :nro_egreso,{ :class => "campo",
+                :size => 20,
+                :onFocus => "this.style.border='1px solid #f00',this.value=''",
+                :onBlur => "this.style.border='1px solid #bbb'",
+                :onChange=> "javascript:this.value=this.value.toUpperCase();"
+                 }  %>
+      <%= error_message_on :egreso, :nro_egreso, :css_class =>"cerror"%></td>
+  </tr>
+  <tr valign="middle">
+    <td height="30" ><div align="right"><strong>Proveedor :&nbsp;&nbsp;</strong></div></td>
+    <td> <%=select("egreso", "proveedor_id", Proveedor.find(:all, :order =>"autobuscar asc").collect {|p| [ p.autobuscar, p.id ] }, { :include_blank => true },
+                   { :style=>"width:500px", :class => "campo", :onFocus => "this.style.border='1px solid #f00'", :onBlur => "this.style.border='1px solid #bbb'" }) %>
+      <%= error_message_on :egreso, :proveedor_id, :css_class =>"cerror"%></td>
+  </tr>
+  <tr valign="middle">
+    <td height="30" ><div align="right"><strong>Observacion / Concepto:&nbsp;&nbsp;</strong></div></td>
+    <td height="30" ><%= f.text_area(:observacion, :cols => 80, :rows => 4, :class => 'campo', :maxlength => 4000, :onChange=> "javascript:this.value=this.value.toUpperCase();") %></td>
+  </tr>
+  <tr valign="middle">
+    <td height="30" ><div align="right"><strong>Forma de pago :&nbsp;&nbsp;</strong></div></td>
+    <td> <%= select(:egreso, :forma_pago, { "EFECTIVO" => "EFECTIVO", "BANCO" => "BANCO", "TRANSFERENCIA" => "TRANSFERENCIA",
+                                             "CONSIGNACION" => "CONSIGNACION", "CHEQUE" => "CHEQUE"},
+                    { :include_blank => true }, { :style=>"width:150px", :class => "campo", :onFocus => "this.style.border='1px solid #f00'", :onBlur => "this.style.border='1px solid #bbb'" })%></td>
+  </tr>
+  <tr valign="middle">
+    <td height="30" ><div align="right"><strong>Valor Bruto:&nbsp;&nbsp;</strong></div></td>
+    <td height="30" ><%= f.text_field :valor_bruto,{ :class => "campo", :size => 30,:onFocus => "this.style.border='1px solid #f00',this.value=''",:onBlur => "this.style.border='1px solid #bbb'",:onChange=> "javascript:this.value=this.value.toUpperCase();"}  %></td>
+  </tr>
+  <tr valign="middle">
+    <td height="30" ><div align="right"><strong>Valor Iva:&nbsp;&nbsp;</strong></div></td>
+    <td height="30" ><%= f.text_field :valor_iva,{ :class => "campo", :size => 30,:onFocus => "this.style.border='1px solid #f00',this.value=''",:onBlur => "this.style.border='1px solid #bbb'",:onChange=> "javascript:this.value=this.value.toUpperCase();"}  %></td>
+  </tr>
+  <tr valign="middle">
+    <td height="30" ><div align="right"><strong>Valor :&nbsp;&nbsp;</strong></div></td>
+    <td height="30" ><%= f.text_field :valor,{ :class => "campo", :size => 30,:onFocus => "this.style.border='1px solid #f00',this.value=''",:onBlur => "this.style.border='1px solid #bbb'",:onChange=> "javascript:this.value=this.value.toUpperCase();"}  %></td>
+  </tr>
+<% unless @egreso.new_record? %>
+  <tr valign="middle">
+    <td height="30" ><div align="right"><strong>Creacion :&nbsp;&nbsp;</strong></div></td>
+    <td height="30" ><%=@egreso.created_at.strftime("%Y-%m-%d %X")%> - <%=@egreso.user.username rescue nil%></td>
+  </tr>
+  <tr valign="middle">
+    <td height="30" ><div align="right"><strong>Ult.Act :&nbsp;&nbsp;</strong></div></td>
+    <td height="30" ><%=@egreso.updated_at.strftime("%Y-%m-%d %X")%> - <%=User.find(@egreso.user_actualiza).username rescue nil%></td>
+  </tr>
+<% end %>
+  <tr valign="middle">
+    <td height="30"></td>
+    <td height="30"><%= submit_tag "Guardar", :name => nil, :disable_with => "Guardando" , :class=>"buttonAsLink"%></td>
+  </tr>
+</table>
+</div>
+<% end %>
+  <% unless @egreso.new_record? %>
+  <%= render :partial => "/egresosimagenes/egresosimagenes" %></div>
+  <% end %>
+</fieldset>
+<br/>

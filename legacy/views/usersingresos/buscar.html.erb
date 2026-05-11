@@ -1,0 +1,30 @@
+<div id="productheader">
+  <h2>&nbsp;<img src="/images/controlingreso.png"></h2>
+  <div align="right">
+     <%= link_to 'Buscar Ingresos', busqueda_usersingresos_path, :class=>"regresarlink" %>&nbsp;&nbsp;
+  </div>
+</div>
+<br/>
+<table width="80%" border="0" align="center" cellpadding="0" cellspacing="0" id="one-column-emphasis">
+  <tr valign="middle">
+    <td width="45%" height="30" class="oce-first">Usuario</td>
+    <td width="25%" class="oce-first">Fecha Entrada</td>
+    <td width="25%" class="oce-first">Fecha Salida</td>
+    <td width="5%" class="oce-first">&nbsp;</td>
+  </tr>
+<% i = 0 %>
+<% @usersingresos.each do |usersingreso| %>
+  <% i = i + 1
+    fch1 = usersingreso.created_at
+    fch2 = usersingreso.updated_at
+%>
+  <tr valign="middle">
+    <td align="left"><%=h usersingreso.user.nombre rescue nil %></td>
+    <td align="left"><%=h fch1.strftime("%m/%d/%Y %I:%M:%S") %></td>
+    <td align="left"><%=h fch2.strftime("%m/%d/%Y %I:%M:%S") %></td>
+    <td align="left"><%= link_to "Ver", { :controller => 'usersingresos', :action=>'vermas', :userid=> usersingreso.user_id, :fecha=>usersingreso.fecha},
+                     { :popup => ['new_window','height=500,width=1000,scrollbars=yes'], :class=>"verlink"}%></td>
+  </tr>
+  <% end %>
+</table>
+<br/>

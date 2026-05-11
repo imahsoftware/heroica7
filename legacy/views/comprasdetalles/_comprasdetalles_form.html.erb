@@ -1,0 +1,53 @@
+<div align="center">
+<table  width="95%" border="0" align="center" cellpadding="1" cellspacing="1">
+  <tr>
+    <td width="51%" height="32" class="camposDescN11">Producto</td>
+    <td width="5%" height="32" class="camposDescN11">Unidad</td>
+    <td width="5%" height="32" class="camposDescN11">Cantidad</td>
+    <td width="13%" height="32" class="camposDescN11">Valor Unitario</td>
+    <td width="13%" height="32" class="camposDescN11">Valor Descuento</td>
+    <td width="13%" height="32" class="camposDescN11">Valor Iva</td>
+  </tr>
+  <tr>
+    <td class="campos"><%=select("comprasdetalle", "producto_id", Producto.find(:all, :order=>"descripcion").collect {|p| [ p.descripcion, p.id ] }, { :include_blank => true },
+      { :style=>"width:430px", :class => "campo", :onFocus => "this.style.border='1px solid #f00'", :onBlur => "this.style.border='1px solid #bbb'" }) %>
+          <%= error_message_on :comprasdetalle, :producto_id, :css_class =>"cerror"%></td>
+    <td  class="campos"><%= text_field :comprasdetalle, :unidad,{ :class => "campo", :size => 5,
+                  :onChange=> "javascript:this.value=this.value.toUpperCase();",
+                :onFocus => "this.style.border='1px solid #f00'",
+                :onBlur => "this.style.border='1px solid #bbb'" }%>
+          <%= error_message_on :comprasdetalle, :unidad, :css_class =>"cerror"%></td>
+    <td  class="campos"><%= text_field :comprasdetalle, :cantidad,{ :class => "campo", :size => 5,
+                  :onChange=> "javascript:this.value=this.value.toUpperCase();",
+                :onFocus => "this.style.border='1px solid #f00'",
+                :onBlur => "this.style.border='1px solid #bbb'" }%>
+          <%= error_message_on :comprasdetalle, :cantidad, :css_class =>"cerror"%></td>
+    <td  class="campos"><%= text_field :comprasdetalle, :valor_unitario,{ :class => "campo", :size => 13,
+                  :onChange=> "javascript:this.value=this.value.toUpperCase();",
+                :onFocus => "this.style.border='1px solid #f00'",
+                :onBlur => "this.style.border='1px solid #bbb'" }%>
+          <%= error_message_on :comprasdetalle, :valor_unitario, :css_class =>"cerror"%></td>
+    <td  class="campos"><%= text_field :comprasdetalle, :valor_descuento,{ :class => "campo", :size => 13,
+                  :onChange=> "javascript:this.value=this.value.toUpperCase();",
+                :onFocus => "this.style.border='1px solid #f00'",
+                :onBlur => "this.style.border='1px solid #bbb'" }%>
+          <%= error_message_on :comprasdetalle, :valor_descuento, :css_class =>"cerror"%></td>
+    <td  class="campos"><%= text_field :comprasdetalle, :valor_iva,{ :class => "campo", :size => 13,
+                  :onChange=> "javascript:this.value=this.value.toUpperCase();",
+                :onFocus => "this.style.border='1px solid #f00'",
+                :onBlur => "this.style.border='1px solid #bbb'" }%>
+          <%= error_message_on :comprasdetalle, :valor_iva, :css_class =>"cerror"%></td>
+  </tr>
+</table>
+<table width="95%" height="0" border="0" cellpadding="0" cellspacing="0">
+  <tr><td height="10"><hr size="1" noshade class="hrlinea"></td></tr>
+</table>
+<table width="95%" border="0" cellpadding="2" cellspacing="2">
+  <tr>
+    <td height="30"><div align="right">
+        <%= hidden_field :comprasdetalle, :id %>
+        <%= submit_tag "Guardar",:disable_with => "Guardando...", :class=>"buttonAsLink"%>
+</div></td>
+  </tr>
+</table>
+</div>

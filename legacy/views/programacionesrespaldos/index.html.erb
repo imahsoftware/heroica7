@@ -1,0 +1,54 @@
+<h1>Listing programacionesrespaldos</h1>
+
+<table>
+  <tr>
+    <th>Fecha captura</th>
+    <th>Programacioneshorario</th>
+    <th>Persona</th>
+    <th>Tiposhorario</th>
+    <th>Placa</th>
+    <th>Instructor</th>
+    <th>Fecha inicial</th>
+    <th>Nro clases</th>
+    <th>Fecha final</th>
+    <th>Recoje</th>
+    <th>User</th>
+    <th>User actualiza</th>
+    <th>Ph created at</th>
+    <th>Ph updated at</th>
+    <th>Observacion</th>
+    <th>Enespera</th>
+    <th>Fecha teoria</th>
+    <th>Estado</th>
+  </tr>
+
+<% @programacionesrespaldos.each do |programacionesrespaldo| %>
+  <tr>
+    <td><%=h programacionesrespaldo.fecha_captura %></td>
+    <td><%=h programacionesrespaldo.programacioneshorario_id %></td>
+    <td><%=h programacionesrespaldo.persona_id %></td>
+    <td><%=h programacionesrespaldo.tiposhorario_id %></td>
+    <td><%=h programacionesrespaldo.placa_id %></td>
+    <td><%=h programacionesrespaldo.instructor_id %></td>
+    <td><%=h programacionesrespaldo.fecha_inicial %></td>
+    <td><%=h programacionesrespaldo.nro_clases %></td>
+    <td><%=h programacionesrespaldo.fecha_final %></td>
+    <td><%=h programacionesrespaldo.recoje %></td>
+    <td><%=h programacionesrespaldo.user_id %></td>
+    <td><%=h programacionesrespaldo.user_actualiza %></td>
+    <td><%=h programacionesrespaldo.ph_created_at %></td>
+    <td><%=h programacionesrespaldo.ph_updated_at %></td>
+    <td><%=h programacionesrespaldo.observacion %></td>
+    <td><%=h programacionesrespaldo.enespera %></td>
+    <td><%=h programacionesrespaldo.fecha_teoria %></td>
+    <td><%=h programacionesrespaldo.estado %></td>
+    <td><%= link_to 'Show', programacionesrespaldo %></td>
+    <td><%= link_to 'Edit', edit_programacionesrespaldo_path(programacionesrespaldo) %></td>
+    <td><%= link_to 'Destroy', programacionesrespaldo, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New programacionesrespaldo', new_programacionesrespaldo_path %>

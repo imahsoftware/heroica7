@@ -1,0 +1,52 @@
+<h1>Editing pregunta</h1>
+
+<% form_for(@pregunta) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :descripcion %><br />
+    <%= f.text_field :descripcion %>
+  </p>
+  <p>
+    <%= f.label :opcion1 %><br />
+    <%= f.text_field :opcion1 %>
+  </p>
+  <p>
+    <%= f.label :opcion2 %><br />
+    <%= f.text_field :opcion2 %>
+  </p>
+  <p>
+    <%= f.label :opcion3 %><br />
+    <%= f.text_field :opcion3 %>
+  </p>
+  <p>
+    <%= f.label :opcion4 %><br />
+    <%= f.text_field :opcion4 %>
+  </p>
+  <p>
+    <%= f.label :opcion5 %><br />
+    <%= f.text_field :opcion5 %>
+  </p>
+  <p>
+    <%= f.label :grafica %><br />
+    <%= f.text_field :grafica %>
+  </p>
+  <p>
+    <%= f.label :grupo %><br />
+    <%= f.text_field :grupo %>
+  </p>
+  <p>
+    <%= f.label :codigo %><br />
+    <%= f.text_field :codigo %>
+  </p>
+  <p>
+    <%= f.label :multiple %><br />
+    <%= f.text_field :multiple %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @pregunta %> |
+<%= link_to 'Back', preguntas_path %>

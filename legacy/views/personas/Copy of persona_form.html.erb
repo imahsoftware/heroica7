@@ -1,0 +1,205 @@
+<%= stylesheet_link_tag 'tabs'%>
+<%= javascript_include_tag 'fabtabulous' %>
+<div id="productheader">
+  <span class="tit_gr_azul">&nbsp;&nbsp;INFORMACION USUARIOS</span>
+  <div align="right">
+   <%= link_to 'Buscar Usuario', busqueda_personas_path, :class=>"regresarlink" %>&nbsp;&nbsp;</div>
+</div>
+<div id="container">
+    <div id="mainmenu">
+      <ul id="tabs">
+        <li><a href="#tab1"><img src="/images/datosbasicos.png" border="0" title="Datos Basicos"></img></a></li>
+        <% unless @persona.new_record? %>
+        <li><a href="#tab3"><img src="/images/medidas.png" border="0" title="Tramites"></img></a></li>
+        <li><a href="#tab2"><img src="/images/obligacion.png" border="0" title="Clases Dictadas"></img></a></li>
+        <li><a href="#tab4"><img src="/images/direccion.png" border="0" title="Teorico"></img></a></li>
+        <% end %>
+      </ul>
+    </div>
+</div>
+<div class="panel" id="tab1">
+  <fieldset>
+<% form_for(@persona,:html => { :multipart => true })  do |f| %>
+<div id="productheader">
+  <span class="tit_gr_azul">&nbsp;&nbsp;DATOS BASICOS</span>
+</div>
+<BR/>
+<div align="center">
+<table width="850" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><table width="100%"  border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td width="20%" valign="top"><div align="center">
+          <%  if @persona.personasimagen_file_name %>
+            <img src="/system/personasimagenes/<%=@persona.id%>/original/<%=@persona.personasimagen_file_name%>" height="180" width="180" border="0" title="Fotografia" />
+          <%  else %>
+            <img src="/images/noFoto.jpg" border="0" height="100" width="100" title="No Fotografia" />
+          <%  end %>
+          </div></td>
+        <td width="80%"><table width="100%" border="0" cellpadding="0" cellspacing="2">
+            <tr>
+              <td width="157" class="camposDescN11">Documento</td>
+              <td width="203" class="camposDescN11">Identificaci&oacute;n *</td>
+              <td width="203" class="camposDescN11">Expedida en *</td>
+              <td width="250" class="camposDescN11">Primer Nombre *</td>
+            </tr>
+            <tr>
+              <td> <%= select(:persona,
+                          :documento, { "C.C." => "CC",
+                                     "T.I." => "TI",
+                                   "NIT" => "NIT",
+                                 "PAS" => "PAS",
+                                 "C.E." => "CE"},
+                                  { :include_blank => true },
+                                { :style=>"width:70px", :class => "campo", :onFocus => "this.style.border='1px solid #f00'", :onBlur => "this.style.border='1px solid #bbb'" })%> <%= error_message_on :persona, :documento, :css_class =>"cerror"%> </td>
+              <td><%= f.text_field :identificacion ,{ :class => "campo", :size => 20,
+                :onFocus => "this.style.border='1px solid #f00'",
+                :onBlur => "this.style.border='1px solid #bbb'" }%> <%= error_message_on :persona, :identificacion, :css_class =>"cerror"%> </td>
+              <td><%= f.text_field :expedida ,{ :class => "campo", :size => 20,
+                :onChange=> "javascript:this.value=this.value.toUpperCase();",
+                :onFocus => "this.style.border='1px solid #f00'",
+                :onBlur => "this.style.border='1px solid #bbb'" }%> <%= error_message_on :persona, :identificacion, :css_class =>"cerror"%> </td>
+              <td><%= f.text_field :primer_nombre,{ :class => "campo",:size => 30,
+              :onChange=> "javascript:this.value=this.value.toUpperCase();",
+              :onFocus => "this.style.border='1px solid #f00'",
+              :onBlur => "this.style.border='1px solid #bbb'" }%> <%= f.error_message_on :primer_nombre, :css_class =>"cerror"%> </td>
+
+            </tr>
+          </table>
+            <table width="100%" border="0" cellpadding="0" cellspacing="2">
+              <tr>
+                <td width="220" class="camposDescN11">Segundo Nombre</td>
+                <td width="188" class="camposDescN11">Primer Apellido *</td>
+                <td width="190" class="camposDescN11">Segundo Apellido</td>
+              </tr>
+              <tr>
+              <td><%= f.text_field :segundo_nombre,{ :class => "campo", :size => 30,
+              :onChange=> "javascript:this.value=this.value.toUpperCase();",
+              :onFocus => "this.style.border='1px solid #f00'",
+              :onBlur => "this.style.border='1px solid #bbb'" }%> </td>
+                <td><%= f.text_field :primer_apellido,{ :class => "campo", :size => 30,
+              :onChange=> "javascript:this.value=this.value.toUpperCase();",
+              :onFocus => "this.style.border='1px solid #f00'",
+              :onBlur => "this.style.border='1px solid #bbb'" }%> <%= f.error_message_on :primer_apellido, :css_class =>"cerror"%></td>
+                <td><%= f.text_field :segundo_apellido,{ :class => "campo", :size => 30,
+              :onChange=> "javascript:this.value=this.value.toUpperCase();",
+              :onFocus => "this.style.border='1px solid #f00'",
+              :onBlur => "this.style.border='1px solid #bbb'" }%></td>               
+                
+              </tr>
+            </table>
+            <table width="100%" border="0" cellspacing="2" cellpadding="0">
+              <tr>
+                <td width="170"><span class="camposDescN11">Genero</span></td>
+                <td width="122"><span class="camposDescN11">Fecha Nacimiento</span></td>
+                <td width="32%"><span class="camposDescN11">Lugar Nacimiento</span></td>
+                <td width="17%"><span class="camposDescN11">Factor - RH </span></td>                
+              </tr>
+              <tr>
+                <td><span class="camposDescN11">Masculino <%= f.radio_button("genero", "true") %> Femenino <%= f.radio_button("genero", "false") %></span></td>
+                <td><%= calendar_date_select "persona", "fecha_nacimiento", :year_range =>[1930,2013], :class=> "campo", :size => 10, :time => false%> <%= f.error_message_on :fecha_nacimiento, :css_class =>"cerror"%></td>
+                <td><%= f.text_field :lugar_nacimiento,{ :class => "campo", :size => 30,
+              :onChange=> "javascript:this.value=this.value.toUpperCase();",
+              :onFocus => "this.style.border='1px solid #f00'",
+              :onBlur => "this.style.border='1px solid #bbb'" }%></td>
+                <td><%= f.text_field :factor,{ :class => "campo", :size => 5,
+                        :onChange=> "javascript:this.value=this.value.toUpperCase();",
+                        :onFocus => "this.style.border='1px solid #f00'",
+                        :onBlur => "this.style.border='1px solid #bbb'" }%> <%= f.text_field :rh,{ :class => "campo", :size => 5,
+                                    :onChange=> "javascript:this.value=this.value.toUpperCase();",
+                                    :onFocus => "this.style.border='1px solid #f00'",
+                                    :onBlur => "this.style.border='1px solid #bbb'" }%></td>
+
+              </tr>
+            </table>
+            <table width="100%" border="0" cellspacing="2" cellpadding="0">
+              <tr>
+                <td width="51%"><span class="camposDescN11">Direccion</span></td>
+                <td width="15%"><span class="camposDescN11">Telefono 1</span></td>
+                <td width="15%"><span class="camposDescN11">Telefono 2 </span></td>
+                <td width="15%"><span class="camposDescN11">Celular</span></td>                
+              </tr>
+              <tr>
+                <td><%= f.text_field :direccion,{ :class => "campo", :size => 52,
+              :onChange=> "javascript:this.value=this.value.toUpperCase();",
+              :onFocus => "this.style.border='1px solid #f00'",
+              :onBlur => "this.style.border='1px solid #bbb'" }%></td>
+                <td><%= f.text_field :telefono,{ :class => "campo", :size => 15,
+              :onFocus => "this.style.border='1px solid #f00'",
+              :onBlur => "this.style.border='1px solid #bbb'" }%> <%= f.error_message_on :telefono, :css_class =>"cerror"%></td>
+                <td><%= f.text_field :telefono_oficina,{ :class => "campo", :size => 15,
+              :onFocus => "this.style.border='1px solid #f00'",
+              :onBlur => "this.style.border='1px solid #bbb'" }%> <%= f.error_message_on :telefono_oficina, :css_class =>"cerror"%></td>
+                <td><%= f.text_field :celular,{ :class => "campo", :size => 15,
+                        :onFocus => "this.style.border='1px solid #f00'",
+                        :onBlur => "this.style.border='1px solid #bbb'" }%> <%= f.error_message_on :celular, :css_class =>"cerror"%></td>
+
+              </tr>
+            </table>
+            <table width="100%" border="0" cellspacing="2" cellpadding="0">
+              <tr>
+                <td width="55%" class="camposDescN11">Correo Electronico</td>
+                <td class="camposDescN11">Fotografia</td>
+              </tr>
+              <tr>
+                <td><%= f.text_field :email,{ :class => "campo", :size => 45,
+              :onFocus => "this.style.border='1px solid #f00'",
+              :onBlur => "this.style.border='1px solid #bbb'" }%></td>
+                <td><%= f.file_field :personasimagen, {
+                         :size => 46,
+                         :class => "campo",
+                         :maxlength => 60,
+                         :onFocus => "this.style.border='1px solid #f00'",
+                         :onBlur => "this.style.border='1px solid #bbb'" } %></td>
+              </tr>
+            </table>
+            </td>
+      </tr>
+      <tr>
+        <td colspan="2" valign="top"><table width="100%" height="0" border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td height="10"><hr size="1" noshade="noshade" class="hrlinea" /></td>
+          </tr>
+        </table>
+          <table width="100%" border="0" cellpadding="2" cellspacing="2">
+            <tr>
+              <td class="camposDesc11" align="left">
+                <% unless @persona.new_record? %>
+      Ultima Actualización: <%=User.find(@persona.user_id).username rescue nil%> - <%=@persona.updated_at.strftime("%Y-%m-%d %X")%>
+      <% end %></td>
+              <td  height="30"><div align="right">
+                  <% if permiso("persona","A").to_s == "S" %>
+                  <%= f.submit "Guardar",:disable_with => "Guardando...", :class=>"buttonAsLink"%>
+                  <% end %>
+              </div></td>
+            </tr>
+          </table></td>
+        </tr>
+    </table>
+    </td>
+  </tr>
+</table>
+
+  
+</div>
+<% end %>
+<br/>
+</fieldset>
+</div>
+<% unless @persona.new_record? %>
+<div class="panel" id="tab3">
+        <div id="personastramites_form">
+           <%= render :partial => "/personastramites/personastramites" %>
+        </div>
+</div>
+<div class="panel" id="tab2">
+        <div id="personasclases_form">
+           <%= render :partial => "/personasclases/personasclases" %>
+        </div>
+</div>
+<div class="panel" id="tab4">
+        <div id="teoricos_form">
+           <%= render :partial => "/teoricos/teoricos" %>
+        </div>
+</div>
+<% end %>

@@ -1,0 +1,59 @@
+<% form_tag busqueda_teoricos_path, :method => 'get' do %>
+<div id="productheader">
+  <span class="tit_gr_azul">&nbsp;&nbsp;PRUEBA TEORICA</span>
+</div>
+<div align="center">
+<table width="500" height="250" border="0" cellpadding="0" cellspacing="0">
+  <tr>
+    <td>
+      <div align="center"><img src="/images/<%=Parametro.find(11).valor.to_s%>"></img></div><br/><br/>
+      <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+             <tr>
+               <td colspan="2" height="10">
+               </td>
+             </tr>
+             <tr>
+               <td colspan="2" height="10">Bienvenido, Si desea pulse <%= link_to 'Aqui', edit_preguntasprueba_path(1)%> para interactuar un poco con el Sistema en una demostración de lo que será la Evaluación Teórica</td>
+             </tr>
+             <tr>
+               <td colspan="2" height="10">&nbsp;</td>
+             </tr>
+             <tr>
+               <td width="70%"><div align="right"><strong>Digite su identificación para iniciar la prueba : </strong></div></td>
+               <td width="30%"><%= text_field_tag :buscarident, params[:buscarident],{ :class => "campo", :size => 20,
+                :onFocus => "this.style.border='1px solid #f00'",
+                :onBlur => "this.style.border='1px solid #bbb'", :placeholder=>"Identificacion", :autofocus=>"true", :required=>"true" } %>
+               </td>
+             </tr>
+             <tr>
+               <td colspan="2" height="10"><hr size="1" noshade class="hrlinea"></td>
+             </tr>
+             <% if flash[:warninglogin] %>
+             <tr>
+               <td colspan="2"><div align="center">
+                    <div id="footer_wrap1">
+                    <table width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#FFFF99">
+                          <tr>
+                            <td width="5%"><div align="right"><img src="/images/cancel.png"></div></td>
+                            <td width="95%" class="campos">&nbsp;&nbsp;<%= flash[:warninglogin] %></td>
+                         </tr>
+                      </table>
+                    </div>
+                    <script type="text/javascript">
+                        setTimeout("new Effect.Fade('footer_wrap1');", 5000)
+                    </script>
+                 </div></td>
+             </tr>
+             <% end %>
+             <tr>
+               <td colspan="2"><div align="right"><div class="uiButton"><span class="uiButtonText"><%= submit_tag "Iniciar Prueba",:class=>"buttonAsLink",
+:onClick=>"Element.show('imagenlogin')"%>
+        <%= image_tag "load.gif", :id =>'imagenlogin', :style => 'display:none;'%></span></div></div></td>
+             </tr>
+           </table>
+        </td>
+      </tr>
+    </table>
+</div>
+  <br/><br/><br/>
+<% end %>

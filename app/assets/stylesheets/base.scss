@@ -294,6 +294,13 @@ $red-border: #fecaca;
     font-weight: 600;
     i { margin-right: 8px; }
   }
+
+  a, a:hover, a:focus, a:active {
+    background: none !important;
+    background-color: transparent !important;
+    color: inherit;
+    text-decoration: none;
+  }
 }
 
 // Box index con cabecera (usuarios, listados)
@@ -313,6 +320,15 @@ $red-border: #fecaca;
       font-weight: 600;
       letter-spacing: 0.02em;
       i { margin-right: 8px; opacity: 0.9; }
+    }
+
+    // Evita que los links dentro del header cambien el fondo al hacer hover
+    // Solo aplica a links que NO sean botones
+    a:not(.btn), a:not(.btn):hover, a:not(.btn):focus, a:not(.btn):active {
+      background: none !important;
+      background-color: transparent !important;
+      color: inherit;
+      text-decoration: none;
     }
   }
 }

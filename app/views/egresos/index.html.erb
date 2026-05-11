@@ -1,0 +1,90 @@
+<% title 'Egresos' %>
+
+<div class="box box-usuarios">
+  <div class="box-header">
+    <span class="box-title">
+      <i class="fa fa-money"></i> Egresos
+      <span class="users-count-badge"><%= @egresos.count %> registros</span>
+    </span>
+    <div class="box-tools pull-right" style="margin-top: -2px;">
+      <%= link_to new_egreso_path, class: 'btn btn-sm btn-success', title: 'Nuevo egreso' do %>
+        <i class="fa fa-plus"></i> Nuevo
+      <% end %>
+      <%= link_to busqueda_egresos_path, class: 'btn btn-sm btn-default', title: 'Búsqueda avanzada' do %>
+        <i class="fa fa-search"></i> Buscar
+      <% end %>
+    </div>
+  </div>
+
+  <div class="box-body">
+
+    <%# Formulario de ingreso rápido %>
+    <%= form_tag add_egreso_egresos_path, method: :post, style: 'margin-bottom: 16px;' do %>
+      <div class="table-responsive">
+        <table class="table table-bordered table-condensed table-usuarios" style="margin-bottom: 0;">
+          <thead>
+            <tr>
+              <th width="14%">Fecha</th>
+              <th width="12%">Nro. Egreso</th>
+              <th width="12%">Valor</th>
+              <th width="52%">Observación</th>
+              <th width="10%" class="text-center">Acción</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <%= text_field_tag 'egreso[fecha]', nil,
+                    class: 'form-control datepicker input-sm',
+                    placeholder: 'YYYY-MM-DD', readonly: true %>
+              </td>
+              <td>
+                <%= text_field_tag 'egreso[nro_egreso]', nil,
+                    class: 'form-control input-sm input_uppercase',
+                    onChange: 'this.value=this.value.toUpperCase()' %>
+              </td>
+              <td>
+                <%= text_field_tag 'egreso[valor]', nil,
+                    class: 'form-control input-sm' %>
+              </td>
+              <td>
+                <%= text_field_tag 'egreso[observacion]', nil,
+                    class: 'form-control input-sm input_uppercase',
+                    onChange: 'this.value=this.value.toUpperCase()' %>
+              </td>
+              <td class="text-center">
+                <%= submit_tag 'Guardar', class: 'btn btn-sm btn-primary',
+                    data: { disable_with: 'Guardando...' } %>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    <% end %>
+
+    <div class="flash_messages"></div>
+
+    <% if flash[:notice] %>
+      <div class="alert alert-info alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <%= flash[:notice] %>
+      </div>
+    <% end %>
+
+    <div id="egreso_list">
+      <%= render 'list' %>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  $('.datepicker').datepicker({
+    dayNamesMin: ["Dom","Lun","Mar","Mie","Jue","Vie","Sáb"],
+    monthNamesShort: ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"],
+    dateFormat: "yy-mm-dd",
+    yearRange: '2010:2030',
+    changeMonth: true,
+    changeYear: true
+  });
+</script>

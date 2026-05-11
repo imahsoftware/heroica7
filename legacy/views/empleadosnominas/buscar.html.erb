@@ -1,0 +1,21 @@
+<div id="productheader">
+  <span class="tit_gr_azul">&nbsp;&nbsp;INFORMACION NOMINA</span>
+</div>
+<br/>
+<% form_tag nomina_empleadosnominas_path, :method => 'get', :target=>"_parent" do %>
+    <div align="center">
+    <table width="60%" border="0" align="center" cellpadding="0" cellspacing="0" id="one-column-emphasis">
+      <tr valign="middle">
+        <td width="30%" height="30" class="camposDesc"><div align="right"><strong>Seleccione el periodo:&nbsp;&nbsp;</strong></div></td>
+        <td width="70%" height="30" class="camposDesc"> <%=select("ubicacion", "periodosliquidacion_id", Periodosliquidacion.find(:all, :conditions => ["estado = 'A'"]).collect {|p| [ p.inicio.to_s+' - '+p.fin.to_s, p.id ] }, { :include_blank => true },
+          { :style=>"width:250px", :class => "campo", :onFocus => "this.style.border='1px solid #f00'", :onBlur => "this.style.border='1px solid #bbb'" }) %></td>
+      </tr>
+      <tr valign="middle">
+        <td height="30" class="camposDesc"></td>
+        <td height="30" class="camposDesc">
+          <%= submit_tag "Generar", :name => nil, :disable_with => "Generando..." , :class=>"buttonAsLink"%></td>
+      </tr>
+    </table>
+    </div>
+<% end %>
+

@@ -1,0 +1,137 @@
+<%
+  if @personastramite.categoria_id == 1
+    teoricas = 25
+    taller = 3
+    practicas = 8
+  elsif @personastramite.categoria_id == 2
+    teoricas = 25
+    taller = 3
+    practicas = 15
+  elsif @personastramite.categoria_id == 3
+    teoricas = 25
+    taller = 5
+    practicas = 20
+  elsif @personastramite.categoria_id == 4
+    teoricas = 30
+    taller = 5
+    practicas = 30
+  elsif @personastramite.categoria_id == 5 or @personastramite.categoria_id == 6
+    teoricas = 20
+    taller = 10
+    practicas = 15
+  end
+%>
+<br/><div align="center">
+<table width="850" height="77"  border="0" cellpadding="0" cellspacing="0" class="sample">
+  <tr>
+    <td width="250" rowspan="2" valign="middle"><div align="center"><img src="/images/<%=Parametro.find(10).valor.to_s%>"></img></div></td>
+    <td width="395" rowspan="2"><div align="center" class="camposDescN16">ACUERDO COMERCIAL</div></td>
+    <td width="92" height="40"><div align="center">VERSION</div></td>
+    <td width="113"><div align="center">01</div></td>
+  </tr>
+  <tr>
+    <td height="40" ><div align="center">FECHA</div></td>
+    <td><div align="center">18/06/2010</div></td>
+  </tr>
+</table>
+<table width="850"  border="0" cellspacing="5" cellpadding="0">
+      <tr>
+        <td width="30%" valign="top">
+         <table width="100%"  border="0" cellspacing="0" cellpadding="0" class="sample">
+           <tr>
+              <td width="50%" class="camposDescN11"><div align="center">FOTOGRAFIA</div></td>
+              <td width="50%" class="camposDescN11"><div align="center">IDENTIFICACION BIOMETRICA</div></td>
+          </tr>
+            <tr>
+              <td width="50%" height="120" class="camposDescN12"><div align="center">
+                <%  if @personastramite.persona.personasimagen_file_name %>
+                   <img src="/system/personasimagenes/<%=@personastramite.persona_id%>/original/<%=@personastramite.persona.personasimagen_file_name rescue nil%>" height="120" width="120" border="0" title="Fotografia" />
+                <%  else %>
+                  <img src="/images/noFoto.jpg" border="0" height="100" width="100" title="No Fotografia" />
+                <%  end %></div>
+              </td>
+              <td width="50%" height="120" class="camposDesc11" valign="bottom"><div align="center">Indice Derecho</div></td>
+          </tr>
+         </table>
+          </td>
+        <td width="70%"><table width="100%"  border="0" cellspacing="0" cellpadding="0" class="sample">
+            <tr>
+            <td width="25%" class="camposDescN12"><div align="left">Consecutivo:</div></td>
+            <td width="70%" class="camposDesc12"><div align="left">&nbsp;<%=@personastramite.id%></div></td>
+          </tr>
+          <tr>
+            <td class="camposDescN12"><div align="left">Fecha:</div></td>
+            <td class="camposDesc12"><div align="left">&nbsp;<%=@personastramite.created_at.strftime("%Y-%m-%d") rescue nil%></div></td>
+          </tr>
+          <tr>
+            <td class="camposDescN12"><div align="left">Alumno:</div></td>
+            <td class="camposDesc12"><div align="left">&nbsp;<%=@personastramite.persona.identificacion rescue nil%> - <%=@personastramite.persona.nombres rescue nil%></div></td>
+          </tr>
+          <tr>
+            <td class="camposDescN12"><div align="left">Categoria:</div></td>
+            <td class="camposDesc12"><div align="left">&nbsp;<%=@personastramite.categoria.codigo_nuevo rescue nil%></div></td>
+          </tr>
+          <tr>
+            <td class="camposDescN12"><div align="left">Precio:</div></td>
+            <td class="camposDesc12"><div align="left">&nbsp;<%=camponumerico(@personastramite.factura.valor) rescue nil%></div></td>
+          </tr>
+          <tr>
+            <td class="camposDescN12"><div align="left">Numero de Factura:</div></td>
+            <td class="camposDesc12"><div align="left">&nbsp;<%=Parametro.find(17).valor.to_s%><%=facturacero(@personastramite.factura.nro_factura) rescue nil%></div></td>
+          </tr>
+        </table>
+          <table width="100%"  border="0" cellspacing="0" cellpadding="0" class="sample">
+            <tr>
+              <td class="camposDescN12"><div align="left">Tipo de Clase</div></td>
+              <td class="camposDescN12"><div align="center">TEORICAS</div></td>
+              <td class="camposDescN12"><div align="center">TALLER</div></td>
+              <td class="camposDescN12"><div align="center">PRÁCTICAS</div></td>
+            </tr>
+            <tr>
+              <td class="camposDescN12"><div align="left">Intensidad Horaria</div>
+              <td ><div align="center"><%=teoricas%></div></td>
+              <td ><div align="center"><%=taller%></div></td>
+              <td ><div align="center"><%=practicas%></div></td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+<table width="850"  border="0" cellspacing="0" cellpadding="0" class="sample">
+  <tr>
+    <td class="camposDescN12"><div align="center">IMPORTANTE</div></td>
+  </tr>
+  <tr>
+    <td height="50"><div align="justify" class="camposDesc10">
+      - USTED RECIBIÓ UN CORREO DE SOPORTEFABRICAAULAPP CON USUARIO Y CONTRASEÑA QUE LE SERVIRAN PARA INSTALAR LA APLICACIÓN EN SU CELULAR Y PARA REALIZAR EL EXAMEN TEORICO. CON ESTA APLICACIÓN USTED PODRÁ ESTAR AL TANTO DE SU PROGRESO DURANTE EL CURSO DE CONDUCCIÓN.<BR/>
+      - PARA CADA CLASE PRACTICA USTED DEBERÁ PORTAR SU DOCUMENTO DE IDENTIDAD ORIGINAL.<BR/>
+      - DURANTE LAS CLASES PRACTICAS Y TEORICAS EVITE RECIBIR, HACER LLAMADAS O CHATEAR.<BR/>
+      - POR FAVOR ASISTA PUNTUALMENTE A SUS CLASES TEORICAS, TALLER Y PRACTICAS; DEBERÁ PRESENTARSE 15 MINUTOS ANTES DE LA HORA PROGRAMADA, DE LO CONTRARIO PODRÍA PERDER SU CLASE.<BR/>
+      - LA PRUEBA PSICOSENSOMETRICA TIENE UNA VIGENCIA DE 180 DÍAS CALENDARIO, SI PERMITE QUE ESTA PRUEBA VENZA DEBERA HACERLA NUEVAMENTE Y CANCELAR EL COSTO TOTAL DE LA MISMA.<BR/>
+      - AVISAR CON 24 HORAS DE ANTELACION SI DESEA CANCELAR O APLAZAR SU CLASE PRÁCTICA O TEÓRICA, DE LO CONTRARIO SI SE  AUSENTA SIN NOTIFICACION ALGUNA PODRÍA PERDER EL HORARIO ELEGIDO Y SU CUPO PARA CLASE TEÓRICA.<BR/>
+      - EL CURSO DE CONDUCCIÓN EN NINGUN CASO PODRÁ DESARROLLARSE EN MAS DE 3 MESES (90 DÍAS), DE LO CONTRARIO DEBERA INICIARLO NUEVAMENTE DESDE CERO Y CANCELAR EL VALOR TOTAL DEL MISMO. ARTICULO 7 DECRETO 1500 DEL 29 DE ABRIL DEL 2009<BR/>
+      - EL 25% DEL TOTAL DE LAS CLASES PRÁCTICAS SE DESARROLLARÁN EN PISTA O AREA PRÁCTICA.<BR/>
+      - EL 75% DEL TOTAL DE LAS CLASES PRÁCTICAS SE DESARROLLARÁN EN LAS VIAS DE USO PÚBLICO.<BR/>
+      - EN EL VEHICULO SOLO DEBERÁN IR EL INSTRUCTOR Y EL ALUMNO.<BR/>
+    </div></td>
+  </tr>
+</table>
+<table width="850"  border="0" cellspacing="0" cellpadding="0">
+  <tr valign="bottom">
+    <td width="416" height="50"><div align="center">______________________________________</div></td>
+    <td width="43">&nbsp;</td>
+    <td width="391" height="50"><div align="center">______________________________________</div></td>
+  </tr>
+  <tr>
+    <td class="camposDescN12"><div align="center">FIRMA AUTORIZADO </div></td>
+    <td>&nbsp;</td>
+    <td class="camposDescN12"><div align="center">FIRMA DEL CLIENTE </div></td>
+  </tr>
+</table>
+<table width="760"  border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td width="60%" class="camposDesc11"><div align="left"><%=Time.now.strftime("%Y-%m-%d %X")%> - <%=User.find(is_admin).nombre rescue nil%></div></td>
+        <td width="40%" class="camposDesc11"><div align="right"><a href="javascript:window.print()" class="imprimirlink">Imprimir</a>&nbsp;&nbsp;</div></td>
+      </tr>
+  </table>
+<br/>

@@ -1,0 +1,7 @@
+<% form_for(@empleadosnomina) do |f| %>
+<%= f.error_messages %>
+  <%= render :partial => 'fields', :f => f %>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>

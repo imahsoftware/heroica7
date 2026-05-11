@@ -1,0 +1,16 @@
+<br/>
+<div id="productheader">
+  <span class="tit_gr_azul">&nbsp;&nbsp;Soporte del Egreso (<%=@egreso.nro_egreso rescue nil%>)</span>
+  <div align="right">
+    <%= link_to 'Regresar Egreso', edit_egreso_path(@egreso), :class=>"regresarlink" %>&nbsp;&nbsp;
+  </div>
+</div>
+<br/>
+<% form_for(:egresosimagen, @egresosimagen, :url => egreso_egresosimagenes_path(@egreso), :html => { :multipart => true }) do |f| %>
+  <%= render :partial => 'form', :locals => { :f => f } %>
+  <table width="80%" border="0" align="center" cellpadding="0" cellspacing="0" id="one-column-emphasis">
+    <tr width="40%" valign="top">
+      <td><div align="right"><%= f.submit "Guardar",:disable_with => "Guardando...", :class=>"buttonAsLink"%></div></td>
+    </tr>
+  </table>
+<% end %>

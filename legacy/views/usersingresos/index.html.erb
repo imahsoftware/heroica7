@@ -1,0 +1,22 @@
+<h1>Listing usersingresos</h1>
+
+<table>
+  <tr>
+    <th>User</th>
+    <th>Fecha</th>
+  </tr>
+
+<% @usersingresos.each do |usersingreso| %>
+  <tr>
+    <td><%=h usersingreso.user_id %></td>
+    <td><%=h usersingreso.fecha %></td>
+    <td><%= link_to 'Show', usersingreso %></td>
+    <td><%= link_to 'Edit', edit_usersingreso_path(usersingreso) %></td>
+    <td><%= link_to 'Destroy', usersingreso, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New usersingreso', new_usersingreso_path %>

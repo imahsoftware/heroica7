@@ -1,0 +1,51 @@
+<div id="productheader">
+  <span class="tit_gr_azul">&nbsp;&nbsp;EGRESOS</span>
+</div>
+<br/>
+<div align="center">
+<table width="90%" height="40" border="0" cellpadding="0" cellspacing="0">
+   <tr>
+    <td><% form_remote_tag :url => {:action => 'add_egreso'}, :complete => "egreso_fecha.value=nil egreso_nro_egreso.value=nil egreso_valor.value=nil egreso_observacion.value=nil" do %>
+<table width="100%" height="40" border="0" cellpadding="0" cellspacing="0">
+   <tr>
+     <td width="15%" class="campos">Fecha</td>
+     <td width="10%" class="campos">Nro Egreso</td>
+     <td width="10%" class="campos">Valor</td>
+     <td width="55%" class="campos">Observacion</td>
+     <td width="10%" class="campos"></td>
+   </tr>
+   <tr>
+     <td><%= calendar_date_select 'egreso', 'fecha', :year_range =>[2010,2020], :class=> "campo", :size => 10, :time => false%></td>
+     <td><%= text_field 'egreso', 'nro_egreso',{ :class => "campo",
+                :size => 15,
+                :onFocus => "this.style.border='1px solid #f00',this.value=''",
+                :onBlur => "this.style.border='1px solid #bbb'",
+                :onChange=> "javascript:this.value=this.value.toUpperCase();"
+                 }  %></td>
+<td><%= text_field 'egreso', 'valor',{ :class => "campo",
+                :size => 15,
+                :onFocus => "this.style.border='1px solid #f00',this.value=''",
+                :onBlur => "this.style.border='1px solid #bbb'",
+                :onChange=> "javascript:this.value=this.value.toUpperCase();"
+                 }  %></td>
+<td><%= text_field 'egreso', 'observacion',{ :class => "campo",
+                :size => 65,
+                :onFocus => "this.style.border='1px solid #f00',this.value=''",
+                :onBlur => "this.style.border='1px solid #bbb'",
+                :onChange=> "javascript:this.value=this.value.toUpperCase();"
+                 }  %></td>
+<td><%= submit_tag "Guardar", :class=>"buttonAsLink"%></td>
+   </tr>
+</table>
+     <% end %></td>
+  </tr>
+</table>
+
+<br />
+<div id="egreso_list">
+<%= render :partial => 'list' %>
+  <div id="notice"><%= flash[:notice] %></div>
+</div>
+<br/>
+</div>
+

@@ -1,0 +1,34 @@
+<table  width="82%" border="0" align="center" cellpadding="1" cellspacing="1">
+  <tr>
+  <td width="52%" height="32" class="campos">Concepto</td>
+  <td width="5%" height="32" class="campos">Cantidad</td>
+  <td width="23%" class="campos">Valor</td>
+  <td width="20%" class="campos"></td>
+  </tr>
+  <tr>
+    <td class="campos"><%=select("detallesfactura", "concepto_id", Concepto.all.collect {|p| [ p.descripcion, p.id ] }, { :include_blank => true },
+      { :style=>"width:400px", :class => "campo", :onFocus => "this.style.border='1px solid #f00'", :onBlur => "this.style.border='1px solid #bbb'" }) %>
+          <%= error_message_on :detallesfactura, :concepto_id, :css_class =>"cerror"%></td>
+  <td  class="campos"><%= text_field :detallesfactura, :cantidad,{ :class => "campo", :size => 5,
+                  :onChange=> "javascript:this.value=this.value.toUpperCase();",
+                :onFocus => "this.style.border='1px solid #f00'",
+                :onBlur => "this.style.border='1px solid #bbb'" }%>
+          <%= error_message_on :detallesfactura, :cantidad, :css_class =>"cerror"%></td>
+  <td  class="campos"><%= text_field :detallesfactura, :valor,{ :class => "campo", :size => 20,
+                  :onChange=> "javascript:this.value=this.value.toUpperCase();",
+                :onFocus => "this.style.border='1px solid #f00'",
+                :onBlur => "this.style.border='1px solid #bbb'" }%>
+          <%= error_message_on :detallesfactura, :valor, :css_class =>"cerror"%></td>
+  <td  height="30"><div align="right">
+        <% if permiso("detallesfactura","A").to_s == "S" %>
+        <%= hidden_field :detallesfactura, :id %>
+        <%= submit_tag "Guardar",:disable_with => "Guardando...", :class=>"buttonAsLink"%>
+        <% end %>
+</div></td>
+  </tr>
+</table>
+<table width="90%" height="0" border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td height="10"><hr size="1" noshade class="hrlinea"></td>
+      </tr>
+  </table>

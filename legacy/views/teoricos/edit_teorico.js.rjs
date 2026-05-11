@@ -1,0 +1,1 @@
+page.replace_html :teoricos_form, :partial => "/teoricos/teoricos"

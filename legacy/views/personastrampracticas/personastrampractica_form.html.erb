@@ -1,0 +1,679 @@
+<%= stylesheet_link_tag 'tabs'%>
+<%= javascript_include_tag 'fabtabulous' %>
+<% form_for(@personastrampractica,:html => { :multipart => true })  do |f|
+  @personastramite = Personastramite.find(@personastrampractica.personastramite_id)
+%>
+  <br/><div align="center">
+  <table width="850" border="0" cellpadding="0" cellspacing="0" class="sample">
+    <tr>
+      <td width="250" height="40" rowspan="2" valign="middle"><div align="center"><img src="/images/<%=Parametro.find(10).valor.to_s%>"></img></div></td>
+      <td width="395" height="40" rowspan="2"><div align="center" class="camposDescN16">PRUEBA PRACTICA DE CONDUCCION</div></td>
+      <td width="92" height="40"><div align="center">VERSION</div></td>
+      <td width="113"><div align="center">1</div></td>
+    </tr>
+    <tr>
+      <td height="40"><div align="center">FECHA</div></td>
+      <td><div align="center">06/01/2011</div></td>
+    </tr>
+  </table>
+  <table width="850"  border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td>
+        <table width="100%"  border="0" cellspacing="0" cellpadding="0">
+         <tr>
+          <td width="20%" valign="top"><div align="center">
+            <%  if @personastramite.persona.personasimagen_file_name %>
+              <img src="/system/personasimagenes/<%=@personastramite.persona_id%>/original/<%=@personastramite.persona.personasimagen_file_name rescue nil%>" height="120" width="150" border="0" title="Fotografia" />
+            <%  else %>
+              <img src="/images/noFoto.jpg" border="0" height="100" width="100" title="No Fotografia" />
+            <%  end %>
+          </div></td>
+          <td width="80%"><table width="100%"  border="0" cellspacing="0" cellpadding="0" class="sample">
+            <tr>
+              <td width="20%" height="20" class="camposDescN12"><div align="left">Alumno:</div></td>
+              <td colspan="3" class="camposDesc12"><div align="left">&nbsp;<%=@personastramite.persona.identificacion rescue nil%> - <%=@personastramite.persona.nombres rescue nil%></div></td>
+            </tr>
+            <tr>
+              <td height="20" class="camposDescN12"><div align="left">Fecha Nacimiento:</div> </td>
+              <td colspan="3" class="camposDesc12"><div align="left">&nbsp;<%=@personastramite.persona.fecha_nacimiento rescue nil%> - <%=@personastramite.persona.lugar_nacimiento rescue nil%></div></td>
+            </tr>
+            <tr>
+              <td height="20" class="camposDescN12"><div align="left">Direccion:</div></td>
+              <td colspan="3" class="camposDesc12"><div align="left">&nbsp;<%=@personastramite.persona.direccion rescue nil%></div></td>
+            </tr>
+            <tr>
+              <td height="20" class="camposDescN12"><div align="left">Telefonos:</div></td>
+              <td colspan="3" class="camposDesc12"><div align="left">&nbsp;<%=@personastramite.persona.telefono rescue nil%> - <%=@personastramite.persona.telefono_oficina rescue nil%> - <%=@personastramite.persona.celular rescue nil%></div></td>
+            </tr>
+            <tr>
+              <td height="20" class="camposDescN12"><div align="left">Instructor:</div></td>
+              <td class="camposDesc12"><div align="left">&nbsp;<%=@personastramite.placa.descripcion rescue nil%> - <%=@personastramite.placa.instructor.nombre rescue nil%></div></td>
+              <td class="camposDescN12"><div align="left">Categoria:</div></td>
+              <td class="camposDesc12" width="18%"><div align="left">&nbsp;<%=@personastramite.categoria.codigo_nuevo rescue nil%></div></td>
+            </tr>
+            <tr>
+              <td height="20" class="camposDescN12"><div align="left">Empresa:</div> </td>
+              <td class="camposDesc12"><div align="left"><%= f.text_field :empresa,{ :class => "campo", :size => 50,
+                                                                                     :onChange=> "javascript:this.value=this.value.toUpperCase();",
+                                                                                   :onFocus => "this.style.border='1px solid #f00'",
+                                                                                   :onBlur => "this.style.border='1px solid #bbb'" }%></div></td>
+              <td class="camposDescN12"><div align="left">Hora:</div></td>
+              <td class="camposDesc12"><div align="left"><%= f.text_field :hora,{ :class => "campo", :size => 10,
+                                                                                     :onFocus => "this.style.border='1px solid #f00'",
+                                                                                     :onBlur => "this.style.border='1px solid #bbb'" }%></div></td>
+            </tr>
+            <tr>
+              <td height="20" class="camposDescN12"><div align="left">Nro de licencia:</div> </td>
+              <td class="camposDesc12"><div align="left"><%= f.text_field :nro_licencia,{ :class => "campo", :size => 30,
+                                                                                     :onFocus => "this.style.border='1px solid #f00'",
+                                                                                     :onBlur => "this.style.border='1px solid #bbb'" }%></div></td>
+              <td class="camposDescN12"><div align="left">Fecha Venc.:</div></td>
+              <td class="camposDesc12"><div align="left">
+                <%= calendar_date_select "personastrampractica", "fecha_vencimiento", :year_range =>[1930,2030], :class=> "campo", :size => 10, :time => false%> <%= f.error_message_on :fecha_vencimiento, :css_class =>"cerror"%></div></td>
+            </tr>
+          </table></td>
+        </tr>
+      </table>
+        <table width="850" border="0" cellspacing="0" cellpadding="0" class="sample">
+          <thead>
+          <tr>
+            <td colspan="5" height="20"><div align="center" class="camposDescN12">INSPECCIÓN Y ADAPTACIÓN AL VEHÍCULO (20%)</div></td>
+          </tr>
+          <tr>
+            <td width="5%" height="15"><div align="center" class="camposDescN10">#</div></td>
+            <td width="50%"><div align="center" class="camposDescN10">ITEM</div></td>
+            <td width="10%" rowspan="2"><div align="center" class="camposDescN10">PESO DEL FACTOR EN %</div></td>
+            <td width="10%" rowspan="2"><div align="center" class="camposDescN10">EVALUACIÓN (E)</div></td>
+            <td width="10%" rowspan="2"><div align="center" class="camposDescN10">CALIFICACIÓN (C)</div></td>
+          </tr>
+          </thead>
+          <tr>
+            <td><div align="center" class="camposDescN11">1</div></td>
+            <td height="20"><div align="left" class="camposDesc11">Verificación de documentos
+              <%= select(:personastrampractica,:inspeva_dato1, select_sino,{ :include_blank => true }, { :style=>"width:100", :class => "span2"})%>
+              <%= f.error_message_on :inspeva_dato1, :css_class =>"cerror"%>
+            </div></td>
+          </tr>
+          <tr>
+            <td><div align="center" class="camposDescN11">2</div></td>
+            <td><div align="left" class="camposDesc11">Inspección del nivel del aceite</div></td>
+            <td><div align="center" class="camposDescN11">5</div></td>
+            <td><div align="center" class="camposDescN11"><%= f.text_field :inspeva_dato2,{ :class => "campo", :size => 5, :onFocus => "this.style.border='1px solid #f00'", :onBlur => "this.style.border='1px solid #bbb'" }%>
+              <%= observe_field "personastrampractica_inspeva_dato2", :url => { :action => :calcularvalor },
+                                :frequency => 0.25,
+                                :on => 'blur',
+                                :with => "'pvr0=inspeva'+'&pvr1=dato2'+'&pvr2='+encodeURIComponent(value)"%>
+              <%= f.error_message_on :inspeva_dato2, :css_class =>"cerror"%></div></td>
+            <td><div align="center" class="camposDescN11"><%= f.text_field :inspcal_dato2,{ :class => "campodisabled", :size => 5, :readonly=>"yes"}%></div></td>
+          </tr>
+          <tr>
+            <td><div align="center" class="camposDescN11">3</div></td>
+            <td><div align="left" class="camposDesc11">Inspección del nivel de gasolina</div></td>
+            <td><div align="center" class="camposDescN11">5</div></td>
+            <td><div align="center" class="camposDescN11"><%= f.text_field :inspeva_dato3,{ :class => "campo", :size => 5, :onFocus => "this.style.border='1px solid #f00'", :onBlur => "this.style.border='1px solid #bbb'" }%>
+              <%= observe_field "personastrampractica_inspeva_dato3", :url => { :action => :calcularvalor },
+                                :frequency => 0.25,
+                                :on => 'blur',
+                                :with => "'pvr0=inspeva'+'&pvr1=dato3'+'&pvr2='+encodeURIComponent(value)"%>
+              <%= f.error_message_on :inspeva_dato3, :css_class =>"cerror"%></div></td>
+            <td><div align="center" class="camposDescN11"><%= f.text_field :inspcal_dato3,{ :class => "campodisabled", :size => 5, :readonly=>"yes"}%></div></td>
+          </tr>
+          <tr>
+            <td><div align="center" class="camposDescN11">4</div></td>
+            <td><div align="left" class="camposDesc11">Verificación del estado de la batería</div></td>
+            <td><div align="center" class="camposDescN11">5</div></td>
+            <td><div align="center" class="camposDescN11"><%= f.text_field :inspeva_dato4,{ :class => "campo", :size => 5, :onFocus => "this.style.border='1px solid #f00'", :onBlur => "this.style.border='1px solid #bbb'" }%>
+              <%= observe_field "personastrampractica_inspeva_dato4", :url => { :action => :calcularvalor },
+                                :frequency => 0.25,
+                                :on => 'blur',
+                                :with => "'pvr0=inspeva'+'&pvr1=dato4'+'&pvr2='+encodeURIComponent(value)"%>
+              <%= f.error_message_on :inspeva_dato4, :css_class =>"cerror"%></div></td>
+            <td><div align="center" class="camposDescN11"><%= f.text_field :inspcal_dato4,{ :class => "campodisabled", :size => 5, :readonly=>"yes"}%></div></td>
+          </tr>
+          <tr>
+            <td><div align="center" class="camposDescN11">5</div></td>
+            <td><div align="left" class="camposDesc11">Verificación de los niveles de electrolítos</div></td>
+            <td><div align="center" class="camposDescN11">5</div></td>
+            <td><div align="center" class="camposDescN11"><%= f.text_field :inspeva_dato5,{ :class => "campo", :size => 5, :onFocus => "this.style.border='1px solid #f00'", :onBlur => "this.style.border='1px solid #bbb'" }%>
+              <%= observe_field "personastrampractica_inspeva_dato5", :url => { :action => :calcularvalor },
+                                :frequency => 0.25,
+                                :on => 'blur',
+                                :with => "'pvr0=inspeva'+'&pvr1=dato5'+'&pvr2='+encodeURIComponent(value)"%>
+              <%= f.error_message_on :inspeva_dato5, :css_class =>"cerror"%></div></td>
+            <td><div align="center" class="camposDescN11"><%= f.text_field :inspcal_dato5,{ :class => "campodisabled", :size => 5, :readonly=>"yes"}%></div></td>
+          </tr>
+          <tr>
+            <td><div align="center" class="camposDescN11">6</div></td>
+            <td><div align="left" class="camposDesc11">Inspeccion y verificación del sistema de frenos</div></td>
+            <td><div align="center" class="camposDescN11">10</div></td>
+            <td><div align="center" class="camposDescN11"><%= f.text_field :inspeva_dato6,{ :class => "campo", :size => 5, :onFocus => "this.style.border='1px solid #f00'", :onBlur => "this.style.border='1px solid #bbb'" }%>
+              <%= observe_field "personastrampractica_inspeva_dato6", :url => { :action => :calcularvalor },
+                                :frequency => 0.25,
+                                :on => 'blur',
+                                :with => "'pvr0=inspeva'+'&pvr1=dato6'+'&pvr2='+encodeURIComponent(value)"%>
+              <%= f.error_message_on :inspeva_dato6, :css_class =>"cerror"%></div></td>
+            <td><div align="center" class="camposDescN11"><%= f.text_field :inspcal_dato6,{ :class => "campodisabled", :size => 5, :readonly=>"yes"}%></div></td>
+          </tr>
+          <tr>
+            <td><div align="center" class="camposDescN11">7</div></td>
+            <td><div align="left" class="camposDesc11">Verificación del estado de las llantas</div></td>
+            <td><div align="center" class="camposDescN11">5</div></td>
+            <td><div align="center" class="camposDescN11"><%= f.text_field :inspeva_dato7,{ :class => "campo", :size => 5, :onFocus => "this.style.border='1px solid #f00'", :onBlur => "this.style.border='1px solid #bbb'" }%>
+              <%= observe_field "personastrampractica_inspeva_dato7", :url => { :action => :calcularvalor },
+                                :frequency => 0.25,
+                                :on => 'blur',
+                                :with => "'pvr0=inspeva'+'&pvr1=dato7'+'&pvr2='+encodeURIComponent(value)"%>
+              <%= f.error_message_on :inspeva_dato7, :css_class =>"cerror"%></div></td>
+            <td><div align="center" class="camposDescN11"><%= f.text_field :inspcal_dato7,{ :class => "campodisabled", :size => 5, :readonly=>"yes"}%></div></td>
+          </tr>
+          <tr>
+            <td><div align="center" class="camposDescN11">8</div></td>
+            <td><div align="left" class="camposDesc11">Verificación presión de las llantas</div></td>
+            <td><div align="center" class="camposDescN11">5</div></td>
+            <td><div align="center" class="camposDescN11"><%= f.text_field :inspeva_dato8,{ :class => "campo", :size => 5, :onFocus => "this.style.border='1px solid #f00'", :onBlur => "this.style.border='1px solid #bbb'" }%>
+              <%= observe_field "personastrampractica_inspeva_dato8", :url => { :action => :calcularvalor },
+                                :frequency => 0.25,
+                                :on => 'blur',
+                                :with => "'pvr0=inspeva'+'&pvr1=dato8'+'&pvr2='+encodeURIComponent(value)"%>
+              <%= f.error_message_on :inspeva_dato8, :css_class =>"cerror"%></div></td>
+            <td><div align="center" class="camposDescN11"><%= f.text_field :inspcal_dato8,{ :class => "campodisabled", :size => 5, :readonly=>"yes"}%></div></td>
+          </tr>
+          <tr>
+            <td><div align="center" class="camposDescN11">9</div></td>
+            <td><div align="left" class="camposDesc11">Verificación del estado de las luces</div></td>
+            <td><div align="center" class="camposDescN11">10</div></td>
+            <td><div align="center" class="camposDescN11"><%= f.text_field :inspeva_dato9,{ :class => "campo", :size => 5, :onFocus => "this.style.border='1px solid #f00'", :onBlur => "this.style.border='1px solid #bbb'" }%>
+              <%= observe_field "personastrampractica_inspeva_dato9", :url => { :action => :calcularvalor },
+                                :frequency => 0.25,
+                                :on => 'blur',
+                                :with => "'pvr0=inspeva'+'&pvr1=dato9'+'&pvr2='+encodeURIComponent(value)"%>
+              <%= f.error_message_on :inspeva_dato9, :css_class =>"cerror"%></div></td>
+            <td><div align="center" class="camposDescN11"><%= f.text_field :inspcal_dato9,{ :class => "campodisabled", :size => 5, :readonly=>"yes"}%></div></td>
+          </tr>
+          <tr>
+            <td><div align="center" class="camposDescN11">10</div></td>
+            <td><div align="left" class="camposDesc11">Adaptación o graduación de espejos</div></td>
+            <td><div align="center" class="camposDescN11">10</div></td>
+            <td><div align="center" class="camposDescN11"><%= f.text_field :inspeva_dato10,{ :class => "campo", :size => 5, :onFocus => "this.style.border='1px solid #f00'", :onBlur => "this.style.border='1px solid #bbb'" }%>
+              <%= observe_field "personastrampractica_inspeva_dato10", :url => { :action => :calcularvalor },
+                                :frequency => 0.25,
+                                :on => 'blur',
+                                :with => "'pvr0=inspeva'+'&pvr1=dato10'+'&pvr2='+encodeURIComponent(value)"%>
+              <%= f.error_message_on :inspeva_dato10, :css_class =>"cerror"%></div></td>
+            <td><div align="center" class="camposDescN11"><%= f.text_field :inspcal_dato10,{ :class => "campodisabled", :size => 5, :readonly=>"yes"}%></div></td>
+          </tr>
+          <tr>
+            <td><div align="center" class="camposDescN11">11</div></td>
+            <td><div align="left" class="camposDesc11">Inspección de soportes y estribos</div></td>
+            <td><div align="center" class="camposDescN11">10</div></td>
+            <td><div align="center" class="camposDescN11"><%= f.text_field :inspeva_dato11,{ :class => "campo", :size => 5, :onFocus => "this.style.border='1px solid #f00'", :onBlur => "this.style.border='1px solid #bbb'" }%>
+              <%= observe_field "personastrampractica_inspeva_dato11", :url => { :action => :calcularvalor },
+                                :frequency => 0.25,
+                                :on => 'blur',
+                                :with => "'pvr0=inspeva'+'&pvr1=dato11'+'&pvr2='+encodeURIComponent(value)"%>
+              <%= f.error_message_on :inspeva_dato11, :css_class =>"cerror"%></div></td>
+            <td><div align="center" class="camposDescN11"><%= f.text_field :inspcal_dato11,{ :class => "campodisabled", :size => 5, :readonly=>"yes"}%></div></td>
+          </tr>
+          <tr>
+            <td><div align="center" class="camposDescN11">12</div></td>
+            <td><div align="left" class="camposDesc11">Verificación de equipos de protección personal</div></td>
+            <td><div align="center" class="camposDescN11">10</div></td>
+            <td><div align="center" class="camposDescN11"><%= f.text_field :inspeva_dato12,{ :class => "campo", :size => 5, :onFocus => "this.style.border='1px solid #f00'", :onBlur => "this.style.border='1px solid #bbb'" }%>
+              <%= observe_field "personastrampractica_inspeva_dato12", :url => { :action => :calcularvalor },
+                                :frequency => 0.25,
+                                :on => 'blur',
+                                :with => "'pvr0=inspeva'+'&pvr1=dato12'+'&pvr2='+encodeURIComponent(value)"%>
+              <%= f.error_message_on :inspeva_dato12, :css_class =>"cerror"%></div></td>
+            <td><div align="center" class="camposDescN11"><%= f.text_field :inspcal_dato12,{ :class => "campodisabled", :size => 5, :readonly=>"yes"}%></div></td>
+          </tr>
+          <tr>
+            <td><div align="center" class="camposDescN11">13</div></td>
+            <td><div align="left" class="camposDesc11">Adapcion o graduación del manillar o manubrio</div></td>
+            <td><div align="center" class="camposDescN11">10</div></td>
+            <td><div align="center" class="camposDescN11"><%= f.text_field :inspeva_dato13,{ :class => "campo", :size => 5, :onFocus => "this.style.border='1px solid #f00'", :onBlur => "this.style.border='1px solid #bbb'" }%>
+              <%= observe_field "personastrampractica_inspeva_dato13", :url => { :action => :calcularvalor },
+                                :frequency => 0.25,
+                                :on => 'blur',
+                                :with => "'pvr0=inspeva'+'&pvr1=dato13'+'&pvr2='+encodeURIComponent(value)"%>
+              <%= f.error_message_on :inspeva_dato13, :css_class =>"cerror"%></div></td>
+            <td><div align="center" class="camposDescN11"><%= f.text_field :inspcal_dato13,{ :class => "campodisabled", :size => 5, :readonly=>"yes"}%></div></td>
+          </tr>
+          <tr>
+            <td><div align="center" class="camposDescN11">14</div></td>
+            <td><div align="left" class="camposDesc11">Identificación de los controles</div></td>
+            <td><div align="center" class="camposDescN11">10</div></td>
+            <td><div align="center" class="camposDescN11"><%= f.text_field :inspeva_dato14,{ :class => "campo", :size => 5, :onFocus => "this.style.border='1px solid #f00'", :onBlur => "this.style.border='1px solid #bbb'" }%>
+              <%= observe_field "personastrampractica_inspeva_dato14", :url => { :action => :calcularvalor },
+                                :frequency => 0.25,
+                                :on => 'blur',
+                                :with => "'pvr0=inspeva'+'&pvr1=dato14'+'&pvr2='+encodeURIComponent(value)"%>
+              <%= f.error_message_on :inspeva_dato14, :css_class =>"cerror"%></div></td>
+            <td><div align="center" class="camposDescN11"><%= f.text_field :inspcal_dato14,{ :class => "campodisabled", :size => 5, :readonly=>"yes"}%></div></td>
+          </tr>
+          <tr style="background: #F2F2F2;">
+            <td colspan="2" height="20"><div align="center" class="camposDescN12">SUBTOTAL</div></td>
+            <td><div align="center" class="camposDescN12">100</div></td>
+            <td><div align="center" class="camposDescN12"><%=@personastrampractica.cal_inspeccion rescue 0%></div></td>
+            <td><div align="center" class="camposDescN12"><%=@personastrampractica.punt_inspeccion rescue 0%></div></td>
+          </tr>
+        </table><br/>
+        <table width="850" border="0" cellspacing="0" cellpadding="0" class="sample">
+          <thead>
+          <tr>
+            <td colspan="5" height="20"><div align="center" class="camposDescN12">DESTREZA Y HABILIDAD EN EL MANEJO DE LOS MECANISMOS DE CONTROL Y EN LAS TECNICAS DE CONDUCCIÓN (40%)</div></td>
+          </tr>
+          <tr>
+            <td width="5%"><div align="center" class="camposDescN10">#</div></td>
+            <td width="50%"><div align="center" class="camposDescN10">ITEM</div></td>
+            <td width="10%"><div align="center" class="camposDescN10">PESO DEL FACTOR EN %</div></td>
+            <td width="10%"><div align="center" class="camposDescN10">EVALUACIÓN (E)</div></td>
+            <td width="10%"><div align="center" class="camposDescN10">CALIFICACIÓN (C)</div></td>
+          </tr>
+          </thead>
+          <tr>
+            <td><div align="center" class="camposDescN11">1</div></td>
+            <td><div align="left" class="camposDesc11">Maniobra de encendido y arranque del vehiculo</div></td>
+            <td><div align="center" class="camposDescN11">4</div></td>
+            <td><div align="center" class="camposDescN11"><%= f.text_field :desteva_dato1,{ :class => "campo", :size => 5, :onFocus => "this.style.border='1px solid #f00'", :onBlur => "this.style.border='1px solid #bbb'" }%>
+              <%= observe_field "personastrampractica_desteva_dato1", :url => { :action => :calcularvalor },
+                                :frequency => 0.25,
+                                :on => 'blur',
+                                :with => "'pvr0=desteva'+'&pvr1=dato1'+'&pvr2='+encodeURIComponent(value)"%>
+              <%= f.error_message_on :desteva_dato1, :css_class =>"cerror"%></div></td>
+            <td><div align="center" class="camposDescN11"><%= f.text_field :destcal_dato1,{ :class => "campodisabled", :size => 5, :readonly=>"yes"}%></div></td>
+          </tr>
+          <tr>
+            <td><div align="center" class="camposDescN11">2</div></td>
+            <td><div align="left" class="camposDesc11">Puesta en marcha en plano y en pendiente</div></td>
+            <td><div align="center" class="camposDescN11">6</div></td>
+            <td><div align="center" class="camposDescN11"><%= f.text_field :desteva_dato2,{ :class => "campo", :size => 5, :onFocus => "this.style.border='1px solid #f00'", :onBlur => "this.style.border='1px solid #bbb'" }%>
+              <%= observe_field "personastrampractica_desteva_dato2", :url => { :action => :calcularvalor },
+                                :frequency => 0.25,
+                                :on => 'blur',
+                                :with => "'pvr0=desteva'+'&pvr1=dato2'+'&pvr2='+encodeURIComponent(value)"%>
+              <%= f.error_message_on :desteva_dato2, :css_class =>"cerror"%></div></td>
+            <td><div align="center" class="camposDescN11"><%= f.text_field :destcal_dato2,{ :class => "campodisabled", :size => 5, :readonly=>"yes"}%></div></td>
+          </tr>
+          <tr>
+            <td><div align="center" class="camposDescN11">3</div></td>
+            <td><div align="left" class="camposDesc11">Avance en línea recta y con ángulos</div></td>
+            <td><div align="center" class="camposDescN11">4</div></td>
+            <td><div align="center" class="camposDescN11"><%= f.text_field :desteva_dato3,{ :class => "campo", :size => 5, :onFocus => "this.style.border='1px solid #f00'", :onBlur => "this.style.border='1px solid #bbb'" }%>
+              <%= observe_field "personastrampractica_desteva_dato3", :url => { :action => :calcularvalor },
+                                :frequency => 0.25,
+                                :on => 'blur',
+                                :with => "'pvr0=desteva'+'&pvr1=dato3'+'&pvr2='+encodeURIComponent(value)"%>
+              <%= f.error_message_on :desteva_dato3, :css_class =>"cerror"%></div></td>
+            <td><div align="center" class="camposDescN11"><%= f.text_field :destcal_dato3,{ :class => "campodisabled", :size => 5, :readonly=>"yes"}%></div></td>
+          </tr>
+          <tr>
+            <td><div align="center" class="camposDescN11">4</div></td>
+            <td><div align="left" class="camposDesc11">Coordinación:  embrague - cambio</div></td>
+            <td><div align="center" class="camposDescN11">6</div></td>
+            <td><div align="center" class="camposDescN11"><%= f.text_field :desteva_dato4,{ :class => "campo", :size => 5, :onFocus => "this.style.border='1px solid #f00'", :onBlur => "this.style.border='1px solid #bbb'" }%>
+              <%= observe_field "personastrampractica_desteva_dato4", :url => { :action => :calcularvalor },
+                                :frequency => 0.25,
+                                :on => 'blur',
+                                :with => "'pvr0=desteva'+'&pvr1=dato4'+'&pvr2='+encodeURIComponent(value)"%>
+              <%= f.error_message_on :desteva_dato4, :css_class =>"cerror"%></div></td>
+            <td><div align="center" class="camposDescN11"><%= f.text_field :destcal_dato4,{ :class => "campodisabled", :size => 5, :readonly=>"yes"}%></div></td>
+          </tr>
+          <tr>
+            <td><div align="center" class="camposDescN11">5</div></td>
+            <td><div align="left" class="camposDesc11">Coordinación: acelerador-freno-embrague</div></td>
+            <td><div align="center" class="camposDescN11">10</div></td>
+            <td><div align="center" class="camposDescN11"><%= f.text_field :desteva_dato5,{ :class => "campo", :size => 5, :onFocus => "this.style.border='1px solid #f00'", :onBlur => "this.style.border='1px solid #bbb'" }%>
+              <%= observe_field "personastrampractica_desteva_dato5", :url => { :action => :calcularvalor },
+                                :frequency => 0.25,
+                                :on => 'blur',
+                                :with => "'pvr0=desteva'+'&pvr1=dato5'+'&pvr2='+encodeURIComponent(value)"%>
+              <%= f.error_message_on :desteva_dato5, :css_class =>"cerror"%></div></td>
+            <td><div align="center" class="camposDescN11"><%= f.text_field :destcal_dato5,{ :class => "campodisabled", :size => 5, :readonly=>"yes"}%></div></td>
+          </tr>
+          <tr>
+            <td><div align="center" class="camposDescN11">6</div></td>
+            <td><div align="left" class="camposDesc11">Utilización de cambios Descendente-Ascendente</div></td>
+            <td><div align="center" class="camposDescN11">10</div></td>
+            <td><div align="center" class="camposDescN11"><%= f.text_field :desteva_dato6,{ :class => "campo", :size => 5, :onFocus => "this.style.border='1px solid #f00'", :onBlur => "this.style.border='1px solid #bbb'" }%>
+              <%= observe_field "personastrampractica_desteva_dato6", :url => { :action => :calcularvalor },
+                                :frequency => 0.25,
+                                :on => 'blur',
+                                :with => "'pvr0=desteva'+'&pvr1=dato6'+'&pvr2='+encodeURIComponent(value)"%>
+              <%= f.error_message_on :desteva_dato6, :css_class =>"cerror"%></div></td>
+            <td><div align="center" class="camposDescN11"><%= f.text_field :destcal_dato6,{ :class => "campodisabled", :size => 5, :readonly=>"yes"}%></div></td>
+          </tr>
+          <tr>
+            <td><div align="center" class="camposDescN11">7</div></td>
+            <td><div align="left" class="camposDesc11">Utilización de cambios Ascendente-Descendente</div></td>
+            <td><div align="center" class="camposDescN11">5</div></td>
+            <td><div align="center" class="camposDescN11"><%= f.text_field :desteva_dato7,{ :class => "campo", :size => 5, :onFocus => "this.style.border='1px solid #f00'", :onBlur => "this.style.border='1px solid #bbb'" }%>
+              <%= observe_field "personastrampractica_desteva_dato7", :url => { :action => :calcularvalor },
+                                :frequency => 0.25,
+                                :on => 'blur',
+                                :with => "'pvr0=desteva'+'&pvr1=dato7'+'&pvr2='+encodeURIComponent(value)"%>
+              <%= f.error_message_on :desteva_dato7, :css_class =>"cerror"%></div></td>
+            <td><div align="center" class="camposDescN11"><%= f.text_field :destcal_dato7,{ :class => "campodisabled", :size => 5, :readonly=>"yes"}%></div></td>
+          </tr>
+          <tr>
+            <td><div align="center" class="camposDescN11">8</div></td>
+            <td><div align="left" class="camposDesc11">Utilización del freno Delantero</div></td>
+            <td><div align="center" class="camposDescN11">5</div></td>
+            <td><div align="center" class="camposDescN11"><%= f.text_field :desteva_dato8,{ :class => "campo", :size => 5, :onFocus => "this.style.border='1px solid #f00'", :onBlur => "this.style.border='1px solid #bbb'" }%>
+              <%= observe_field "personastrampractica_desteva_dato8", :url => { :action => :calcularvalor },
+                                :frequency => 0.25,
+                                :on => 'blur',
+                                :with => "'pvr0=desteva'+'&pvr1=dato8'+'&pvr2='+encodeURIComponent(value)"%>
+              <%= f.error_message_on :desteva_dato8, :css_class =>"cerror"%></div></td>
+            <td><div align="center" class="camposDescN11"><%= f.text_field :destcal_dato8,{ :class => "campodisabled", :size => 5, :readonly=>"yes"}%></div></td>
+          </tr>
+          <tr>
+            <td><div align="center" class="camposDescN11">9</div></td>
+            <td><div align="left" class="camposDesc11">Utilización del freno Trasero</div></td>
+            <td><div align="center" class="camposDescN11">8</div></td>
+            <td><div align="center" class="camposDescN11"><%= f.text_field :desteva_dato9,{ :class => "campo", :size => 5, :onFocus => "this.style.border='1px solid #f00'", :onBlur => "this.style.border='1px solid #bbb'" }%>
+              <%= observe_field "personastrampractica_desteva_dato9", :url => { :action => :calcularvalor },
+                                :frequency => 0.25,
+                                :on => 'blur',
+                                :with => "'pvr0=desteva'+'&pvr1=dato9'+'&pvr2='+encodeURIComponent(value)"%>
+              <%= f.error_message_on :desteva_dato9, :css_class =>"cerror"%></div></td>
+            <td><div align="center" class="camposDescN11"><%= f.text_field :destcal_dato9,{ :class => "campodisabled", :size => 5, :readonly=>"yes"}%></div></td>
+          </tr>
+          <tr>
+            <td><div align="center" class="camposDescN11">10</div></td>
+            <td><div align="left" class="camposDesc11">Descenso y Ascenso en Terreno Inclinado</div></td>
+            <td><div align="center" class="camposDescN11">6</div></td>
+            <td><div align="center" class="camposDescN11"><%= f.text_field :desteva_dato10,{ :class => "campo", :size => 5, :onFocus => "this.style.border='1px solid #f00'", :onBlur => "this.style.border='1px solid #bbb'" }%>
+              <%= observe_field "personastrampractica_desteva_dato10", :url => { :action => :calcularvalor },
+                                :frequency => 0.25,
+                                :on => 'blur',
+                                :with => "'pvr0=desteva'+'&pvr1=dato10'+'&pvr2='+encodeURIComponent(value)"%>
+              <%= f.error_message_on :desteva_dato10, :css_class =>"cerror"%></div></td>
+            <td><div align="center" class="camposDescN11"><%= f.text_field :destcal_dato10,{ :class => "campodisabled", :size => 5, :readonly=>"yes"}%></div></td>
+          </tr>
+          <tr>
+            <td><div align="center" class="camposDescN11">11</div></td>
+            <td><div align="left" class="camposDesc11">Detención del vehiculo y arranque en pendiente</div></td>
+            <td><div align="center" class="camposDescN11">10</div></td>
+            <td><div align="center" class="camposDescN11"><%= f.text_field :desteva_dato11,{ :class => "campo", :size => 5, :onFocus => "this.style.border='1px solid #f00'", :onBlur => "this.style.border='1px solid #bbb'" }%>
+              <%= observe_field "personastrampractica_desteva_dato11", :url => { :action => :calcularvalor },
+                                :frequency => 0.25,
+                                :on => 'blur',
+                                :with => "'pvr0=desteva'+'&pvr1=dato11'+'&pvr2='+encodeURIComponent(value)"%>
+              <%= f.error_message_on :desteva_dato11, :css_class =>"cerror"%></div></td>
+            <td><div align="center" class="camposDescN11"><%= f.text_field :destcal_dato11,{ :class => "campodisabled", :size => 5, :readonly=>"yes"}%></div></td>
+          </tr>
+          <tr>
+            <td><div align="center" class="camposDescN11">12</div></td>
+            <td><div align="left" class="camposDesc11">Maniobra de Viraje y Adelantamiento</div></td>
+            <td><div align="center" class="camposDescN11">6</div></td>
+            <td><div align="center" class="camposDescN11"><%= f.text_field :desteva_dato12,{ :class => "campo", :size => 5, :onFocus => "this.style.border='1px solid #f00'", :onBlur => "this.style.border='1px solid #bbb'" }%>
+              <%= observe_field "personastrampractica_desteva_dato12", :url => { :action => :calcularvalor },
+                                :frequency => 0.25,
+                                :on => 'blur',
+                                :with => "'pvr0=desteva'+'&pvr1=dato12'+'&pvr2='+encodeURIComponent(value)"%>
+              <%= f.error_message_on :desteva_dato12, :css_class =>"cerror"%></div></td>
+            <td><div align="center" class="camposDescN11"><%= f.text_field :destcal_dato12,{ :class => "campodisabled", :size => 5, :readonly=>"yes"}%></div></td>
+          </tr>
+          <tr>
+            <td><div align="center" class="camposDescN11">13</div></td>
+            <td><div align="left" class="camposDesc11">Reducción de velocidad</div></td>
+            <td><div align="center" class="camposDescN11">4</div></td>
+            <td><div align="center" class="camposDescN11"><%= f.text_field :desteva_dato13,{ :class => "campo", :size => 5, :onFocus => "this.style.border='1px solid #f00'", :onBlur => "this.style.border='1px solid #bbb'" }%>
+              <%= observe_field "personastrampractica_desteva_dato13", :url => { :action => :calcularvalor },
+                                :frequency => 0.25,
+                                :on => 'blur',
+                                :with => "'pvr0=desteva'+'&pvr1=dato13'+'&pvr2='+encodeURIComponent(value)"%>
+              <%= f.error_message_on :desteva_dato13, :css_class =>"cerror"%></div></td>
+            <td><div align="center" class="camposDescN11"><%= f.text_field :destcal_dato13,{ :class => "campodisabled", :size => 5, :readonly=>"yes"}%></div></td>
+          </tr>
+          <tr>
+            <td><div align="center" class="camposDescN11">14</div></td>
+            <td><div align="left" class="camposDesc11">Detenimiento en Marcha</div></td>
+            <td><div align="center" class="camposDescN11">10</div></td>
+            <td><div align="center" class="camposDescN11"><%= f.text_field :desteva_dato14,{ :class => "campo", :size => 5, :onFocus => "this.style.border='1px solid #f00'", :onBlur => "this.style.border='1px solid #bbb'" }%>
+              <%= observe_field "personastrampractica_desteva_dato14", :url => { :action => :calcularvalor },
+                                :frequency => 0.25,
+                                :on => 'blur',
+                                :with => "'pvr0=desteva'+'&pvr1=dato14'+'&pvr2='+encodeURIComponent(value)"%>
+              <%= f.error_message_on :desteva_dato14, :css_class =>"cerror"%></div></td>
+            <td><div align="center" class="camposDescN11"><%= f.text_field :destcal_dato14,{ :class => "campodisabled", :size => 5, :readonly=>"yes"}%></div></td>
+          </tr>
+          <tr>
+            <td><div align="center" class="camposDescN11">15</div></td>
+            <td><div align="left" class="camposDesc11">Parqueo O Estacionamiento</div></td>
+            <td><div align="center" class="camposDescN11">10</div></td>
+            <td><div align="center" class="camposDescN11"><%= f.text_field :desteva_dato15,{ :class => "campo", :size => 5, :onFocus => "this.style.border='1px solid #f00'", :onBlur => "this.style.border='1px solid #bbb'" }%>
+              <%= observe_field "personastrampractica_desteva_dato15", :url => { :action => :calcularvalor },
+                                :frequency => 0.25,
+                                :on => 'blur',
+                                :with => "'pvr0=desteva'+'&pvr1=dato15'+'&pvr2='+encodeURIComponent(value)"%>
+              <%= f.error_message_on :desteva_dato15, :css_class =>"cerror"%></div></td>
+            <td><div align="center" class="camposDescN11"><%= f.text_field :destcal_dato15,{ :class => "campodisabled", :size => 5, :readonly=>"yes"}%></div></td>
+          </tr>
+          <tr style="background: #F2F2F2;">
+            <td colspan="2" height="20"><div align="center" class="camposDescN12">SUBTOTAL</div></td>
+            <td><div align="center" class="camposDescN12">100</div></td>
+            <td><div align="center" class="camposDescN12"><%=@personastrampractica.cal_destreza rescue 0%></div></td>
+            <td><div align="center" class="camposDescN12"><%=@personastrampractica.punt_destreza rescue 0%></div></td>
+          </tr>
+        </table><br/>
+      <table width="850" border="0" cellspacing="0" cellpadding="0" class="sample">
+        <thead>
+          <tr>
+            <td colspan="5" height="20"><div align="center" class="camposDescN12">COMPORTAMIENTO DEL CONDUCTOR FRENTE AL TRANSITO, EN LA EJECUCIÓN DE LAS MANIOBRAS (40%)</div></td>
+          </tr>
+          <tr>
+            <td width="5%"><div align="center" class="camposDescN10">#</div></td>
+            <td width="50%"><div align="center" class="camposDescN10">ITEM</div></td>
+            <td width="10%"><div align="center" class="camposDescN10">PESO DEL FACTOR EN %</div></td>
+            <td width="10%"><div align="center" class="camposDescN10">EVALUACIÓN (E)</div></td>
+            <td width="10%"><div align="center" class="camposDescN10">CALIFICACIÓN (C)</div></td>
+          </tr>
+        </thead>
+          <tr>
+            <td><div align="center" class="camposDescN11">1</div></td>
+            <td><div align="left" class="camposDesc11">Utilización de las Señales de Cruce</div></td>
+            <td><div align="center" class="camposDescN11">10</div></td>
+            <td><div align="center" class="camposDescN11"><%= f.text_field :compeva_dato1,{ :class => "campo", :size => 5, :onFocus => "this.style.border='1px solid #f00'", :onBlur => "this.style.border='1px solid #bbb'" }%>
+              <%= observe_field "personastrampractica_compeva_dato1", :url => { :action => :calcularvalor },
+                                :frequency => 0.25,
+                                :on => 'blur',
+                                :with => "'pvr0=compeva'+'&pvr1=dato1'+'&pvr2='+encodeURIComponent(value)"%>
+              <%= f.error_message_on :compeva_dato1, :css_class =>"cerror"%></div></td>
+            <td><div align="center" class="camposDescN11"><%= f.text_field :compcal_dato1,{ :class => "campodisabled", :size => 5, :readonly=>"yes"}%></div></td>
+          </tr>
+          <tr>
+            <td><div align="center" class="camposDescN11">2</div></td>
+            <td><div align="left" class="camposDesc11">Distancia de Seguimiento, de Parada y de Lateral</div></td>
+            <td><div align="center" class="camposDescN11">10</div></td>
+            <td><div align="center" class="camposDescN11"><%= f.text_field :compeva_dato2,{ :class => "campo", :size => 5, :onFocus => "this.style.border='1px solid #f00'", :onBlur => "this.style.border='1px solid #bbb'" }%>
+              <%= observe_field "personastrampractica_compeva_dato2", :url => { :action => :calcularvalor },
+                                :frequency => 0.25,
+                                :on => 'blur',
+                                :with => "'pvr0=compeva'+'&pvr1=dato2'+'&pvr2='+encodeURIComponent(value)"%>
+              <%= f.error_message_on :compeva_dato2, :css_class =>"cerror"%></div></td>
+            <td><div align="center" class="camposDescN11"><%= f.text_field :compcal_dato2,{ :class => "campodisabled", :size => 5, :readonly=>"yes"}%></div></td>
+          </tr>
+          <tr>
+            <td><div align="center" class="camposDescN11">3</div></td>
+            <td><div align="left" class="camposDesc11">Adelantamientos</div></td>
+            <td><div align="center" class="camposDescN11">10</div></td>
+            <td><div align="center" class="camposDescN11"><%= f.text_field :compeva_dato3,{ :class => "campo", :size => 5, :onFocus => "this.style.border='1px solid #f00'", :onBlur => "this.style.border='1px solid #bbb'" }%>
+              <%= observe_field "personastrampractica_compeva_dato3", :url => { :action => :calcularvalor },
+                                :frequency => 0.25,
+                                :on => 'blur',
+                                :with => "'pvr0=compeva'+'&pvr1=dato3'+'&pvr2='+encodeURIComponent(value)"%>
+              <%= f.error_message_on :compeva_dato3, :css_class =>"cerror"%></div></td>
+            <td><div align="center" class="camposDescN11"><%= f.text_field :compcal_dato3,{ :class => "campodisabled", :size => 5, :readonly=>"yes"}%></div></td>
+          </tr>
+          <tr>
+            <td><div align="center" class="camposDescN11">4</div></td>
+            <td><div align="left" class="camposDesc11">Cruces</div></td>
+            <td><div align="center" class="camposDescN11">10</div></td>
+            <td><div align="center" class="camposDescN11"><%= f.text_field :compeva_dato4,{ :class => "campo", :size => 5, :onFocus => "this.style.border='1px solid #f00'", :onBlur => "this.style.border='1px solid #bbb'" }%>
+              <%= observe_field "personastrampractica_compeva_dato4", :url => { :action => :calcularvalor },
+                                :frequency => 0.25,
+                                :on => 'blur',
+                                :with => "'pvr0=compeva'+'&pvr1=dato4'+'&pvr2='+encodeURIComponent(value)"%>
+              <%= f.error_message_on :compeva_dato4, :css_class =>"cerror"%></div></td>
+            <td><div align="center" class="camposDescN11"><%= f.text_field :compcal_dato4,{ :class => "campodisabled", :size => 5, :readonly=>"yes"}%></div></td>
+          </tr>
+          <tr>
+            <td><div align="center" class="camposDescN11">5</div></td>
+            <td><div align="left" class="camposDesc11">Intersecciones (señalizadas y no señalizadas)</div></td>
+            <td><div align="center" class="camposDescN11">10</div></td>
+            <td><div align="center" class="camposDescN11"><%= f.text_field :compeva_dato5,{ :class => "campo", :size => 5, :onFocus => "this.style.border='1px solid #f00'", :onBlur => "this.style.border='1px solid #bbb'" }%>
+              <%= observe_field "personastrampractica_compeva_dato5", :url => { :action => :calcularvalor },
+                                :frequency => 0.25,
+                                :on => 'blur',
+                                :with => "'pvr0=compeva'+'&pvr1=dato5'+'&pvr2='+encodeURIComponent(value)"%>
+              <%= f.error_message_on :compeva_dato5, :css_class =>"cerror"%></div></td>
+            <td><div align="center" class="camposDescN11"><%= f.text_field :compcal_dato5,{ :class => "campodisabled", :size => 5, :readonly=>"yes"}%></div></td>
+          </tr>
+          <tr>
+            <td><div align="center" class="camposDescN11">6</div></td>
+            <td><div align="left" class="camposDesc11">Glorietas</div></td>
+            <td><div align="center" class="camposDescN11">10</div></td>
+            <td><div align="center" class="camposDescN11"><%= f.text_field :compeva_dato6,{ :class => "campo", :size => 5, :onFocus => "this.style.border='1px solid #f00'", :onBlur => "this.style.border='1px solid #bbb'" }%>
+              <%= observe_field "personastrampractica_compeva_dato6", :url => { :action => :calcularvalor },
+                                :frequency => 0.25,
+                                :on => 'blur',
+                                :with => "'pvr0=compeva'+'&pvr1=dato6'+'&pvr2='+encodeURIComponent(value)"%>
+              <%= f.error_message_on :compeva_dato6, :css_class =>"cerror"%></div></td>
+            <td><div align="center" class="camposDescN11"><%= f.text_field :compcal_dato6,{ :class => "campodisabled", :size => 5, :readonly=>"yes"}%></div></td>
+          </tr>
+          <tr>
+            <td><div align="center" class="camposDescN11">7</div></td>
+            <td><div align="left" class="camposDesc11">Cambios de Carril</div></td>
+            <td><div align="center" class="camposDescN11">5</div></td>
+            <td><div align="center" class="camposDescN11"><%= f.text_field :compeva_dato7,{ :class => "campo", :size => 5, :onFocus => "this.style.border='1px solid #f00'", :onBlur => "this.style.border='1px solid #bbb'" }%>
+              <%= observe_field "personastrampractica_compeva_dato7", :url => { :action => :calcularvalor },
+                                :frequency => 0.25,
+                                :on => 'blur',
+                                :with => "'pvr0=compeva'+'&pvr1=dato7'+'&pvr2='+encodeURIComponent(value)"%>
+              <%= f.error_message_on :compeva_dato7, :css_class =>"cerror"%></div></td>
+            <td><div align="center" class="camposDescN11"><%= f.text_field :compcal_dato7,{ :class => "campodisabled", :size => 5, :readonly=>"yes"}%></div></td>
+          </tr>
+          <tr>
+            <td><div align="center" class="camposDescN11">8</div></td>
+            <td><div align="left" class="camposDesc11">Cambios de Calzadas</div></td>
+            <td><div align="center" class="camposDescN11">5</div></td>
+            <td><div align="center" class="camposDescN11"><%= f.text_field :compeva_dato8,{ :class => "campo", :size => 5, :onFocus => "this.style.border='1px solid #f00'", :onBlur => "this.style.border='1px solid #bbb'" }%>
+              <%= observe_field "personastrampractica_compeva_dato8", :url => { :action => :calcularvalor },
+                                :frequency => 0.25,
+                                :on => 'blur',
+                                :with => "'pvr0=compeva'+'&pvr1=dato8'+'&pvr2='+encodeURIComponent(value)"%>
+              <%= f.error_message_on :compeva_dato8, :css_class =>"cerror"%></div></td>
+            <td><div align="center" class="camposDescN11"><%= f.text_field :compcal_dato8,{ :class => "campodisabled", :size => 5, :readonly=>"yes"}%></div></td>
+          </tr>
+          <tr>
+            <td><div align="center" class="camposDescN11">9</div></td>
+            <td><div align="left" class="camposDesc11">Maniobras de Viraje</div></td>
+            <td><div align="center" class="camposDescN11">10</div></td>
+            <td><div align="center" class="camposDescN11"><%= f.text_field :compeva_dato9,{ :class => "campo", :size => 5, :onFocus => "this.style.border='1px solid #f00'", :onBlur => "this.style.border='1px solid #bbb'" }%>
+              <%= observe_field "personastrampractica_compeva_dato9", :url => { :action => :calcularvalor },
+                                :frequency => 0.25,
+                                :on => 'blur',
+                                :with => "'pvr0=compeva'+'&pvr1=dato9'+'&pvr2='+encodeURIComponent(value)"%>
+              <%= f.error_message_on :compeva_dato9, :css_class =>"cerror"%></div></td>
+            <td><div align="center" class="camposDescN11"><%= f.text_field :compcal_dato9,{ :class => "campodisabled", :size => 5, :readonly=>"yes"}%></div></td>
+          </tr>
+          <tr>
+            <td><div align="center" class="camposDescN11">10</div></td>
+            <td><div align="left" class="camposDesc11">Utilización de las luces Direccionales</div></td>
+            <td><div align="center" class="camposDescN11">10</div></td>
+            <td><div align="center" class="camposDescN11"><%= f.text_field :compeva_dato10,{ :class => "campo", :size => 5, :onFocus => "this.style.border='1px solid #f00'", :onBlur => "this.style.border='1px solid #bbb'" }%>
+              <%= observe_field "personastrampractica_compeva_dato10", :url => { :action => :calcularvalor },
+                                :frequency => 0.25,
+                                :on => 'blur',
+                                :with => "'pvr0=compeva'+'&pvr1=dato10'+'&pvr2='+encodeURIComponent(value)"%>
+              <%= f.error_message_on :compeva_dato10, :css_class =>"cerror"%></div></td>
+            <td><div align="center" class="camposDescN11"><%= f.text_field :compcal_dato10,{ :class => "campodisabled", :size => 5, :readonly=>"yes"}%></div></td>
+          </tr>
+        <tr>
+          <td><div align="center" class="camposDescN11">11</div></td>
+          <td><div align="left" class="camposDesc11">Seguimiento y Cumplimiento de las Señales de Transito</div></td>
+          <td><div align="center" class="camposDescN11">10</div></td>
+          <td><div align="center" class="camposDescN11"><%= f.text_field :compeva_dato11,{ :class => "campo", :size => 5, :onFocus => "this.style.border='1px solid #f00'", :onBlur => "this.style.border='1px solid #bbb'" }%>
+            <%= observe_field "personastrampractica_compeva_dato11", :url => { :action => :calcularvalor },
+                              :frequency => 0.25,
+                              :on => 'blur',
+                              :with => "'pvr0=compeva'+'&pvr1=dato11'+'&pvr2='+encodeURIComponent(value)"%>
+            <%= f.error_message_on :compeva_dato11, :css_class =>"cerror"%></div></td>
+          <td><div align="center" class="camposDescN11"><%= f.text_field :compcal_dato11,{ :class => "campodisabled", :size => 5, :readonly=>"yes"}%></div></td>
+        <tr style="background: #F2F2F2;">
+          <tr>
+            <td colspan="2" height="20"><div align="center" class="camposDescN12">SUBTOTAL</div></td>
+            <td><div align="center" class="camposDescN12">100</div></td>
+            <td><div align="center" class="camposDescN12"><%=@personastrampractica.cal_comportamiento rescue 0%></div></td>
+            <td><div align="center" class="camposDescN12"><%=@personastrampractica.punt_comportamiento rescue 0%></div></td>
+          </tr>
+        </table>
+        <br/>
+        <table width="850" border="0" cellspacing="0" cellpadding="0" class="sample">
+          <thead>
+          <tr>
+            <td colspan="2" width="50%"><div align="center" class="camposDescN11">ASPECTOS DE LA EVALUACIÓN</div></td>
+            <td width="10%"><div align="center" class="camposDescN10">PESO PONDERADO (Pp)</div></td>
+            <td width="10%"><div align="center" class="camposDescN10">CALIFICACIÓN <br/>Peso del factor x E/100 (C)</div></td>
+            <td width="10%"><div align="center" class="camposDescN10">PUNTAJE C <br/>xPp/100</div></td>
+          </tr>
+          </thead>
+          <tr>
+            <td colspan="2"><div align="left" class="camposDesc11">INSPECCIÓN Y ADAPTACIÓN AL VEHÍCULO</div></td>
+            <td><div align="center" class="camposDescN11">20</div></td>
+            <td><div align="center" class="camposDescN11"><%=@personastrampractica.cal_inspeccion rescue 0%></div></td>
+            <td><div align="center" class="camposDescN11"><%=@personastrampractica.punt_inspeccion rescue 0%></div></td>
+          </tr>
+          <tr>
+            <td colspan="2"><div align="left" class="camposDesc11">DESTREZA Y HABILIDAD EN EL MANEJO DE LOS MECANISMOS DE CONTROL Y EN LAS TECNICAS DE CONDUCCIÓN</div></td>
+            <td><div align="center" class="camposDescN11">40</div></td>
+            <td><div align="center" class="camposDescN11"><%=@personastrampractica.cal_destreza rescue 0%></div></td>
+            <td><div align="center" class="camposDescN11"><%=@personastrampractica.punt_destreza rescue 0%></div></td>
+          </tr>
+          <tr>
+            <td colspan="2"><div align="left" class="camposDesc11">COMPORTAMIENTO DEL CONDUCTOR FRENTE AL TRANSITO , EN LA EJECUCIÓN DE LAS MANIOBRAS</div></td>
+            <td><div align="center" class="camposDescN11">40</div></td>
+            <td><div align="center" class="camposDescN11"><%=@personastrampractica.cal_comportamiento%></div></td>
+            <td><div align="center" class="camposDescN11"><%=@personastrampractica.punt_comportamiento rescue 0%></div></td>
+          </tr>
+          <tr>
+            <td colspan="2"><div align="left" class="camposDesc11">PUNTAJE TOTAL</div></td>
+            <td><div align="center" class="camposDescN11">100</div></td>
+            <td><div align="center" class="camposDescN11"><%=@personastrampractica.calificacion rescue 0%></div></td>
+            <td><div align="center" class="camposDescN11"><%=@personastrampractica.puntaje rescue 0%></div></td>
+          </tr>
+        </table>
+        <table width="850" border="0" cellspacing="0" cellpadding="0" class="sample">
+          <tr>
+            <td><div align="left" class="camposDescN11">OBSERVACIONES GENERALES DE LA PRUEBA</div></td>
+            <td><div align="center" class="camposDescN11"><%= text_area :personastrampractica, :observaciones,{ :class => "campoMultiLinea", :cols=>"100", :rows=>"4",
+                                                                                                               :onChange=> "javascript:this.value=this.value.toUpperCase();",
+                                                                                                               :onFocus => "this.style.border='1px solid #f00'",
+                                                                                                               :onBlur => "this.style.border='1px solid #bbb'" } %></div></td>
+          </tr>
+        </table>
+        <br/>
+        <table width="100%" height="0" border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td height="10"><hr size="1" noshade="noshade" class="hrlinea" /></td>
+          </tr>
+        </table>
+        <table width="100%" border="0" cellpadding="2" cellspacing="2">
+          <tr>
+            <td class="camposDesc11" align="left"></td>
+            <td  height="30"><div align="right">
+                <%= f.submit "Guardar",:disable_with => "Guardando...", :class=>"buttonAsLink"%>
+              <a href="javascript:window.print()" class="imprimirlink">Imprimir</a>
+            </div></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+<br/>
+<br/>
+
+<% end %>
+

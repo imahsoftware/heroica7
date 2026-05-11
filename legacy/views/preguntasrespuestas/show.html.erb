@@ -1,0 +1,13 @@
+<p>
+  <b>Pregunta:</b>
+  <%=h @preguntasrespuesta.pregunta_id %>
+</p>
+
+<p>
+  <b>Respuesta:</b>
+  <%=h @preguntasrespuesta.respuesta %>
+</p>
+
+
+<%= link_to 'Edit', edit_preguntasrespuesta_path(@preguntasrespuesta) %> |
+<%= link_to 'Back', preguntasrespuestas_path %>

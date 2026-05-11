@@ -1,0 +1,1 @@
+page.replace_html :comprasdetalles_form, :partial => "comprasdetalles", :object => @comprasdetalle

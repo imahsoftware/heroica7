@@ -1,0 +1,31 @@
+<div class="box box-usuarios">
+  <div class="box-header">
+    <span class="box-title">
+      <i class="fa fa-paperclip"></i> Soporte Digital
+      <span class="users-count-badge"><%= @egreso.egresosimagenes.count %> documentos</span>
+    </span>
+    <div class="box-tools pull-right" style="margin-top: -2px;">
+      <%= link_to new_egreso_egresosimagen_path(@egreso),
+          id: 'new_egresosimagen_button',
+          class: 'btn btn-sm btn-success',
+          remote: true,
+          title: 'Agregar documento' do %>
+        <i class="fa fa-plus"></i> Agregar
+      <% end %>
+    </div>
+  </div>
+  <div class="box-body">
+    <div class="flash_messages"></div>
+    <div id="egresosimagen_form" class="collapse" style="margin-bottom: 12px;"></div>
+    <div id="egresosimagenes">
+      <% if @egreso.egresosimagenes.any? %>
+        <%= render 'egresosimagenes/tabla' %>
+      <% else %>
+        <div class="empty-state">
+          <i class="fa fa-paperclip"></i>
+          <p>No hay documentos digitales asociados a este egreso.</p>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

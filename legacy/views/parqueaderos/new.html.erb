@@ -1,0 +1,39 @@
+<h1>New parqueadero</h1>
+
+<% form_for(@parqueadero) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :fecha_hora %><br />
+    <%= f.datetime_select :fecha_hora %>
+  </p>
+  <p>
+    <%= f.label :tipo %><br />
+    <%= f.text_field :tipo %>
+  </p>
+  <p>
+    <%= f.label :placa_id %><br />
+    <%= f.text_field :placa_id %>
+  </p>
+  <p>
+    <%= f.label :instructor_id %><br />
+    <%= f.text_field :instructor_id %>
+  </p>
+  <p>
+    <%= f.label :kilometraje_entrada %><br />
+    <%= f.text_field :kilometraje_entrada %>
+  </p>
+  <p>
+    <%= f.label :kilometraje_salida %><br />
+    <%= f.text_field :kilometraje_salida %>
+  </p>
+  <p>
+    <%= f.label :cant_combustible %><br />
+    <%= f.text_field :cant_combustible %>
+  </p>
+  <p>
+    <%= f.submit 'Create' %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', parqueaderos_path %>

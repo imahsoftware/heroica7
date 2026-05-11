@@ -1,0 +1,32 @@
+<h1>Listing parqueaderos</h1>
+
+<table>
+  <tr>
+    <th>Fecha hora</th>
+    <th>Tipo</th>
+    <th>Placa</th>
+    <th>Instructor</th>
+    <th>Kilometraje entrada</th>
+    <th>Kilometraje salida</th>
+    <th>Cant combustible</th>
+  </tr>
+
+<% @parqueaderos.each do |parqueadero| %>
+  <tr>
+    <td><%=h parqueadero.fecha_hora %></td>
+    <td><%=h parqueadero.tipo %></td>
+    <td><%=h parqueadero.placa_id %></td>
+    <td><%=h parqueadero.instructor_id %></td>
+    <td><%=h parqueadero.kilometraje_entrada %></td>
+    <td><%=h parqueadero.kilometraje_salida %></td>
+    <td><%=h parqueadero.cant_combustible %></td>
+    <td><%= link_to 'Show', parqueadero %></td>
+    <td><%= link_to 'Edit', edit_parqueadero_path(parqueadero) %></td>
+    <td><%= link_to 'Destroy', parqueadero, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New parqueadero', new_parqueadero_path %>

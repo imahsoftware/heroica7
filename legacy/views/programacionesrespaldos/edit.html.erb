@@ -1,0 +1,84 @@
+<h1>Editing programacionesrespaldo</h1>
+
+<% form_for(@programacionesrespaldo) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :fecha_captura %><br />
+    <%= f.date_select :fecha_captura %>
+  </p>
+  <p>
+    <%= f.label :programacioneshorario_id %><br />
+    <%= f.text_field :programacioneshorario_id %>
+  </p>
+  <p>
+    <%= f.label :persona_id %><br />
+    <%= f.text_field :persona_id %>
+  </p>
+  <p>
+    <%= f.label :tiposhorario_id %><br />
+    <%= f.text_field :tiposhorario_id %>
+  </p>
+  <p>
+    <%= f.label :placa_id %><br />
+    <%= f.text_field :placa_id %>
+  </p>
+  <p>
+    <%= f.label :instructor_id %><br />
+    <%= f.text_field :instructor_id %>
+  </p>
+  <p>
+    <%= f.label :fecha_inicial %><br />
+    <%= f.date_select :fecha_inicial %>
+  </p>
+  <p>
+    <%= f.label :nro_clases %><br />
+    <%= f.text_field :nro_clases %>
+  </p>
+  <p>
+    <%= f.label :fecha_final %><br />
+    <%= f.date_select :fecha_final %>
+  </p>
+  <p>
+    <%= f.label :recoje %><br />
+    <%= f.text_field :recoje %>
+  </p>
+  <p>
+    <%= f.label :user_id %><br />
+    <%= f.text_field :user_id %>
+  </p>
+  <p>
+    <%= f.label :user_actualiza %><br />
+    <%= f.text_field :user_actualiza %>
+  </p>
+  <p>
+    <%= f.label :ph_created_at %><br />
+    <%= f.datetime_select :ph_created_at %>
+  </p>
+  <p>
+    <%= f.label :ph_updated_at %><br />
+    <%= f.datetime_select :ph_updated_at %>
+  </p>
+  <p>
+    <%= f.label :observacion %><br />
+    <%= f.text_field :observacion %>
+  </p>
+  <p>
+    <%= f.label :enespera %><br />
+    <%= f.text_field :enespera %>
+  </p>
+  <p>
+    <%= f.label :fecha_teoria %><br />
+    <%= f.datetime_select :fecha_teoria %>
+  </p>
+  <p>
+    <%= f.label :estado %><br />
+    <%= f.text_field :estado %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @programacionesrespaldo %> |
+<%= link_to 'Back', programacionesrespaldos_path %>

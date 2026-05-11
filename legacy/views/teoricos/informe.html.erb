@@ -1,0 +1,103 @@
+<div align="center">
+<table  width="720" border="0" align="center" cellspacing="0">
+  <tr>
+    <td width="30%" ><div align="center"><img src="/images/<%=Parametro.find(10).valor.to_s%>" width="190" height="75"></img></div></td>
+    <td width="70%" class="camposDesc16"><div align="center">INFORME PRUEBA TEORICA</div></td>
+  </tr>
+</table>
+<br/>
+<table width="700"  border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td width="20%" valign="top"><div align="center">
+           <%  if @teorico.persona.personasimagen_file_name %>
+             <img src="/system/personasimagenes/<%=@teorico.persona_id%>/original/<%=@teorico.persona.personasimagen_file_name rescue nil%>" height="120" width="150" border="0" title="Fotografia" />
+          <%  else %>
+            <img src="/images/noFoto.jpg" border="0" height="100" width="100" title="No Fotografia" />
+          <%  end %>
+          </div></td>
+        <td width="80%"><table width="100%"  border="0" cellspacing="0" cellpadding="0" class="sample">
+          <tr>
+            <td width="132" height="20" class="camposDescN12"><div align="left">Alumno:</div></td>
+            <td colspan="3" class="camposDesc12"><div align="left">&nbsp;<%=@teorico.persona.identificacion rescue nil%> - <%=@teorico.persona.nombres rescue nil%></div></td>
+          </tr>
+          <tr>
+            <td height="20" class="camposDescN12"><div align="left">Fecha Nacimiento:</div> </td>
+            <td colspan="3" class="camposDesc12"><div align="left">&nbsp;<%=@teorico.persona.fecha_nacimiento rescue nil%> - <%=@teorico.persona.lugar_nacimiento rescue nil%></div></td>
+          </tr>
+          <tr>
+            <td height="20" class="camposDescN12"><div align="left">Direccion:</div></td>
+            <td colspan="3" class="camposDesc12"><div align="left">&nbsp;<%=@teorico.persona.direccion rescue nil%></div></td>
+          </tr>
+          <tr>
+            <td height="20" class="camposDescN12"><div align="left">Telefonos:</div></td>
+            <td colspan="3" class="camposDesc12"><div align="left">&nbsp;<%=@teorico.persona.telefono rescue nil%> - <%=@teorico.persona.telefono_oficina rescue nil%> - <%=@teorico.persona.celular rescue nil%></div></td>
+          </tr>
+        </table></td>
+      </tr>
+    </table>
+<br/>
+<table width="700"  border="0" cellspacing="0" cellpadding="0" class="sample">
+  <tr valign="middle">
+    <td width="35%" height="20" class="camposDescN12"><div align="center">Fecha</div></td>
+    <td width="20%" class="camposDescN12"><div align="center">Categoria</div></td>
+    <td width="15%" class="camposDescN12"><div align="center">Correctas</div></td>
+    <td width="15%" class="camposDescN12"><div align="center">Incorrectas</div></td>
+    <td width="15%" class="camposDescN12"><div align="center">Estado</div></td>
+  </tr>
+  <tr>
+    <td height="20" class="camposDesc"><div align="center"><%=@teorico.created_at.strftime("%Y-%m-%d %X")%> - <%=@teorico.user.username rescue nil%></div></td>
+    <td class="camposDesc"><div align="center"><%=@teorico.categoria.codigo_nuevo rescue nil%></div></td>
+    <td class="camposDesc"><div align="center"><%=@teorico.correctas rescue nil%></div></td>
+    <td class="camposDesc"><div align="center"><%=@teorico.incorrectas rescue nil%></div></td>
+    <td class="camposDescN12"><div align="center"><%=@teorico.estado%></div></td>
+ </tr>
+</table>
+<br/>
+<table width="700"  border="0" cellspacing="0" cellpadding="0" class="sample">
+    <tr  valign="middle">
+      <td width="10%" height="20" class="camposDescN12"><div align="center">Grupo</div></td>
+      <td width="15%" class="camposDescN12"><div align="center">Nro Pregunta</div></td>
+      <td width="20%" class="camposDescN12"><div align="center">Respuesta</div></td>
+      <td width="20%" class="camposDescN12"><div align="center">Estado</div></td>
+      <td width="35%" class="camposDescN12"><div align="center">Rta Correcta</div></td>
+    </tr>
+<% @teoricosresultados.each do |teoricosresultado|
+  @pregunta = Pregunta.find(teoricosresultado.pregunta_id) %>
+    <% if teoricosresultado.estado.to_s == 'C'  %>
+    <tr bgcolor="#00FF00">
+    <% else %>
+    <tr valign="middle">
+    <% end %>
+        <td class="camposDesc"><div align="center"><%=h @pregunta.grupo %></div></td>
+        <td class="camposDesc"><div align="center"><%=h @pregunta.id %></div></td>
+        <td class="camposDesc"><div align="center">
+          <% if teoricosresultado.respuesta %>
+            Opcion <%=h teoricosresultado.respuesta %>
+          <% else %>
+            <strong>Sin Respuesta</strong>
+          <% end %></div>
+        </td>
+        <td class="camposDesc"><div align="center"><%=h teoricosresultado.destado %></div></td>
+        <td class="camposDesc"><div align="center">
+        <% if teoricosresultado.estado.to_s != 'C' %>
+        <%
+           @preguntasrespuestas = Preguntasrespuesta.find_all_by_pregunta_id(@pregunta.id)
+           @preguntasrespuestas.each do |preguntasrespuesta| %>
+             Opcion <%=preguntasrespuesta.respuesta.to_s%>,
+        <%  end
+        end
+        %></div>
+        </td>
+    </tr>
+<% end %>
+</table>
+<br/>
+<table width="710"  border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td width="60%" class="camposDesc11"><div align="left"><%=Time.now.strftime("%Y-%m-%d %X")%> - <%=User.find(is_admin).nombre rescue nil%></div></td>
+        <td width="40%" class="camposDesc11"><div align="right"><a href="javascript:window.print()" class="imprimirlink">Imprimir</a>&nbsp;&nbsp;</div></td>
+      </tr>
+</table>
+<br/>
+
+</div>

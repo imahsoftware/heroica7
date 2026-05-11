@@ -1,0 +1,26 @@
+<div align="center">
+<table  width="90%" border="0" align="center" cellpadding="1" cellspacing="1">
+  <tr>
+    <td height="32" class="camposDescN11">Fecha Clase</td>
+    <td  class="campos">
+    <%= calendar_date_select "personasclase", "fecha_clase", :year_range =>[1930,2026], :class=> "campo", :size => 10, :time => false, :onfocus=>"this.blur()"%></td>
+  </tr>
+  <tr>
+    <td height="32"  class="campos">&nbsp;</td>
+    <td  class="campos">&nbsp;</td>
+  </tr>
+</table>
+<table width="90%" height="0" border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td height="10"><hr size="1" noshade class="hrlinea"></td>
+      </tr>
+    </table>
+<table width="90%" border="0" cellpadding="2" cellspacing="2">
+  <tr>
+    <td  height="30"><div align="right">
+        <%= hidden_field :persona, :id %>
+        <%= submit_tag "Guardar",:disable_with => "Guardando...", :class=>"buttonAsLink"%>
+</div></td>
+  </tr>
+</table>
+</div>

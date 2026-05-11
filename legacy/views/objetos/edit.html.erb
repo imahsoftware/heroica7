@@ -1,0 +1,16 @@
+<h1>Editing objeto</h1>
+
+<% form_for(@objeto) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :descripcion %><br />
+    <%= f.text_field :descripcion %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @objeto %> |
+<%= link_to 'Back', objetos_path %>

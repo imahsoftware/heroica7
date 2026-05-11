@@ -1,0 +1,221 @@
+<div id="productheader">
+  <span class="tit_gr_azul">&nbsp;&nbsp;INFORMACION TRAMITE</span>
+</div>
+<BR/>
+<div align="center">
+<% remote_form_for [@persona, @personastramite] do |form| %>
+  <% if permiso("personastramite","C").to_s == "S" %>
+        <% if !@personastramite.id %>
+	<%= render :partial => "/personastramites/personastramites_form" %>
+    <% end %>
+ <% end %>
+<% if @persona.personastramites.exists? %>
+<table width="95%" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr valign="middle">
+    <td width="25%" height="30" class="oce-first">Usuario</td>
+    <td width="25%" height="30" class="oce-first">Categoria / Tramite</td>
+    <td width="5%" class="oce-first">Placa</td>
+    <td width="25%" class="oce-first"><div align="center">Datos</div></td>
+    <td width="10%" class="oce-first"><div align="center">Factura</div></td>
+    <td width="10%" class="oce-first"><div align="center"></div></td>
+  </tr>
+</table>
+<% @persona.personastramites.each do |personastramite| %>
+   <% if personastramite.id != @personastramite.id %>
+  <table width="95%" border="0" align="center" cellpadding="0" cellspacing="0" id="one-column-emphasis">
+   <tr  valign="middle" class="<%=cycle('even1', 'odd1')%>" id="personastramite_<%=personastramite.id%>">
+     <td width="25%" class="camposDesc">
+       <table width="100%" border="0" cellspacing="0" cellpadding="0">
+         <tr>
+           <td><%=personastramite.created_at.strftime("%Y-%m-%d %X")%> - <%=personastramite.user.username rescue nil%></td>
+         </tr>
+         <tr>
+           <td><%=personastramite.updated_at.strftime("%Y-%m-%d %X")%> - <%=User.find(personastramite.user_actualiza).username rescue nil%></td>
+         </tr>
+       </table>
+     </td>
+    <td width="25%" height="30" class="camposDesc">
+       <table width="100%" border="0" cellspacing="0" cellpadding="0">
+         <tr>
+           <td><%=personastramite.categoria.nombre rescue nil%></td>
+         </tr>
+         <tr>
+           <td><%=personastramite.tipostramite.descripcion rescue nil%></td>
+         </tr>
+         <% if personastramite.empresa_id %>
+         <tr>
+           <td> Empresa: <%=personastramite.empresa.identificacion rescue nil%> - <%=personastramite.empresa.nombre rescue nil%></td>
+         </tr>
+         <% end %>
+       </table>
+    </td>
+    <td width="5%" class="camposDesc"><%=personastramite.placa.descripcion rescue nil%></td>
+    <td width="25%" class="camposDesc"><div align="center">
+      <%= link_to image_tag('contenido.png', { :border => 0, :title => "Registro Clase"}),
+                                   {:controller=>"personastramites", :action =>"registroclase", :id =>personastramite.id},
+                                   :popup => ['new_window','height=500,width=1000,scrollbars=yes'],
+                                 :title => "Registro Clase"%>&nbsp;
+        <%= link_to image_tag('application_cascade.png', { :border => 0, :title => "Registro Solicitud"}),
+                                   {:controller=>"personastramites", :action =>"registrosolicitud", :id =>personastramite.id},
+                                   :popup => ['new_window','height=500,width=1000,scrollbars=yes'],
+                                 :title => "Registro Solicitud"%>&nbsp;
+        <%= link_to image_tag('teorico.gif', { :border => 0, :title => "Programar teorico"}),
+                                {:controller=>"personastramites", :action =>"teorico", :id =>personastramite.id},
+                                :popup => ['new_window','height=500,width=800,scrollbars=yes'],
+                                :title => "Programar Teorico"%>
+      <%= link_to image_tag('defensivo.png', { :border => 0, :title => "Acuerdo Comercial"}),
+                  {:controller=>"personastramites", :action =>"acuerdocomercial", :id =>personastramite.id},
+                  :popup => ['new_window','height=700,width=950,scrollbars=yes'],
+                  :title => "Acuerdo Comercial"%>&nbsp;<br/>
+        <%= link_to image_tag('defensivo.png', { :border => 0, :title => "Diploma - Manejo defensivo"}),
+                                {:controller=>"personastramites", :action =>"diploma", :id =>personastramite.id, :nombredip =>"MANEJO DEFENSIVO, NORMAS DE TRANSITO Y SEGURIDAD VIAL"},
+                                :popup => ['new_window','height=700,width=950,scrollbars=yes'],
+                                :title => "Diploma - Manejo defensivo"%>&nbsp;
+        <%= link_to image_tag('mecanica.png', { :border => 0, :title => "Diploma - Mecanica Basica"}),
+                                {:controller=>"personastramites", :action =>"diploma", :id =>personastramite.id, :nombredip =>"MECANICA BASICA"},
+                                :popup => ['new_window','height=700,width=950,scrollbars=yes'],
+                                :title => "Diploma - Manejo defensivo"%>&nbsp;
+        <%= link_to image_tag('paramedico.png', { :border => 0, :title => "Diploma - Primeros Auxilios"}),
+                                {:controller=>"personastramites", :action =>"diploma", :id =>personastramite.id, :nombredip =>"PRIMEROS AUXILIOS"},
+                                :popup => ['new_window','height=700,width=950,scrollbars=yes'],
+                                :title => "Diploma - Manejo defensivo"%>&nbsp;
+        <%= link_to image_tag('tecnicas.png', { :border => 0, :title => "Diploma - Tecnicas de Conducción"}),
+                                {:controller=>"personastramites", :action =>"diploma", :id =>personastramite.id, :nombredip =>"TECNICAS DE CONDUCCIÓN"},
+                                :popup => ['new_window','height=700,width=950,scrollbars=yes'],
+                                :title => "Diploma - Manejo defensivo"%>&nbsp;
+        <%= link_to image_tag('inspeccion.png', { :border => 0, :title => "Diploma - Inspección Preoperacional"}),
+                                {:controller=>"personastramites", :action =>"diploma", :id =>personastramite.id, :nombredip =>"INSPECCIÓN PREOPERACIONAL"},
+                                :popup => ['new_window','height=700,width=950,scrollbars=yes'],
+                                :title => "Diploma - Manejo defensivo"%>&nbsp;
+        <%= link_to image_tag('incendio.png', { :border => 0, :title => "Diploma - Control de incendios en carretera"}),
+                                {:controller=>"personastramites", :action =>"diploma", :id =>personastramite.id, :nombredip =>"CONTROL DE INCENDIOS EN CARRETERA"},
+                                :popup => ['new_window','height=700,width=950,scrollbars=yes'],
+                                :title => "Diploma - Manejo defensivo"%>
+      <%= link_to image_tag('incendio.png', { :border => 0, :title => "Diploma - Comportamiento de los estudiantes"}),
+                  {:controller=>"personastramites", :action =>"diploma", :id =>personastramite.id, :nombredip =>"COMPORTAMIENTO DE LOS ESTUDIANTES"},
+                  :popup => ['new_window','height=700,width=950,scrollbars=yes'],
+                  :title => "Diploma - Comportamiento de los estudiantes"%>
+      <%= link_to image_tag('home222.png', { :border => 0, :title => "Evaluacion Practica Vehiculo"}), practica_personastramites_path(:id =>personastramite.id),
+                  :popup => ['new_window','height=700,width=950,scrollbars=yes'],
+                  :title => "Evaluacion Practica Vehiculo"%>
+      <%= link_to image_tag('home222.png', { :border => 0, :title => "Evaluacion Practica Motos"}), practicam_personastramites_path(:id =>personastramite.id),
+                  :popup => ['new_window','height=700,width=950,scrollbars=yes'],
+                  :title => "Evaluacion Practica Motos"%>
+        </div>
+    </td>
+    <td width="10%" class="camposDesc">
+      <div align="center">
+      <% if personastramite.factura_id %>
+      <%= link_to facturacero(personastramite.factura.nro_factura),
+                                   {:controller=>"facturas", :action =>"verfactura", :factura_id =>personastramite.factura_id},
+                                   :popup => ['new_window','height=500,width=1000,scrollbars=yes'],
+                                 :title => "Ver Factura"%>
+      <% else %>
+        <%= link_to image_tag('visita.png', { :border => 0, :title => "Generar Factura"}),
+                                   {:controller=>"personastramites", :action =>"crearfactura", :persona_id =>@persona.id,
+                                    :tipostramite_id => personastramite.tipostramite_id,
+                                    :categoria_id => personastramite.categoria_id,
+                                    :personastramite_id => personastramite.id},
+                                    :confirm=>"Esta Seguro que desea Generar Factura?",:popup => ['new_window','height=500,width=1000,scrollbars=yes']%>
+
+      <% end %>
+        </div>
+    </td>
+    <td width="10%" class="camposDesc"><div align="center">
+        <%  if !personastramite.factura_id %>
+            <% if permiso("personastramite","A").to_s == "S" %>
+            <%= link_to_remote('Editar',{:url => edit_persona_personastramite_path(@persona, personastramite),
+                    :method => :get}, :class=>"editarlink")%>
+            <%   end %>
+            <% if permiso("personastramite","E").to_s == "S" 
+                  if @personastramite.personastramiteshoras.exists?
+            %>
+            &nbsp;<%= link_to_remote('Borrar',{:url => persona_personastramite_path(@persona, personastramite),
+                    :method => :delete, :confirm => "¿Seguro?"}, :class=>"borrarlink")%>
+                <%  end %>
+             <%  end %>
+        <% else %>
+            <% if permiso("personastramiteesp","A").to_s == "S" %>
+            <%= link_to_remote('Editar_e',{:url => edit_persona_personastramite_path(@persona, personastramite),
+                    :method => :get}, :class=>"editarlink")%>
+            <% end %>
+
+        <% end %>
+            &nbsp;
+        <%= link_to 'Horas',hora_personastramiteshoras_path(personastramite.id), :class=>"archivolink"%>
+        </div>
+    </td>
+ </tr>
+</table>
+ <% if personastramite.personastramiteshoras.exists? %>
+  <div align="center">
+  <table width="80%" border="0" cellspacing="1" cellpadding="1" id="one-column-emphasis">
+  <tr>
+    <td colspan="6">
+        <span class="tit_gr_azul">REGISTRO DE HORAS</span>
+    </td>
+  </tr>
+  <tr>
+    <td class="oce-first" width="10%"><div align="center">Fecha</div></td>
+    <td class="oce-first" width="15%"><div align="center">Horas Practicas</div></td>
+    <td class="oce-first" width="15%"><div align="center">Horas Teoricas</div></td>
+    <td class="oce-first" width="15%"><div align="center">Horas Taller</div></td>
+    <td class="oce-first" width="15%"><div align="center">Total</div></td>
+    <td class="oce-first" width="30%">Instructor</td>
+  </tr>
+<% personastramite.personastramiteshoras.each do |personastramiteshora| %>
+  <tr class="<%=cycle('even1', 'odd1')%>">
+    <td><div align="center"><%=personastramiteshora.fecha%></div></td>
+    <td><div align="center"><%=personastramiteshora.practicas%></div></td>
+    <td><div align="center"><%=personastramiteshora.teoricas%></div></td>
+    <td><div align="center"><%=personastramiteshora.taller%></div></td>
+    <td><div align="center" class="camposDescN11"><%=personastramiteshora.dtotal rescue nil%></div></td>
+    <td><%=personastramiteshora.instructor.nombre rescue nil%></td>
+  </tr>
+<% end %>
+  </table>
+    </div>
+<% end %>
+<table width="90%" height="0" border="0" cellpadding="0" cellspacing="0">
+  <tr>
+    <td height="20"><hr size="1" noshade class="hrlinea"></td>
+  </tr>
+</table>
+<% else %>
+      <fieldset>
+      <table width="90%" border="0" cellpadding="2" cellspacing="2">
+  <tr>
+    <td  height="30"><div class="col_enc">EDITAR</div></td>
+  </tr>
+</table>
+    <tr class="<%=cycle('even', 'odd')%>" id="personastramite_<%=@personastramite.id%>">
+     <%= render :partial => "personastramites_form" %>
+    </tr>
+    </fieldset>
+<% end %>
+        <% end %>
+<% else %>
+<table width="40%" border="0" cellpadding="0" align="center" cellspacing="0" bgcolor="#E5E5E5">
+      <tr>
+        <td width="10%"><div align="right"><img src="/images/alerta.png"></div></td>
+        <td width="90%" class="campos">&nbsp;&nbsp;No hay datos asociados.</td>
+     </tr>
+</table>
+<% end %>
+            <%= hidden_field :persona, :id %>
+<% end %>
+<br/>
+<% if flash[:personastramite] %>
+<div id="personastramite">
+  <table width="90%" border="0" cellpadding="0" cellspacing="0" bgcolor="#E5E5E5">
+   <tr>
+        <td width="5%"><div align="right"><img src="/images/connect.png"></div></td>
+        <td width="95%" class="campos" align="left" >&nbsp;&nbsp;<%= flash[:personastramite] %></td>
+   </tr>
+  </table>
+</div>
+<script type="text/javascript">
+  setTimeout("new Effect.Fade('personastramite');", 5000)
+</script>
+<% end %>
+</div>

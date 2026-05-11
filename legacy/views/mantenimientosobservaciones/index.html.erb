@@ -1,0 +1,24 @@
+<h1>Listing mantenimientosobservaciones</h1>
+
+<table>
+  <tr>
+    <th>Mantenimiento</th>
+    <th>User</th>
+    <th>Observaciones</th>
+  </tr>
+
+<% @mantenimientosobservaciones.each do |mantenimientosobservacion| %>
+  <tr>
+    <td><%=h mantenimientosobservacion.mantenimiento_id %></td>
+    <td><%=h mantenimientosobservacion.user_id %></td>
+    <td><%=h mantenimientosobservacion.observaciones %></td>
+    <td><%= link_to 'Show', mantenimientosobservacion %></td>
+    <td><%= link_to 'Edit', edit_mantenimientosobservacion_path(mantenimientosobservacion) %></td>
+    <td><%= link_to 'Destroy', mantenimientosobservacion, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New mantenimientosobservacion', new_mantenimientosobservacion_path %>

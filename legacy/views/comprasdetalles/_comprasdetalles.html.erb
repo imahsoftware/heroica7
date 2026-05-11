@@ -1,0 +1,78 @@
+<div id="productheader">
+  <span class="tit_gr_azul">&nbsp;&nbsp;DETALLE DE LA COMPRA</span>
+</div>
+<br/>
+<div align="center">
+<% remote_form_for [@compra, @comprasdetalle] do |form| %>
+    <% if !@comprasdetalle.id %>
+	<%= render :partial => "/comprasdetalles/comprasdetalles_form" %>
+    <% end %>
+<% if @compra.comprasdetalles.exists? %>
+<table width="95%" border="0" align="center" cellpadding="0" cellspacing="0" id="one-column-emphasis">
+  <tr valign="middle">
+    <td width="25%" height="30" class="oce-first">Usuario</td>
+    <td width="30%" height="30" class="oce-first">Producto</td>
+    <td width="5%" class="oce-first"><div align="center">Unidad</div></td>
+    <td width="5%" class="oce-first"><div align="center">Cant.</div></td>
+    <td width="10%" class="oce-first"><div align="center">Valor Unitario</div></td>
+    <td width="10%" class="oce-first"><div align="center">Valor Total</div></td>
+    <td width="20%" class="oce-first"><div align="center"></div></td>
+  </tr>
+<% @compra.comprasdetalles.each do |comprasdetalle| %>
+   <% if comprasdetalle.id != @comprasdetalle.id %>
+   <tr  valign="middle" class="<%=cycle('even1', 'odd1')%>" id="comprasdetalle_<%=comprasdetalle.id%>">
+     <td class="camposDesc">
+       <%=comprasdetalle.created_at.strftime("%Y-%m-%d %X")%> - <%=comprasdetalle.user.username rescue nil%><br/>
+       <%=comprasdetalle.updated_at.strftime("%Y-%m-%d %X")%> - <%=User.find(comprasdetalle.user_actualiza).username rescue nil%>
+     </td>
+    <td class="camposDesc"><%=comprasdetalle.producto.descripcion rescue nil%></td>
+    <td class="camposDesc"><div align="center"><%=comprasdetalle.unidad%></div></td>
+    <td class="camposDesc"><div align="center"><%=comprasdetalle.cantidad%></div></td>
+    <td class="camposDesc"><div align="right"><%=camponumerico(comprasdetalle.valor_unitario)%></div></td>
+    <td class="camposDesc"><div align="right"><%=camponumerico(comprasdetalle.valor_total)%></div></td>
+    <td class="camposDesc"><div align="center">
+            <%= link_to_remote('Editar',{:url => edit_compra_comprasdetalle_path(@compra, comprasdetalle),
+                    :method => :get}, :class=>"editarlink")%>
+            &nbsp;<%= link_to_remote('Borrar',{:url => compra_comprasdetalle_path(@compra, comprasdetalle),
+                    :method => :delete, :confirm => "¿Seguro?"}, :class=>"borrarlink")%>
+        </div>
+    </td>
+ </tr>
+<% else %>
+
+<table width="90%" border="0" cellpadding="2" cellspacing="2">
+  <tr>
+    <td  height="30"><div class="col_enc">EDITAR</div></td>
+  </tr>
+</table>
+    <tr class="<%=cycle('even', 'odd')%>" id="comprasdetalle_<%=@comprasdetalle.id%>">
+     <%= render :partial => "comprasdetalles_form" %>
+    </tr>
+<table width="90%" border="0" cellpadding="2" cellspacing="2">
+<% end %>
+        <% end %>
+<% else %>
+<table width="40%" border="0" cellpadding="0" align="center" cellspacing="0" bgcolor="#E5E5E5">
+      <tr>
+        <td width="10%"><div align="right"><img src="/images/alerta.png"></div></td>
+        <td width="90%" class="campos">&nbsp;&nbsp;No hay datos asociados.</td>
+     </tr>
+</table>
+<% end %>
+            <%= hidden_field :compra, :id %>
+<% end %>
+<br/>
+<% if flash[:comprasdetalle] %>
+<div id="comprasdetalle">
+  <table width="90%" border="0" cellpadding="0" cellspacing="0" bgcolor="#E5E5E5">
+   <tr>
+        <td width="5%"><div align="right"><img src="/images/connect.png"></div></td>
+        <td width="95%" class="campos" align="left" >&nbsp;&nbsp;<%= flash[:comprasdetalle] %></td>
+   </tr>
+  </table>
+</div>
+<script type="text/javascript">
+  setTimeout("new Effect.Fade('comprasdetalle');", 5000)
+</script>
+<% end %>
+</div>

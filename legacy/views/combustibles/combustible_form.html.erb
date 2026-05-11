@@ -1,0 +1,82 @@
+<%= stylesheet_link_tag 'tabs'%>
+<%= javascript_include_tag 'fabtabulous' %>
+<div id="productheader">
+  <h2><img src="/images/combustibles.png"></h2>
+  <div align="right">
+   <%= link_to 'Buscar Registro', busqueda_combustibles_path, :class=>"regresarlink" %>&nbsp;&nbsp;</div>
+</div>
+<fieldset>
+<%  form_for @combustible do |f| %>
+<br/>
+<div align="center">
+<table width="80%" border="0" align="center" cellpadding="0" cellspacing="0" id="one-column-emphasis">
+  <tr valign="middle">
+    <td width="30%" height="30" ><div align="right"><strong>Fecha y hora de Tanqueo:&nbsp;&nbsp;</strong></div></td>
+    <td width="70%" height="30" >
+<%= calendar_date_select "combustible", "fecha", :year_range => 50.years.ago..0.years.ago, :class=> "campo", :size => 25%></td>
+  </tr>
+  <tr valign="middle">
+    <td width="30%" height="30" ><div align="right"><strong>Placa :&nbsp;&nbsp;</strong></div></td>
+    <td width="70%" height="30" >
+    <%=select("combustible", "placa_id", Placa.find(:all,:order=>'descripcion').collect {|p| [ p.descripcion, p.id ] }, { :include_blank => true },
+      { :style=>"width:100px", :class => "campo", :onFocus => "this.style.border='1px solid #f00'", :onBlur => "this.style.border='1px solid #bbb'" }) %></td>
+  </tr>
+  <tr valign="middle">
+    <td width="30%" height="30" ><div align="right"><strong>Tipo Combustible :&nbsp;&nbsp;</strong></div></td>
+    <td width="70%" height="30" >
+    <%=select("combustible", "tiposcombustible_id", Tiposcombustible.find(:all,:order=>'descripcion').collect {|p| [ p.descripcion, p.id ] }, { :include_blank => true },
+      { :style=>"width:100px", :class => "campo", :onFocus => "this.style.border='1px solid #f00'", :onBlur => "this.style.border='1px solid #bbb'" }) %>
+    </td>
+  </tr>
+  <tr valign="middle">
+    <td width="30%" height="30" ><div align="right"><strong>Kilometraje :&nbsp;&nbsp;</strong></div></td>
+    <td width="70%" height="30" ><%= f.text_field :kilometraje ,{ :class => "campo", :size => 15,
+              :onFocus => "this.style.border='1px solid #f00'",
+              :onBlur => "this.style.border='1px solid #bbb'" } %></td>
+  </tr>
+  <tr valign="middle">
+    <td width="30%" height="30" ><div align="right"><strong>Odometro :&nbsp;&nbsp;</strong></div></td>
+    <td width="70%" height="30" ><%= f.text_field :odometro,{ :class => "campo", :size => 15,
+              :onFocus => "this.style.border='1px solid #f00'",
+              :onBlur => "this.style.border='1px solid #bbb'" }  %></td>
+  </tr>
+  <tr valign="middle">
+    <td width="30%" height="30" ><div align="right"><strong>Horometro :&nbsp;&nbsp;</strong></div></td>
+    <td width="70%" height="30" ><%= f.text_field :horometro ,{ :class => "campo", :size => 15,
+              :onFocus => "this.style.border='1px solid #f00'",
+              :onBlur => "this.style.border='1px solid #bbb'" } %></td>
+  </tr>
+  <tr valign="middle">
+    <td width="30%" height="30" ><div align="right"><strong>Cantidad de Galones :&nbsp;&nbsp;</strong></div></td>
+    <td width="70%" height="30" ><%= f.text_field :galones,{ :class => "campo", :size => 15,
+              :onFocus => "this.style.border='1px solid #f00'",
+              :onBlur => "this.style.border='1px solid #bbb'" }  %></td>
+  </tr>
+  <tr valign="middle">
+    <td width="30%" height="30" ><div align="right"><strong>Valor Galon :&nbsp;&nbsp;</strong></div></td>
+    <td width="70%" height="30" ><%= f.text_field :valor_galon,{ :class => "campo", :size => 15,
+              :onFocus => "this.style.border='1px solid #f00'",
+              :onBlur => "this.style.border='1px solid #bbb'" }  %></td>
+  </tr>
+  <tr valign="middle">
+    <td width="30%" height="30" ><div align="right"><strong>Valor Total :&nbsp;&nbsp;</strong></div></td>
+    <td width="70%" height="30" > <%= f.text_field :valor_total,{ :class => "campo", :size => 15,
+              :onFocus => "this.style.border='1px solid #f00'",
+              :onBlur => "this.style.border='1px solid #bbb'" }  %></td>
+  </tr>
+  <tr valign="middle">
+    <td width="30%" height="30" ><div align="right"><strong>Nro de Clases :&nbsp;&nbsp;</strong></div></td>
+    <td width="70%" height="30" ><%= f.text_field :nro_clases,{ :class => "campo", :size => 15,
+              :onFocus => "this.style.border='1px solid #f00'",
+              :onBlur => "this.style.border='1px solid #bbb'" } %></td>
+  </tr>
+  <tr valign="middle">
+    <td height="30"></td>
+    <td height="30">
+<%= submit_tag "Guardar", :name => nil, :disable_with => "Guardando" , :class=>"buttonAsLink"%></td>
+  </tr>
+</table>
+</div>
+<% end %>
+</fieldset>
+<br/>
