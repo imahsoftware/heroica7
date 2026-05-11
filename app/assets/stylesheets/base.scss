@@ -295,7 +295,7 @@ $red-border: #fecaca;
     i { margin-right: 8px; }
   }
 
-  a, a:hover, a:focus, a:active {
+  a:not(.btn), a:not(.btn):hover, a:not(.btn):focus, a:not(.btn):active {
     background: none !important;
     background-color: transparent !important;
     color: inherit;
@@ -420,7 +420,7 @@ $red-border: #fecaca;
   border-radius: 6px;
   font-weight: 600;
   font-size: 13px;
-  transition: opacity 0.2s, transform 0.1s;
+  transition: background 0.3s ease, opacity 0.2s, transform 0.1s, box-shadow 0.3s ease;
   box-shadow: 0 3px 10px rgba(185,28,28,0.3);
 
   &:hover, &:focus {
@@ -429,7 +429,21 @@ $red-border: #fecaca;
     color: #fff;
   }
 
-  &:active { transform: translateY(0); }
+  &:active {
+    transform: translateY(0);
+    background: linear-gradient(135deg, #7f1d1d, #991b1b);
+    box-shadow: 0 1px 4px rgba(185,28,28,0.2);
+  }
+
+  // Estado mientras se procesa el submit (data-disable-with)
+  &:disabled, &[disabled] {
+    background: linear-gradient(135deg, #c0392b, #e74c3c);
+    opacity: 0.85;
+    color: #fff;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: 0 2px 6px rgba(185,28,28,0.2);
+  }
 }
 
 // ============================================================
