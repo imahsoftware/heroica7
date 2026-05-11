@@ -26,7 +26,7 @@ class EmpresasController < ApplicationController
 
   def index
     @q = Empresa.ransack(params[:q])
-    @empresas = @q.result.order(:nombre)
+    @empresas = @q.result.order(:nombre).paginate(page: params[:page], per_page: 20)
     respond_to do |format|
       format.html
     end

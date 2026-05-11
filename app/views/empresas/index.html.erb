@@ -4,7 +4,7 @@
   <div class="box-header">
     <span class="box-title">
       <i class="fa fa-building"></i> Empresas
-      <span class="users-count-badge"><%= @empresas.count %> registros</span>
+      <span class="users-count-badge"><%= @empresas.total_entries rescue @empresas.count %> registros</span>
     </span>
     <div class="box-tools pull-right" style="margin-top: -2px;">
       <%= link_to new_empresa_path, remote: true, id: 'new_empresa_button',
