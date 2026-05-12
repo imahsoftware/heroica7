@@ -1,0 +1,52 @@
+<% title 'Compras' %>
+
+<div class="box box-usuarios">
+  <div class="box-header">
+    <span class="box-title">
+      <i class="fa fa-shopping-cart"></i> Compras
+      <span class="users-count-badge"><%= @compras.total_entries rescue @compras.count %> registros</span>
+    </span>
+    <div class="box-tools pull-right" style="margin-top: -2px;">
+      <%= link_to new_compra_path,
+          id: 'new_compra_button',
+          class: 'btn btn-sm btn-success',
+          title: 'Agregar compra' do %>
+        <i class="fa fa-plus"></i> Nuevo
+      <% end %>
+    </div>
+  </div>
+
+  <div class="box-body">
+
+    <div class="row" style="margin-bottom: 16px;">
+      <div class="col-md-5 col-sm-7 col-xs-12 search-bar">
+        <%= search_form_for @q do |f| %>
+          <div class="input-group">
+            <%= f.search_field :consecutivo_cont,
+                class: 'form-control',
+                placeholder: 'Buscar por consecutivo...' %>
+            <div class="input-group-btn">
+              <%= button_tag type: 'submit', class: 'btn btn-search' do %>
+                <i class="fa fa-search"></i>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="flash_messages"></div>
+
+    <div id="compras">
+      <% if @compras.any? %>
+        <%= render 'compras/tabla' %>
+      <% else %>
+        <div class="empty-state">
+          <i class="fa fa-shopping-cart"></i>
+          <p>No se encontraron compras.</p>
+        </div>
+      <% end %>
+    </div>
+
+  </div>
+</div>

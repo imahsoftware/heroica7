@@ -1,0 +1,47 @@
+<%= simple_form_for([@compra, @comprasdetalle], remote: true) do |f| %>
+  <div class="bs-callout">
+    <div class="row">
+      <div class="col-md-5">
+        <%= f.input :producto_id, as: :select, label: 'Producto *',
+            collection: Producto.order(:descripcion).collect { |p| [p.descripcion, p.id] },
+            include_blank: true,
+            input_html: { class: 'select2' } %>
+      </div>
+      <div class="col-md-1">
+        <%= f.input :unidad, label: 'Unidad',
+            input_html: { onChange: 'this.value=this.value.toUpperCase()', class: 'form-control input_uppercase' } %>
+      </div>
+      <div class="col-md-1">
+        <%= f.input :cantidad, label: 'Cantidad *',
+            input_html: { class: 'form-control' } %>
+      </div>
+      <div class="col-md-2">
+        <%= f.input :valor_unitario, label: 'Valor Unitario *',
+            input_html: { class: 'form-control' } %>
+      </div>
+      <div class="col-md-2">
+        <%= f.input :valor_descuento, label: 'Descuento *',
+            input_html: { class: 'form-control' } %>
+      </div>
+      <div class="col-md-1">
+        <%= f.input :valor_iva, label: 'IVA',
+            input_html: { class: 'form-control' } %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <% if @comprasdetalle.new_record? %>
+          <%= button_tag t(:cancelar), type: 'button',
+              data: { toggle: 'collapse', target: '#comprasdetalle_form' },
+              class: 'cancel_button btn btn-flat btn-default pull-left' %>
+        <% else %>
+          <%= link_to t(:cancelar), compra_comprasdetalle_path(@compra, @comprasdetalle),
+              class: 'btn btn-flat btn-default pull-left', remote: true %>
+        <% end %>
+      </div>
+      <div class="col-md-6 text-right">
+        <%= f.button :submit, t(:guardar), class: 'btn btn-danger pull-right' %>
+      </div>
+    </div>
+  </div>
+<% end %>

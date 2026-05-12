@@ -1,0 +1,104 @@
+<% title 'Compras' %>
+
+<div class="box box-usuarios">
+  <div class="box-header">
+    <span class="box-title">
+      <i class="fa fa-shopping-cart"></i> Compras
+    </span>
+    <div class="box-tools pull-right" style="margin-top: -2px;">
+      <%= link_to compras_path, class: 'btn btn-sm btn-default', title: 'Regresar' do %>
+        <i class="fa fa-arrow-left"></i> Listado
+      <% end %>
+    </div>
+  </div>
+
+  <div class="box-body">
+    <% if flash[:notice] %>
+      <div class="alert alert-success alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <%= flash[:notice] %>
+      </div>
+    <% end %>
+
+    <%= simple_form_for @compra do |f| %>
+      <div class="row">
+        <div class="col-md-2">
+          <%= f.input :consecutivo, label: 'Consecutivo',
+              input_html: { onChange: 'this.value=this.value.toUpperCase()', class: 'form-control input_uppercase' } %>
+        </div>
+        <div class="col-md-2">
+          <%= f.input :fecha_orden, label: 'Fecha Orden',
+              as: :string, input_html: { class: 'form-control datepicker', readonly: true, placeholder: 'YYYY-MM-DD' } %>
+        </div>
+        <div class="col-md-4">
+          <%= f.input :proveedor_id, label: 'Proveedor',
+              as: :select,
+              collection: Proveedor.where("razon_social is not null and razon_social != ''").order(:razon_social).collect { |p| [p.razon_social, p.id] },
+              include_blank: true,
+              input_html: { class: 'select2', style: 'width:100%' } %>
+        </div>
+        <div class="col-md-4">
+          <%= f.input :proceso_solicita, label: 'Proceso Solicita',
+                      input_html: { onChange: 'this.value=this.value.toUpperCase()', class: 'form-control input_uppercase' } %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <%= f.input :persona_solicita, label: 'Persona Solicita',
+              input_html: { onChange: 'this.value=this.value.toUpperCase()', class: 'form-control input_uppercase' } %>
+        </div>
+        <div class="col-md-2">
+          <%= f.input :fecha_proentrega, label: 'Fecha Entrega',
+                      as: :string, input_html: { class: 'form-control datepicker', readonly: true, placeholder: 'YYYY-MM-DD' } %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <%= f.input :justificacion, label: 'Justificación',
+              as: :text,
+              input_html: { onChange: 'this.value=this.value.toUpperCase()', class: 'form-control input_uppercase', rows: 4 } %>
+        </div>
+      </div>
+
+
+      <% unless @compra.new_record? %>
+        <div class="row" style="margin-top: 8px; font-size: 11px; color: #64748b;">
+          <div class="col-md-6">
+            <strong>Creación:</strong>
+            <%= @compra.created_at.strftime('%Y-%m-%d %H:%M') rescue '—' %>
+            — <%= @compra.user.username rescue nil %>
+          </div>
+          <div class="col-md-6">
+            <strong>Últ. Act.:</strong>
+            <%= @compra.updated_at.strftime('%Y-%m-%d %H:%M') rescue '—' %>
+            — <%= User.find(@compra.user_actualiza).username rescue nil %>
+          </div>
+        </div>
+      <% end %>
+
+      <div class="row" style="margin-top: 16px;">
+        <div class="col-md-12 text-right">
+          <%= f.button :submit, 'Guardar', class: 'btn btn-primary', data: { disable_with: 'Guardando...' } %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<% unless @compra.new_record? %>
+  <div id="comprasdetalles_form">
+    <%= render 'comprasdetalles/comprasdetalles' %>
+  </div>
+<% end %>
+
+<script>
+  $('.datepicker').datepicker({
+    dayNamesMin: ["Dom","Lun","Mar","Mie","Jue","Vie","Sáb"],
+    monthNamesShort: ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"],
+    dateFormat: "yy-mm-dd",
+    yearRange: '2010:2030',
+    changeMonth: true,
+    changeYear: true
+  });
+  $('.select2').select2();
+</script>

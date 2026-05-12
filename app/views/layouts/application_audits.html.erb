@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for?(:title) ? yield(:title) : 'Registros' %> | <%= ENV['NOMBRE_APLICACION'] %></title>
+    <title><%= content_for?(:title) ? "Heroica - #{yield(:title)}" : 'Heroica' %> | <%= ENV['NOMBRE_APLICACION'] %></title>
     <%= csrf_meta_tags %>
     <%= action_cable_meta_tag %>
     <%= favicon_link_tag asset_path('favicon.png') %>

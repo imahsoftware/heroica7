@@ -165,6 +165,11 @@ Rails.application.routes.draw do
   resources :instructores
   resources :categorias
   resources :tipostramites
+
+  resources :compras do
+    resources :comprasdetalles
+  end
+
   resources :conceptos
   resources :cobrostramites
   resources :proveedores

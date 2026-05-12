@@ -101,5 +101,6 @@ ActiveSupport::Inflector.inflections(:en) do |inflect|
   inflect.irregular('tiposcombustible', 'tiposcombustibles')
   inflect.irregular('instructor', 'instructores')
   inflect.irregular('proveedor', 'proveedores')
+  inflect.irregular('comprasdetalle', 'comprasdetalles')
 
 end

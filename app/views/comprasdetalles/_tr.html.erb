@@ -1,0 +1,22 @@
+<tr id="comprasdetalle_<%= comprasdetalle.id %>">
+  <td class="text-center">
+    <%= link_to edit_compra_comprasdetalle_path(@compra, comprasdetalle), remote: true,
+        title: t(:title_editar),
+        data: { toggle: 'tooltip' } do %>
+      <button class="btn btn-xs btn-warning btn-accion"><i class="fa fa-edit"></i></button>
+    <% end %>
+    <%= link_to compra_comprasdetalle_path(@compra, comprasdetalle), remote: true,
+        method: :delete,
+        title: t(:title_elimina),
+        data: { confirm: t(:elimina_confirma), toggle: 'tooltip' } do %>
+      <button class="btn btn-xs btn-danger btn-accion"><i class="fa fa-trash"></i></button>
+    <% end %>
+  </td>
+  <td><%= comprasdetalle.producto.descripcion rescue nil %></td>
+  <td class="text-center"><%= comprasdetalle.unidad %></td>
+  <td class="text-center"><%= comprasdetalle.cantidad %></td>
+  <td class="text-right"><%= camponumerico(comprasdetalle.valor_unitario) rescue comprasdetalle.valor_unitario %></td>
+  <td class="text-right"><%= camponumerico(comprasdetalle.valor_descuento) rescue comprasdetalle.valor_descuento %></td>
+  <td class="text-right"><%= camponumerico(comprasdetalle.valor_iva) rescue comprasdetalle.valor_iva %></td>
+  <td class="text-right"><%= camponumerico(comprasdetalle.valor_total) rescue comprasdetalle.valor_total %></td>
+</tr>

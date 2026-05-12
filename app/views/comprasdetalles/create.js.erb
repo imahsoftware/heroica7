@@ -1,0 +1,31 @@
+<% if @comprasdetalle_saved.present? %>
+  <% if @compra.comprasdetalles.count == 1 %>
+    $("#comprasdetalles").html("<%= j render 'tabla' %>");
+  <% else %>
+    $("#tbody_comprasdetalles").prepend("<%= j render 'tr', comprasdetalle: @comprasdetalle_saved %>");
+  <% end %>
+  $(".clean").val("").trigger('change');
+  $("#comprasdetalle_form").collapse("hide");
+  $('[data-toggle="tooltip"]').tooltip();
+  $(".flash_messages_detalle").html("<%= j render 'layouts/flash_messages' %>");
+<% else %>
+  // Mostrar errores resaltando los campos inválidos
+  $(".form-group").removeClass("has-error");
+  $(".help-block-error").remove();
+
+  <% @comprasdetalle.errors.each do |error| %>
+    var field_<%= error.attribute %> = $("#comprasdetalle_<%= error.attribute %>");
+    field_<%= error.attribute %>.closest(".form-group").addClass("has-error");
+    if (field_<%= error.attribute %>.closest(".form-group").find(".help-block-error").length === 0) {
+      field_<%= error.attribute %>.closest(".form-group").append("<span class='help-block help-block-error'><%= j error.full_message %></span>");
+    }
+  <% end %>
+
+  $(".flash_messages_detalle").html("<div class='alert alert-danger alert-dismissible'><button type='button' class='close' data-dismiss='alert'>&times;</button>Corrija los errores antes de guardar.</div>");
+<% end %>
+
+setTimeout(function() {
+  $(".alert_flash, .alert-danger").fadeOut(300, function() {
+    $(this).remove();
+  });
+}, 5000);

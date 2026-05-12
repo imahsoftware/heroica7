@@ -1,0 +1,22 @@
+<tr id="compra_<%= compra.id %>">
+  <td class="text-center">
+    <%= link_to edit_compra_path(id: compra.id),
+        title: t(:title_editar),
+        data: { toggle: 'tooltip' } do %>
+      <button class="btn btn-xs btn-warning btn-accion"><i class="fa fa-edit"></i></button>
+    <% end %>
+    <%= link_to compra_path(compra),
+        method: :delete,
+        title: t(:title_elimina),
+        data: { confirm: t(:elimina_confirma), toggle: 'tooltip' } do %>
+      <button class="btn btn-xs btn-danger btn-accion"><i class="fa fa-trash"></i></button>
+    <% end %>
+  </td>
+  <td><strong><%= compra.consecutivo %></strong></td>
+  <td><%= compra.fecha_orden %></td>
+  <td><%= compra.proveedor.razon_social rescue nil %></td>
+  <td style="font-size: 11px; color: #64748b;">
+    <%= compra.updated_at.strftime('%Y-%m-%d %H:%M') rescue '—' %>
+    <% if compra.user.present? %> — <%= compra.user.username %><% end %>
+  </td>
+</tr>

@@ -1,0 +1,29 @@
+<div class="box box-usuarios">
+  <div class="box-header">
+    <span class="box-title">
+      <i class="fa fa-list-alt"></i> Detalle de la Compra
+    </span>
+    <div class="box-tools pull-right" style="margin-top: -2px;">
+      <%= link_to new_compra_comprasdetalle_path(@compra), remote: true,
+          id: 'new_comprasdetalle_button',
+          class: 'btn btn-sm btn-success',
+          title: t(:agregar) do %>
+        <i class="fa fa-plus"></i> <%= t :agregar %>
+      <% end %>
+    </div>
+  </div>
+  <div class="box-body">
+    <div class="flash_messages_detalle"></div>
+    <div id="comprasdetalle_form" class="collapse" style="margin-bottom: 12px;"></div>
+    <div id="comprasdetalles">
+      <% if @compra.comprasdetalles.exists? %>
+        <%= render 'comprasdetalles/tabla' %>
+      <% else %>
+        <div class="empty-state">
+          <i class="fa fa-list-alt"></i>
+          <p><%= t :atencion_msj %></p>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
