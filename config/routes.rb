@@ -173,5 +173,61 @@ Rails.application.routes.draw do
   resources :conceptos
   resources :cobrostramites
   resources :proveedores
+  resources :empleados
+
+
+
+  # ─── Personastramiteshoras ──────────────────────────────────────────────────
+  resources :personastramiteshoras, only: [:index, :show, :new, :edit, :create, :update, :destroy] do
+    collection do
+      get  'hora'
+      get  'new2'
+      post 'create2'
+      get  'update2'
+    end
+  end
+
+  # ─── Facturas ────────────────────────────────────────────────────────────────
+  resources :facturas, only: [:index, :show, :edit, :update] do
+    collection do
+      get  'busqueda'
+      get  'buscar'
+      get  'verfactura'
+      get  'informeclases'
+    end
+  end
+
+  # ─── Personas ───────────────────────────────────────────────────────────────
+  resources :personas, only: [:new, :create, :edit, :update, :destroy] do
+    collection do
+      get  'busqueda'
+      get  'buscar'
+      get  'listar'
+      get  'informesiet'
+      get  'informeper'
+    end
+    resources :personastramites, only: [:index, :show, :new, :edit, :create, :update, :destroy] do
+      member do
+        get  'registroclase'
+        get  'registrosolicitud'
+        get  'diploma'
+        get  'acuerdocomercial'
+        get  'teorico'
+        get  'crearfactura'
+        get  'practica'
+        get  'practicam'
+      end
+    end
+    resources :personasclases, only: [:index, :show, :new, :edit, :create, :update, :destroy]
+    resources :teoricos,       only: [:index, :show, :new, :edit, :create, :update, :destroy] do
+      member do
+        get 'informe'
+      end
+    end
+  end
+
+  # Busqueda global de teoricos (para iniciar prueba)
+  get  'teoricos/busqueda', to: 'teoricos#busqueda', as: 'teoricos_busqueda'
+
 
 end

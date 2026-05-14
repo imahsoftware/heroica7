@@ -1,0 +1,31 @@
+<tr id="portafolioscuenta_<%= portafolioscuenta.id %>">
+  <td class="text-center">
+    <%# if is_auth_e("portafolioscuenta")%>
+    <%= link_to edit_portafolio_portafolioscuenta_path(@portafolio, portafolioscuenta), remote: true, class: 'edit_contratosmodificacion_button', data: { toggle: 'tooltip' }, title: "#{t :title_editar}" do %>
+      <button class="btn btn-xs btn-warning"><i class="fa fa-edit"></i></button>
+    <% end %>
+    <%= link_to portafolio_portafolioscuenta_path(@portafolio, portafolioscuenta), remote: true, method: :delete, data: { confirm: "#{t :elimina_confirma}", toggle: 'tooltip' }, title: "#{t :title_elimina}" do %>
+      <button class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></button>
+    <% end %>
+    <%# end %>
+    <%= link_to detalle_portafolioscuentas_path(id: portafolioscuenta.id), remote: true, data: { toggle: 'tooltip' }, title: "Agregar Detalle" do %>
+      <button class="btn btn-xs btn-success"><i class="fa fa-folder-open"></i></button>
+    <% end %>
+    <button class="btn btn-xs btn-info">
+      <span data-toggle="tooltip" data-html="true" data-original-title="<div align='left'><%= portafolioscuenta.user.nombre.html_safe rescue nil %> - <%= portafolioscuenta.created_at.strftime('%Y-%m-%d %X').html_safe rescue nil %></div>"><i class="fa fa-user" aria-hidden="true"></i></span>
+    </button>
+  </td>
+  <td align="left" class="text-table"><%= portafolioscuenta.descripcion rescue nil %></td>
+  <td align="left" class="text-table"><%= portafolioscuenta.portafoliosccontable.descripcion_contables rescue nil %></td>
+  <td align="left" class="text-table"><%= portafolioscuenta.nro_cuenta rescue nil %></td>
+  <td align="center" class="text-table"><%= portafolioscuenta.tipo rescue nil %></td>
+  <td align="center" class="text-table"><%= portafolioscuenta.estado rescue nil %></td>
+</tr>
+
+
+<div class="modal fade" id="detalle<%= portafolioscuenta.id %>">
+  <div class="modal-dialog" style="width: 70%;">
+    <div class="modal-content">
+    </div>
+  </div>
+</div>

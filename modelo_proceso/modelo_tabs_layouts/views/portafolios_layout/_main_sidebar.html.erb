@@ -1,0 +1,98 @@
+
+<%
+  isadmin = is_admin
+  user = User.find(isadmin)
+  isportafolio = is_portafolio
+  issygma = is_sygma
+%>
+<aside class="main-sidebar">
+  <section class="sidebar">
+    <%#= render 'personas/buscadorrapido' %>
+    <ul class="sidebar-menu" data-widget="tree">
+        <li>
+          <%= link_to portafolios_path do %>
+            <i class="fa fa-arrow-left text-danger"></i> Regresar a portafolios
+          <% end %>
+        </li>
+
+      <% if @portafolio.logo_file_name%>
+        <div align="center"><%= image_tag (@portafolio.logo.url(:medium, false)), style: "width: 70%;" rescue nil%></div>
+      <% else %>
+        <div align="center"><%= image_tag 'marester.png', class: 'user-image', style: "width: 70%;" %></div>
+      <% end %>
+
+      <li class="header"><%= t :menu %></li>
+      <!-- Optionally, you can add icons to the links -->
+      <% unless @portafolio.new_record? %>
+        <li class="treeview"></li>
+        <li class="<%= active_class(edit_portafolio_path(etapa: "A", id: @portafolio.id)) %>">
+          <%= link_to edit_portafolio_path(etapa: "A", id: @portafolio.id) do %>
+            <i class="fa fa-bullseye"></i><span>Compañia</span>
+          <% end %>
+        </li>
+        <li class="<%= active_class(edit_portafolio_path(etapa: "B", id: @portafolio.id)) %>">
+          <%= link_to edit_portafolio_path(etapa: "B", id: @portafolio.id) do %>
+            <i class="fa fa-bullseye"></i><span>Cuentas</span>
+          <% end %>
+        </li>
+        <li class="<%= active_class(edit_portafolio_path(etapa: "C", id: @portafolio.id)) %>">
+          <%= link_to edit_portafolio_path(etapa: "C", id: @portafolio.id) do %>
+            <i class="fa fa-bullseye"></i><span>Centros de Costo</span>
+          <% end %>
+        </li>
+        <li class="<%= active_class(edit_portafolio_path(etapa: "D", id: @portafolio.id)) %>">
+          <%= link_to edit_portafolio_path(etapa: "D", id: @portafolio.id) do %>
+            <i class="fa fa-bullseye"></i><span>PUC</span>
+          <% end %>
+        </li>
+        <li class="<%= active_class(edit_portafolio_path(etapa: "E", id: @portafolio.id, tipo: 'COMPRA')) %>">
+          <%= link_to edit_portafolio_path(etapa: "E", id: @portafolio.id, tipo: 'COMPRA') do %>
+            <i class="fa fa-bullseye"></i><span>Codigos Compras</span>
+          <% end %>
+        </li>
+        <li class="<%= active_class(edit_portafolio_path(etapa: "F", id: @portafolio.id, tipo: 'VENTA')) %>">
+          <%= link_to edit_portafolio_path(etapa: "F", id: @portafolio.id, tipo: 'VENTA') do %>
+            <i class="fa fa-bullseye"></i><span>Codigos Ventas</span>
+          <% end %>
+        </li>
+        <li class="<%= active_class(edit_portafolio_path(etapa: "G", id: @portafolio.id)) %>">
+          <%= link_to edit_portafolio_path(etapa: "G", id: @portafolio.id) do %>
+            <i class="fa fa-bullseye"></i><span>Articulos Región</span>
+          <% end %>
+        </li>
+        <li class="<%= active_class(edit_portafolio_path(etapa: "H", id: @portafolio.id)) %>">
+          <%= link_to edit_portafolio_path(etapa: "H", id: @portafolio.id) do %>
+            <i class="fa fa-bullseye"></i><span>Proveedores</span>
+          <% end %>
+        </li>
+        <li class="<%= active_class(edit_portafolio_path(etapa: "I", id: @portafolio.id)) %>">
+          <%= link_to edit_portafolio_path(etapa: "I", id: @portafolio.id) do %>
+            <i class="fa fa-bullseye"></i><span>Descuentos</span>
+          <% end %>
+        </li>
+        <li class="<%= active_class(edit_portafolio_path(etapa: "J", id: @portafolio.id)) %>">
+          <%= link_to edit_portafolio_path(etapa: "J", id: @portafolio.id) do %>
+            <i class="fa fa-bullseye"></i><span>Formas de Pago</span>
+          <% end %>
+        </li>
+        <li class="<%= active_class(edit_portafolio_path(etapa: "K", id: @portafolio.id)) %>">
+          <%= link_to edit_portafolio_path(etapa: "K", id: @portafolio.id) do %>
+            <i class="fa fa-bullseye"></i><span>Rango Facturación</span>
+          <% end %>
+        </li>
+        <li class="<%= active_class(edit_portafolio_path(etapa: "L", id: @portafolio.id)) %>">
+          <%= link_to edit_portafolio_path(etapa: "L", id: @portafolio.id) do %>
+            <i class="fa fa-bullseye"></i><span>Rango Notas</span>
+          <% end %>
+        </li>
+        <li class="<%= active_class(edit_portafolio_path(etapa: "M", id: @portafolio.id)) %>">
+          <%= link_to edit_portafolio_path(etapa: "M", id: @portafolio.id) do %>
+            <i class="fa fa-bullseye"></i><span>Ivas contables</span>
+          <% end %>
+        </li>
+
+      <% end %>
+
+    </ul>
+  </section>
+</aside>

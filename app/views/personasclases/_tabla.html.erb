@@ -1,0 +1,19 @@
+<div class="table-responsive">
+  <table class="table table-bordered table-condensed table-striped">
+    <thead>
+      <tr>
+        <th width="8%"  class="text-center">Acciones</th>
+        <th width="25%">Usuario / Fecha</th>
+        <th width="15%">Horario</th>
+        <th width="15%">Placa</th>
+        <th width="22%">Instructor</th>
+        <th width="15%">Fecha Clase</th>
+      </tr>
+    </thead>
+    <tbody id="tbody_personasclases">
+      <% persona.personasclases.each do |pc| %>
+        <%= render 'personasclases/tr', personasclase: pc, persona: persona %>
+      <% end %>
+    </tbody>
+  </table>
+</div>

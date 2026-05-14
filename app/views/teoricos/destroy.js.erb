@@ -1,0 +1,15 @@
+$(".alert_flash").fadeOut(300, function() { $(this).remove(); });
+
+<% if @persona.teoricos.count == 0 %>
+  $("#teoricos").html("<div class=\"alert alert-warning\"><h4><i class=\"icon fa fa-info\"></i> Atencion</h4>No hay pruebas teoricas registradas.</div>");
+<% else %>
+  $("#teorico_<%= @teorico.id %>").remove();
+<% end %>
+
+$(".flash_messages").html("<%= j render "layouts/flash_messages" %>");
+
+setTimeout(function() {
+  $(".alert_flash").fadeOut(300, function() { $(this).remove(); });
+}, 5000);
+
+$(".tooltip").tooltip("hide");

@@ -1,0 +1,60 @@
+<%# Tab activo según parámetro o por defecto datos básicos %>
+<% active_tab = params[:tab] || 'basicos' %>
+
+<div class="nav-tabs-custom">
+  <ul class="nav nav-tabs">
+    <li class="<%= active_tab == 'basicos'   ? 'active' : '' %>">
+      <a href="#tab-basicos"  data-toggle="tab"><i class="fa fa-user"></i> Datos Básicos</a>
+    </li>
+    <% unless @persona.new_record? %>
+      <li class="<%= active_tab == 'tramites'  ? 'active' : '' %>">
+        <a href="#tab-tramites" data-toggle="tab"><i class="fa fa-file-text"></i> Información Trámite</a>
+      </li>
+      <li class="<%= active_tab == 'clases'    ? 'active' : '' %>">
+        <a href="#tab-clases"   data-toggle="tab"><i class="fa fa-graduation-cap"></i> Clases Dictadas</a>
+      </li>
+      <li class="<%= active_tab == 'teorico'   ? 'active' : '' %>">
+        <a href="#tab-teorico"  data-toggle="tab"><i class="fa fa-book"></i> Prueba Teórica</a>
+      </li>
+    <% end %>
+  </ul>
+
+  <div class="tab-content">
+
+    <%# ── TAB 1: Datos Básicos ── %>
+    <div class="tab-pane <%= active_tab == 'basicos' ? 'active' : '' %>" id="tab-basicos">
+      <%= render 'form', persona: @persona %>
+    </div>
+
+    <% unless @persona.new_record? %>
+
+      <%# ── TAB 2: Información Trámite ── %>
+      <div class="tab-pane <%= active_tab == 'tramites' ? 'active' : '' %>" id="tab-tramites">
+        <div id="personastramites_tab">
+          <%= render 'personastramites/personastramites',
+                persona: @persona,
+                personastramite: @personastramite %>
+        </div>
+      </div>
+
+      <%# ── TAB 3: Clases Dictadas ── %>
+      <div class="tab-pane <%= active_tab == 'clases' ? 'active' : '' %>" id="tab-clases">
+        <div id="personasclases_tab">
+          <%= render 'personasclases/personasclases',
+                persona: @persona,
+                personasclase: @personasclase %>
+        </div>
+      </div>
+
+      <%# ── TAB 4: Prueba Teórica ── %>
+      <div class="tab-pane <%= active_tab == 'teorico' ? 'active' : '' %>" id="tab-teorico">
+        <div id="teoricos_tab">
+          <%= render 'teoricos/teoricos',
+                persona: @persona,
+                teorico: @teorico %>
+        </div>
+      </div>
+
+    <% end %>
+  </div>
+</div>

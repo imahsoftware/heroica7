@@ -1,0 +1,5 @@
+<% if @portafolio.etapa.to_s == 'A' %>
+  <%= render partial: "form", locals: { portafolio: @portafolio } %>
+<% elsif @portafolio.etapa.to_s == 'B' %>
+  <%= render 'portafolioscuentas/portafolioscuentas' %>
+<% end %>

@@ -1,0 +1,31 @@
+<tr id="teorico_<%= teorico.id %>">
+  <td class="text-center">
+    <%= link_to informe_persona_teorico_path(persona, teorico),
+        target: "_blank", class: "btn btn-xs btn-info",
+        title: "Informe Prueba", data: { toggle: "tooltip" } do %>
+      <i class="fa fa-file-text-o"></i>
+    <% end %>
+    <% if permiso("teorico","E").to_s == "S" %>
+      <%= link_to persona_teorico_path(persona, teorico),
+          remote: true, method: :delete,
+          data: { confirm: "Seguro?", toggle: "tooltip" },
+          title: "Eliminar" do %>
+        <button class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></button>
+      <% end %>
+    <% end %>
+  </td>
+  <td>
+    <small>
+      <%= teorico.created_at.strftime("%Y-%m-%d %X") rescue nil %> -
+      <%= teorico.user.username rescue nil %>
+    </small>
+  </td>
+  <td><%= teorico.categoria.codigo_nuevo rescue teorico.categoria.nombre rescue nil %></td>
+  <td class="text-center"><%= teorico.correctas rescue nil %></td>
+  <td class="text-center"><%= teorico.incorrectas rescue nil %></td>
+  <td class="text-center">
+    <span class="label label-<%= teorico.estado == "PENDIENTE" ? "warning" : "success" %>">
+      <%= teorico.estado %>
+    </span>
+  </td>
+</tr>

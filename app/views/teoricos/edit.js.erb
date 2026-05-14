@@ -1,0 +1,12 @@
+$("#teorico_form").collapse("hide");
+$("#teorico_form").empty();
+
+<% if @active_record.present? %>
+  $("#teorico_<%= @active_record.id %>").replaceWith("<%= j render "tr", teorico: @active_record, persona: @persona %>");
+<% end %>
+
+$("#teorico_<%= @teorico.id %>").html("<td colspan=\"6\"><%= j render "form" %></td>");
+$("#teorico_<%= @teorico.id %>").addClass("active_teorico");
+
+$(".tooltip").tooltip("hide");
+$("[data-toggle=\"tooltip\"]").tooltip();

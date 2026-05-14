@@ -1,0 +1,6 @@
+<div class="page-header"><h3>Registro de Solicitud</h3></div>
+<p><strong>Persona:</strong> <%= @personastramite.persona.nombres rescue nil %></p>
+<p><strong>Categoría:</strong> <%= @personastramite.categoria.nombre rescue nil %></p>
+<p><strong>Trámite:</strong> <%= @personastramite.tipostramite.descripcion rescue nil %></p>
+<p><strong>Documento Anterior:</strong> <%= @personastramite.documento_anterior %></p>
+<p><strong>Identificación Anterior:</strong> <%= @personastramite.identificacion_anterior %></p>

@@ -1,0 +1,7 @@
+<% if @active_record.present? %>
+  $("#teorico_<%= @active_record.id %>").replaceWith("<%= j render "tr", teorico: @active_record, persona: @persona %>");
+<% end %>
+$("#teorico_form").html("<%= j render "form" %>");
+$(".tooltip").tooltip("hide");
+$("[data-toggle=\"tooltip\"]").tooltip();
+$("#teorico_form").collapse("show");

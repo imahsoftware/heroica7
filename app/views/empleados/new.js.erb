@@ -1,0 +1,8 @@
+<% if @active_record.present? %>
+  $("#empleado_<%= @active_record.id %>").replaceWith("<%= j render 'tr', empleado: @active_record %>");
+<% end %>
+$("#empleado_form").html("<%= j render 'form' %>");
+$(".tooltip").tooltip("hide");
+$('[data-toggle="tooltip"]').tooltip();
+$("#empleado_form").collapse("show");
+$(".select2").select2();

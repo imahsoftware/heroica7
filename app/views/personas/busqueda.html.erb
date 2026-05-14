@@ -1,0 +1,136 @@
+<% title 'Personas' rescue nil %>
+
+<div class="box box-usuarios">
+  <div class="box-header">
+    <span class="box-title">
+      <i class="fa fa-users"></i> Información Usuarios
+    </span>
+    <div class="box-tools pull-right">
+      <%= link_to new_persona_path, class: 'btn btn-sm btn-success', title: 'Nueva persona' do %>
+        <i class="fa fa-plus"></i> Nuevo
+      <% end %>
+    </div>
+  </div>
+
+  <div class="box-body">
+
+    <%# ── Búsqueda por identificación / nombre ── %>
+    <div class="box box-default">
+      <div class="box-header with-border">
+        <h3 class="box-title"><i class="fa fa-search"></i> Buscar Usuario</h3>
+      </div>
+      <div class="box-body">
+        <%= form_tag buscar_personas_path, method: :get do %>
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Identificación</label>
+                <%= text_field_tag :buscarident, params[:buscarident],
+                    class: 'form-control', placeholder: 'Número de identificación' %>
+              </div>
+            </div>
+            <div class="col-md-5">
+              <div class="form-group">
+                <label>Nombre</label>
+                <%= text_field_tag :buscarnombre, params[:buscarnombre],
+                    class: 'form-control', placeholder: 'Nombre completo o parcial' %>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <label>&nbsp;</label><br>
+                <%= submit_tag 'Buscar', name: nil,
+                    class: 'btn btn-primary', data: { disable_with: 'Buscando...' } %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <%# ── Informe SIET ── %>
+    <div class="box box-default">
+      <div class="box-header with-border">
+        <h3 class="box-title"><i class="fa fa-file-excel-o"></i> Informe SIET</h3>
+      </div>
+      <div class="box-body">
+        <%= form_tag informesiet_personas_path, method: :get do %>
+          <div class="row">
+            <div class="col-md-3">
+              <div class="form-group">
+                <label>Fecha Inicial</label>
+                <%= text_field_tag 'ubicacion[inicial]', nil,
+                    class: 'form-control datepicker', placeholder: 'YYYY-MM-DD' %>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <label>Fecha Final</label>
+                <%= text_field_tag 'ubicacion[final]', nil,
+                    class: 'form-control datepicker', placeholder: 'YYYY-MM-DD' %>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Categoría</label>
+                <%= select_tag 'ubicacion[categoria_id]',
+                    options_from_collection_for_select(Categoria.all, :id, :nombre),
+                    include_blank: true, class: 'form-control select2' %>
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="form-group">
+                <label>&nbsp;</label><br>
+                <%= submit_tag 'Generar', name: nil, class: 'btn btn-warning' %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <%# ── Informe Datos Básicos ── %>
+    <div class="box box-default">
+      <div class="box-header with-border">
+        <h3 class="box-title"><i class="fa fa-file-excel-o"></i> Informe Datos Básicos</h3>
+      </div>
+      <div class="box-body">
+        <%= form_tag informeper_personas_path, method: :get do %>
+          <div class="row">
+            <div class="col-md-3">
+              <div class="form-group">
+                <label>Fecha Inicial</label>
+                <%= text_field_tag 'ubicacion[inicial1]', nil,
+                    class: 'form-control datepicker', placeholder: 'YYYY-MM-DD' %>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <label>Fecha Final</label>
+                <%= text_field_tag 'ubicacion[final1]', nil,
+                    class: 'form-control datepicker', placeholder: 'YYYY-MM-DD' %>
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="form-group">
+                <label>&nbsp;</label><br>
+                <%= submit_tag 'Generar', name: nil, class: 'btn btn-warning' %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  $('.datepicker').datepicker({
+    dayNamesMin: ["Dom","Lun","Mar","Mie","Jue","Vie","Sáb"],
+    monthNamesShort: ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"],
+    dateFormat: "yy-mm-dd", yearRange: '1990:2030',
+    changeMonth: true, changeYear: true
+  });
+  $('.select2').select2();
+</script>

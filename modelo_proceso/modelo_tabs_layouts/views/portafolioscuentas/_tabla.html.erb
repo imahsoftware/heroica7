@@ -1,0 +1,19 @@
+<div class="table-responsive">
+  <table class="table table-bordered table-condensed table-striped">
+	  <thead class="thcolor">
+      <tr>
+        <td width="10%"></td>
+        <th class="text-left">Descripción</th>
+				<th width="20%" class="text-left text-table">Contables</th>
+        <th width="12%" class="text-left text-table">Nro Cuenta</th>
+				<th width="12%" class="text-center text-table">Tipo</th>
+        <th width="12%" class="text-center text-table">Estado</th>
+      </tr>
+    </thead>
+	  <tbody id="tbody_portafolioscuentas">
+	    <% @portafolio.portafolioscuentas.order(id: :desc).each do |portafolioscuenta| %>
+	      <%= render 'portafolioscuentas/tr', portafolioscuenta: portafolioscuenta %>
+	    <% end %>
+	  </tbody>
+	</table>
+</div>

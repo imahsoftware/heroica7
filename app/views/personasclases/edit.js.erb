@@ -1,0 +1,13 @@
+$("#personasclase_form").collapse("hide");
+$("#personasclase_form").empty();
+
+<% if @active_record.present? %>
+  $("#personasclase_<%= @active_record.id %>").replaceWith("<%= j render "tr", personasclase: @active_record, persona: @persona %>");
+<% end %>
+
+$("#personasclase_<%= @personasclase.id %>").html("<td colspan=\"6\"><%= j render "form" %></td>");
+$("#personasclase_<%= @personasclase.id %>").addClass("active_personasclase");
+
+$(".select2").select2();
+$(".tooltip").tooltip("hide");
+$("[data-toggle=\"tooltip\"]").tooltip();

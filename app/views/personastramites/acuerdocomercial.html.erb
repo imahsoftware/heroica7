@@ -1,0 +1,6 @@
+<%# Acuerdo comercial — layout cartas %>
+<div class="page-header"><h3>Acuerdo Comercial</h3></div>
+<p><strong>Persona:</strong> <%= @personastramite.persona.nombres rescue nil %></p>
+<p><strong>Identificación:</strong> <%= @personastramite.persona.identificacion rescue nil %></p>
+<p><strong>Categoría:</strong> <%= @personastramite.categoria.nombre rescue nil %></p>
+<p><strong>Trámite:</strong> <%= @personastramite.tipostramite.descripcion rescue nil %></p>

@@ -1,0 +1,16 @@
+<div class="page-header"><h3>Registro de Clase</h3></div>
+<p><strong>Persona:</strong> <%= @personastramite.persona.nombres rescue nil %></p>
+<p><strong>Categoría:</strong> <%= @personastramite.categoria.nombre rescue nil %></p>
+<p><strong>Trámite:</strong> <%= @personastramite.tipostramite.descripcion rescue nil %></p>
+<% if @personastramite.personastramiteshoras.exists? %>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Fecha</th><th>Prácticas</th><th>Teóricas</th><th>Taller</th><th>Total</th><th>Instructor<        <th>Fecha</th><th>Prácticas</th><th>Teóricas</th><th>Taller</th><th>Total</th><th>Instructor<        <th>Fecha</th><th>Prácticas</th><th>Teóricas</th><th>Taller</th><th>Total</th><th>Instructor<        <th>Fecha</th><th>Prácticas</th><th>Teóricas</th><th>Taller</th><th>Total</th><th>Instructor<         <td><%= h.instructor.nombre rescue nil %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>No hay horas registradas.</p>
+<% end %>

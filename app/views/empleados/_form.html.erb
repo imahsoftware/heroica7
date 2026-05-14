@@ -1,0 +1,77 @@
+<%= simple_form_for @empleado, remote: true do |f| %>
+  <div class="bs-callout">
+    <div class="row">
+      <div class="col-md-4">
+        <%= f.input :identificacion, input_html: { class: 'clean' } %>
+      </div>
+      <div class="col-md-4">
+        <%= f.input :nombre, input_html: { class: 'clean', onchange: 'this.value=this.value.toUpperCase();' } %>
+      </div>
+      <div class="col-md-4">
+        <%= f.input :cargo, input_html: { class: 'clean', onchange: 'this.value=this.value.toUpperCase();' } %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <%= f.input :banco, input_html: { class: 'clean', onchange: 'this.value=this.value.toUpperCase();' } %>
+      </div>
+      <div class="col-md-4">
+        <%= f.input :cuenta, input_html: { class: 'clean', onchange: 'this.value=this.value.toUpperCase();' } %>
+      </div>
+      <div class="col-md-4">
+        <%= f.input :salud, input_html: { class: 'clean', onchange: 'this.value=this.value.toUpperCase();' } %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <%= f.input :pension, input_html: { class: 'clean', onchange: 'this.value=this.value.toUpperCase();' } %>
+      </div>
+      <div class="col-md-4">
+        <%= f.input :salario, input_html: { class: 'clean' } %>
+      </div>
+      <div class="col-md-4">
+        <%= f.input :estado, as: :select,
+            collection: { 'ACTIVO' => 'A', 'INACTIVO' => 'I' },
+            input_html: { class: 'select2 clean' },
+            include_blank: true,
+            label: 'Estado' %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <%= f.input :instructor, as: :select,
+            collection: { 'SI' => 'SI', 'NO' => 'NO' },
+            input_html: { class: 'select2 clean' },
+            include_blank: true,
+            label: 'Instructor de Conducción' %>
+      </div>
+    </div>
+    <% unless @empleado.new_record? %>
+      <div class="row">
+        <div class="col-md-12">
+          <small class="text-muted">
+            Última Actualización: <%= @empleado.updated_at.strftime('%Y-%m-%d %X') %>
+          </small>
+        </div>
+      </div>
+    <% end %>
+    <div class="row" style="margin-top: 10px;">
+      <div class="col-md-6">
+        <% if @empleado.new_record? %>
+          <%= button_tag "#{t :cancelar}", type: 'button',
+              data: { target: '#empleado_form' },
+              class: 'cancel_button btn btn-flat btn-default pull-left',
+              aria_hidden: true %>
+        <% else %>
+          <%= link_to "#{t :cancelar}", empleado_path(@empleado),
+              class: 'btn btn-flat btn-default pull-left',
+              aria_hidden: true,
+              remote: true %>
+        <% end %>
+      </div>
+      <div class="col-md-6">
+        <%= f.button :submit, "#{t :guardar}", class: 'btn btn-danger pull-right' %>
+      </div>
+    </div>
+  </div>
+<% end %>

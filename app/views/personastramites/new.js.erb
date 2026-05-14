@@ -1,0 +1,8 @@
+<% if @active_record.present? %>
+  $("#personastramite_<%= @active_record.id %>").replaceWith("<%= j render 'tr', personastramite: @active_record, persona: @persona %>");
+<% end %>
+$("#personastramite_form").html("<%= j render 'form' %>");
+$(".tooltip").tooltip("hide");
+$('[data-toggle="tooltip"]').tooltip();
+$("#personastramite_form").collapse("show");
+$(".select2").select2();

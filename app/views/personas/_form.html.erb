@@ -1,0 +1,270 @@
+<%= simple_form_for @persona, html: { multipart: true } do |f| %>
+  <div class="box box-primary">
+    <div class="box-header with-border">
+      <h3 class="box-title"><i class="fa fa-user"></i> Datos Básicos</h3>
+      <% unless @persona.new_record? %>
+        <div class="box-tools pull-right">
+          <span class="label label-danger">
+            Última actualización:
+            <%= User.find(@persona.user_id).username rescue nil %> -
+            <%= @persona.updated_at.strftime('%Y-%m-%d %X') rescue nil %>
+          </span>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="box-body">
+
+      <%# ── Foto + Identificación ── %>
+      <div class="row">
+        <div class="col-md-2 text-center">
+          <% if @persona.respond_to?(:personasimagen_file_name) && @persona.personasimagen_file_name.present? %>
+            <img src="/system/personasimagenes/<%= @persona.id %>/original/<%= @persona.personasimagen_file_name %>"
+                 height="120" width="120" class="img-thumbnail" alt="Foto" />
+          <% else %>
+            <img src="/images/noFoto.jpg" height="100" width="100" class="img-thumbnail" alt="Sin foto" />
+          <% end %>
+        </div>
+
+        <div class="col-md-10">
+          <div class="row">
+            <div class="col-md-2">
+              <%= f.input :documento, as: :select,
+                  collection: { 'C.C.' => 'CC', 'T.I.' => 'TI', 'NIT' => 'NIT',
+                                'PAS' => 'PAS', 'C.E.' => 'CE' },
+                  include_blank: true,
+                  input_html: { class: 'select2 clean' },
+                  label: 'Documento' %>
+            </div>
+            <div class="col-md-2">
+              <%= f.input :identificacion, input_html: { class: 'clean' }, label: 'Identificación *' %>
+            </div>
+            <div class="col-md-3">
+              <%= f.input :expedida, input_html: { class: 'clean', onchange: 'this.value=this.value.toUpperCase();' }, label: 'Expedida en *' %>
+            </div>
+            <div class="col-md-3">
+              <%= f.input :primer_nombre, input_html: { class: 'clean', onchange: 'this.value=this.value.toUpperCase();' }, label: 'Primer Nombre *' %>
+            </div>
+            <div class="col-md-2">
+              <%= f.input :segundo_nombre, input_html: { class: 'clean', onchange: 'this.value=this.value.toUpperCase();' }, label: 'Segundo Nombre' %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-3">
+              <%= f.input :primer_apellido, input_html: { class: 'clean', onchange: 'this.value=this.value.toUpperCase();' }, label: 'Primer Apellido *' %>
+            </div>
+            <div class="col-md-3">
+              <%= f.input :segundo_apellido, input_html: { class: 'clean', onchange: 'this.value=this.value.toUpperCase();' }, label: 'Segundo Apellido' %>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <label>Género</label><br>
+                <label class="radio-inline">
+                  <%= f.radio_button :genero, 'true' %> Masculino
+                </label>
+                <label class="radio-inline">
+                  <%= f.radio_button :genero, 'false' %> Femenino
+                </label>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <%= f.input :fecha_nacimiento, as: :string,
+                  input_html: { class: 'datepicker clean', readonly: true },
+                  label: 'Fecha Nacimiento' %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <hr>
+
+      <%# ── Datos personales ── %>
+      <div class="row">
+        <div class="col-md-3">
+          <%= f.input :lugar_nacimiento, input_html: { class: 'clean', onchange: 'this.value=this.value.toUpperCase();' }, label: 'Lugar Nacimiento' %>
+        </div>
+        <div class="col-md-1">
+          <%= f.input :factor, input_html: { class: 'clean', onchange: 'this.value=this.value.toUpperCase();' }, label: 'Factor' %>
+        </div>
+        <div class="col-md-1">
+          <%= f.input :rh, input_html: { class: 'clean', onchange: 'this.value=this.value.toUpperCase();' }, label: 'RH' %>
+        </div>
+        <div class="col-md-3">
+          <%= f.input :jornada, as: :select,
+              collection: [['DIURNA','1) DIURNA'],['NOCTURNA','2) NOCTURNA'],['FIN DE SEMANA','3) FIN DE SEMANA']],
+              include_blank: true,
+              input_html: { class: 'select2 clean' },
+              label: 'Jornada' %>
+        </div>
+        <div class="col-md-4">
+          <%= f.input :estado_civil, as: :select,
+              collection: [['SOLTERO','1) SOLTERO'],['CASADO','2) CASADO'],
+                           ['UNIÓN LIBRE','3) UNIÓN LIBRE'],['SEPARADO','4) SEPARADO'],
+                           ['VIUDO','5) VIUDO'],['DIVORCIADO','6) DIVORCIADO'],
+                           ['SIN INFORMACIÓN','7) SIN INFORMACIÓN']],
+              include_blank: true,
+              input_html: { class: 'select2 clean' },
+              label: 'Estado Civil' %>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-2">
+          <%= f.input :estrato, as: :select,
+              collection: [['1','1) 1'],['2','2) 2'],['3','3) 3'],
+                           ['4','4) 4'],['5','5) 5'],['6','6) 6'],
+                           ['SIN INFORMACIÓN','99) SIN INFORMACIÓN']],
+              include_blank: true,
+              input_html: { class: 'select2 clean' },
+              label: 'Estrato' %>
+        </div>
+        <div class="col-md-4">
+          <%= f.input :nivel_formacion, as: :select,
+              collection: [['PREESCOLAR','1) PREESCOLAR'],['BÁSICA PRIMARIA','2) BÁSICA PRIMARIA'],
+                           ['BÁSICA SECUNDARIA','3) BÁSICA SECUNDARIA'],['MEDIA','4) MEDIA'],
+                           ['PREGRADO','5) PREGRADO'],['POSTGRADO','6) POSTGRADO'],
+                           ['SIN ESTUDIOS','7) SIN ESTUDIOS'],['TÉCNICO LABORAL','8) TÉCNICO LABORAL'],
+                           ['SIN INFORMACIÓN','99) SIN INFORMACIÓN']],
+              include_blank: true,
+              input_html: { class: 'select2 clean' },
+              label: 'Nivel de Formación' %>
+        </div>
+        <div class="col-md-3">
+          <%= f.input :ocupacion, as: :select,
+              collection: [['EMPLEADO','1) EMPLEADO'],
+                           ['ESTUDIANTE. BÁSICA / MEDIA','2) ESTUDIANTE. BÁSICA / MEDIA'],
+                           ['ESTUDIANTE SUPERIOR','3) ESTUDIANTE SUPERIOR'],
+                           ['DESEMPLEADO','4) DESEMPLEADO'],
+                           ['INDEPENDIENTE','5) INDEPENDIENTE']],
+              include_blank: true,
+              input_html: { class: 'select2 clean' },
+              label: 'Ocupación' %>
+        </div>
+        <div class="col-md-3">
+          <%= f.input :discapacidad, as: :select,
+              collection: [['SORDERA PROFUNDA','1) SORDERA PROFUNDA'],
+                           ['HIPOACUSIA A BAJA AUDICIÓN','2) HIPOACUSIA A BAJA AUDICIÓN'],
+                           ['BAJA VISIÓN DIAGNOSTICA','3) BAJA VISIÓN DIAGNOSTICA'],
+                           ['CEGUERA','4) CEGUERA'],['PARÁLISIS CEREBRAL','5) PARÁLISIS CEREBRAL'],
+                           ['LESIÓN NEUROMUSCULAR','6) LESIÓN NEUROMUSCULAR'],
+                           ['DEFICIENCIA COGNITIVA','7) DEFICIENCIA COGNITIVA'],
+                           ['NO APLICA','9) NO APLICA']],
+              include_blank: true,
+              input_html: { class: 'select2 clean' },
+              label: 'Discapacidad' %>
+        </div>
+      </div>
+
+      <hr>
+
+      <%# ── Contacto ── %>
+      <div class="row">
+        <div class="col-md-4">
+          <%= f.input :lugar_origen, as: :select,
+              collection: select_municipios_colombia,
+              include_blank: true,
+              input_html: { class: 'select2 clean' },
+              label: 'Lugar de Origen' %>
+        </div>
+        <div class="col-md-4">
+          <%= f.input :direccion, input_html: { class: 'clean', onchange: 'this.value=this.value.toUpperCase();' }, label: 'Dirección' %>
+        </div>
+        <div class="col-md-4">
+          <%= f.input :email, input_html: { class: 'clean' }, label: 'Correo Electrónico' %>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-2">
+          <%= f.input :telefono, input_html: { class: 'clean' }, label: 'Teléfono 1' %>
+        </div>
+        <div class="col-md-2">
+          <%= f.input :telefono_oficina, input_html: { class: 'clean' }, label: 'Teléfono 2' %>
+        </div>
+        <div class="col-md-2">
+          <%= f.input :celular, input_html: { class: 'clean' }, label: 'Celular' %>
+        </div>
+        <div class="col-md-6">
+          <%= f.input :regimen, as: :select,
+              collection: [['SISBEN V2 - Nivel 1','1) SISBEN V2 - Nivel 1'],
+                           ['SISBEN V2 - Nivel 2','2) SISBEN V2 - Nivel 2'],
+                           ['SISBEN V2 - Nivel 3','3) SISBEN V2 - Nivel 3'],
+                           ['ALIANSALUD EPS S.A.','14) ALIANSALUD EPS S.A.'],
+                           ['Compensar EPS','17) Compensar EPS'],
+                           ['Coomeva EPS','18) Coomeva EPS'],
+                           ['EPS Sura','21) EPS Sura'],
+                           ['Nueva EPS','30) Nueva Promotora de Salud - Nueva EPS'],
+                           ['Salud Total EPS','32) Salud Total EPS'],
+                           ['Saludcoop EPS','35) Saludcoop EPS  Organismo Cooperativo'],
+                           ['Sanitas EPS','36) Sanitas EPS'],
+                           ['SIN INFORMACION','99) SIN INFORMACION']],
+              include_blank: true,
+              input_html: { class: 'select2 clean' },
+              label: 'Régimen de Salud' %>
+        </div>
+      </div>
+
+      <hr>
+
+      <%# ── Multiculturalidad ── %>
+      <div class="row">
+        <div class="col-md-12">
+          <label>Multiculturalidad</label><br>
+          <label class="checkbox-inline">
+            <%= f.check_box :multi_indigena, {}, 'SI', 'NO' %> Indígena
+          </label>
+          <label class="checkbox-inline">
+            <%= f.check_box :multi_afro, {}, 'SI', 'NO' %> Afrodescendiente
+          </label>
+          <label class="checkbox-inline">
+            <%= f.check_box :multi_desplazado, {}, 'SI', 'NO' %> Desplazado
+          </label>
+          <label class="checkbox-inline">
+            <%= f.check_box :multi_pobfrontera, {}, 'SI', 'NO' %> Población de Frontera
+          </label>
+          <label class="checkbox-inline">
+            <%= f.check_box :multi_cabeza, {}, 'SI', 'NO' %> Cabeza de Familia
+          </label>
+          <label class="checkbox-inline">
+            <%= f.check_box :multi_reinsertado, {}, 'SI', 'NO' %> Reinsertado
+          </label>
+          <label class="checkbox-inline">
+            <%= f.check_box :multi_pobroom, {}, 'SI', 'NO' %> Población Room
+          </label>
+        </div>
+      </div>
+
+      <hr>
+
+      <%# ── Fotografía ── %>
+      <div class="row">
+        <div class="col-md-4">
+          <%= f.input :personasimagen, as: :file, label: 'Fotografía' %>
+        </div>
+      </div>
+
+    </div><%# /.box-body %>
+
+    <div class="box-footer">
+      <div class="box-tools pull-right">
+        <% if permiso("persona","A").to_s == "S" || @persona.new_record? %>
+          <%= f.button :submit, 'Guardar', class: 'btn btn-danger',
+              data: { disable_with: 'Guardando...' } %>
+        <% end %>
+      </div>
+      <%= link_to busqueda_personas_path, class: 'btn btn-default' do %>
+        <i class="fa fa-arrow-left"></i> Buscar Usuario
+      <% end %>
+    </div>
+  </div>
+<% end %>
+
+<script>
+  $('.select2').select2();
+  $('.datepicker').datepicker({
+    dayNamesMin: ["Dom","Lun","Mar","Mie","Jue","Vie","Sáb"],
+    monthNamesShort: ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"],
+    dateFormat: "yy-mm-dd", yearRange: '1930:2030',
+    changeMonth: true, changeYear: true
+  });
+</script>

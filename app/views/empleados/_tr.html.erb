@@ -1,0 +1,33 @@
+<tr id="empleado_<%= empleado.id %>">
+  <td class="text-center">
+    <%= link_to edit_empleado_path(empleado), remote: true,
+        class: 'edit_empleado_button',
+        title: t(:title_editar),
+        data: { toggle: 'tooltip' } do %>
+      <button class="btn btn-xs btn-warning btn-accion"><i class="fa fa-edit"></i></button>
+    <% end %>
+    <%= link_to empleado_path(empleado), remote: true,
+        method: :delete,
+        title: t(:title_elimina),
+        data: { confirm: t(:elimina_confirma), toggle: 'tooltip' } do %>
+      <button class="btn btn-xs btn-danger btn-accion"><i class="fa fa-trash"></i></button>
+    <% end %>
+  </td>
+  <td><%= empleado.identificacion %></td>
+  <td><%= empleado.nombre %></td>
+  <td><%= empleado.cargo %></td>
+  <td class="text-center">
+    <% if empleado.instructor.present? %>
+      <span class="badge-activo <%= empleado.instructor == 'SI' ? 'si' : 'no' %>">
+        <%= empleado.instructor %>
+      </span>
+    <% else %>
+      <span class="text-muted">—</span>
+    <% end %>
+  </td>
+  <td class="text-center">
+    <span class="badge-activo <%= empleado.estado == 'A' ? 'si' : 'no' %>">
+      <%= empleado.destado %>
+    </span>
+  </td>
+</tr>

@@ -1,0 +1,92 @@
+<%= simple_form_for [@persona, @personastramite], remote: true do |f| %>
+  <div class="bs-callout">
+    <div class="row">
+      <div class="col-md-4">
+        <%= f.input :categoria_id, as: :select,
+            collection: Categoria.all.collect { |p| [p.nombre, p.id] },
+            include_blank: true,
+            input_html: { class: 'select2 clean' },
+            label: 'Categoría' %>
+      </div>
+      <div class="col-md-4">
+        <%= f.input :tipostramite_id, as: :select,
+            collection: Tipostramite.all.collect { |p| [p.descripcion, p.id] },
+            include_blank: true,
+            input_html: { class: 'select2 clean' },
+            label: 'Trámite' %>
+      </div>
+      <div class="col-md-4">
+        <%= f.input :placa_id, as: :select,
+            collection: Placa.where("instructor_id IS NOT NULL AND estado = 'A'")
+                             .collect { |p| ["#{p.descripcion} - #{p.instructor.nombre rescue ''}", p.id] },
+            include_blank: true,
+            input_html: { class: 'select2 clean' },
+            label: 'Placa - Instructor' %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <%= f.input :documento_anterior,
+            input_html: { class: 'clean', onchange: 'this.value=this.value.toUpperCase();' },
+            label: 'Documento Anterior' %>
+      </div>
+      <div class="col-md-4">
+        <%= f.input :identificacion_anterior,
+            input_html: { class: 'clean', onchange: 'this.value=this.value.toUpperCase();' },
+            label: 'Identificación Anterior' %>
+      </div>
+      <div class="col-md-4">
+        <%= f.input :empresa_id, as: :select,
+            collection: Empresa.order(:nombre).collect { |p| ["#{p.nombre} - #{p.identificacion}", p.id] },
+            include_blank: true,
+            input_html: { class: 'select2 clean' },
+            label: 'Empresa' %>
+      </div>
+    </div>
+
+    <%# Restricciones %>
+    <div class="row">
+      <div class="col-md-12">
+        <label>Restricciones</label>
+        <div class="row">
+          <% [
+            [:restriccion_01, 'Debe conducir con lentes'],
+            [:restriccion_02, 'No puede conducir de noche'],
+            [:restriccion_03, 'Menor de 18 años. No puede conducir por carretera'],
+            [:restriccion_04, 'Diseño especial de vehículo'],
+            [:restriccion_05, 'Debe conducir con aparato ortopédico'],
+            [:restriccion_06, 'No puede conducir conjunto de vehículos'],
+            [:restriccion_07, 'No puede conducir otro tipo de vehículo'],
+            [:restriccion_99, 'Otra']
+          ].each do |campo, etiqueta| %>
+            <div class="col-md-6">
+              <%= f.input campo, as: :select,
+                  collection: { 'SI' => 'SI', 'NO' => 'NO' },
+                  include_blank: true,
+                  input_html: { class: 'select2 clean', style: 'width:70px' },
+                  label: etiqueta %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <div class="row" style="margin-top:10px;">
+      <div class="col-md-6">
+        <% if @personastramite.new_record? %>
+          <%= button_tag t(:cancelar), type: 'button',
+              data: { target: '#personastramite_form' },
+              class: 'cancel_button btn btn-flat btn-default pull-left' %>
+        <% else %>
+          <%= link_to t(:cancelar),
+              persona_personastramite_path(@persona, @personastramite),
+              class: 'btn btn-flat btn-default pull-left',
+              remote: true %>
+        <% end %>
+      </div>
+      <div class="col-md-6">
+        <%= f.button :submit, t(:guardar), class: 'btn btn-danger pull-right' %>
+      </div>
+    </div>
+  </div>
+<% end %>

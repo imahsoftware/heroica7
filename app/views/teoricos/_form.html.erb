@@ -1,0 +1,36 @@
+<%= simple_form_for [@persona, @teorico], remote: true do |f| %>
+  <div class="bs-callout">
+    <div class="row">
+      <div class="col-md-4">
+        <%= f.input :fecha, as: :string,
+            input_html: { class: "datepicker clean", readonly: true },
+            label: "Fecha programacion prueba" %>
+      </div>
+    </div>
+    <div class="row" style="margin-top:10px;">
+      <div class="col-md-6">
+        <% if @teorico.new_record? %>
+          <%= button_tag t(:cancelar), type: "button",
+              data: { target: "#teorico_form" },
+              class: "cancel_button btn btn-flat btn-default pull-left" %>
+        <% else %>
+          <%= link_to t(:cancelar),
+              persona_teorico_path(@persona, @teorico),
+              class: "btn btn-flat btn-default pull-left",
+              remote: true %>
+        <% end %>
+      </div>
+      <div class="col-md-6">
+        <%= f.button :submit, t(:guardar), class: "btn btn-danger pull-right" %>
+      </div>
+    </div>
+  </div>
+<% end %>
+<script>
+  $(".datepicker").datepicker({
+    dayNamesMin: ["Dom","Lun","Mar","Mie","Jue","Vie","Sab"],
+    monthNamesShort: ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"],
+    dateFormat: "yy-mm-dd", yearRange: "2000:2030",
+    changeMonth: true, changeYear: true
+  });
+</script>

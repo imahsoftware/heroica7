@@ -1,31 +1,43 @@
 <aside class="main-sidebar">
   <section class="sidebar">
-    <div class="user-panel">
-      <div class="row">
-        <div align="center"><%= image_tag 'logonuevo.png', class: 'user-image', size: '190x90' %></div>
-      </div>
-    </div>
-    <!-- Sidebar Menu -->
     <ul class="sidebar-menu" data-widget="tree">
+
       <li>
-        <%= link_to personas_path do %>
-          <i class="fa fa-arrow-left text-success"></i> Regresar a Personas
+        <%= link_to busqueda_personas_path do %>
+          <i class="fa fa-arrow-left text-danger"></i> Regresar a búsqueda
         <% end %>
       </li>
+
+      <li class="header"><%= t :menu rescue 'Menú' %></li>
+
+      <% if defined?(@persona) && @persona&.persisted? %>
+
+        <li class="<%= active_class(edit_persona_path(@persona)) rescue '' %>">
+          <%= link_to edit_persona_path(@persona) do %>
+            <i class="fa fa-user"></i><span>Datos Básicos</span>
+          <% end %>
+        </li>
+
+        <li class="<%= active_class(persona_personastramites_path(@persona)) rescue '' %>">
+          <%= link_to edit_persona_path(@persona, tab: 'tramites') do %>
+            <i class="fa fa-file-text"></i><span>Información Trámite</span>
+          <% end %>
+        </li>
+
+        <li class="<%= active_class(persona_personasclases_path(@persona)) rescue '' %>">
+          <%= link_to edit_persona_path(@persona, tab: 'clases') do %>
+            <i class="fa fa-graduation-cap"></i><span>Clases Dictadas</span>
+          <% end %>
+        </li>
+
+        <li class="<%= active_class(persona_teoricos_path(@persona)) rescue '' %>">
+          <%= link_to edit_persona_path(@persona, tab: 'teorico') do %>
+            <i class="fa fa-book"></i><span>Prueba Teórica</span>
+          <% end %>
+        </li>
+
+      <% end %>
+
     </ul>
-    <% unless @persona.new_record? %>
-      <% if @persona.personasimagenes.where(descripcion: "FOTO").exists? %>
-        <div align="center"><%=@persona.img_foto rescue nil %></div>
-      <% end -%>
-    <% end -%>
-    <div align="center"><%=@persona.img_firma rescue nil %></div>
-    <div align="center"><%=@persona.img_huellad rescue nil %></div>
   </section>
 </aside>
-<div class="modal fade" id="camara">
-  <div class="modal-dialog" style="width: 700px;">
-    <div class="modal-content" style="width: 700px;">
-    </div>
-  </div>
-</div>
-

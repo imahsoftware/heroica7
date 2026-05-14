@@ -1,0 +1,49 @@
+<div class="box box-usuarios">
+  <div class="box-header">
+    <span class="box-title">
+      <i class="fa fa-users"></i> Resultados de Búsqueda
+    </span>
+    <div class="box-tools pull-right">
+      <%= link_to busqueda_personas_path, class: 'btn btn-sm btn-default' do %>
+        <i class="fa fa-arrow-left"></i> Volver
+      <% end %>
+    </div>
+  </div>
+
+  <div class="box-body">
+    <div class="table-responsive">
+      <table class="table table-bordered table-condensed table-striped">
+        <thead>
+          <tr>
+            <th width="20%">Identificación</th>
+            <th width="60%">Nombre</th>
+            <th width="20%" class="text-center">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @personas.each do |persona| %>
+            <tr>
+              <td><%= persona.identificacion %></td>
+              <td>
+                <%= [persona.primer_nombre, persona.segundo_nombre,
+                     persona.primer_apellido, persona.segundo_apellido]
+                      .compact.reject(&:blank?).join(' ') %>
+              </td>
+              <td class="text-center">
+                <%= link_to edit_persona_path(persona), class: 'btn btn-xs btn-warning',
+                    title: 'Editar' do %>
+                  <i class="fa fa-edit"></i> Editar
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <span class="badge"><%= @personas.count %></span> registros encontrados
+      </div>
+    </div>
+  </div>
+</div>

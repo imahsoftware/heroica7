@@ -1,0 +1,35 @@
+<div class="box box-primary">
+  <div class="box-header with-border">
+    <h3 class="box-title"><i class="fa fa-book"></i> Informe Prueba Teorica</h3>
+  </div>
+  <div class="box-body">
+    <p><strong>Persona:</strong> <%= @teorico.persona.nombres rescue nil %></p>
+    <p><strong>Categoria:</strong> <%= @teorico.categoria.nombre rescue nil %></p>
+    <p><strong>Estado:</strong> <%= @teorico.estado %></p>
+    <p><strong>Correctas:</strong> <%= @teorico.correctas %> &nbsp; <strong>Incorrectas:</strong> <%= @teorico.incorrectas %></p>
+    <% if @teoricosresultados.any? %>
+      <table class="table table-bordered table-condensed">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Pregunta</th>
+            <th class="text-center">Estado</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @teoricosresultados.each do |r| %>
+            <tr>
+              <td><%= r.consecutivo %></td>
+              <td><%= r.pregunta.descripcion rescue nil %></td>
+              <td class="text-center">
+                <span class="label label-<%= r.estado == "C" ? "success" : "danger" %>">
+                  <%= r.destado %>
+                </span>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,143 @@
+<tr id="personastramite_<%= personastramite.id %>">
+  <td class="text-center">
+    <% unless personastramite.factura_id %>
+      <% if permiso("personastramite","A").to_s == "S" %>
+        <%= link_to edit_persona_personastramite_path(persona, personastramite),
+            remote: true, title: 'Editar', data: { toggle: 'tooltip' } do %>
+          <button class="btn btn-xs btn-warning"><i class="fa fa-edit"></i></button>
+        <% end %>
+      <% end %>
+      <% if permiso("personastramite","E").to_s == "S" %>
+        <%= link_to persona_personastramite_path(persona, personastramite),
+            remote: true, method: :delete,
+            data: { confirm: '¿Seguro que desea eliminar?', toggle: 'tooltip' },
+            title: 'Eliminar' do %>
+          <button class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></button>
+        <% end %>
+      <% end %>
+    <% else %>
+      <% if permiso("personastramiteesp","A").to_s == "S" %>
+        <%= link_to edit_persona_personastramite_path(persona, personastramite),
+            remote: true, title: 'Editar (especial)', data: { toggle: 'tooltip' } do %>
+          <button class="btn btn-xs btn-warning"><i class="fa fa-edit"></i></button>
+        <% end %>
+      <% end %>
+    <% end %>
+  </td>
+
+  <td>
+    <small>
+      <%= personastramite.created_at.strftime('%Y-%m-%d %X') rescue nil %> -
+      <%= personastramite.user.username rescue nil %><br>
+      <%= personastramite.updated_at.strftime('%Y-%m-%d %X') rescue nil %> -
+      <%= User.find(personastramite.user_actualiza).username rescue nil %>
+    </small>
+  </td>
+
+  <td>
+    <%= personastramite.categoria.nombre rescue nil %><br>
+    <small><%= personastramite.tipostramite.descripcion rescue nil %></small>
+    <% if personastramite.empresa_id %>
+      <br><small>Empresa: <%= personastramite.empresa.nombre rescue nil %></small>
+    <% end %>
+  </td>
+
+  <td><%= personastramite.placa.descripcion rescue nil %></td>
+
+  <td class="text-center">
+    <div class="btn-group btn-group-xs">
+      <%= link_to registroclase_persona_personastramite_path(persona, personastramite),
+          target: '_blank', class: 'btn btn-xs btn-default', title: 'Registro Clase',
+          data: { toggle: 'tooltip' } do %>
+        <i class="fa fa-list-alt"></i>
+      <% end %>
+      <%= link_to registrosolicitud_persona_personastramite_path(persona, personastramite),
+          target: '_blank', class: 'btn btn-xs btn-default', title: 'Registro Solicitud',
+          data: { toggle: 'tooltip' } do %>
+        <i class="fa fa-file-text-o"></i>
+      <% end %>
+      <%= link_to teorico_persona_personastramite_path(persona, personastramite),
+          target: '_blank', class: 'btn btn-xs btn-info', title: 'Programar Teórico',
+          data: { toggle: 'tooltip' } do %>
+        <i class="fa fa-book"></i>
+      <% end %>
+      <%= link_to acuerdocomercial_persona_personastramite_path(persona, personastramite),
+          target: '_blank', class: 'btn btn-xs btn-default', title: 'Acuerdo Comercial',
+          data: { toggle: 'tooltip' } do %>
+        <i class="fa fa-handshake-o"></i>
+      <% end %>
+      <%= link_to diploma_persona_personastramite_path(persona, personastramite,
+              nombredip: 'MANEJO DEFENSIVO, NORMAS DE TRANSITO Y SEGURIDAD VIAL'),
+          target: '_blank', class: 'btn btn-xs btn-success', title: 'Diploma Manejo Defensivo',
+          data: { toggle: 'tooltip' } do %>
+        <i class="fa fa-certificate"></i>
+      <% end %>
+      <%= link_to practica_persona_personastramite_path(persona, personastramite),
+          target: '_blank', class: 'btn btn-xs btn-primary', title: 'Evaluación Práctica Vehículo',
+          data: { toggle: 'tooltip' } do %>
+        <i class="fa fa-car"></i>
+      <% end %>
+      <%= link_to practicam_persona_personastramite_path(persona, personastramite),
+          target: '_blank', class: 'btn btn-xs btn-primary', title: 'Evaluación Práctica Motos',
+          data: { toggle: 'tooltip' } do %>
+        <i class="fa fa-motorcycle"></i>
+      <% end %>
+    </div>
+  </td>
+
+  <td class="text-center">
+    <% if personastramite.factura_id %>
+      <%= link_to facturacero(personastramite.factura.nro_factura),
+          verfactura_facturas_path(factura_id: personastramite.factura_id),
+          target: '_blank', class: 'btn btn-xs btn-success' %>
+    <% else %>
+      <%= link_to crearfactura_persona_personastramite_path(persona, personastramite,
+              tipostramite_id: personastramite.tipostramite_id,
+              categoria_id:    personastramite.categoria_id),
+          target: '_blank',
+          data: { confirm: '¿Está seguro que desea Generar Factura?' },
+          class: 'btn btn-xs btn-warning', title: 'Generar Factura' do %>
+        <i class="fa fa-file-invoice-dollar"></i> Facturar
+      <% end %>
+    <% end %>
+  </td>
+
+  <td class="text-center">
+    <%= link_to hora_personastramiteshoras_path(personastramite.id),
+        class: 'btn btn-xs btn-info', title: 'Ver Horas' do %>
+      <i class="fa fa-clock-o"></i> Horas
+    <% end %>
+  </td>
+</tr>
+
+<%# Sub-tabla de horas si existen %>
+<% if personastramite.personastramiteshoras.exists? %>
+  <tr>
+    <td colspan="7">
+      <table class="table table-condensed table-bordered" style="margin:0; font-size:11px;">
+        <thead>
+          <tr class="active">
+            <th>Fecha</th>
+            <th class="text-center">Horas Prácticas</th>
+            <th class="text-center">Horas Teóricas</th>
+            <th class="text-center">Horas Taller</th>
+            <th class="text-center">Total</th>
+            <th>Instructor</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% personastramite.personastramiteshoras.each do |hora| %>
+            <tr>
+              <td><%= hora.fecha %></td>
+              <td class="text-center"><%= hora.practicas %></td>
+              <td class="text-center"><%= hora.teoricas %></td>
+              <td class="text-center"><%= hora.taller %></td>
+              <td class="text-center"><strong><%= hora.dtotal rescue nil %></strong></td>
+              <td><%= hora.instructor.nombre rescue nil %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </td>
+  </tr>
+<% end %>

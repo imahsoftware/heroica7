@@ -1,0 +1,3 @@
+$("#empleado_<%= @empleado.id %>").replaceWith("<%= j render 'tr', empleado: @empleado %>");
+
+$('[data-toggle="tooltip"]').tooltip();

@@ -1,0 +1,30 @@
+<%= stylesheet_link_tag 'scaffold' rescue nil %>
+<div class="page-header">
+  <h3>Informe Datos Personas</h3>
+</div>
+<table border="1">
+  <tr valign="middle" style="font-family: Tahoma; font-size: 10px;">
+    <td><strong>FECHA DE INGRESO</strong></td>
+    <td><strong>TIPO DE IDENTIFICACIÓN</strong></td>
+    <td><strong>NÚMERO DE IDENTIFICACIÓN</strong></td>
+    <td><strong>NOMBRES</strong></td>
+    <td><strong>APELLIDOS</strong></td>
+    <td><strong>Telefono 1</strong></td>
+    <td><strong>Telefono 2</strong></td>
+    <td><strong>Celular</strong></td>
+    <td><strong>Email</strong></td>
+  </tr>
+<% @personas.each do |persona| %>
+  <tr valign="middle" style="font-family: Tahoma; font-size: 10px;">
+    <td><%= persona.created_at rescue nil %></td>
+    <td><%= persona.siet_tipodocumento rescue nil %></td>
+    <td><%= persona.identificacion rescue nil %></td>
+    <td><%= persona.siet_nombres rescue nil %></td>
+    <td><%= persona.siet_apellidos rescue nil %></td>
+    <td><%= persona.telefono rescue nil %></td>
+    <td><%= persona.telefono_oficina rescue nil %></td>
+    <td><%= persona.celular rescue nil %></td>
+    <td><%= persona.email rescue nil %></td>
+  </tr>
+<% end %>
+</table>
