@@ -1,6 +1,239 @@
-<div class="page-header"><h3>Registro de Solicitud</h3></div>
-<p><strong>Persona:</strong> <%= @personastramite.persona.nombres rescue nil %></p>
-<p><strong>Categoría:</strong> <%= @personastramite.categoria.nombre rescue nil %></p>
-<p><strong>Trámite:</strong> <%= @personastramite.tipostramite.descripcion rescue nil %></p>
-<p><strong>Documento Anterior:</strong> <%= @personastramite.documento_anterior %></p>
-<p><strong>Identificación Anterior:</strong> <%= @personastramite.identificacion_anterior %></p>
+<br/>
+<div align="center">
+
+  <%# ── Encabezado ─────────────────────────────────────────────────────────── %>
+  <table width="850" height="77" border="0" cellpadding="0" cellspacing="0" class="sample">
+    <tr>
+      <td width="250" rowspan="2" valign="middle">
+        <div align="center">
+          <img src="/images/<%= Parametro.find(10).valor.to_s %>">
+        </div>
+      </td>
+      <td width="395" rowspan="2">
+        <div align="center" class="camposDescN16">SOLICITUD</div>
+      </td>
+      <td width="92" height="40">
+        <div align="center">VERSION</div>
+      </td>
+      <td width="113">
+        <div align="center">02</div>
+      </td>
+    </tr>
+    <tr>
+      <td height="40">
+        <div align="center">FECHA</div>
+      </td>
+      <td>
+        <div align="center">27/04/2011</div>
+      </td>
+    </tr>
+  </table>
+
+  <%# ── Datos del alumno ───────────────────────────────────────────────────── %>
+  <table width="850" border="0" cellspacing="5" cellpadding="0">
+    <tr>
+      <td width="30%" valign="top">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="sample">
+          <tr>
+            <td width="50%" class="camposDescN11">
+              <div align="center">FOTOGRAFIA</div>
+            </td>
+            <td width="50%" class="camposDescN11">
+              <div align="center">IDENTIFICACION BIOMETRICA</div>
+            </td>
+          </tr>
+          <tr>
+            <td width="50%" height="120" class="camposDescN12">
+              <div align="center">
+                <% if @personastramite.persona.personasimagen_file_name %>
+                  <img src="/system/personasimagenes/<%= @personastramite.persona_id %>/original/<%= @personastramite.persona.personasimagen_file_name rescue nil %>"
+                       height="120" width="120" border="0" title="Fotografia"/>
+                <% else %>
+                  <img src="/images/noFoto.jpg" border="0" height="100" width="100" title="No Fotografia"/>
+                <% end %>
+              </div>
+            </td>
+            <td width="50%" height="120" class="camposDesc11" valign="bottom">
+              <div align="center">Indice Derecho</div>
+            </td>
+          </tr>
+        </table>
+      </td>
+      <td width="70%">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="sample">
+          <tr>
+            <td width="25%" height="20" class="camposDescN12">
+              <div align="left">Consecutivo:</div>
+            </td>
+            <td width="70%" class="camposDesc12">
+              <div align="left">&nbsp;<%= @personastramite.id %></div>
+            </td>
+          </tr>
+          <tr>
+            <td class="camposDescN12" height="20">
+              <div align="left">Alumno:</div>
+            </td>
+            <td class="camposDesc12">
+              <div align="left">
+                &nbsp;<%= @personastramite.persona.identificacion rescue nil %>
+                - <%= @personastramite.persona.nombres rescue nil %>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td class="camposDescN12" height="20">
+              <div align="left">Fecha Nacimiento:</div>
+            </td>
+            <td class="camposDesc12">
+              <div align="left">
+                &nbsp;<%= @personastramite.persona.fecha_nacimiento rescue nil %>
+                - <%= @personastramite.persona.lugar_nacimiento rescue nil %>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td class="camposDescN12" height="20">
+              <div align="left">Direccion:</div>
+            </td>
+            <td class="camposDesc12">
+              <div align="left">&nbsp;<%= @personastramite.persona.direccion rescue nil %></div>
+            </td>
+          </tr>
+          <tr>
+            <td class="camposDescN12" height="20">
+              <div align="left">Telefonos:</div>
+            </td>
+            <td class="camposDesc12">
+              <div align="left">
+                &nbsp;<%= @personastramite.persona.telefono rescue nil %>
+                - <%= @personastramite.persona.telefono_oficina rescue nil %>
+                - <%= @personastramite.persona.celular rescue nil %>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td class="camposDescN12" height="20">
+              <div align="left">Categoria:</div>
+            </td>
+            <td class="camposDesc12">
+              <div align="left">&nbsp;<%= @personastramite.categoria.codigo_nuevo rescue nil %></div>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+
+  <%# horario, fechainicial, teohorario y teofechainicial vienen del controlador %>
+
+  <%# ── Tabla de horarios ──────────────────────────────────────────────────── %>
+  <table width="850" border="0" cellspacing="0" cellpadding="0" class="sample">
+    <tr valign="middle">
+      <td width="251" class="camposDescN14">
+        <div align="center">HORARIOS</div>
+      </td>
+      <td>
+        <div align="center">
+          <table width="100%" border="0" cellspacing="0" cellpadding="0" class="sample">
+            <tr>
+              <td width="243" class="camposDescN14">
+                <div align="center"></div>
+              </td>
+              <td>
+                <div align="center" class="camposDescN12">FECHA</div>
+              </td>
+              <td>
+                <div align="center" class="camposDescN12">HORARIOS</div>
+              </td>
+            </tr>
+            <tr>
+              <td class="camposDescN14" rowspan="2">
+                <div align="center">TEORIA Y TALLER</div>
+              </td>
+              <td>
+                <div align="center">Lunes a Jueves</div>
+              </td>
+              <td>
+                <div align="center">02:00 p.m a 06:00 p.m</div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div align="center">Lunes a Viernes</div>
+              </td>
+              <td>
+                <div align="center">06:00 p.m a 10:00 p.m</div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div align="center" class="camposDescN14">PRACTICA</div>
+              </td>
+              <td>
+                <div align="center">Lunes a Viernes</div>
+              </td>
+              <td>
+                <div align="center">06:00 a.m a 06:00 p.m</div>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </td>
+    </tr>
+  </table>
+
+  <br/>
+
+  <%# ── Declaración ────────────────────────────────────────────────────────── %>
+  <table width="850" border="0" cellspacing="0" cellpadding="0" class="sample">
+    <tr>
+      <td height="50">
+        <div align="center" class="camposDescN14">
+          Declaro que toda la informacion que suministrare durante el proceso sera verdadera
+          y acepto cumplir con los requisitos para la formacion a la que aspiro y proporcionare
+          cualquier informacion necesaria para la evaluacion.
+        </div>
+      </td>
+    </tr>
+  </table>
+
+  <%# ── Firmas ─────────────────────────────────────────────────────────────── %>
+  <table width="850" border="0" cellspacing="0" cellpadding="0">
+    <tr valign="bottom">
+      <td width="416" height="50">
+        <div align="center">______________________________________</div>
+      </td>
+      <td width="43">&nbsp;</td>
+      <td width="391" height="50">
+        <div align="center">______________________________________</div>
+      </td>
+    </tr>
+    <tr>
+      <td class="camposDescN12">
+        <div align="center">FIRMA DEL ASPIRANTE</div>
+      </td>
+      <td>&nbsp;</td>
+      <td class="camposDescN12">
+        <div align="center">FIRMA AUTORIZADA</div>
+      </td>
+    </tr>
+  </table>
+
+  <%# ── Pie de página ──────────────────────────────────────────────────────── %>
+  <table width="760" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td width="60%" class="camposDesc11">
+        <div align="left">
+          <%= Time.now.strftime("%Y-%m-%d %X") %> - <%= User.find(is_admin).nombre rescue nil %>
+        </div>
+      </td>
+      <td width="40%" class="camposDesc11">
+        <div align="right">
+          <a href="javascript:window.print()" class="imprimirlink">Imprimir</a>&nbsp;&nbsp;
+        </div>
+      </td>
+    </tr>
+  </table>
+
+</div>
+<br/>

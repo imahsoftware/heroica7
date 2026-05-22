@@ -40,9 +40,21 @@
         </tbody>
       </table>
     </div>
+
     <div class="row">
-      <div class="col-xs-12">
-        <span class="badge"><%= @personas.count %></span> registros encontrados
+      <div class="col-xs-12 col-sm-6">
+        <span class="badge"><%= @total_personas %></span> registros encontrados
+        &nbsp;|&nbsp; Página <%= @personas.current_page %> de <%= @personas.total_pages %>
+      </div>
+      <div class="col-xs-12 col-sm-6 text-right">
+        <%= will_paginate @personas,
+              renderer:          'BootstrapPagination::Rails',
+              previous_label:    '&laquo; Anterior'.html_safe,
+              next_label:        'Siguiente &raquo;'.html_safe,
+              inner_window:      2,
+              outer_window:      1,
+              params:            { buscarident: params[:buscarident],
+                                   buscarnombre: params[:buscarnombre] } %>
       </div>
     </div>
   </div>

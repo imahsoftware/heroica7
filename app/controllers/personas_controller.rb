@@ -17,13 +17,20 @@ class PersonasController < ApplicationController
 
   # GET /personas/buscar  — búsqueda por identificación y/o nombre
   def buscar
-    @personas = Persona.buscar(params[:buscarident], params[:buscarnombre])
-    if @personas.count == 1
-      redirect_to edit_persona_path(@personas.first)
-    elsif @personas.count == 0
-      flash[:notice] = 'No hay informacion de la busqueda'
-      redirect_to busqueda_personas_path
+    resultados = Persona.buscar(params[:buscarident], params[:buscarnombre])
+
+    # Redirige directo al edit solo cuando la búsqueda es por identificación exacta
+    if params[:buscarident].present? && params[:buscarnombre].blank? && resultados.count == 1
+      redirect_to edit_persona_path(resultados.first) and return
     end
+
+    if resultados.count == 0
+      flash[:notice] = 'No hay informacion de la busqueda'
+      redirect_to busqueda_personas_path and return
+    end
+
+    @personas       = resultados.paginate(page: params[:page], per_page: 20)
+    @total_personas = resultados.count
   rescue StandardError
     flash[:notice] = 'Debe digitar datos para la consulta'
     redirect_to busqueda_personas_path

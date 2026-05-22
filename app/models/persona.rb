@@ -7,6 +7,7 @@ class Persona < ApplicationRecord
   has_many :abonos
   has_many :teoricos
   has_many :teoricosresultados
+  has_many :programacioneshorarios
 
   validates :identificacion, presence: true, uniqueness: true, numericality: true
   validates :primer_nombre,  presence: true

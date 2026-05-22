@@ -79,10 +79,24 @@ class PersonastramitesController < ApplicationController
 
   # GET /personas/:persona_id/personastramites/:id/registroclase
   def registroclase
+    programacion = Programacioneshorario
+                     .where(persona_id: @personastramite.persona_id)
+                     .includes(:tiposhorario)
+                     .last
+    @horario      = programacion&.tiposhorario&.descripcion
+    @fechainicial = programacion&.fecha_inicial&.strftime('%Y-%m-%d')
   end
 
   # GET /personas/:persona_id/personastramites/:id/registrosolicitud
   def registrosolicitud
+    programacion = Programacioneshorario
+                     .where(persona_id: @personastramite.persona_id)
+                     .includes(:tiposhorario)
+                     .last
+    @horario          = programacion&.tiposhorario&.descripcion
+    @fechainicial     = programacion&.fecha_inicial&.strftime('%Y-%m-%d')
+    @teohorario       = programacion&.fecha_teoria&.strftime('%I:%M %p')
+    @teofechainicial  = programacion&.fecha_teoria&.strftime('%Y-%m-%d')
   end
 
   # GET /personas/:persona_id/personastramites/:id/diploma
@@ -92,6 +106,7 @@ class PersonastramitesController < ApplicationController
 
   # GET /personas/:persona_id/personastramites/:id/acuerdocomercial
   def acuerdocomercial
+    @teoricas, @taller, @practicas = horas_por_categoria(@personastramite.categoria_id)
   end
 
   # GET /personas/:persona_id/personastramites/:id/teorico
@@ -203,12 +218,24 @@ class PersonastramitesController < ApplicationController
   def set_layout
     if %w[crearfactura teorico].include?(action_name)
       'basico'
-    elsif %w[registroclase registrosolicitud].include?(action_name)
+    elsif %w[registroclase registrosolicitud acuerdocomercial].include?(action_name)
       'informes'
-    elsif %w[diploma acuerdocomercial].include?(action_name)
-      'cartas'
+    elsif %w[diploma].include?(action_name)
+      'basico'
     else
       'application_personas'
+    end
+  end
+
+  # Devuelve [teoricas, taller, practicas] según la categoría del trámite
+  def horas_por_categoria(categoria_id)
+    case categoria_id
+    when 1 then [25,  3,  8]
+    when 2 then [25,  3, 15]
+    when 3 then [25,  5, 20]
+    when 4 then [30,  5, 30]
+    when 5, 6 then [20, 10, 15]
+    else [0, 0, 0]
     end
   end
 end

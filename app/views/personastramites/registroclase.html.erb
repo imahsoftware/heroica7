@@ -1,16 +1,335 @@
-<div class="page-header"><h3>Registro de Clase</h3></div>
-<p><strong>Persona:</strong> <%= @personastramite.persona.nombres rescue nil %></p>
-<p><strong>Categoría:</strong> <%= @personastramite.categoria.nombre rescue nil %></p>
-<p><strong>Trámite:</strong> <%= @personastramite.tipostramite.descripcion rescue nil %></p>
-<% if @personastramite.personastramiteshoras.exists? %>
-  <table class="table table-bordered table-condensed">
-    <thead>
+<br/><div align="center">
+<table width="850" border="0" cellpadding="0" cellspacing="0" class="sample">
+  <tr>
+    <td width="250" rowspan="2" valign="middle"><div align="center"><img src="/images/<%=Parametro.find(10).valor.to_s%>" height="70"></img></div></td>
+    <td width="395" rowspan="2"><div align="center" class="camposDescN16">REGISTRO DE CLASES <br/>PRACTICAS Y TEORICAS </div></td>
+    <td width="92"><div align="center" class="camposDesc12">VERSION</div></td>
+    <td width="113"><div align="center" class="camposDesc12">03</div></td>
+  </tr>
+  <tr>
+    <td><div align="center" class="camposDesc12">FECHA</div></td>
+    <td><div align="center" class="camposDesc12">28/04/2011</div></td>
+  </tr>
+</table>
+<table width="850"  border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><table width="100%"  border="0" cellspacing="0" cellpadding="0">
       <tr>
-        <th>Fecha</th><th>Prácticas</th><th>Teóricas</th><th>Taller</th><th>Total</th><th>Instructor<        <th>Fecha</th><th>Prácticas</th><th>Teóricas</th><th>Taller</th><th>Total</th><th>Instructor<        <th>Fecha</th><th>Prácticas</th><th>Teóricas</th><th>Taller</th><th>Total</th><th>Instructor<        <th>Fecha</th><th>Prácticas</th><th>Teóricas</th><th>Taller</th><th>Total</th><th>Instructor<         <td><%= h.instructor.nombre rescue nil %></td>
+        <td width="20%" valign="top"><div align="center">
+           <%  if @personastramite.persona.personasimagen_file_name %>
+             <img src="/system/personasimagenes/<%=@personastramite.persona_id%>/original/<%=@personastramite.persona.personasimagen_file_name rescue nil%>" height="120" width="150" border="0" title="Fotografia" />
+          <%  else %>
+            <img src="/images/noFoto.jpg" border="0" height="100" width="100" title="No Fotografia" />
+          <%  end %>
+          </div></td>
+        <td width="80%"><table width="100%"  border="0" cellspacing="0" cellpadding="0" class="sample">
+          <tr>
+            <td width="132" class="camposDescN12"><div align="left">Alumno:</div></td>
+            <td colspan="3" class="camposDesc12"><div align="left">&nbsp;<%=@personastramite.persona.identificacion rescue nil%> - <%=@personastramite.persona.nombres rescue nil%></div></td>
+          </tr>
+          <tr>
+            <td class="camposDescN12"><div align="left">Fecha Nacimiento:</div> </td>
+            <td colspan="3" class="camposDesc12"><div align="left">&nbsp;<%=@personastramite.persona.fecha_nacimiento rescue nil%> - <%=@personastramite.persona.lugar_nacimiento rescue nil%></div></td>
+          </tr>
+          <tr>
+            <td class="camposDescN12"><div align="left">Direccion:</div></td>
+            <td colspan="3" class="camposDesc12"><div align="left">&nbsp;<%=@personastramite.persona.direccion rescue nil%></div></td>
+          </tr>
+          <tr>
+            <td class="camposDescN12"><div align="left">Telefonos:</div></td>
+            <td colspan="3" class="camposDesc12"><div align="left">&nbsp;<%=@personastramite.persona.telefono rescue nil%> - <%=@personastramite.persona.telefono_oficina rescue nil%> - <%=@personastramite.persona.celular rescue nil%></div></td>
+          </tr>
+          <%# horario y fechainicial vienen del controlador %>
+          <tr>
+            <td class="camposDescN12"><div align="left">Horario:</div></td>
+            <td width="238" class="camposDesc12"><div align="left">&nbsp;<%= @horario %></div></td>
+            <td width="100" class="camposDescN12"><div align="left">Fecha Inicial: </div></td>
+            <td width="88" class="camposDesc12"><div align="left">&nbsp;<%= @fechainicial %></div></td>
+          </tr>
+          <tr>
+            <td class="camposDescN12"><div align="left">Instructor:</div></td>
+            <td class="camposDesc12"><div align="left">&nbsp;<%=@personastramite.placa.descripcion rescue nil%> - <%=@personastramite.placa.instructor.nombre rescue nil%></div></td>
+            <td class="camposDescN12"><div align="left">Categoria:</div></td>
+            <td class="camposDesc12"><div align="left">&nbsp;<%=@personastramite.categoria.codigo_nuevo rescue nil%></div></td>
+          </tr>
+        </table></td>
+      </tr>
+    </table>
+<table width="850"  border="0" cellspacing="0" cellpadding="0" class="sample">
+  <tr>
+    <td ><div align="center" class="camposDescN11">CLASE</div></td>
+    <td width="122"><div align="center" class="camposDescN11">FECHA</div></td>
+    <td width="428"><div align="center" class="camposDescN11">TEMA</div></td>
+    <td width="236"><div align="center" class="camposDescN11">FIRMA</div></td>
+  </tr>
+  <tr>
+    <td ><div align="center" class="camposDescN11">1</div></td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td ><div align="center" class="camposDescN11">2</div></td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td ><div align="center" class="camposDescN11">3</div></td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td ><div align="center" class="camposDescN11">4</div></td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td ><div align="center" class="camposDescN11">5</div></td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td ><div align="center" class="camposDescN11">6</div></td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td ><div align="center" class="camposDescN11">7</div></td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td ><div align="center" class="camposDescN11">8</div></td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td ><div align="center" class="camposDescN11">9</div></td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td ><div align="center" class="camposDescN11">10</div></td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td ><div align="center" class="camposDescN11">11</div></td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td ><div align="center" class="camposDescN11">12</div></td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td ><div align="center" class="camposDescN11">13</div></td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td ><div align="center" class="camposDescN11">14</div></td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td ><div align="center" class="camposDescN11">15</div></td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td ><div align="center" class="camposDescN11">16</div></td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td ><div align="center" class="camposDescN11">17</div></td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td ><div align="center" class="camposDescN11">18</div></td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td ><div align="center" class="camposDescN11">19</div></td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td ><div align="center" class="camposDescN11">20</div></td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td ><div align="center" class="camposDescN11">21</div></td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td ><div align="center" class="camposDescN11">22</div></td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td ><div align="center" class="camposDescN11">23</div></td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td ><div align="center" class="camposDescN11">24</div></td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td ><div align="center" class="camposDescN11">25</div></td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td ><div align="center" class="camposDescN11">26</div></td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td ><div align="center" class="camposDescN11">27</div></td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td ><div align="center" class="camposDescN11">28</div></td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td ><div align="center" class="camposDescN11">29</div></td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td ><div align="center" class="camposDescN11">30</div></td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+</table>
+    </td>
+  </tr>
+</table>
+<table width="850"  border="0" cellspacing="0" cellpadding="0" class="sample">
+  <tr>
+    <td rowspan="9" width="200"><div align="center" class="camposDescN12">FORMACION TEORICA Y BASICA APLICADA </div></td>
+  </tr>
+  <tr>
+    <td><div align="center" class="camposDescN11">INT.</div></td>
+    <td width="15%"><div align="center" class="camposDescN11">FECHA</div></td>
+    <td width="30%"><div align="center" class="camposDescN11">TEMA</div></td>
+    <td width="30%"><div align="center" class="camposDescN11">FIRMA</div></td>
+  </tr>
+  <tr>
+    <td ><div align="center" class="camposDescN11"> </div></td>
+    <td>&nbsp;</td>
+    <td><div align="left" class="camposDesc11">1- Movilidad segura y sostenible</div></td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td ><div align="center" class="camposDescN11"></div></td>
+    <td>&nbsp;</td>
+    <td><div align="left" class="camposDesc11">2- Normas de Tránsito</div></td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td ><div align="center" class="camposDescN11"></div></td>
+    <td>&nbsp;</td>
+    <td><div align="left" class="camposDesc11">3- Señalización vial</div></td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td ><div align="center" class="camposDescN11"></div></td>
+    <td>&nbsp;</td>
+    <td><div align="left" class="camposDesc11">4- Infraestructura Vial</div></td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td ><div align="center" class="camposDescN11"></div></td>
+    <td>&nbsp;</td>
+    <td><div align="left" class="camposDesc11">5- Saberes Específicos</div></td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td ><div align="center" class="camposDescN11"></div></td>
+    <td>&nbsp;</td>
+    <td><div align="left" class="camposDesc11">6- Primeros Auxilios</div></td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td ><div align="center" class="camposDescN11"></div></td>
+    <td>&nbsp;</td>
+    <td><div align="left" class="camposDesc11">7- Horas Vehículo</div></td>
+    <td>&nbsp;</td>
+  </tr>
+</table>
+<table width="850"  border="0" cellspacing="0" cellpadding="0" class="sample">
+  <tr>
+    <td  colspan="3"><div align="center" class="camposDescN12">ESTE ESPACIO ES DE USO EXCLUSIVO DEL INSTRUCTOR DE CONDUCCI&Oacute;N</div></td>
+  </tr>
+  <tr>
+    <td width="251"><div align="center" class="camposDescN12">APROBACION DEL PROGRAMA PRACTICO</div></td>
+    <td width="243"><div align="center" class="camposDescN12">
+      <table width="100%" height="36"  border="0" cellpadding="0" cellspacing="0" class="sample">
+        <tr>
+          <td width="60%">CUMPLIO</td>
+          <td width="20%"><div align="center">SI</div></td>
+          <td width="20%"><div align="center">NO</div></td>
         </tr>
-      <% end %>
-    </tbody>
+      </table>
+    </div></td>
+    <td width="356" valign="bottom"><div align="center" class="camposDescN12">FIRMA INSTRUCTOR</div></td>
+  </tr>
+  <tr>
+    <td  colspan="3"><div align="center" class="camposDescN12">OBSERVACIONES</div></td>
+  </tr>
+  <tr>
+    <td height="30" colspan="3">&nbsp;</td>
+  </tr>
+</table>
+<table width="760"  border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td width="60%" height="10" class="camposDesc10"><div align="left"><%=Time.now.strftime("%Y-%m-%d %X")%> - <%=User.find(is_admin).nombre rescue nil%></div></td>
+    <td width="40%" height="10" class="camposDesc10"><div align="right"><a href="javascript:window.print()" class="imprimirlink">Imprimir</a>&nbsp;&nbsp;</div></td>
+  </tr>
   </table>
-<% else %>
-  <p>No hay horas registradas.</p>
-<% end %>
+  <%=flash[:factura]%>
+</div>
+<br/>
+<br/>
