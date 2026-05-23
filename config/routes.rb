@@ -194,8 +194,22 @@ Rails.application.routes.draw do
       get  'buscar'
       get  'verfactura'
       get  'informeclases'
+      get  'informe'
+      get  'informeimp'
+      get  'informeconsolidado'
+      get  'informeconsolidadoimp'
+      get  'informeclasesimp'
+    end
+    resources :detallesfacturas, only: [:create, :edit, :update, :destroy]
+    resources :abonos, only: [:create, :edit, :update, :destroy] do
+      member do
+        get 'anula'
+      end
     end
   end
+
+  # ─── Abonos (ver recibo independiente) ───────────────────────────────────────
+  get 'abonos/verabono', to: 'abonos#verabono', as: 'verabono_abono'
 
   # ─── Personas ───────────────────────────────────────────────────────────────
   resources :personas, only: [:new, :create, :edit, :update, :destroy] do

@@ -1,0 +1,41 @@
+<%# locals: editing (bool), det (Detallesfactura al editar) %>
+<% editing  ||= false %>
+<% det      ||= @detallesfactura %>
+<% form_url = editing ? factura_detallesfactura_path(@factura, det) : factura_detallesfacturas_path(@factura) %>
+
+<%= form_with url: form_url,
+      method: (editing ? :patch : :post),
+      data: { turbo_stream: true } do |f| %>
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <%= label_tag 'detallesfactura[concepto_id]', 'Concepto' %>
+        <%= select_tag 'detallesfactura[concepto_id]',
+              options_from_collection_for_select(Concepto.order(:descripcion), :id, :descripcion, det&.concepto_id),
+              include_blank: true,
+              class: 'form-control' %>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="form-group">
+        <%= label_tag 'detallesfactura[cantidad]', 'Cantidad' %>
+        <%= text_field_tag 'detallesfactura[cantidad]', det&.cantidad,
+              class: 'form-control', size: 5 %>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="form-group">
+        <%= label_tag 'detallesfactura[valor]', 'Valor' %>
+        <%= text_field_tag 'detallesfactura[valor]', det&.valor,
+              class: 'form-control', size: 20 %>
+      </div>
+    </div>
+    <div class="col-md-2" style="padding-top: 25px;">
+      <% if permiso('detallesfactura', 'A').to_s == 'S' %>
+        <%= submit_tag 'Guardar', class: 'btn btn-primary', disable_with: 'Guardando...' %>
+      <% end %>
+    </div>
+  </div>
+
+<% end %>

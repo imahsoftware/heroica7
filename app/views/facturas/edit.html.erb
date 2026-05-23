@@ -1,0 +1,108 @@
+<div class="box box-primary">
+  <div class="box-header with-border">
+    <h3 class="box-title"><i class="fa fa-file-text"></i> INFORMACION FACTURA</h3>
+    <div class="box-tools pull-right">
+      <%= link_to 'Buscar Factura', busqueda_facturas_path, class: 'btn btn-default btn-sm' %>
+    </div>
+  </div>
+  <div class="box-body">
+
+    <%# ── Tabs ──────────────────────────────────────────────────────────────── %>
+    <ul class="nav nav-tabs" id="facturaTabs" role="tablist">
+      <li class="nav-item active">
+        <a class="nav-link active" id="tab-factura" data-toggle="tab" href="#tab1" role="tab">
+          <i class="fa fa-file-text"></i> Factura
+        </a>
+      </li>
+      <% unless @factura.new_record? %>
+        <li class="nav-item">
+          <a class="nav-link" id="tab-abonos" data-toggle="tab" href="#tab2" role="tab">
+            <i class="fa fa-money"></i> Abonos
+          </a>
+        </li>
+      <% end %>
+    </ul>
+
+    <div class="tab-content" style="padding-top: 15px;">
+
+      <%# ── Tab Factura ───────────────────────────────────────────────────────── %>
+      <div class="tab-pane active" id="tab1" role="tabpanel">
+
+        <%= form_with model: @factura, local: true do |f| %>
+          <div class="row">
+            <div class="col-md-2">
+              <strong>Nro Factura</strong><br>
+              <%= link_to facturacero(@factura.nro_factura),
+                    verfactura_facturas_path(factura_id: @factura.id),
+                    target: '_blank',
+                    title: 'Ver Factura' %>
+            </div>
+            <div class="col-md-4">
+              <strong>Persona</strong><br>
+              <%= @factura.persona&.identificacion %> - <%= @factura.persona&.nombres %>
+            </div>
+            <div class="col-md-2">
+              <strong>Categoría</strong><br>
+              <%= @factura.categoria&.nombre %>
+            </div>
+            <div class="col-md-2">
+              <strong>Trámite</strong><br>
+              <%= @factura.tipostramite&.descripcion %>
+            </div>
+            <div class="col-md-2">
+              <strong>Estado</strong><br>
+              <%= @factura.destado %>
+            </div>
+          </div>
+
+          <hr>
+
+          <div class="row">
+            <div class="col-md-6">
+              <% unless @factura.new_record? %>
+                <small>
+                  Creado por: <strong><%= User.find(@factura.user_id).username rescue nil %></strong>
+                  el <%= @factura.created_at.strftime('%Y-%m-%d %H:%M:%S') %>
+                </small>
+              <% end %>
+            </div>
+            <div class="col-md-6 text-right">
+              <% if @factura.estado.to_s == 'A' %>
+                <small class="text-danger">
+                  Anulado por: <strong><%= User.find(@factura.user_anula).username rescue nil %></strong>
+                  el <%= @factura.updated_at.strftime('%Y-%m-%d %H:%M:%S') %>
+                </small>
+              <% else %>
+                <% if permiso('facturaanular', 'A').to_s == 'S' %>
+                  <%= f.submit 'Anular',
+                        class: 'btn btn-danger btn-sm',
+                        data: { confirm: '¿Está seguro que desea anular la Factura?' },
+                        disable_with: 'Anulando...' %>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+
+        <br>
+
+        <% unless @factura.new_record? %>
+          <div id="detallesfacturas_form">
+            <%= render partial: '/detallesfacturas/detallesfacturas' %>
+          </div>
+        <% end %>
+
+      </div><%# fin tab1 %>
+
+      <%# ── Tab Abonos ────────────────────────────────────────────────────────── %>
+      <% unless @factura.new_record? %>
+        <div class="tab-pane" id="tab2" role="tabpanel">
+          <div id="abonos_form">
+            <%= render partial: '/abonos/abonos' %>
+          </div>
+        </div>
+      <% end %>
+
+    </div><%# fin tab-content %>
+  </div><%# fin box-body %>
+</div><%# fin box %>

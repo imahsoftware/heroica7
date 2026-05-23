@@ -1,0 +1,40 @@
+<div class="box box-primary">
+  <div class="box-header with-border">
+    <h3 class="box-title"><i class="fa fa-search"></i> INFORMACION FACTURA</h3>
+    <div class="box-tools pull-right">
+      <%= link_to 'Buscar Factura', busqueda_facturas_path, class: 'btn btn-default btn-sm' %>
+    </div>
+  </div>
+  <div class="box-body">
+    <div class="table-responsive">
+      <table class="table table-bordered table-sm table-hover">
+        <thead>
+          <tr>
+            <th>Usuario</th>
+            <th>Nro Factura</th>
+            <th>Valor</th>
+            <th>Estado</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @facturas.each do |factura| %>
+            <tr>
+              <td>
+                <%= factura.persona&.identificacion %> -
+                <%= factura.persona&.nombres %>
+              </td>
+              <td><%= facturacero(factura.nro_factura) %></td>
+              <td><%= camponumerico(factura.valor) %></td>
+              <td><%= factura.destado %></td>
+              <td class="text-center">
+                <%= link_to 'Ver', edit_factura_path(factura), class: 'btn btn-xs btn-primary' %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <p class="text-muted">Nro Total de Registros: <strong><%= @facturas.count %></strong></p>
+  </div>
+</div>

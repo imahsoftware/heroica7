@@ -1,0 +1,94 @@
+<div align="center">
+  <br>
+  <%= render partial: 'encabezado_informe' %>
+  <br>
+
+  <table width="800" border="0" cellspacing="0" cellpadding="0" class="sample">
+    <thead>
+      <tr>
+        <td height="40" colspan="5" class="camposDescN16">
+          <div align="center">INFORME CONSOLIDADO RANGO DE FECHAS &nbsp; <%= @fch1 %> - <%= @fch2 %></div>
+        </td>
+      </tr>
+    </thead>
+  </table>
+  <br>
+
+  <%# ── Actividad conexa ──────────────────────────────────────────────────────── %>
+  <table width="500" border="0" cellspacing="0" cellpadding="0" class="sample">
+    <thead>
+      <tr><td height="20" colspan="4" class="camposDescN11">DETALLE DE ACTIVIDAD RELACIONADA / CONEXAS</td></tr>
+      <tr>
+        <td width="70%" height="20" class="camposDescN11"><div align="left">Descripcion</div></td>
+        <td width="10%" class="camposDescN11"><div align="center">Cant.</div></td>
+        <td width="20%" class="camposDescN11"><div align="center">Valor</div></td>
+      </tr>
+    </thead>
+    <% saldoactividad = 0
+       for objeto in @objetos
+         saldoactividad += objeto.val.to_i %>
+    <tr>
+      <td class="camposDesc11"><div align="left"><%= objeto.descripcion %></div></td>
+      <td class="camposDesc11"><div align="center"><%= objeto.cant %></div></td>
+      <td class="camposDesc11"><div align="right"><%= camponumerico(objeto.val) %>&nbsp;</div></td>
+    </tr>
+    <% end %>
+    <thead>
+      <tr>
+        <td height="20" colspan="2" class="camposDescN12"></td>
+        <td height="20" class="camposDescN12"><div align="right"><%= camponumerico(saldoactividad) %>&nbsp;</div></td>
+      </tr>
+    </thead>
+  </table>
+  <br>
+
+  <%# ── Egresos ───────────────────────────────────────────────────────────────── %>
+  <table width="800" border="0" cellspacing="0" cellpadding="0" class="sample">
+    <thead>
+      <tr><td height="20" colspan="5" class="camposDescN11">INFORMACION EGRESOS</td></tr>
+      <tr>
+        <td width="10%" height="20" class="camposDescN11"><div align="center">Nro Egreso</div></td>
+        <td width="15%" class="camposDescN11"><div align="center">Fecha</div></td>
+        <td class="camposDescN11">Observacion</td>
+        <td width="15%" class="camposDescN11"><div align="center">Forma de Pago</div></td>
+        <td width="15%" class="camposDescN11"><div align="center">Valor</div></td>
+      </tr>
+    </thead>
+    <% saldoegreso = 0
+       for egreso in @egresos
+         saldoegreso += egreso.valor.to_i if egreso.forma_pago.to_s == 'EFECTIVO' %>
+    <tr>
+      <td class="camposDesc11"><div align="center"><%= egreso.nro_egreso %></div></td>
+      <td class="camposDesc11"><div align="center"><%= egreso.fecha %></div></td>
+      <td class="camposDesc11"><%= egreso.observacion %></td>
+      <td class="camposDesc11"><div align="center"><%= egreso.forma_pago %></div></td>
+      <td class="camposDesc11"><div align="right"><%= camponumerico(egreso.valor) %>&nbsp;&nbsp;</div></td>
+    </tr>
+    <% end %>
+    <thead>
+      <tr>
+        <td height="20" colspan="4" class="camposDescN12"><div align="right">SUBTOTAL EGRESOS&nbsp;&nbsp;</div></td>
+        <td height="20" class="camposDescN12"><div align="right"><%= camponumerico(saldoegreso) %>&nbsp;&nbsp;</div></td>
+      </tr>
+    </thead>
+  </table>
+  <br>
+
+  <table width="800" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td width="60%" height="20" class="camposDesc11">
+        <div align="left"><%= Time.now.strftime('%Y-%m-%d %H:%M:%S') %> - <%= User.find(is_admin).nombre rescue nil %></div>
+      </td>
+      <td width="40%" height="20" class="camposDesc11">
+        <div align="right">
+          Pulse <%= link_to 'Aqui',
+                      informeconsolidadoimp_facturas_path(inicial: @fch1, final: @fch2),
+                      target: '_blank',
+                      title: 'Ver Diseño para imprimir' %> para imprimir
+          &nbsp;&nbsp;
+        </div>
+      </td>
+    </tr>
+  </table>
+</div>
+<br><br>

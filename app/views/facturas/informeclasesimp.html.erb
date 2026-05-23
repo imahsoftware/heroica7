@@ -1,0 +1,110 @@
+<div id="productheader">
+  <span class="tit_gr_azul">&nbsp;&nbsp;INFORMACION CLASES POR PERIODO</span>
+</div>
+<br>
+<div align="center">
+
+  <%# ── Tabla detalle por sesión ──────────────────────────────────────────────── %>
+  <table width="99%" border="0" cellspacing="0" cellpadding="0" class="sample">
+    <thead>
+      <tr>
+        <td height="40" colspan="10" class="camposDescN16">
+          <div align="center">INFORME RANGO DE FECHAS &nbsp; <%= @fch1 %> - <%= @fch2 %></div>
+        </td>
+      </tr>
+    </thead>
+  </table>
+
+  <table width="99%" border="0" align="center" cellpadding="0" cellspacing="0" class="sample">
+    <thead>
+      <tr valign="middle">
+        <td width="8%"  class="camposDescN11"><div align="center">Fecha Inscripcion</div></td>
+        <td width="28%" class="camposDescN11"><div align="center">Identificacion - Nombre</div></td>
+        <td width="4%"  class="camposDescN11"><div align="center">Cat.</div></td>
+        <td width="8%"  class="camposDescN11"><div align="center">Fecha Reg. Clases</div></td>
+        <td width="5%"  class="camposDescN11"><div align="center">Practicas</div></td>
+        <td width="5%"  class="camposDescN11"><div align="center">Teoricas</div></td>
+        <td width="5%"  class="camposDescN11"><div align="center">Taller</div></td>
+        <td width="4%"  class="camposDescN11"><div align="center">Total</div></td>
+        <td width="21%" class="camposDescN11"><div align="center">Placa - Instructor</div></td>
+        <td width="2%"  class="camposDescN11"><div align="center"></div></td>
+      </tr>
+    </thead>
+    <% for pth in @personastramiteshoras %>
+      <tr valign="middle">
+        <td class="camposDesc11"><div align="center"><%= pth.fch %></div></td>
+        <td class="camposDesc11"><%= pth.identificacion %> - <%= pth.nombre %> <%= pth.apellido %></td>
+        <td class="camposDesc11"><div align="center"><%= pth.cat.to_s.slice(9..15) %></div></td>
+        <td class="camposDesc11"><div align="center"><%= pth.fecha %></div></td>
+        <td class="camposDesc11"><div align="center"><%= pth.practicas %></div></td>
+        <td class="camposDesc11"><div align="center"><%= pth.teoricas %></div></td>
+        <td class="camposDesc11"><div align="center"><%= pth.taller %></div></td>
+        <td class="camposDesc11"><div align="center"><%= pth.total %></div></td>
+        <td class="camposDesc11">
+          <% if pth.placa_id
+               placa = Placa.find(pth.placa_id) rescue nil
+               if placa %>
+                 <%= placa.descripcion %> - <%= placa.instructor&.nombre %>
+          <%   end
+             end %>
+        </td>
+        <td class="camposDesc11"><div align="center">
+          <%= link_to '',
+                personastramiteshoras_path(personastramite_id: pth.personastramite_id),
+                target: '_blank',
+                title: 'Registro Horas RUNT',
+                class: 'nuevolink' %>
+        </div></td>
+      </tr>
+    <% end %>
+  </table>
+  <br>
+
+  <%# ── Tabla consolidada por alumno ──────────────────────────────────────────── %>
+  <table width="99%" border="0" align="center" cellpadding="0" cellspacing="0" class="sample">
+    <thead>
+      <tr valign="middle">
+        <td width="8%"  class="camposDescN11"><div align="center">Fecha Inscripcion</div></td>
+        <td width="40%" class="camposDescN11"><div align="center">Identificacion - Nombre</div></td>
+        <td width="4%"  class="camposDescN11"><div align="center">Cat.</div></td>
+        <td width="8%"  class="camposDescN11"><div align="center">Total<br>Practicas</div></td>
+        <td width="8%"  class="camposDescN11"><div align="center">Total<br>Teoricas</div></td>
+        <td width="8%"  class="camposDescN11"><div align="center">Total<br>Taller</div></td>
+        <td width="8%"  class="camposDescN11"><div align="center">Falta<br>Practicas</div></td>
+        <td width="8%"  class="camposDescN11"><div align="center">Falta<br>Teoricas</div></td>
+        <td width="8%"  class="camposDescN11"><div align="center">Falta<br>Taller</div></td>
+      </tr>
+    </thead>
+    <% for objeto in @objetos
+         categoria = Categoria.find(objeto.categoria_id) rescue nil
+         cant1 = categoria ? categoria.practicas.to_i - objeto.pra.to_i : 0
+         cant2 = categoria ? categoria.teoricas.to_i  - objeto.teo.to_i : 0
+         cant3 = categoria ? categoria.taller.to_i    - objeto.tal.to_i : 0 %>
+      <tr valign="middle">
+        <td class="camposDesc11"><div align="center"><%= objeto.fch %></div></td>
+        <td class="camposDesc11"><%= objeto.identificacion %> - <%= objeto.nombre %> <%= objeto.apellido %></td>
+        <td class="camposDesc11"><div align="center"><%= objeto.cat.to_s.slice(9..15) %></div></td>
+        <td class="camposDesc11"><div align="center"><%= objeto.pra %></div></td>
+        <td class="camposDesc11"><div align="center"><%= objeto.teo %></div></td>
+        <td class="camposDesc11"><div align="center"><%= objeto.tal %></div></td>
+        <td class="camposDesc11"><div align="center"><%= cant1 %></div></td>
+        <td class="camposDesc11"><div align="center"><%= cant2 %></div></td>
+        <td class="camposDesc11"><div align="center"><%= cant3 %></div></td>
+      </tr>
+    <% end %>
+  </table>
+
+  <table width="90%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td width="60%" height="20" class="camposDesc11">
+        <div align="left"><%= Time.now.strftime('%Y-%m-%d %H:%M:%S') %> - <%= User.find(is_admin).nombre rescue nil %></div>
+      </td>
+      <td width="40%" height="20" class="camposDesc11">
+        <div align="right">
+          <a href="javascript:window.print()" class="imprimirlink">Imprimir</a>&nbsp;&nbsp;
+        </div>
+      </td>
+    </tr>
+  </table>
+  <br>
+</div>

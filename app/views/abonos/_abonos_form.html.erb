@@ -1,0 +1,38 @@
+<%# locals: editing (bool), ab (Abono al editar) %>
+<% editing ||= false %>
+<% ab      ||= @abono %>
+<% form_url = editing ? factura_abono_path(@factura, ab) : factura_abonos_path(@factura) %>
+
+<%= form_with url: form_url,
+      method: (editing ? :patch : :post),
+      data: { turbo_stream: true } do |f| %>
+
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+        <%= label_tag 'abono[valor]', 'Valor del Abono' %>
+        <%= text_field_tag 'abono[valor]', ab&.valor,
+              class: 'form-control', size: 20 %>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <%= label_tag 'abono[forma_pago]', 'Forma de Pago' %>
+        <%= select_tag 'abono[forma_pago]',
+              options_for_select(
+                [['EFECTIVO','EFECTIVO'],['CONSIGNACION','CONSIGNACION'],
+                 ['TRANSFERENCIA','TRANSFERENCIA'],['CHEQUE','CHEQUE']],
+                ab&.forma_pago
+              ),
+              include_blank: true,
+              class: 'form-control' %>
+      </div>
+    </div>
+    <div class="col-md-4" style="padding-top: 25px;">
+      <% if permiso('abono', 'A').to_s == 'S' %>
+        <%= submit_tag 'Guardar', class: 'btn btn-primary', disable_with: 'Guardando...' %>
+      <% end %>
+    </div>
+  </div>
+
+<% end %>

@@ -1,0 +1,19 @@
+<table width="760" border="0" cellspacing="0" cellpadding="1">
+  <tr>
+    <td width="150" valign="center">
+      <div align="center">
+        <img src="/uploads/<%= Parametro.find(10).valor.to_s rescue '' %>">
+      </div>
+    </td>
+    <td>
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr><td class="camposDescN12"><div align="center"><%= Parametro.find(1).valor.to_s rescue '' %></div></td></tr>
+        <tr><td class="camposDescN11"><div align="center">NIT: <%= Parametro.find(2).valor.to_s rescue '' %></div></td></tr>
+        <tr><td class="camposDescN11"><div align="center"><%= Parametro.find(13).valor.to_s rescue '' %></div></td></tr>
+        <tr><td class="camposDescN11"><div align="center">Sede Bocagrande: <%= Parametro.find(14).valor.to_s rescue '' %></div></td></tr>
+        <tr><td class="camposDescN11"><div align="center">Sede Turbaco: <%= Parametro.find(15).valor.to_s rescue '' %></div></td></tr>
+        <tr><td class="camposDescN11"><div align="center">Sitio Web: <%= Parametro.find(9).valor.to_s rescue '' %></div></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>

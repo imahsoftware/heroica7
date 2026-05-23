@@ -1,0 +1,95 @@
+<div class="box box-info">
+  <div class="box-header with-border">
+    <h4 class="box-title"><i class="fa fa-list"></i> DETALLE DE LA FACTURA</h4>
+  </div>
+  <div class="box-body">
+
+    <%# ── Formulario nuevo detalle ────────────────────────────────────────────── %>
+    <% if permiso('detallesfactura', 'C').to_s == 'S' && @detallesfactura && !@detallesfactura.persisted? %>
+      <% if @factura.estado == 'C' %>
+        <div class="alert alert-warning text-center">LA FACTURA SE ENCUENTRA CANCELADA</div>
+      <% elsif @factura.estado == 'A' %>
+        <div class="alert alert-danger text-center">LA FACTURA SE ENCUENTRA ANULADA</div>
+      <% else %>
+        <%= render partial: '/detallesfacturas/detallesfacturas_form' %>
+      <% end %>
+    <% end %>
+
+    <%# ── Listado de detalles ──────────────────────────────────────────────────── %>
+    <% if @factura.detallesfacturas.exists? %>
+      <table class="table table-bordered table-sm table-hover">
+        <thead>
+          <tr>
+            <th>Usuario</th>
+            <th>Categoría / Trámite</th>
+            <th>Concepto</th>
+            <th class="text-center">Cant.</th>
+            <th class="text-right">Valor</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @factura.detallesfacturas.each do |det| %>
+            <% if @detallesfactura && det.id == @detallesfactura.id %>
+              <%# fila en modo edición %>
+              <tr id="detallesfactura_<%= det.id %>">
+                <td colspan="6">
+                  <strong>EDITAR DETALLE</strong><br>
+                  <%= render partial: '/detallesfacturas/detallesfacturas_form',
+                        locals: { editing: true, det: det } %>
+                </td>
+              </tr>
+            <% else %>
+              <tr id="detallesfactura_<%= det.id %>" class="<%= cycle('odd', 'even') %>">
+                <td>
+                  <small>
+                    <%= det.created_at.strftime('%Y-%m-%d %H:%M:%S') %> - <%= det.user&.username %><br>
+                    <%= det.updated_at.strftime('%Y-%m-%d %H:%M:%S') %> - <%= User.find(det.user_actualiza).username rescue nil %>
+                  </small>
+                </td>
+                <td>
+                  <%= det.categoria&.nombre %><br>
+                  <small><%= det.tipostramite&.descripcion %></small>
+                </td>
+                <td><%= det.concepto&.descripcion %></td>
+                <td class="text-center"><%= det.cantidad.presence || 1 %></td>
+                <td class="text-right"><%= camponumerico(det.valor) %></td>
+                <td class="text-center">
+                  <% if permiso('detallesfactura', 'A').to_s == 'S' && @factura.estado == 'P' %>
+                    <%= link_to 'Editar',
+                          edit_factura_detallesfactura_path(@factura, det),
+                          data: { turbo_stream: true },
+                          class: 'btn btn-xs btn-warning' %>
+                  <% end %>
+                  <% if permiso('detallesfactura', 'E').to_s == 'S' && @factura.estado.to_s == 'P' %>
+                    <%= link_to 'Borrar',
+                          factura_detallesfactura_path(@factura, det),
+                          data: { turbo_method: :delete, turbo_confirm: '¿Seguro?' },
+                          class: 'btn btn-xs btn-danger' %>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          <% end %>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="4" class="text-right"><strong>VALOR TOTAL FACTURA:</strong></td>
+            <td class="text-right"><strong><%= camponumerico(@factura.detallesfacturas.sum('valor')) %></strong></td>
+            <td></td>
+          </tr>
+        </tfoot>
+      </table>
+    <% else %>
+      <div class="alert alert-info">No hay datos asociados.</div>
+    <% end %>
+
+    <% if flash[:detallesfactura] %>
+      <div id="flash_detallesfactura" class="alert alert-success">
+        <%= flash[:detallesfactura] %>
+      </div>
+      <script>setTimeout(function(){ var el = document.getElementById('flash_detallesfactura'); if(el){ el.style.transition='opacity 1s'; el.style.opacity=0; setTimeout(function(){ el.remove(); }, 1000); } }, 4000);</script>
+    <% end %>
+
+  </div>
+</div>

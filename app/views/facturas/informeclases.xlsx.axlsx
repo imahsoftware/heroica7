@@ -1,0 +1,87 @@
+wb = xlsx_package.workbook
+
+wb.styles do |s|
+  header   = s.add_style(b: true, bg_color: 'FF99CCFF', fg_color: 'FF000000',
+                          sz: 11, font_name: 'Arial',
+                          alignment: { horizontal: :center, vertical: :center },
+                          border: Axlsx::STYLE_THIN_BORDER)
+  datosiz  = s.add_style(sz: 11, font_name: 'Calibri',
+                          alignment: { horizontal: :left, vertical: :center },
+                          border: Axlsx::STYLE_THIN_BORDER)
+  datosc   = s.add_style(sz: 11, font_name: 'Calibri',
+                          alignment: { horizontal: :center, vertical: :center },
+                          border: Axlsx::STYLE_THIN_BORDER)
+  datosd   = s.add_style(sz: 11, font_name: 'Calibri',
+                          alignment: { horizontal: :right, vertical: :center },
+                          border: Axlsx::STYLE_THIN_BORDER)
+  numerico = s.add_style(format_code: '#,##0', sz: 11, font_name: 'Calibri',
+                          alignment: { horizontal: :right, vertical: :center },
+                          border: Axlsx::STYLE_THIN_BORDER)
+
+  # ── Hoja 1: Relación detallada ──────────────────────────────────────────────
+  wb.add_worksheet(name: 'Relacion') do |sheet|
+    sheet.add_row [
+      'FECHA INSCRIPCION', 'IDENTIFICACION', 'NOMBRE', 'APELLIDOS',
+      'CATEGORIA', 'FECHA REGISTRO CLASES',
+      'PRACTICAS', 'TEORICAS', 'TALLER', 'TOTAL',
+      'PLACA', 'INSTRUCTOR'
+    ], style: header
+
+    @personastramiteshoras.each do |pth|
+      placa      = pth.placa_id.present? ? (Placa.find(pth.placa_id) rescue nil) : nil
+      instructor = pth.instructor_id.present? ? (Instructor.find(pth.instructor_id) rescue nil) : nil
+      sheet.add_row [
+        pth.fch.to_s,
+        pth.identificacion.to_s,
+        pth.nombre.to_s,
+        pth.apellido.to_s,
+        pth.cat.to_s,
+        pth.fecha.to_s,
+        pth.practicas.to_i,
+        pth.teoricas.to_i,
+        pth.taller.to_i,
+        pth.total.to_i,
+        placa      ? placa.descripcion.to_s : '',
+        instructor ? instructor.nombre.to_s : ''
+      ], style: [datosc, datosiz, datosiz, datosiz, datosc, datosc,
+                 numerico, numerico, numerico, numerico, datosc, datosiz]
+    end
+
+    # Anchos fijos por columna (en caracteres aprox.):
+    # FechaInsc, Ident, Nombre, Apellidos, Cat, FechaClase, Prac, Teo, Tall, Tot, Placa, Instructor
+    sheet.column_widths 16, 16, 26, 26, 16, 20, 11, 11, 11, 11, 14, 35
+  end
+
+  # ── Hoja 2: Consolidado por alumno ──────────────────────────────────────────
+  wb.add_worksheet(name: 'Consolidado') do |sheet|
+    sheet.add_row [
+      'FECHA INSCRIPCION', 'IDENTIFICACION', 'NOMBRE', 'APELLIDOS', 'CATEGORIA',
+      'TOTAL PRACTICAS', 'TOTAL TEORICAS', 'TOTAL TALLER',
+      'PRACTICAS FALTANTES', 'TEORICAS FALTANTES', 'TALLER FALTANTES'
+    ], style: header
+
+    @objetos.each do |obj|
+      categoria = Categoria.find(obj.categoria_id) rescue nil
+      cant1 = categoria ? categoria.practicas.to_i - obj.pra.to_i : 0
+      cant2 = categoria ? categoria.teoricas.to_i  - obj.teo.to_i : 0
+      cant3 = categoria ? categoria.taller.to_i    - obj.tal.to_i : 0
+      sheet.add_row [
+        obj.fch.to_s,
+        obj.identificacion.to_s,
+        obj.nombre.to_s,
+        obj.apellido.to_s,
+        obj.cat.to_s,
+        obj.pra.to_i,
+        obj.teo.to_i,
+        obj.tal.to_i,
+        cant1,
+        cant2,
+        cant3
+      ], style: [datosc, datosiz, datosiz, datosiz, datosc,
+                 numerico, numerico, numerico, numerico, numerico, numerico]
+    end
+
+    # FechaInsc, Ident, Nombre, Apellidos, Cat, TotPrac, TotTeo, TotTall, FaltPrac, FaltTeo, FaltTall
+    sheet.column_widths 16, 16, 26, 26, 16, 16, 16, 16, 20, 20, 20
+  end
+end
