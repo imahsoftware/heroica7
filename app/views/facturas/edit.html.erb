@@ -1,8 +1,12 @@
-<div class="box box-primary">
-  <div class="box-header with-border">
-    <h3 class="box-title"><i class="fa fa-file-text"></i> INFORMACION FACTURA</h3>
-    <div class="box-tools pull-right">
-      <%= link_to 'Buscar Factura', busqueda_facturas_path, class: 'btn btn-default btn-sm' %>
+<div class="box box-usuarios">
+  <div class="box-header">
+    <span class="box-title">
+      <i class="fa fa-file-text"></i> INFORMACION FACTURA
+    </span>
+    <div class="box-tools pull-right" style="margin-top: -2px;">
+      <%= link_to busqueda_facturas_path, class: 'btn btn-sm btn-default' do %>
+        <i class="fa fa-arrow-left"></i> Buscar Factura
+      <% end %>
     </div>
   </div>
   <div class="box-body">

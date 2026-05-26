@@ -50,53 +50,67 @@
 
       <%# ── Informe diario ──────────────────────────────────────────────────────── %>
       <h4><i class="fa fa-bar-chart"></i> INFORME DIARIO</h4>
-      <%= form_with url: informe_facturas_path, method: :get, local: true do %>
+      <form id="form_informe" method="get" action="<%= informe_facturas_path %>" data-turbo="false">
         <div class="row">
           <div class="col-md-4">
             <div class="form-group">
-              <%= label_tag 'ubicacion[inicial]', 'Fecha Inicial' %>
-              <%= date_field_tag 'ubicacion[inicial]', params.dig(:ubicacion, :inicial),
-                    class: 'form-control' %>
+              <label for="informe_inicial">Fecha Inicial</label>
+              <input type="text" id="informe_inicial" name="ubicacion[inicial]" class="form-control datepicker" placeholder="YYYY-MM-DD" autocomplete="off"
+                     value="<%= params.dig(:ubicacion, :inicial) %>">
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-group">
-              <%= label_tag 'ubicacion[final]', 'Fecha Final' %>
-              <%= date_field_tag 'ubicacion[final]', params.dig(:ubicacion, :final),
-                    class: 'form-control' %>
+              <label for="informe_final">Fecha Final</label>
+              <input type="text" id="informe_final" name="ubicacion[final]" class="form-control datepicker" placeholder="YYYY-MM-DD" autocomplete="off"
+                     value="<%= params.dig(:ubicacion, :final) %>">
             </div>
           </div>
           <div class="col-md-4" style="padding-top: 25px;">
-            <%= submit_tag 'Generar', class: 'btn btn-success', disable_with: 'Generando...' %>
+            <button type="button" class="btn btn-success"
+                    onclick="abrirInformePopup('form_informe', '<%= informe_facturas_path %>')">
+              <i class="fa fa-eye"></i> Generar
+            </button>
+            <button type="button" class="btn btn-warning"
+                    onclick="document.getElementById('form_informe').action='<%= informe_facturas_path(format: :xlsx) %>'; document.getElementById('form_informe').target='_self'; document.getElementById('form_informe').submit();">
+              <i class="fa fa-download"></i> Excel
+            </button>
           </div>
         </div>
-      <% end %>
+      </form>
 
       <hr>
 
       <%# ── Informe diario consolidado ─────────────────────────────────────────── %>
       <h4><i class="fa fa-bar-chart"></i> INFORME DIARIO CONSOLIDADO</h4>
-      <%= form_with url: informeconsolidado_facturas_path, method: :get, local: true do %>
+      <form id="form_informeconsolidado" method="get" action="<%= informeconsolidado_facturas_path %>" data-turbo="false">
         <div class="row">
           <div class="col-md-4">
             <div class="form-group">
-              <%= label_tag 'ubicacion[inicial]', 'Fecha Inicial' %>
-              <%= date_field_tag 'ubicacion[inicial]', params.dig(:ubicacion, :inicial),
-                    class: 'form-control' %>
+              <label for="consolidado_inicial">Fecha Inicial</label>
+              <input type="text" id="consolidado_inicial" name="ubicacion[inicial]" class="form-control datepicker" placeholder="YYYY-MM-DD" autocomplete="off"
+                     value="<%= params.dig(:ubicacion, :inicial) %>">
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-group">
-              <%= label_tag 'ubicacion[final]', 'Fecha Final' %>
-              <%= date_field_tag 'ubicacion[final]', params.dig(:ubicacion, :final),
-                    class: 'form-control' %>
+              <label for="consolidado_final">Fecha Final</label>
+              <input type="text" id="consolidado_final" name="ubicacion[final]" class="form-control datepicker" placeholder="YYYY-MM-DD" autocomplete="off"
+                     value="<%= params.dig(:ubicacion, :final) %>">
             </div>
           </div>
           <div class="col-md-4" style="padding-top: 25px;">
-            <%= submit_tag 'Generar', class: 'btn btn-success', disable_with: 'Generando...' %>
+            <button type="button" class="btn btn-success"
+                    onclick="abrirInformePopup('form_informeconsolidado', '<%= informeconsolidado_facturas_path %>')">
+              <i class="fa fa-eye"></i> Generar
+            </button>
+            <button type="button" class="btn btn-warning"
+                    onclick="document.getElementById('form_informeconsolidado').action='<%= informeconsolidado_facturas_path(format: :xlsx) %>'; document.getElementById('form_informeconsolidado').target='_self'; document.getElementById('form_informeconsolidado').submit();">
+              <i class="fa fa-download"></i> Excel
+            </button>
           </div>
         </div>
-      <% end %>
+      </form>
 
       <hr>
 
@@ -107,14 +121,14 @@
           <div class="col-md-4">
             <div class="form-group">
               <label for="clases_inicial">Fecha Inicial</label>
-              <input type="date" id="clases_inicial" name="ubicacion[inicial]" class="form-control"
+              <input type="text" id="clases_inicial" name="ubicacion[inicial]" class="form-control datepicker" placeholder="YYYY-MM-DD" autocomplete="off"
                      value="<%= params.dig(:ubicacion, :inicial) %>">
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-group">
               <label for="clases_final">Fecha Final</label>
-              <input type="date" id="clases_final" name="ubicacion[final]" class="form-control"
+              <input type="text" id="clases_final" name="ubicacion[final]" class="form-control datepicker" placeholder="YYYY-MM-DD" autocomplete="off"
                      value="<%= params.dig(:ubicacion, :final) %>">
             </div>
           </div>
@@ -130,3 +144,16 @@
 
   </div>
 </div>
+
+<script>
+  function abrirInformePopup(formId, accion) {
+    var popup = window.open('', 'heroica_informe',
+      'width=1050,height=750,scrollbars=yes,resizable=yes,toolbar=no,menubar=no,location=no');
+    var form = document.getElementById(formId);
+    form.action  = accion;
+    form.target  = 'heroica_informe';
+    form.submit();
+    form.target  = '_self';   // restaurar para que Excel no abra popup
+    popup.focus();
+  }
+</script>

@@ -1,0 +1,80 @@
+wb = xlsx_package.workbook
+
+wb.styles do |s|
+  titulo   = s.add_style(b: true, bg_color: 'FF1F3864', fg_color: 'FFFFFFFF',
+                          sz: 12, font_name: 'Arial',
+                          alignment: { horizontal: :center, vertical: :center },
+                          border: Axlsx::STYLE_THIN_BORDER)
+  header   = s.add_style(b: true, bg_color: 'FF99CCFF', fg_color: 'FF000000',
+                          sz: 11, font_name: 'Arial',
+                          alignment: { horizontal: :center, vertical: :center },
+                          border: Axlsx::STYLE_THIN_BORDER)
+  subtotal_label = s.add_style(b: true, bg_color: 'FFDCE6F1', fg_color: 'FF000000',
+                          sz: 11, font_name: 'Arial',
+                          alignment: { horizontal: :right, vertical: :center },
+                          border: Axlsx::STYLE_THIN_BORDER)
+  datosiz  = s.add_style(sz: 11, font_name: 'Calibri',
+                          alignment: { horizontal: :left, vertical: :center },
+                          border: Axlsx::STYLE_THIN_BORDER)
+  datosc   = s.add_style(sz: 11, font_name: 'Calibri',
+                          alignment: { horizontal: :center, vertical: :center },
+                          border: Axlsx::STYLE_THIN_BORDER)
+  numerico = s.add_style(format_code: '#,##0', sz: 11, font_name: 'Calibri',
+                          alignment: { horizontal: :right, vertical: :center },
+                          border: Axlsx::STYLE_THIN_BORDER)
+  numerico_bold = s.add_style(format_code: '#,##0', b: true, sz: 11, font_name: 'Calibri',
+                          bg_color: 'FFDCE6F1',
+                          alignment: { horizontal: :right, vertical: :center },
+                          border: Axlsx::STYLE_THIN_BORDER)
+
+  # ── Hoja 1: Actividad Conexa ─────────────────────────────────────────────────
+  wb.add_worksheet(name: 'Actividad Conexa') do |sheet|
+    sheet.add_row ["INFORME CONSOLIDADO  #{@fch1}  /  #{@fch2}  —  ACTIVIDAD RELACIONADA / CONEXAS"],
+                  style: titulo
+    sheet.merge_cells "A1:C1"
+    sheet.add_row []
+    sheet.add_row ['DESCRIPCION', 'CANTIDAD', 'VALOR'], style: header
+
+    saldoactividad = 0
+    @objetos.each do |obj|
+      saldoactividad += obj.val.to_i
+      sheet.add_row [
+        obj.descripcion.to_s,
+        obj.cant.to_i,
+        obj.val.to_i
+      ], style: [datosiz, datosc, numerico]
+    end
+
+    sheet.add_row ['', 'TOTAL', saldoactividad],
+                  style: [subtotal_label, subtotal_label, numerico_bold]
+
+    sheet.column_widths 55, 14, 18
+  end
+
+  # ── Hoja 2: Egresos ──────────────────────────────────────────────────────────
+  wb.add_worksheet(name: 'Egresos') do |sheet|
+    sheet.add_row ["INFORME CONSOLIDADO  #{@fch1}  /  #{@fch2}  —  EGRESOS"],
+                  style: titulo
+    sheet.merge_cells "A1:E1"
+    sheet.add_row []
+    sheet.add_row ['NRO EGRESO', 'FECHA', 'OBSERVACION', 'FORMA DE PAGO', 'VALOR'],
+                  style: header
+
+    saldoegreso = 0
+    @egresos.each do |eg|
+      saldoegreso += eg.valor.to_i if eg.forma_pago.to_s == 'EFECTIVO'
+      sheet.add_row [
+        eg.nro_egreso.to_s,
+        eg.fecha.to_s,
+        eg.observacion.to_s,
+        eg.forma_pago.to_s,
+        eg.valor.to_i
+      ], style: [datosc, datosc, datosiz, datosc, numerico]
+    end
+
+    sheet.add_row ['', '', '', 'SUBTOTAL EGRESOS', saldoegreso],
+                  style: [subtotal_label, subtotal_label, subtotal_label, subtotal_label, numerico_bold]
+
+    sheet.column_widths 14, 14, 50, 18, 16
+  end
+end

@@ -1,6 +1,8 @@
-<div class="box box-info">
-  <div class="box-header with-border">
-    <h4 class="box-title"><i class="fa fa-list"></i> DETALLE DE LA FACTURA</h4>
+<div class="box box-usuarios">
+  <div class="box-header">
+    <span class="box-title">
+      <i class="fa fa-list"></i> DETALLE DE LA FACTURA
+    </span>
   </div>
   <div class="box-body">
 
@@ -17,7 +19,7 @@
 
     <%# ── Listado de detalles ──────────────────────────────────────────────────── %>
     <% if @factura.detallesfacturas.exists? %>
-      <table class="table table-bordered table-sm table-hover">
+      <table class="table table-bordered table-condensed table-striped table-usuarios">
         <thead>
           <tr>
             <th>Usuario</th>
@@ -58,13 +60,15 @@
                   <% if permiso('detallesfactura', 'A').to_s == 'S' && @factura.estado == 'P' %>
                     <%= link_to 'Editar',
                           edit_factura_detallesfactura_path(@factura, det),
-                          data: { turbo_stream: true },
+                          remote: true,
                           class: 'btn btn-xs btn-warning' %>
                   <% end %>
                   <% if permiso('detallesfactura', 'E').to_s == 'S' && @factura.estado.to_s == 'P' %>
                     <%= link_to 'Borrar',
                           factura_detallesfactura_path(@factura, det),
-                          data: { turbo_method: :delete, turbo_confirm: '¿Seguro?' },
+                          method: :delete,
+                          remote: true,
+                          data: { confirm: '¿Seguro?' },
                           class: 'btn btn-xs btn-danger' %>
                   <% end %>
                 </td>

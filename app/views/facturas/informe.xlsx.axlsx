@@ -1,0 +1,149 @@
+wb = xlsx_package.workbook
+
+wb.styles do |s|
+  titulo   = s.add_style(b: true, bg_color: 'FF1F3864', fg_color: 'FFFFFFFF',
+                          sz: 12, font_name: 'Arial',
+                          alignment: { horizontal: :center, vertical: :center },
+                          border: Axlsx::STYLE_THIN_BORDER)
+  header   = s.add_style(b: true, bg_color: 'FF99CCFF', fg_color: 'FF000000',
+                          sz: 11, font_name: 'Arial',
+                          alignment: { horizontal: :center, vertical: :center },
+                          border: Axlsx::STYLE_THIN_BORDER)
+  subtotal = s.add_style(b: true, bg_color: 'FFDCE6F1', fg_color: 'FF000000',
+                          sz: 11, font_name: 'Arial',
+                          alignment: { horizontal: :right, vertical: :center },
+                          border: Axlsx::STYLE_THIN_BORDER)
+  subtotal_label = s.add_style(b: true, bg_color: 'FFDCE6F1', fg_color: 'FF000000',
+                          sz: 11, font_name: 'Arial',
+                          alignment: { horizontal: :right, vertical: :center },
+                          border: Axlsx::STYLE_THIN_BORDER)
+  datosiz  = s.add_style(sz: 11, font_name: 'Calibri',
+                          alignment: { horizontal: :left, vertical: :center },
+                          border: Axlsx::STYLE_THIN_BORDER)
+  datosc   = s.add_style(sz: 11, font_name: 'Calibri',
+                          alignment: { horizontal: :center, vertical: :center },
+                          border: Axlsx::STYLE_THIN_BORDER)
+  numerico = s.add_style(format_code: '#,##0', sz: 11, font_name: 'Calibri',
+                          alignment: { horizontal: :right, vertical: :center },
+                          border: Axlsx::STYLE_THIN_BORDER)
+  numerico_bold = s.add_style(format_code: '#,##0', b: true, sz: 11, font_name: 'Calibri',
+                          bg_color: 'FFDCE6F1',
+                          alignment: { horizontal: :right, vertical: :center },
+                          border: Axlsx::STYLE_THIN_BORDER)
+
+  # ── Hoja 1: Facturas ────────────────────────────────────────────────────────
+  wb.add_worksheet(name: 'Facturas') do |sheet|
+    sheet.add_row ["INFORME DIARIO DE FACTURAS  #{@fch1}  /  #{@fch2}"],
+                  style: titulo
+    sheet.merge_cells "A1:E1"
+    sheet.add_row []
+    sheet.add_row ['NRO', 'NRO FACTURA', 'IDENTIFICACION - NOMBRE', 'ESTADO', 'VALOR'],
+                  style: header
+
+    i = 0
+    totalfactura = 0
+    @facturas.each do |f|
+      i += 1
+      totalfactura += f.valor.to_i if f.estado != 'A'
+      sheet.add_row [
+        i,
+        f.nro_factura.to_s,
+        "#{f.persona&.identificacion} - #{f.persona&.nombres}",
+        f.destado.to_s,
+        f.valor.to_i
+      ], style: [datosc, datosc, datosiz, datosc, numerico]
+    end
+
+    sheet.add_row ['', '', '', 'TOTAL FACTURACION', totalfactura],
+                  style: [subtotal_label, subtotal_label, subtotal_label, subtotal_label, numerico_bold]
+
+    sheet.column_widths 8, 16, 55, 16, 16
+  end
+
+  # ── Hoja 2: Actividad Conexa ─────────────────────────────────────────────────
+  wb.add_worksheet(name: 'Actividad Conexa') do |sheet|
+    sheet.add_row ["DETALLE DE ACTIVIDAD RELACIONADA / CONEXAS  #{@fch1}  /  #{@fch2}"],
+                  style: titulo
+    sheet.merge_cells "A1:C1"
+    sheet.add_row []
+    sheet.add_row ['DESCRIPCION', 'CANTIDAD', 'VALOR'], style: header
+
+    saldoactividad = 0
+    @objetos.each do |obj|
+      saldoactividad += obj.val.to_i
+      sheet.add_row [
+        obj.descripcion.to_s,
+        obj.cant.to_i,
+        obj.val.to_i
+      ], style: [datosiz, datosc, numerico]
+    end
+
+    sheet.add_row ['', 'TOTAL', saldoactividad],
+                  style: [subtotal_label, subtotal_label, numerico_bold]
+
+    sheet.column_widths 55, 14, 18
+  end
+
+  # ── Hoja 3: Abonos ───────────────────────────────────────────────────────────
+  wb.add_worksheet(name: 'Abonos') do |sheet|
+    sheet.add_row ["INFORME DIARIO DE ABONOS  #{@fch1}  /  #{@fch2}"],
+                  style: titulo
+    sheet.merge_cells "A1:F1"
+    sheet.add_row []
+    sheet.add_row ['NRO', 'NRO ABONO', 'IDENTIFICACION - NOMBRE', 'FORMA DE PAGO', 'ESTADO', 'VALOR'],
+                  style: header
+
+    i = 0; sub1 = 0; sub2 = 0; sub3 = 0; sub4 = 0
+    @abonos.each do |ab|
+      i += 1
+      sub1 += ab.valor.to_i if ab.estado != 'A' && ab.forma_pago.to_s == 'EFECTIVO'
+      sub2 += ab.valor.to_i if ab.estado != 'A' && ab.forma_pago.to_s == 'TRANSFERENCIA'
+      sub3 += ab.valor.to_i if ab.estado != 'A' && ab.forma_pago.to_s == 'CHEQUE'
+      sub4 += ab.valor.to_i if ab.estado != 'A' && ab.forma_pago.to_s == 'CONSIGNACION'
+      sheet.add_row [
+        i,
+        ab.nro_abono.to_s,
+        "#{ab.factura&.persona&.identificacion} - #{ab.factura&.persona&.nombres}",
+        ab.forma_pago.to_s,
+        ab.destado.to_s,
+        ab.valor.to_i
+      ], style: [datosc, datosc, datosiz, datosc, datosc, numerico]
+    end
+
+    sheet.add_row []
+    sheet.add_row ['', '', '', '', 'SUBTOTAL EFECTIVO',     sub1], style: [subtotal_label]*5 + [numerico_bold]
+    sheet.add_row ['', '', '', '', 'SUBTOTAL TRANSFERENCIA',sub2], style: [subtotal_label]*5 + [numerico_bold]
+    sheet.add_row ['', '', '', '', 'SUBTOTAL CHEQUE',       sub3], style: [subtotal_label]*5 + [numerico_bold]
+    sheet.add_row ['', '', '', '', 'SUBTOTAL CONSIGNACION', sub4], style: [subtotal_label]*5 + [numerico_bold]
+    sheet.add_row ['', '', '', '', 'SUBTOTAL OFICINA', sub1+sub2+sub3+sub4], style: [subtotal_label]*5 + [numerico_bold]
+
+    sheet.column_widths 8, 14, 55, 18, 14, 16
+  end
+
+  # ── Hoja 4: Egresos ──────────────────────────────────────────────────────────
+  wb.add_worksheet(name: 'Egresos') do |sheet|
+    sheet.add_row ["INFORME DIARIO DE EGRESOS  #{@fch1}  /  #{@fch2}"],
+                  style: titulo
+    sheet.merge_cells "A1:E1"
+    sheet.add_row []
+    sheet.add_row ['NRO EGRESO', 'FECHA', 'OBSERVACION', 'FORMA DE PAGO', 'VALOR'],
+                  style: header
+
+    saldoegreso = 0
+    @egresos.each do |eg|
+      saldoegreso += eg.valor.to_i if eg.forma_pago.to_s == 'EFECTIVO'
+      sheet.add_row [
+        eg.nro_egreso.to_s,
+        eg.fecha.to_s,
+        eg.observacion.to_s,
+        eg.forma_pago.to_s,
+        eg.valor.to_i
+      ], style: [datosc, datosc, datosiz, datosc, numerico]
+    end
+
+    sheet.add_row ['', '', '', 'SUBTOTAL EGRESOS', saldoegreso],
+                  style: [subtotal_label, subtotal_label, subtotal_label, subtotal_label, numerico_bold]
+
+    sheet.column_widths 14, 14, 50, 18, 16
+  end
+end

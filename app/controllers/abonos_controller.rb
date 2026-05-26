@@ -16,9 +16,7 @@ class AbonosController < ApplicationController
   end
 
   def edit
-    respond_to do |format|
-      format.turbo_stream { render 'edit_abono' }
-    end
+    respond_to { |format| format.js }
   end
 
   def create
@@ -30,7 +28,7 @@ class AbonosController < ApplicationController
 
     if @abono.valor.to_i <= 0
       flash.now[:abono] = 'El valor del abono debe ser superior a CERO'
-      respond_to { |f| f.turbo_stream { render 'abonos' } }
+      respond_to { |f| f.js { render 'abonos' } }
       return
     end
 
@@ -42,7 +40,7 @@ class AbonosController < ApplicationController
 
     if valor > valorfactura
       flash.now[:abono] = 'El valor del Abono supera el valor de la factura'
-      respond_to { |f| f.turbo_stream { render 'abonos' } }
+      respond_to { |f| f.js { render 'abonos' } }
       return
     end
 
@@ -58,27 +56,16 @@ class AbonosController < ApplicationController
         ActiveRecord::Base.connection.execute(
           "UPDATE facturas SET estado = 'C' WHERE id = #{@factura.id}"
         )
-      end
-
-      @abono = Abono.new
-      flash.now[:abono] = 'Creado con exito'
-
-      if valor == valorfactura
         flash[:notice] = 'Abono Registrado y Factura Cancelada'
-        respond_to do |format|
-          format.turbo_stream do
-            render turbo_stream: turbo_stream.update(
-              'abonos_form',
-              html: "<script>window.location = '#{edit_factura_path(@factura)}';</script>"
-            )
-          end
-        end
+        respond_to { |f| f.js { render 'abono_redirect' } }
       else
-        respond_to { |f| f.turbo_stream { render 'abonos' } }
+        @abono = Abono.new
+        flash.now[:abono] = 'Creado con exito'
+        respond_to { |f| f.js { render 'abonos' } }
       end
     else
       flash.now[:abono] = 'Se produjo un error al guardar el registro'
-      respond_to { |f| f.turbo_stream { render 'abonos' } }
+      respond_to { |f| f.js { render 'abonos' } }
     end
   end
 
@@ -86,17 +73,10 @@ class AbonosController < ApplicationController
     if @abono.update(abono_params)
       @abono = Abono.new
       flash.now[:abono] = 'Actualizado con Exito'
-      respond_to { |f| f.turbo_stream { render 'abonos' } }
     else
-      respond_to do |format|
-        format.turbo_stream do
-          render turbo_stream: turbo_stream.update(
-            'abonos_form',
-            html: "<p class='text-danger'>El registro tiene inconsistencias. Verifique!!</p>"
-          )
-        end
-      end
+      flash.now[:abono] = 'El registro tiene inconsistencias. Verifique!!'
     end
+    respond_to { |f| f.js { render 'abonos' } }
   end
 
   def destroy
@@ -108,10 +88,9 @@ class AbonosController < ApplicationController
     )
     @abono = Abono.new
     flash.now[:abono] = 'Anulado con exito...'
-    respond_to { |f| f.turbo_stream { render 'abonos' } }
+    respond_to { |f| f.js { render 'abonos' } }
   end
 
-  # GET /facturas/:factura_id/abonos/:id/anula
   def anula
     ActiveRecord::Base.connection.execute(
       "UPDATE abonos SET user_anula = #{is_admin}, valor = 0, saldo = 0, estado = 'A', updated_at = CURRENT_TIMESTAMP() WHERE id = #{@abono.id}"
@@ -121,7 +100,7 @@ class AbonosController < ApplicationController
     )
     @abono = Abono.new
     flash.now[:abono] = 'Abono Anulado con Exito'
-    respond_to { |f| f.turbo_stream { render 'abonos' } }
+    respond_to { |f| f.js { render 'abonos' } }
   end
 
   private

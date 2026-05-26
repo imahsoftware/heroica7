@@ -1,0 +1,110 @@
+<% title 'Facturas' %>
+
+<div class="box box-usuarios">
+  <div class="box-header">
+    <span class="box-title">
+      <i class="fa fa-file-text"></i> Facturas
+      <span class="users-count-badge"><%= @facturas.total_entries rescue @facturas.count %> registros</span>
+    </span>
+    <div class="box-tools pull-right" style="margin-top: -2px;">
+      <%= link_to busqueda_facturas_path, class: 'btn btn-sm btn-default', title: 'Búsqueda avanzada' do %>
+        <i class="fa fa-search"></i> Buscar
+      <% end %>
+    </div>
+  </div>
+
+  <div class="box-body">
+
+    <div class="row" style="margin-bottom: 16px;">
+      <div class="col-md-5 col-sm-7 col-xs-12 search-bar">
+        <%= search_form_for @q do |f| %>
+          <div class="input-group">
+            <%= f.search_field :nro_factura_eq,
+                class: 'form-control',
+                placeholder: 'Buscar por número de factura...' %>
+            <div class="input-group-btn">
+              <%= button_tag type: 'submit', class: 'btn btn-search' do %>
+                <i class="fa fa-search"></i>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <% if flash[:notice] %>
+      <div class="alert alert-info alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <%= flash[:notice] %>
+      </div>
+    <% end %>
+
+    <% if @facturas.any? %>
+      <div class="table-responsive">
+        <table class="table table-bordered table-condensed table-striped table-usuarios">
+          <thead>
+            <tr>
+              <th width="8%" class="text-center">Acciones</th>
+              <th width="10%">Nro. Factura</th>
+              <th width="8%">Estado</th>
+              <th>Persona</th>
+              <th width="18%">Categoría / Trámite</th>
+              <th width="10%" class="text-right">Valor</th>
+              <th width="14%">Fecha</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @facturas.each do |factura| %>
+              <tr>
+                <td class="text-center">
+                  <%= link_to edit_factura_path(factura),
+                      class: 'btn btn-xs btn-primary', title: 'Ver / Editar' do %>
+                    <i class="fa fa-edit"></i>
+                  <% end %>
+                  <%= link_to verfactura_facturas_path(factura_id: factura.id),
+                      class: 'btn btn-xs btn-default', title: 'Imprimir', target: '_blank' do %>
+                    <i class="fa fa-print"></i>
+                  <% end %>
+                </td>
+                <td><%= facturacero(factura.nro_factura) %></td>
+                <td class="text-center">
+                  <% badge_class = case factura.estado
+                                   when 'P' then 'label-warning'
+                                   when 'C' then 'label-success'
+                                   when 'A' then 'label-danger'
+                                   else 'label-default'
+                                   end %>
+                  <span class="label <%= badge_class %>"><%= factura.destado %></span>
+                </td>
+                <td>
+                  <% if factura.persona %>
+                    <small><%= factura.persona.identificacion %></small><br>
+                    <%= factura.persona.nombres %>
+                  <% end %>
+                </td>
+                <td>
+                  <%= factura.categoria&.nombre %><br>
+                  <small class="text-muted"><%= factura.tipostramite&.descripcion %></small>
+                </td>
+                <td class="text-right"><%= number_with_delimiter(factura.valor) %></td>
+                <td><%= factura.created_at&.strftime('%Y-%m-%d') %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="row" style="margin-top: 12px;">
+        <div class="col-xs-12 text-right">
+          <%= will_paginate @facturas, renderer: BootstrapPagination::Rails %>
+        </div>
+      </div>
+    <% else %>
+      <div class="empty-state">
+        <i class="fa fa-file-text"></i>
+        <p>No se encontraron facturas.</p>
+      </div>
+    <% end %>
+
+  </div>
+</div>

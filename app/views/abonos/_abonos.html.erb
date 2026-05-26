@@ -1,6 +1,8 @@
-<div class="box box-success">
-  <div class="box-header with-border">
-    <h4 class="box-title"><i class="fa fa-money"></i> ABONOS</h4>
+<div class="box box-usuarios">
+  <div class="box-header">
+    <span class="box-title">
+      <i class="fa fa-money"></i> ABONOS
+    </span>
   </div>
   <div class="box-body">
 
@@ -17,7 +19,7 @@
 
     <%# ── Listado de abonos ────────────────────────────────────────────────────── %>
     <% if @factura.abonos.exists? %>
-      <table class="table table-bordered table-sm table-hover">
+      <table class="table table-bordered table-condensed table-striped table-usuarios">
         <thead>
           <tr>
             <th>Usuario</th>
@@ -59,7 +61,8 @@
                     <% if permiso('abono', 'E').to_s == 'S' %>
                       <%= link_to 'Anular Abono',
                             anula_factura_abono_path(@factura, abono),
-                            data: { turbo_stream: true, turbo_confirm: '¿Seguro?' },
+                            remote: true,
+                            data: { confirm: '¿Seguro?' },
                             class: 'btn btn-xs btn-danger' %>
                     <% end %>
                   <% end %>

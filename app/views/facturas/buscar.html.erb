@@ -1,40 +1,62 @@
-<div class="box box-primary">
-  <div class="box-header with-border">
-    <h3 class="box-title"><i class="fa fa-search"></i> INFORMACION FACTURA</h3>
-    <div class="box-tools pull-right">
-      <%= link_to 'Buscar Factura', busqueda_facturas_path, class: 'btn btn-default btn-sm' %>
+<div class="box box-usuarios">
+  <div class="box-header">
+    <span class="box-title">
+      <i class="fa fa-search"></i> INFORMACION FACTURA
+      <span class="users-count-badge"><%= @facturas.count %> registros</span>
+    </span>
+    <div class="box-tools pull-right" style="margin-top: -2px;">
+      <%= link_to busqueda_facturas_path, class: 'btn btn-sm btn-default' do %>
+        <i class="fa fa-arrow-left"></i> Buscar Factura
+      <% end %>
     </div>
   </div>
+
   <div class="box-body">
-    <div class="table-responsive">
-      <table class="table table-bordered table-sm table-hover">
-        <thead>
-          <tr>
-            <th>Usuario</th>
-            <th>Nro Factura</th>
-            <th>Valor</th>
-            <th>Estado</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @facturas.each do |factura| %>
+    <% if @facturas.any? %>
+      <div class="table-responsive">
+        <table class="table table-bordered table-condensed table-striped table-usuarios">
+          <thead>
             <tr>
-              <td>
-                <%= factura.persona&.identificacion %> -
-                <%= factura.persona&.nombres %>
-              </td>
-              <td><%= facturacero(factura.nro_factura) %></td>
-              <td><%= camponumerico(factura.valor) %></td>
-              <td><%= factura.destado %></td>
-              <td class="text-center">
-                <%= link_to 'Ver', edit_factura_path(factura), class: 'btn btn-xs btn-primary' %>
-              </td>
+              <th>Usuario</th>
+              <th width="14%">Nro Factura</th>
+              <th width="14%" class="text-right">Valor</th>
+              <th width="12%" class="text-center">Estado</th>
+              <th width="7%"  class="text-center">Acciones</th>
             </tr>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
-    <p class="text-muted">Nro Total de Registros: <strong><%= @facturas.count %></strong></p>
+          </thead>
+          <tbody>
+            <% @facturas.each do |factura| %>
+              <tr>
+                <td>
+                  <small class="text-muted"><%= factura.persona&.identificacion %></small>
+                  <%= factura.persona&.nombres %>
+                </td>
+                <td><%= facturacero(factura.nro_factura) %></td>
+                <td class="text-right"><%= camponumerico(factura.valor) %></td>
+                <td class="text-center">
+                  <% badge_class = case factura.estado
+                                   when 'P' then 'label-warning'
+                                   when 'C' then 'label-success'
+                                   when 'A' then 'label-danger'
+                                   else 'label-default'
+                                   end %>
+                  <span class="label <%= badge_class %>"><%= factura.destado %></span>
+                </td>
+                <td class="text-center">
+                  <%= link_to edit_factura_path(factura), class: 'btn btn-xs btn-primary', title: 'Ver / Editar' do %>
+                    <i class="fa fa-edit"></i>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    <% else %>
+      <div class="empty-state">
+        <i class="fa fa-search"></i>
+        <p>No se encontraron facturas.</p>
+      </div>
+    <% end %>
   </div>
 </div>

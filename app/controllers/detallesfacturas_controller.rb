@@ -2,7 +2,7 @@
 
 class DetallesfacturasController < ApplicationController
   layout 'application'
-  before_action :checkaccess
+  #before_action :checkaccess
   before_action :set_factura
   before_action :set_detallesfactura, only: [:edit, :update, :destroy]
 
@@ -11,9 +11,7 @@ class DetallesfacturasController < ApplicationController
   end
 
   def edit
-    respond_to do |format|
-      format.turbo_stream { render 'edit_detallesfactura' }
-    end
+    respond_to { |format| format.js }
   end
 
   def create
@@ -30,9 +28,7 @@ class DetallesfacturasController < ApplicationController
       flash.now[:detallesfactura] = 'Se produjo un error al guardar el registro'
     end
 
-    respond_to do |format|
-      format.turbo_stream { render 'detallesfacturas' }
-    end
+    respond_to { |format| format.js { render 'detallesfacturas' } }
   end
 
   def update
@@ -41,19 +37,11 @@ class DetallesfacturasController < ApplicationController
     if @detallesfactura.update(detallesfactura_params)
       @detallesfactura = Detallesfactura.new
       flash.now[:detallesfactura] = 'Actualizado con Exito'
-      respond_to do |format|
-        format.turbo_stream { render 'detallesfacturas' }
-      end
     else
-      respond_to do |format|
-        format.turbo_stream do
-          render turbo_stream: turbo_stream.update(
-            'detallesfacturas_form',
-            html: "<p class='text-danger'>El registro tiene inconsistencias. Verifique!!</p>"
-          )
-        end
-      end
+      flash.now[:detallesfactura] = 'El registro tiene inconsistencias. Verifique!!'
     end
+
+    respond_to { |format| format.js { render 'detallesfacturas' } }
   end
 
   def destroy
@@ -64,9 +52,7 @@ class DetallesfacturasController < ApplicationController
     @detallesfactura = Detallesfactura.new
     flash.now[:detallesfactura] = 'Borrado con exito'
 
-    respond_to do |format|
-      format.turbo_stream { render 'detallesfacturas' }
-    end
+    respond_to { |format| format.js { render 'detallesfacturas' } }
   end
 
   private

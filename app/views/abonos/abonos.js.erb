@@ -1,0 +1,7 @@
+$("#abonos_form").html("<%= j render partial: '/abonos/abonos' %>");
+<% if flash[:abono] %>
+  setTimeout(function(){
+    var el = document.getElementById('flash_abono');
+    if(el){ el.style.transition='opacity 1s'; el.style.opacity=0; setTimeout(function(){ el.remove(); }, 1000); }
+  }, 4000);
+<% end %>

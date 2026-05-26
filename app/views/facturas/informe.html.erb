@@ -182,11 +182,9 @@
       </td>
       <td width="40%" height="20" class="camposDesc11">
         <div align="right">
-          Pulse <%= link_to 'Aqui',
-                      informeimp_facturas_path(inicial: @fch1, final: @fch2),
-                      target: '_blank',
-                      title: 'Ver Diseño para imprimir' %> para imprimir
-          &nbsp;&nbsp;
+          <a href="javascript:window.print()" class="imprimirlink">
+            <i class="fa fa-print"></i> Imprimir
+          </a>&nbsp;&nbsp;
         </div>
       </td>
     </tr>

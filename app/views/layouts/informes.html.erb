@@ -5,14 +5,28 @@
     <title><%= ENV['NOMBRE_APLICACION'] %></title>
     <%= csrf_meta_tags %>
     <%= action_cable_meta_tag %>
-		<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <style>
+      html                { background: #ffffff !important; }
+      body                { background: #ffffff !important; background-color: #ffffff !important; color: #000 !important; }
+      .wrapper            { background: #ffffff !important; background-color: #ffffff !important; min-height: unset !important; }
+      .content-wrapper    { background: #ffffff !important; background-color: #ffffff !important; }
+      section.content     { background: #ffffff !important; padding: 10px 20px; }
+      .imprimirlink       { color: #1a5276; font-weight: bold; text-decoration: none; }
+      @media print {
+        .imprimirlink { display: none; }
+        body          { margin: 0; }
+      }
+    </style>
   </head>
   <body>
     <div class="wrapper">
       <section class="content">
-        <%= yield %>
+        <div style="background:#ffffff; max-width:900px; margin:20px auto; padding:20px; border-radius:4px; box-shadow:0 1px 4px rgba(0,0,0,.2);">
+          <%= yield %>
+        </div>
       </section>
     </div>
   </body>

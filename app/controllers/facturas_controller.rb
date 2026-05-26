@@ -64,6 +64,13 @@ class FacturasController < ApplicationController
        WHERE DATE_FORMAT(f.created_at,'%Y-%m-%d') BETWEEN '#{@fch1}' AND '#{@fch2}'
        GROUP BY t.descripcion"
     )
+    respond_to do |format|
+      format.html
+      format.xlsx do
+        filename = "Heroica_InformeDiario_#{@fch1}_#{@fch2}.xlsx"
+        response.headers['Content-Disposition'] = "attachment; filename=\"#{filename}\""
+      end
+    end
   end
 
   # GET /facturas/informeimp
@@ -106,6 +113,13 @@ class FacturasController < ApplicationController
        WHERE DATE_FORMAT(f.created_at,'%Y-%m-%d') BETWEEN '#{@fch1}' AND '#{@fch2}'
        GROUP BY t.descripcion"
     )
+    respond_to do |format|
+      format.html
+      format.xlsx do
+        filename = "Heroica_InformeConsolidado_#{@fch1}_#{@fch2}.xlsx"
+        response.headers['Content-Disposition'] = "attachment; filename=\"#{filename}\""
+      end
+    end
   end
 
   # GET /facturas/informeconsolidadoimp
@@ -250,7 +264,7 @@ class FacturasController < ApplicationController
   def set_layout
     if %w[informeclases].include?(action_name)
       'excel'
-    elsif %w[verfactura informeimp informeconsolidadoimp informeclasesimp].include?(action_name)
+    elsif %w[verfactura informe informeconsolidado informeimp informeconsolidadoimp informeclasesimp].include?(action_name)
       'informes'
     else
       'application'

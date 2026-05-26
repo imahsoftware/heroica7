@@ -5,7 +5,7 @@
 
 <%= form_with url: form_url,
       method: (editing ? :patch : :post),
-      data: { turbo_stream: true } do |f| %>
+      remote: true do |f| %>
 
   <div class="row">
     <div class="col-md-4">
@@ -25,7 +25,8 @@
                 ab&.forma_pago
               ),
               include_blank: true,
-              class: 'form-control' %>
+              class: 'form-control select2',
+              style: 'width:100%' %>
       </div>
     </div>
     <div class="col-md-4" style="padding-top: 25px;">
@@ -36,3 +37,12 @@
   </div>
 
 <% end %>
+
+<script>
+  (function() {
+    var sel = document.querySelector('select[name="abono[forma_pago]"]');
+    if (sel && typeof $ !== 'undefined' && $.fn.select2) {
+      $(sel).select2({ width: '100%' });
+    }
+  })();
+</script>
