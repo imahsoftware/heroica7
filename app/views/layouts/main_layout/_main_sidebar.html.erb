@@ -8,12 +8,7 @@
 <aside class="main-sidebar">
   <section class="sidebar">
 
-    <!-- Logo en sidebar -->
-    <div class="sidebar-logo-wrapper">
-      <%= link_to root_path do %>
-        <%= image_tag 'logo_heroica.png', alt: 'Logo Heroica', class: 'sidebar-logo-img' %>
-      <% end %>
-    </div>
+    <%= render 'layouts/sidebar_logo' %>
 
     <!-- Sidebar Menu -->
     <ul class="sidebar-menu" data-widget="tree">

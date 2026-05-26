@@ -2,6 +2,7 @@
 
 class PersonasController < ApplicationController
   before_action :set_persona, only: [:edit, :update, :destroy]
+  before_action :set_etapa, only: [:edit, :update]
 
   layout :set_layout
   #before_action :checkaccess
@@ -21,7 +22,7 @@ class PersonasController < ApplicationController
 
     # Redirige directo al edit solo cuando la búsqueda es por identificación exacta
     if params[:buscarident].present? && params[:buscarnombre].blank? && resultados.count == 1
-      redirect_to edit_persona_path(resultados.first) and return
+      redirect_to edit_persona_path(resultados.first, etapa: 'A') and return
     end
 
     if resultados.count == 0
@@ -60,7 +61,7 @@ class PersonasController < ApplicationController
     @persona.user_id = is_admin
     if @persona.save
       flash[:notice] = 'Usuario Creado con Exito.'
-      redirect_to edit_persona_path(@persona)
+      redirect_to edit_persona_path(@persona, etapa: 'A')
     else
       render :new
     end
@@ -71,7 +72,7 @@ class PersonasController < ApplicationController
     @persona.user_id = is_admin
     if @persona.update(persona_params)
       flash[:notice] = 'Usuario Actualizado con Exito.'
-      redirect_to edit_persona_path(@persona)
+      redirect_to edit_persona_path(@persona, etapa: @etapa)
     else
       @personastramite = Personastramite.new
       @personasclase   = Personasclase.new
@@ -79,7 +80,7 @@ class PersonasController < ApplicationController
       render :edit
     end
   rescue StandardError
-    redirect_to edit_persona_path(@persona)
+    redirect_to edit_persona_path(@persona, etapa: (@etapa.presence || 'A'))
   end
 
   # DELETE /personas/:id
@@ -139,6 +140,11 @@ class PersonasController < ApplicationController
 
   def set_persona
     @persona = Persona.find(params[:id])
+  end
+
+  def set_etapa
+    @etapa = params[:etapa].presence || 'A'
+    @etapa = 'A' if @persona&.new_record? && @etapa != 'A'
   end
 
   def persona_params

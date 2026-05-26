@@ -180,12 +180,12 @@ class PersonastramitesController < ApplicationController
     pra = if Personastrapractica.exists?(personastramite_id: @personastramite.id)
             Personastrapractica.find_by(personastramite_id: @personastramite.id)
           else
-            Personastrapractica.create!(
+            Personastrapractica.new(
               personastramite_id: @personastramite.id,
               user_id:            is_admin
-            )
+            ).tap(&:save!)
           end
-    redirect_to edit_personastrapractica_path(pra.id)
+    redirect_to edit_personastrapractica_path(pra)
   end
 
   # GET /personas/:persona_id/personastramites/:id/practicam
@@ -193,12 +193,12 @@ class PersonastramitesController < ApplicationController
     pra = if Personastrampractica.exists?(personastramite_id: @personastramite.id)
             Personastrampractica.find_by(personastramite_id: @personastramite.id)
           else
-            Personastrampractica.create!(
+            Personastrampractica.new(
               personastramite_id: @personastramite.id,
               user_id:            is_admin
-            )
+            ).tap(&:save!)
           end
-    redirect_to edit_personastrampractica_path(pra.id)
+    redirect_to edit_personastrampractica_path(pra)
   end
 
   private

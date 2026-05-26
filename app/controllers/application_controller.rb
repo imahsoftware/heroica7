@@ -2009,7 +2009,7 @@ class ApplicationController < ActionController::Base
   helper_method :is_programacionpersona
   def is_programacionpersona(personastramiteid)
     ActiveRecord::Base.connection.execute("CALL prc_personastrapractica(#{personastramiteid})")
-    Objeto.find_by_sql(["select * from personastrapractica where personastramite_id = #{personastramiteid}"])
+    Objeto.find_by_sql(["select * from personastrapracticas where personastramite_id = #{personastramiteid}"])
   end
 
   helper_method :is_liq

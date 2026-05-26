@@ -62,6 +62,8 @@ ActiveSupport::Inflector.inflections(:en) do |inflect|
   inflect.irregular('programacioneshorario', 'programacioneshorarios')
   inflect.irregular('tipostramite', 'tipostramites')
   inflect.irregular('personastramite', 'personastramites')
+  inflect.irregular('personastrapractica', 'personastrapracticas')
+  inflect.irregular('personastrampractica', 'personastrampracticas')
 
   inflect.irregular('teoricosmodulo', 'teoricosmodulos')
   inflect.irregular('teoricosmateria', 'teoricosmaterias')
@@ -102,5 +104,6 @@ ActiveSupport::Inflector.inflections(:en) do |inflect|
   inflect.irregular('instructor', 'instructores')
   inflect.irregular('proveedor', 'proveedores')
   inflect.irregular('comprasdetalle', 'comprasdetalles')
+
 
 end
