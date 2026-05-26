@@ -30,7 +30,7 @@
                       .compact.reject(&:blank?).join(' ') %>
               </td>
               <td class="text-center">
-                <%= link_to edit_persona_path(persona), class: 'btn btn-xs btn-warning',
+                <%= link_to edit_persona_path(persona, etapa: 'A'), class: 'btn btn-xs btn-warning',
                     title: 'Editar' do %>
                   <i class="fa fa-edit"></i> Editar
                 <% end %>

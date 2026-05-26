@@ -1,5 +1,6 @@
 <aside class="main-sidebar">
   <section class="sidebar">
+    <%= render 'layouts/sidebar_logo' %>
     <ul class="sidebar-menu" data-widget="tree">
 
       <li>
@@ -12,30 +13,36 @@
 
       <% if defined?(@persona) && @persona&.persisted? %>
 
-        <li class="<%= active_class(edit_persona_path(@persona)) rescue '' %>">
-          <%= link_to edit_persona_path(@persona) do %>
+        <li class="<%= active_class(edit_persona_path(etapa: 'A', id: @persona.id)) %>">
+          <%= link_to edit_persona_path(etapa: 'A', id: @persona.id) do %>
             <i class="fa fa-user"></i><span>Datos Básicos</span>
           <% end %>
         </li>
 
-        <li class="<%= active_class(persona_personastramites_path(@persona)) rescue '' %>">
-          <%= link_to edit_persona_path(@persona, tab: 'tramites') do %>
+        <li class="<%= active_class(edit_persona_path(etapa: 'B', id: @persona.id)) %>">
+          <%= link_to edit_persona_path(etapa: 'B', id: @persona.id) do %>
             <i class="fa fa-file-text"></i><span>Información Trámite</span>
           <% end %>
         </li>
 
-        <li class="<%= active_class(persona_personasclases_path(@persona)) rescue '' %>">
-          <%= link_to edit_persona_path(@persona, tab: 'clases') do %>
+        <li class="<%= active_class(edit_persona_path(etapa: 'C', id: @persona.id)) %>">
+          <%= link_to edit_persona_path(etapa: 'C', id: @persona.id) do %>
             <i class="fa fa-graduation-cap"></i><span>Clases Dictadas</span>
           <% end %>
         </li>
 
-        <li class="<%= active_class(persona_teoricos_path(@persona)) rescue '' %>">
-          <%= link_to edit_persona_path(@persona, tab: 'teorico') do %>
+        <li class="<%= active_class(edit_persona_path(etapa: 'D', id: @persona.id)) %>">
+          <%= link_to edit_persona_path(etapa: 'D', id: @persona.id) do %>
             <i class="fa fa-book"></i><span>Prueba Teórica</span>
           <% end %>
         </li>
 
+      <% elsif defined?(@persona) && @persona&.new_record? %>
+        <li class="active">
+          <%= link_to new_persona_path do %>
+            <i class="fa fa-user"></i><span>Datos Básicos</span>
+          <% end %>
+        </li>
       <% end %>
 
     </ul>

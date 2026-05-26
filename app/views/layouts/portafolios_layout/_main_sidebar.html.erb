@@ -7,6 +7,7 @@
 %>
 <aside class="main-sidebar">
   <section class="sidebar">
+    <%= render 'layouts/sidebar_logo' %>
     <ul class="sidebar-menu" data-widget="tree">
       <% if issygma %>
         <% portafolios = Portafolio.all.where("estado = 'ACTIVO' and id != #{isportafolio}").order("nombre") %>

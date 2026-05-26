@@ -243,5 +243,16 @@ Rails.application.routes.draw do
   # Busqueda global de teoricos (para iniciar prueba)
   get  'teoricos/busqueda', to: 'teoricos#busqueda', as: 'teoricos_busqueda'
 
+  resources :personastrapracticas, only: [:edit, :create, :update] do
+    collection do
+      get 'calcularvalor'
+    end
+  end
+
+  resources :personastrampracticas, only: [:edit, :create, :update] do
+    collection do
+      get 'calcularvalor'
+    end
+  end
 
 end

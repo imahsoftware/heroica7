@@ -4,7 +4,7 @@
       <% if permiso("personastramite","A").to_s == "S" %>
         <%= link_to edit_persona_personastramite_path(persona, personastramite),
             remote: true, title: 'Editar', data: { toggle: 'tooltip' } do %>
-          <button class="btn btn-xs btn-warning"><i class="fa fa-edit"></i></button>
+          <button class="btn btn-xs btn-warning btn-accion"><i class="fa fa-edit"></i></button>
         <% end %>
       <% end %>
       <% if permiso("personastramite","E").to_s == "S" %>
@@ -12,14 +12,14 @@
             remote: true, method: :delete,
             data: { confirm: '¿Seguro que desea eliminar?', toggle: 'tooltip' },
             title: 'Eliminar' do %>
-          <button class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></button>
+          <button class="btn btn-xs btn-danger btn-accion"><i class="fa fa-trash"></i></button>
         <% end %>
       <% end %>
     <% else %>
       <% if permiso("personastramiteesp","A").to_s == "S" %>
         <%= link_to edit_persona_personastramite_path(persona, personastramite),
             remote: true, title: 'Editar (especial)', data: { toggle: 'tooltip' } do %>
-          <button class="btn btn-xs btn-warning"><i class="fa fa-edit"></i></button>
+          <button class="btn btn-xs btn-warning btn-accion"><i class="fa fa-edit"></i></button>
         <% end %>
       <% end %>
     <% end %>

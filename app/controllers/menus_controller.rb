@@ -29,7 +29,7 @@ class MenusController < ApplicationController
     @control = Controlfirma.where(controlador: @controlador, id_registro: @idRegistro, estado: 'PENDIENTE',
                                   url: @url, tipo_documento: @tipo_documento, modelo: @modelo, portafolio_id: @portafolio,
                                   user_firma: @user_firma, controlformato_id: cf.id).first_or_create
-    redirect_to edit_persona_path(persona)
+    redirect_to edit_persona_path(persona, etapa: 'A')
 =begin
     respond_to do |format|
       flash[:notice] = ""

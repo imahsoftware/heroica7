@@ -1,19 +1,22 @@
-<div class="box box-default color-palette-box">
-  <div class="box-header with-border">
-    <h3 class="box-title"><i class="fa fa-book"></i> Informacion Prueba Teorica</h3>
+<div class="box box-usuarios">
+  <div class="box-header">
+    <span class="box-title">
+      <i class="fa fa-book"></i> Prueba Teórica
+      <span class="users-count-badge"><%= persona.teoricos.count %> registros</span>
+    </span>
   </div>
 
   <div class="box-body">
     <div class="flash_messages"></div>
-    <div id="teorico_form" class="collapse"></div>
+    <div id="teorico_form" class="collapse" style="margin-bottom: 12px;"></div>
 
     <div id="teoricos">
       <% if persona.teoricos.exists? %>
-        <%= render "teoricos/tabla", persona: persona, teorico: teorico %>
+        <%= render 'teoricos/tabla', persona: persona, teorico: teorico %>
       <% else %>
-        <div class="alert alert-warning">
-          <h4><i class="icon fa fa-info"></i> Atencion</h4>
-          No hay pruebas teoricas registradas para esta persona.
+        <div class="empty-state">
+          <i class="fa fa-book"></i>
+          <p>No hay pruebas teóricas registradas para esta persona.</p>
         </div>
       <% end %>
     </div>

@@ -3850,4 +3850,59 @@ module ApplicationHelper
     end
     return dato
   end
+
+  # ── Compatibilidad Rails 2 (prácticas de conducción) ───────────────────────
+
+  def error_message_on(object_name, method, options = {})
+    record = object_name.is_a?(Symbol) ? instance_variable_get("@#{object_name}") : object_name
+    return ''.html_safe if record.blank? || !record.errors[method].any?
+
+    content_tag(:span, record.errors[method].first, class: options[:css_class])
+  end
+
+  def form_field_error(form, method, options = {})
+    return ''.html_safe if form.object.blank? || !form.object.errors[method].any?
+
+    content_tag(:span, form.object.errors[method].first, class: options[:css_class] || 'cerror')
+  end
+
+  def calendar_date_select(object_name, method, options = {})
+    record = instance_variable_get("@#{object_name}")
+    value = record&.public_send(method)
+    text_field_tag(
+      "#{object_name}[#{method}]",
+      value,
+      class: [options[:class], 'datepicker'].compact.join(' '),
+      size: options[:size]
+    )
+  end
+
+  def observe_field(field_id, url: {}, on: 'blur', with: nil, **_options)
+    path = url_for(controller: controller.controller_path, action: url[:action] || 'calcularvalor')
+    with_js = with.to_s.gsub(/\bvalue\b/, 'el.value')
+    javascript_tag(<<~JS.html_safe)
+      (function() {
+        function bindObserveField() {
+          var el = document.getElementById('#{j field_id}');
+          if (!el || el.dataset.observeBound) return;
+          el.dataset.observeBound = '1';
+          el.addEventListener('#{on}', function() {
+            var qs = #{with_js};
+            fetch('#{path}?' + qs, {
+              headers: { 'X-Requested-With': 'XMLHttpRequest', 'Accept': 'application/json' },
+              credentials: 'same-origin'
+            })
+            .then(function(r) { return r.json(); })
+            .then(function(data) {
+              var target = document.getElementById(data.field_id);
+              if (target) target.value = data.value;
+            });
+          });
+        }
+        document.addEventListener('turbolinks:load', bindObserveField);
+        document.addEventListener('DOMContentLoaded', bindObserveField);
+        bindObserveField();
+      })();
+    JS
+  end
 end

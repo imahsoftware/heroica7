@@ -3,13 +3,13 @@
     <% if permiso("personasclase","E").to_s == "S" %>
       <%= link_to edit_persona_personasclase_path(persona, personasclase),
           remote: true, title: 'Editar', data: { toggle: 'tooltip' } do %>
-        <button class="btn btn-xs btn-warning"><i class="fa fa-edit"></i></button>
+        <button class="btn btn-xs btn-warning btn-accion"><i class="fa fa-edit"></i></button>
       <% end %>
       <%= link_to persona_personasclase_path(persona, personasclase),
           remote: true, method: :delete,
           data: { confirm: '¿Seguro?', toggle: 'tooltip' },
           title: 'Eliminar' do %>
-        <button class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></button>
+        <button class="btn btn-xs btn-danger btn-accion"><i class="fa fa-trash"></i></button>
       <% end %>
     <% end %>
   </td>
