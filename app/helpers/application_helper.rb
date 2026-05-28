@@ -3905,4 +3905,48 @@ module ApplicationHelper
       })();
     JS
   end
+
+  # Rails2 :popup compat.
+  # Usage:
+  # link_to_popup "Ver Acta", {controller: "comites", action: "visualizar", id: @comite.id},
+  #   popup: ['new_window','height=700,width=950,scrollbars=yes'], class: "btn btn-success"
+  def link_to_popup(name = nil, options = nil, html_options = nil, &block)
+    if block_given?
+      html_options = options
+      options = name
+      name = capture(&block)
+    end
+
+    html_options ||= {}
+    popup = html_options.delete(:popup)
+
+    unless popup.nil?
+      popup_name, features = popup
+      features = features.to_s
+
+      width = features[/width\s*=\s*(\d+)/, 1]
+      height = features[/height\s*=\s*(\d+)/, 1]
+      scrollbars = features[/scrollbars\s*=\s*(yes|no)/i, 1] || 'yes'
+      popup_name ||= 'new_window'
+
+      html_options[:data] ||= {}
+      html_options[:data] = html_options[:data].transform_keys { |k| k.to_s.tr('-', '_').to_sym }
+      html_options[:data].merge!(
+        popup: true,
+        popup_name: popup_name,
+        popup_width: (width || 950).to_i,
+        popup_height: (height || 700).to_i,
+        popup_scrollbars: scrollbars
+      )
+
+      # Force popup even if global JS not loaded
+      # (keeps legacy behavior: don't navigate current window)
+      html_options[:onclick] = [
+        "window.open(this.href,'#{popup_name}','#{features},resizable=yes,toolbar=no,menubar=no,location=no,status=no');",
+        "return false;"
+      ].join(' ')
+    end
+
+    link_to(name, options, html_options)
+  end
 end

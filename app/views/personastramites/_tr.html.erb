@@ -45,41 +45,93 @@
   <td><%= personastramite.placa.descripcion rescue nil %></td>
 
   <td class="text-center">
-    <div class="btn-group btn-group-xs">
+    <div class="btn-group btn-group-xs" style="white-space: normal;">
       <%= link_to registroclase_persona_personastramite_path(persona, personastramite),
-          target: '_blank', class: 'btn btn-xs btn-default', title: 'Registro Clase',
-          data: { toggle: 'tooltip' } do %>
+          class: 'btn btn-xs btn-default', title: 'Registro Clase',
+          data: { toggle: 'tooltip', turbo: false, popup: true, popup_name: 'new_window', popup_width: 1000, popup_height: 500, popup_scrollbars: 'yes' } do %>
         <i class="fa fa-list-alt"></i>
       <% end %>
       <%= link_to registrosolicitud_persona_personastramite_path(persona, personastramite),
-          target: '_blank', class: 'btn btn-xs btn-default', title: 'Registro Solicitud',
-          data: { toggle: 'tooltip' } do %>
+          class: 'btn btn-xs btn-default', title: 'Registro Solicitud',
+          data: { toggle: 'tooltip', turbo: false, popup: true, popup_name: 'new_window', popup_width: 1000, popup_height: 500, popup_scrollbars: 'yes' } do %>
         <i class="fa fa-file-text-o"></i>
       <% end %>
-      <%= link_to teorico_persona_personastramite_path(persona, personastramite),
-          target: '_blank', class: 'btn btn-xs btn-info', title: 'Programar Teórico',
-          data: { toggle: 'tooltip' } do %>
+      <%= link_to_popup teorico_persona_personastramite_path(persona, personastramite),
+          popup: ['new_window', 'height=500,width=800,scrollbars=yes'],
+          class: 'btn btn-xs btn-info', title: 'Programar Teórico',
+          data: { toggle: 'tooltip', turbo: false } do %>
         <i class="fa fa-book"></i>
       <% end %>
       <%= link_to acuerdocomercial_persona_personastramite_path(persona, personastramite),
-          target: '_blank', class: 'btn btn-xs btn-default', title: 'Acuerdo Comercial',
-          data: { toggle: 'tooltip' } do %>
+          class: 'btn btn-xs btn-default', title: 'Acuerdo Comercial',
+          data: { toggle: 'tooltip', turbo: false, popup: true, popup_name: 'new_window', popup_width: 950, popup_height: 700, popup_scrollbars: 'yes' } do %>
         <i class="fa fa-handshake-o"></i>
       <% end %>
-      <%= link_to diploma_persona_personastramite_path(persona, personastramite,
-              nombredip: 'MANEJO DEFENSIVO, NORMAS DE TRANSITO Y SEGURIDAD VIAL'),
-          target: '_blank', class: 'btn btn-xs btn-success', title: 'Diploma Manejo Defensivo',
-          data: { toggle: 'tooltip' } do %>
-        <i class="fa fa-certificate"></i>
-      <% end %>
+
+      <div class="btn-group btn-group-xs">
+        <button type="button"
+                class="btn btn-xs btn-success dropdown-toggle"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+                title="Diplomas">
+          <i class="fa fa-certificate"></i> <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-right">
+          <li>
+            <%= link_to diploma_persona_personastramite_path(persona, personastramite,
+                  nombredip: 'MANEJO DEFENSIVO, NORMAS DE TRANSITO Y SEGURIDAD VIAL'),
+                data: { turbo: false, popup: true, popup_name: 'new_window', popup_width: 950, popup_height: 700, popup_scrollbars: 'yes' } do %>
+              <i class="fa fa-shield"></i> Manejo defensivo
+            <% end %>
+          </li>
+          <li>
+            <%= link_to diploma_persona_personastramite_path(persona, personastramite, nombredip: 'MECANICA BASICA'),
+                data: { turbo: false, popup: true, popup_name: 'new_window', popup_width: 950, popup_height: 700, popup_scrollbars: 'yes' } do %>
+              <i class="fa fa-cog"></i> Mecánica básica
+            <% end %>
+          </li>
+          <li>
+            <%= link_to diploma_persona_personastramite_path(persona, personastramite, nombredip: 'PRIMEROS AUXILIOS'),
+                data: { turbo: false, popup: true, popup_name: 'new_window', popup_width: 950, popup_height: 700, popup_scrollbars: 'yes' } do %>
+              <i class="fa fa-ambulance"></i> Primeros auxilios
+            <% end %>
+          </li>
+          <li>
+            <%= link_to diploma_persona_personastramite_path(persona, personastramite, nombredip: 'TECNICAS DE CONDUCCIÓN'),
+                data: { turbo: false, popup: true, popup_name: 'new_window', popup_width: 950, popup_height: 700, popup_scrollbars: 'yes' } do %>
+              <i class="fa fa-road"></i> Técnicas de conducción
+            <% end %>
+          </li>
+          <li>
+            <%= link_to diploma_persona_personastramite_path(persona, personastramite, nombredip: 'INSPECCIÓN PREOPERACIONAL'),
+                data: { turbo: false, popup: true, popup_name: 'new_window', popup_width: 950, popup_height: 700, popup_scrollbars: 'yes' } do %>
+              <i class="fa fa-search"></i> Inspección preoperacional
+            <% end %>
+          </li>
+          <li>
+            <%= link_to diploma_persona_personastramite_path(persona, personastramite, nombredip: 'CONTROL DE INCENDIOS EN CARRETERA'),
+                data: { turbo: false, popup: true, popup_name: 'new_window', popup_width: 950, popup_height: 700, popup_scrollbars: 'yes' } do %>
+              <i class="fa fa-fire"></i> Control incendios carretera
+            <% end %>
+          </li>
+          <li>
+            <%= link_to diploma_persona_personastramite_path(persona, personastramite, nombredip: 'COMPORTAMIENTO DE LOS ESTUDIANTES'),
+                data: { turbo: false, popup: true, popup_name: 'new_window', popup_width: 950, popup_height: 700, popup_scrollbars: 'yes' } do %>
+              <i class="fa fa-users"></i> Comportamiento estudiantes
+            <% end %>
+          </li>
+        </ul>
+      </div>
+
       <%= link_to practica_persona_personastramite_path(persona, personastramite),
-          target: '_blank', class: 'btn btn-xs btn-primary', title: 'Evaluación Práctica Vehículo',
-          data: { toggle: 'tooltip' } do %>
+          class: 'btn btn-xs btn-primary', title: 'Evaluación Práctica Vehículo',
+          data: { toggle: 'tooltip', turbo: false, popup: true, popup_name: 'new_window', popup_width: 950, popup_height: 700, popup_scrollbars: 'yes' } do %>
         <i class="fa fa-car"></i>
       <% end %>
       <%= link_to practicam_persona_personastramite_path(persona, personastramite),
-          target: '_blank', class: 'btn btn-xs btn-primary', title: 'Evaluación Práctica Motos',
-          data: { toggle: 'tooltip' } do %>
+          class: 'btn btn-xs btn-primary', title: 'Evaluación Práctica Motos',
+          data: { toggle: 'tooltip', turbo: false, popup: true, popup_name: 'new_window', popup_width: 950, popup_height: 700, popup_scrollbars: 'yes' } do %>
         <i class="fa fa-motorcycle"></i>
       <% end %>
     </div>
@@ -89,13 +141,14 @@
     <% if personastramite.factura_id %>
       <%= link_to facturacero(personastramite.factura.nro_factura),
           verfactura_facturas_path(factura_id: personastramite.factura_id),
-          target: '_blank', class: 'btn btn-xs btn-success' %>
+          target: '_blank', rel: 'noopener', data: { turbo: false },
+          class: 'btn btn-xs btn-success' %>
     <% else %>
       <%= link_to crearfactura_persona_personastramite_path(persona, personastramite,
               tipostramite_id: personastramite.tipostramite_id,
               categoria_id:    personastramite.categoria_id),
-          target: '_blank',
-          data: { confirm: '¿Está seguro que desea Generar Factura?' },
+          target: '_blank', rel: 'noopener',
+          data: { confirm: '¿Está seguro que desea Generar Factura?', turbo: false },
           class: 'btn btn-xs btn-warning', title: 'Generar Factura' do %>
         <i class="fa fa-file-invoice-dollar"></i> Facturar
       <% end %>
@@ -103,8 +156,9 @@
   </td>
 
   <td class="text-center">
-    <%= link_to hora_personastramiteshoras_path(personastramite.id),
-        class: 'btn btn-xs btn-info', title: 'Ver Horas' do %>
+    <%= link_to hora_personastramiteshoras_path(personastramite_id: personastramite.id),
+        class: 'btn btn-xs btn-info', title: 'Ver Horas',
+        data: { turbo: false } do %>
       <i class="fa fa-clock-o"></i> Horas
     <% end %>
   </td>
@@ -114,30 +168,39 @@
 <% if personastramite.personastramiteshoras.exists? %>
   <tr>
     <td colspan="7">
-      <table class="table table-condensed table-bordered" style="margin:0; font-size:11px;">
-        <thead>
-          <tr class="active">
-            <th>Fecha</th>
-            <th class="text-center">Horas Prácticas</th>
-            <th class="text-center">Horas Teóricas</th>
-            <th class="text-center">Horas Taller</th>
-            <th class="text-center">Total</th>
-            <th>Instructor</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% personastramite.personastramiteshoras.each do |hora| %>
-            <tr>
-              <td><%= hora.fecha %></td>
-              <td class="text-center"><%= hora.practicas %></td>
-              <td class="text-center"><%= hora.teoricas %></td>
-              <td class="text-center"><%= hora.taller %></td>
-              <td class="text-center"><strong><%= hora.dtotal rescue nil %></strong></td>
-              <td><%= hora.instructor.nombre rescue nil %></td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
+      <div class="box box-default" style="margin: 6px 0 0; border: 1px solid #e5e7eb;">
+        <div class="box-header with-border" style="padding: 6px 10px; background: #f5f5f5; color: #333;">
+          <h3 class="box-title" style="font-size: 12px; font-weight: 700; margin: 0; color: #333;">
+            <i class="fa fa-clock-o" style="color:#333;"></i> REGISTRO DE HORAS
+          </h3>
+        </div>
+        <div class="box-body" style="padding: 0;">
+          <table class="table table-condensed table-bordered table-striped text-table" style="margin:0;">
+            <thead>
+              <tr>
+                <th style="width: 110px; background:#394959; color:#fff;">Fecha</th>
+                <th class="text-center" style="width: 120px; background:#394959; color:#fff;">Prácticas</th>
+                <th class="text-center" style="width: 120px; background:#394959; color:#fff;">Teóricas</th>
+                <th class="text-center" style="width: 110px; background:#394959; color:#fff;">Taller</th>
+                <th class="text-center" style="width: 90px; background:#394959; color:#fff;">Total</th>
+                <th style="background:#394959; color:#fff;">Instructor</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% personastramite.personastramiteshoras.each do |hora| %>
+                <tr>
+                  <td><%= hora.fecha %></td>
+                  <td class="text-center"><%= hora.practicas %></td>
+                  <td class="text-center"><%= hora.teoricas %></td>
+                  <td class="text-center"><%= hora.taller %></td>
+                  <td class="text-center"><strong><%= hora.dtotal rescue nil %></strong></td>
+                  <td><%= hora.instructor.nombre rescue nil %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </td>
   </tr>
 <% end %>

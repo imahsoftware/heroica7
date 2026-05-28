@@ -45,6 +45,32 @@ $(document).on("turbolinks:load", function() {
   });
   $('.wysihtml5').wysihtml5();
   $('[data-toggle="popover"]').popover();
+
+  // Popup links (legacy :popup behavior)
+  $(document).off('click.popupLink').on('click.popupLink', 'a[data-popup="true"]', function(e) {
+    e.preventDefault();
+    var $a = $(this);
+    var url = $a.attr('href');
+    if (!url) { return; }
+
+    var name = ($a.data('popupName') || 'new_window');
+    var w = parseInt($a.data('popupWidth') || 950, 10);
+    var h = parseInt($a.data('popupHeight') || 700, 10);
+    var scrollbars = ($a.data('popupScrollbars') || 'yes');
+
+    var left = Math.max(0, (screen.width  - w) / 2);
+    var top  = Math.max(0, (screen.height - h) / 2);
+    // Note: modern browsers may ignore some features
+    var features = 'width=' + w +
+                   ',height=' + h +
+                   ',left=' + left +
+                   ',top=' + top +
+                   ',scrollbars=' + scrollbars +
+                   ',resizable=yes' +
+                   ',toolbar=no,menubar=no,location=no,status=no';
+    var win = window.open(url, name, features);
+    if (win && win.focus) { win.focus(); }
+  });
 });
 
 

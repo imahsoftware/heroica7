@@ -1,0 +1,64 @@
+<div class="box box-usuarios">
+  <div class="box-header">
+    <span class="box-title">
+      <i class="fa fa-bolt"></i> Registro rápido de horas
+      <small style="opacity:.85;">
+        [<%= @personastramite&.persona&.nombres %>]
+      </small>
+    </span>
+  </div>
+
+  <div class="box-body">
+    <%= form_with model: @personastramiteshora,
+                  url: create2_personastramiteshoras_path,
+                  method: :post,
+                  local: true do |f| %>
+      <%= f.hidden_field :personastramite_id, value: @personastramite.id %>
+
+      <div class="row">
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label class="control-label">Fecha</label>
+            <%= f.date_field :fecha, class: 'form-control', required: true %>
+          </div>
+        </div>
+        <div class="col-sm-2">
+          <div class="form-group">
+            <label class="control-label">Prácticas</label>
+            <%= f.number_field :practicas, class: 'form-control', required: true, min: 0 %>
+          </div>
+        </div>
+        <div class="col-sm-2">
+          <div class="form-group">
+            <label class="control-label">Teóricas</label>
+            <%= f.number_field :teoricas, class: 'form-control', required: true, min: 0 %>
+          </div>
+        </div>
+        <div class="col-sm-2">
+          <div class="form-group">
+            <label class="control-label">Taller</label>
+            <%= f.number_field :taller, class: 'form-control', required: true, min: 0 %>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label class="control-label">Instructor</label>
+            <%= f.select :instructor_id,
+                         options_from_collection_for_select(Instructor.order(:nombre), :id, :nombre, @personastramiteshora.instructor_id),
+                         { include_blank: true },
+                         class: 'form-control', required: true %>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-right">
+        <%= link_to hora_personastramiteshoras_path(personastramite_id: @personastramite.id),
+            class: 'btn btn-default' do %>
+          Regresar
+        <% end %>
+        <%= f.submit 'Guardar', class: 'btn btn-primary' %>
+      </div>
+    <% end %>
+  </div>
+</div>
+

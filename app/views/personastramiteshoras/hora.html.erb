@@ -1,0 +1,77 @@
+<div class="box box-primary">
+  <div class="box-header with-border">
+    <h3 class="box-title">
+      <i class="fa fa-clock-o"></i> Registro de horas
+      <small>[<%= @personastramite&.persona&.nombres %>]</small>
+    </h3>
+
+    <div class="box-tools pull-right">
+      <%= link_to edit_persona_path(@personastramite.persona_id),
+          class: 'btn btn-sm btn-default', title: 'Regresar a persona' do %>
+        <i class="fa fa-arrow-left"></i> Regresar
+      <% end %>
+
+      <%= link_to new_personastramiteshora_path(personastramite_id: @personastramite.id),
+          class: 'btn btn-sm btn-success', title: 'Nuevo registro' do %>
+        <i class="fa fa-plus"></i> Nuevo
+      <% end %>
+    </div>
+  </div>
+
+  <div class="box-body">
+    <div class="table-responsive table-responsive-dropdowns">
+      <table class="table table-bordered table-condensed table-striped table-usuarios">
+        <thead>
+          <tr>
+            <th width="28%">Usuario / Fecha</th>
+            <th class="text-center" width="10%">Fecha</th>
+            <th class="text-center" width="10%">Prácticas</th>
+            <th class="text-center" width="10%">Teóricas</th>
+            <th class="text-center" width="10%">Taller</th>
+            <th class="text-center" width="8%">Total</th>
+            <th width="16%">Instructor</th>
+            <th class="text-center" width="8%">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @personastramiteshoras.each do |h| %>
+            <tr>
+              <td>
+                <small>
+                  <%= h.created_at&.strftime('%Y-%m-%d %X') %> -
+                  <%= h.user&.username rescue nil %><br>
+                  <%= h.updated_at&.strftime('%Y-%m-%d %X') %> -
+                  <%= User.find(h.user_actualiza).username rescue nil %>
+                </small>
+              </td>
+              <td class="text-center"><%= h.fecha %></td>
+              <td class="text-center"><%= h.practicas %></td>
+              <td class="text-center"><%= h.teoricas %></td>
+              <td class="text-center"><%= h.taller %></td>
+              <td class="text-center"><strong><%= h.dtotal rescue nil %></strong></td>
+              <td><%= h.instructor&.nombre %></td>
+              <td class="text-center">
+                <% if permiso('personastramiteshora', 'A').to_s == 'S' %>
+                  <%= link_to edit_personastramiteshora_path(h, personastramite_id: @personastramite.id),
+                      class: 'btn btn-xs btn-warning', title: 'Editar',
+                      data: { toggle: 'tooltip' } do %>
+                    <i class="fa fa-edit"></i>
+                  <% end %>
+                <% end %>
+                <% if permiso('personastramiteshora', 'E').to_s == 'S' %>
+                  <%= link_to personastramiteshora_path(h, personastramite_id: @personastramite.id),
+                      method: :delete,
+                      data: { confirm: '¿Está seguro de eliminar?', toggle: 'tooltip' },
+                      class: 'btn btn-xs btn-danger', title: 'Eliminar' do %>
+                    <i class="fa fa-trash"></i>
+                  <% end %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+

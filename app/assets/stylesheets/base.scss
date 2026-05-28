@@ -309,7 +309,8 @@ $red-border: #fecaca;
   border-radius: 6px;
   box-shadow: 0 2px 12px rgba(0,0,0,0.08);
 
-  .box-header {
+  // Only style direct header, avoid nested boxes
+  > .box-header {
     background: linear-gradient(135deg, #2c3a47 0%, #394959 100%);
     border-radius: 4px 4px 0 0;
     padding: 12px 16px;
@@ -481,6 +482,16 @@ $red-border: #fecaca;
   }
 }
 
+// Dropdowns dentro de tablas responsivas (evita clipping de menú)
+.table-responsive.table-responsive-dropdowns {
+  overflow: visible;
+}
+
+// Form Horas: respira sin pelear con AdminLTE
+.personastramiteshoras-form {
+  .form-group { margin-bottom: 12px; }
+}
+
 // Badge activo/inactivo
 .badge-activo {
   display: inline-block;
@@ -513,6 +524,21 @@ $red-border: #fecaca;
   transition: opacity 0.15s, transform 0.1s;
 
   &:hover { opacity: 0.85; transform: translateY(-1px); }
+}
+
+// Icon color inside buttons: inherit text color (fix icons black)
+.btn .fa,
+.btn .glyphicon {
+  color: inherit;
+}
+
+// Force white text/icons on colored buttons (AdminLTE/legacy CSS sometimes overrides)
+.btn.btn-primary,
+.btn.btn-success,
+.btn.btn-info,
+.btn.btn-warning,
+.btn.btn-danger {
+  color: #fff;
 }
 
 // ============================================================

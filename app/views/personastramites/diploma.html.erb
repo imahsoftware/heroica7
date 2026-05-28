@@ -1,2 +1,56 @@
-<div class="page-header"><h3>Diploma - <%= @nombre %></h<div class="page-header"><h3>Diploma - <%= @nombre %></h<div class="page-header"><h3>Diploma - <%= @nombre %></h<div class="page-header"><h3>Diploma - <%= @nombden<div class="page-header"><h3>Diploma - <%= @nombre %></h<div class="page-header"><h3>Diploma - <%= @nombre %></h<div class="page-header"><h3>Diploma - <%= @nombre %></h<div class="page-header"><h3>Diploma - <%= @nombden<div class="page-header"><h3>Diploma - <%= @nombre %></h<div class="page-header"><h3>Diploma - <%= @nombre %></h<div class="page-header"><h3>Diploma - <%= @nombre %></h<div class="page-header"><h3>Diploma - <%= @nombden<div class="page-header"><h3>Diploma - <%= @nombre %></h<div class="page-header"><h3>Diploma - <%= @nombre %></h<div class="page-header"><h3>Diploma - <%= @nombre %></h<div class="page-header"><h3>Diploma - <%= @nombden<div claria.nombre rescue nil %></p>
-<p><strong>Trámite:</strong> <%= @personastramite.tipostramite.descripcion rescue nil %></p>
+<%
+  datoFch =
+    (Parametro.find_by(id: 24)&.valor&.to_date) ||
+    (defined?(Time.zone) && Time.zone ? Time.zone.today : Date.today)
+%>
+
+<div id="contenedorcontrato">
+  <div class="diploma-pos diploma-nombres"><%= @personastramite&.persona&.nombres %></div>
+  <div class="diploma-pos diploma-tipodoc"><%= @personastramite&.persona&.tipodocumento %></div>
+  <div class="diploma-pos diploma-identificacion"><%= @personastramite&.persona&.identificacion %></div>
+  <div class="diploma-pos diploma-expedida"><%= @personastramite&.persona&.expedida %></div>
+  <div class="diploma-pos diploma-curso"><%= @nombre %></div>
+  <div class="diploma-pos diploma-dia"><%= datoFch.strftime("%d") %></div>
+  <div class="diploma-pos diploma-mes"><%= descmes(datoFch.strftime("%m")) %></div>
+  <div class="diploma-pos diploma-ano"><%= datoFch.strftime("%Y") %></div>
+
+  <a href="javascript:window.print()" class="imprimirlink" aria-label="Imprimir"></a>
+</div>
+
+<style>
+  #contenedorcontrato {
+    width: 927px;
+    height: 715px;
+    position: relative;
+    margin: 0 auto;
+    font-family: Tahoma, sans-serif;
+    background: url("<%= asset_path("diploma2.png") %>") no-repeat;
+    background-size: 927px 715px;
+    text-align: left;
+    font-size: 12px;
+    font-weight: bold;
+  }
+
+  .diploma-pos {
+    position: absolute;
+  }
+
+  .diploma-nombres { left: 130px; top: 400px; }
+  .diploma-tipodoc { left: 230px; top: 420px; }
+  .diploma-identificacion { left: 450px; top: 420px; }
+  .diploma-expedida { left: 730px; top: 420px; }
+  .diploma-curso { left: 450px; top: 438px; }
+  .diploma-dia { left: 370px; top: 490px; }
+  .diploma-mes { left: 540px; top: 490px; }
+  .diploma-ano { left: 660px; top: 490px; }
+
+  /* Si ya existe estilo global para .imprimirlink, esto no estorba */
+  .imprimirlink {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    width: 32px;
+    height: 32px;
+    display: inline-block;
+  }
+</style>

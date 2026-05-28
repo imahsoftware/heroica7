@@ -1,0 +1,67 @@
+<div class="box box-body">
+<%= form_with model: personastramiteshora,
+              url: url,
+              method: method,
+              local: true,
+              html: { class: 'form-horizontal personastramiteshoras-form' } do |f| %>
+  <div class="row">
+    <div class="col-md-2">
+      <label>Fecha</label>
+      <div class="input-group" style="margin-bottom: 12px;">
+        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+        <%= f.text_field :fecha,
+                         class: 'form-control datepicker clean',
+                         placeholder: 'yyyy-mm-dd',
+                         required: true,
+                         autocomplete: 'off',
+                         readonly: true %>
+      </div>
+    </div>
+
+    <div class="col-md-2">
+      <label>Prácticas</label>
+      <div style="margin-bottom: 12px;">
+        <%= f.number_field :practicas, class: 'form-control clean', required: true, min: 0 %>
+      </div>
+    </div>
+
+    <div class="col-md-2">
+      <label>Teóricas</label>
+      <div style="margin-bottom: 12px;">
+        <%= f.number_field :teoricas, class: 'form-control clean', required: true, min: 0 %>
+      </div>
+    </div>
+
+    <div class="col-md-2">
+      <label>Taller</label>
+      <div style="margin-bottom: 12px;">
+        <%= f.number_field :taller, class: 'form-control clean', required: true, min: 0 %>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+
+        <label>Instructor</label>
+        <div style="margin-bottom: 12px;">
+        <%= f.select :instructor_id,
+                     options_from_collection_for_select(Instructor.order(:nombre), :id, :nombre, personastramiteshora.instructor_id),
+                     { include_blank: true },
+                     class: 'form-control select2 clean',
+                     style: 'width: 100%',
+                     required: true %>
+        </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12 text-right" style="margin-top: 10px;">
+      <%= link_to hora_personastramiteshoras_path(personastramite_id: personastramite.id),
+          class: 'btn btn-default' do %>
+        <i class="fa fa-arrow-left"></i> Regresar
+      <% end %>
+      <%= f.submit 'Guardar', class: 'btn btn-danger' %>
+    </div>
+  </div>
+
+<% end %>
+</div>

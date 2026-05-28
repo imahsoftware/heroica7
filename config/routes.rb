@@ -166,6 +166,17 @@ Rails.application.routes.draw do
   resources :categorias
   resources :tipostramites
 
+  # ─── Teóricos resultados (flujo de prueba) ──────────────────────────────────
+  resources :teoricosresultados, only: [:index, :edit, :update] do
+    collection do
+      get :next
+      get :previous
+      get :marcar
+      get :desmarcar
+      get :finalizar
+    end
+  end
+
   resources :compras do
     resources :comprasdetalles
   end

@@ -218,10 +218,8 @@ class PersonastramitesController < ApplicationController
   def set_layout
     if %w[crearfactura teorico].include?(action_name)
       'basico'
-    elsif %w[registroclase registrosolicitud acuerdocomercial].include?(action_name)
+    elsif %w[registroclase registrosolicitud acuerdocomercial diploma].include?(action_name)
       'informes'
-    elsif %w[diploma].include?(action_name)
-      'basico'
     else
       'application_personas'
     end

@@ -1,3 +1,51 @@
+<style type="text/css">
+  /* Responsive: keep layout, no horizontal scroll */
+  table.sample,
+  table[width="850"] {
+    width: 100% !important;
+    max-width: 100% !important;
+    table-layout: fixed;
+  }
+
+  td, th {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  input.campo,
+  textarea.campoMultiLinea,
+  select.span2,
+  input.campodisabled {
+    width: 100% !important;
+    box-sizing: border-box;
+  }
+
+  /* Print: mimic legacy Rails2 (fixed 850px, inputs honor size=) */
+  @media print {
+    table.sample,
+    table[width="850"] {
+      width: 850px !important;
+      max-width: 850px !important;
+      table-layout: auto !important;
+    }
+
+    input.campo,
+    textarea.campoMultiLinea,
+    select.span2,
+    input.campodisabled {
+      width: auto !important;
+      max-width: none !important;
+    }
+
+    .no-print { display: none !important; }
+  }
+</style>
+
 <%= form_for(@personastrampractica, html: { multipart: true }) do |f| %>
 <% @personastramite = Personastramite.find(@personastrampractica.personastramite_id) %>
   <br/><div align="center">
@@ -656,15 +704,13 @@
             <td height="10"><hr size="1" noshade="noshade" class="hrlinea" /></td>
           </tr>
         </table>
-        <table width="100%" border="0" cellpadding="2" cellspacing="2">
-          <tr>
-            <td class="camposDesc11" align="left"></td>
-            <td  height="30"><div align="right">
-                <%= f.submit "Guardar", data: { disable_with: "Guardando..." }, class: "buttonAsLink" %>
-              <a href="javascript:window.print()" class="imprimirlink">Imprimir</a>
-            </div></td>
-          </tr>
-        </table>
+        <div class="no-print" style="margin-top: 8px;">
+          <div style="text-align: right;">
+            <%= f.submit "Guardar", data: { disable_with: "Guardando..." }, class: "buttonAsLink" %>
+            &nbsp;&nbsp;
+            <a href="javascript:window.print()" class="imprimirlink">Imprimir</a>
+          </div>
+        </div>
       </td>
     </tr>
   </table>
