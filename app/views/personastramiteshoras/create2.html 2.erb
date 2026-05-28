@@ -1,0 +1,21 @@
+<div class="box box-usuarios">
+  <div class="box-header">
+    <span class="box-title">
+      <i class="fa fa-check"></i> Registro de horas
+    </span>
+  </div>
+
+  <div class="box-body">
+    <% if flash[:notice].present? %>
+      <div class="alert alert-success"><%= flash[:notice] %></div>
+    <% end %>
+
+    <div class="text-right">
+      <%= link_to hora_personastramiteshoras_path(personastramite_id: @personastramite.id),
+          class: 'btn btn-primary' do %>
+        Volver a horas
+      <% end %>
+    </div>
+  </div>
+</div>
+
