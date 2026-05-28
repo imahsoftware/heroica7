@@ -11,7 +11,10 @@ class DetallesfacturasController < ApplicationController
   end
 
   def edit
-    respond_to { |format| format.js }
+    respond_to do |format|
+      format.js
+      format.html { redirect_to edit_factura_path(@factura) }
+    end
   end
 
   def create
@@ -28,7 +31,10 @@ class DetallesfacturasController < ApplicationController
       flash.now[:detallesfactura] = 'Se produjo un error al guardar el registro'
     end
 
-    respond_to { |format| format.js { render 'detallesfacturas' } }
+    respond_to do |format|
+      format.js { render 'detallesfacturas' }
+      format.html { redirect_to edit_factura_path(@factura) }
+    end
   end
 
   def update
@@ -41,7 +47,10 @@ class DetallesfacturasController < ApplicationController
       flash.now[:detallesfactura] = 'El registro tiene inconsistencias. Verifique!!'
     end
 
-    respond_to { |format| format.js { render 'detallesfacturas' } }
+    respond_to do |format|
+      format.js { render 'detallesfacturas' }
+      format.html { redirect_to edit_factura_path(@factura) }
+    end
   end
 
   def destroy
@@ -52,7 +61,10 @@ class DetallesfacturasController < ApplicationController
     @detallesfactura = Detallesfactura.new
     flash.now[:detallesfactura] = 'Borrado con exito'
 
-    respond_to { |format| format.js { render 'detallesfacturas' } }
+    respond_to do |format|
+      format.js { render 'detallesfacturas' }
+      format.html { redirect_to edit_factura_path(@factura) }
+    end
   end
 
   private

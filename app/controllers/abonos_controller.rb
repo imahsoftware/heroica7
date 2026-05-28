@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class AbonosController < ApplicationController
-  before_action :checkaccess, except: [:verabono]
+  #before_action :checkaccess, except: [:verabono]
   before_action :set_factura, except: [:verabono]
   before_action :set_abono,   only: [:edit, :update, :destroy, :anula]
 
@@ -16,7 +16,10 @@ class AbonosController < ApplicationController
   end
 
   def edit
-    respond_to { |format| format.js }
+    respond_to do |format|
+      format.js
+      format.html { redirect_to edit_factura_path(@factura) }
+    end
   end
 
   def create
@@ -28,7 +31,10 @@ class AbonosController < ApplicationController
 
     if @abono.valor.to_i <= 0
       flash.now[:abono] = 'El valor del abono debe ser superior a CERO'
-      respond_to { |f| f.js { render 'abonos' } }
+      respond_to do |f|
+        f.js   { render 'abonos' }
+        f.html { redirect_to edit_factura_path(@factura) }
+      end
       return
     end
 
@@ -40,7 +46,10 @@ class AbonosController < ApplicationController
 
     if valor > valorfactura
       flash.now[:abono] = 'El valor del Abono supera el valor de la factura'
-      respond_to { |f| f.js { render 'abonos' } }
+      respond_to do |f|
+        f.js   { render 'abonos' }
+        f.html { redirect_to edit_factura_path(@factura) }
+      end
       return
     end
 
@@ -57,15 +66,24 @@ class AbonosController < ApplicationController
           "UPDATE facturas SET estado = 'C' WHERE id = #{@factura.id}"
         )
         flash[:notice] = 'Abono Registrado y Factura Cancelada'
-        respond_to { |f| f.js { render 'abono_redirect' } }
+        respond_to do |f|
+          f.js   { render 'abono_redirect' }
+          f.html { redirect_to edit_factura_path(@factura) }
+        end
       else
         @abono = Abono.new
         flash.now[:abono] = 'Creado con exito'
-        respond_to { |f| f.js { render 'abonos' } }
+        respond_to do |f|
+          f.js   { render 'abonos' }
+          f.html { redirect_to edit_factura_path(@factura) }
+        end
       end
     else
       flash.now[:abono] = 'Se produjo un error al guardar el registro'
-      respond_to { |f| f.js { render 'abonos' } }
+      respond_to do |f|
+        f.js   { render 'abonos' }
+        f.html { redirect_to edit_factura_path(@factura) }
+      end
     end
   end
 
@@ -76,7 +94,10 @@ class AbonosController < ApplicationController
     else
       flash.now[:abono] = 'El registro tiene inconsistencias. Verifique!!'
     end
-    respond_to { |f| f.js { render 'abonos' } }
+    respond_to do |f|
+      f.js   { render 'abonos' }
+      f.html { redirect_to edit_factura_path(@factura) }
+    end
   end
 
   def destroy
@@ -88,7 +109,10 @@ class AbonosController < ApplicationController
     )
     @abono = Abono.new
     flash.now[:abono] = 'Anulado con exito...'
-    respond_to { |f| f.js { render 'abonos' } }
+    respond_to do |f|
+      f.js   { render 'abonos' }
+      f.html { redirect_to edit_factura_path(@factura) }
+    end
   end
 
   def anula
@@ -100,7 +124,10 @@ class AbonosController < ApplicationController
     )
     @abono = Abono.new
     flash.now[:abono] = 'Abono Anulado con Exito'
-    respond_to { |f| f.js { render 'abonos' } }
+    respond_to do |f|
+      f.js   { render 'abonos' }
+      f.html { redirect_to edit_factura_path(@factura) }
+    end
   end
 
   private

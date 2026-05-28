@@ -5,14 +5,15 @@
 
 <%= form_with url: form_url,
       method: (editing ? :patch : :post),
-      remote: true do |f| %>
+      data: { remote: true } do |f| %>
 
   <div class="row">
     <div class="col-md-4">
       <div class="form-group">
         <%= label_tag 'abono[valor]', 'Valor del Abono' %>
         <%= text_field_tag 'abono[valor]', ab&.valor,
-              class: 'form-control', size: 20 %>
+              class: 'form-control solo-numeros', inputmode: 'numeric',
+              pattern: '[0-9]*', size: 20 %>
       </div>
     </div>
     <div class="col-md-4">
@@ -44,5 +45,19 @@
     if (sel && typeof $ !== 'undefined' && $.fn.select2) {
       $(sel).select2({ width: '100%' });
     }
+
+    // Solo dígitos en campos .solo-numeros
+    document.querySelectorAll('.solo-numeros').forEach(function(input) {
+      input.addEventListener('keypress', function(e) {
+        if (!/[0-9]/.test(e.key)) e.preventDefault();
+      });
+      input.addEventListener('paste', function(e) {
+        var texto = (e.clipboardData || window.clipboardData).getData('text');
+        if (!/^[0-9]+$/.test(texto)) e.preventDefault();
+      });
+      input.addEventListener('input', function() {
+        this.value = this.value.replace(/[^0-9]/g, '');
+      });
+    });
   })();
 </script>

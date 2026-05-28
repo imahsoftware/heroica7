@@ -5,7 +5,7 @@
 
 <%= form_with url: form_url,
       method: (editing ? :patch : :post),
-      remote: true do |f| %>
+      data: { remote: true } do |f| %>
 
   <div class="row">
     <div class="col-md-6">
@@ -35,6 +35,9 @@
     <div class="col-md-2" style="padding-top: 25px;">
       <% if permiso('detallesfactura', 'A').to_s == 'S' %>
         <%= submit_tag 'Guardar', class: 'btn btn-primary', disable_with: 'Guardando...' %>
+      <% end %>
+      <% if editing %>
+        <%= link_to 'Cancelar', edit_factura_path(@factura), class: 'btn btn-default' %>
       <% end %>
     </div>
   </div>

@@ -32,16 +32,69 @@
         </thead>
         <tbody>
           <% @factura.detallesfacturas.each do |det| %>
-            <% if @detallesfactura && det.id == @detallesfactura.id %>
-              <%# fila en modo edición %>
-              <tr id="detallesfactura_<%= det.id %>">
-                <td colspan="6">
-                  <strong>EDITAR DETALLE</strong><br>
-                  <%= render partial: '/detallesfacturas/detallesfacturas_form',
-                        locals: { editing: true, det: det } %>
+            <% editing_this = @detallesfactura && det.id == @detallesfactura.id %>
+
+            <% if editing_this %>
+              <%# ── fila en modo edición: cada campo va en su columna ── %>
+              <tr id="detallesfactura_<%= det.id %>" class="warning">
+                <td>
+                  <small><i class="fa fa-pencil"></i> editando</small>
+                </td>
+                <td>
+                  <%= det.categoria&.nombre %><br>
+                  <small><%= det.tipostramite&.descripcion %></small>
+                </td>
+                <td>
+                  <%# El <form> vive aquí; los otros inputs lo referencian con form="id" %>
+                  <form id="edit_det_<%= det.id %>"
+                        action="<%= factura_detallesfactura_path(@factura, det) %>"
+                        method="post"
+                        data-remote="true">
+                    <%= hidden_field_tag :_method, :patch %>
+                    <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+                    <%= select_tag 'detallesfactura[concepto_id]',
+                          options_from_collection_for_select(
+                            Concepto.order(:descripcion), :id, :descripcion, det.concepto_id),
+                          include_blank: true,
+                          class: 'form-control select2',
+                          style: 'width:100%' %>
+                  </form>
+                </td>
+                <td>
+                  <input form="edit_det_<%= det.id %>"
+                         type="text" name="detallesfactura[cantidad]"
+                         value="<%= det.cantidad %>"
+                         class="form-control input-sm" style="width:70px">
+                </td>
+                <td>
+                  <input form="edit_det_<%= det.id %>"
+                         type="text" name="detallesfactura[valor]"
+                         value="<%= det.valor %>"
+                         class="form-control input-sm">
+                </td>
+                <td class="text-center">
+                  <button form="edit_det_<%= det.id %>"
+                          type="submit"
+                          class="btn btn-xs btn-primary">
+                    <i class="fa fa-check"></i> Guardar
+                  </button>
+                  <%= link_to edit_factura_path(@factura),
+                        class: 'btn btn-xs btn-default' do %>
+                    <i class="fa fa-times"></i> Cancelar
+                  <% end %>
                 </td>
               </tr>
+              <script>
+                (function(){
+                  var sel = document.querySelector('#edit_det_<%= det.id %> select');
+                  if (sel && typeof $ !== 'undefined' && $.fn.select2) {
+                    $(sel).select2({ width: '100%', dropdownParent: $(sel).closest('td') });
+                  }
+                })();
+              </script>
+
             <% else %>
+              <%# ── fila normal ── %>
               <tr id="detallesfactura_<%= det.id %>" class="<%= cycle('odd', 'even') %>">
                 <td>
                   <small>
