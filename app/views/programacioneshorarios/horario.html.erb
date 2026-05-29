@@ -1,0 +1,137 @@
+<style>
+  .horario-scroll-wrapper {
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    margin: 0 -10px;
+    padding: 0 10px 8px;
+  }
+
+  .horario-columns {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+    gap: 8px;
+    width: max-content;
+    min-width: 100%;
+  }
+
+  .horario-col {
+    flex: 0 0 300px;
+    width: 300px;
+    max-width: 300px;
+  }
+
+  .horario-placa-box {
+    margin-bottom: 0;
+    font-size: 10px;
+  }
+
+  .horario-placa-box .box-header {
+    padding: 6px 8px;
+  }
+
+  .horario-placa-box .box-title {
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  .horario-placa-box .box-body {
+    padding: 6px 8px;
+  }
+
+  .horario-placa-box .box-footer {
+    padding: 4px 8px;
+    font-size: 9px;
+  }
+
+  .horario-placa-box .table > thead > tr > th,
+  .horario-placa-box .table > tbody > tr > td {
+    padding: 4px 6px;
+    font-size: 10px;
+    vertical-align: top;
+  }
+
+  .horario-placa-box .horario-slot-label {
+    font-size: 9px;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  .horario-prog-item {
+    margin: 4px 0 0;
+    padding: 4px 6px;
+    font-size: 9px;
+    line-height: 1.35;
+    background: #f9f9f9;
+    border: 1px solid #e3e3e3;
+    border-radius: 3px;
+  }
+
+  .horario-prog-item .btn {
+    padding: 1px 5px;
+    font-size: 9px;
+  }
+
+  .horario-prog-item .btn-group {
+    margin-top: 3px;
+  }
+
+  .horario-placa-meta {
+    margin: 0 0 4px;
+    font-size: 9px;
+    line-height: 1.3;
+  }
+
+  .horario-placa-box .label {
+    font-size: 8px;
+    padding: 2px 5px;
+  }
+
+  .horario-informe-box .box-title {
+    font-size: 13px;
+  }
+
+  .horario-informe-box .control-label,
+  .horario-informe-box .form-control,
+  .horario-informe-box .btn {
+    font-size: 11px;
+  }
+</style>
+
+<div class="box box-primary" style="margin-bottom: 10px;">
+  <div class="box-header with-border" style="padding: 8px 10px;">
+    <h3 class="box-title" style="font-size: 14px;">
+      <i class="fa fa-calendar-check-o"></i> Programación de Horarios
+    </h3>
+  </div>
+
+  <div class="box-body" style="padding: 8px 10px;">
+    <% if @placas.any? %>
+      <div class="horario-scroll-wrapper">
+        <div class="horario-columns">
+          <% @placas.each do |placa| %>
+            <div class="horario-col">
+              <%= render 'placa_horario', placa: placa %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% else %>
+      <div class="alert alert-info" style="margin-bottom: 0; padding: 8px 12px;">
+        <i class="fa fa-info-circle"></i> No hay placas activas para programar.
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<%= render 'informe_filtro',
+           url: informe_programacioneshorarios_path,
+           title: 'Informe de Clases por Periodo',
+           icon: 'fa-graduation-cap' %>
+
+<%= render 'informe_filtro',
+           url: progclases_programacioneshorarios_path,
+           title: 'Informe Programación de Clases por Periodo',
+           icon: 'fa-calendar' %>

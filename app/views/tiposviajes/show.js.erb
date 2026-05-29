@@ -1,0 +1,4 @@
+$("#tiposviaje_<%= @tiposviaje.id %>").replaceWith("<%= j render 'tr', tiposviaje: @tiposviaje %>");
+$("#tiposviaje_form").collapse("hide");
+$("#tiposviaje_form").empty();
+$(".tooltip").tooltip("hide");

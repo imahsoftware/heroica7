@@ -1,0 +1,133 @@
+<%= stylesheet_link_tag 'tabs'%>
+<%= javascript_include_tag 'fabtabulous' %>
+<div id="productheader">
+  <span class="tit_gr_azul">&nbsp;&nbsp;PROGRAMACION HORARIOS</span>
+  <div align="right">
+   <%= link_to 'Regresar al Horario', horario_programacioneshorarios_path, :class=>"regresarlink" %>&nbsp;&nbsp;</div>
+  </div>
+<%  form_for @programacioneshorario do |f| %>
+      <div align="center">
+<%= f.hidden_field :tiposhorario_id %>
+<%= f.hidden_field :placa_id %>
+<table width="80%" height="40" border="0" cellpadding="0" cellspacing="0">
+   <tr>
+    <td>
+<table width="100%" height="40" border="0" cellpadding="0" cellspacing="0">
+  <tr>
+     <td width="20%" height="25" class="camposDescN12">Horario :</td>
+     <td width="80%" class="camposDesc12"><%=@programacioneshorario.tiposhorario.descripcion rescue nil%></td>
+   </tr>
+  <tr>
+     <td width="20%" height="25" class="camposDescN12">Placa :</td>
+     <td width="80%" class="camposDesc12"><%=@programacioneshorario.placa.descripcion rescue nil%></td>
+   </tr>
+   <tr>
+     <td width="20%" height="25" class="camposDescN12">Instructor :</td>
+     <td width="80%" class="camposDesc12"><%=@programacioneshorario.placa.instructor.nombre rescue nil%></td>
+   </tr>
+   <tr>
+     <td width="20%" height="25" class="camposDescN12">Fecha Inicial :</td>
+     <td width="80%" class="camposDesc12"><%= calendar_date_select "programacioneshorario", "fecha_inicial", :year_range =>[1930,2026], :class=> "campo", :size => 10, :time => false, :onfocus=>"this.blur()"%>
+     <%= error_message_on :programacioneshorario, :fecha_inicial, :css_class =>"cerror"%></td>
+   </tr>
+   <tr>
+     <td width="20%" height="25" class="camposDescN12">Nro de Clases :</td>
+     <td width="80%" class="camposDesc12"><%= f.text_field :nro_clases,{ :class => "campo", :size => 10,
+                        :onFocus => "this.style.border='1px solid #f00'",
+                        :onBlur => "this.style.border='1px solid #bbb'" }%>
+    <%= error_message_on :programacioneshorario, :nro_clases, :css_class =>"cerror"%></td>
+   </tr>
+   <tr>
+     <td width="20%" height="25" class="camposDescN12">Fecha Final :</td>
+     <td width="80%" class="camposDesc12"><%=@programacioneshorario.fecha_final rescue nil%></td>
+   </tr>
+   <tr>
+     <td width="20%" height="25" class="camposDescN12">Usuario :</td>
+     <td width="80%" class="camposDesc12">
+       <%= text_field_with_auto_complete :programacioneshorario, :persona_autobuscar,
+	    { :class => "campo",
+                :size => 90,
+                :maxlength => 150,
+                :onFocus => "this.style.border='1px solid #f00'",
+                :onBlur => "this.style.border='1px solid #bbb'" },
+	    { :url => listar_personas_path(:js), :method => :get, :with => "'search=' + element.value" } %>
+       <%= error_message_on :programacioneshorario, :persona_autobuscar, :css_class =>"cerror"%>
+     </td>
+   </tr>
+   <tr>
+     <td width="20%" height="25" class="camposDescN12">Recoje ? :</td>
+     <td width="80%" class="camposDesc12"><%= select(:programacioneshorario,
+                          :recoje, { "SI" => "S",
+                                     "NO" => "N"},
+                                  { :include_blank => true },
+                                { :style=>"width:70px", :class => "campo", :onFocus => "this.style.border='1px solid #f00'", :onBlur => "this.style.border='1px solid #bbb'" })%>
+          <%= error_message_on :programacioneshorario, :recoje, :css_class =>"cerror"%></td>
+   </tr>
+   <tr>
+     <td width="20%" height="25" class="camposDescN12">Observaciones :</td>
+     <td width="80%" class="camposDesc12"><%= text_area :programacioneshorario, :observacion,{ :class => "campoMultiLinea", :cols=>"80", :rows=>"3",
+                :onChange=> "javascript:this.value=this.value.toUpperCase();",
+                :onFocus => "this.style.border='1px solid #f00'",
+                :onBlur => "this.style.border='1px solid #bbb'" } %></td>
+   </tr>
+   <tr>
+     <td width="20%" height="25" class="camposDescN12">Persona en Espera :</td>
+     <td width="80%" class="camposDesc12"><%= text_field :programacioneshorario, :enespera,{ :class => "campo", :size =>70,
+                  :onChange=> "javascript:this.value=this.value.toUpperCase();",
+                :onFocus => "this.style.border='1px solid #f00'",
+                :onBlur => "this.style.border='1px solid #bbb'" }%></td>
+   </tr>
+   <tr>
+     <td width="20%" height="25" class="camposDescN12">Fecha y Hora Teoria :</td>
+     <td width="80%" class="camposDesc12"><%= calendar_date_select "programacioneshorario", "fecha_teoria", :year_range =>[2010,2020], :class=> "campo", :size => 22, :onfocus=>"this.blur()"%>
+     <%= error_message_on :programacioneshorario, :fecha_teoria, :css_class =>"cerror"%></td>
+   </tr>
+   <tr>
+     <td></td>
+      <td><%= f.submit "Guardar", :class=>"buttonAsLink"%></td>
+   </tr>
+</table>
+</td>
+  </tr>
+</table>
+    <table width="90%" height="0" border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td height="10"><hr size="1" noshade class="hrlinea"></td>
+      </tr>
+    </table>
+<%  if Personasclase.exists?(["persona_id = ?", @programacioneshorario.persona_id]) == true %>
+<div id="productheader">
+  <span class="tit_gr_azul">&nbsp;&nbsp;INFORMACION CLASES DICTADAS</span>
+</div>
+<BR/>
+<table width="90%" border="0" align="center" cellpadding="0" cellspacing="0"  id="one-column-emphasis">
+  <tr valign="middle">
+    <td width="10%" height="30" class="oce-first"><div align="center">Nro Clases</div></td>
+    <td width="30%" height="30" class="oce-first">Usuario</td>
+    <td width="10%" height="30" class="oce-first">Horario</td>
+    <td width="10%" class="oce-first">Placa</td>
+    <td width="30%" class="oce-first">Instructor</td>
+    <td width="10%" class="oce-first"><div align="center">Fecha Clase</div></td>
+  </tr>
+<% @personasclases = Personasclase.find_all_by_persona_id(@programacioneshorario.persona_id)
+   i = 0
+   @personasclases.each do |personasclase|
+     i = i +1 
+%>
+   <tr  valign="middle" class="<%=cycle('even1', 'odd1')%>" id="personasclase_<%=personasclase.id%>">
+     <td width="10%" class="camposDescN12"><div align="center"><%=i%></div></td>
+     <td width="30%" class="camposDesc"><%=personasclase.created_at.strftime("%Y-%m-%d %X")%> - <%=personasclase.user.username rescue nil%>
+     </td>
+    <td width="10%" height="30" class="camposDesc"><%=personasclase.tiposhorario.descripcion rescue nil%></td>
+    <td width="10%" class="camposDesc"><%=personasclase.placa.descripcion rescue nil%></td>
+    <td width="30%" class="camposDesc"><%=personasclase.placa.instructor.nombre rescue nil%></td>
+    <td width="10%" class="camposDesc"><%=personasclase.fecha_clase%></td>
+ </tr>
+<% end %>
+</table>
+<br/>
+<% end %>
+<% end %>
+      </div>
+
+<br/>

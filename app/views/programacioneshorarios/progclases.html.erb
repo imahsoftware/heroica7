@@ -1,0 +1,76 @@
+<div align="center">
+  <br/>
+  <table width="760"  border="0" cellspacing="0" cellpadding="1">
+  <tr>
+    <td width="150" valign="center"><div align="center"><img src="/images/<%=Parametro.find(10).valor.to_s%>"></img></div></td>
+    <td><table width="100%"  border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td class="camposDescN12"><div align="center"><%=Parametro.find(1).valor.to_s%></div></td>
+        </tr>
+        <tr>
+          <td class="camposDescN11"><div align="center">NIT: <%=Parametro.find(2).valor.to_s%></div></td>
+        </tr>
+        <tr>
+          <td class="camposDescN11"><div align="center"><%=Parametro.find(13).valor.to_s%></div></td>
+        </tr>
+        <tr>
+          <td class="camposDescN11"><div align="center">Sede Bocagrande: <%=Parametro.find(14).valor.to_s%></div></td>
+        </tr>
+                <tr>
+          <td class="camposDescN11"><div align="center">Sede Turbaco: <%=Parametro.find(15).valor.to_s%></div></td>
+        </tr>
+        <tr>
+          <td class="camposDescN11"><div align="center">Sitio Web: <%=Parametro.find(9).valor.to_s%></div></td>
+        </tr>
+    </table></td>
+  </tr>
+</table>
+<br/>
+<div id="productheader">
+  <span class="tit_gr_azul">&nbsp;&nbsp;INFORMACION PROGRAMACION DE CLASES</span>
+</div>
+<BR/>
+<div align="center">
+  <table width="850"  border="0" cellspacing="0" cellpadding="0" class="sample">
+    <thead>
+      <tr>
+        <td height="40" colspan="5" class="camposDescN16"><div align="center">INFORME RANGO DE FECHAS   <%=@fch1%> - <%=@fch2%></div></td>
+      </tr>
+    </thead>
+  </table>
+<table width="850" border="0" align="center" cellpadding="0" cellspacing="0" class="sample">
+  <thead>
+  <tr valign="middle">
+    <td width="30%" class="camposDescN11">Usuario</td>
+    <td width="10%" class="camposDescN11"><div align="center">Horario</div></td>
+    <td width="10%" class="camposDescN11"><div align="center">Placa</div></td>
+    <td width="20%" class="camposDescN11">Instructor</td>
+    <td width="10%" class="camposDescN11"><div align="center">Fecha Inicio</div></td>
+    <td width="10%" class="camposDescN11"><div align="center">Fecha Fin</div></td>
+    <td width="10%" class="camposDescN11"><div align="center">Nro Clases</div></td>
+  </tr>
+  </thead>
+<% i = 0
+   for programacioneshorario in @programacioneshorarios
+   i = i + 1
+%>
+   <tr  valign="middle">
+    <td class="camposDesc11"><%=programacioneshorario.persona.identificacion rescue nil%> - <%=programacioneshorario.persona.nombres rescue nil%></td>
+    <td class="camposDesc11"><div align="center"><%=programacioneshorario.tiposhorario.descripcion rescue nil%></div></td>
+    <td class="camposDesc11"><div align="center"><%=programacioneshorario.placa.descripcion rescue nil%></div></td>
+    <td class="camposDesc11"><%=programacioneshorario.instructor.nombre rescue nil%></td>
+    <td class="camposDesc11"><div align="center"><%=programacioneshorario.fecha_inicial%></div></td>
+    <td class="camposDesc11"><div align="center"><%=programacioneshorario.fecha_final%></div></td>
+    <td class="camposDesc11"><div align="center"><%=Personasclase.count(:conditions =>["persona_id = #{programacioneshorario.persona_id}"])%></div></td>
+ </tr>
+<% end %>
+</table>
+<table width="850"  border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td width="60%" height="20" class="camposDesc11"><div align="left"><%=Time.now.strftime("%Y-%m-%d %X")%> - <%=User.find(is_admin).nombre rescue nil%></div></td>
+        <td width="40%" height="20" class="camposDesc11"><div align="right"><a href="javascript:window.print()" class="imprimirlink">Imprimir</a>&nbsp;&nbsp;</div></td>
+      </tr>
+  </table>
+<br/>
+      </div>
+</div>

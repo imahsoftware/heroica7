@@ -1,0 +1,93 @@
+<% title @viaje.new_record? ? 'Nuevo Tour' : "Tour #{@viaje.identificacion}" %>
+
+<%= simple_form_for @viaje do |f| %>
+  <div class="box box-usuarios">
+    <div class="box-header">
+      <span class="box-title">
+        <%= link_to busqueda_viajes_path, data: { toggle: 'tooltip' }, title: 'Buscar Registro',
+            style: 'color: inherit; text-decoration: none; background: none;' do %>
+          <i class="fa fa-arrow-left fa-fw text-danger"></i>
+        <% end %>
+        <i class="fa fa-plane"></i>
+        <%= @viaje.new_record? ? 'Nuevo Tour' : "Tour #{@viaje.identificacion}" %>
+      </span>
+    </div>
+
+    <div class="box-body">
+      <div class="bs-callout">
+        <p class="section-label">Datos del tour</p>
+        <div class="row">
+          <div class="col-xs-12 col-sm-4 col-md-4">
+            <%= f.input :tiposviaje_id, as: :select, label: 'Tipo de Tour *',
+                collection: @tiposviajes.map { |p| [p.descripcion, p.id] },
+                include_blank: true,
+                input_html: { class: 'form-control select2' } %>
+          </div>
+          <div class="col-xs-12 col-sm-2 col-md-2">
+            <%= f.input :identificacion, label: 'Identificación *',
+                input_html: { onChange: 'this.value=this.value.toUpperCase()',
+                              class: 'form-control input_uppercase' } %>
+          </div>
+          <div class="col-xs-12 col-sm-3 col-md-3">
+            <%= f.input :nombre, label: 'Nombre *',
+                        input_html: { onChange: 'this.value=this.value.toUpperCase()',
+                                      class: 'form-control input_uppercase' } %>
+          </div>
+          <div class="col-xs-12 col-sm-3 col-md-3">
+            <%= f.input :apellido, label: 'Apellido *',
+                        input_html: { onChange: 'this.value=this.value.toUpperCase()',
+                                      class: 'form-control input_uppercase' } %>
+          </div>
+        </div>
+
+
+        <p class="section-label" style="margin-top: 16px;">Información adicional</p>
+        <div class="row">
+          <div class="col-xs-12 col-sm-3 col-md-2">
+            <%= f.input :peso, label: 'Peso (En libras) *',
+                input_html: { class: 'form-control' } %>
+          </div>
+          <div class="col-xs-12 col-sm-4 col-md-3">
+            <%= f.input :horario, label: 'Horario',
+                input_html: { class: 'form-control' } %>
+          </div>
+          <div class="col-xs-12 col-sm-3 col-md-2">
+            <%= f.input :habitacionhotel, label: 'Habitación Hotel',
+                input_html: { class: 'form-control' } %>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top: 12px;">
+          <div class="col-md-6">
+            <%= link_to t(:cancelar), busqueda_viajes_path, class: 'btn btn-flat btn-default' %>
+          </div>
+          <div class="col-md-6 text-right">
+            <%= f.button :submit, t(:guardar), class: 'btn-guardar',
+                data: { disable_with: 'Guardando...' } %>
+            <% unless @viaje.new_record? %>
+              <% if Viajesrecibo.exists?(viaje_id: @viaje.id, estado: 0) %>
+                <%= link_to_popup 'Ver Recibo',
+                    show_viajesrecibos_path(viaje_id: @viaje.id),
+                    popup: ['new_window', 'height=330,width=700,scrollbars=yes'],
+                    class: 'btn btn-info btn-sm' %>
+                <%= link_to 'Anular Recibo',
+                    eliminar_viajesrecibos_path(viaje_id: @viaje.id),
+                    class: 'btn btn-danger btn-sm',
+                    data: { confirm: 'Esta seguro?' } %>
+              <% else %>
+                <%= link_to 'Generar Recibo',
+                    crearrecibo_viajesrecibos_path(viaje_id: @viaje.id, tiposviaje: @viaje.tiposviaje_id),
+                    class: 'btn btn-success btn-sm',
+                    data: { confirm: 'Esta seguro?' } %>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<script>
+  $('.select2').select2();
+</script>

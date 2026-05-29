@@ -1,0 +1,31 @@
+<% title 'Resultados — Tours' %>
+
+<div class="box box-usuarios">
+  <div class="box-header">
+    <span class="box-title">
+      <i class="fa fa-plane"></i> Tours
+      <span class="users-count-badge"><%= @viajes.count %> registros</span>
+    </span>
+    <div class="box-tools pull-right" style="margin-top: -2px;">
+      <%= link_to new_viaje_path, class: 'btn btn-sm btn-success', title: 'Nuevo tour' do %>
+        <i class="fa fa-plus"></i> Nuevo
+      <% end %>
+      <%= link_to busqueda_viajes_path, class: 'btn btn-sm btn-default', title: 'Buscar registros' do %>
+        <i class="fa fa-search"></i> Buscar
+      <% end %>
+    </div>
+  </div>
+
+  <div class="box-body">
+    <div id="viajes">
+      <% if @viajes.any? %>
+        <%= render 'viajes/tabla' %>
+      <% else %>
+        <div class="empty-state">
+          <i class="fa fa-plane"></i>
+          <p>No se encontraron tours.</p>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

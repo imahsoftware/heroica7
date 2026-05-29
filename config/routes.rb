@@ -45,6 +45,7 @@ Rails.application.routes.draw do
       get  'searchall'
       post :index
       post 'cargarprueba'
+      get  'indexalertas'
       get  'semaforoalertas'
       get  'abrirmapa'
       get  'modogestion'
@@ -165,6 +166,32 @@ Rails.application.routes.draw do
   resources :instructores
   resources :categorias
   resources :tipostramites
+  resources :tiposviajes, controller: 'tiposviajes'
+
+  resources :viajes do
+    collection do
+      get :buscar
+      get :busqueda
+      get :informe
+    end
+  end
+
+  resources :viajesrecibos, only: [] do
+    collection do
+      get :crearrecibo
+      get :eliminar
+      get :show, path: 'show', as: :show
+    end
+  end
+
+  resources :programacioneshorarios, only: [:new, :create, :edit, :update, :destroy] do
+    collection do
+      get :horario
+      get :informe
+      get :progclases
+      get :marcarclase
+    end
+  end
 
   # ─── Teóricos resultados (flujo de prueba) ──────────────────────────────────
   resources :teoricosresultados, only: [:index, :edit, :update] do

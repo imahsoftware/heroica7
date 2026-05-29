@@ -1,0 +1,12 @@
+<tr id="viaje_<%= viaje.id %>">
+  <td class="text-center">
+    <%= link_to edit_viaje_path(viaje),
+        title: t(:title_editar),
+        data: { toggle: 'tooltip' } do %>
+      <button class="btn btn-xs btn-warning btn-accion"><i class="fa fa-edit"></i></button>
+    <% end %>
+  </td>
+  <td><%= viaje.tiposviaje&.descripcion %></td>
+  <td><%= viaje.identificacion %></td>
+  <td><strong><%= viaje.nombre %> <%= viaje.apellido %></strong></td>
+</tr>

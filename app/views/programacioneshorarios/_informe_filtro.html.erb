@@ -1,0 +1,49 @@
+<div class="box box-info horario-informe-box" style="margin-top: 10px;">
+  <div class="box-header with-border" style="padding: 6px 10px;">
+    <h3 class="box-title">
+      <i class="fa <%= icon %>"></i> <%= title %>
+    </h3>
+  </div>
+
+  <div class="box-body" style="padding: 8px 10px;">
+    <%= form_tag url, method: :get do %>
+      <div class="row">
+        <div class="col-md-3 col-sm-6">
+          <div class="form-group" style="margin-bottom: 8px;">
+            <label class="control-label">Fecha inicial</label>
+            <%= calendar_date_select 'ubicacion', 'inicial',
+                  year_range: 50.years.ago..0.years.ago,
+                  class: 'form-control input-sm',
+                  size: 10,
+                  time: false %>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-6">
+          <div class="form-group" style="margin-bottom: 8px;">
+            <label class="control-label">Fecha final</label>
+            <%= calendar_date_select 'ubicacion', 'final',
+                  year_range: 50.years.ago..0.years.ago,
+                  class: 'form-control input-sm',
+                  size: 10,
+                  time: false %>
+          </div>
+        </div>
+        <div class="col-md-4 col-sm-8">
+          <div class="form-group" style="margin-bottom: 8px;">
+            <label class="control-label">Instructor</label>
+            <%= select 'ubicacion', 'instructor_id',
+                       @instructores.map { |p| [p.nombre, p.id] },
+                       { include_blank: true },
+                       { class: 'form-control input-sm select2' } %>
+          </div>
+        </div>
+        <div class="col-md-2 col-sm-4">
+          <div class="form-group" style="margin-bottom: 8px;">
+            <label class="control-label">&nbsp;</label>
+            <%= submit_tag 'Generar', class: 'btn btn-primary btn-sm btn-block' %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

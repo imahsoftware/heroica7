@@ -1,0 +1,189 @@
+<% title 'Alertas del Sistema' %>
+
+<div class="row" style="margin-bottom: 16px;">
+  <div class="col-md-4 col-sm-6 col-xs-12">
+    <div class="info-box bg-yellow">
+      <span class="info-box-icon"><i class="fa fa-id-card"></i></span>
+      <div class="info-box-content">
+        <span class="info-box-text">Instructores</span>
+        <span class="info-box-number"><%= @instructores.size %></span>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4 col-sm-6 col-xs-12">
+    <div class="info-box bg-red">
+      <span class="info-box-icon"><i class="fa fa-car"></i></span>
+      <div class="info-box-content">
+        <span class="info-box-text">Placas / Vehículos</span>
+        <span class="info-box-number"><%= @objetos.size %></span>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4 col-sm-6 col-xs-12">
+    <div class="info-box bg-aqua">
+      <span class="info-box-icon"><i class="fa fa-users"></i></span>
+      <div class="info-box-content">
+        <span class="info-box-text">Usuarios / Clases</span>
+        <span class="info-box-number"><%= @categoriasalertas.size %></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="box box-usuarios">
+  <div class="box-header">
+    <span class="box-title">
+      <i class="fa fa-exclamation-triangle"></i> Vencimiento de licencias — Instructores
+      <span class="users-count-badge"><%= @instructores.size %> alertas</span>
+    </span>
+    <div class="box-tools pull-right" style="margin-top: -2px;">
+      <span class="label label-default"><i class="fa fa-calendar"></i> <%= @fechahoy.strftime('%d/%m/%Y') %></span>
+    </div>
+  </div>
+  <div class="box-body">
+    <% if @instructores.any? %>
+      <div class="table-responsive">
+        <table class="table table-bordered table-condensed table-striped table-usuarios">
+          <thead>
+            <tr>
+              <th width="30%">Tipo de alerta</th>
+              <th width="45%">Instructor</th>
+              <th width="25%" class="text-center">Fecha vencimiento</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @instructores.each do |instructor| %>
+              <% vencida = instructor.fch.present? && instructor.fch.to_date <= @fechahoy rescue false %>
+              <% tipo = instructor.nom.to_s.include?('INSTRUCTOR') ? 'Licencia de instructor' : 'Licencia de conducción' %>
+              <tr>
+                <td>
+                  <span class="label <%= vencida ? 'label-danger' : 'label-warning' %>" title="<%= instructor.nom %>">
+                    <i class="fa fa-exclamation-circle"></i> <%= tipo %>
+                  </span>
+                </td>
+                <td><strong><%= instructor.nombre %></strong></td>
+                <td class="text-center">
+                  <code style="font-size: 11px; background: <%= vencida ? '#fde8e8' : '#fff8e6' %>; color: #394959; padding: 2px 8px; border-radius: 4px;">
+                    <%= instructor.fch %>
+                  </code>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    <% else %>
+      <div class="empty-state">
+        <i class="fa fa-check-circle"></i>
+        <p>No hay alertas de vencimiento para instructores.</p>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<div class="box box-usuarios">
+  <div class="box-header">
+    <span class="box-title">
+      <i class="fa fa-car"></i> Vencimiento de documentos — Placas
+      <span class="users-count-badge"><%= @objetos.size %> alertas</span>
+    </span>
+  </div>
+  <div class="box-body">
+    <% if @objetos.any? %>
+      <div class="table-responsive">
+        <table class="table table-bordered table-condensed table-striped table-usuarios">
+          <thead>
+            <tr>
+              <th width="30%">Tipo de alerta</th>
+              <th width="45%">Placa / Vehículo</th>
+              <th width="25%" class="text-center">Fecha vencimiento</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @objetos.each do |objeto| %>
+              <% vencida = objeto.fch.present? && objeto.fch.to_date <= @fechahoy rescue false %>
+              <% tipo = if objeto.nom.to_s.include?('SOAT')
+                          'SOAT'
+                        elsif objeto.nom.to_s.include?('REVISION')
+                          'Revisión'
+                        else
+                          'Tarjeta de operación'
+                        end %>
+              <tr>
+                <td>
+                  <span class="label <%= vencida ? 'label-danger' : 'label-warning' %>" title="<%= objeto.nom %>">
+                    <i class="fa fa-exclamation-circle"></i> <%= tipo %>
+                  </span>
+                </td>
+                <td><strong><%= objeto.descripcion %></strong></td>
+                <td class="text-center">
+                  <code style="font-size: 11px; background: <%= vencida ? '#fde8e8' : '#fff8e6' %>; color: #394959; padding: 2px 8px; border-radius: 4px;">
+                    <%= objeto.fch %>
+                  </code>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    <% else %>
+      <div class="empty-state">
+        <i class="fa fa-check-circle"></i>
+        <p>No hay alertas de vencimiento para placas.</p>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<div class="box box-usuarios">
+  <div class="box-header">
+    <span class="box-title">
+      <i class="fa fa-users"></i> Alertas de prácticas — Usuarios
+      <span class="users-count-badge"><%= @categoriasalertas.size %> alertas</span>
+    </span>
+  </div>
+  <div class="box-body">
+    <% if @categoriasalertas.any? %>
+      <div class="table-responsive">
+        <table class="table table-bordered table-condensed table-striped table-usuarios">
+          <thead>
+            <tr>
+              <th width="35%">Usuario</th>
+              <th width="65%">Detección</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @categoriasalertas.each do |categoriasalerta| %>
+              <tr>
+                <td><strong><%= categoriasalerta.persona&.autobuscar %></strong></td>
+                <td>
+                  <% if categoriasalerta.cantclases > categoriasalerta.practicas %>
+                    <span class="label label-danger" style="display: inline-block; margin: 2px 0; white-space: normal; text-align: left;">
+                      <i class="fa fa-warning"></i>
+                      Se dictaron más clases: pactadas <%= categoriasalerta.practicas %>, registradas <%= categoriasalerta.cantclases %>
+                    </span><br>
+                  <% end %>
+                  <% if categoriasalerta.cantclases >= categoriasalerta.alertaspracticas %>
+                    <span class="label label-warning" style="display: inline-block; margin: 2px 0; white-space: normal; text-align: left;">
+                      <i class="fa fa-bell"></i>
+                      Solicitud de abono: registradas <%= categoriasalerta.cantclases %>, alerta <%= categoriasalerta.alertaspracticas %>
+                    </span>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    <% else %>
+      <div class="empty-state">
+        <i class="fa fa-check-circle"></i>
+        <p>No hay alertas de prácticas para usuarios.</p>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<div class="text-center" style="margin-top: 24px; margin-bottom: 16px;">
+  <%= render 'logo_parametro' %>
+</div>

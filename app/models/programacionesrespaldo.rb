@@ -1,0 +1,2 @@
+class Programacionesrespaldo < ApplicationRecord
+end

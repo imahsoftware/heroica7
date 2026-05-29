@@ -1,0 +1,18 @@
+<tr id="tiposviaje_<%= tiposviaje.id %>">
+  <td class="text-center">
+    <%= link_to edit_tiposviaje_path(tiposviaje), remote: true,
+        title: t(:title_editar),
+        data: { toggle: 'tooltip' } do %>
+      <button class="btn btn-xs btn-warning btn-accion"><i class="fa fa-edit"></i></button>
+    <% end %>
+    <%= link_to tiposviaje_path(tiposviaje), remote: true,
+        method: :delete,
+        title: t(:title_elimina),
+        data: { confirm: t(:elimina_confirma), toggle: 'tooltip' } do %>
+      <button class="btn btn-xs btn-danger btn-accion"><i class="fa fa-trash"></i></button>
+    <% end %>
+  </td>
+  <td class="text-center"><%= tiposviaje.id %></td>
+  <td><strong><%= tiposviaje.descripcion %></strong></td>
+  <td class="text-right"><%= tiposviaje.valor.presence || '—' %></td>
+</tr>

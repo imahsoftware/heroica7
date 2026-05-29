@@ -1,0 +1,69 @@
+<% title 'Tours' %>
+
+<div class="box box-usuarios">
+  <div class="box-header">
+    <span class="box-title">
+      <i class="fa fa-plane"></i> Tours
+    </span>
+    <div class="box-tools pull-right" style="margin-top: -2px;">
+      <%= link_to new_viaje_path, class: 'btn btn-sm btn-success', title: 'Nuevo tour' do %>
+        <i class="fa fa-plus"></i> Nuevo
+      <% end %>
+    </div>
+  </div>
+
+  <div class="box-body">
+    <div class="bs-callout">
+      <%= form_tag buscar_viajes_path, method: :get do %>
+        <p class="section-label">Búsqueda de registros</p>
+        <div class="row">
+          <div class="col-xs-12 col-sm-6 col-md-4">
+            <div class="form-group">
+              <label class="control-label">Tipo de Tour</label>
+              <%= select_tag 'ubicacion[tour]',
+                             options_for_select(
+                               @tiposviajes.map { |p| [p.descripcion, p.id] },
+                               params.dig(:ubicacion, :tour)
+                             ),
+                             include_blank: true,
+                             class: 'form-control select2' %>
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-4 col-md-3">
+            <div class="form-group">
+              <label class="control-label">Identificación</label>
+              <%= text_field_tag :identificacion, params[:identificacion],
+                  class: 'form-control input_uppercase',
+                  placeholder: 'Buscar por identificación...',
+                  onChange: 'this.value=this.value.toUpperCase()' %>
+            </div>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top: 8px;">
+          <div class="col-md-12">
+            <%= button_tag type: 'submit', class: 'btn btn-search',
+                data: { disable_with: 'Buscando...' } do %>
+              <i class="fa fa-search"></i> Buscar
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="bs-callout" style="margin-top: 16px;">
+      <%= form_tag informe_viajes_path, method: :get do %>
+        <p class="section-label">Informe de recibos</p>
+        <div class="row">
+          <div class="col-md-12">
+            <%= submit_tag 'Exportar Informe XLS', class: 'btn btn-success' %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<script>
+  $('.select2').select2();
+</script>

@@ -1,0 +1,43 @@
+<div class="horario-prog-item post1S_<%= programacioneshorario.id %>">
+  <strong><%= programacioneshorario.fecha_inicial %> - <%= programacioneshorario.fecha_final %></strong><br>
+  <i class="fa fa-file-text-o"></i> <%= programacioneshorario.persona&.nombres %>
+
+  <div class="btn-group btn-group-xs" role="group">
+    <%= link_to edit_programacioneshorario_path(programacioneshorario),
+                class: 'btn btn-warning',
+                title: 'Editar',
+                data: { toggle: 'tooltip' } do %>
+      <i class="fa fa-edit"></i>
+    <% end %>
+
+    <%= link_to_popup marcarclase_programacioneshorarios_path(id: programacioneshorario.id),
+                      class: 'btn btn-success',
+                      title: 'Marcar clase',
+                      data: { confirm: '¿Seguro que desea registrar clase el dia de hoy para este usuario?', toggle: 'tooltip' },
+                      popup: ['registroclase', 'height=200,width=400,scrollbars=yes'] do %>
+      <i class="fa fa-check"></i>
+    <% end %>
+
+    <%= link_to programacioneshorario_path(programacioneshorario),
+                class: 'btn btn-danger',
+                title: 'Eliminar',
+                method: :delete,
+                data: { confirm: '¿Seguro?', turbo: false, toggle: 'tooltip' },
+                onclick: "$(this).closest('.post1S_#{programacioneshorario.id}').remove();" do %>
+      <i class="fa fa-trash"></i>
+    <% end %>
+  </div>
+
+  <% if programacioneshorario.observacion.to_s.present? %>
+    <div><strong>OBS:</strong> <%= programacioneshorario.observacion %></div>
+  <% end %>
+
+  <% if programacioneshorario.enespera.to_s.present? %>
+    <div><strong>EN ESPERA:</strong> <%= programacioneshorario.enespera %></div>
+  <% end %>
+
+  <% cantclases = Personasclase.where(persona_id: programacioneshorario.persona_id).count %>
+  <% if cantclases.positive? %>
+    <div class="text-info"><strong>CLASES:</strong> <%= cantclases %></div>
+  <% end %>
+</div>

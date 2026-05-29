@@ -1,0 +1,42 @@
+<div class="box box-default box-solid horario-placa-box">
+  <div class="box-header with-border text-center">
+    <div class="box-title"><%= placa.descripcion %></div>
+    <div class="horario-placa-meta text-muted">
+      <i class="fa fa-user"></i> <%= placa.instructor&.nombre %><br>
+      <span class="label label-info">Pico y placa: <%= placa.picoyplaca %></span>
+    </div>
+  </div>
+
+  <div class="box-body no-padding">
+    <table class="table table-bordered table-condensed" style="margin-bottom: 0;">
+      <tbody>
+        <% @tiposhorarios.each do |tiposhorario| %>
+          <tr>
+            <td class="text-center horario-slot-label" style="width: 70px;">
+              <%= tiposhorario.descripcion %>
+            </td>
+            <td>
+              <%= link_to new_programacioneshorario_path(tiposhorario_id: tiposhorario.id, placa_id: placa.id),
+                          class: 'btn btn-xs btn-success',
+                          title: 'Crear registro',
+                          data: { toggle: 'tooltip' } do %>
+                <i class="fa fa-plus"></i>
+              <% end %>
+
+              <% programacioneshorarios = Programacioneshorario.where(
+                   tiposhorario_id: tiposhorario.id, placa_id: placa.id, estado: 'A'
+                 ) %>
+              <% programacioneshorarios.each do |programacioneshorario| %>
+                <%= render 'programacion_item', programacioneshorario: programacioneshorario %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="box-footer text-center">
+    <%= placa.descripcion %> · <%= placa.instructor&.nombre %>
+  </div>
+</div>

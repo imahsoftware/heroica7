@@ -1,0 +1,6 @@
+<% if @viajesrecibo.present? %>
+  <%= render 'recibo', viajesrecibo: @viajesrecibo, label: 'ORIGINAL' %>
+  <p>---------------------------------------</p>
+  <%= render 'recibo', viajesrecibo: @viajesrecibo, label: 'COPIA' %>
+  <p>---------------------------------------</p>
+<% end %>

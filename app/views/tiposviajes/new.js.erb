@@ -1,0 +1,7 @@
+<% if @active_record.present? %>
+  $("#tiposviaje_<%= @active_record.id %>").replaceWith("<%= j render 'tr', tiposviaje: @active_record %>");
+<% end %>
+$("#tiposviaje_form").html("<%= j render 'form' %>");
+$("#tiposviaje_form").collapse("show");
+$(".tooltip").tooltip("hide");
+$('[data-toggle="tooltip"]').tooltip();
