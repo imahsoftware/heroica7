@@ -213,6 +213,20 @@ Rails.application.routes.draw do
   resources :proveedores
   resources :empleados
 
+  # ─── Empleadosnominas ────────────────────────────────────────────────────────
+  resources :empleadosnominas, only: [] do
+    collection do
+      get  'buscar'
+      get  'nomina'
+      post 'nomina'
+      get  'edit_individual'
+      put  'update_individual'
+      get  'tirilla'
+      get  'informe'
+      get  'calcularvalor'
+    end
+  end
+
 
 
   # ─── Personastramiteshoras ──────────────────────────────────────────────────

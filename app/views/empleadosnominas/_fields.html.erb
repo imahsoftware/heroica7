@@ -1,0 +1,168 @@
+<%# locals: nom (Empleadosnomina), empleado (Empleado) %>
+<% empleado ||= nom.empleado || Empleado.new %>
+<% es_instructor = empleado.instructor.to_s == 'SI' %>
+<% pre = "empleadosnominas[#{nom.id}]" %>
+
+<tr>
+  <td><small><%= empleado.nombre %></small></td>
+
+  <%# ── Salario y Quincena: siempre readonly ── %>
+  <td class="text-right">
+    <%= text_field_tag "#{pre}[salario]", camponumerico(nom.salario),
+          class: 'form-control input-sm text-right campo-readonly',
+          readonly: true, style: 'width:90px' %>
+  </td>
+  <td class="text-right">
+    <%= text_field_tag "#{pre}[quincena]", camponumerico(nom.quincena),
+          class: 'form-control input-sm text-right campo-readonly',
+          readonly: true, style: 'width:90px' %>
+  </td>
+
+  <%# ── Horas Auto: editable solo instructores ── %>
+  <td class="text-center">
+    <% if es_instructor %>
+      <%= text_field_tag "#{pre}[horas_auto]", nom.horas_auto,
+            class: 'form-control input-sm text-center campo-calc solo-numeros',
+            style: 'width:55px',
+            data: { nomid: nom.id, empid: empleado.id, campo: 'horas_auto' } %>
+    <% else %>
+      <%= text_field_tag "#{pre}[horas_auto]", nom.horas_auto,
+            class: 'form-control input-sm text-center campo-readonly',
+            readonly: true, style: 'width:55px' %>
+    <% end %>
+  </td>
+
+  <%# ── Horas Bus: editable solo instructores ── %>
+  <td class="text-center">
+    <% if es_instructor %>
+      <%= text_field_tag "#{pre}[horas_bus]", nom.horas_bus,
+            class: 'form-control input-sm text-center campo-calc solo-numeros',
+            style: 'width:55px',
+            data: { nomid: nom.id, empid: empleado.id, campo: 'horas_bus' } %>
+    <% else %>
+      <%= text_field_tag "#{pre}[horas_bus]", nom.horas_bus,
+            class: 'form-control input-sm text-center campo-readonly',
+            readonly: true, style: 'width:55px' %>
+    <% end %>
+  </td>
+
+  <%# ── Horas Mula: editable solo instructores ── %>
+  <td class="text-center">
+    <% if es_instructor %>
+      <%= text_field_tag "#{pre}[horas_minus]", nom.horas_minus,
+            class: 'form-control input-sm text-center campo-calc solo-numeros',
+            style: 'width:55px',
+            data: { nomid: nom.id, empid: empleado.id, campo: 'horas_minus' } %>
+    <% else %>
+      <%= text_field_tag "#{pre}[horas_minus]", nom.horas_minus,
+            class: 'form-control input-sm text-center campo-readonly',
+            readonly: true, style: 'width:55px' %>
+    <% end %>
+  </td>
+
+  <%# ── Días: editable solo NO instructores ── %>
+  <td class="text-center">
+    <% if es_instructor %>
+      <%= text_field_tag "#{pre}[dias]", nom.dias,
+            class: 'form-control input-sm text-center campo-readonly',
+            readonly: true, style: 'width:50px' %>
+    <% else %>
+      <%= text_field_tag "#{pre}[dias]", nom.dias,
+            class: 'form-control input-sm text-center campo-calc solo-numeros',
+            style: 'width:50px',
+            data: { nomid: nom.id, empid: empleado.id, campo: 'dias' } %>
+    <% end %>
+  </td>
+
+  <%# ── Bonificación: editable todos ── %>
+  <td class="text-right">
+    <%= text_field_tag "#{pre}[bonificacion]", nom.bonificacion,
+          class: 'form-control input-sm text-right campo-calc solo-numeros',
+          style: 'width:80px',
+          data: { nomid: nom.id, empid: empleado.id, campo: 'bonificacion' } %>
+  </td>
+
+  <%# ── Incapacidad: editable todos ── %>
+  <td class="text-right">
+    <%= text_field_tag "#{pre}[incapacidad]", nom.incapacidad,
+          class: 'form-control input-sm text-right solo-numeros',
+          style: 'width:80px' %>
+  </td>
+
+  <%# ── Subtotal: readonly calculado ── %>
+  <td class="text-right">
+    <%= text_field_tag "#{pre}[subtotal]", camponumerico(nom.subtotal),
+          id: "nom_#{nom.id}_subtotal",
+          class: 'form-control input-sm text-right campo-readonly campo-resultado',
+          readonly: true, style: 'width:90px' %>
+  </td>
+
+  <%# ── Ajuste: editable solo instructores ── %>
+  <td class="text-right">
+    <% if es_instructor %>
+      <%= text_field_tag "#{pre}[ajuste]", nom.ajuste,
+            class: 'form-control input-sm text-right campo-calc solo-numeros',
+            style: 'width:80px',
+            data: { nomid: nom.id, empid: empleado.id, campo: 'ajuste' } %>
+    <% else %>
+      <%= text_field_tag "#{pre}[ajuste]", nom.ajuste,
+            class: 'form-control input-sm text-right campo-readonly',
+            readonly: true, style: 'width:80px' %>
+    <% end %>
+  </td>
+
+  <%# ── Salud / Pensión / Auxilio: readonly calculados ── %>
+  <td class="text-right">
+    <%= text_field_tag "#{pre}[salud]", camponumerico(nom.salud),
+          id: "nom_#{nom.id}_salud",
+          class: 'form-control input-sm text-right campo-readonly campo-resultado',
+          readonly: true, style: 'width:80px' %>
+  </td>
+  <td class="text-right">
+    <%= text_field_tag "#{pre}[pension]", camponumerico(nom.pension),
+          id: "nom_#{nom.id}_pension",
+          class: 'form-control input-sm text-right campo-readonly campo-resultado',
+          readonly: true, style: 'width:80px' %>
+  </td>
+  <td class="text-right">
+    <%= text_field_tag "#{pre}[auxilio]", camponumerico(nom.auxilio),
+          id: "nom_#{nom.id}_auxilio",
+          class: 'form-control input-sm text-right campo-readonly campo-resultado',
+          readonly: true, style: 'width:80px' %>
+  </td>
+
+  <%# ── Seguro / Dotación / Préstamo: editable todos ── %>
+  <td class="text-right">
+    <%= text_field_tag "#{pre}[seguro]", nom.seguro,
+          class: 'form-control input-sm text-right campo-calc solo-numeros',
+          style: 'width:80px',
+          data: { nomid: nom.id, empid: empleado.id, campo: 'seguro' } %>
+  </td>
+  <td class="text-right">
+    <%= text_field_tag "#{pre}[dotacion]", nom.dotacion,
+          class: 'form-control input-sm text-right campo-calc solo-numeros',
+          style: 'width:80px',
+          data: { nomid: nom.id, empid: empleado.id, campo: 'dotacion' } %>
+  </td>
+  <td class="text-right">
+    <%= text_field_tag "#{pre}[prestamo]", nom.prestamo,
+          class: 'form-control input-sm text-right campo-calc solo-numeros',
+          style: 'width:80px',
+          data: { nomid: nom.id, empid: empleado.id, campo: 'prestamo' } %>
+  </td>
+
+  <%# ── Total: readonly calculado ── %>
+  <td class="text-right">
+    <%= text_field_tag "#{pre}[total]", camponumerico(nom.total),
+          id: "nom_#{nom.id}_total",
+          class: 'form-control input-sm text-right campo-readonly campo-resultado',
+          readonly: true, style: 'width:90px' %>
+  </td>
+
+  <%# ── Observación: texto libre ── %>
+  <td>
+    <%= text_field_tag "#{pre}[observacion]", nom.observacion,
+          class: 'form-control input-sm',
+          style: 'width:150px' %>
+  </td>
+</tr>

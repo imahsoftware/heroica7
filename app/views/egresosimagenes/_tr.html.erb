@@ -6,7 +6,7 @@
         data: { confirm: t(:elimina_confirma), toggle: 'tooltip' } do %>
       <button class="btn btn-xs btn-danger btn-accion"><i class="fa fa-trash"></i></button>
     <% end %>
-    <%= link_to egresosimagen.docfile.url,
+    <%= link_to egresosimagen.egreso.url,
         title: 'Ver Documento',
         data: { toggle: 'tooltip' },
         onclick: 'window.open(this.href,"new_window","height=450,width=600,scrollbars=yes");return false;' do %>
@@ -19,7 +19,7 @@
   <td><%= egresosimagen.descripcion %></td>
   <td style="font-size: 11px; color: #64748b;">
     <code style="font-size: 11px; background: #f1f5f9; color: #394959; padding: 2px 6px; border-radius: 4px;">
-      <%= egresosimagen.docfile_file_name %>
+      <%= egresosimagen.egreso_file_name %>
     </code>
   </td>
 </tr>

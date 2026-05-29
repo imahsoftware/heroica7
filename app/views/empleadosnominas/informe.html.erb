@@ -1,0 +1,90 @@
+<%# Encabezado %>
+<table width="100%" style="margin-bottom:15px;">
+  <tr>
+    <td width="160" valign="middle">
+      <%= image_tag 'logo_heroica.png', style: 'max-width:140px; max-height:70px;' %>
+    </td>
+    <td valign="middle" align="center">
+      <strong style="font-size:15px;"><%= Parametro.find(1).valor rescue '' %></strong><br>
+      NIT: <%= Parametro.find(2).valor rescue '' %><br>
+      Dirección: <%= Parametro.find(13).valor rescue '' %><br>
+      PBX: <%= Parametro.find(7).valor rescue '' %> — FAX: <%= Parametro.find(8).valor rescue '' %><br>
+      <%= Parametro.find(9).valor rescue '' %>
+    </td>
+  </tr>
+</table>
+
+<h4 class="text-center">
+  NÓMINA — Periodo: <%= @periodosliquidacion.inicio %> / <%= @periodosliquidacion.fin %>
+</h4>
+
+<div style="overflow-x:auto;">
+  <table class="table table-bordered table-condensed" style="font-size:11px; min-width:1400px;">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th class="text-right">Salario<br>Básico</th>
+        <th class="text-right">Quincena</th>
+        <th class="text-center">Hrs<br>Auto</th>
+        <th class="text-center">Hrs<br>Bus</th>
+        <th class="text-center">Hrs<br>Mula</th>
+        <th class="text-center">Días</th>
+        <th class="text-right">Bonificación</th>
+        <th class="text-right">Incapacidad</th>
+        <th class="text-right">Subtotal</th>
+        <th class="text-right">Ajuste<br>Mínimo</th>
+        <th class="text-right">Salud</th>
+        <th class="text-right">Pensión</th>
+        <th class="text-right">Auxilio</th>
+        <th class="text-right">Seguro</th>
+        <th class="text-right">Dotación</th>
+        <th class="text-right">Préstamo</th>
+        <th class="text-right">TOTAL</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @empleadosnominas.each do |nom| %>
+        <tr>
+          <td><%= nom.empleado.identificacion %> — <%= nom.empleado.nombre %></td>
+          <td class="text-right"><%= camponumerico(nom.salario) %></td>
+          <td class="text-right"><%= camponumerico(nom.quincena) %></td>
+          <td class="text-center"><%= nom.horas_auto %></td>
+          <td class="text-center"><%= nom.horas_bus %></td>
+          <td class="text-center"><%= nom.horas_minus %></td>
+          <td class="text-center"><%= nom.dias %></td>
+          <td class="text-right"><%= camponumerico(nom.bonificacion) %></td>
+          <td class="text-right"><%= camponumerico(nom.incapacidad) %></td>
+          <td class="text-right"><%= camponumerico(nom.subtotal) %></td>
+          <td class="text-right"><%= camponumerico(nom.ajuste) %></td>
+          <td class="text-right"><%= camponumerico(nom.salud) %></td>
+          <td class="text-right"><%= camponumerico(nom.pension) %></td>
+          <td class="text-right"><%= camponumerico(nom.auxilio) %></td>
+          <td class="text-right"><%= camponumerico(nom.seguro) %></td>
+          <td class="text-right"><%= camponumerico(nom.dotacion) %></td>
+          <td class="text-right"><%= camponumerico(nom.prestamo) %></td>
+          <td class="text-right"><strong><%= camponumerico(nom.total) %></strong></td>
+        </tr>
+      <% end %>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="9" class="text-right"><strong>TOTALES:</strong></td>
+        <td class="text-right"><strong><%= camponumerico(@empleadosnominas.sum(:subtotal)) %></strong></td>
+        <td class="text-right"><strong><%= camponumerico(@empleadosnominas.sum(:ajuste)) %></strong></td>
+        <td class="text-right"><strong><%= camponumerico(@empleadosnominas.sum(:salud)) %></strong></td>
+        <td class="text-right"><strong><%= camponumerico(@empleadosnominas.sum(:pension)) %></strong></td>
+        <td class="text-right"><strong><%= camponumerico(@empleadosnominas.sum(:auxilio)) %></strong></td>
+        <td class="text-right"><strong><%= camponumerico(@empleadosnominas.sum(:seguro)) %></strong></td>
+        <td class="text-right"><strong><%= camponumerico(@empleadosnominas.sum(:dotacion)) %></strong></td>
+        <td class="text-right"><strong><%= camponumerico(@empleadosnominas.sum(:prestamo)) %></strong></td>
+        <td class="text-right"><strong><%= camponumerico(@empleadosnominas.sum(:total)) %></strong></td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+
+<div style="margin-top:20px; text-align:center;">
+  <a href="javascript:window.print()" class="imprimirlink">
+    <i class="fa fa-print"></i> Imprimir
+  </a>
+</div>

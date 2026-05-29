@@ -1,0 +1,32 @@
+<div class="box box-primary">
+  <div class="box-header with-border">
+    <h3 class="box-title"><i class="fa fa-money"></i> INFORMACIÓN NÓMINA</h3>
+  </div>
+  <div class="box-body">
+    <%= form_tag nomina_empleadosnominas_path, method: :post, local: true do %>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <%= label_tag 'ubicacion[periodosliquidacion_id]', 'Seleccione el Periodo' %>
+            <%= select_tag 'ubicacion[periodosliquidacion_id]',
+                  options_from_collection_for_select(
+                    Periodosliquidacion.where(estado: 'A').order(:inicio),
+                    :id,
+                    :descripcion
+                  ),
+                  include_blank: true,
+                  class: 'form-control select2',
+                  style: 'width:100%' %>
+          </div>
+        </div>
+        <div class="col-md-3" style="padding-top:25px;">
+          <%= submit_tag 'Generar Nómina', class: 'btn btn-primary', disable_with: 'Generando...' %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<script>
+  $(function(){ $('select.select2').select2({ width: '100%' }); });
+</script>

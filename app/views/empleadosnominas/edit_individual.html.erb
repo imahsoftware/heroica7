@@ -1,0 +1,127 @@
+<div class="box box-usuarios">
+  <div class="box-header with-border">
+    <h3 class="box-title">
+      <i class="fa fa-money"></i>
+      NÓMINA — Periodo:
+      <%= @periodosliquidacion.inicio rescue '' %> / <%= @periodosliquidacion.fin rescue '' %>
+    </h3>
+  </div>
+  <div class="box-body" style="overflow-x:auto;">
+
+    <%= form_tag update_individual_empleadosnominas_path, method: :put, local: true do %>
+
+      <table class="table table-bordered table-condensed table-striped table-usuarios" style="min-width:2200px; font-size:12px;">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th class="text-center">Salario<br>Básico</th>
+            <th class="text-center">Quincena</th>
+            <th class="text-center">Hrs<br>Auto</th>
+            <th class="text-center">Hrs<br>Bus</th>
+            <th class="text-center">Hrs<br>Mula</th>
+            <th class="text-center">Días</th>
+            <th class="text-center">Bonificación</th>
+            <th class="text-center">Incapacidad</th>
+            <th class="text-center">Subtotal</th>
+            <th class="text-center">Ajuste<br>Mínimo</th>
+            <th class="text-center">Salud</th>
+            <th class="text-center">Pensión</th>
+            <th class="text-center">Auxilio<br>Transp.</th>
+            <th class="text-center">Seguro</th>
+            <th class="text-center">Dotación</th>
+            <th class="text-center">Préstamo</th>
+            <th class="text-center">TOTAL</th>
+            <th class="text-center">Observaciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @empleadosnominas.each do |nom| %>
+            <%= render 'fields', nom: nom, empleado: nom.empleado %>
+          <% end %>
+        </tbody>
+      </table>
+
+      <div class="row" style="margin-top:15px;">
+        <div class="col-md-12">
+          <%= submit_tag 'Guardar', class: 'btn btn-primary', disable_with: 'Guardando...' %>
+          <%= link_to 'Regresar', buscar_empleadosnominas_path, class: 'btn btn-default' %>
+          <% if @periodosliquidacion %>
+            <%= link_to 'Tirilla',
+                  tirilla_empleadosnominas_path(periodosliquidacion_id: @periodosliquidacion.id),
+                  target: '_blank', class: 'btn btn-info' %>
+            <%= link_to 'Informe',
+                  informe_empleadosnominas_path(periodosliquidacion_id: @periodosliquidacion.id),
+                  target: '_blank', class: 'btn btn-success' %>
+          <% end %>
+        </div>
+      </div>
+
+    <% end %>
+
+  </div>
+</div>
+
+<style>
+  .campo-readonly { background-color: #f5f5f5; }
+  .campo-resultado { font-weight: bold; }
+</style>
+
+<script>
+var calcularUrl = '<%= calcularvalor_empleadosnominas_path %>';
+
+function recalcular(nomId, empId) {
+  var get = function(campo) {
+    var el = document.querySelector('[data-nomid="' + nomId + '"][data-campo="' + campo + '"]') ||
+             document.getElementById('nom_' + nomId + '_' + campo);
+    return el ? (el.value || 0) : 0;
+  };
+
+  var params = new URLSearchParams({
+    pvr0:  empId,
+    pvr1:  nomId,
+    pvr2:  get('horas_auto'),
+    pvr3:  get('horas_minus'),
+    pvr4:  get('horas_bus'),
+    pvr5:  get('dias'),
+    pvr6:  get('bonificacion'),
+    pvr7:  get('ajuste'),
+    pvr8:  get('seguro'),
+    pvr9:  get('dotacion'),
+    pvr10: get('prestamo')
+  });
+
+  fetch(calcularUrl + '?' + params.toString(), {
+    headers: { 'X-Requested-With': 'XMLHttpRequest' }
+  })
+  .then(function(r){ return r.json(); })
+  .then(function(data) {
+    ['subtotal','salud','pension','auxilio','total'].forEach(function(c){
+      var el = document.getElementById('nom_' + nomId + '_' + c);
+      if (el) el.value = data[c];
+    });
+  });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  // Recalcular al perder foco en campos de cálculo
+  document.querySelectorAll('.campo-calc').forEach(function(input) {
+    input.addEventListener('blur', function() {
+      recalcular(this.dataset.nomid, this.dataset.empid);
+    });
+  });
+
+  // Solo dígitos en campos .solo-numeros
+  document.querySelectorAll('.solo-numeros').forEach(function(input) {
+    input.addEventListener('keypress', function(e) {
+      if (!/[0-9]/.test(e.key)) e.preventDefault();
+    });
+    input.addEventListener('paste', function(e) {
+      var texto = (e.clipboardData || window.clipboardData).getData('text');
+      if (!/^[0-9]+$/.test(texto)) e.preventDefault();
+    });
+    input.addEventListener('input', function() {
+      this.value = this.value.replace(/[^0-9]/g, '');
+    });
+  });
+});
+</script>

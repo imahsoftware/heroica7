@@ -1,0 +1,136 @@
+<style>
+  @media print { .salto { page-break-after: always; } }
+  body { font-size: 12px; }
+  .firma-line { border-top: 1px solid #000; width: 200px; margin-top: 40px; }
+</style>
+
+<% @empleadosnominas.each_with_index do |nom, idx| %>
+  <div class="<%= idx < @empleadosnominas.size - 1 ? 'salto' : '' %>" style="margin-bottom:30px;">
+
+    <%# ── Encabezado ── %>
+    <table width="100%" style="margin-bottom:10px;">
+      <tr>
+        <td width="160" valign="middle">
+          <%= image_tag 'logo_heroica.png', style: 'max-width:140px; max-height:70px;' %>
+        </td>
+        <td valign="middle" align="center">
+          <strong style="font-size:15px;"><%= Parametro.find(1).valor rescue '' %></strong><br>
+          NIT: <%= Parametro.find(2).valor rescue '' %><br>
+          Dirección: <%= Parametro.find(13).valor rescue '' %><br>
+          PBX: <%= Parametro.find(7).valor rescue '' %> — FAX: <%= Parametro.find(8).valor rescue '' %><br>
+          <%= Parametro.find(9).valor rescue '' %>
+        </td>
+      </tr>
+    </table>
+
+    <table class="table table-bordered table-condensed" style="font-size:12px;">
+      <tr><td width="30%"><strong>EMPLEADO</strong></td><td><%= nom.empleado.identificacion rescue '' %> — <%= nom.empleado.nombre rescue '' %></td></tr>
+      <tr><td><strong>CARGO</strong></td><td><%= nom.empleado.cargo rescue '' %></td></tr>
+      <tr><td><strong>PERIODO DE PAGO</strong></td><td><%= @periodosliquidacion.inicio %> — <%= @periodosliquidacion.fin %></td></tr>
+      <tr><td><strong>NRO CUENTA</strong></td><td><%= nom.empleado.banco rescue '' %> — <%= nom.empleado.cuenta rescue '' %></td></tr>
+      <tr><td><strong>SALARIO BÁSICO</strong></td><td><%= camponumerico(nom.empleado.salario) rescue '' %></td></tr>
+    </table>
+
+    <table class="table table-bordered table-condensed" style="font-size:12px;">
+      <thead>
+        <tr>
+          <th colspan="4">COMPROBANTE DE NÓMINA</th>
+        </tr>
+        <tr>
+          <th width="48%">CONCEPTO</th>
+          <th width="8%" class="text-center">DÍAS</th>
+          <th width="22%" class="text-right">DEVENGADO</th>
+          <th width="22%" class="text-right">DEDUCCIONES</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>SALARIO BÁSICO</td>
+          <td class="text-center"><%= nom.dias %></td>
+          <td class="text-right"><%= camponumerico(nom.subtotal.to_i - nom.bonificacion.to_i) rescue 0 %></td>
+          <td class="text-right">0</td>
+        </tr>
+        <tr>
+          <td>BONIFICACIONES</td>
+          <td class="text-center"><%= nom.dias %></td>
+          <td class="text-right"><%= camponumerico(nom.bonificacion) %></td>
+          <td class="text-right">0</td>
+        </tr>
+        <tr>
+          <td>AUXILIO DE TRANSPORTE</td>
+          <td class="text-center"><%= nom.dias %></td>
+          <td class="text-right"><%= camponumerico(nom.auxilio) %></td>
+          <td class="text-right">0</td>
+        </tr>
+        <tr>
+          <td>DOTACIÓN</td>
+          <td class="text-center"><%= nom.dias %></td>
+          <td class="text-right"><%= camponumerico(nom.dotacion) %></td>
+          <td class="text-right">0</td>
+        </tr>
+        <tr>
+          <td>SALUD (<%= nom.empleado.salud rescue '' %>)</td>
+          <td class="text-center"><%= nom.dias %></td>
+          <td class="text-right">0</td>
+          <td class="text-right"><%= camponumerico(nom.salud) %></td>
+        </tr>
+        <tr>
+          <td>PENSIÓN (<%= nom.empleado.pension rescue '' %>)</td>
+          <td class="text-center"><%= nom.dias %></td>
+          <td class="text-right">0</td>
+          <td class="text-right"><%= camponumerico(nom.pension) %></td>
+        </tr>
+        <tr>
+          <td>PRÉSTAMO</td>
+          <td class="text-center"><%= nom.dias %></td>
+          <td class="text-right">0</td>
+          <td class="text-right"><%= camponumerico(nom.prestamo) %></td>
+        </tr>
+        <tr>
+          <td>VALOR AJUSTE AL MÍNIMO</td>
+          <td class="text-center"><%= nom.dias %></td>
+          <td class="text-right"><%= camponumerico(nom.ajuste) %></td>
+          <td class="text-right">0</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="2" class="text-right"><strong>TOTAL DEVENGADO PERIODO:</strong></td>
+          <td colspan="2" class="text-right"><strong><%= camponumerico(nom.total) %></strong></td>
+        </tr>
+      </tfoot>
+    </table>
+
+    <table style="font-size:12px; width:100%; margin-bottom:20px;">
+      <tr>
+        <td width="20%"><strong>Observaciones:</strong></td>
+        <td>
+          <% if nom.empleado.cargo.to_s.downcase.include?('instructor') %>
+            Horas Dictadas: Automóvil → <%= nom.horas_auto.to_i %>, Bus → <%= nom.horas_bus.to_i %>, Mula → <%= nom.horas_minus.to_i %>.<br>
+          <% end %>
+          <%= nom.observacion %>
+        </td>
+      </tr>
+    </table>
+
+    <table style="width:80%; font-size:12px;">
+      <tr>
+        <td width="40%">__________________________________</td>
+        <td width="20%">&nbsp;</td>
+        <td width="40%">__________________________________</td>
+      </tr>
+      <tr>
+        <td>Firma Aprobado</td>
+        <td>&nbsp;</td>
+        <td>Firma Aceptado</td>
+      </tr>
+    </table>
+
+  </div>
+<% end %>
+
+<div style="margin-top:20px; text-align:center;">
+  <a href="javascript:window.print()" class="imprimirlink">
+    <i class="fa fa-print"></i> Imprimir
+  </a>
+</div>
