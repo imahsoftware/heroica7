@@ -15,8 +15,8 @@
       <div class="col-md-6">
         <% if @egresosimagen.new_record? %>
           <%= button_tag t(:cancelar), type: 'button',
-              data: { target: '#egresosimagen_form' },
-              class: 'cancel_button btn btn-flat btn-default' %>
+              onclick: "$('#egresosimagen_form').html('').removeClass('in').css({height:'0px',overflow:'hidden'}); return false;",
+              class: 'btn btn-flat btn-default' %>
         <% else %>
           <%= link_to t(:cancelar),
               egreso_egresosimagen_path(@egreso, @egresosimagen),

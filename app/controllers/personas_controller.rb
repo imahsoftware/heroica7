@@ -92,7 +92,7 @@ class PersonasController < ApplicationController
     end
   end
 
-  # GET /personas/informesiet  — exporta Excel SIET
+  # GET /personas/informesiet  — exporta Excel SIET (.xlsx)
   def informesiet
     if params[:ubicacion].blank? ||
        params[:ubicacion][:inicial].blank? ||
@@ -100,8 +100,6 @@ class PersonasController < ApplicationController
       flash[:notice] = 'Debe digitar datos para la consulta'
       redirect_to busqueda_personas_path and return
     end
-
-    set_excel_headers("Heroica_SIET_#{Time.now.strftime('%Y%m%d_%X')}.xls")
 
     var = params[:ubicacion][:categoria_id].to_i
     fecha_ini = params[:ubicacion][:inicial].to_date
@@ -116,9 +114,16 @@ class PersonasController < ApplicationController
                     fecha_ini, fecha_fin, var
                   ).order(:created_at)
                 end
+
+    respond_to do |format|
+      format.xlsx do
+        response.headers['Content-Disposition'] =
+          "attachment; filename=\"Heroica_SIET_#{Time.now.strftime('%Y%m%d')}.xlsx\""
+      end
+    end
   end
 
-  # GET /personas/informeper  — exporta Excel datos básicos
+  # GET /personas/informeper  — exporta Excel datos básicos (.xlsx)
   def informeper
     if params[:ubicacion].blank? ||
        params[:ubicacion][:inicial1].blank? ||
@@ -127,13 +132,18 @@ class PersonasController < ApplicationController
       redirect_to busqueda_personas_path and return
     end
 
-    set_excel_headers("Heroica_HV_#{Time.now.strftime('%Y%m%d_%X')}.xls")
-
     @personas = Persona.where(
       'DATE(created_at) BETWEEN ? AND ?',
       params[:ubicacion][:inicial1].to_date,
       params[:ubicacion][:final1].to_date
     ).order(:created_at)
+
+    respond_to do |format|
+      format.xlsx do
+        response.headers['Content-Disposition'] =
+          "attachment; filename=\"Heroica_HV_#{Time.now.strftime('%Y%m%d')}.xlsx\""
+      end
+    end
   end
 
   private
@@ -152,17 +162,6 @@ class PersonasController < ApplicationController
   end
 
   def set_layout
-    if %w[informesiet informeper].include?(action_name)
-      'excel'
-    else
-      'application_personas'
-    end
-  end
-
-  def set_excel_headers(filename)
-    response.headers['Content-Type']        = 'application/vnd.ms-excel'
-    response.headers['Content-Disposition'] = "attachment; filename=\"#{filename}\""
-    response.headers['Cache-Control']       = 'max-age=0'
-    response.headers['pragma']              = 'public'
+    'application_personas'
   end
 end

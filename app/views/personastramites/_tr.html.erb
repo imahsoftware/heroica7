@@ -138,9 +138,10 @@
   </td>
 
   <td class="text-center">
-    <% if personastramite.factura_id %>
-      <%= link_to facturacero(personastramite.factura.nro_factura),
-          verfactura_facturas_path(factura_id: personastramite.factura_id),
+    <% factura = personastramite.factura_id ? personastramite.factura : nil %>
+    <% if factura %>
+      <%= link_to facturacero(factura.nro_factura),
+          verfactura_facturas_path(factura_id: factura.id),
           target: '_blank', rel: 'noopener', data: { turbo: false },
           class: 'btn btn-xs btn-success' %>
     <% else %>

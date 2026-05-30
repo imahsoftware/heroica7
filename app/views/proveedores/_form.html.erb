@@ -109,8 +109,8 @@
       <div class="col-md-6">
         <% if @proveedor.new_record? %>
           <%= button_tag t(:cancelar), type: 'button',
-              data: { toggle: 'collapse', target: '#proveedor_form' },
-              class: 'cancel_button btn btn-flat btn-default' %>
+              onclick: "$('#proveedor_form').html('').removeClass('in').css({height:'0px',overflow:'hidden'}); return false;",
+              class: 'btn btn-flat btn-default' %>
         <% else %>
           <%= link_to t(:cancelar), proveedor_path(@proveedor),
               class: 'btn btn-flat btn-default', remote: true %>

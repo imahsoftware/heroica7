@@ -17,8 +17,8 @@
       <div class="col-md-6">
         <% if @concepto.new_record? %>
           <%= button_tag t(:cancelar), type: 'button',
-              data: { toggle: 'collapse', target: '#concepto_form' },
-              class: 'cancel_button btn btn-flat btn-default' %>
+              onclick: "$('#concepto_form').html('').removeClass('in').css({height:'0px',overflow:'hidden'}); return false;",
+              class: 'btn btn-flat btn-default' %>
         <% else %>
           <%= link_to t(:cancelar), concepto_path(@concepto),
               class: 'btn btn-flat btn-default', remote: true %>

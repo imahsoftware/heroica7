@@ -31,9 +31,9 @@
     <div class="row" style="margin-top:10px;">
       <div class="col-md-6">
         <% if @personasclase.new_record? %>
-          <%= button_tag t(:cancelar), type: "button",
-              data: { target: "#personasclase_form" },
-              class: "cancel_button btn btn-flat btn-default pull-left" %>
+          <%= button_tag t(:cancelar), type: 'button',
+              onclick: "$('#personasclase_form').html('').removeClass('in').css({height:'0px',overflow:'hidden'}); return false;",
+              class: 'btn btn-flat btn-default' %>
         <% else %>
           <%= link_to t(:cancelar),
               persona_personasclase_path(@persona, @personasclase),

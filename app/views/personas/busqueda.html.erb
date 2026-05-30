@@ -54,7 +54,7 @@
         <h3 class="box-title"><i class="fa fa-file-excel-o"></i> Informe SIET</h3>
       </div>
       <div class="box-body">
-        <%= form_tag informesiet_personas_path, method: :get do %>
+        <%= form_tag informesiet_personas_path(format: :xlsx), method: :get do %>
           <div class="row">
             <div class="col-md-3">
               <div class="form-group">
@@ -95,7 +95,7 @@
         <h3 class="box-title"><i class="fa fa-file-excel-o"></i> Informe Datos Básicos</h3>
       </div>
       <div class="box-body">
-        <%= form_tag informeper_personas_path, method: :get do %>
+        <%= form_tag informeper_personas_path(format: :xlsx), method: :get do %>
           <div class="row">
             <div class="col-md-3">
               <div class="form-group">

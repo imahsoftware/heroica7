@@ -34,6 +34,14 @@
           </tr>
         </thead>
         <tbody>
+          <% if @personastramiteshoras.empty? %>
+            <tr>
+              <td colspan="8" class="text-center" style="padding:20px; color:#aaa;">
+                <i class="fa fa-clock-o" style="font-size:24px; display:block; margin-bottom:8px;"></i>
+                Aún no hay horas registradas para este trámite.
+              </td>
+            </tr>
+          <% end %>
           <% @personastramiteshoras.each do |h| %>
             <tr>
               <td>

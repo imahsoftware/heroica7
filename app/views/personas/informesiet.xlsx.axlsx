@@ -1,0 +1,72 @@
+wd = xlsx_package.workbook
+wd.styles do |style|
+  title   = wd.styles.add_style(b: true, bg_color: 'FF1F497D', fg_color: 'FFFFFFFF', sz: 12, font_name: 'Calibri', alignment: { horizontal: :center, vertical: :center })
+  grupo   = wd.styles.add_style(b: true, bg_color: 'FF2E75B6', fg_color: 'FFFFFFFF', sz: 10, font_name: 'Calibri', alignment: { horizontal: :center, vertical: :center })
+  header  = wd.styles.add_style(b: true, bg_color: 'FF4472C4', fg_color: 'FFFFFFFF', sz: 10, font_name: 'Calibri', alignment: { horizontal: :center, vertical: :center, wrap_text: true })
+  dato    = wd.styles.add_style(sz: 10, font_name: 'Calibri', alignment: { horizontal: :left, vertical: :center })
+  centro  = wd.styles.add_style(sz: 10, font_name: 'Calibri', alignment: { horizontal: :center, vertical: :center })
+  fecha_s = wd.styles.add_style(sz: 10, font_name: 'Calibri', format_code: 'dd-mm-yyyy', alignment: { horizontal: :center, vertical: :center })
+
+  wd.add_worksheet(name: 'SIET') do |sheet|
+    # Fila 1: título
+    sheet.add_row ['INFORME SIET'], style: [title]
+    sheet.merge_cells('A1:W1')
+
+    # Fila 2: grupos de encabezado
+    sheet.add_row [
+      '', 'DATOS DE PROGRAMA', '', 'DATOS PERSONALES', '', '', '', '', '', '', '', '', '', '', '', '',
+      'MULTICULTURALIDAD', '', '', '', '', '', ''
+    ], style: Array.new(23, grupo)
+    sheet.merge_cells('B2:C2')
+    sheet.merge_cells('D2:P2')
+    sheet.merge_cells('Q2:W2')
+
+    # Fila 3: encabezados de columna
+    sheet.add_row [
+      'CONSECUTIVO', 'FECHA DE INGRESO', 'JORNADA',
+      'TIPO IDENTIFICACIÓN', 'Nº IDENTIFICACIÓN', 'NOMBRES', 'APELLIDOS',
+      'GÉNERO', 'ESTADO CIVIL', 'FECHA NACIMIENTO', 'LUGAR DE ORIGEN',
+      'ESTRATO', 'RÉGIMEN SALUD', 'NIVEL FORMACIÓN', 'OCUPACIÓN', 'DISCAPACIDAD',
+      'INDÍGENA', 'AFRODESCENDIENTE', 'DESPLAZADO', 'POB. FRONTERA',
+      'CABEZA FAMILIA', 'REINSERTADO', 'POB. ROOM'
+    ], style: Array.new(23, header)
+
+    # Datos
+    i = 0
+    @personas.each do |p|
+      i += 1
+      sheet.add_row [
+        i,
+        p.created_at&.to_date,
+        p.jornada.to_s,
+        p.siet_tipodocumento.to_s,
+        p.identificacion.to_s,
+        p.siet_nombres.to_s,
+        p.siet_apellidos.to_s,
+        p.siet_genero.to_s,
+        p.estado_civil.to_s,
+        p.fecha_nacimiento,
+        p.lugar_origen.to_s,
+        p.estrato.to_s,
+        p.regimen.to_s,
+        p.nivel_formacion.to_s,
+        p.ocupacion.to_s,
+        p.discapacidad.to_s,
+        (p.multi_indigena.to_s == 'SI' ? 'X' : ''),
+        (p.multi_afro.to_s == 'SI' ? 'X' : ''),
+        (p.multi_desplazado.to_s == 'SI' ? 'X' : ''),
+        (p.multi_pobfrontera.to_s == 'SI' ? 'X' : ''),
+        (p.multi_cabeza.to_s == 'SI' ? 'X' : ''),
+        (p.multi_reinsertado.to_s == 'SI' ? 'X' : ''),
+        (p.multi_pobroom.to_s == 'SI' ? 'X' : '')
+      ], style: [centro, fecha_s, dato, dato, dato, dato, dato, centro, centro, fecha_s, dato,
+                 centro, dato, dato, dato, dato,
+                 centro, centro, centro, centro, centro, centro, centro]
+    end
+
+    # Anchos de columna
+    sheet.column_widths 6, 14, 12, 18, 16, 20, 20, 10, 12, 14, 18,
+                        8,  14, 16, 16, 14,
+                        10, 14, 12, 14, 13, 12, 11
+  end
+end

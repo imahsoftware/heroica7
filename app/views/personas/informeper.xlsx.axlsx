@@ -1,0 +1,34 @@
+wd = xlsx_package.workbook
+wd.styles do |style|
+  title  = wd.styles.add_style(b: true, bg_color: 'FF1F497D', fg_color: 'FFFFFFFF', sz: 12, font_name: 'Calibri', alignment: { horizontal: :center, vertical: :center })
+  header = wd.styles.add_style(b: true, bg_color: 'FF4472C4', fg_color: 'FFFFFFFF', sz: 10, font_name: 'Calibri', alignment: { horizontal: :center, vertical: :center })
+  dato   = wd.styles.add_style(sz: 10, font_name: 'Calibri', alignment: { horizontal: :left, vertical: :center })
+  centro = wd.styles.add_style(sz: 10, font_name: 'Calibri', alignment: { horizontal: :center, vertical: :center })
+  fecha_s = wd.styles.add_style(sz: 10, font_name: 'Calibri', format_code: 'dd-mm-yyyy', alignment: { horizontal: :center, vertical: :center })
+
+  wd.add_worksheet(name: 'Datos Personas') do |sheet|
+    sheet.add_row ['INFORME DATOS BÁSICOS DE PERSONAS'], style: [title]
+    sheet.merge_cells('A1:I1')
+
+    sheet.add_row [
+      'FECHA DE INGRESO', 'TIPO IDENTIFICACIÓN', 'Nº IDENTIFICACIÓN',
+      'NOMBRES', 'APELLIDOS', 'TELÉFONO 1', 'TELÉFONO 2', 'CELULAR', 'EMAIL'
+    ], style: Array.new(9, header)
+
+    @personas.each do |p|
+      sheet.add_row [
+        p.created_at&.to_date,
+        p.siet_tipodocumento.to_s,
+        p.identificacion.to_s,
+        p.siet_nombres.to_s,
+        p.siet_apellidos.to_s,
+        p.telefono.to_s,
+        p.telefono_oficina.to_s,
+        p.celular.to_s,
+        p.email.to_s
+      ], style: [fecha_s, dato, dato, dato, dato, centro, centro, centro, dato]
+    end
+
+    sheet.column_widths 14, 18, 16, 22, 22, 14, 14, 14, 28
+  end
+end

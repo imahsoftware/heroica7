@@ -71,6 +71,16 @@ $(document).on("turbolinks:load", function() {
     var win = window.open(url, name, features);
     if (win && win.focus) { win.focus(); }
   });
+
+  // Botones Cancelar: ocultan el contenedor indicado en data-target
+  $(document).on('click', '.cancel_button', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    var target = $(this).attr('data-target');
+    if (target) {
+      $(target).html('').removeClass('in').css({ height: '0px', overflow: 'hidden' });
+    }
+  });
 });
 
 

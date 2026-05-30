@@ -45,8 +45,8 @@
       <div class="col-md-6">
         <% if @categoria.new_record? %>
           <%= button_tag t(:cancelar), type: 'button',
-              data: { toggle: 'collapse', target: '#categoria_form' },
-              class: 'cancel_button btn btn-flat btn-default' %>
+              onclick: "$('#categoria_form').html('').removeClass('in').css({height:'0px',overflow:'hidden'}); return false;",
+              class: 'btn btn-flat btn-default' %>
         <% else %>
           <%= link_to t(:cancelar), categoria_path(@categoria),
               class: 'btn btn-flat btn-default', remote: true %>

@@ -65,8 +65,8 @@
       <div class="col-md-6">
         <% if @instructor.new_record? %>
           <%= button_tag t(:cancelar), type: 'button',
-              data: { toggle: 'collapse', target: '#instructor_form' },
-              class: 'cancel_button btn btn-flat btn-default' %>
+              onclick: "$('#instructor_form').html('').removeClass('in').css({height:'0px',overflow:'hidden'}); return false;",
+              class: 'btn btn-flat btn-default' %>
         <% else %>
           <%= link_to t(:cancelar), instructor_path(@instructor),
               class: 'btn btn-flat btn-default', remote: true %>

@@ -58,9 +58,9 @@
     <div class="row" style="margin-top: 10px;">
       <div class="col-md-6">
         <% if @empleado.new_record? %>
-          <%= button_tag "#{t :cancelar}", type: 'button',
-              data: { target: '#empleado_form' },
-              class: 'cancel_button btn btn-flat btn-default pull-left',
+          <%= button_tag t(:cancelar), type: 'button',
+              onclick: "$('#empleado_form').html('').removeClass('in').css({height:'0px',overflow:'hidden'}); return false;",
+              class: 'btn btn-flat btn-default',
               aria_hidden: true %>
         <% else %>
           <%= link_to "#{t :cancelar}", empleado_path(@empleado),

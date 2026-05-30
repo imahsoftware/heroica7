@@ -35,8 +35,8 @@
       <div class="col-md-6">
         <% if @producto.new_record? %>
           <%= button_tag t(:cancelar), type: 'button',
-              data: { toggle: 'collapse', target: '#producto_form' },
-              class: 'cancel_button btn btn-flat btn-default' %>
+              onclick: "$('#producto_form').html('').removeClass('in').css({height:'0px',overflow:'hidden'}); return false;",
+              class: 'btn btn-flat btn-default' %>
         <% else %>
           <%= link_to t(:cancelar), producto_path(@producto),
               class: 'btn btn-flat btn-default', remote: true %>

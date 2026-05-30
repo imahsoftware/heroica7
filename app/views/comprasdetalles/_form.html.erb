@@ -32,8 +32,8 @@
       <div class="col-md-6">
         <% if @comprasdetalle.new_record? %>
           <%= button_tag t(:cancelar), type: 'button',
-              data: { toggle: 'collapse', target: '#comprasdetalle_form' },
-              class: 'cancel_button btn btn-flat btn-default pull-left' %>
+              onclick: "$('#comprasdetalle_form').html('').removeClass('in').css({height:'0px',overflow:'hidden'}); return false;",
+              class: 'btn btn-flat btn-default' %>
         <% else %>
           <%= link_to t(:cancelar), compra_comprasdetalle_path(@compra, @comprasdetalle),
               class: 'btn btn-flat btn-default pull-left', remote: true %>
