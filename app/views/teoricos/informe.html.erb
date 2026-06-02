@@ -1,35 +1,85 @@
-<div class="box box-primary">
-  <div class="box-header with-border">
-    <h3 class="box-title"><i class="fa fa-book"></i> Informe Prueba Teorica</h3>
-  </div>
-  <div class="box-body">
-    <p><strong>Persona:</strong> <%= @teorico.persona.nombres rescue nil %></p>
-    <p><strong>Categoria:</strong> <%= @teorico.categoria.nombre rescue nil %></p>
-    <p><strong>Estado:</strong> <%= @teorico.estado %></p>
-    <p><strong>Correctas:</strong> <%= @teorico.correctas %> &nbsp; <strong>Incorrectas:</strong> <%= @teorico.incorrectas %></p>
-    <% if @teoricosresultados.any? %>
-      <table class="table table-bordered table-condensed">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Pregunta</th>
-            <th class="text-center">Estado</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @teoricosresultados.each do |r| %>
+<div style="max-width:860px; margin:0 auto; padding:20px;">
+
+  <%# ── Encabezado ── %>
+  <div class="box box-usuarios">
+    <div class="box-header with-border">
+      <h3 class="box-title">
+        <i class="fa fa-book"></i> Informe Prueba Teórica
+      </h3>
+      <div class="box-tools pull-right">
+        <a href="javascript:window.print()" class="btn btn-sm btn-default">
+          <i class="fa fa-print"></i> Imprimir
+        </a>
+      </div>
+    </div>
+    <div class="box-body">
+
+      <%# ── Datos generales ── %>
+      <div class="row" style="margin-bottom:15px;">
+        <div class="col-md-6">
+          <p><strong>Persona:</strong> <%= @teorico.persona.nombres rescue '—' %></p>
+          <p><strong>Categoría:</strong> <%= @teorico.categoria.nombre rescue '—' %></p>
+          <p><strong>Estado:</strong>
+            <span class="label label-<%= @teorico.estado == 'A' ? 'success' : 'warning' %>" style="font-size:13px;">
+              <%= @teorico.estado == 'A' ? 'APROBADO' : @teorico.estado %>
+            </span>
+          </p>
+        </div>
+        <div class="col-md-6 text-right">
+          <div style="display:inline-flex; gap:20px; align-items:center;">
+            <div style="text-align:center; background:#dff0d8; padding:12px 20px; border-radius:6px;">
+              <div style="font-size:28px; font-weight:bold; color:#3c763d;"><%= @teorico.correctas.to_i %></div>
+              <div style="font-size:12px; color:#3c763d;"><i class="fa fa-check"></i> CORRECTAS</div>
+            </div>
+            <div style="text-align:center; background:#f2dede; padding:12px 20px; border-radius:6px;">
+              <div style="font-size:28px; font-weight:bold; color:#a94442;"><%= @teorico.incorrectas.to_i %></div>
+              <div style="font-size:12px; color:#a94442;"><i class="fa fa-times"></i> INCORRECTAS</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <%# ── Tabla de preguntas ── %>
+      <% if @teoricosresultados.any? %>
+        <table class="table table-bordered table-condensed table-striped">
+          <thead>
             <tr>
-              <td><%= r.consecutivo %></td>
-              <td><%= r.pregunta.descripcion rescue nil %></td>
-              <td class="text-center">
-                <span class="label label-<%= r.estado == "C" ? "success" : "danger" %>">
-                  <%= r.destado %>
-                </span>
-              </td>
+              <th width="5%" class="text-center">#</th>
+              <th>Pregunta</th>
+              <th width="12%" class="text-center">Resultado</th>
             </tr>
-          <% end %>
-        </tbody>
-      </table>
-    <% end %>
+          </thead>
+          <tbody>
+            <% @teoricosresultados.each do |r| %>
+              <tr>
+                <td class="text-center"><%= r.consecutivo %></td>
+                <td><%= r.pregunta&.descripcion %></td>
+                <td class="text-center">
+                  <% if r.estado == 'C' %>
+                    <span style="color:#3c763d; font-weight:bold;">
+                      <i class="fa fa-check-circle"></i> Correcta
+                    </span>
+                  <% else %>
+                    <span style="color:#a94442; font-weight:bold;">
+                      <i class="fa fa-times-circle"></i> Incorrecta
+                    </span>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="2" class="text-right"><strong>Total preguntas:</strong></td>
+              <td class="text-center"><strong><%= @teoricosresultados.count %></strong></td>
+            </tr>
+          </tfoot>
+        </table>
+      <% else %>
+        <div class="alert alert-info">No hay resultados registrados para esta prueba.</div>
+      <% end %>
+
+    </div>
   </div>
+
 </div>

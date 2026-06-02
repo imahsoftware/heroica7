@@ -21,8 +21,8 @@
     </small>
   </td>
   <td><%= teorico.categoria.codigo_nuevo rescue teorico.categoria.nombre rescue nil %></td>
-  <td class="text-center"><%= teorico.correctas rescue nil %></td>
-  <td class="text-center"><%= teorico.incorrectas rescue nil %></td>
+  <td class="text-center" style="color:#3c763d; font-weight:bold;"><%= teorico.correctas.to_i %></td>
+  <td class="text-center" style="color:#a94442; font-weight:bold;"><%= teorico.incorrectas.to_i %></td>
   <td class="text-center">
     <span class="label label-<%= teorico.estado == "PENDIENTE" ? "warning" : "success" %>">
       <%= teorico.estado %>

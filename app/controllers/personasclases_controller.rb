@@ -31,12 +31,11 @@ class PersonasclasesController < ApplicationController
 
   # POST /personas/:persona_id/personasclases
   def create
-    @personasclase          = Personasclase.new(personasclase_params)
-    @personasclase.user_id  = is_admin
+    @personasclase            = Personasclase.new(personasclase_params)
+    @personasclase.user_id    = is_admin
+    @personasclase.persona_id = @persona.id   # debe asignarse antes de valid?
     respond_to do |format|
-      if @personasclase.valid?
-        @persona.personasclases << @personasclase
-        @persona.save
+      if @personasclase.save
         @personasclase = Personasclase.new
         flash[:notice] = t(:notice_crea_msj)
         format.js

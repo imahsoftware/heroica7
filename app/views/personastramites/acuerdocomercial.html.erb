@@ -6,7 +6,7 @@
     <tr>
       <td width="250" rowspan="2" valign="middle">
         <div align="center">
-          <img src="/images/<%= Parametro.find(10).valor.to_s %>">
+          <%= image_tag 'logo_heroica.png', style: 'max-width:220px; max-height:80px;' %>
         </div>
       </td>
       <td width="395" rowspan="2">
@@ -49,7 +49,7 @@
                   <img src="/system/personasimagenes/<%= @personastramite.persona_id %>/original/<%= @personastramite.persona.personasimagen_file_name rescue nil %>"
                        height="120" width="120" border="0" title="Fotografia"/>
                 <% else %>
-                  <img src="/images/noFoto.jpg" border="0" height="100" width="100" title="No Fotografia"/>
+                  <%= image_tag 'user_img.png', height: 100, width: 100, title: 'Sin Fotografía' %>
                 <% end %>
               </div>
             </td>
