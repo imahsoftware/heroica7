@@ -9,9 +9,10 @@
         <% end %>
       </li>
 
-      <li class="header"><%= t :menu rescue 'Menú' %></li>
-
       <% if defined?(@persona) && @persona&.persisted? %>
+
+        <%# ── Menú de secciones de la persona ── %>
+        <li class="header">MENÚ DE OPCIONES</li>
 
         <li class="<%= active_class(edit_persona_path(etapa: 'A', id: @persona.id)) %>">
           <%= link_to edit_persona_path(etapa: 'A', id: @persona.id) do %>
@@ -38,11 +39,13 @@
         </li>
 
       <% elsif defined?(@persona) && @persona&.new_record? %>
+        <li class="header">MENÚ DE OPCIONES</li>
         <li class="active">
           <%= link_to new_persona_path do %>
             <i class="fa fa-user"></i><span>Datos Básicos</span>
           <% end %>
         </li>
+
       <% end %>
 
     </ul>

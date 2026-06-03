@@ -162,6 +162,10 @@ class PersonasController < ApplicationController
   end
 
   def set_layout
-    'application_personas'
+    if %w[busqueda buscar listar].include?(action_name)
+      'application'
+    else
+      'application_personas'
+    end
   end
 end
