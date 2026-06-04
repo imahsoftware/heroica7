@@ -1,4 +1,6 @@
 class Tiposcombustible < ApplicationRecord
+  has_many :combustibles
+
   validates :descripcion, presence: true
 
   def self.ransackable_attributes(auth_object = nil)

@@ -1,0 +1,23 @@
+<tr id="combustible_<%= combustible.id %>">
+  <td class="text-center">
+    <%= link_to edit_combustible_path(combustible), remote: true,
+        title: t(:title_editar),
+        data: { toggle: 'tooltip' } do %>
+      <button class="btn btn-xs btn-warning btn-accion"><i class="fa fa-edit"></i></button>
+    <% end %>
+    <%= link_to combustible_path(combustible), remote: true,
+        method: :delete,
+        title: t(:title_elimina),
+        data: { confirm: t(:elimina_confirma), toggle: 'tooltip' } do %>
+      <button class="btn btn-xs btn-danger btn-accion"><i class="fa fa-trash"></i></button>
+    <% end %>
+  </td>
+  <td><%= combustible.fecha.present? ? combustible.fecha.strftime('%Y-%m-%d %H:%M') : '—' rescue '—' %></td>
+  <td><strong><%= combustible.placa&.descripcion.presence || '—' %></strong></td>
+  <td><%= combustible.tiposcombustible&.descripcion.presence || '—' %></td>
+  <td class="text-right"><%= combustible.kilometraje.presence || '—' %></td>
+  <td class="text-right"><%= combustible.galones.presence || '—' %></td>
+  <td class="text-right"><%= combustible.valor_galon.presence || '—' %></td>
+  <td class="text-right"><%= combustible.valor_total.presence || '—' %></td>
+  <td class="text-center"><%= combustible.nro_clases.presence || '—' %></td>
+</tr>

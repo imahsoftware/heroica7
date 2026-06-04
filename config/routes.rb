@@ -164,6 +164,7 @@ Rails.application.routes.draw do
   end
 
   resources :tiposcombustibles
+  resources :combustibles
   resources :instructores
   resources :categorias
   resources :tipostramites

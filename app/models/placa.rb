@@ -1,6 +1,7 @@
 class Placa < ApplicationRecord
   belongs_to :user, optional: true
   belongs_to :instructor, optional: true
+  has_many :combustibles
 
   validates :descripcion, presence: true
 

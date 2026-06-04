@@ -1,0 +1,52 @@
+<% title 'Combustibles' %>
+
+<div class="box box-usuarios">
+  <div class="box-header">
+    <span class="box-title">
+      <i class="fa fa-tint"></i> Registro de combustible
+      <span class="users-count-badge"><%= @combustibles.total_entries rescue @combustibles.count %> registros</span>
+    </span>
+    <div class="box-tools pull-right" style="margin-top: -2px;">
+      <%= link_to new_combustible_path, remote: true, id: 'new_combustible_button',
+          class: 'btn btn-sm btn-success',
+          title: 'Agregar tanqueo' do %>
+        <i class="fa fa-plus"></i> Nuevo
+      <% end %>
+    </div>
+  </div>
+
+  <div class="box-body">
+
+    <div class="row" style="margin-bottom: 16px;">
+      <div class="col-md-6 col-sm-8 col-xs-12 search-bar">
+        <%= search_form_for @q do |f| %>
+          <div class="input-group">
+            <%= f.search_field :placa_descripcion_cont,
+                class: 'form-control',
+                placeholder: 'Buscar por placa...' %>
+            <div class="input-group-btn">
+              <%= button_tag type: 'submit', class: 'btn btn-search' do %>
+                <i class="fa fa-search"></i>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="flash_messages"></div>
+    <div id="combustible_form" class="collapse" style="margin-bottom: 12px;"></div>
+
+    <div id="combustibles">
+      <% if @combustibles.any? %>
+        <%= render 'combustibles/tabla' %>
+      <% else %>
+        <div class="empty-state">
+          <i class="fa fa-tint"></i>
+          <p>No se encontraron registros de combustible.</p>
+        </div>
+      <% end %>
+    </div>
+
+  </div>
+</div>

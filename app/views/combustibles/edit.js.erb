@@ -1,0 +1,16 @@
+$("#combustible_form").collapse("hide");
+$("#combustible_form").empty();
+
+<% if @active_record.present? %>
+  $("#combustible_<%= @active_record.id %>").replaceWith("<%= j render 'tr', combustible: @active_record %>");
+<% end %>
+
+$("#combustible_<%= @combustible.id %>").html("<td colspan='9'><%= j render 'form' %></td>");
+$("#combustible_<%= @combustible.id %>").addClass("active_combustible");
+
+$(".select2").select2();
+if ($.fn.datetimepicker) {
+  $(".datetimepicker").datetimepicker({ format: "YYYY-MM-DD HH:mm", sideBySide: true });
+}
+$(".tooltip").tooltip("hide");
+$('[data-toggle="tooltip"]').tooltip();

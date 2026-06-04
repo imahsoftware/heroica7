@@ -1,0 +1,74 @@
+<%= simple_form_for @combustible, remote: true do |f| %>
+  <div class="bs-callout">
+
+    <p class="section-label">Datos del tanqueo</p>
+    <div class="row">
+      <div class="col-md-3">
+        <%= f.input :fecha, as: :string, label: 'Fecha y hora tanqueo',
+            input_html: { class: 'form-control datetimepicker clean', readonly: true } %>
+      </div>
+      <div class="col-md-3">
+        <%= f.input :placa_id, as: :select,
+            collection: Placa.order(:descripcion).collect { |p| [p.descripcion, p.id] },
+            include_blank: true,
+            input_html: { class: 'select2 clean' },
+            label: 'Placa' %>
+      </div>
+      <div class="col-md-3">
+        <%= f.input :tiposcombustible_id, as: :select,
+            collection: Tiposcombustible.order(:descripcion).collect { |t| [t.descripcion, t.id] },
+            include_blank: true,
+            input_html: { class: 'select2 clean' },
+            label: 'Tipo combustible' %>
+      </div>
+      <div class="col-md-3">
+        <%= f.input :kilometraje, label: 'Kilometraje',
+            input_html: { class: 'form-control' } %>
+      </div>
+    </div>
+
+    <div class="row" style="margin-top: 8px;">
+      <div class="col-md-2">
+        <%= f.input :odometro, label: 'Odómetro',
+            input_html: { class: 'form-control' } %>
+      </div>
+      <div class="col-md-2">
+        <%= f.input :horometro, label: 'Horómetro',
+            input_html: { class: 'form-control' } %>
+      </div>
+      <div class="col-md-2">
+        <%= f.input :galones, label: 'Galones',
+            input_html: { class: 'form-control' } %>
+      </div>
+      <div class="col-md-2">
+        <%= f.input :valor_galon, label: 'Valor galón',
+            input_html: { class: 'form-control' } %>
+      </div>
+      <div class="col-md-2">
+        <%= f.input :valor_total, label: 'Valor total',
+            input_html: { class: 'form-control' } %>
+      </div>
+      <div class="col-md-2">
+        <%= f.input :nro_clases, label: 'Nro clases',
+            input_html: { class: 'form-control' } %>
+      </div>
+    </div>
+
+    <div class="row" style="margin-top: 12px;">
+      <div class="col-md-6">
+        <% if @combustible.new_record? %>
+          <%= button_tag t(:cancelar), type: 'button',
+              onclick: "$('#combustible_form').html('').removeClass('in').css({height:'0px',overflow:'hidden'}); return false;",
+              class: 'btn btn-flat btn-default' %>
+        <% else %>
+          <%= link_to t(:cancelar), combustible_path(@combustible),
+              class: 'btn btn-flat btn-default', remote: true %>
+        <% end %>
+      </div>
+      <div class="col-md-6 text-right">
+        <%= f.button :submit, t(:guardar), class: 'btn-guardar' %>
+      </div>
+    </div>
+
+  </div>
+<% end %>
