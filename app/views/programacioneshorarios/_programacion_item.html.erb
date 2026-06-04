@@ -21,8 +21,9 @@
     <%= link_to programacioneshorario_path(programacioneshorario),
                 class: 'btn btn-danger',
                 title: 'Eliminar',
+                remote: true,
                 method: :delete,
-                data: { confirm: '¿Seguro?', toggle: 'tooltip' } do %>
+                data: { confirm: '¿Seguro?', toggle: 'tooltip', turbolinks: true } do %>
       <i class="fa fa-trash"></i>
     <% end %>
   </div>

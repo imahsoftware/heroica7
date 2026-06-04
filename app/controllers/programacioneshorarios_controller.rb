@@ -160,7 +160,10 @@ class ProgramacioneshorariosController < ApplicationController
   def destroy
     @programacioneshorario = Programacioneshorario.find(params[:id])
     ActiveRecord::Base.connection.execute("update programacioneshorarios set estado = 'I' where id = #{@programacioneshorario.id}")
-    head :ok
+    respond_to do |format|
+      format.html { redirect_to horario_programacioneshorarios_path }
+      format.js
+    end
   end
 
   private
