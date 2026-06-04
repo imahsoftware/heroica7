@@ -1,0 +1,2 @@
+class Festivo < ApplicationRecord
+end

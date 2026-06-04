@@ -5,11 +5,14 @@ class ProgramacioneshorariosController < ApplicationController
 
   def horario
     ActiveRecord::Base.connection.execute('delete from programacioneshorarios where persona_id is null')
-    unless Programacionesrespaldo.exists?(["created_at = curdate()"])
+    unless Programacionesrespaldo.where('DATE(created_at) = CURDATE()').exists?
       ActiveRecord::Base.connection.execute("insert into programacionesrespaldos
-                                             select 0,cast(curdate()-1 as date),id,persona_id,tiposhorario_id,placa_id,instructor_id,
+                                             (fecha_captura,programacioneshorario_id,persona_id,tiposhorario_id,placa_id,instructor_id,
+                                              fecha_inicial,nro_clases,fecha_final,recoje,user_id,user_actualiza,ph_created_at,ph_updated_at,
+                                              observacion,enespera,fecha_teoria,estado,created_at,updated_at)
+                                             select cast(curdate()-1 as date),id,persona_id,tiposhorario_id,placa_id,instructor_id,
                                                     fecha_inicial,nro_clases,fecha_final,recoje,user_id,user_actualiza,created_at,updated_at,
-                                                    observacion,enespera,fecha_teoria,estado,curdate(),curdate()
+                                                    observacion,enespera,fecha_teoria,estado,now(),now()
                                              from programacioneshorarios")
     end
     @placas = Placa.where(estado: 'A').includes(:instructor).order(:descripcion)
@@ -129,11 +132,11 @@ class ProgramacioneshorariosController < ApplicationController
       if Personastramite.exists?(persona_id: @programacioneshorario.persona_id, placa_id: @programacioneshorario.placa_id)
         save_programacion('Programacion Creado con Exito.')
       else
-        flash[:notice] = 'Hay diferencias entre el vehiculo e instructor seleccionado para la Clase y el registrado en el Tramite. Verifique!!!'
+        @error_message = 'Hay diferencias entre el vehículo e instructor seleccionado para la Clase y el registrado en el Trámite. Verifique!!!'
         render :programacioneshorario_form
       end
     else
-      flash[:notice] = 'El usuario no tiene pago relacionado, no se puede realizar programación de Clases. Verifique!!!'
+      @error_message = 'El alumno no tiene pago registrado o la factura está pendiente de abono. No se puede realizar la programación. Verifique!!!'
       render :programacioneshorario_form
     end
   end
@@ -164,23 +167,27 @@ class ProgramacioneshorariosController < ApplicationController
 
   def save_programacion(message)
     @programacioneshorario.instructor_id = Placa.find(@programacioneshorario.placa_id).instructor_id
-    @programacioneshorario.fecha_final = fechaprog(@programacioneshorario.fecha_inicial, @programacioneshorario.nro_clases + 2)
+    @programacioneshorario.fecha_final = fechaprog(@programacioneshorario.fecha_inicial,
+                                                   @programacioneshorario.nro_clases.to_i + 2)
     @programacioneshorario.estado = 'A'
 
     if @programacioneshorario.save
       flash[:notice] = message
       redirect_to horario_programacioneshorarios_path
     else
+      @error_message = "No se pudo guardar: #{@programacioneshorario.errors.full_messages.join(', ')}"
       render :programacioneshorario_form
     end
-  rescue StandardError
+  rescue StandardError => e
+    Rails.logger.error "save_programacion error: #{e.class} — #{e.message}\n#{e.backtrace.first(5).join("\n")}"
+    @error_message = "Error al guardar: #{e.message}"
     render :programacioneshorario_form
   end
 
   def programacioneshorario_params
     params.require(:programacioneshorario).permit(
-      :tiposhorario_id, :placa_id, :fecha_inicial, :nro_clases,
-      :persona_autobuscar, :recoje, :observacion, :enespera, :fecha_teoria
+      :tiposhorario_id, :placa_id, :persona_id, :fecha_inicial, :nro_clases,
+      :recoje, :observacion, :enespera, :fecha_teoria
     )
   end
 

@@ -201,33 +201,25 @@ class ApplicationController < ActionController::Base
 
   helper_method :fechaprog
   def fechaprog(fechainicial, dias)
-    if (fechainicial.to_s != '') && (dias.to_s != '')
-      fechawork = fechainicial.to_time
-      minutosmas = dias.to_i * 86400
-      fechaprog = (fechawork + minutosmas.to_i)
-      cantidad = Festivo.where('fecha between ? and ?', fechawork, fechaprog).count
-      if cantidad.positive?
-        minutosadd = cantidad.to_i * 86400
-        fechaprogramacion = fechawork + minutosmas.to_i + minutosadd.to_i
-        fecha = fechaprogramacion.strftime('%d-%m-%Y')
-        cantidad1 = Festivo.where('fecha = ?', fecha).count
-        while cantidad1.to_i.positive?
-          fechaprogramacion += 86400
-          fecha = fechaprogramacion.strftime('%d-%m-%Y')
-          cantidad1 = Festivo.where('fecha = ?', fecha).count
-        end
-      else
-        fechaprogramacion = fechaprog
-        fecha = fechaprog.strftime('%d-%m-%Y')
-        cantidad1 = Festivo.where('fecha = ?', fecha).count
-        while cantidad1.to_i.positive?
-          fechaprogramacion += 86400
-          fecha = fechaprogramacion.strftime('%d-%m-%Y')
-          cantidad1 = Festivo.where('fecha = ?', fecha).count
-        end
-      end
+    return nil if fechainicial.to_s.blank? || dias.to_s.blank?
+
+    fechawork      = fechainicial.to_date
+    fechaprog_date = fechawork + dias.to_i
+
+    # Contar festivos entre fechawork y fechaprog_date (comparación SQL con Date objects)
+    cantidad = Festivo.where('fecha >= ? AND fecha <= ?',
+                             fechawork.strftime('%Y-%m-%d'),
+                             fechaprog_date.strftime('%Y-%m-%d')).count
+
+    fechaprogramacion = cantidad.positive? ? fechaprog_date + cantidad : fechaprog_date
+
+    # Avanzar si cae en festivo
+    loop do
+      break unless Festivo.where('fecha = ?', fechaprogramacion.strftime('%Y-%m-%d')).exists?
+      fechaprogramacion += 1
     end
-    fecha
+
+    fechaprogramacion
   end
 
   helper_method :fechaprogx

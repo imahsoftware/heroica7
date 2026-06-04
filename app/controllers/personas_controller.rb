@@ -39,8 +39,11 @@ class PersonasController < ApplicationController
 
   # GET /personas/listar  — autocomplete AJAX
   def listar
-    @personas = Persona.where('autobuscar LIKE ?', "%#{params[:search]}%")
-    render layout: false
+    @personas = Persona.where('autobuscar LIKE ?', "%#{params[:search]}%").limit(30)
+    respond_to do |format|
+      format.html { render layout: false }
+      format.json { render json: @personas.map { |p| { id: p.id, autobuscar: p.autobuscar } } }
+    end
   end
 
   # GET /personas/new
