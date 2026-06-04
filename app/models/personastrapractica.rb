@@ -4,35 +4,36 @@ class Personastrapractica < ApplicationRecord
   belongs_to :personastramite
   belongs_to :user, optional: true
 
-  validates :inspeva_dato2, :inspeva_dato3, :inspeva_dato4, :inspeva_dato5, :inspeva_dato6,
-            :inspeva_dato7, :inspeva_dato8, :inspeva_dato9, :inspeva_dato10, :inspeva_dato11,
-            :compeva_dato1, :compeva_dato2, :compeva_dato3, :compeva_dato4, :compeva_dato5,
-            :compeva_dato6, :compeva_dato7, :compeva_dato8, :compeva_dato9, :compeva_dato10,
-            :desteva_dato8, :desteva_dato14,
-            inclusion: { in: 1..10, message: '** Error' }, on: :update
+  RANGOS_EVALUACION = {
+    inspeva_dato2: 1..10, inspeva_dato3: 1..10, inspeva_dato4: 1..10, inspeva_dato5: 1..10,
+    inspeva_dato6: 1..10, inspeva_dato7: 1..10, inspeva_dato8: 1..10, inspeva_dato9: 1..10,
+    inspeva_dato10: 1..10, inspeva_dato11: 1..10,
+    compeva_dato1: 1..10, compeva_dato2: 1..10, compeva_dato3: 1..10, compeva_dato4: 1..10,
+    compeva_dato5: 1..10, compeva_dato6: 1..10, compeva_dato7: 1..10, compeva_dato8: 1..10,
+    compeva_dato9: 1..10, compeva_dato10: 1..10,
+    desteva_dato8: 1..10, desteva_dato14: 1..10,
+    desteva_dato1: 1..6, desteva_dato3: 1..6, desteva_dato4: 1..6, desteva_dato5: 1..6,
+    desteva_dato6: 1..6, desteva_dato7: 1..6, desteva_dato12: 1..6, desteva_dato13: 1..6,
+    desteva_dato2: 1..8, desteva_dato9: 1..8, desteva_dato10: 1..8, desteva_dato11: 1..8
+  }.freeze
 
-  validates :desteva_dato1, :desteva_dato3, :desteva_dato4, :desteva_dato5, :desteva_dato6,
-            :desteva_dato7, :desteva_dato12, :desteva_dato13,
-            inclusion: { in: 1..6, message: '** Error' }, on: :update
-
-  validates :desteva_dato2, :desteva_dato9, :desteva_dato10, :desteva_dato11,
-            inclusion: { in: 1..8, message: '** Error' }, on: :update
-
-  before_validation :normalizar_evaluaciones_numericas, on: :update
+  validate :validar_rangos_evaluacion, on: :update
   before_save :calcular_totales
 
   private
 
-  def normalizar_evaluaciones_numericas
-    attribute_names.each do |campo|
-      next unless campo.match?(/\A(inspeva|desteva|compeva)_dato\d+\z/)
-      next if campo == 'inspeva_dato1'
-
+  def validar_rangos_evaluacion
+    RANGOS_EVALUACION.each do |campo, rango|
       valor = self[campo]
       next if valor.blank?
 
-      texto = valor.to_s.strip
-      self[campo] = texto.to_i if texto.match?(/\A\d+\z/)
+      numero = Float(valor.to_s.strip)
+      entero = numero.to_i
+      unless numero == entero && rango.cover?(entero)
+        errors.add(campo, '** Error')
+      end
+    rescue ArgumentError, TypeError
+      errors.add(campo, '** Error')
     end
   end
 

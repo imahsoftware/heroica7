@@ -4,41 +4,40 @@ class Personastrampractica < ApplicationRecord
   belongs_to :personastramite
   belongs_to :user, optional: true
 
-  before_validation :normalizar_evaluaciones_numericas, on: :update
+  # Legacy validates_inclusion por campo; columnas suelen ser string/varchar
+  RANGOS_EVALUACION = {
+    inspeva_dato2: 1..5, inspeva_dato3: 1..5, inspeva_dato4: 1..5, inspeva_dato5: 1..5,
+    inspeva_dato7: 1..5, inspeva_dato8: 1..5, desteva_dato7: 1..5, desteva_dato8: 1..5,
+    compeva_dato7: 1..5, compeva_dato8: 1..5,
+    desteva_dato1: 1..4, desteva_dato3: 1..4, desteva_dato13: 1..4,
+    desteva_dato2: 1..6, desteva_dato4: 1..6, desteva_dato5: 1..6,
+    desteva_dato10: 1..6, desteva_dato12: 1..6,
+    desteva_dato9: 1..8,
+    inspeva_dato6: 1..10, inspeva_dato9: 1..10, inspeva_dato10: 1..10, inspeva_dato11: 1..10,
+    inspeva_dato12: 1..10, inspeva_dato13: 1..10, inspeva_dato14: 1..10,
+    desteva_dato6: 1..10, desteva_dato11: 1..10, desteva_dato14: 1..10, desteva_dato15: 1..10,
+    compeva_dato1: 1..10, compeva_dato2: 1..10, compeva_dato3: 1..10, compeva_dato4: 1..10,
+    compeva_dato5: 1..10, compeva_dato6: 1..10, compeva_dato9: 1..10,
+    compeva_dato10: 1..10, compeva_dato11: 1..10
+  }.freeze
 
-  validates :inspeva_dato2, :inspeva_dato3, :inspeva_dato4, :inspeva_dato5, :inspeva_dato7,
-            :inspeva_dato8, :desteva_dato7, :desteva_dato8, :compeva_dato7, :compeva_dato8,
-            inclusion: { in: 1..5, message: '** Error' }, on: :update
-
-  validates :desteva_dato1, :desteva_dato3, :desteva_dato13,
-            inclusion: { in: 1..4, message: '** Error' }, on: :update
-
-  validates :desteva_dato2, :desteva_dato4, :desteva_dato5, :desteva_dato10, :desteva_dato12,
-            inclusion: { in: 1..6, message: '** Error' }, on: :update
-
-  validates :desteva_dato9, inclusion: { in: 1..8, message: '** Error' }, on: :update
-
-  validates :inspeva_dato6, :inspeva_dato9, :inspeva_dato10, :inspeva_dato11, :inspeva_dato12,
-            :inspeva_dato13, :inspeva_dato14, :desteva_dato6, :desteva_dato11, :desteva_dato14,
-            :desteva_dato15, :compeva_dato1, :compeva_dato2, :compeva_dato3, :compeva_dato4,
-            :compeva_dato5, :compeva_dato6, :compeva_dato9, :compeva_dato10, :compeva_dato11,
-            inclusion: { in: 1..10, message: '** Error' }, on: :update
-
+  validate :validar_rangos_evaluacion, on: :update
   before_save :calcular_totales
 
   private
 
-  # Form envía "3" como string; Rails 7 inclusion 1..N no acepta string (legacy sí pasaba)
-  def normalizar_evaluaciones_numericas
-    attribute_names.each do |campo|
-      next unless campo.match?(/\A(inspeva|desteva|compeva)_dato\d+\z/)
-      next if campo == 'inspeva_dato1' # SI / NO
-
+  def validar_rangos_evaluacion
+    RANGOS_EVALUACION.each do |campo, rango|
       valor = self[campo]
       next if valor.blank?
 
-      texto = valor.to_s.strip
-      self[campo] = texto.to_i if texto.match?(/\A\d+\z/)
+      numero = Float(valor.to_s.strip)
+      entero = numero.to_i
+      unless numero == entero && rango.cover?(entero)
+        errors.add(campo, '** Error')
+      end
+    rescue ArgumentError, TypeError
+      errors.add(campo, '** Error')
     end
   end
 
