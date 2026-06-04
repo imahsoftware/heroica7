@@ -11,26 +11,39 @@ class TeoricosController < ApplicationController
     return redirect_to(edit_persona_path(@persona, etapa: 'D')) if params[:persona_id].present?
   end
 
-  # GET /teoricos/busqueda  — búsqueda para iniciar prueba teórica
+  # GET /teoricos/busqueda — procesa identificación (legacy collection :busqueda)
   def busqueda
-    @persona_busqueda = Persona.find_by(identificacion: params[:buscarident])
+    ident = params[:buscarident].to_s.strip
+    if ident.blank?
+      flash.now[:warninglogin] = 'Debe digitar datos para la consulta'
+      render :index
+      return
+    end
+
+    @persona_busqueda = Persona.find_by(identificacion: ident)
     if @persona_busqueda&.id
       if Teorico.exists?(persona_id: @persona_busqueda.id, estado: 'PENDIENTE')
         @teorico = Teorico.where(persona_id: @persona_busqueda.id, estado: 'PENDIENTE')
                           .order(:id).first
         @teoricosresultados = Teoricosresultado.where(teorico_id: @teorico.id).order(:id).first
-        redirect_to edit_teoricosresultado_path(@teoricosresultados)
+        if @teoricosresultados
+          redirect_to edit_teoricosresultado_path(@teoricosresultados)
+        else
+          flash[:warninglogin] = 'El usuario no tiene prueba programada'
+          redirect_to teoricos_path
+        end
       else
         flash[:warninglogin] = 'El usuario no tiene prueba programada'
-        redirect_to teoricos_busqueda_path
+        redirect_to teoricos_path
       end
     else
       flash[:warninglogin] = 'La usuario no existe'
-      redirect_to teoricos_busqueda_path
+      redirect_to teoricos_path
     end
-  rescue StandardError
+  rescue StandardError => e
+    Rails.logger.warn "Teoricos#busqueda error: #{e.class} — #{e.message}"
     flash[:warninglogin] = 'Debe digitar datos para la consulta'
-    redirect_to teoricos_busqueda_path
+    redirect_to teoricos_path
   end
 
   # GET /personas/:persona_id/teoricos/:id  (JS)

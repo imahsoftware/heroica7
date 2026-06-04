@@ -3,13 +3,14 @@
     <h3 class="box-title"><i class="fa fa-book"></i> Busqueda Prueba Teorica</h3>
   </div>
   <div class="box-body">
-    <%= form_tag teoricos_busqueda_path, method: :get do %>
+    <%= form_tag teoricos_busqueda_path, method: :get, data: { turbo: false } do %>
       <div class="row">
         <div class="col-md-4">
           <div class="form-group">
             <label>Identificacion del estudiante</label>
             <%= text_field_tag :buscarident, params[:buscarident],
-                class: "form-control", placeholder: "Numero de identificacion" %>
+                class: "form-control", placeholder: "Numero de identificacion",
+                required: true, autofocus: true %>
           </div>
         </div>
         <div class="col-md-2">
