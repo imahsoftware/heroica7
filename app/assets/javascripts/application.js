@@ -48,8 +48,10 @@ $(document).on("turbolinks:load", function() {
 
   // Popup links (legacy :popup behavior)
   $(document).off('click.popupLink').on('click.popupLink', 'a[data-popup="true"]', function(e) {
-    e.preventDefault();
     var $a = $(this);
+    // link_to_popup ya define onclick; evitar doble window.open
+    if ($a.attr('onclick')) { return; }
+    e.preventDefault();
     var confirmMsg = $a.data('confirm');
     if (confirmMsg && !window.confirm(confirmMsg)) { return; }
     var url = $a.attr('href');

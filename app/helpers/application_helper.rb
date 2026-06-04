@@ -3936,11 +3936,19 @@ module ApplicationHelper
         popup_name: popup_name,
         popup_width: (width || 950).to_i,
         popup_height: (height || 700).to_i,
-        popup_scrollbars: scrollbars
+        popup_scrollbars: scrollbars,
+        turbolinks: false,
+        turbo: false
       )
 
-      # Force popup even if global JS not loaded
-      # (keeps legacy behavior: don't navigate current window)
+      feature_str = "#{features},resizable=yes,toolbar=no,menubar=no,location=no,status=no"
+      confirm_msg = html_options[:data][:confirm]
+      open_js = "window.open(this.href,'#{popup_name}','#{feature_str}');"
+      if confirm_msg.present?
+        open_js = "if(confirm(#{confirm_msg.to_json})){#{open_js}}"
+      end
+      # Evita que Turbolinks/UJS navegue la ventana del horario
+      html_options[:onclick] = "#{open_js}return false;"
     end
 
     link_to(name, options, html_options)

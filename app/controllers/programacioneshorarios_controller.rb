@@ -81,7 +81,7 @@ class ProgramacioneshorariosController < ApplicationController
     ActiveRecord::Base.connection.execute('delete from categoriasalertas where alertaspracticas > cantclases')
     ActiveRecord::Base.connection.execute("delete from categoriasalertas where persona_id in (select persona_id from facturas where estado = 'C')")
 
-    @programacioneshorario = Programacioneshorario.find(params[:id])
+    @programacioneshorario = Programacioneshorario.includes(:persona).find(params[:id])
     validafecha = Objeto.find_by_sql(
       "select 'X' valor from dual where curdate() between '#{@programacioneshorario.fecha_inicial}' and '#{@programacioneshorario.fecha_final}'"
     ).first&.valor.to_s
@@ -195,7 +195,9 @@ class ProgramacioneshorariosController < ApplicationController
   end
 
   def determine_layout
-    if %w[horario marcarclase informe progclases].include?(action_name)
+    return 'ventana' if action_name == 'marcarclase'
+
+    if %w[horario informe progclases].include?(action_name)
       'informes'
     else
       'basico'

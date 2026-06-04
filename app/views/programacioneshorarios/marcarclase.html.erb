@@ -1,16 +1,79 @@
-<div align="left">
-  <%= image_tag Parametro.find(10).valor.to_s, alt: 'Logo', style: 'max-height: 70px;' %>
+<% mensaje = flash[:personasclase].to_s %>
+<% exito = mensaje.downcase.include?('exito') || mensaje.downcase.include?('éxito') %>
+<% alert_class = exito ? 'alert-success' : 'alert-danger' %>
+<% icon_class = exito ? 'fa-check-circle' : 'fa-exclamation-triangle' %>
+
+<div class="marcarclase-ventana">
+  <div class="marcarclase-card">
+    <div class="marcarclase-header text-center">
+      <%= image_tag Parametro.find(10).valor.to_s, alt: 'Logo', class: 'marcarclase-logo' %>
+      <h4 class="marcarclase-titulo">Marcar clase</h4>
+      <% if @programacioneshorario&.persona %>
+        <p class="marcarclase-alumno text-muted">
+          <i class="fa fa-user"></i>
+          <%= @programacioneshorario.persona.nombres %>
+        </p>
+      <% end %>
+    </div>
+
+    <div class="alert <%= alert_class %> marcarclase-mensaje" role="alert">
+      <i class="fa <%= icon_class %>"></i>
+      <span><%= mensaje.presence || 'Sin mensaje de respuesta.' %></span>
+    </div>
+
+    <div class="text-center marcarclase-acciones">
+      <button type="button" class="btn btn-primary btn-sm" onclick="window.close();">
+        <i class="fa fa-times"></i> Cerrar
+      </button>
+    </div>
+  </div>
 </div>
-<br>
-<br>
-<div align="center">
-  <table width="90%" border="0" cellpadding="0" cellspacing="0" align="center">
-    <tr>
-      <td>
-        <div class="error2" style="padding: 12px;">
-          <%= flash[:personasclase].presence || 'Sin mensaje de respuesta.' %>
-        </div>
-      </td>
-    </tr>
-  </table>
-</div>
+
+<style>
+  .marcarclase-ventana {
+    padding: 12px;
+    max-width: 420px;
+    margin: 0 auto;
+  }
+
+  .marcarclase-card {
+    background: #fff;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+    padding: 16px 18px 14px;
+    border: 1px solid #d2d6de;
+  }
+
+  .marcarclase-logo {
+    max-height: 56px;
+    max-width: 100%;
+    margin-bottom: 8px;
+  }
+
+  .marcarclase-titulo {
+    margin: 0 0 4px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+  }
+
+  .marcarclase-alumno {
+    margin: 0 0 12px;
+    font-size: 12px;
+  }
+
+  .marcarclase-mensaje {
+    margin-bottom: 14px;
+    font-size: 13px;
+    line-height: 1.45;
+    text-align: left;
+  }
+
+  .marcarclase-mensaje i {
+    margin-right: 6px;
+  }
+
+  .marcarclase-acciones .btn {
+    min-width: 100px;
+  }
+</style>
