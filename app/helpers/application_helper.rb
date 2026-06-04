@@ -3906,10 +3906,15 @@ module ApplicationHelper
     JS
   end
 
+  # Ventana popup estándar (legacy horario / trámites)
+  def popup_ventana_grande
+    ['new_window', 'height=1000,width=1000,scrollbars=yes']
+  end
+
   # Rails2 :popup compat.
   # Usage:
   # link_to_popup "Ver Acta", {controller: "comites", action: "visualizar", id: @comite.id},
-  #   popup: ['new_window','height=700,width=950,scrollbars=yes'], class: "btn btn-success"
+  #   popup: popup_ventana_grande, class: "btn btn-success"
   def link_to_popup(name = nil, options = nil, html_options = nil, &block)
     if block_given?
       html_options = options

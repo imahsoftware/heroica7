@@ -46,14 +46,16 @@
 
   <td class="text-center">
     <div class="btn-group btn-group-xs" style="white-space: normal;">
-      <%= link_to registroclase_persona_personastramite_path(persona, personastramite),
+      <%= link_to_popup registroclase_persona_personastramite_path(persona, personastramite),
+          popup: popup_ventana_grande,
           class: 'btn btn-xs btn-default', title: 'Registro Clase',
-          data: { toggle: 'tooltip', turbo: false, popup: true, popup_name: 'new_window', popup_width: 1000, popup_height: 500, popup_scrollbars: 'yes' } do %>
+          data: { toggle: 'tooltip', turbo: false } do %>
         <i class="fa fa-list-alt"></i>
       <% end %>
-      <%= link_to registrosolicitud_persona_personastramite_path(persona, personastramite),
+      <%= link_to_popup registrosolicitud_persona_personastramite_path(persona, personastramite),
+          popup: popup_ventana_grande,
           class: 'btn btn-xs btn-default', title: 'Registro Solicitud',
-          data: { toggle: 'tooltip', turbo: false, popup: true, popup_name: 'new_window', popup_width: 1000, popup_height: 500, popup_scrollbars: 'yes' } do %>
+          data: { toggle: 'tooltip', turbo: false } do %>
         <i class="fa fa-file-text-o"></i>
       <% end %>
       <%= link_to_popup teorico_persona_personastramite_path(persona, personastramite),
@@ -62,9 +64,10 @@
           data: { toggle: 'tooltip', turbo: false } do %>
         <i class="fa fa-book"></i>
       <% end %>
-      <%= link_to acuerdocomercial_persona_personastramite_path(persona, personastramite),
+      <%= link_to_popup acuerdocomercial_persona_personastramite_path(persona, personastramite),
+          popup: popup_ventana_grande,
           class: 'btn btn-xs btn-default', title: 'Acuerdo Comercial',
-          data: { toggle: 'tooltip', turbo: false, popup: true, popup_name: 'new_window', popup_width: 950, popup_height: 700, popup_scrollbars: 'yes' } do %>
+          data: { toggle: 'tooltip', turbo: false } do %>
         <i class="fa fa-handshake-o"></i>
       <% end %>
 
@@ -79,59 +82,61 @@
         </button>
         <ul class="dropdown-menu dropdown-menu-right">
           <li>
-            <%= link_to diploma_persona_personastramite_path(persona, personastramite,
+            <%= link_to_popup diploma_persona_personastramite_path(persona, personastramite,
                   nombredip: 'MANEJO DEFENSIVO, NORMAS DE TRANSITO Y SEGURIDAD VIAL'),
-                data: { turbo: false, popup: true, popup_name: 'new_window', popup_width: 950, popup_height: 700, popup_scrollbars: 'yes' } do %>
+                popup: popup_ventana_grande, data: { turbo: false } do %>
               <i class="fa fa-shield"></i> Manejo defensivo
             <% end %>
           </li>
           <li>
-            <%= link_to diploma_persona_personastramite_path(persona, personastramite, nombredip: 'MECANICA BASICA'),
-                data: { turbo: false, popup: true, popup_name: 'new_window', popup_width: 950, popup_height: 700, popup_scrollbars: 'yes' } do %>
+            <%= link_to_popup diploma_persona_personastramite_path(persona, personastramite, nombredip: 'MECANICA BASICA'),
+                popup: popup_ventana_grande, data: { turbo: false } do %>
               <i class="fa fa-cog"></i> Mecánica básica
             <% end %>
           </li>
           <li>
-            <%= link_to diploma_persona_personastramite_path(persona, personastramite, nombredip: 'PRIMEROS AUXILIOS'),
-                data: { turbo: false, popup: true, popup_name: 'new_window', popup_width: 950, popup_height: 700, popup_scrollbars: 'yes' } do %>
+            <%= link_to_popup diploma_persona_personastramite_path(persona, personastramite, nombredip: 'PRIMEROS AUXILIOS'),
+                popup: popup_ventana_grande, data: { turbo: false } do %>
               <i class="fa fa-ambulance"></i> Primeros auxilios
             <% end %>
           </li>
           <li>
-            <%= link_to diploma_persona_personastramite_path(persona, personastramite, nombredip: 'TECNICAS DE CONDUCCIÓN'),
-                data: { turbo: false, popup: true, popup_name: 'new_window', popup_width: 950, popup_height: 700, popup_scrollbars: 'yes' } do %>
+            <%= link_to_popup diploma_persona_personastramite_path(persona, personastramite, nombredip: 'TECNICAS DE CONDUCCIÓN'),
+                popup: popup_ventana_grande, data: { turbo: false } do %>
               <i class="fa fa-road"></i> Técnicas de conducción
             <% end %>
           </li>
           <li>
-            <%= link_to diploma_persona_personastramite_path(persona, personastramite, nombredip: 'INSPECCIÓN PREOPERACIONAL'),
-                data: { turbo: false, popup: true, popup_name: 'new_window', popup_width: 950, popup_height: 700, popup_scrollbars: 'yes' } do %>
+            <%= link_to_popup diploma_persona_personastramite_path(persona, personastramite, nombredip: 'INSPECCIÓN PREOPERACIONAL'),
+                popup: popup_ventana_grande, data: { turbo: false } do %>
               <i class="fa fa-search"></i> Inspección preoperacional
             <% end %>
           </li>
           <li>
-            <%= link_to diploma_persona_personastramite_path(persona, personastramite, nombredip: 'CONTROL DE INCENDIOS EN CARRETERA'),
-                data: { turbo: false, popup: true, popup_name: 'new_window', popup_width: 950, popup_height: 700, popup_scrollbars: 'yes' } do %>
+            <%= link_to_popup diploma_persona_personastramite_path(persona, personastramite, nombredip: 'CONTROL DE INCENDIOS EN CARRETERA'),
+                popup: popup_ventana_grande, data: { turbo: false } do %>
               <i class="fa fa-fire"></i> Control incendios carretera
             <% end %>
           </li>
           <li>
-            <%= link_to diploma_persona_personastramite_path(persona, personastramite, nombredip: 'COMPORTAMIENTO DE LOS ESTUDIANTES'),
-                data: { turbo: false, popup: true, popup_name: 'new_window', popup_width: 950, popup_height: 700, popup_scrollbars: 'yes' } do %>
+            <%= link_to_popup diploma_persona_personastramite_path(persona, personastramite, nombredip: 'COMPORTAMIENTO DE LOS ESTUDIANTES'),
+                popup: popup_ventana_grande, data: { turbo: false } do %>
               <i class="fa fa-users"></i> Comportamiento estudiantes
             <% end %>
           </li>
         </ul>
       </div>
 
-      <%= link_to practica_persona_personastramite_path(persona, personastramite),
+      <%= link_to_popup practica_persona_personastramite_path(persona, personastramite),
+          popup: popup_ventana_grande,
           class: 'btn btn-xs btn-primary', title: 'Evaluación Práctica Vehículo',
-          data: { toggle: 'tooltip', turbo: false, popup: true, popup_name: 'new_window', popup_width: 950, popup_height: 700, popup_scrollbars: 'yes' } do %>
+          data: { toggle: 'tooltip', turbo: false } do %>
         <i class="fa fa-car"></i>
       <% end %>
-      <%= link_to practicam_persona_personastramite_path(persona, personastramite),
+      <%= link_to_popup practicam_persona_personastramite_path(persona, personastramite),
+          popup: popup_ventana_grande,
           class: 'btn btn-xs btn-primary', title: 'Evaluación Práctica Motos',
-          data: { toggle: 'tooltip', turbo: false, popup: true, popup_name: 'new_window', popup_width: 950, popup_height: 700, popup_scrollbars: 'yes' } do %>
+          data: { toggle: 'tooltip', turbo: false } do %>
         <i class="fa fa-motorcycle"></i>
       <% end %>
     </div>
