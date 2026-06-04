@@ -5,7 +5,7 @@
         title: "Informe Prueba", data: { toggle: "tooltip" } do %>
       <i class="fa fa-file-text-o"></i>
     <% end %>
-    <% if permiso("teorico","E").to_s == "S" %>
+    <% if is_auth_e("teorico") %>
       <%= link_to persona_teorico_path(persona, teorico),
           remote: true, method: :delete,
           data: { confirm: "Seguro?", toggle: "tooltip" },

@@ -90,7 +90,7 @@ class ProgramacioneshorariosController < ApplicationController
     validafecha = hoy.between?(inicio, fin) ? 'X' : ''
 
     if Categoriasalerta.exists?(persona_id: @programacioneshorario.persona_id)
-      if permiso('autorizacionclase', 'A').to_s == 'S'
+      if is_auth_a('autorizacionclase')
         dejarpasar = 'S'
         obs = 'Usuario con autorización especial'
       else
@@ -100,7 +100,7 @@ class ProgramacioneshorariosController < ApplicationController
       dejarpasar = 'S'
     end
 
-    if validafecha == 'X' || permiso('personastramiteesp', 'A').to_s == 'S'
+    if validafecha == 'X' || is_auth_a('personastramiteesp')
       if dejarpasar == 'S'
         @placa = Placa.find(@programacioneshorario.placa_id)
         personasclase = Personasclase.new(
@@ -112,7 +112,7 @@ class ProgramacioneshorariosController < ApplicationController
           user_id: is_admin
         )
         personasclase.save
-        flash.now[:personasclase] = if permiso('personastramiteesp', 'A').to_s == 'S'
+        flash.now[:personasclase] = if is_auth_a('personastramiteesp')
                                       "Clase registrada con exito. Perfil Especial...#{obs}"
                                     else
                                       "Clase registrada con exito.#{obs}"
@@ -129,7 +129,7 @@ class ProgramacioneshorariosController < ApplicationController
     @programacioneshorario = Programacioneshorario.new(programacioneshorario_params)
     @programacioneshorario.user_id = is_admin
 
-    if permiso('autorizacionprogramacion', 'A').to_s == 'S'
+    if is_auth_a('autorizacionprogramacion')
       save_programacion('Programacion Creado con Exito. Usuario con autorización especial')
     elsif Abono.exists?(estado: 'C', factura_id: Factura.where(persona_id: @programacioneshorario.persona_id).select(:id))
       if Personastramite.exists?(persona_id: @programacioneshorario.persona_id, placa_id: @programacioneshorario.placa_id)

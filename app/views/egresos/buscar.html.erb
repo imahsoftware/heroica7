@@ -35,7 +35,7 @@
                       data: { toggle: 'tooltip' } do %>
                     <button class="btn btn-xs btn-warning btn-accion"><i class="fa fa-edit"></i></button>
                   <% end %>
-                  <% if permiso('egreso', 'E').to_s == 'S' %>
+                  <% if is_auth_e('egreso') %>
                     <%= link_to egreso_path(egreso), method: :delete,
                         title: t(:title_elimina),
                         data: { confirm: t(:elimina_confirma), toggle: 'tooltip' } do %>

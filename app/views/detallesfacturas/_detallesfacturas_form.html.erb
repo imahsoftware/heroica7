@@ -33,7 +33,7 @@
       </div>
     </div>
     <div class="col-md-2" style="padding-top: 25px;">
-      <% if permiso('detallesfactura', 'A').to_s == 'S' %>
+      <% if is_auth_a('detallesfactura') %>
         <%= submit_tag 'Guardar', class: 'btn btn-primary', disable_with: 'Guardando...' %>
       <% end %>
       <% if editing %>

@@ -59,14 +59,14 @@
               <td class="text-center"><strong><%= h.dtotal rescue nil %></strong></td>
               <td><%= h.instructor&.nombre %></td>
               <td class="text-center">
-                <% if permiso('personastramiteshora', 'A').to_s == 'S' %>
+                <% if is_auth_a('personastramiteshora') %>
                   <%= link_to edit_personastramiteshora_path(h, personastramite_id: @personastramite.id),
                       class: 'btn btn-xs btn-warning', title: 'Editar',
                       data: { toggle: 'tooltip' } do %>
                     <i class="fa fa-edit"></i>
                   <% end %>
                 <% end %>
-                <% if permiso('personastramiteshora', 'E').to_s == 'S' %>
+                <% if is_auth_e('personastramiteshora') %>
                   <%= link_to personastramiteshora_path(h, personastramite_id: @personastramite.id),
                       method: :delete,
                       data: { confirm: '¿Está seguro de eliminar?', toggle: 'tooltip' },

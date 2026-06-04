@@ -1,6 +1,6 @@
 <tr id="empresa_<%= empresa.id %>">
   <td class="text-center">
-    <% if permiso('empresa', 'A').to_s == 'S' %>
+    <% if is_auth_a('empresa') %>
       <%= link_to edit_empresa_path(empresa), remote: true,
           class: 'edit_empresa_button',
           title: t(:title_editar),

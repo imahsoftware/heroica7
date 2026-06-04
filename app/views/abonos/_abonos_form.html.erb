@@ -31,7 +31,7 @@
       </div>
     </div>
     <div class="col-md-4" style="padding-top: 25px;">
-      <% if permiso('abono', 'A').to_s == 'S' %>
+      <% if is_auth_a('abono') %>
         <%= submit_tag 'Guardar', class: 'btn btn-primary', disable_with: 'Guardando...' %>
       <% end %>
     </div>

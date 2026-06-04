@@ -78,7 +78,7 @@
                   el <%= @factura.updated_at.strftime('%Y-%m-%d %H:%M:%S') %>
                 </small>
               <% else %>
-                <% if permiso('facturaanular', 'A').to_s == 'S' %>
+                <% if is_auth_a('facturaanular') %>
                   <%= f.submit 'Anular',
                         class: 'btn btn-danger btn-sm',
                         data: { confirm: '¿Está seguro que desea anular la Factura?' },

@@ -248,7 +248,7 @@
 
   <div class="box-footer">
     <div class="box-tools pull-right">
-      <% if permiso("persona", "A").to_s == "S" || @persona.new_record? %>
+      <% if is_auth_a("persona") || @persona.new_record? %>
         <%= f.button :submit, 'Guardar', class: 'btn btn-danger',
                      data: { disable_with: 'Guardando...' } %>
       <% end %>

@@ -5,7 +5,7 @@
       <span class="users-count-badge"><%= persona.personasclases.count %> registros</span>
     </span>
     <div class="box-tools pull-right" style="margin-top: -2px;">
-      <% if permiso("personasclase", "C").to_s == "S" %>
+      <% if is_auth_c("personasclase") %>
         <%= link_to new_persona_personasclase_path(persona),
             id: 'new_personasclase_button',
             class: 'btn btn-sm btn-success',

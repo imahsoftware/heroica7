@@ -20,14 +20,14 @@
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
           <li>
-            <% if permiso("disponipractica","A").to_s == "S"%>
+            <% if is_auth_a("disponipractica") %>
             <%= link_to horarionuevo_programacionesfechas_path, class: 'dropdown-toggle', title: 'Agenda de Programacion'  do %>
               <i class="fa fa-car" aria-hidden="true"></i>
             <% end %>
             <% end %>            
           </li>
           <li>
-            <% if permiso("teoricodispo","A").to_s == "S"%>
+            <% if is_auth_a("teoricodispo") %>
                 <%= link_to disponibilidad_agendas_path, class: 'dropdown-toggle', onclick: 'window.open(this.href,"new_window","height=600,width=900,scrollbars=yes");return false;', title: 'Disponibilidad'  do %>
                   <i class="fa fa-calendar"></i>
                 <% end %>

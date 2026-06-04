@@ -1,13 +1,13 @@
 <tr id="personastramite_<%= personastramite.id %>">
   <td class="text-center">
     <% unless personastramite.factura_id %>
-      <% if permiso("personastramite","A").to_s == "S" %>
+      <% if is_auth_a("personastramite") %>
         <%= link_to edit_persona_personastramite_path(persona, personastramite),
             remote: true, title: 'Editar', data: { toggle: 'tooltip' } do %>
           <button class="btn btn-xs btn-warning btn-accion"><i class="fa fa-edit"></i></button>
         <% end %>
       <% end %>
-      <% if permiso("personastramite","E").to_s == "S" %>
+      <% if is_auth_e("personastramite") %>
         <%= link_to persona_personastramite_path(persona, personastramite),
             remote: true, method: :delete,
             data: { confirm: '¿Seguro que desea eliminar?', toggle: 'tooltip' },
@@ -16,7 +16,7 @@
         <% end %>
       <% end %>
     <% else %>
-      <% if permiso("personastramiteesp","A").to_s == "S" %>
+      <% if is_auth_a("personastramiteesp") %>
         <%= link_to edit_persona_personastramite_path(persona, personastramite),
             remote: true, title: 'Editar (especial)', data: { toggle: 'tooltip' } do %>
           <button class="btn btn-xs btn-warning btn-accion"><i class="fa fa-edit"></i></button>

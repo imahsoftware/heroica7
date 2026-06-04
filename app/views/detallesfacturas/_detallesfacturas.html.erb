@@ -7,7 +7,7 @@
   <div class="box-body">
 
     <%# ── Formulario nuevo detalle ────────────────────────────────────────────── %>
-    <% if permiso('detallesfactura', 'C').to_s == 'S' && @detallesfactura && !@detallesfactura.persisted? %>
+    <% if is_auth_c('detallesfactura') && @detallesfactura && !@detallesfactura.persisted? %>
       <% if @factura.estado == 'C' %>
         <div class="alert alert-warning text-center">LA FACTURA SE ENCUENTRA CANCELADA</div>
       <% elsif @factura.estado == 'A' %>
@@ -110,13 +110,13 @@
                 <td class="text-center"><%= det.cantidad.presence || 1 %></td>
                 <td class="text-right"><%= camponumerico(det.valor) %></td>
                 <td class="text-center">
-                  <% if permiso('detallesfactura', 'A').to_s == 'S' && @factura.estado == 'P' %>
+                  <% if is_auth_a('detallesfactura') && @factura.estado == 'P' %>
                     <%= link_to 'Editar',
                           edit_factura_detallesfactura_path(@factura, det),
                           remote: true,
                           class: 'btn btn-xs btn-warning' %>
                   <% end %>
-                  <% if permiso('detallesfactura', 'E').to_s == 'S' && @factura.estado.to_s == 'P' %>
+                  <% if is_auth_e('detallesfactura') && @factura.estado.to_s == 'P' %>
                     <%= link_to 'Borrar',
                           factura_detallesfactura_path(@factura, det),
                           method: :delete,

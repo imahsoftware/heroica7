@@ -7,7 +7,7 @@
   <div class="box-body">
 
     <%# ── Formulario nuevo abono ─────────────────────────────────────────────── %>
-    <% if permiso('abono', 'C').to_s == 'S' && @abono && !@abono.persisted? %>
+    <% if is_auth_c('abono') && @abono && !@abono.persisted? %>
       <% if @factura.estado == 'C' %>
         <div class="alert alert-warning text-center">LA FACTURA SE ENCUENTRA CANCELADA</div>
       <% elsif @factura.estado == 'A' %>
@@ -58,7 +58,7 @@
                           target: '_blank',
                           title: 'Ver Abono',
                           class: 'btn btn-xs btn-info' %>
-                    <% if permiso('abono', 'E').to_s == 'S' %>
+                    <% if is_auth_e('abono') %>
                       <%= link_to 'Anular Abono',
                             anula_factura_abono_path(@factura, abono),
                             remote: true,

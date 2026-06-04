@@ -1,10 +1,12 @@
 <tr id="personasclase_<%= personasclase.id %>">
   <td class="text-center">
-    <% if permiso("personasclase","E").to_s == "S" %>
+    <% if is_auth_a("personasclase") %>
       <%= link_to edit_persona_personasclase_path(persona, personasclase),
           remote: true, title: 'Editar', data: { toggle: 'tooltip' } do %>
         <button class="btn btn-xs btn-warning btn-accion"><i class="fa fa-edit"></i></button>
       <% end %>
+    <% end %>
+    <% if is_auth_e("personasclase") %>
       <%= link_to persona_personasclase_path(persona, personasclase),
           remote: true, method: :delete,
           data: { confirm: '¿Seguro?', toggle: 'tooltip' },

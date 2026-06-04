@@ -43,7 +43,7 @@
       </div>
     <% end %>
 
-    <% if permiso('facturasinforme', 'A').to_s == 'S' %>
+    <% if is_auth_a('facturasinforme') %>
       <hr>
 
       <%# ── Informe diario ──────────────────────────────────────────────────────── %>
