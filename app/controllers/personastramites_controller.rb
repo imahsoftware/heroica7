@@ -35,17 +35,18 @@ class PersonastramitesController < ApplicationController
 
   # POST /personas/:persona_id/personastramites
   def create
-    @personastramite          = Personastramite.new(personastramite_params)
-    @personastramite.user_id  = is_admin
+    @personastramite            = Personastramite.new(personastramite_params)
+    @personastramite.user_id    = is_admin
+    @personastramite.persona_id = @persona.id
+
     respond_to do |format|
-      if @personastramite.valid?
-        @persona.personastramites << @personastramite
-        @persona.save
-        @personastramite = Personastramite.new
+      if @personastramite.save
+        @personastramite_creada = @personastramite
+        @personastramite        = Personastramite.new
         flash[:notice] = t(:notice_crea_msj)
         format.js
       else
-        flash[:notice] = 'Se produjo un error al guardar el registro'
+        flash.now[:alert] = 'Corrija los campos marcados antes de guardar.'
         format.js { render 'layouts/errors', locals: { object: @personastramite } }
       end
     end
@@ -57,10 +58,13 @@ class PersonastramitesController < ApplicationController
     @personastramite_edit.user_actualiza = is_admin
     respond_to do |format|
       if @personastramite_edit.update(personastramite_params)
-        @personastramite = Personastramite.new
+        @personastramite_actualizada = @personastramite_edit
+        @personastramite             = Personastramite.new
         flash[:notice] = t(:notice_actualiza_msj)
         format.js
       else
+        @personastramite = @personastramite_edit
+        flash.now[:alert] = 'Corrija los campos marcados antes de guardar.'
         format.js { render 'layouts/errors', locals: { object: @personastramite_edit } }
       end
     end
@@ -68,6 +72,7 @@ class PersonastramitesController < ApplicationController
 
   # DELETE /personas/:persona_id/personastramites/:id
   def destroy
+    @personastramite_eliminada_id = @personastramite.id
     @personastramite.respaldo(is_admin)
     @personastramite.destroy
     @personastramite = Personastramite.new

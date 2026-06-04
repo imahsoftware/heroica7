@@ -1,6 +1,6 @@
 $(".alert_flash").fadeOut(300, function() { $(this).remove(); });
 
-$("#personastramite_<%= @personastramite.id %>").replaceWith("<%= j render 'tr', personastramite: @personastramite, persona: @persona %>");
+$("#personastramite_<%= @personastramite_actualizada.id %>").replaceWith("<%= j render 'tr', personastramite: @personastramite_actualizada, persona: @persona %>");
 
 $('[data-toggle="tooltip"]').tooltip();
 $(".flash_messages").html("<%= j render 'layouts/flash_messages' %>");

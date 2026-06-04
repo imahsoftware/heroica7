@@ -1,8 +1,24 @@
 $(".form-group").removeClass("has-error");
 $(".form-group > .help-block.help-block-error").remove();
+
 <% if object.errors.any? %>
   <% object.errors.each do |error| %>
-    $(".<%= object.model_name.param_key %>_<%= error.attribute %>").addClass("has-error");
-    $(".<%= object.model_name.param_key %>_<%= error.attribute %>").append("<span class='help-block help-block-error'><%= j error.message %></span>");
+    (function() {
+      var field = $("#<%= object.model_name.param_key %>_<%= error.attribute %>");
+      var group = field.length ? field.closest(".form-group") : $(".<%= object.model_name.param_key %>_<%= error.attribute %>").first();
+      if (!group.length) {
+        group = $(".<%= object.model_name.param_key %>_<%= error.attribute %>").first();
+      }
+      group.addClass("has-error");
+      if (group.find(".help-block.help-block-error").length === 0) {
+        group.append("<span class='help-block help-block-error'><%= j error.full_message %></span>");
+      }
+    })();
+  <% end %>
+
+  <% if flash[:notice].present? || flash[:alert].present? %>
+    if ($(".flash_messages").length) {
+      $(".flash_messages").html("<%= j render 'layouts/flash_messages' %>");
+    }
   <% end %>
 <% end %>
