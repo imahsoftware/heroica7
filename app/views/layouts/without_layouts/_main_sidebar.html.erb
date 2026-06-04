@@ -1,4 +1,4 @@
-<% usr = User.find(is_admin) %>
+<% usr = current_admin_user %>
 <aside class="main-sidebar" style="position: fixed;">
   <section class="sidebar">
     <div align="center"><%= image_tag usr.avatar.url(:medium), alt: 'User Image', class: 'img-circle bb', width: '128px' %></div>

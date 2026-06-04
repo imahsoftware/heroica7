@@ -50,22 +50,27 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  # ── Memoización del usuario admin activo ──────────────────────────────────
-  # Centraliza el User.find en un solo método memoizado por request.
-  # Todos los helpers que necesiten datos del usuario deben usar current_admin_user
-  # en lugar de hacer User.find(is_admin) individualmente.
-  helper_method :current_admin_user
-  def current_admin_user
-    @current_admin_user ||= User.find(is_admin)
+  # ── Usuario admin activo (memo por request) ───────────────────────────────
+  # is_admin / is_portafolio: sin reconsultar current_user ni portafolio_id.
+  # current_admin_user: un solo User.find con portafolio precargado.
+  # En vistas/controladores usar current_admin_user, no User.find(is_admin).
+  helper_method :current_admin_user, :is_admin, :is_portafolio
+
+  def is_admin
+    return @is_admin_id if instance_variable_defined?(:@is_admin_id)
+
+    @is_admin_id = current_user.user2_id.presence || current_user.id
   end
 
-  helper_method :is_admin
-  def is_admin
-    if !current_user.user2_id.nil?
-      current_user.user2_id
-    else
-      current_user.id
-    end
+  def is_portafolio
+    return @is_portafolio_id if instance_variable_defined?(:@is_portafolio_id)
+    return nil unless user_signed_in?
+
+    @is_portafolio_id = current_admin_user.portafolio_id
+  end
+
+  def current_admin_user
+    @current_admin_user ||= User.includes(:portafolio).find(is_admin)
   end
 
   helper_method :is_tipocliente
@@ -663,11 +668,6 @@ class ApplicationController < ActionController::Base
   def is_select_razonespago
     @objetos = Razonespago.includes(:razonesportafolios).where(razonesportafolios: { portafolio_id: is_portafolio }).order(:descripcion)
     @objetos
-  end
-
-  helper_method :is_portafolio
-  def is_portafolio
-    return current_admin_user.portafolio_id if user_signed_in?
   end
 
   helper_method :is_authport
