@@ -3941,10 +3941,6 @@ module ApplicationHelper
 
       # Force popup even if global JS not loaded
       # (keeps legacy behavior: don't navigate current window)
-      html_options[:onclick] = [
-        "window.open(this.href,'#{popup_name}','#{features},resizable=yes,toolbar=no,menubar=no,location=no,status=no');",
-        "return false;"
-      ].join(' ')
     end
 
     link_to(name, options, html_options)

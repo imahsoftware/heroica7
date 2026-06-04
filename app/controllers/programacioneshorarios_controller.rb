@@ -109,16 +109,16 @@ class ProgramacioneshorariosController < ApplicationController
           user_id: is_admin
         )
         personasclase.save
-        flash[:personasclase] = if permiso('personastramiteesp', 'A').to_s == 'S'
-                                   "Clase registrada con exito. Perfil Especial...#{obs}"
-                                 else
-                                   "Clase registrada con exito.#{obs}"
-                                 end
+        flash.now[:personasclase] = if permiso('personastramiteesp', 'A').to_s == 'S'
+                                      "Clase registrada con exito. Perfil Especial...#{obs}"
+                                    else
+                                      "Clase registrada con exito.#{obs}"
+                                    end
       else
-        flash[:personasclase] = 'El usuario debe realizar la cancelacion de la factura para permitir continuar con las demas clases'
+        flash.now[:personasclase] = 'El usuario debe realizar la cancelacion de la factura para permitir continuar con las demas clases'
       end
     else
-      flash[:personasclase] = 'La fecha programada del Alumno ya fue cumplida o no ha iniciado.. No se puede registrar la clase.'
+      flash.now[:personasclase] = 'La fecha programada del Alumno ya fue cumplida o no ha iniciado.. No se puede registrar la clase.'
     end
   end
 

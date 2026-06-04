@@ -13,7 +13,11 @@
     <%= link_to_popup marcarclase_programacioneshorarios_path(id: programacioneshorario.id),
                       class: 'btn btn-success',
                       title: 'Marcar clase',
-                      data: { confirm: '¿Seguro que desea registrar clase el dia de hoy para este usuario?', toggle: 'tooltip' },
+                      data: {
+                        confirm: '¿Seguro que desea registrar clase el dia de hoy para este usuario?',
+                        toggle: 'tooltip',
+                        turbo: false
+                      },
                       popup: ['registroclase', 'height=200,width=400,scrollbars=yes'] do %>
       <i class="fa fa-check"></i>
     <% end %>

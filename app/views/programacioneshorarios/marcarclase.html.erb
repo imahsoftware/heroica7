@@ -1,12 +1,16 @@
 <div align="left">
-<img src="/images/<%=Parametro.find(10).valor.to_s%>"></img>
+  <%= image_tag Parametro.find(10).valor.to_s, alt: 'Logo', style: 'max-height: 70px;' %>
 </div>
-<br/>
-<br/>
+<br>
+<br>
 <div align="center">
-<table width="90%" border="0" cellpadding="0" cellspacing="0" align="center" >
-  <tr>
-    <td><div class="error2"><%=flash[:personasclase]%></div></td>
-  </tr>
-</table>
+  <table width="90%" border="0" cellpadding="0" cellspacing="0" align="center">
+    <tr>
+      <td>
+        <div class="error2" style="padding: 12px;">
+          <%= flash[:personasclase].presence || 'Sin mensaje de respuesta.' %>
+        </div>
+      </td>
+    </tr>
+  </table>
 </div>
