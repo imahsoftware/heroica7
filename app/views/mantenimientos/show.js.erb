@@ -1,0 +1,4 @@
+$("#mantenimiento_<%= @mantenimiento.id %>").replaceWith("<%= j render 'tr', mantenimiento: @mantenimiento %>");
+$("#mantenimiento_form").collapse("hide");
+$("#mantenimiento_form").empty();
+$(".tooltip").tooltip("hide");

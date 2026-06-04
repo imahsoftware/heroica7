@@ -1,0 +1,23 @@
+<tr id="mantenimiento_<%= mantenimiento.id %>">
+  <td class="text-center">
+    <%= link_to edit_mantenimiento_path(mantenimiento), remote: true,
+        title: t(:title_editar),
+        data: { toggle: 'tooltip' } do %>
+      <button class="btn btn-xs btn-warning btn-accion"><i class="fa fa-edit"></i></button>
+    <% end %>
+    <%= link_to mantenimiento_path(mantenimiento), remote: true,
+        method: :delete,
+        title: t(:title_elimina),
+        data: { confirm: t(:elimina_confirma), toggle: 'tooltip' } do %>
+      <button class="btn btn-xs btn-danger btn-accion"><i class="fa fa-trash"></i></button>
+    <% end %>
+  </td>
+  <td><strong><%= mantenimiento.placa&.descripcion.presence || '—' %></strong></td>
+  <td><%= mantenimiento.fecha.present? ? mantenimiento.fecha.strftime('%Y-%m-%d') : '—' rescue '—' %></td>
+  <td><%= truncate(mantenimiento.descripcion.to_s, length: 60).presence || '—' %></td>
+  <td><%= truncate(mantenimiento.taller.to_s, length: 40).presence || '—' %></td>
+  <td class="text-center"><%= mantenimiento.eficacia.presence || '—' %></td>
+  <td class="text-right"><%= mantenimiento.costo.presence || '—' %></td>
+  <td><%= mantenimiento.fecha_salida.present? ? mantenimiento.fecha_salida.strftime('%Y-%m-%d') : '—' rescue '—' %></td>
+  <td><%= mantenimiento.instructor&.nombre.presence || '—' %></td>
+</tr>

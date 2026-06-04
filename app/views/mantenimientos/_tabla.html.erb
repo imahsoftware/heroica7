@@ -1,0 +1,28 @@
+<div class="table-responsive">
+  <table class="table table-bordered table-condensed table-striped table-usuarios">
+    <thead>
+      <tr>
+        <th width="8%" class="text-center">Acciones</th>
+        <th width="10%">Placa</th>
+        <th width="10%">Fecha ingreso</th>
+        <th width="22%">Descripción</th>
+        <th width="14%">Taller</th>
+        <th width="6%" class="text-center">Eficacia</th>
+        <th width="8%" class="text-right">Costo total</th>
+        <th width="10%">Fecha salida</th>
+        <th width="12%">Instructor</th>
+      </tr>
+    </thead>
+    <tbody id="tbody_mantenimientos">
+      <% @mantenimientos.each do |mantenimiento| %>
+        <%= render 'mantenimientos/tr', mantenimiento: mantenimiento %>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<div class="row" style="margin-top: 12px;">
+  <div class="col-xs-12 text-right">
+    <%= will_paginate @mantenimientos, renderer: BootstrapPagination::Rails %>
+  </div>
+</div>

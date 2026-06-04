@@ -1,0 +1,14 @@
+$("#mantenimiento_form").collapse("hide");
+$("#mantenimiento_form").empty();
+
+<% if @active_record.present? %>
+  $("#mantenimiento_<%= @active_record.id %>").replaceWith("<%= j render 'tr', mantenimiento: @active_record %>");
+<% end %>
+
+$("#mantenimiento_<%= @mantenimiento.id %>").html("<td colspan='9'><%= j render 'form' %></td>");
+$("#mantenimiento_<%= @mantenimiento.id %>").addClass("active_mantenimiento");
+
+$(".select2").select2();
+$(".datepicker").datepicker({ format: 'yyyy-mm-dd', autoclose: true });
+$(".tooltip").tooltip("hide");
+$('[data-toggle="tooltip"]').tooltip();

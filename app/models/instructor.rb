@@ -1,4 +1,6 @@
 class Instructor < ApplicationRecord
+  has_many :mantenimientos
+
   validates :nombre, presence: true
 
   def self.ransackable_attributes(auth_object = nil)

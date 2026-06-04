@@ -2,6 +2,7 @@ class Placa < ApplicationRecord
   belongs_to :user, optional: true
   belongs_to :instructor, optional: true
   has_many :combustibles
+  has_many :mantenimientos
 
   validates :descripcion, presence: true
 

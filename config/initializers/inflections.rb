@@ -105,6 +105,7 @@ ActiveSupport::Inflector.inflections(:en) do |inflect|
   inflect.irregular('login_activity', 'login_activities')
   inflect.irregular('tiposcombustible', 'tiposcombustibles')
   inflect.irregular('combustible', 'combustibles')
+  inflect.irregular('mantenimiento', 'mantenimientos')
   inflect.irregular('instructor', 'instructores')
   inflect.irregular('proveedor', 'proveedores')
   inflect.irregular('comprasdetalle', 'comprasdetalles')

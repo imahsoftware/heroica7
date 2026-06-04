@@ -1,0 +1,91 @@
+<%= simple_form_for @mantenimiento, remote: true do |f| %>
+  <div class="bs-callout">
+
+    <p class="section-label">Datos del mantenimiento</p>
+    <div class="row">
+      <div class="col-md-3">
+        <%= f.input :placa_id, as: :select,
+            collection: Placa.order(:descripcion).collect { |p| [p.descripcion, p.id] },
+            include_blank: true,
+            input_html: { class: 'select2 clean' },
+            label: 'Placa' %>
+      </div>
+      <div class="col-md-2">
+        <%= f.input :fecha, as: :string, label: 'Fecha ingreso',
+            input_html: { class: 'form-control datepicker clean', readonly: true } %>
+      </div>
+      <div class="col-md-2">
+        <%= f.input :fecha_salida, as: :string, label: 'Fecha salida',
+            input_html: { class: 'form-control datepicker clean', readonly: true } %>
+      </div>
+      <div class="col-md-2">
+        <%= f.input :eficacia, as: :select,
+            collection: [['', nil], ['SI', 'SI'], ['NO', 'NO']],
+            include_blank: false,
+            input_html: { class: 'form-control' },
+            label: 'Eficacia' %>
+      </div>
+      <div class="col-md-3">
+        <%= f.input :instructor_id, as: :select,
+            collection: Instructor.order(:nombre).collect { |i| [i.nombre, i.id] },
+            include_blank: true,
+            input_html: { class: 'select2 clean' },
+            label: 'Instructor a cargo' %>
+      </div>
+    </div>
+
+    <div class="row" style="margin-top: 8px;">
+      <div class="col-md-12">
+        <%= f.input :descripcion, as: :text, label: 'Descripción',
+            input_html: { rows: 3, class: 'form-control input_uppercase', onChange: 'this.value=this.value.toUpperCase();' } %>
+      </div>
+    </div>
+
+    <div class="row" style="margin-top: 8px;">
+      <div class="col-md-2">
+        <%= f.input :kilometraje, label: 'Kilometraje',
+            input_html: { class: 'form-control' } %>
+      </div>
+      <div class="col-md-2">
+        <%= f.input :costo_repuestos, label: 'Costo repuestos',
+            input_html: { class: 'form-control' } %>
+      </div>
+      <div class="col-md-2">
+        <%= f.input :costo_obra, label: 'Costo mano de obra',
+            input_html: { class: 'form-control' } %>
+      </div>
+      <div class="col-md-2">
+        <%= f.input :costo, label: 'Costo total',
+            input_html: { class: 'form-control' } %>
+      </div>
+    </div>
+
+    <div class="row" style="margin-top: 8px;">
+      <div class="col-md-6">
+        <%= f.input :taller, as: :text, label: 'Taller',
+            input_html: { rows: 2, class: 'form-control input_uppercase', onChange: 'this.value=this.value.toUpperCase();' } %>
+      </div>
+      <div class="col-md-6">
+        <%= f.input :observaciones, as: :text, label: 'Observaciones',
+            input_html: { rows: 2, class: 'form-control input_uppercase', onChange: 'this.value=this.value.toUpperCase();' } %>
+      </div>
+    </div>
+
+    <div class="row" style="margin-top: 12px;">
+      <div class="col-md-6">
+        <% if @mantenimiento.new_record? %>
+          <%= button_tag t(:cancelar), type: 'button',
+              onclick: "$('#mantenimiento_form').html('').removeClass('in').css({height:'0px',overflow:'hidden'}); return false;",
+              class: 'btn btn-flat btn-default' %>
+        <% else %>
+          <%= link_to t(:cancelar), mantenimiento_path(@mantenimiento),
+              class: 'btn btn-flat btn-default', remote: true %>
+        <% end %>
+      </div>
+      <div class="col-md-6 text-right">
+        <%= f.button :submit, t(:guardar), class: 'btn-guardar' %>
+      </div>
+    </div>
+
+  </div>
+<% end %>

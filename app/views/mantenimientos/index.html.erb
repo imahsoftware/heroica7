@@ -1,0 +1,62 @@
+<% title 'Mantenimientos' %>
+
+<div class="box box-usuarios">
+  <div class="box-header">
+    <span class="box-title">
+      <i class="fa fa-wrench"></i> Mantenimientos
+      <span class="users-count-badge"><%= @mantenimientos.total_entries rescue @mantenimientos.count %> registros</span>
+    </span>
+    <div class="box-tools pull-right" style="margin-top: -2px;">
+      <%= link_to new_mantenimiento_path(placa_id: @q.placa_id_eq), remote: true, id: 'new_mantenimiento_button',
+          class: 'btn btn-sm btn-success',
+          title: 'Agregar mantenimiento' do %>
+        <i class="fa fa-plus"></i> Nuevo
+      <% end %>
+    </div>
+  </div>
+
+  <div class="box-body">
+
+    <div class="row" style="margin-bottom: 16px;">
+      <div class="col-md-6 col-sm-8 col-xs-12">
+        <%= search_form_for @q, html: { class: 'form-inline' } do |f| %>
+          <div class="form-group" style="min-width: 280px; width: 100%; max-width: 420px;">
+            <label for="q_placa_id_eq" class="control-label" style="display: block; margin-bottom: 6px;">Placa</label>
+            <div class="input-group" style="width: 100%;">
+              <%= f.select :placa_id_eq,
+                  options_from_collection_for_select(@placas, :id, :descripcion, @q.placa_id_eq),
+                  { include_blank: '— Todas las placas —' },
+                  { class: 'form-control select2-placa-search', id: 'q_placa_id_eq', style: 'width: 100%;' } %>
+              <span class="input-group-btn">
+                <%= button_tag type: 'submit', class: 'btn btn-search' do %>
+                  <i class="fa fa-search"></i> Buscar
+                <% end %>
+              </span>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="flash_messages"></div>
+    <div id="mantenimiento_form" class="collapse" style="margin-bottom: 12px;"></div>
+
+    <div id="mantenimientos">
+      <% if @mantenimientos.any? %>
+        <%= render 'mantenimientos/tabla' %>
+      <% else %>
+        <div class="empty-state">
+          <i class="fa fa-wrench"></i>
+          <p>No se encontraron registros de mantenimiento.</p>
+        </div>
+      <% end %>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  $(function() {
+    $('.select2-placa-search').select2({ width: '100%', allowClear: true, placeholder: '— Todas las placas —' });
+  });
+</script>
