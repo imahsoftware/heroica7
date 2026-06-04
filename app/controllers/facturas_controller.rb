@@ -164,20 +164,7 @@ class FacturasController < ApplicationController
        WHERE  DATE_FORMAT(t.created_at,'%Y-%m-%d') BETWEEN '#{@fch1}' AND '#{@fch2}'
        ORDER BY p.identificacion, c.nombre, h.fecha ASC"
     )
-    @objetos = Objeto.find_by_sql(
-      "SELECT DATE_FORMAT(t.created_at,'%Y-%m-%d') fch,
-              p.identificacion,
-              CONCAT(p.primer_nombre,' ',p.segundo_nombre) nombre,
-              CONCAT(p.primer_apellido,' ',p.segundo_apellido) apellido,
-              t.categoria_id, c.nombre cat,
-              SUM(h.practicas) pra, SUM(h.teoricas) teo, SUM(h.taller) tal
-       FROM   personas p
-       JOIN   personastramites t  ON t.persona_id = p.id
-       JOIN   personastramiteshoras h ON h.personastramite_id = t.id
-       JOIN   categorias c ON t.categoria_id = c.id
-       WHERE  DATE_FORMAT(t.created_at,'%Y-%m-%d') BETWEEN '#{@fch1}' AND '#{@fch2}'
-       GROUP BY p.identificacion, c.nombre"
-    )
+    @objetos = Objeto.find_by_sql(sql_informeclases_objetos(@fch1, @fch2))
     filename = "Heroica_Clases_#{Time.now.strftime('%Y%m%d_%H%M%S')}.xlsx"
     respond_to do |format|
       format.html { render 'informeclasesimp' }
@@ -211,20 +198,7 @@ class FacturasController < ApplicationController
        WHERE  DATE_FORMAT(t.created_at,'%Y-%m-%d') BETWEEN '#{@fch1}' AND '#{@fch2}'
        ORDER BY p.identificacion, c.nombre, h.fecha ASC"
     )
-    @objetos = Objeto.find_by_sql(
-      "SELECT DATE_FORMAT(t.created_at,'%Y-%m-%d') fch,
-              p.identificacion,
-              CONCAT(p.primer_nombre,' ',p.segundo_nombre) nombre,
-              CONCAT(p.primer_apellido,' ',p.segundo_apellido) apellido,
-              t.categoria_id, c.nombre cat,
-              SUM(h.practicas) pra, SUM(h.teoricas) teo, SUM(h.taller) tal
-       FROM   personas p
-       JOIN   personastramites t  ON t.persona_id = p.id
-       JOIN   personastramiteshoras h ON h.personastramite_id = t.id
-       JOIN   categorias c ON t.categoria_id = c.id
-       WHERE  DATE_FORMAT(t.created_at,'%Y-%m-%d') BETWEEN '#{@fch1}' AND '#{@fch2}'
-       GROUP BY p.identificacion, c.nombre"
-    )
+    @objetos = Objeto.find_by_sql(sql_informeclases_objetos(@fch1, @fch2))
   end
 
   # GET /facturas/:id/edit
@@ -256,6 +230,28 @@ class FacturasController < ApplicationController
   end
 
   private
+
+  # Consolidado por alumno+categoría (compatible con MySQL ONLY_FULL_GROUP_BY)
+  def sql_informeclases_objetos(fch1, fch2)
+    <<~SQL.squish
+      SELECT MIN(DATE_FORMAT(t.created_at,'%Y-%m-%d')) AS fch,
+             p.identificacion,
+             MAX(CONCAT(p.primer_nombre,' ',IFNULL(p.segundo_nombre,''))) AS nombre,
+             MAX(CONCAT(p.primer_apellido,' ',IFNULL(p.segundo_apellido,''))) AS apellido,
+             t.categoria_id,
+             c.nombre AS cat,
+             SUM(h.practicas) AS pra,
+             SUM(h.teoricas) AS teo,
+             SUM(h.taller) AS tal
+      FROM   personas p
+      JOIN   personastramites t ON t.persona_id = p.id
+      JOIN   personastramiteshoras h ON h.personastramite_id = t.id
+      JOIN   categorias c ON t.categoria_id = c.id
+      WHERE  DATE_FORMAT(t.created_at,'%Y-%m-%d') BETWEEN '#{fch1}' AND '#{fch2}'
+      GROUP BY p.identificacion, t.categoria_id, c.nombre
+      ORDER BY p.identificacion, c.nombre
+    SQL
+  end
 
   def factura_params
     params.require(:factura).permit!
