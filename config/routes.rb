@@ -292,7 +292,8 @@ Rails.application.routes.draw do
     end
   end
 
-  # Busqueda global de teoricos (para iniciar prueba)
+  # Prueba teórica global (legacy map.resources :teoricos)
+  get  'teoricos',          to: 'teoricos#index',    as: 'teoricos'
   get  'teoricos/busqueda', to: 'teoricos#busqueda', as: 'teoricos_busqueda'
 
   resources :personastrapracticas, only: [:edit, :create, :update] do

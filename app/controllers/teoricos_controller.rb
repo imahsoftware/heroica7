@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
 class TeoricosController < ApplicationController
-  before_action :set_persona, except: [:busqueda]
+  before_action :set_persona, except: %i[busqueda index]
   before_action :set_teorico, only: [:show, :edit, :update, :destroy, :informe]
 
   layout :set_layout
 
-  # GET /personas/:persona_id/teoricos
+  # GET /teoricos — pantalla búsqueda prueba teórica (legacy index)
   def index
-    # Listado vacío — la lógica se muestra en el tab via partial
+    return redirect_to(edit_persona_path(@persona, etapa: 'D')) if params[:persona_id].present?
   end
 
   # GET /teoricos/busqueda  — búsqueda para iniciar prueba teórica
