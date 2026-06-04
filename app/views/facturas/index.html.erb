@@ -61,8 +61,10 @@
                       class: 'btn btn-xs btn-primary', title: 'Ver / Editar' do %>
                     <i class="fa fa-edit"></i>
                   <% end %>
-                  <%= link_to verfactura_facturas_path(factura_id: factura.id),
-                      class: 'btn btn-xs btn-default', title: 'Imprimir', target: '_blank' do %>
+                  <%= link_to_popup verfactura_facturas_path(factura_id: factura.id),
+                      popup: popup_ventana_grande,
+                      class: 'btn btn-xs btn-default', title: 'Imprimir',
+                      data: { turbo: false } do %>
                     <i class="fa fa-print"></i>
                   <% end %>
                 </td>

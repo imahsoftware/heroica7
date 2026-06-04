@@ -145,9 +145,11 @@
   <td class="text-center">
     <% factura = personastramite.factura_id ? personastramite.factura : nil %>
     <% if factura %>
-      <%= link_to facturacero(factura.nro_factura),
+      <%= link_to_popup facturacero(factura.nro_factura),
           verfactura_facturas_path(factura_id: factura.id),
-          target: '_blank', rel: 'noopener', data: { turbo: false },
+          popup: popup_ventana_grande,
+          title: 'Ver Factura',
+          data: { turbo: false },
           class: 'btn btn-xs btn-success' %>
     <% else %>
       <%= link_to crearfactura_persona_personastramite_path(persona, personastramite,

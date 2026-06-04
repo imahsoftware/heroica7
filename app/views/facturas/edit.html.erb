@@ -36,10 +36,11 @@
           <div class="row">
             <div class="col-md-2">
               <strong>Nro Factura</strong><br>
-              <%= link_to facturacero(@factura.nro_factura),
+              <%= link_to_popup facturacero(@factura.nro_factura),
                     verfactura_facturas_path(factura_id: @factura.id),
-                    target: '_blank',
-                    title: 'Ver Factura' %>
+                    popup: popup_ventana_grande,
+                    title: 'Ver Factura',
+                    data: { turbo: false } %>
             </div>
             <div class="col-md-4">
               <strong>Persona</strong><br>
