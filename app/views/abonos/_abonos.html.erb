@@ -53,11 +53,13 @@
                 <td class="text-center"><%= abono.destado %></td>
                 <td class="text-center">
                   <% if abono.estado.to_s != 'A' %>
-                    <%= link_to 'Ver Abono',
-                          verabono_abono_path(abono_id: abono.id),
-                          target: '_blank',
-                          title: 'Ver Abono',
-                          class: 'btn btn-xs btn-info' %>
+                    <%= link_to_popup verabono_abono_path(abono_id: abono.id),
+                        popup: popup_ventana_grande,
+                        class: 'btn btn-xs btn-info',
+                        title: 'Ver Abono',
+                        data: { turbo: false } do %>
+                      <i class="fa fa-eye"></i>
+                    <% end %>
                     <% if is_auth_e('abono') %>
                       <%= link_to 'Anular Abono',
                             anula_factura_abono_path(@factura, abono),
