@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
   # ─── Errores ────────────────────────────────────────────────────────────────
+  get '/favicon.ico', to: redirect('/favicon.png')
   get  'errors/not_found'
   get  'errors/internal_server_error'
   match '/404', to: 'errors#not_found',             via: :all

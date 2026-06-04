@@ -1,23 +1,12 @@
-<div class="error-box">
-  <div class="form-login">
-    <div class="row">
-      <div class="col-md-12 text-center" >
-        <%= image_tag 'logo_inicio.png', size: '300x150' %>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12 text-center" style="color: #20447d; font-family: '-apple-system', BlinkMacSystemFont, Roboto, Arial, Helvetica, 'sans-serif';">
-        <h4>
-          Se acaba de presentar un problema en el procedimiento, por favor reportar al administrador.
-        </h4>
-        <h4><%= Time.now.strftime("%Y-%m-%d %H:%M:%S %p") %></h4>
-      </div>
-    </div>
-    <hr>
-    <div class="text-center" style="color: #20447d; font-family: '-apple-system', BlinkMacSystemFont, Roboto, Arial, Helvetica, 'sans-serif';">
-      <h4 style="color: red;">
-        Para regresar a la página anterior haz click <%= link_to root_path do %><button class="btn btn-sm btn-danger">Aquí</button><% end %>
-      </h4>
-    </div>
-  </div>
-</div>
+<% content_for :title, "Error del servidor" %>
+
+<div class="error-code">500</div>
+<i class="fa-solid fa-triangle-exclamation error-icon" aria-hidden="true"></i>
+<h1 class="error-title">Algo salió mal</h1>
+<p class="error-message">
+  Se presentó un problema en el procedimiento. Por favor reporta al administrador si el error continúa.
+</p>
+<p class="error-time"><%= l(Time.zone.now, format: :long) %></p>
+<%= link_to root_path, class: "btn-error" do %>
+  <i class="fa-solid fa-house"></i> Volver al inicio
+<% end %>
