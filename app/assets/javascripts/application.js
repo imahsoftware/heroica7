@@ -49,7 +49,7 @@ $(document).on("turbolinks:load", function() {
   // Popup links (legacy :popup behavior)
   $(document).off('click.popupLink').on('click.popupLink', 'a[data-popup="true"]', function(e) {
     var $a = $(this);
-    // link_to_popup ya define onclick; evitar doble window.open
+    // link_to_popup ya trae onclick (confirm + window.open)
     if ($a.attr('onclick')) { return; }
     e.preventDefault();
     var confirmMsg = $a.data('confirm');

@@ -75,6 +75,7 @@ class ProgramacioneshorariosController < ApplicationController
        from   personasclases p, personastramites t, categorias c
        where  p.persona_id = t.persona_id
        and    t.categoria_id = c.id
+       and    p.persona_id not in (select persona_id from categoriasalertas)
        group by p.persona_id, t.categoria_id, c.practicas
       "
     )
@@ -82,9 +83,11 @@ class ProgramacioneshorariosController < ApplicationController
     ActiveRecord::Base.connection.execute("delete from categoriasalertas where persona_id in (select persona_id from facturas where estado = 'C')")
 
     @programacioneshorario = Programacioneshorario.includes(:persona).find(params[:id])
-    validafecha = Objeto.find_by_sql(
-      "select 'X' valor from dual where curdate() between '#{@programacioneshorario.fecha_inicial}' and '#{@programacioneshorario.fecha_final}'"
-    ).first&.valor.to_s
+    # Misma regla legacy (curdate between fecha_inicial and fecha_final), sin depender de tabla dual
+    hoy = Time.zone.today
+    inicio = @programacioneshorario.fecha_inicial.to_date
+    fin = @programacioneshorario.fecha_final.to_date
+    validafecha = hoy.between?(inicio, fin) ? 'X' : ''
 
     if Categoriasalerta.exists?(persona_id: @programacioneshorario.persona_id)
       if permiso('autorizacionclase', 'A').to_s == 'S'

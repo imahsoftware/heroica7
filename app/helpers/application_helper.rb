@@ -3942,12 +3942,12 @@ module ApplicationHelper
       )
 
       feature_str = "#{features},resizable=yes,toolbar=no,menubar=no,location=no,status=no"
-      confirm_msg = html_options[:data][:confirm]
+      confirm_msg = html_options[:data].delete(:confirm)
       open_js = "window.open(this.href,'#{popup_name}','#{feature_str}');"
       if confirm_msg.present?
         open_js = "if(confirm(#{confirm_msg.to_json})){#{open_js}}"
       end
-      # Evita que Turbolinks/UJS navegue la ventana del horario
+      # Un solo confirm (onclick). Sin data-confirm → rails-ujs no repite diálogo.
       html_options[:onclick] = "#{open_js}return false;"
     end
 
