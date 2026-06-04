@@ -14,5 +14,5 @@
   </td>
   <td class="text-center"><%= tiposviaje.id %></td>
   <td><strong><%= tiposviaje.descripcion %></strong></td>
-  <td class="text-right"><%= tiposviaje.valor.presence || '—' %></td>
+  <td class="text-right"><%= camponumerico tiposviaje.valor.presence || '—' %></td>
 </tr>

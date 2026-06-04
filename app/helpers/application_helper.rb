@@ -1557,35 +1557,7 @@ module ApplicationHelper
   end
 
   def camponumerico(valor)
-    if is_portafolio == 10014
-      number_to_currency(valor, precision: 2, unit: '', delimiter: ',', separator: '.')
-    else
       number_to_currency(valor, precision: 2, unit: '', delimiter: '.')
-    end
-  end
-
-  def camponumerico2(valor)
-    if is_portafolio == 10014
-      number_to_currency(valor, precision: 0, unit: '', delimiter: ',', separator: '.')
-    else
-      number_to_currency(valor, precision: 0, unit: '', delimiter: '.')
-    end
-  end
-
-  def camponumerico3(valor)
-    if is_portafolio == 10014
-      number_to_currency(valor, precision: 3, unit: '', delimiter: ',', separator: '.')
-    else
-      number_to_currency(valor, precision: 3, unit: '', delimiter: '.')
-    end
-  end
-
-  def camponumerico4(valor)
-    if is_portafolio == 10014
-      number_to_currency(valor, precision: 1, unit: '', delimiter: ',', separator: '.')
-    else
-      number_to_currency(valor, precision: 1, unit: '', delimiter: '.')
-    end
   end
 
   def select_zona
