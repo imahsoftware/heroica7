@@ -4,6 +4,8 @@ class Personastrampractica < ApplicationRecord
   belongs_to :personastramite
   belongs_to :user, optional: true
 
+  before_validation :normalizar_evaluaciones_numericas, on: :update
+
   validates :inspeva_dato2, :inspeva_dato3, :inspeva_dato4, :inspeva_dato5, :inspeva_dato7,
             :inspeva_dato8, :desteva_dato7, :desteva_dato8, :compeva_dato7, :compeva_dato8,
             inclusion: { in: 1..5, message: '** Error' }, on: :update
@@ -25,6 +27,20 @@ class Personastrampractica < ApplicationRecord
   before_save :calcular_totales
 
   private
+
+  # Form envía "3" como string; Rails 7 inclusion 1..N no acepta string (legacy sí pasaba)
+  def normalizar_evaluaciones_numericas
+    attribute_names.each do |campo|
+      next unless campo.match?(/\A(inspeva|desteva|compeva)_dato\d+\z/)
+      next if campo == 'inspeva_dato1' # SI / NO
+
+      valor = self[campo]
+      next if valor.blank?
+
+      texto = valor.to_s.strip
+      self[campo] = texto.to_i if texto.match?(/\A\d+\z/)
+    end
+  end
 
   def calcular_totales
     self.cal_inspeccion = inspeva_dato11.to_f + inspeva_dato2.to_f + inspeva_dato3.to_f +

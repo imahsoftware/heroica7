@@ -18,9 +18,23 @@ class Personastrapractica < ApplicationRecord
   validates :desteva_dato2, :desteva_dato9, :desteva_dato10, :desteva_dato11,
             inclusion: { in: 1..8, message: '** Error' }, on: :update
 
+  before_validation :normalizar_evaluaciones_numericas, on: :update
   before_save :calcular_totales
 
   private
+
+  def normalizar_evaluaciones_numericas
+    attribute_names.each do |campo|
+      next unless campo.match?(/\A(inspeva|desteva|compeva)_dato\d+\z/)
+      next if campo == 'inspeva_dato1'
+
+      valor = self[campo]
+      next if valor.blank?
+
+      texto = valor.to_s.strip
+      self[campo] = texto.to_i if texto.match?(/\A\d+\z/)
+    end
+  end
 
   def calcular_totales
     self.cal_inspeccion = inspeva_dato11.to_f + inspeva_dato2.to_f + inspeva_dato3.to_f +

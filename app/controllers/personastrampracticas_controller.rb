@@ -26,10 +26,9 @@ class PersonastrampracticasController < ApplicationController
       flash[:notice] = 'Evaluación Actualizado con Exito.'
       redirect_to edit_personastrampractica_path(@personastrampractica)
     else
-      render 'personastrampractica_form'
+      Rails.logger.warn "personastrampractica #{@personastrampractica.id} update falló: #{@personastrampractica.errors.full_messages.join(', ')}"
+      render 'personastrampractica_form', status: :unprocessable_entity
     end
-  rescue StandardError
-    redirect_to edit_personastrampractica_path(@personastrampractica)
   end
 
   def calcularvalor
