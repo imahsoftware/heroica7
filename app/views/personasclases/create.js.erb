@@ -3,7 +3,7 @@ $(".alert_flash").fadeOut(300, function() { $(this).remove(); });
 <% if @persona.personasclases.count == 1 %>
   $("#personasclases").html("<%= j render "tabla", persona: @persona, personasclase: @personasclase %>");
 <% else %>
-  $("#tbody_personasclases").prepend("<%= j render "tr", personasclase: @personasclase, persona: @persona %>");
+  $("#tbody_personasclases").prepend("<%= j render "tr", personasclase: @personasclase_creada, persona: @persona %>");
 <% end %>
 
 $(".clean").val("").trigger("change");

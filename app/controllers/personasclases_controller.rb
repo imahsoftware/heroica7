@@ -36,6 +36,7 @@ class PersonasclasesController < ApplicationController
     @personasclase.persona_id = @persona.id   # debe asignarse antes de valid?
     respond_to do |format|
       if @personasclase.save
+        @personasclase_creada = @personasclase
         @personasclase = Personasclase.new
         flash[:notice] = t(:notice_crea_msj)
         format.js
@@ -52,6 +53,7 @@ class PersonasclasesController < ApplicationController
     personasclase_edit.user_actualiza = is_admin
     respond_to do |format|
       if personasclase_edit.update(personasclase_params)
+        @personasclase_actualizada = personasclase_edit
         @personasclase = Personasclase.new
         flash[:notice] = t(:notice_actualiza_msj)
         format.js
@@ -63,6 +65,7 @@ class PersonasclasesController < ApplicationController
 
   # DELETE /personas/:persona_id/personasclases/:id
   def destroy
+    @personasclase_eliminada_id = @personasclase.id
     @personasclase.destroy
     @personasclase = Personasclase.new
     flash['success'] = 'Eliminado con exito'
