@@ -1,0 +1,4 @@
+$("#parqueadero_<%= @parqueadero.id %>").replaceWith("<%= j render 'tr', parqueadero: @parqueadero %>");
+$("#parqueadero_form").collapse("hide");
+$("#parqueadero_form").empty();
+$(".tooltip").tooltip("hide");

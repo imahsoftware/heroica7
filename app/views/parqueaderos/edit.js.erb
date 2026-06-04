@@ -1,0 +1,16 @@
+$("#parqueadero_form").collapse("hide");
+$("#parqueadero_form").empty();
+
+<% if @active_record.present? %>
+  $("#parqueadero_<%= @active_record.id %>").replaceWith("<%= j render 'tr', parqueadero: @active_record %>");
+<% end %>
+
+$("#parqueadero_<%= @parqueadero.id %>").html("<td colspan='7'><%= j render 'form' %></td>");
+$("#parqueadero_<%= @parqueadero.id %>").addClass("active_parqueadero");
+
+$(".select2").select2();
+if ($.fn.datetimepicker) {
+  $(".datetimepicker").datetimepicker({ format: "YYYY-MM-DD HH:mm", sideBySide: true });
+}
+$(".tooltip").tooltip("hide");
+$('[data-toggle="tooltip"]').tooltip();

@@ -166,6 +166,7 @@ Rails.application.routes.draw do
   resources :tiposcombustibles
   resources :combustibles
   resources :mantenimientos
+  resources :parqueaderos
   resources :instructores
   resources :categorias
   resources :tipostramites

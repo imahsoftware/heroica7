@@ -1,0 +1,29 @@
+<tr id="parqueadero_<%= parqueadero.id %>">
+  <td class="text-center">
+    <%= link_to edit_parqueadero_path(parqueadero), remote: true,
+        title: t(:title_editar),
+        data: { toggle: 'tooltip' } do %>
+      <button class="btn btn-xs btn-warning btn-accion"><i class="fa fa-edit"></i></button>
+    <% end %>
+    <%= link_to parqueadero_path(parqueadero), remote: true,
+        method: :delete,
+        title: t(:title_elimina),
+        data: { confirm: t(:elimina_confirma), toggle: 'tooltip' } do %>
+      <button class="btn btn-xs btn-danger btn-accion"><i class="fa fa-trash"></i></button>
+    <% end %>
+  </td>
+  <td><strong><%= parqueadero.placa&.descripcion.presence || '—' %></strong></td>
+  <td><%= parqueadero.fecha_hora.present? ? parqueadero.fecha_hora.strftime('%Y-%m-%d %H:%M') : '—' rescue '—' %></td>
+  <td class="text-center">
+    <% if parqueadero.tipo == 'ENTRADA' %>
+      <span class="label label-success">ENTRADA</span>
+    <% elsif parqueadero.tipo == 'SALIDA' %>
+      <span class="label label-warning">SALIDA</span>
+    <% else %>
+      —
+    <% end %>
+  </td>
+  <td><%= parqueadero.instructor&.nombre.presence || '—' %></td>
+  <td class="text-right"><%= parqueadero.kilometraje_entrada.presence || '—' %></td>
+  <td class="text-right"><%= parqueadero.cant_combustible.presence || '—' %></td>
+</tr>

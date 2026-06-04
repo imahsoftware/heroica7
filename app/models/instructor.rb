@@ -1,5 +1,6 @@
 class Instructor < ApplicationRecord
   has_many :mantenimientos
+  has_many :parqueaderos
 
   validates :nombre, presence: true
 

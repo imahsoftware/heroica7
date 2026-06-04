@@ -3,6 +3,7 @@ class Placa < ApplicationRecord
   belongs_to :instructor, optional: true
   has_many :combustibles
   has_many :mantenimientos
+  has_many :parqueaderos
 
   validates :descripcion, presence: true
 

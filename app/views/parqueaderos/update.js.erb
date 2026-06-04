@@ -1,0 +1,8 @@
+$("#parqueadero_form").collapse("hide");
+$("#parqueadero_form").empty();
+<% if flash[:notice] %>
+  $(".flash_messages").html("<div class='alert alert-success alert-dismissible'><button type='button' class='close' data-dismiss='alert'>&times;</button><%= j flash[:notice] %></div>");
+  <% flash.discard(:notice) %>
+<% end %>
+$("#parqueadero_<%= @parqueadero.id %>").replaceWith("<%= j render 'tr', parqueadero: @parqueadero %>");
+$('[data-toggle="tooltip"]').tooltip();
