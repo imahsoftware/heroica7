@@ -129,9 +129,11 @@
 <%= render 'informe_filtro',
            url: informe_programacioneshorarios_path,
            title: 'Informe de Clases por Periodo',
-           icon: 'fa-graduation-cap' %>
+           icon: 'fa-graduation-cap',
+           field_namespace: 'ubicacion' %>
 
 <%= render 'informe_filtro',
            url: progclases_programacioneshorarios_path,
            title: 'Informe Programación de Clases por Periodo',
-           icon: 'fa-calendar' %>
+           icon: 'fa-calendar',
+           field_namespace: 'prog_ubicacion' %>

@@ -48,10 +48,12 @@
           <% if @periodosliquidacion %>
             <%= link_to 'Tirilla',
                   tirilla_empleadosnominas_path(periodosliquidacion_id: @periodosliquidacion.id),
-                  target: '_blank', class: 'btn btn-info' %>
+                  onclick: "window.open(this.href,'nomina_tirilla','height=700,width=950,scrollbars=yes,resizable=yes');return false;",
+                  class: 'btn btn-info' %>
             <%= link_to 'Informe',
                   informe_empleadosnominas_path(periodosliquidacion_id: @periodosliquidacion.id),
-                  target: '_blank', class: 'btn btn-success' %>
+                  onclick: "window.open(this.href,'nomina_informe','height=700,width=950,scrollbars=yes,resizable=yes');return false;",
+                  class: 'btn btn-success' %>
           <% end %>
         </div>
       </div>

@@ -32,21 +32,23 @@ class ProgramacioneshorariosController < ApplicationController
       @personasclases = scope
       @fch1 = params[:ubicacion][:inicial]
       @fch2 = params[:ubicacion][:final]
+      render layout: 'pdf_heroica'
     end
   end
 
   def progclases
-    if params.dig(:ubicacion, :inicial).blank? && params.dig(:ubicacion, :final).blank?
+    if params.dig(:prog_ubicacion, :inicial).blank? && params.dig(:prog_ubicacion, :final).blank?
       flash[:notice] = 'Debe digitar datos para la consulta'
       redirect_to horario_programacioneshorarios_path
     else
       scope = Programacioneshorario.where(
-        fecha_inicial: params[:ubicacion][:inicial]..params[:ubicacion][:final]
+        fecha_inicial: params[:prog_ubicacion][:inicial]..params[:prog_ubicacion][:final]
       ).order(:persona_id)
-      scope = scope.where(instructor_id: params[:ubicacion][:instructor_id]) if params[:ubicacion][:instructor_id].present?
+      scope = scope.where(instructor_id: params[:prog_ubicacion][:instructor_id]) if params[:prog_ubicacion][:instructor_id].present?
       @programacioneshorarios = scope
-      @fch1 = params[:ubicacion][:inicial]
-      @fch2 = params[:ubicacion][:final]
+      @fch1 = params[:prog_ubicacion][:inicial]
+      @fch2 = params[:prog_ubicacion][:final]
+      render layout: 'pdf_heroica'
     end
   end
 

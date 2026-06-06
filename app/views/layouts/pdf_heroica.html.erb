@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <style>
+      body { font-family: Tahoma, sans-serif; margin: 0; padding: 15px; }
+      table { border-collapse: collapse; }
+      .sample { border: 1px solid gray; border-collapse: collapse; }
+      .sample th, .sample td { border: 1px solid gray; padding: 3px 6px; }
+      thead { background: #F2F2F2; }
+      .camposDesc11  { font-size: 11px; font-family: Tahoma; }
+      .camposDescN11 { font-weight: bold; font-size: 11px; font-family: Tahoma; }
+      .camposDescN12 { font-weight: bold; font-size: 12px; font-family: Tahoma; }
+      .camposDescN16 { font-weight: bold; font-size: 16px; font-family: Tahoma; }
+      .tit_gr_azul   { font-family: Tahoma; font-size: 19px; color: #4390b4; }
+      .imprimirlink  { display: none; }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  </head>
+  <body>
+    <div id="pdf-content">
+      <%= yield %>
+    </div>
+    <script>
+      window.onload = function() {
+        var element = document.getElementById('pdf-content');
+        var opt = {
+          margin:      [10, 10, 10, 10],
+          filename:    'informe.pdf',
+          image:       { type: 'jpeg', quality: 0.98 },
+          html2canvas: { scale: 2, useCORS: true },
+          jsPDF:       { unit: 'mm', format: 'letter', orientation: 'portrait' }
+        };
+        html2pdf().set(opt).from(element).save();
+      };
+    </script>
+  </body>
+</html>

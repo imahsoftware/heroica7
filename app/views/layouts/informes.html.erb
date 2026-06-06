@@ -20,6 +20,7 @@
         body          { margin: 0; }
       }
     </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   </head>
   <body>
     <div class="wrapper">
@@ -29,5 +30,22 @@
         </div>
       </section>
     </div>
+  <script>
+    window.onload = function() {
+      // Solo disparar en vistas de solo lectura (reportes):
+      // tiene .imprimirlink Y no tiene formulario POST de edición
+      var hasImprimir   = !!document.querySelector('.imprimirlink');
+      var hasEditForm   = !!document.querySelector('form[method="post"], form[data-method="post"]');
+      if (!hasImprimir || hasEditForm) return;
+      var opt = {
+        margin:      [10, 10, 10, 10],
+        filename:    'informe.pdf',
+        image:       { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2, useCORS: true },
+        jsPDF:       { unit: 'mm', format: 'letter', orientation: 'portrait' }
+      };
+      html2pdf().set(opt).from(document.body).save();
+    };
+  </script>
   </body>
 </html>
