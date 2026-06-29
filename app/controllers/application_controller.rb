@@ -2018,9 +2018,12 @@ class ApplicationController < ActionController::Base
   private
 
   def enforce_password_change
-    return unless session[:must_change_password]
     return if password_change_exempt?
 
+    needs_change = session[:must_change_password] || current_user.must_change_password?
+    return unless needs_change
+
+    session[:must_change_password] = true
     redirect_to editpass_user_path(current_user), alert: 'Debe cambiar su contraseña antes de continuar.'
   end
 

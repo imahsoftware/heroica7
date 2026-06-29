@@ -13,9 +13,10 @@ class Users::SessionsController < Devise::SessionsController
   end
 
   def create
+    prior_sign_in_count = lookup_prior_sign_in_count
     self.resource = warden.authenticate!(auth_options)
     if self.resource.activo == "S"
-      must_change_password = self.resource.sign_in_count.to_i.zero?
+      must_change_password = prior_sign_in_count.to_i < 2
       sign_in(resource_name, resource, store: true)
       warden.set_user(resource, scope: resource_name, store: true)
       self.resource.save(validate: false)
@@ -98,6 +99,14 @@ class Users::SessionsController < Devise::SessionsController
   end
 
   private
+
+  def lookup_prior_sign_in_count
+    username = params.dig(:user, :username).to_s.strip
+    return nil if username.blank?
+
+    User.where(username: username).pick(:sign_in_count)
+  end
+
   # Check if there is no signed in user before doing the sign out.
   #
   # If there is no signed in user, it will set the flash message and redirect

@@ -82,6 +82,10 @@ class User < ApplicationRecord
     self.sign_in_count = 0
   end
 
+  def must_change_password?
+    sign_in_count.to_i < 2
+  end
+
   def timeout_in
     if self.geintac == "S"
       1.day
