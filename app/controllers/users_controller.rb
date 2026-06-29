@@ -375,16 +375,19 @@ class UsersController < ApplicationController
     # No actualizar identificacion si viene vacío — conservar el valor actual
     params[:user].delete(:identificacion) if params[:user][:identificacion].blank?
 
-    # No actualizar password si viene vacío — Devise :validatable lo requeriría
-    if params[:user][:password].blank?
-      params[:user].delete(:password)
-      params[:user].delete(:password_confirmation)
-      result = @user.update_without_password(user_params)
-    else
-      result = @user.update(user_params)
+    attrs = user_params.to_unsafe_h.symbolize_keys
+    password = attrs.delete(:password)
+    password_confirmation = attrs.delete(:password_confirmation)
+
+    @user.user_id = is_admin
+    @user.assign_attributes(attrs)
+
+    if password.present?
+      @user.password = password
+      @user.password_confirmation = password_confirmation
     end
 
-    if params[:user][:ingresoseguro].to_s == "NO"
+    if params.dig(:user, :ingresoseguro).to_s == 'NO'
       @user.encrypted_otp_secret = nil
       @user.encrypted_otp_secret_iv = nil
       @user.encrypted_otp_secret_salt = nil
@@ -393,8 +396,8 @@ class UsersController < ApplicationController
       @user.unconfirmed_otp_secret = nil
     end
 
-    if result
-      flash['success'] = "Usuario actualizado"
+    if @user.save
+      flash['success'] = 'Usuario actualizado'
       if is_permit('admin/users') == true
         redirect_to edit_user_path(id: @user.id, etapa: 'A')
       else
@@ -403,7 +406,7 @@ class UsersController < ApplicationController
     else
       @usersmodulo = Usersmodulo.new
       @userspermiso = Userspermiso.new
-      render "user_form"
+      render 'user_form', status: :unprocessable_entity
     end
   end
 
@@ -557,7 +560,10 @@ class UsersController < ApplicationController
       return
     end
 
-    if @user.update(password: params[:user][:password], password_confirmation: params[:user][:password_confirmation])
+    @user.password = params.dig(:user, :password)
+    @user.password_confirmation = params.dig(:user, :password_confirmation)
+
+    if @user.save
       @user.update_columns(sign_in_count: 2)
       session.delete(:must_change_password)
       flash[:notice] = 'Contraseña actualizada correctamente.'
