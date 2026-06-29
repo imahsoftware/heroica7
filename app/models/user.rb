@@ -9,8 +9,10 @@ class User < ApplicationRecord
 
   devise :recoverable, :trackable, :validatable, :timeoutable, :lockable
 
+  attr_accessor :skip_password_validation
+
   # Validacion de contraseña segura — solo cuando se está cambiando
-  validates :password, password_strength: true, allow_blank: true
+  validates :password, password_strength: true, allow_blank: true, unless: :skip_password_validation?
 
   has_many :login_activities, as: :user
 #  acts_as_authentic
@@ -39,8 +41,6 @@ class User < ApplicationRecord
 #validates :identificacion, uniqueness: { scope: :portafolio_id,
 #   message: "Ya hay una misma cedula registrada en este portafolio" }, on: :create
 
-  validates :password, presence: true, if: :valitatecountone
-
   scope :with_role, lambda { |role| {:conditions => "roles_mask & #{2**ROLES.index(role.to_s)} > 0"} }
   before_save :antesdeguardar
 
@@ -66,9 +66,20 @@ class User < ApplicationRecord
     save!
   end
 
-  def valitatecountone
-    currentuser = self.geintac rescue nil
-    self.sign_in_count == 1 and currentuser == "S"
+  def skip_password_validation?
+    skip_password_validation == true
+  end
+
+  def password_required?
+    return false if skip_password_validation?
+    super
+  end
+
+  def assign_temporary_password!
+    self.skip_password_validation = true
+    self.password = '123456789'
+    self.password_confirmation = '123456789'
+    self.sign_in_count = 0
   end
 
   def timeout_in

@@ -15,11 +15,19 @@ class Users::SessionsController < Devise::SessionsController
   def create
     self.resource = warden.authenticate!(auth_options)
     if self.resource.activo == "S"
+      must_change_password = self.resource.sign_in_count.to_i.zero?
       sign_in(resource_name, resource, store: true)
       warden.set_user(resource, scope: resource_name, store: true)
       self.resource.save(validate: false)
       cookies.signed[:user_id] = self.resource.id
       cookies.signed[:username] = self.resource.username
+
+      if must_change_password
+        session[:must_change_password] = true
+        redirect_to editpass_user_path(self.resource), alert: 'Debe cambiar su contraseña antes de continuar.'
+        return
+      end
+
       if self.resource.ingresoseguro == 'SI'
         if self.resource.otp_required_for_login.nil?
           redirect_to activate_two_factor_index_path

@@ -10,6 +10,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   before_action :authenticate_user!, except: [:validatesession, :formulario_validacion]
+  before_action :enforce_password_change, if: :user_signed_in?
   before_action :validatesession
   # before_action :soportespendientes, :soportespendientescant, :agendasmenus
   before_action :configure_permitted_parameters, if: :devise_controller?
@@ -2012,5 +2013,23 @@ class ApplicationController < ActionController::Base
       nroliq = abono.nro
     end
     nroliq.to_i + 1
+  end
+
+  private
+
+  def enforce_password_change
+    return unless session[:must_change_password]
+    return if password_change_exempt?
+
+    redirect_to editpass_user_path(current_user), alert: 'Debe cambiar su contraseña antes de continuar.'
+  end
+
+  def password_change_exempt?
+    return true if devise_controller? && controller_name == 'passwords'
+    return true if controller_path == 'users/sessions'
+    return true if controller_path == 'users' && %w[editpass updatepass].include?(action_name)
+    return true if controller_path.include?('two_factor')
+
+    false
   end
 end

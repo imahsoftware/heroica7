@@ -1,32 +1,11 @@
 class Users::PasswordsController < Devise::PasswordsController
-  # GET /resource/password/new
-  # def new
-  #   super
-  # end
+  layout 'heroica_auth'
 
-  # POST /resource/password
-  # def create
-  #   super
-  # end
+  protected
 
-  # GET /resource/password/edit?reset_password_token=abcdef
-  # def edit
-  #   super
-  # end
-
-  # PUT /resource/password
-  # def update
-  #   super
-  # end
-
-  # protected
-
-  # def after_resetting_password_path_for(resource)
-  #   super(resource)
-  # end
-
-  # The path used after sending reset password instructions
-  # def after_sending_reset_password_instructions_path_for(resource_name)
-  #   super(resource_name)
-  # end
+  def after_resetting_password_path_for(resource)
+    resource.update_columns(sign_in_count: 2) if resource.sign_in_count.to_i <= 1
+    session.delete(:must_change_password)
+    menus_path
+  end
 end

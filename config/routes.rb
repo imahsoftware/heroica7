@@ -17,7 +17,8 @@ Rails.application.routes.draw do
   # ─── Autenticación (Devise) ──────────────────────────────────────────────────
   devise_for :users, controllers: {
     sessions:      'users/sessions',
-    registrations: 'users_controller'
+    registrations: 'users/registrations',
+    passwords:     'users/passwords'
   }
 
   devise_scope :user do
@@ -74,6 +75,11 @@ Rails.application.routes.draw do
     end
 
     resources :users do
+      member do
+        get   :editpass
+        patch :updatepass
+      end
+
       collection do
         get  :autocomplete_identificacion_nombre
         get  :autocomplete_cambio_user2
@@ -100,7 +106,6 @@ Rails.application.routes.draw do
         get  'cambiosucursal'
         get  'cambiarperfil'
         get  'masivo'
-        get  'updatepass'
         post 'etapar'
         get  'etapa'
         get  'act'

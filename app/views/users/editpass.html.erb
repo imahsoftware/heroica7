@@ -2,7 +2,7 @@
 
 <div class="card-header-text">
   <h2>Cambiar contraseña</h2>
-  <p>Ingresa tu nueva contraseña para continuar</p>
+  <p>Debes actualizar tu contraseña antes de ingresar al sistema</p>
 </div>
 
 <% if flash[:alert].present? %>
@@ -12,16 +12,19 @@
   </div>
 <% end %>
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
-  <%= f.hidden_field :reset_password_token %>
+<% if flash[:notice].present? %>
+  <div class="alert-box alert-notice">
+    <i class="fa-solid fa-circle-check"></i>
+    <span><%= flash[:notice] %></span>
+  </div>
+<% end %>
 
-  <% if resource.errors[:reset_password_token].present? %>
-    <div class="alert-box alert-danger">
-      <i class="fa-solid fa-circle-exclamation"></i>
-      <span><%= resource.errors[:reset_password_token].first %></span>
-    </div>
-  <% end %>
+<div class="user-info">
+  <div><strong>Usuario:</strong> <%= @user.username %></div>
+  <div><strong>Nombre:</strong> <%= @user.nombre %></div>
+</div>
 
+<%= form_for @user, url: updatepass_user_path(@user), method: :patch do |f| %>
   <div class="form-group">
     <label for="user_password">Nueva contraseña</label>
     <div class="input-wrapper">
@@ -36,7 +39,7 @@
         <i class="fa-solid fa-eye" id="toggle-icon-1"></i>
       </button>
     </div>
-    <% resource.errors[:password].each do |msg| %>
+    <% @user.errors[:password].each do |msg| %>
       <div class="field-error"><%= msg %></div>
     <% end %>
   </div>
@@ -54,12 +57,12 @@
         <i class="fa-solid fa-eye" id="toggle-icon-2"></i>
       </button>
     </div>
-    <% resource.errors[:password_confirmation].each do |msg| %>
+    <% @user.errors[:password_confirmation].each do |msg| %>
       <div class="field-error"><%= msg %></div>
     <% end %>
   </div>
 
-  <%= f.submit 'Cambiar contraseña', class: 'btn-login' %>
+  <%= f.submit 'Guardar contraseña', class: 'btn-login' %>
 <% end %>
 
 <div class="card-footer-text">

@@ -8,7 +8,7 @@ class UsersController < ApplicationController
 
   autocomplete :cambio, :user2
 
-  before_action :checkaccess, except: [:cambioportafolio, :reestablecesusuario, :inconsistencias, :importar, :importar2, :carguemasivo, :fincargue, :cargar, :cargar2, :modograficoedu, :autocomplete_identificacion_nombre, :actemail, :updateemailedu, :edupol_resetpass,:edupol_desbloquearusuario,:modogestion, :cambiosucursal, :etapar, :etapa, :update, :cambiotipoconsulta], if: :user_signed_in?
+  before_action :checkaccess, except: [:cambioportafolio, :reestablecesusuario, :inconsistencias, :importar, :importar2, :carguemasivo, :fincargue, :cargar, :cargar2, :modograficoedu, :autocomplete_identificacion_nombre, :actemail, :updateemailedu, :edupol_resetpass,:edupol_desbloquearusuario,:modogestion, :cambiosucursal, :etapar, :etapa, :update, :cambiotipoconsulta, :editpass, :updatepass], if: :user_signed_in?
   before_action :authenticate_user!, except: [:autocomplete_identificacion_nombre, :iniciar]
 
   def autocomplete_user_nombre
@@ -274,37 +274,44 @@ class UsersController < ApplicationController
   end
 
   def create
+    password_blank = params.dig(:user, :password).blank?
+    if password_blank
+      params[:user]&.delete(:password)
+      params[:user]&.delete(:password_confirmation)
+    end
+
     @user = User.new(user_params)
     if is_sygma == false
       @user.portafolio_id = is_portafolio
     end
-      if @user.save
-        if @user.geintac == 'S'
-          @modulos = Modulo.all
-          @objetos = Objeto.all
-          #@reportes = Reporte.where.not(metodo: nil)
-          @modulos.each do |modulo|
-            usersmodulo = Usersmodulo.new
-            usersmodulo.user_id = @user.id
-            usersmodulo.modulo_id = modulo.id
-            usersmodulo.save
-          end
-          @objetos.each do |objeto|
-            userspermiso = Userspermiso.new
-            userspermiso.user_id = @user.id
-            userspermiso.objeto_id = objeto.id
-            userspermiso.actualiza = 'S'
-            userspermiso.crea = 'S'
-            userspermiso.elimina = 'S'
-            userspermiso.save
-          end
+    @user.etapa = 'A'
+    @user.assign_temporary_password! if password_blank
+
+    if @user.save
+      if @user.geintac == 'S'
+        @modulos = Modulo.all
+        @objetos = Objeto.all
+        @modulos.each do |modulo|
+          usersmodulo = Usersmodulo.new
+          usersmodulo.user_id = @user.id
+          usersmodulo.modulo_id = modulo.id
+          usersmodulo.save
         end
-        flash[:notice] = "Creado con Exito."
-        redirect_to edit_user_path(etapa: "A", id: @user.id)
-      else
-        @user.etapa = 'A'
-        render action: "user_form"
+        @objetos.each do |objeto|
+          userspermiso = Userspermiso.new
+          userspermiso.user_id = @user.id
+          userspermiso.objeto_id = objeto.id
+          userspermiso.actualiza = 'S'
+          userspermiso.crea = 'S'
+          userspermiso.elimina = 'S'
+          userspermiso.save
+        end
       end
+      flash[:notice] = "Creado con Exito."
+      redirect_to edit_user_path(etapa: "A", id: @user.id)
+    else
+      render action: "user_form"
+    end
   end
 
   def modogestion
@@ -529,11 +536,35 @@ class UsersController < ApplicationController
 
   def resetpass
     @user = User.find(params[:id])
-    @user.sign_in_count = 0
-    @user.password = '123456789'
-    @user.password_confirmation = '123456789'
+    @user.assign_temporary_password!
     @user.save(validate: false)
     redirect_to users_path
+  end
+
+  def editpass
+    @user = User.find(params[:id])
+    unless @user.id == current_user.id || is_permit('admin/users')
+      redirect_to root_path, alert: 'No autorizado'
+      return
+    end
+    render :editpass, layout: 'heroica_auth'
+  end
+
+  def updatepass
+    @user = User.find(params[:id])
+    unless @user.id == current_user.id || is_permit('admin/users')
+      redirect_to root_path, alert: 'No autorizado'
+      return
+    end
+
+    if @user.update(password: params[:user][:password], password_confirmation: params[:user][:password_confirmation])
+      @user.update_columns(sign_in_count: 2)
+      session.delete(:must_change_password)
+      flash[:notice] = 'Contraseña actualizada correctamente.'
+      redirect_to menus_path
+    else
+      render :editpass, layout: 'heroica_auth'
+    end
   end
 
   def cambiarperfil
@@ -589,7 +620,9 @@ class UsersController < ApplicationController
   private
 
     def set_layout
-      if ['index', 'new', 'create', 'update'].include?(action_name)
+      if ['editpass', 'updatepass'].include?(action_name)
+        'heroica_auth'
+      elsif ['index', 'new', 'create', 'update'].include?(action_name)
         'application_admin'
       elsif ['edit'].include?(action_name)
         'application_users'
