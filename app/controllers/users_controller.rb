@@ -379,7 +379,6 @@ class UsersController < ApplicationController
     password = attrs.delete(:password)
     password_confirmation = attrs.delete(:password_confirmation)
 
-    @user.user_id = is_admin
     @user.assign_attributes(attrs)
 
     if password.present?
