@@ -19,11 +19,11 @@
     <%# ── Foto + Identificación ── %>
     <div class="row">
       <div class="col-md-2 text-center">
-        <% if @persona.respond_to?(:personasimagen_file_name) && @persona.personasimagen_file_name.present? %>
+        <% if @persona.personasimagen_file_name.present? %>
           <img src="/system/personasimagenes/<%= @persona.id %>/original/<%= @persona.personasimagen_file_name %>"
                height="120" width="120" class="img-thumbnail" alt="Foto"/>
         <% else %>
-          <img src="/images/noFoto.jpg" height="100" width="100" class="img-thumbnail" alt="Sin foto"/>
+          <img src="<%= image_path('noFoto.jpg') %>" height="100" width="100" class="img-thumbnail" alt="Sin foto"/>
         <% end %>
       </div>
 

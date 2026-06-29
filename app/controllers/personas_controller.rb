@@ -80,10 +80,8 @@ class PersonasController < ApplicationController
       @personastramite = Personastramite.new
       @personasclase   = Personasclase.new
       @teorico         = Teorico.new
-      render :edit
+      render :edit, status: :unprocessable_entity
     end
-  rescue StandardError
-    redirect_to edit_persona_path(@persona, etapa: (@etapa.presence || 'A'))
   end
 
   # DELETE /personas/:id

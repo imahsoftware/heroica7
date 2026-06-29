@@ -9,6 +9,9 @@ class Persona < ApplicationRecord
   has_many :teoricosresultados
   has_many :programacioneshorarios
 
+  has_attached_file :personasimagen
+  validates_attachment_content_type :personasimagen, content_type: /\Aimage\/.*\z/
+
   validates :identificacion, presence: true, uniqueness: true, numericality: true
   validates :primer_nombre,  presence: true
   validates :primer_apellido, presence: true
