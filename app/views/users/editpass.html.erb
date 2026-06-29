@@ -19,6 +19,13 @@
   </div>
 <% end %>
 
+<% if @user.errors.any? %>
+  <div class="alert-box alert-danger">
+    <i class="fa-solid fa-circle-exclamation"></i>
+    <span><%= @user.errors.full_messages.join('. ') %></span>
+  </div>
+<% end %>
+
 <div class="user-info">
   <div><strong>Usuario:</strong> <%= @user.username %></div>
   <div><strong>Nombre:</strong> <%= @user.nombre %></div>

@@ -69,10 +69,18 @@
       display: block; font-size: 0.8rem; font-weight: 600; color: #374151;
       margin-bottom: 0.45rem; letter-spacing: 0.04em; text-transform: uppercase;
     }
-    .input-wrapper { position: relative; display: flex; align-items: center; }
+    .input-wrapper { position: relative; display: block; width: 100%; }
+    .input-wrapper .field_with_errors { display: block; width: 100%; }
+    .input-wrapper .field_with_errors .form-control {
+      width: 100%;
+      border-color: #ef4444;
+      background: #fff;
+      box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.12);
+    }
     .input-icon {
-      position: absolute; left: 1rem; color: #94a3b8; font-size: 0.95rem;
-      pointer-events: none; transition: color 0.2s;
+      position: absolute; left: 1rem; top: 50%; transform: translateY(-50%);
+      color: #94a3b8; font-size: 0.95rem;
+      pointer-events: none; transition: color 0.2s; z-index: 1;
     }
     .form-control {
       width: 100%; padding: 0.75rem 2.75rem; border: 1.5px solid #e2e8f0;
@@ -87,8 +95,9 @@
     }
     .input-wrapper:focus-within .input-icon { color: #ef4444; }
     .toggle-password {
-      position: absolute; right: 1rem; background: none; border: none;
-      cursor: pointer; color: #94a3b8; font-size: 0.9rem; padding: 0;
+      position: absolute; right: 1rem; top: 50%; transform: translateY(-50%);
+      background: none; border: none;
+      cursor: pointer; color: #94a3b8; font-size: 0.9rem; padding: 0; z-index: 1;
     }
     .toggle-password:hover { color: #ef4444; }
     .btn-login {
