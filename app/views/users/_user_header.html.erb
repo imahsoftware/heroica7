@@ -51,16 +51,6 @@
         title: 'Permisos' do %>
       <i class="fa fa-shield-alt"></i> Permisos
     <% end %>
-    <%= link_to edit_user_path(id: @user.id, etapa: 'I'),
-        class: "user-nav-btn #{'active' if @user.etapa == 'I'}",
-        title: 'Reportes' do %>
-      <i class="fa fa-file-alt"></i> Reportes
-    <% end %>
-    <%= link_to edit_user_path(id: @user.id, etapa: 'E'),
-        class: "user-nav-btn #{'active' if @user.etapa == 'E'}",
-        title: 'Imágenes' do %>
-      <i class="fa fa-images"></i> Imágenes
-    <% end %>
     <%= link_to users_path,
         class: "user-nav-btn",
         title: 'Volver al listado' do %>

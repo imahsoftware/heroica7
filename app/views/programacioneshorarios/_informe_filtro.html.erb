@@ -6,12 +6,13 @@
   </div>
 
   <div class="box-body" style="padding: 8px 10px;">
-    <%= form_tag url, method: :get do %>
+    <%= form_tag url, method: :get,
+          onsubmit: "window.open('','pdf_popup_#{field_namespace}','height=700,width=950,scrollbars=yes,resizable=yes'); this.target='pdf_popup_#{field_namespace}'; return true;" do %>
       <div class="row">
         <div class="col-md-3 col-sm-6">
           <div class="form-group" style="margin-bottom: 8px;">
             <label class="control-label">Fecha inicial</label>
-            <%= calendar_date_select 'ubicacion', 'inicial',
+            <%= calendar_date_select field_namespace, 'inicial',
                   year_range: 50.years.ago..0.years.ago,
                   class: 'form-control input-sm',
                   size: 10,
@@ -21,7 +22,7 @@
         <div class="col-md-3 col-sm-6">
           <div class="form-group" style="margin-bottom: 8px;">
             <label class="control-label">Fecha final</label>
-            <%= calendar_date_select 'ubicacion', 'final',
+            <%= calendar_date_select field_namespace, 'final',
                   year_range: 50.years.ago..0.years.ago,
                   class: 'form-control input-sm',
                   size: 10,
@@ -31,10 +32,13 @@
         <div class="col-md-4 col-sm-8">
           <div class="form-group" style="margin-bottom: 8px;">
             <label class="control-label">Instructor</label>
-            <%= select 'ubicacion', 'instructor_id',
-                       @instructores.map { |p| [p.nombre, p.id] },
-                       { include_blank: true },
-                       { class: 'form-control input-sm select2' } %>
+            <%= select_tag "#{field_namespace}[instructor_id]",
+                       options_for_select([['', '']] + @instructores.map { |p| [p.nombre, p.id] }),
+                       class: 'form-control input-sm',
+                       id: "#{field_namespace}_instructor_id" %>
+            <script>
+              $(function() { $('#<%= "#{field_namespace}_instructor_id" %>').select2(); });
+            </script>
           </div>
         </div>
         <div class="col-md-2 col-sm-4">

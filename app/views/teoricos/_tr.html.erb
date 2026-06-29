@@ -1,7 +1,8 @@
 <tr id="teorico_<%= teorico.id %>">
   <td class="text-center">
     <%= link_to informe_persona_teorico_path(persona, teorico),
-        target: "_blank", class: "btn btn-xs btn-info",
+        onclick: "window.open(this.href,'teorico_informe','height=700,width=950,scrollbars=yes,resizable=yes');return false;",
+        class: "btn btn-xs btn-info",
         title: "Informe Prueba", data: { toggle: "tooltip" } do %>
       <i class="fa fa-file-text-o"></i>
     <% end %>

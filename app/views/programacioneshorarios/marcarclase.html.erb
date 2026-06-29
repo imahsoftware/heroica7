@@ -22,10 +22,26 @@
     </div>
 
     <div class="text-center marcarclase-acciones">
-      <button type="button" class="btn btn-primary btn-sm" onclick="window.close();">
+      <button type="button" class="btn btn-primary btn-sm" onclick="cerrarYOcultar();">
         <i class="fa fa-times"></i> Cerrar
       </button>
     </div>
+
+    <script>
+      <% if exito %>
+        // Auto-cerrar y ocultar botones en el padre tras 1.5 segundos
+        setTimeout(function() { cerrarYOcultar(); }, 1500);
+      <% end %>
+
+      function cerrarYOcultar() {
+        <% if exito && @programacioneshorario %>
+          if (window.opener && !window.opener.closed) {
+            window.opener.ocultarBotonesClase(<%= @programacioneshorario.id %>);
+          }
+        <% end %>
+        window.close();
+      }
+    </script>
   </div>
 </div>
 
