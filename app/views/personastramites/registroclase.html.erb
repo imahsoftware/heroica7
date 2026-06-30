@@ -30,18 +30,18 @@
   .registro-clase-sheet .camposDesc10  { font-size: 10px; }
 
   .registro-clase-foto img {
-    max-height: 100px;
-    max-width: 130px;
+    max-height: 120px;
+    max-width: 150px;
   }
 
-  .registro-clase-practica tr.fila-clase td { height: 14px; }
-  .registro-clase-teoria tr.fila-teoria td { height: 13px; }
-  .registro-clase-instructor .observaciones td { height: 28px; }
+  .registro-clase-practica tr.fila-clase td { height: 18px; }
+  .registro-clase-teoria tr.fila-teoria td { height: 16px; }
+  .registro-clase-instructor .observaciones td { height: 36px; }
 
   @media print {
     @page {
       size: letter portrait;
-      margin: 0.12in 0.18in;
+      margin: 0.15in 0.2in;
     }
 
     html, body {
@@ -52,54 +52,60 @@
 
     .informe-document {
       max-width: none !important;
-      width: auto !important;
+      width: 100% !important;
       padding: 0 !important;
-      margin: 0 auto !important;
+      margin: 0 !important;
     }
 
     .registro-clase-sheet {
-      width: 8.15in;
-      max-width: 8.15in;
-      min-height: 0;
+      width: 100% !important;
+      max-width: none !important;
+      min-height: 10.7in;
+      height: 10.7in;
+      box-sizing: border-box;
       page-break-inside: avoid;
       page-break-after: avoid;
     }
 
+    .registro-clase-sheet table[width="850"],
     .registro-clase-sheet table.sample {
-      width: 100%;
-      max-width: 100%;
+      width: 100% !important;
+      max-width: 100% !important;
     }
 
-    .registro-clase-sheet .camposDescN16 { font-size: 12px !important; }
+    .registro-clase-sheet .camposDescN16 { font-size: 14px !important; }
     .registro-clase-sheet .camposDescN12,
-    .registro-clase-sheet .camposDesc12  { font-size: 9px !important; }
+    .registro-clase-sheet .camposDesc12  { font-size: 11px !important; }
     .registro-clase-sheet .camposDescN11,
-    .registro-clase-sheet .camposDesc11  { font-size: 8px !important; }
-    .registro-clase-sheet .camposDesc10  { font-size: 7px !important; }
+    .registro-clase-sheet .camposDesc11  { font-size: 10px !important; }
+    .registro-clase-sheet .camposDesc10  { font-size: 9px !important; }
 
     .registro-clase-sheet td,
     .registro-clase-sheet th {
-      padding: 0 2px !important;
-      line-height: 1.05 !important;
+      padding: 2px 4px !important;
+      line-height: 1.15 !important;
     }
 
-    .registro-clase-header td { height: 0.42in; }
+    .registro-clase-header td { height: 0.36in; }
 
-    .registro-clase-alumno td { height: 0.17in; }
+    .registro-clase-alumno td { height: 0.22in; }
 
     .registro-clase-foto img {
-      max-height: 0.88in !important;
-      max-width: 1.1in !important;
+      max-height: 1.22in !important;
+      max-width: 1.48in !important;
       width: auto !important;
     }
 
-    .registro-clase-practica tr.fila-clase td { height: 0.132in; }
+    /* 30 filas práctica — reparten altura restante de la hoja */
+    .registro-clase-practica tr.fila-clase td { height: 0.193in; }
 
-    .registro-clase-teoria tr.fila-teoria td { height: 0.122in; }
+    .registro-clase-teoria tr.fila-teoria td { height: 0.158in; }
 
-    .registro-clase-instructor .observaciones td { height: 0.32in; }
+    .registro-clase-instructor tr:not(.observaciones) td { height: 0.26in; }
 
-    .registro-clase-footer td { height: 0.12in; }
+    .registro-clase-instructor .observaciones td { height: 0.52in; }
+
+    .registro-clase-footer td { height: 0.16in; }
 
     .imprimirlink { display: none !important; }
   }
@@ -123,7 +129,7 @@
     <td><table width="850" border="0" cellspacing="0" cellpadding="0">
       <tr>
         <td width="20%" valign="top"><div align="center" class="registro-clase-foto">
-           <%= persona_informe_foto(@personastramite.persona, height: 100, width: 130) %>
+           <%= persona_informe_foto(@personastramite.persona, height: 120, width: 150) %>
           </div></td>
         <td width="80%"><table width="100%"  border="0" cellspacing="0" cellpadding="0" class="sample registro-clase-alumno">
           <tr>
