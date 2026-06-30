@@ -76,27 +76,82 @@ module ApplicationHelper
   end
 
   def informe_image_tag(source, options = {})
-    if defined?(request) && request.format.pdf?
-      wicked_pdf_image_tag(source, options)
+    if pdf_request?
+      src = informe_image_data_uri(source)
+      return '' if src.blank?
+
+      tag(:img, options.merge(src: src))
     else
       image_tag(source, options)
     end
   end
 
   def persona_informe_foto(persona, height: 120, width: 120)
-    if persona.personasimagen_file_name.present? && persona.personasimagen.path.present?
-      informe_image_tag persona.personasimagen.path, height: height, width: width, border: 0, title: 'Fotografia'
+    img_opts = { height: height, width: width, border: 0, alt: 'Fotografia' }
+
+    if persona.personasimagen_file_name.present?
+      path = persona.personasimagen.path.presence ||
+             Rails.root.join(
+               'public/system/personasimagenes',
+               persona.id.to_s,
+               'original',
+               persona.personasimagen_file_name
+             ).to_s
+      informe_image_tag(path, img_opts)
     else
-      informe_image_tag 'user_img.png', height: height, width: width, title: 'Sin Fotografía'
+      informe_image_tag('blankSilhouetteMale.png', img_opts.merge(alt: 'Sin Fotografia'))
     end
   end
 
   def diploma_background_url
-    image_path = Rails.root.join('app/assets/images/diploma2.png')
-    if defined?(request) && request.format.pdf?
-      "file://#{image_path}"
+    if pdf_request?
+      informe_image_data_uri('diploma2.png')
     else
       asset_path('diploma2.png')
+    end
+  end
+
+  def pdf_request?
+    defined?(request) && request.format.pdf?
+  end
+
+  def informe_image_data_uri(source)
+    path = resolve_informe_image_path(source)
+    return '' unless path && File.file?(path)
+
+    mime = informe_image_mime(path)
+    data = Base64.strict_encode64(File.binread(path))
+    "data:#{mime};base64,#{data}"
+  rescue StandardError => e
+    Rails.logger.warn("informe_image_data_uri: #{e.message}") if defined?(Rails)
+    ''
+  end
+
+  def resolve_informe_image_path(source)
+    source = source.to_s
+
+    return source if source.start_with?('/') && File.file?(source)
+
+    public_system = Rails.root.join('public', source.delete_prefix('/'))
+    return public_system.to_s if source.start_with?('/system/') && File.file?(public_system)
+
+    asset_file = Rails.root.join('app/assets/images', source)
+    return asset_file.to_s if File.file?(asset_file)
+
+    if (asset = Rails.application.assets&.find_asset(source))
+      return asset.filename if File.file?(asset.filename)
+    end
+
+    nil
+  end
+
+  def informe_image_mime(path)
+    case File.extname(path).downcase
+    when '.png'  then 'image/png'
+    when '.jpg', '.jpeg' then 'image/jpeg'
+    when '.gif'  then 'image/gif'
+    when '.webp' then 'image/webp'
+    else 'image/png'
     end
   end
 
