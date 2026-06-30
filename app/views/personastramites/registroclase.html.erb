@@ -41,7 +41,7 @@
   @media print {
     @page {
       size: letter portrait;
-      margin: 0.15in 0.2in;
+      margin: 0.1in 0.15in;
     }
 
     html, body {
@@ -60,8 +60,7 @@
     .registro-clase-sheet {
       width: 100% !important;
       max-width: none !important;
-      min-height: 10.7in;
-      height: 10.7in;
+      min-height: 10.8in;
       box-sizing: border-box;
       page-break-inside: avoid;
       page-break-after: avoid;
@@ -73,39 +72,38 @@
       max-width: 100% !important;
     }
 
-    .registro-clase-sheet .camposDescN16 { font-size: 14px !important; }
+    .registro-clase-sheet .camposDescN16 { font-size: 15px !important; }
     .registro-clase-sheet .camposDescN12,
-    .registro-clase-sheet .camposDesc12  { font-size: 11px !important; }
+    .registro-clase-sheet .camposDesc12  { font-size: 12px !important; }
     .registro-clase-sheet .camposDescN11,
-    .registro-clase-sheet .camposDesc11  { font-size: 10px !important; }
-    .registro-clase-sheet .camposDesc10  { font-size: 9px !important; }
+    .registro-clase-sheet .camposDesc11  { font-size: 11px !important; }
+    .registro-clase-sheet .camposDesc10  { font-size: 10px !important; }
 
     .registro-clase-sheet td,
     .registro-clase-sheet th {
-      padding: 2px 4px !important;
-      line-height: 1.15 !important;
+      padding: 2px 5px !important;
+      line-height: 1.18 !important;
     }
 
-    .registro-clase-header td { height: 0.36in; }
+    .registro-clase-header td { height: 0.38in; }
 
-    .registro-clase-alumno td { height: 0.22in; }
+    .registro-clase-alumno td { height: 0.24in; }
 
     .registro-clase-foto img {
-      max-height: 1.22in !important;
-      max-width: 1.48in !important;
+      max-height: 1.28in !important;
+      max-width: 1.55in !important;
       width: auto !important;
     }
 
-    /* 30 filas práctica — reparten altura restante de la hoja */
-    .registro-clase-practica tr.fila-clase td { height: 0.193in; }
+    .registro-clase-practica tr.fila-clase td { height: 0.198in; }
 
-    .registro-clase-teoria tr.fila-teoria td { height: 0.158in; }
+    .registro-clase-teoria tr.fila-teoria td { height: 0.164in; }
 
-    .registro-clase-instructor tr:not(.observaciones) td { height: 0.26in; }
+    .registro-clase-instructor tr:not(.observaciones) td { height: 0.28in; }
 
-    .registro-clase-instructor .observaciones td { height: 0.52in; }
+    .registro-clase-instructor .observaciones td { height: 0.58in; }
 
-    .registro-clase-footer td { height: 0.16in; }
+    .registro-clase-footer td { height: 0.17in; }
 
     .imprimirlink { display: none !important; }
   }
@@ -114,7 +112,7 @@
 <div class="registro-clase-sheet" align="center">
 <table width="850" border="0" cellpadding="0" cellspacing="0" class="sample registro-clase-header">
   <tr>
-    <td width="250" rowspan="2" valign="middle"><div align="center"><%= informe_image_tag 'logo_heroica.png', style: 'max-width:220px; max-height:80px;' %></div></td>
+    <td width="250" rowspan="2" valign="middle"><div align="center"><%= informe_image_tag 'logo_heroica.png', style: 'max-width:240px; max-height:85px;' %></div></td>
     <td width="395" rowspan="2"><div align="center" class="camposDescN16">REGISTRO DE CLASES <br/>PRACTICAS Y TEORICAS </div></td>
     <td width="92"><div align="center" class="camposDesc12">VERSION</div></td>
     <td width="113"><div align="center" class="camposDesc12">03</div></td>
