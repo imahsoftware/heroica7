@@ -75,6 +75,31 @@ module ApplicationHelper
     "fa #{icon}"
   end
 
+  def informe_image_tag(source, options = {})
+    if defined?(request) && request.format.pdf?
+      wicked_pdf_image_tag(source, options)
+    else
+      image_tag(source, options)
+    end
+  end
+
+  def persona_informe_foto(persona, height: 120, width: 120)
+    if persona.personasimagen_file_name.present? && persona.personasimagen.path.present?
+      informe_image_tag persona.personasimagen.path, height: height, width: width, border: 0, title: 'Fotografia'
+    else
+      informe_image_tag 'user_img.png', height: height, width: width, title: 'Sin Fotografía'
+    end
+  end
+
+  def diploma_background_url
+    image_path = Rails.root.join('app/assets/images/diploma2.png')
+    if defined?(request) && request.format.pdf?
+      "file://#{image_path}"
+    else
+      asset_path('diploma2.png')
+    end
+  end
+
   def irregular_types(type)
     case type
     when 'alert'

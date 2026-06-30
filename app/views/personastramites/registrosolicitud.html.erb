@@ -6,7 +6,7 @@
     <tr>
       <td width="250" rowspan="2" valign="middle">
         <div align="center">
-          <%= image_tag 'logo_heroica.png', style: 'max-width:220px; max-height:80px;' %>
+          <%= informe_image_tag 'logo_heroica.png', style: 'max-width:220px; max-height:80px;' %>
         </div>
       </td>
       <td width="395" rowspan="2">
@@ -30,7 +30,7 @@
   </table>
 
   <%# ── Datos del alumno ───────────────────────────────────────────────────── %>
-  <table width="850" border="0" cellspacing="5" cellpadding="0">
+  <table width="850" border="0" cellspacing="0" cellpadding="0" class="informe-bloque">
     <tr>
       <td width="30%" valign="top">
         <table width="100%" border="0" cellspacing="0" cellpadding="0" class="sample">
@@ -45,12 +45,7 @@
           <tr>
             <td width="50%" height="120" class="camposDescN12">
               <div align="center">
-                <% if @personastramite.persona.personasimagen_file_name %>
-                  <img src="/system/personasimagenes/<%= @personastramite.persona_id %>/original/<%= @personastramite.persona.personasimagen_file_name rescue nil %>"
-                       height="120" width="120" border="0" title="Fotografia"/>
-                <% else %>
-                  <%= image_tag 'user_img.png', height: 100, width: 100, title: 'Sin Fotografía' %>
-                <% end %>
+                <%= persona_informe_foto(@personastramite.persona, height: 120, width: 120) %>
               </div>
             </td>
             <td width="50%" height="120" class="camposDesc11" valign="bottom">
@@ -187,7 +182,7 @@
   <%# ── Declaración ────────────────────────────────────────────────────────── %>
   <table width="850" border="0" cellspacing="0" cellpadding="0" class="sample">
     <tr>
-      <td height="50">
+      <td>
         <div align="center" class="camposDescN14">
           Declaro que toda la informacion que suministrare durante el proceso sera verdadera
           y acepto cumplir con los requisitos para la formacion a la que aspiro y proporcionare

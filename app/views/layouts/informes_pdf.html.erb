@@ -1,28 +1,21 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html>
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title><%= ENV['NOMBRE_APLICACION'] %></title>
-    <%= csrf_meta_tags %>
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <meta charset="utf-8"/>
+    <%= wicked_pdf_stylesheet_link_tag 'ceasoft' %>
     <style>
-      html, body {
-        background: #ffffff !important;
+      body {
         margin: 0;
         padding: 0;
+        color: #000;
+        background: #fff;
       }
       .informe-document {
         width: 100%;
         max-width: 850px;
         margin: 0 auto;
-        padding: 10px 0 20px;
       }
-      .imprimirlink {
-        color: #1a5276;
-        font-weight: bold;
-        text-decoration: none;
-      }
-      /* Tablas informe: linea negra delgada */
+      /* Tablas informe: linea negra delgada (override ceasoft .sample outset/inset) */
       .informe-document table.sample {
         border-collapse: collapse;
         border-spacing: 0;
@@ -47,10 +40,10 @@
         padding: 0;
         vertical-align: top;
       }
-      @media print {
-        .imprimirlink { display: none; }
-        @page { size: letter portrait; margin: 10mm; }
-      }
+      .imprimirlink { display: none; }
+      table { page-break-inside: auto; }
+      tr    { page-break-inside: avoid; page-break-after: auto; }
+      td, th { page-break-inside: avoid; }
     </style>
   </head>
   <body>

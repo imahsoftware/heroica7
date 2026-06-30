@@ -90,6 +90,7 @@ class PersonastramitesController < ApplicationController
                      .last
     @horario      = programacion&.tiposhorario&.descripcion
     @fechainicial = programacion&.fecha_inicial&.strftime('%Y-%m-%d')
+    respond_informe_pdf("registro_clase_#{@personastramite.id}")
   end
 
   # GET /personas/:persona_id/personastramites/:id/registrosolicitud
@@ -102,16 +103,19 @@ class PersonastramitesController < ApplicationController
     @fechainicial     = programacion&.fecha_inicial&.strftime('%Y-%m-%d')
     @teohorario       = programacion&.fecha_teoria&.strftime('%I:%M %p')
     @teofechainicial  = programacion&.fecha_teoria&.strftime('%Y-%m-%d')
+    respond_informe_pdf("registro_solicitud_#{@personastramite.id}")
   end
 
   # GET /personas/:persona_id/personastramites/:id/diploma
   def diploma
     @nombre = params[:nombredip]
+    respond_informe_pdf("diploma_#{@personastramite.id}", orientation: 'Landscape')
   end
 
   # GET /personas/:persona_id/personastramites/:id/acuerdocomercial
   def acuerdocomercial
     @teoricas, @taller, @practicas = horas_por_categoria(@personastramite.categoria_id)
+    respond_informe_pdf("acuerdo_comercial_#{@personastramite.id}")
   end
 
   # GET /personas/:persona_id/personastramites/:id/teorico
@@ -239,6 +243,24 @@ class PersonastramitesController < ApplicationController
     when 4 then [30,  5, 30]
     when 5, 6 then [20, 10, 15]
     else [0, 0, 0]
+    end
+  end
+
+  def respond_informe_pdf(filename, orientation: 'Portrait')
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: filename,
+               template: "personastramites/#{action_name}",
+               formats: [:html],
+               layout: 'informes_pdf',
+               encoding: 'UTF-8',
+               page_size: 'Letter',
+               orientation: orientation,
+               margin: { top: 12, bottom: 12, left: 12, right: 12 },
+               disposition: 'inline',
+               print_media_type: true
+      end
     end
   end
 end
