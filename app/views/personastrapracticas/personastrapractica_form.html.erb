@@ -49,6 +49,12 @@
     }
 
     .no-print { display: none !important; }
+
+    td.practica-foto img {
+      width: 150px !important;
+      height: 120px !important;
+      max-width: 150px !important;
+    }
   }
 </style>
 
@@ -72,12 +78,12 @@
   <table width="850" border="0" cellspacing="0" cellpadding="0" class="informe-bloque">
     <tr>
       <td>
-        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <table width="850" border="0" cellspacing="0" cellpadding="0" class="informe-alumno">
           <tr>
-            <td width="20%" valign="top"><div align="center">
+            <td valign="top" class="practica-foto"><div align="center">
               <%= persona_informe_foto(@personastramite.persona, height: 120, width: 150) %>
             </div></td>
-            <td width="80%"><table width="100%"  border="0" cellspacing="0" cellpadding="0" class="sample">
+            <td valign="top" class="practica-datos"><table width="100%" border="0" cellspacing="0" cellpadding="0" class="sample">
               <tr>
                 <td width="20%" height="20" class="camposDescN12"><div align="left">Alumno:</div></td>
                 <td colspan="3" class="camposDesc12"><div align="left">&nbsp;<%=@personastramite.persona.identificacion rescue nil%> - <%=@personastramite.persona.nombres rescue nil%></div></td>

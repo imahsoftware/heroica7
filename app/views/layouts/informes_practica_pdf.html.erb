@@ -26,11 +26,32 @@
         width: 850px;
         margin: 0 auto;
       }
-      .informe-document table[width="850"],
-      .informe-document table.sample {
+      .informe-document table[width="850"] {
         width: 850px !important;
         max-width: 850px !important;
+      }
+      .informe-document table.informe-alumno {
+        width: 850px !important;
         table-layout: fixed;
+        border-collapse: collapse;
+      }
+      .informe-document table.informe-alumno td.practica-foto {
+        width: 170px !important;
+        max-width: 170px !important;
+        vertical-align: top;
+        padding: 4px;
+      }
+      .informe-document table.informe-alumno td.practica-datos {
+        width: 680px !important;
+        vertical-align: top;
+        padding: 0;
+      }
+      .informe-document td.practica-foto img {
+        display: block;
+        width: 150px !important;
+        height: 120px !important;
+        max-width: 150px !important;
+        margin: 0 auto;
       }
       .informe-document .no-print {
         display: none !important;
@@ -58,6 +79,10 @@
       .informe-document table.informe-bloque > tbody > tr > td {
         padding: 0;
         vertical-align: top;
+        page-break-inside: auto !important;
+      }
+      .informe-document br {
+        display: none;
       }
       table { page-break-inside: auto; }
       thead { display: table-header-group; }

@@ -1,10 +1,20 @@
 <style type="text/css">
-  /* Responsive: keep layout, no horizontal scroll */
-  table.sample,
-  table[width="850"] {
-    width: 100% !important;
-    max-width: 100% !important;
-    table-layout: fixed;
+  /* Responsive: solo pantalla edicion, no PDF/impresion */
+  @media screen {
+    table.sample,
+    table[width="850"] {
+      width: 100% !important;
+      max-width: 100% !important;
+      table-layout: fixed;
+    }
+
+    input.campo,
+    textarea.campoMultiLinea,
+    select.span2,
+    input.campodisabled {
+      width: 100% !important;
+      box-sizing: border-box;
+    }
   }
 
   td, th {
@@ -17,16 +27,11 @@
     height: auto;
   }
 
-  input.campo,
-  textarea.campoMultiLinea,
-  select.span2,
-  input.campodisabled {
-    width: 100% !important;
-    box-sizing: border-box;
-  }
-
-  /* Print: mimic legacy Rails2 (fixed 850px, inputs honor size=) */
   @media print {
+    body {
+      background: #fff !important;
+    }
+
     table.sample,
     table[width="850"] {
       width: 850px !important;
@@ -43,15 +48,21 @@
     }
 
     .no-print { display: none !important; }
+
+    td.practica-foto img {
+      width: 150px !important;
+      height: 120px !important;
+      max-width: 150px !important;
+    }
   }
 </style>
 
 <%= form_for(@personastrampractica, html: { multipart: true }) do |f| %>
-<% @personastramite = Personastramite.find(@personastrampractica.personastramite_id) %>
+<% @personastramite ||= Personastramite.find(@personastrampractica.personastramite_id) %>
   <br/><div align="center">
   <table width="850" border="0" cellpadding="0" cellspacing="0" class="sample">
     <tr>
-      <td width="250" height="40" rowspan="2" valign="middle"><div align="center"><%= image_tag 'logo_heroica.png', style: 'max-width:220px; max-height:80px;' %></div></td>
+      <td width="250" height="40" rowspan="2" valign="middle"><div align="center"><%= informe_image_tag 'logo_heroica.png', style: 'max-width:220px; max-height:80px;' %></div></td>
       <td width="395" height="40" rowspan="2"><div align="center" class="camposDescN16">PRUEBA PRACTICA DE CONDUCCION</div></td>
       <td width="92" height="40"><div align="center">VERSION</div></td>
       <td width="113"><div align="center">1</div></td>
@@ -61,19 +72,15 @@
       <td><div align="center">06/01/2011</div></td>
     </tr>
   </table>
-  <table width="850"  border="0" cellspacing="0" cellpadding="0">
+  <table width="850" border="0" cellspacing="0" cellpadding="0" class="informe-bloque">
     <tr>
       <td>
-        <table width="100%"  border="0" cellspacing="0" cellpadding="0">
-         <tr>
-          <td width="20%" valign="top"><div align="center">
-            <%  if @personastramite.persona.personasimagen_file_name %>
-              <img src="/system/personasimagenes/<%=@personastramite.persona_id%>/original/<%=@personastramite.persona.personasimagen_file_name rescue nil%>" height="120" width="150" border="0" title="Fotografia" />
-            <%  else %>
-              <img src="/images/noFoto.jpg" border="0" height="100" width="100" title="No Fotografia" />
-            <%  end %>
-          </div></td>
-          <td width="80%"><table width="100%"  border="0" cellspacing="0" cellpadding="0" class="sample">
+        <table width="850" border="0" cellspacing="0" cellpadding="0" class="informe-alumno">
+          <tr>
+            <td valign="top" class="practica-foto"><div align="center">
+              <%= persona_informe_foto(@personastramite.persona, height: 120, width: 150) %>
+            </div></td>
+            <td valign="top" class="practica-datos"><table width="100%" border="0" cellspacing="0" cellpadding="0" class="sample">
             <tr>
               <td width="20%" height="20" class="camposDescN12"><div align="left">Alumno:</div></td>
               <td colspan="3" class="camposDesc12"><div align="left">&nbsp;<%=@personastramite.persona.identificacion rescue nil%> - <%=@personastramite.persona.nombres rescue nil%></div></td>
@@ -117,8 +124,8 @@
                 <%= calendar_date_select "personastrampractica", "fecha_vencimiento", :year_range =>[1930,2030], :class=> "campo", :size => 10, :time => false%> <%= form_field_error(f, :fecha_vencimiento)%></div></td>
             </tr>
           </table></td>
-        </tr>
-      </table>
+          </tr>
+        </table><br/>
         <table width="850" border="0" cellspacing="0" cellpadding="0" class="sample">
           <thead>
           <tr>
@@ -708,7 +715,8 @@
           <div style="text-align: right;">
             <%= f.submit "Guardar", data: { disable_with: "Guardando..." }, class: "buttonAsLink" %>
             &nbsp;&nbsp;
-            <a href="javascript:window.print()" class="imprimirlink">Imprimir</a>
+            <%= link_to 'Imprimir', edit_personastrampractica_path(@personastrampractica, format: :pdf),
+                        class: 'imprimirlink', target: '_blank', rel: 'noopener' %>
           </div>
         </div>
       </td>

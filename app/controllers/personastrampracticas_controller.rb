@@ -2,11 +2,15 @@
 
 class PersonastrampracticasController < ApplicationController
   before_action :set_personastrampractica, only: [:edit, :update]
+  before_action :set_personastramite_for_form, only: [:edit, :update, :create]
 
   layout 'informes'
 
   def edit
-    render 'personastrampractica_form'
+    respond_to do |format|
+      format.html { render 'personastrampractica_form' }
+      format.pdf  { render_practica_pdf }
+    end
   end
 
   def create
@@ -49,6 +53,26 @@ class PersonastrampracticasController < ApplicationController
 
   def set_personastrampractica
     @personastrampractica = Personastrampractica.find(params[:id])
+  end
+
+  def set_personastramite_for_form
+    return unless @personastrampractica&.personastramite_id
+
+    @personastramite = Personastramite.find(@personastrampractica.personastramite_id)
+  end
+
+  def render_practica_pdf
+    render pdf: "prueba_practica_moto_#{@personastrampractica.id}",
+           template: 'personastrampracticas/personastrampractica_form',
+           formats: [:html],
+           layout: 'informes_practica_pdf',
+           encoding: 'UTF-8',
+           page_size: 'Letter',
+           orientation: 'Portrait',
+           margin: { top: 8, bottom: 8, left: 8, right: 8 },
+           disposition: 'inline',
+           print_media_type: true,
+           disable_smart_shrinking: true
   end
 
   def personastrampractica_params
