@@ -1,20 +1,25 @@
 <style>
   .registro-clase-sheet {
-    width: 100%;
-    max-width: 8.5in;
+    width: 850px;
+    max-width: 850px;
     margin: 0 auto;
     font-family: Tahoma, Geneva, Verdana, sans-serif;
   }
 
+  .registro-clase-sheet table[width="850"],
   .registro-clase-sheet table.sample {
-    width: 100%;
+    width: 850px !important;
+    max-width: 850px !important;
     border-collapse: collapse;
+    table-layout: fixed;
   }
 
   .registro-clase-sheet table.sample td,
   .registro-clase-sheet table.sample th {
     border: 1px solid #000;
     vertical-align: middle;
+    padding: 2px 4px;
+    line-height: 1.1;
   }
 
   .registro-clase-sheet .camposDescN16 { font-size: 16px; font-weight: bold; }
@@ -25,14 +30,18 @@
   .registro-clase-sheet .camposDesc10  { font-size: 10px; }
 
   .registro-clase-foto img {
-    max-height: 120px;
-    max-width: 150px;
+    max-height: 100px;
+    max-width: 130px;
   }
+
+  .registro-clase-practica tr.fila-clase td { height: 14px; }
+  .registro-clase-teoria tr.fila-teoria td { height: 13px; }
+  .registro-clase-instructor .observaciones td { height: 28px; }
 
   @media print {
     @page {
       size: letter portrait;
-      margin: 0.2in 0.25in;
+      margin: 0.12in 0.18in;
     }
 
     html, body {
@@ -43,54 +52,61 @@
 
     .informe-document {
       max-width: none !important;
-      width: 100% !important;
+      width: auto !important;
       padding: 0 !important;
-      margin: 0 !important;
+      margin: 0 auto !important;
     }
 
     .registro-clase-sheet {
-      width: 100%;
-      max-width: none;
-      min-height: 10.1in;
+      width: 8.15in;
+      max-width: 8.15in;
+      min-height: 0;
       page-break-inside: avoid;
       page-break-after: avoid;
     }
 
-    .registro-clase-sheet .camposDescN16 { font-size: 14px !important; }
+    .registro-clase-sheet table.sample {
+      width: 100%;
+      max-width: 100%;
+    }
+
+    .registro-clase-sheet .camposDescN16 { font-size: 12px !important; }
     .registro-clase-sheet .camposDescN12,
-    .registro-clase-sheet .camposDesc12  { font-size: 11px !important; }
+    .registro-clase-sheet .camposDesc12  { font-size: 9px !important; }
     .registro-clase-sheet .camposDescN11,
-    .registro-clase-sheet .camposDesc11  { font-size: 10px !important; }
-    .registro-clase-sheet .camposDesc10  { font-size: 9px !important; }
+    .registro-clase-sheet .camposDesc11  { font-size: 8px !important; }
+    .registro-clase-sheet .camposDesc10  { font-size: 7px !important; }
 
     .registro-clase-sheet td,
     .registro-clase-sheet th {
-      padding: 2px 4px !important;
-      line-height: 1.15 !important;
+      padding: 0 2px !important;
+      line-height: 1.05 !important;
     }
 
-    .registro-clase-header td { height: 0.6in; }
+    .registro-clase-header td { height: 0.42in; }
 
-    .registro-clase-alumno td { height: 0.24in; }
+    .registro-clase-alumno td { height: 0.17in; }
 
     .registro-clase-foto img {
-      max-height: 1.25in !important;
-      max-width: 1.55in !important;
+      max-height: 0.88in !important;
+      max-width: 1.1in !important;
       width: auto !important;
     }
 
-    .registro-clase-practica tr.fila-clase td { height: 0.19in; }
+    .registro-clase-practica tr.fila-clase td { height: 0.132in; }
 
-    .registro-clase-teoria tr.fila-teoria td { height: 0.16in; }
+    .registro-clase-teoria tr.fila-teoria td { height: 0.122in; }
 
-    .registro-clase-instructor .observaciones td { height: 0.7in; }
+    .registro-clase-instructor .observaciones td { height: 0.32in; }
+
+    .registro-clase-footer td { height: 0.12in; }
 
     .imprimirlink { display: none !important; }
   }
 </style>
 
 <div class="registro-clase-sheet" align="center">
-<table width="100%" border="0" cellpadding="0" cellspacing="0" class="sample registro-clase-header">
+<table width="850" border="0" cellpadding="0" cellspacing="0" class="sample registro-clase-header">
   <tr>
     <td width="250" rowspan="2" valign="middle"><div align="center"><%= informe_image_tag 'logo_heroica.png', style: 'max-width:220px; max-height:80px;' %></div></td>
     <td width="395" rowspan="2"><div align="center" class="camposDescN16">REGISTRO DE CLASES <br/>PRACTICAS Y TEORICAS </div></td>
@@ -102,12 +118,12 @@
     <td><div align="center" class="camposDesc12">28/04/2011</div></td>
   </tr>
 </table>
-<table width="100%"  border="0" cellspacing="0" cellpadding="0">
+<table width="850" border="0" cellspacing="0" cellpadding="0">
   <tr>
-    <td><table width="100%"  border="0" cellspacing="0" cellpadding="0">
+    <td><table width="850" border="0" cellspacing="0" cellpadding="0">
       <tr>
         <td width="20%" valign="top"><div align="center" class="registro-clase-foto">
-           <%= persona_informe_foto(@personastramite.persona, height: 120, width: 150) %>
+           <%= persona_informe_foto(@personastramite.persona, height: 100, width: 130) %>
           </div></td>
         <td width="80%"><table width="100%"  border="0" cellspacing="0" cellpadding="0" class="sample registro-clase-alumno">
           <tr>
@@ -142,12 +158,12 @@
         </table></td>
       </tr>
     </table>
-<table width="100%" border="0" cellspacing="0" cellpadding="0" class="sample registro-clase-practica">
+<table width="850" border="0" cellspacing="0" cellpadding="0" class="sample registro-clase-practica">
   <tr>
     <td><div align="center" class="camposDescN11">CLASE</div></td>
-    <td width="14%"><div align="center" class="camposDescN11">FECHA</div></td>
-    <td width="51%"><div align="center" class="camposDescN11">TEMA</div></td>
-    <td width="28%"><div align="center" class="camposDescN11">FIRMA</div></td>
+    <td width="122"><div align="center" class="camposDescN11">FECHA</div></td>
+    <td width="428"><div align="center" class="camposDescN11">TEMA</div></td>
+    <td width="236"><div align="center" class="camposDescN11">FIRMA</div></td>
   </tr>
   <% (1..30).each do |n| %>
     <tr class="fila-clase">
@@ -161,7 +177,7 @@
     </td>
   </tr>
 </table>
-<table width="100%" border="0" cellspacing="0" cellpadding="0" class="sample registro-clase-teoria">
+<table width="850" border="0" cellspacing="0" cellpadding="0" class="sample registro-clase-teoria">
   <tr>
     <td rowspan="9" width="200"><div align="center" class="camposDescN12">FORMACION TEORICA Y BASICA APLICADA </div></td>
   </tr>
@@ -188,14 +204,14 @@
     </tr>
   <% end %>
 </table>
-<table width="100%" border="0" cellspacing="0" cellpadding="0" class="sample registro-clase-instructor">
+<table width="850" border="0" cellspacing="0" cellpadding="0" class="sample registro-clase-instructor">
   <tr>
     <td  colspan="3"><div align="center" class="camposDescN12">ESTE ESPACIO ES DE USO EXCLUSIVO DEL INSTRUCTOR DE CONDUCCI&Oacute;N</div></td>
   </tr>
   <tr>
     <td width="30%"><div align="center" class="camposDescN12">APROBACION DEL PROGRAMA PRACTICO</div></td>
     <td width="29%"><div align="center" class="camposDescN12">
-      <table width="100%" height="36"  border="0" cellpadding="0" cellspacing="0" class="sample">
+      <table width="100%" border="0" cellpadding="0" cellspacing="0" class="sample">
         <tr>
           <td width="60%">CUMPLIO</td>
           <td width="20%"><div align="center">SI</div></td>
@@ -212,7 +228,7 @@
     <td colspan="3">&nbsp;</td>
   </tr>
 </table>
-<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<table width="850" border="0" cellspacing="0" cellpadding="0" class="registro-clase-footer">
   <tr>
     <td width="60%" class="camposDesc10"><div align="left"><%= Time.now.strftime("%Y-%m-%d %X") %> - <%= User.find(is_admin).nombre rescue nil %></div></td>
     <td width="40%" class="camposDesc10"><div align="right"><a href="javascript:window.print()" class="imprimirlink">Imprimir</a>&nbsp;&nbsp;</div></td>
