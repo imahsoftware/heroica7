@@ -1,12 +1,13 @@
 <style>
   .registro-clase-sheet {
     width: 850px;
-    max-width: 850px;
+    max-width: 100%;
     margin: 0 auto;
     font-family: Tahoma, Geneva, Verdana, sans-serif;
+    overflow-x: auto;
   }
 
-  .registro-clase-sheet table[width="850"],
+  .informe-document .registro-clase-sheet table[width="850"],
   .registro-clase-sheet table.sample {
     width: 850px !important;
     max-width: 850px !important;
@@ -20,9 +21,12 @@
     vertical-align: middle;
     padding: 2px 4px;
     line-height: 1.1;
+    box-sizing: border-box;
+    overflow: hidden;
+    word-wrap: break-word;
   }
 
-  .registro-clase-sheet .camposDescN16 { font-size: 16px; font-weight: bold; }
+  .registro-clase-sheet .camposDescN16 { font-size: 14px; font-weight: bold; line-height: 1.2; }
   .registro-clase-sheet .camposDescN12 { font-size: 12px; font-weight: bold; }
   .registro-clase-sheet .camposDesc12  { font-size: 12px; }
   .registro-clase-sheet .camposDescN11 { font-size: 11px; font-weight: bold; }
@@ -32,6 +36,28 @@
   .registro-clase-foto img {
     max-height: 120px;
     max-width: 150px;
+  }
+
+  .registro-clase-header .registro-clase-logo img {
+    max-width: 220px !important;
+    max-height: 70px !important;
+    width: auto !important;
+    height: auto !important;
+  }
+
+  .registro-clase-instructor table.registro-clase-cumplio {
+    width: 100% !important;
+    max-width: 100% !important;
+    table-layout: fixed;
+    border-collapse: collapse;
+    border: 0 !important;
+    margin: 0;
+  }
+
+  .registro-clase-instructor table.registro-clase-cumplio td {
+    border: 1px solid #000;
+    padding: 2px 4px;
+    box-sizing: border-box;
   }
 
   .registro-clase-practica tr.fila-clase td { height: 18px; }
@@ -112,8 +138,8 @@
 <div class="registro-clase-sheet" align="center">
 <table width="850" border="0" cellpadding="0" cellspacing="0" class="sample registro-clase-header">
   <tr>
-    <td width="250" rowspan="2" valign="middle"><div align="center"><%= informe_image_tag 'logo_heroica.png', style: 'max-width:240px; max-height:85px;' %></div></td>
-    <td width="395" rowspan="2"><div align="center" class="camposDescN16">REGISTRO DE CLASES <br/>PRACTICAS Y TEORICAS </div></td>
+    <td width="250" rowspan="2" valign="middle"><div align="center" class="registro-clase-logo"><%= informe_image_tag 'logo_heroica.png', style: 'max-width:220px; max-height:70px;' %></div></td>
+    <td width="395" rowspan="2"><div align="center" class="camposDescN16">REGISTRO DE CLASES<br/>PRACTICAS Y TEORICAS</div></td>
     <td width="92"><div align="center" class="camposDesc12">VERSION</div></td>
     <td width="113"><div align="center" class="camposDesc12">03</div></td>
   </tr>
@@ -169,7 +195,7 @@
     <td width="428"><div align="center" class="camposDescN11">TEMA</div></td>
     <td width="236"><div align="center" class="camposDescN11">FIRMA</div></td>
   </tr>
-  <% (1..28).each do |n| %>
+  <% (1..26).each do |n| %>
     <tr class="fila-clase">
       <td><div align="center" class="camposDescN11"><%= n %></div></td>
       <td>&nbsp;</td>
@@ -215,7 +241,7 @@
   <tr>
     <td width="30%"><div align="center" class="camposDescN12">APROBACION DEL PROGRAMA PRACTICO</div></td>
     <td width="29%"><div align="center" class="camposDescN12">
-      <table width="100%" border="0" cellpadding="0" cellspacing="0" class="sample">
+      <table width="100%" border="0" cellpadding="0" cellspacing="0" class="registro-clase-cumplio">
         <tr>
           <td width="60%">CUMPLIO</td>
           <td width="20%"><div align="center">SI</div></td>
