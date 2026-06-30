@@ -48,11 +48,16 @@
       .informe-document table.informe-bloque {
         border-collapse: collapse;
         border-spacing: 0;
-        width: 850px;
+        width: 100%;
       }
       .informe-document table.informe-bloque > tbody > tr > td {
         padding: 0;
         vertical-align: top;
+      }
+      /* Catch-all: any table with a pixel width attribute becomes fluid */
+      table[width] {
+        width: 100% !important;
+        max-width: 100% !important;
       }
       @media print {
         .imprimirlink { display: none; }

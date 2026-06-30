@@ -1,5 +1,16 @@
+<style>
+@media print {
+  @page { size: letter portrait; margin: 5mm 8mm; }
+  body, td, th, div { font-size: 7px !important; line-height: 1.1 !important; }
+  .camposDescN16 { font-size: 10px !important; }
+  .camposDescN12 { font-size: 8px !important; }
+  td, th { padding: 1px 2px !important; }
+  img { max-height: 55px !important; max-width: 70px !important; }
+  br { display: none; }
+}
+</style>
 <br/><div align="center">
-<table width="850" border="0" cellpadding="0" cellspacing="0" class="sample">
+<table width="100%" border="0" cellpadding="0" cellspacing="0" class="sample">
   <tr>
     <td width="250" rowspan="2" valign="middle"><div align="center"><%= informe_image_tag 'logo_heroica.png', style: 'max-width:220px; max-height:80px;' %></div></td>
     <td width="395" rowspan="2"><div align="center" class="camposDescN16">REGISTRO DE CLASES <br/>PRACTICAS Y TEORICAS </div></td>
@@ -11,7 +22,7 @@
     <td><div align="center" class="camposDesc12">28/04/2011</div></td>
   </tr>
 </table>
-<table width="850"  border="0" cellspacing="0" cellpadding="0">
+<table width="100%"  border="0" cellspacing="0" cellpadding="0">
   <tr>
     <td><table width="100%"  border="0" cellspacing="0" cellpadding="0">
       <tr>
@@ -51,12 +62,12 @@
         </table></td>
       </tr>
     </table>
-<table width="850"  border="0" cellspacing="0" cellpadding="0" class="sample">
+<table width="100%"  border="0" cellspacing="0" cellpadding="0" class="sample">
   <tr>
     <td ><div align="center" class="camposDescN11">CLASE</div></td>
-    <td width="122"><div align="center" class="camposDescN11">FECHA</div></td>
-    <td width="428"><div align="center" class="camposDescN11">TEMA</div></td>
-    <td width="236"><div align="center" class="camposDescN11">FIRMA</div></td>
+    <td width="14%"><div align="center" class="camposDescN11">FECHA</div></td>
+    <td width="51%"><div align="center" class="camposDescN11">TEMA</div></td>
+    <td width="28%"><div align="center" class="camposDescN11">FIRMA</div></td>
   </tr>
   <tr>
     <td ><div align="center" class="camposDescN11">1</div></td>
@@ -242,7 +253,7 @@
     </td>
   </tr>
 </table>
-<table width="850"  border="0" cellspacing="0" cellpadding="0" class="sample">
+<table width="100%"  border="0" cellspacing="0" cellpadding="0" class="sample">
   <tr>
     <td rowspan="9" width="200"><div align="center" class="camposDescN12">FORMACION TEORICA Y BASICA APLICADA </div></td>
   </tr>
@@ -295,13 +306,13 @@
     <td>&nbsp;</td>
   </tr>
 </table>
-<table width="850"  border="0" cellspacing="0" cellpadding="0" class="sample">
+<table width="100%"  border="0" cellspacing="0" cellpadding="0" class="sample">
   <tr>
     <td  colspan="3"><div align="center" class="camposDescN12">ESTE ESPACIO ES DE USO EXCLUSIVO DEL INSTRUCTOR DE CONDUCCI&Oacute;N</div></td>
   </tr>
   <tr>
-    <td width="251"><div align="center" class="camposDescN12">APROBACION DEL PROGRAMA PRACTICO</div></td>
-    <td width="243"><div align="center" class="camposDescN12">
+    <td width="30%"><div align="center" class="camposDescN12">APROBACION DEL PROGRAMA PRACTICO</div></td>
+    <td width="29%"><div align="center" class="camposDescN12">
       <table width="100%" height="36"  border="0" cellpadding="0" cellspacing="0" class="sample">
         <tr>
           <td width="60%">CUMPLIO</td>
@@ -310,7 +321,7 @@
         </tr>
       </table>
     </div></td>
-    <td width="356" valign="bottom"><div align="center" class="camposDescN12">FIRMA INSTRUCTOR</div></td>
+    <td width="42%" valign="bottom"><div align="center" class="camposDescN12">FIRMA INSTRUCTOR</div></td>
   </tr>
   <tr>
     <td  colspan="3"><div align="center" class="camposDescN12">OBSERVACIONES</div></td>
@@ -319,7 +330,7 @@
     <td height="30" colspan="3">&nbsp;</td>
   </tr>
 </table>
-<table width="760"  border="0" cellspacing="0" cellpadding="0">
+<table width="100%"  border="0" cellspacing="0" cellpadding="0">
   <tr>
     <td width="60%" height="10" class="camposDesc10"><div align="left"><%=Time.now.strftime("%Y-%m-%d %X")%> - <%=User.find(is_admin).nombre rescue nil%></div></td>
     <td width="40%" height="10" class="camposDesc10"><div align="right"><a href="javascript:window.print()" class="imprimirlink">Imprimir</a>&nbsp;&nbsp;</div></td>
@@ -329,3 +340,4 @@
 </div>
 <br/>
 <br/>
+<script>window.onload = function() { window.print(); };</script>

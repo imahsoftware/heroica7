@@ -1,8 +1,9 @@
 <div align="center">
+  <div style="max-width: 720px; margin: 0 auto;">
   <br>
-  <table width="760" border="0" cellspacing="0" cellpadding="1">
+  <table width="100%" border="0" cellspacing="0" cellpadding="1">
     <tr>
-      <td width="150" valign="center">
+      <td width="20%" valign="center">
         <div align="center">
           <%= image_tag 'logo_heroica.png', style: 'max-width:130px; max-height:110px;' %>
         </div>
@@ -22,9 +23,9 @@
 
   <br>
 
-  <table width="760" border="0" cellspacing="0" cellpadding="1">
+  <table width="100%" border="0" cellspacing="0" cellpadding="1">
     <tr>
-      <td width="550">
+      <td width="72%">
         <table width="100%" border="0" cellpadding="0" cellspacing="0" class="sample">
           <tr>
             <thead><td colspan="4" class="camposDescN11" height="20">INFORMACION CLIENTE</td></thead>
@@ -51,8 +52,8 @@
           </tr>
         </table>
       </td>
-      <td width="10">&nbsp;</td>
-      <td width="200">
+      <td width="1%">&nbsp;</td>
+      <td width="26%">
         <table width="100%" border="0" cellpadding="0" cellspacing="0">
           <tr><td class="camposDescN16"><div align="center">RECIBO DE CAJA</div></td></tr>
           <tr>
@@ -73,14 +74,14 @@
 
   <br>
 
-  <table width="760" height="150" border="0" cellpadding="0" cellspacing="0" class="sample">
+  <table width="100%" height="150" border="0" cellpadding="0" cellspacing="0" class="sample">
     <tr>
       <td valign="top">
         <table width="100%" border="0" cellspacing="0" cellpadding="0" class="sample">
           <thead>
             <tr>
-              <td width="630" class="camposDescN11">Concepto</td>
-              <td width="130" class="camposDescN11"><div align="center">Subtotal</div></td>
+              <td width="83%" class="camposDescN11">Concepto</td>
+              <td width="17%" class="camposDescN11"><div align="center">Subtotal</div></td>
             </tr>
           </thead>
           <tr>
@@ -101,9 +102,9 @@
 
   <br>
 
-  <table width="760" border="0" cellpadding="0" cellspacing="0" class="sample">
+  <table width="100%" border="0" cellpadding="0" cellspacing="0" class="sample">
     <tr valign="top">
-      <td width="400">
+      <td width="53%">
         <table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0" class="sample">
           <tr>
             <td class="camposDesc10">
@@ -115,8 +116,8 @@
           </tr>
         </table>
       </td>
-      <td width="10">&nbsp;</td>
-      <td width="350">
+      <td width="1%">&nbsp;</td>
+      <td width="46%">
         <table width="100%" border="0" cellpadding="0" cellspacing="0" class="sample">
           <tr>
             <td height="30" class="camposDescN12">TOTAL A PAGAR</td>
@@ -127,7 +128,7 @@
     </tr>
   </table>
 
-  <table width="760" border="0" cellpadding="0" cellspacing="0">
+  <table width="100%" border="0" cellpadding="0" cellspacing="0">
     <tr>
       <td width="60%" height="20" class="camposDesc11">
         <div align="left"><%= Time.now.strftime('%Y-%m-%d %H:%M:%S') %> - <%= User.find(is_admin).nombre rescue nil %></div>
@@ -139,4 +140,8 @@
       </td>
     </tr>
   </table>
+  </div>
 </div>
+<script>
+  window.onload = function() { window.print(); };
+</script>
