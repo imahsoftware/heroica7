@@ -35,68 +35,6 @@
       <!-- Navbar Right Menu -->
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
-          <li class="dropdown messages-menu">
-            <div class="navbar-custom-menu">
-              <ul class="nav navbar-nav">
-                <li>
-                  <% if is_auth_a("disponipractica") %>
-                    <%= link_to horarionuevo_programacionesfechas_path, class: 'dropdown-toggle', title: 'Agenda de Programacion'  do %>
-                      <i class="fa fa-car" aria-hidden="true"></i>
-                    <% end %>
-                  <% end %>
-                </li>
-                <li>
-                  <% if is_auth_a("teoricodispo") %>
-                    <%= link_to disponibilidad_agendas_path, class: 'dropdown-toggle', onclick: 'window.open(this.href,"new_window","height=600,width=900,scrollbars=yes");return false;', title: 'Disponibilidad'  do %>
-                      <i class="fa fa-calendar"></i>
-                    <% end %>
-                  <% end %>
-                </li>
-                <%
-                  permit = Usersmodulo.where(user_id: isadmin, modulo_id: 1).exists?
-                %>
-                <% if params[:controller].to_s != 'users' %>
-                  <% if current_user.user2_id.to_s != "" %>
-                    <ul class="nav navbar-nav">
-                      <li>
-                        <%= link_to reestablecesusuario_users_path do %>
-                          <span style="font-size: 12px !important; ">Reestablecer</span>
-
-                        <% end %>
-                      </li>
-                    </ul>
-                  <% end %>
-                <% end %>
-                <% if isimah or permit == true %>
-                  <% if params[:controller].to_s != 'users' %>
-                    <li class="dropdown messages-menu">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
-                        <span class="glyphicon glyphicon-search"></span>
-                      </a>
-                      <ul class="dropdown-menu" style="margin-top: 3px;">
-                        <li>
-                          <% if isimah == true and current_user.user2_id.to_s == "" %>
-                            <%= form_tag cambiousuario_users_path, method: :get, id: "search-form", class: 'navbar-form navbar-left', role: 'search' do %>
-                              <%= hidden_field_tag :user_id %>
-                              <div class="input-group">
-                                <%= autocomplete_field_tag :nombre, '', autocomplete_cambio_user2_users_path(portafolio_id: isportafolio), class: "form-control", id: 'navbar-search-input', id_element: '#user_id', placeholder: "Buscar...", type: "search" %>
-                              </div>
-                            <% end %>
-                            <script type="text/javascript" charset="utf-8">
-                                $('#navbar-search-input').bind('railsAutocomplete.select', function (event, data) {
-                                    $('#search-form').submit()
-                                });
-                            </script>
-                          <% end %>
-
-                        </li>
-                      </ul>
-                    </li>
-                  <% end %>
-                <% end %>
-              </ul>
-            </div>
-          </li>
           <% if isimah or permit == true
                @modulosseguridad = Usersmodulo.joins(:modulo).where(["usersmodulos.user_id = ? and modulos.nivel = ?", isadmin, 4]).select("modulos.*").order("modulos.descripcion")
                parcount = Usersmodulo.joins(:modulo).where(["usersmodulos.user_id = ? and modulos.nivel = ?", isadmin, 4]).count

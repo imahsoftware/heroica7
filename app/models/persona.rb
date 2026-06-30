@@ -6,6 +6,7 @@ class Persona < ApplicationRecord
   has_many :facturas
   has_many :abonos
   has_many :teoricos
+  
   has_many :teoricosresultados
   has_many :programacioneshorarios
 

@@ -34,6 +34,22 @@
     <% end %>
   </div>
 
+  <!-- Acciones admin (solo etapa Datos) -->
+  <% if @user.etapa.to_s == 'A' %>
+    <div class="user-section-actions">
+      <% if @user.unlock_token %>
+        <%= link_to desbloquearusuario_users_path(id: @user.id), data: { confirm: '¿Está seguro?' }, title: 'Desbloquear usuario', class: 'user-action-btn info' do %>
+          <i class="fa fa-unlock"></i> Desbloquear
+        <% end %>
+      <% end %>
+      <% if is_sygma %>
+        <%= link_to resetpass_users_path(id: @user.id), data: { confirm: '¿Está seguro?' }, title: 'Restablecer clave', class: 'user-action-btn warning' do %>
+          <i class="fa fa-key"></i> Reset Clave
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+
   <!-- Navegación de etapas -->
   <div class="user-section-nav">
     <%= link_to edit_user_path(id: @user.id, etapa: 'A'),
@@ -50,6 +66,9 @@
         class: "user-nav-btn #{'active' if @user.etapa == 'C'}",
         title: 'Permisos' do %>
       <i class="fa fa-shield-alt"></i> Permisos
+    <% end %>
+    <%= link_to new_user_path, class: 'user-nav-btn', title: 'Nuevo usuario' do %>
+      <i class="fa fa-plus"></i> Nuevo
     <% end %>
     <%= link_to users_path,
         class: "user-nav-btn",

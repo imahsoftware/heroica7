@@ -1,29 +1,25 @@
 <%= simple_form_for(@user) do |f| %>
   <div class="row">
     <div class="col-md-12">
-      <div class="box" style="border-top: none; border-radius: 6px; box-shadow: 0 2px 12px rgba(0,0,0,0.08);">
+      <div class="box box-usuarios user-form-box <%= @user.new_record? ? 'user-form-box--new' : 'user-form-box--edit' %>">
 
-        <!-- Header -->
-        <div class="box-form-header">
-          <span class="box-title">
-            <i class="fa fa-<%= @user.new_record? ? 'user-plus' : 'user-edit' %>"></i>
-            <%= @user.new_record? ? 'Nuevo Usuario' : "Editando: #{@user.nombre}" %>
-          </span>
-          <div class="pull-right" style="margin-top: -2px;">
-            <%= link_to users_path, class: 'btn btn-xs btn-default', title: 'Volver al listado' do %>
-              <i class="fa fa-arrow-left"></i> Volver
-            <% end %>
-            <%= link_to new_user_path, class: 'btn btn-xs btn-success', title: 'Nuevo usuario' do %>
-              <i class="fa fa-plus"></i> Nuevo
-            <% end %>
+        <% if @user.new_record? %>
+          <div class="box-form-header">
+            <span class="box-title">
+              <i class="fa fa-user-plus"></i> Nuevo Usuario
+            </span>
+            <div class="pull-right user-form-header-actions">
+              <%= link_to users_path, class: 'btn btn-xs btn-default', title: 'Volver al listado' do %>
+                <i class="fa fa-arrow-left"></i> Volver
+              <% end %>
+            </div>
           </div>
-        </div>
+        <% end %>
 
-        <div class="box-body">
-
+        <div class="box-body user-form-body">
           <% if @user.errors.any? %>
-            <div class="alert alert-danger" style="margin-bottom: 12px;">
-              <ul style="margin-bottom: 0; padding-left: 18px;">
+            <div class="alert alert-danger user-form-errors">
+              <ul>
                 <% @user.errors.full_messages.each do |msg| %>
                   <li><%= msg %></li>
                 <% end %>
@@ -31,46 +27,38 @@
             </div>
           <% end %>
 
-          <!-- Fila 1: Identificación, Nombre, Usuario, Correo, Activo -->
+          <p class="section-label">Identificación y contacto</p>
           <div class="row">
-            <div class="col-md-2">
+            <div class="col-md-2 col-sm-4">
               <%= f.input :identificacion,
                   label: 'Identificación',
                   required: false,
                   input_html: { class: 'form-control' } %>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-5 col-sm-8">
               <%= f.input :nombre,
                   label: 'Nombre completo',
                   input_html: { onChange: 'this.value=this.value.toUpperCase()', class: 'form-control input_uppercase' } %>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-2 col-sm-4">
               <%= f.input :username,
                   label: 'Usuario',
                   input_html: { class: 'form-control', autocomplete: 'off' } %>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3 col-sm-8">
               <%= f.input :email,
                   label: 'Correo electrónico',
                   input_html: { class: 'form-control' } %>
             </div>
-            <div class="col-md-1">
-              <%= f.input :activo,
-                  as: :select,
-                  label: 'Activo',
-                  collection: select_sinocorto,
-                  input_html: { class: 'select2 form-control' } %>
-            </div>
           </div>
 
-          <!-- Fila 2: Extensión, Compañía, Observaciones -->
           <div class="row">
-            <div class="col-md-2">
+            <div class="col-md-2 col-sm-4">
               <%= f.input :extension,
                   label: 'Nro. Licencia / Extensión',
                   input_html: { class: 'form-control' } %>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 col-sm-6">
               <%= f.input :portafolio_id,
                   as: :select,
                   label: 'Compañía',
@@ -78,24 +66,30 @@
                   include_blank: 'Seleccionar',
                   input_html: { class: 'select2 form-control' } %>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-2 col-sm-4">
+              <%= f.input :activo,
+                  as: :select,
+                  label: 'Activo',
+                  collection: select_sinocorto,
+                  input_html: { class: 'select2 form-control' } %>
+            </div>
+            <div class="col-md-4 col-sm-12">
               <%= f.input :observaciones,
                   label: 'Observaciones',
                   input_html: { class: 'form-control' } %>
             </div>
           </div>
 
-          <!-- Fila 3: Contraseña (solo si es nuevo o quiere cambiarla) -->
           <p class="section-label">Contraseña</p>
           <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-4 col-sm-6">
               <%= f.input :password,
                   label: 'Contraseña',
                   required: false,
                   input_html: { class: 'form-control', autocomplete: 'new-password' },
                   hint: @user.new_record? ? 'Opcional. Si se deja vacía se asignará clave temporal.' : 'Dejar en blanco para no cambiar' %>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-4 col-sm-6">
               <%= f.input :password_confirmation,
                   label: 'Confirmar Contraseña',
                   required: false,
@@ -103,12 +97,11 @@
             </div>
           </div>
 
-        </div><!-- /.box-body -->
+        </div>
 
-        <!-- Footer -->
-        <div class="box-footer">
+        <div class="box-footer user-form-footer">
           <div class="pull-right">
-            <%= link_to users_path, class: 'btn btn-default', style: 'margin-right: 8px;' do %>
+            <%= link_to users_path, class: 'btn btn-default user-form-cancel' do %>
               <i class="fa fa-times"></i> Cancelar
             <% end %>
             <%= f.button :submit, class: 'btn-guardar' do %>
@@ -117,9 +110,7 @@
           </div>
         </div>
 
-      </div><!-- /.box -->
+      </div>
     </div>
   </div>
 <% end %>
-
-
