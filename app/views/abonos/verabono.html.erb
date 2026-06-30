@@ -1,6 +1,63 @@
-<div align="center">
-  <div style="max-width: 720px; margin: 0 auto;">
-  <br>
+<style>
+  .verabono-sheet {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  @media print {
+    @page {
+      size: 8.5in 5.5in;
+      margin: 0 0.15in 0.1in 0.15in;
+    }
+
+    html, body {
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+
+    .informe-document {
+      max-width: none !important;
+      width: 100% !important;
+      padding: 0 !important;
+      margin: 0 !important;
+    }
+
+    .verabono-sheet {
+      width: 100%;
+      max-width: none;
+      margin: 0;
+      padding: 0;
+      page-break-inside: avoid;
+      page-break-after: avoid;
+    }
+
+    .verabono-sheet br,
+    .verabono-sheet .verabono-spacer {
+      display: none !important;
+    }
+
+    .verabono-sheet .verabono-concepto {
+      height: auto !important;
+    }
+
+    .verabono-sheet img {
+      max-height: 0.75in !important;
+      max-width: 1.1in !important;
+    }
+
+    .verabono-sheet td,
+    .verabono-sheet th {
+      padding: 1px 3px !important;
+      line-height: 1.15 !important;
+    }
+
+    .imprimirlink {
+      display: none !important;
+    }
+  }
+</style>
+
+<div class="verabono-sheet" align="center">
   <table width="100%" border="0" cellspacing="0" cellpadding="1">
     <tr>
       <td width="20%" valign="center">
@@ -21,7 +78,7 @@
     </tr>
   </table>
 
-  <br>
+  <div class="verabono-spacer"><br></div>
 
   <table width="100%" border="0" cellspacing="0" cellpadding="1">
     <tr>
@@ -72,9 +129,9 @@
     </tr>
   </table>
 
-  <br>
+  <div class="verabono-spacer"><br></div>
 
-  <table width="100%" height="150" border="0" cellpadding="0" cellspacing="0" class="sample">
+  <table width="100%" height="150" border="0" cellpadding="0" cellspacing="0" class="sample verabono-concepto">
     <tr>
       <td valign="top">
         <table width="100%" border="0" cellspacing="0" cellpadding="0" class="sample">
@@ -100,7 +157,7 @@
     </tr>
   </table>
 
-  <br>
+  <div class="verabono-spacer"><br></div>
 
   <table width="100%" border="0" cellpadding="0" cellspacing="0" class="sample">
     <tr valign="top">
@@ -140,7 +197,6 @@
       </td>
     </tr>
   </table>
-  </div>
 </div>
 <script>
   window.onload = function() { window.print(); };

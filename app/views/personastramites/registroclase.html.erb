@@ -1,16 +1,96 @@
 <style>
-@media print {
-  @page { size: letter portrait; margin: 5mm 8mm; }
-  body, td, th, div { font-size: 7px !important; line-height: 1.1 !important; }
-  .camposDescN16 { font-size: 10px !important; }
-  .camposDescN12 { font-size: 8px !important; }
-  td, th { padding: 1px 2px !important; }
-  img { max-height: 55px !important; max-width: 70px !important; }
-  br { display: none; }
-}
+  .registro-clase-sheet {
+    width: 100%;
+    max-width: 8.5in;
+    margin: 0 auto;
+    font-family: Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  .registro-clase-sheet table.sample {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .registro-clase-sheet table.sample td,
+  .registro-clase-sheet table.sample th {
+    border: 1px solid #000;
+    vertical-align: middle;
+  }
+
+  .registro-clase-sheet .camposDescN16 { font-size: 16px; font-weight: bold; }
+  .registro-clase-sheet .camposDescN12 { font-size: 12px; font-weight: bold; }
+  .registro-clase-sheet .camposDesc12  { font-size: 12px; }
+  .registro-clase-sheet .camposDescN11 { font-size: 11px; font-weight: bold; }
+  .registro-clase-sheet .camposDesc11  { font-size: 11px; }
+  .registro-clase-sheet .camposDesc10  { font-size: 10px; }
+
+  .registro-clase-foto img {
+    max-height: 120px;
+    max-width: 150px;
+  }
+
+  @media print {
+    @page {
+      size: letter portrait;
+      margin: 0.2in 0.25in;
+    }
+
+    html, body {
+      margin: 0 !important;
+      padding: 0 !important;
+      background: #fff !important;
+    }
+
+    .informe-document {
+      max-width: none !important;
+      width: 100% !important;
+      padding: 0 !important;
+      margin: 0 !important;
+    }
+
+    .registro-clase-sheet {
+      width: 100%;
+      max-width: none;
+      min-height: 10.1in;
+      page-break-inside: avoid;
+      page-break-after: avoid;
+    }
+
+    .registro-clase-sheet .camposDescN16 { font-size: 14px !important; }
+    .registro-clase-sheet .camposDescN12,
+    .registro-clase-sheet .camposDesc12  { font-size: 11px !important; }
+    .registro-clase-sheet .camposDescN11,
+    .registro-clase-sheet .camposDesc11  { font-size: 10px !important; }
+    .registro-clase-sheet .camposDesc10  { font-size: 9px !important; }
+
+    .registro-clase-sheet td,
+    .registro-clase-sheet th {
+      padding: 2px 4px !important;
+      line-height: 1.15 !important;
+    }
+
+    .registro-clase-header td { height: 0.6in; }
+
+    .registro-clase-alumno td { height: 0.24in; }
+
+    .registro-clase-foto img {
+      max-height: 1.25in !important;
+      max-width: 1.55in !important;
+      width: auto !important;
+    }
+
+    .registro-clase-practica tr.fila-clase td { height: 0.19in; }
+
+    .registro-clase-teoria tr.fila-teoria td { height: 0.16in; }
+
+    .registro-clase-instructor .observaciones td { height: 0.7in; }
+
+    .imprimirlink { display: none !important; }
+  }
 </style>
-<br/><div align="center">
-<table width="100%" border="0" cellpadding="0" cellspacing="0" class="sample">
+
+<div class="registro-clase-sheet" align="center">
+<table width="100%" border="0" cellpadding="0" cellspacing="0" class="sample registro-clase-header">
   <tr>
     <td width="250" rowspan="2" valign="middle"><div align="center"><%= informe_image_tag 'logo_heroica.png', style: 'max-width:220px; max-height:80px;' %></div></td>
     <td width="395" rowspan="2"><div align="center" class="camposDescN16">REGISTRO DE CLASES <br/>PRACTICAS Y TEORICAS </div></td>
@@ -26,10 +106,10 @@
   <tr>
     <td><table width="100%"  border="0" cellspacing="0" cellpadding="0">
       <tr>
-        <td width="20%" valign="top"><div align="center">
+        <td width="20%" valign="top"><div align="center" class="registro-clase-foto">
            <%= persona_informe_foto(@personastramite.persona, height: 120, width: 150) %>
           </div></td>
-        <td width="80%"><table width="100%"  border="0" cellspacing="0" cellpadding="0" class="sample">
+        <td width="80%"><table width="100%"  border="0" cellspacing="0" cellpadding="0" class="sample registro-clase-alumno">
           <tr>
             <td width="132" class="camposDescN12"><div align="left">Alumno:</div></td>
             <td colspan="3" class="camposDesc12"><div align="left">&nbsp;<%=@personastramite.persona.identificacion rescue nil%> - <%=@personastramite.persona.nombres rescue nil%></div></td>
@@ -62,198 +142,26 @@
         </table></td>
       </tr>
     </table>
-<table width="100%"  border="0" cellspacing="0" cellpadding="0" class="sample">
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="sample registro-clase-practica">
   <tr>
-    <td ><div align="center" class="camposDescN11">CLASE</div></td>
+    <td><div align="center" class="camposDescN11">CLASE</div></td>
     <td width="14%"><div align="center" class="camposDescN11">FECHA</div></td>
     <td width="51%"><div align="center" class="camposDescN11">TEMA</div></td>
     <td width="28%"><div align="center" class="camposDescN11">FIRMA</div></td>
   </tr>
-  <tr>
-    <td ><div align="center" class="camposDescN11">1</div></td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-  </tr>
-  <tr>
-    <td ><div align="center" class="camposDescN11">2</div></td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-  </tr>
-  <tr>
-    <td ><div align="center" class="camposDescN11">3</div></td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-  </tr>
-  <tr>
-    <td ><div align="center" class="camposDescN11">4</div></td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-  </tr>
-  <tr>
-    <td ><div align="center" class="camposDescN11">5</div></td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-  </tr>
-  <tr>
-    <td ><div align="center" class="camposDescN11">6</div></td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-  </tr>
-  <tr>
-    <td ><div align="center" class="camposDescN11">7</div></td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-  </tr>
-  <tr>
-    <td ><div align="center" class="camposDescN11">8</div></td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-  </tr>
-  <tr>
-    <td ><div align="center" class="camposDescN11">9</div></td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-  </tr>
-  <tr>
-    <td ><div align="center" class="camposDescN11">10</div></td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-  </tr>
-  <tr>
-    <td ><div align="center" class="camposDescN11">11</div></td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-  </tr>
-  <tr>
-    <td ><div align="center" class="camposDescN11">12</div></td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-  </tr>
-  <tr>
-    <td ><div align="center" class="camposDescN11">13</div></td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-  </tr>
-  <tr>
-    <td ><div align="center" class="camposDescN11">14</div></td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-  </tr>
-  <tr>
-    <td ><div align="center" class="camposDescN11">15</div></td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-  </tr>
-  <tr>
-    <td ><div align="center" class="camposDescN11">16</div></td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-  </tr>
-  <tr>
-    <td ><div align="center" class="camposDescN11">17</div></td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-  </tr>
-  <tr>
-    <td ><div align="center" class="camposDescN11">18</div></td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-  </tr>
-  <tr>
-    <td ><div align="center" class="camposDescN11">19</div></td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-  </tr>
-  <tr>
-    <td ><div align="center" class="camposDescN11">20</div></td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-  </tr>
-  <tr>
-    <td ><div align="center" class="camposDescN11">21</div></td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-  </tr>
-  <tr>
-    <td ><div align="center" class="camposDescN11">22</div></td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-  </tr>
-  <tr>
-    <td ><div align="center" class="camposDescN11">23</div></td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-  </tr>
-  <tr>
-    <td ><div align="center" class="camposDescN11">24</div></td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-  </tr>
-  <tr>
-    <td ><div align="center" class="camposDescN11">25</div></td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-  </tr>
-  <tr>
-    <td ><div align="center" class="camposDescN11">26</div></td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-  </tr>
-  <tr>
-    <td ><div align="center" class="camposDescN11">27</div></td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-  </tr>
-  <tr>
-    <td ><div align="center" class="camposDescN11">28</div></td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-  </tr>
-  <tr>
-    <td ><div align="center" class="camposDescN11">29</div></td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-  </tr>
-  <tr>
-    <td ><div align="center" class="camposDescN11">30</div></td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-  </tr>
+  <% (1..30).each do |n| %>
+    <tr class="fila-clase">
+      <td><div align="center" class="camposDescN11"><%= n %></div></td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+  <% end %>
 </table>
     </td>
   </tr>
 </table>
-<table width="100%"  border="0" cellspacing="0" cellpadding="0" class="sample">
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="sample registro-clase-teoria">
   <tr>
     <td rowspan="9" width="200"><div align="center" class="camposDescN12">FORMACION TEORICA Y BASICA APLICADA </div></td>
   </tr>
@@ -263,50 +171,24 @@
     <td width="30%"><div align="center" class="camposDescN11">TEMA</div></td>
     <td width="30%"><div align="center" class="camposDescN11">FIRMA</div></td>
   </tr>
-  <tr>
-    <td ><div align="center" class="camposDescN11"> </div></td>
-    <td>&nbsp;</td>
-    <td><div align="left" class="camposDesc11">1- Movilidad segura y sostenible</div></td>
-    <td>&nbsp;</td>
-  </tr>
-  <tr>
-    <td ><div align="center" class="camposDescN11"></div></td>
-    <td>&nbsp;</td>
-    <td><div align="left" class="camposDesc11">2- Normas de Tránsito</div></td>
-    <td>&nbsp;</td>
-  </tr>
-  <tr>
-    <td ><div align="center" class="camposDescN11"></div></td>
-    <td>&nbsp;</td>
-    <td><div align="left" class="camposDesc11">3- Señalización vial</div></td>
-    <td>&nbsp;</td>
-  </tr>
-  <tr>
-    <td ><div align="center" class="camposDescN11"></div></td>
-    <td>&nbsp;</td>
-    <td><div align="left" class="camposDesc11">4- Infraestructura Vial</div></td>
-    <td>&nbsp;</td>
-  </tr>
-  <tr>
-    <td ><div align="center" class="camposDescN11"></div></td>
-    <td>&nbsp;</td>
-    <td><div align="left" class="camposDesc11">5- Saberes Específicos</div></td>
-    <td>&nbsp;</td>
-  </tr>
-  <tr>
-    <td ><div align="center" class="camposDescN11"></div></td>
-    <td>&nbsp;</td>
-    <td><div align="left" class="camposDesc11">6- Primeros Auxilios</div></td>
-    <td>&nbsp;</td>
-  </tr>
-  <tr>
-    <td ><div align="center" class="camposDescN11"></div></td>
-    <td>&nbsp;</td>
-    <td><div align="left" class="camposDesc11">7- Horas Vehículo</div></td>
-    <td>&nbsp;</td>
-  </tr>
+  <% [
+    '1- Movilidad segura y sostenible',
+    '2- Normas de Tránsito',
+    '3- Señalización vial',
+    '4- Infraestructura Vial',
+    '5- Saberes Específicos',
+    '6- Primeros Auxilios',
+    '7- Horas Vehículo'
+  ].each do |tema| %>
+    <tr class="fila-teoria">
+      <td><div align="center" class="camposDescN11">&nbsp;</div></td>
+      <td>&nbsp;</td>
+      <td><div align="left" class="camposDesc11"><%= tema %></div></td>
+      <td>&nbsp;</td>
+    </tr>
+  <% end %>
 </table>
-<table width="100%"  border="0" cellspacing="0" cellpadding="0" class="sample">
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="sample registro-clase-instructor">
   <tr>
     <td  colspan="3"><div align="center" class="camposDescN12">ESTE ESPACIO ES DE USO EXCLUSIVO DEL INSTRUCTOR DE CONDUCCI&Oacute;N</div></td>
   </tr>
@@ -326,18 +208,16 @@
   <tr>
     <td  colspan="3"><div align="center" class="camposDescN12">OBSERVACIONES</div></td>
   </tr>
-  <tr>
-    <td height="30" colspan="3">&nbsp;</td>
+  <tr class="observaciones">
+    <td colspan="3">&nbsp;</td>
   </tr>
 </table>
-<table width="100%"  border="0" cellspacing="0" cellpadding="0">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr>
-    <td width="60%" height="10" class="camposDesc10"><div align="left"><%=Time.now.strftime("%Y-%m-%d %X")%> - <%=User.find(is_admin).nombre rescue nil%></div></td>
-    <td width="40%" height="10" class="camposDesc10"><div align="right"><a href="javascript:window.print()" class="imprimirlink">Imprimir</a>&nbsp;&nbsp;</div></td>
+    <td width="60%" class="camposDesc10"><div align="left"><%= Time.now.strftime("%Y-%m-%d %X") %> - <%= User.find(is_admin).nombre rescue nil %></div></td>
+    <td width="40%" class="camposDesc10"><div align="right"><a href="javascript:window.print()" class="imprimirlink">Imprimir</a>&nbsp;&nbsp;</div></td>
   </tr>
-  </table>
-  <%=flash[:factura]%>
+</table>
+<%= flash[:factura] %>
 </div>
-<br/>
-<br/>
 <script>window.onload = function() { window.print(); };</script>
