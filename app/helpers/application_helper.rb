@@ -90,17 +90,34 @@ module ApplicationHelper
     img_opts = { height: height, width: width, border: 0, alt: 'Fotografia' }
 
     if persona.personasimagen_file_name.present?
-      path = persona.personasimagen.path.presence ||
-             Rails.root.join(
-               'public/system/personasimagenes',
-               persona.id.to_s,
-               'original',
-               persona.personasimagen_file_name
-             ).to_s
-      informe_image_tag(path, img_opts)
+      if pdf_request?
+        path = persona_informe_foto_path(persona)
+        informe_image_tag(path, img_opts)
+      else
+        image_tag(persona_informe_foto_url(persona), img_opts)
+      end
     else
       informe_image_tag('blankSilhouetteMale.png', img_opts.merge(alt: 'Sin Fotografia'))
     end
+  end
+
+  def persona_informe_foto_url(persona)
+    "/system/personasimagenes/#{persona.id}/original/#{persona.personasimagen_file_name}"
+  end
+
+  def persona_informe_foto_path(persona)
+    path = persona.personasimagen.path.presence
+    return path if path.present? && File.file?(path)
+
+    legacy = Rails.root.join(
+      'public/system/personasimagenes',
+      persona.id.to_s,
+      'original',
+      persona.personasimagen_file_name
+    ).to_s
+    return legacy if File.file?(legacy)
+
+    path.to_s.presence || legacy
   end
 
   def diploma_background_url

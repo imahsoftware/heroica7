@@ -27,7 +27,6 @@
     height: auto;
   }
 
-  /* Print/PDF: ancho fijo 850px alineado */
   @media print {
     body {
       background: #fff !important;
@@ -37,15 +36,26 @@
     table[width="850"] {
       width: 850px !important;
       max-width: 850px !important;
-      table-layout: auto !important;
+      table-layout: fixed !important;
     }
 
     input.campo,
     textarea.campoMultiLinea,
     select.span2,
-    input.campodisabled {
-      width: auto !important;
-      max-width: none !important;
+    input.campodisabled,
+    select {
+      width: 100% !important;
+      max-width: 100% !important;
+      box-sizing: border-box;
+      font-size: 10px;
+    }
+
+    td.practica-datos input,
+    td.practica-datos select,
+    td.practica-datos textarea {
+      width: 100% !important;
+      max-width: 100% !important;
+      box-sizing: border-box;
     }
 
     .no-print { display: none !important; }
@@ -83,7 +93,13 @@
             <td valign="top" class="practica-foto"><div align="center">
               <%= persona_informe_foto(@personastramite.persona, height: 120, width: 150) %>
             </div></td>
-            <td valign="top" class="practica-datos"><table width="100%" border="0" cellspacing="0" cellpadding="0" class="sample">
+            <td valign="top" class="practica-datos"><table width="100%" border="0" cellspacing="0" cellpadding="0" class="sample practica-datos-tabla">
+              <colgroup>
+                <col style="width:24%">
+                <col style="width:36%">
+                <col style="width:18%">
+                <col style="width:22%">
+              </colgroup>
               <tr>
                 <td width="20%" height="20" class="camposDescN12"><div align="left">Alumno:</div></td>
                 <td colspan="3" class="camposDesc12"><div align="left">&nbsp;<%=@personastramite.persona.identificacion rescue nil%> - <%=@personastramite.persona.nombres rescue nil%></div></td>

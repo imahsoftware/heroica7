@@ -46,12 +46,22 @@
         vertical-align: top;
         padding: 0;
       }
-      .informe-document td.practica-foto img {
-        display: block;
-        width: 150px !important;
-        height: 120px !important;
-        max-width: 150px !important;
-        margin: 0 auto;
+      .informe-document td.practica-datos table.sample {
+        width: 100% !important;
+        max-width: 680px !important;
+        table-layout: fixed;
+      }
+      .informe-document td.practica-datos td {
+        overflow: hidden;
+        word-wrap: break-word;
+      }
+      .informe-document td.practica-datos input,
+      .informe-document td.practica-datos select,
+      .informe-document td.practica-datos textarea {
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box;
+        font-size: 11px;
       }
       .informe-document .no-print {
         display: none !important;
@@ -60,6 +70,9 @@
         border-collapse: collapse;
         border-spacing: 0;
         border: 1px solid #000;
+        table-layout: fixed;
+        width: 850px !important;
+        max-width: 850px !important;
       }
       .informe-document table.sample td,
       .informe-document table.sample th {
@@ -67,6 +80,21 @@
         border-style: solid;
         padding: 3px 5px;
         vertical-align: middle;
+        overflow: hidden;
+        word-wrap: break-word;
+      }
+      .informe-document input,
+      .informe-document select,
+      .informe-document textarea {
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+      }
+      .informe-document input.campo,
+      .informe-document input.campodisabled,
+      .informe-document select.span2,
+      .informe-document select {
+        width: 100% !important;
+        font-size: 10px;
       }
       .informe-document table.sample table.sample {
         border: 0;
