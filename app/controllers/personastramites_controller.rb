@@ -250,16 +250,7 @@ class PersonastramitesController < ApplicationController
     respond_to do |format|
       format.html
       format.pdf do
-        render pdf: filename,
-               template: "personastramites/#{action_name}",
-               formats: [:html],
-               layout: 'informes_pdf',
-               encoding: 'UTF-8',
-               page_size: 'Letter',
-               orientation: orientation,
-               margin: { top: 12, bottom: 12, left: 12, right: 12 },
-               disposition: 'inline',
-               print_media_type: true
+        redirect_to url_for(format: :html)
       end
     end
   end
