@@ -35,7 +35,15 @@
   </div>
 <% end %>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, id: 'idforminit', autocomplete: 'off' }) do |f| %>
+<%= form_for(resource,
+             as: :user,
+             url: user_registration_path,
+             html: {
+               method: :put,
+               id: 'idforminit',
+               autocomplete: 'off',
+               data: { turbo: false }
+             }) do |f| %>
 
   <div class="form-grid">
     <div class="form-group">

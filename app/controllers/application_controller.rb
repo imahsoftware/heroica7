@@ -2031,6 +2031,7 @@ class ApplicationController < ActionController::Base
     return true if devise_controller? && controller_name == 'passwords'
     return true if controller_path == 'users/sessions'
     return true if controller_path == 'users' && %w[editpass updatepass].include?(action_name)
+    return true if devise_controller? && controller_name == 'registrations'
     return true if controller_path.include?('two_factor')
 
     false
