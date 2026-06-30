@@ -90,7 +90,10 @@ class PersonastramitesController < ApplicationController
                      .last
     @horario      = programacion&.tiposhorario&.descripcion
     @fechainicial = programacion&.fecha_inicial&.strftime('%Y-%m-%d')
-    respond_informe_pdf("registro_clase_#{@personastramite.id}")
+    respond_to do |format|
+      format.html
+      format.pdf { render_registroclase_pdf }
+    end
   end
 
   # GET /personas/:persona_id/personastramites/:id/registrosolicitud
@@ -253,5 +256,19 @@ class PersonastramitesController < ApplicationController
         redirect_to url_for(format: :html)
       end
     end
+  end
+
+  def render_registroclase_pdf
+    render pdf: "registro_clase_#{@personastramite.id}",
+           template: 'personastramites/registroclase',
+           formats: [:html],
+           layout: 'informes_registroclase_pdf',
+           encoding: 'UTF-8',
+           page_size: 'Letter',
+           orientation: 'Portrait',
+           margin: { top: 3, bottom: 3, left: 4, right: 4 },
+           disposition: 'inline',
+           print_media_type: true,
+           disable_smart_shrinking: true
   end
 end

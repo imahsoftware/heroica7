@@ -266,4 +266,6 @@
 </table>
 <%= flash[:factura] %>
 </div>
+<% unless pdf_request? %>
 <script>window.onload = function() { window.print(); };</script>
+<% end %>
