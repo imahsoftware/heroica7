@@ -53,7 +53,7 @@
                 <td class="text-center"><%= abono.destado %></td>
                 <td class="text-center">
                   <% if abono.estado.to_s != 'A' %>
-                    <%= link_to_popup verabono_abono_path(abono_id: abono.id),
+                    <%= link_to_popup verabono_abono_path(abono_id: abono.id, format: :pdf),
                         popup: popup_ventana_grande,
                         class: 'btn btn-xs btn-info',
                         title: 'Ver Abono',

@@ -12,7 +12,10 @@ class AbonosController < ApplicationController
   # GET /abonos/verabono?abono_id=X  (abre en ventana nueva, sin autenticación de módulo)
   def verabono
     @abono = Abono.find(params[:abono_id])
-    render layout: 'informes'
+    respond_to do |format|
+      format.html { render layout: 'informes' }
+      format.pdf  { render_verabono_pdf }
+    end
   end
 
   def edit
@@ -142,5 +145,19 @@ class AbonosController < ApplicationController
 
   def abono_params
     params.require(:abono).permit(:valor, :forma_pago)
+  end
+
+  def render_verabono_pdf
+    render pdf: "recibo_abono_#{@abono.id}",
+           template: 'abonos/verabono',
+           formats: [:html],
+           layout: 'informes_pdf',
+           encoding: 'UTF-8',
+           page_size: 'Letter',
+           orientation: 'Portrait',
+           margin: { top: 10, bottom: 10, left: 10, right: 10 },
+           disposition: 'inline',
+           print_media_type: true,
+           disable_smart_shrinking: true
   end
 end
