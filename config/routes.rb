@@ -29,9 +29,9 @@ Rails.application.routes.draw do
 
     post '/users/sessions/verify_otp' => 'users/sessions#verify_otp'
 
-    put    'users'      => 'devise/registrations#update',  as: 'user_registration'
-    get    'users/edit' => 'devise/registrations#edit',    as: 'edit_user_registration'
-    delete 'users'      => 'devise/registrations#destroy', as: 'registration'
+    put    'users'      => 'users/registrations#update',  as: 'user_registration'
+    get    'users/edit' => 'users/registrations#edit',    as: 'edit_user_registration'
+    delete 'users'      => 'users/registrations#destroy', as: 'registration'
     get    'logout'     => 'devise/sessions#destroy'
   end
 

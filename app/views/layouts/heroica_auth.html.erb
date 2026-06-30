@@ -43,7 +43,7 @@
     }
     .login-right {
       flex: 1; background: #f1f5f9; display: flex; align-items: center;
-      justify-content: center; padding: 3rem 2rem; position: relative; overflow: hidden;
+      justify-content: center; padding: 3rem 2rem; position: relative; overflow-x: hidden; overflow-y: auto;
     }
     .login-right::before {
       content: ''; position: absolute; top: 0; right: 0; width: 200px; height: 200px;
@@ -125,6 +125,29 @@
       text-align: center; margin-top: 1.75rem; padding-top: 1.25rem;
       border-top: 1px solid #f1f5f9; font-size: 0.75rem; color: #94a3b8;
     }
+    .login-card--wide { max-width: 760px; padding: 2.4rem 2.2rem; }
+    .form-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 0 1rem;
+    }
+    .form-control:disabled,
+    .form-control[readonly] {
+      background: #f1f5f9; color: #64748b; cursor: not-allowed; opacity: 1;
+    }
+    select.form-control {
+      padding-left: 2.75rem; appearance: auto; cursor: pointer;
+    }
+    .form-actions {
+      display: flex; gap: 0.75rem; justify-content: flex-end;
+      margin-top: 0.75rem; flex-wrap: wrap;
+    }
+    .btn-cancel {
+      padding: 0.85rem 1.25rem; background: #ffffff; color: #64748b;
+      border: 1.5px solid #e2e8f0; border-radius: 10px; font-size: 0.9rem;
+      font-weight: 600; font-family: 'Inter', sans-serif; cursor: pointer;
+      text-decoration: none; transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-cancel:hover { color: #ef4444; border-color: #fecaca; text-decoration: none; }
+    .btn-login--inline { width: auto; padding: 0.85rem 1.75rem; margin-top: 0; }
     @media (max-width: 768px) {
       .login-wrapper { flex-direction: column; }
       .login-left { padding: 2.5rem 2rem 2rem; flex: none; min-height: 220px; }
@@ -136,6 +159,7 @@
       .login-right { flex: none; padding: 2rem 1.25rem 3rem; }
       .login-card { padding: 2rem 1.5rem; box-shadow: none; background: transparent; }
       .login-card::before { display: none; }
+      .form-grid { grid-template-columns: 1fr; gap: 0; }
     }
   </style>
 </head>
@@ -149,7 +173,7 @@
   </div>
   <div class="login-divider"></div>
   <div class="login-right">
-    <div class="login-card">
+    <div class="login-card <%= content_for?(:auth_card_class) ? yield(:auth_card_class) : '' %>">
       <%= yield %>
     </div>
   </div>

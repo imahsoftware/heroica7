@@ -196,8 +196,10 @@ class UsersController < ApplicationController
 
 
   def index
+    locked_scope = User.where('failed_attempts >= ? OR locked_at IS NOT NULL', Devise.maximum_attempts)
+
     if is_sygma == true
-      @blockedusers = User.where(failed_attempts: 3)
+      @blockedusers = locked_scope
       @q = User.ransack(params[:q])
       @users = @q.result.paginate(:page => params[:page], :per_page => 10)
     else
@@ -206,7 +208,7 @@ class UsersController < ApplicationController
         flash[:warning] = 'No se pudo determinar el portafolio del usuario.'
         redirect_to root_path and return
       end
-      @blockedusers = User.where(failed_attempts: 3, portafolio_id: isportafolio)
+      @blockedusers = locked_scope.where(portafolio_id: isportafolio)
       @q = User.ransack(params[:q])
       @users = @q.result
                  .where("portafolio_id = ? AND (geintac = 'N' OR geintac IS NULL)", isportafolio)

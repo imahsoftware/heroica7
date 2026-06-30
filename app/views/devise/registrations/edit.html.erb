@@ -1,85 +1,150 @@
-<script type="text/javascript">
+<% content_for :title, 'Actualizar datos' %>
+<% content_for :auth_card_class, 'login-card--wide' %>
+
+<script>
   document.addEventListener('contextmenu', event => event.preventDefault());
-  
-  function disableF5(e) { if ((e.which || e.keyCode) == 116) e.preventDefault()};
-  $(document).ready(function(){
-       $(document).on("keydown", disableF5);
+  function disableF5(e) { if ((e.which || e.keyCode) == 116) e.preventDefault(); }
+  document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('keydown', disableF5);
   });
 </script>
-<div class="login-box" style="width: 995px !important;">
-  <div class="login-box-body col-md-2" style="min-height: 434px; background-color: #1b86a5;border-top-left-radius: 10px;border-bottom-left-radius: 10px;">
-    <%= image_tag('logowhite.png',style: "width: 100%;margin-top: 150px;") %>
-  </div>
-  <div class="login-box-body col-md-10" style="-min-height: 434px;border-top-right-radius: 10px;border-bottom-right-radius: 10px;">
-    <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, id: 'idforminit', autocomplete: 'off' }) do |f| %>
-      <h3 class="login-box-msg">Actualiza tus Datos</h3>
-      <div class="form-login col-md-6">
-        <br>
-        <label>*Nombre Completo<span style="color: red;font-size: 10px">(obligatorio)</span></label>
-        <div class="input-group" style="margin-bottom: 15px;">
-          <span class="input-group-addon"><i class="fa fa-user"></i></span>
-          <%= f.input :nombre , required: true, class: 'form-control',
-          placeholder: 'Nombre Completo',label: false %>
-        </div>
-        <label>*Identificacion<span style="color: red;font-size: 10px"></span></label>
-        <div class="input-group" style="margin-bottom: 15px;">
-          <span class="input-group-addon"><i class="fa fa-id-card"></i></span>
-          <%= f.input :identificacion ,disabled: true, required: false, class: 'form-control',
-          placeholder: 'Identificacion',label: false %>
-        </div>
-        <label>*Fecha de Nacimiento <span style="color: red;font-size: 10px">(obligatorio)</span></label>
-        <div class="input-group" style="margin-bottom: 15px;">
-          <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-          <%= f.date_field :fecha_nacimiento , required: true, class: 'form-control',
-          placeholder: 'Fecha de Nacimiento',label: false %>
-        </div>
-        <label>*Correo Electrónico <span style="color: red;font-size: 10px"></span></label>
-        <div class="input-group" style="margin-bottom: 15px;">
-          <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-          <%= f.input :email ,disabled: true , required: true, class: 'form-control',
-          placeholder: 'Email',label: false %>
-        </div>
-      </div>
-      <div class="form-login col-md-6">
-        <br>
-        <label>*Dirección <span style="color: red;font-size: 10px">(obligatorio)</span></label>
-        <div class="input-group" style="margin-bottom: 15px;">
-          <span class="input-group-addon"><i class="fa fa-home"></i></span>
-          <%= f.input :direccion , required: true, class: 'form-control',
-          placeholder: 'Dirección',label: false %>
-        </div>
-        <label>*Telefono <span style="color: red;font-size: 10px">(obligatorio)</span></label>
-        <div class="input-group" style="margin-bottom: 15px;">
-          <span class="input-group-addon"><i class="fa fa-phone"></i></span>
-          <%= f.input :telefonos , required: true, class: 'form-control',
-          placeholder: 'Telefono',label: false %>
-        </div>
-        <label>*Celular <span style="color: red;font-size: 10px">(obligatorio)</span></label>
-        <div class="input-group" style="margin-bottom: 15px;">
-          <span class="input-group-addon"><i class="fa fa-mobile"></i></span>
-          <%= f.input :celular , required: true, class: 'form-control',
-          placeholder: 'Celular',label: false %>
-        </div>
-        <label>*Género <span style="color: red;font-size: 10px">(obligatorio)</span></label>
-        <div class="input-group" style="margin-bottom: 15px;">
-          <span class="input-group-addon"><i class="fa fa-venus-mars"></i></span>
-          <%= f.input_field :genero, as: :select, collection: select_genero , required: true, class: 'form-control',
-          placeholder: 'Género',label: false %>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-12 pull-right">
-          <%= f.button :submit, 'Guardar', class: 'btn-primary btn-flat pull-right' %>
-          <% if current_user.sign_in_count != 1 %>
-            <%= link_to "#{t :cancelar}", :back, class: 'btn btn-flat pull-right btn-default', style: 'margin-right:5px' %>
-          <% end %>
-        </div>
-      </div>
-    <% end %>
-  </div>
+
+<div class="card-header-text">
+  <h2>Actualiza tus datos</h2>
+  <p>Completa tu información personal para continuar</p>
 </div>
-<%= render 'layouts/flash_messages' %>
 
+<% if flash[:alert].present? %>
+  <div class="alert-box alert-danger">
+    <i class="fa-solid fa-circle-exclamation"></i>
+    <span><%= flash[:alert] %></span>
+  </div>
+<% end %>
 
+<% if flash[:notice].present? %>
+  <div class="alert-box alert-notice">
+    <i class="fa-solid fa-circle-check"></i>
+    <span><%= flash[:notice] %></span>
+  </div>
+<% end %>
 
+<% if resource.errors.any? %>
+  <div class="alert-box alert-danger">
+    <i class="fa-solid fa-circle-exclamation"></i>
+    <span><%= resource.errors.full_messages.join('. ') %></span>
+  </div>
+<% end %>
 
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, id: 'idforminit', autocomplete: 'off' }) do |f| %>
+
+  <div class="form-grid">
+    <div class="form-group">
+      <label for="user_nombre">Nombre completo <span style="color:#ef4444">*</span></label>
+      <div class="input-wrapper">
+        <%= f.text_field :nombre,
+            required: true,
+            class: 'form-control',
+            placeholder: 'Nombre completo',
+            id: 'user_nombre',
+            onchange: 'this.value=this.value.toUpperCase()' %>
+        <i class="fa-solid fa-user input-icon"></i>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="user_identificacion">Identificación</label>
+      <div class="input-wrapper">
+        <%= f.text_field :identificacion,
+            class: 'form-control',
+            placeholder: 'Identificación',
+            id: 'user_identificacion' %>
+        <i class="fa-solid fa-id-card input-icon"></i>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="user_fecha_nacimiento">Fecha de nacimiento <span style="color:#ef4444">*</span></label>
+      <div class="input-wrapper">
+        <%= f.date_field :fecha_nacimiento,
+            required: true,
+            class: 'form-control',
+            id: 'user_fecha_nacimiento' %>
+        <i class="fa-solid fa-calendar input-icon"></i>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="user_email">Correo electrónico</label>
+      <div class="input-wrapper">
+        <%= f.email_field :email,
+            disabled: true,
+            class: 'form-control',
+            placeholder: 'Correo electrónico',
+            id: 'user_email' %>
+        <i class="fa-solid fa-envelope input-icon"></i>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="user_direccion">Dirección <span style="color:#ef4444">*</span></label>
+      <div class="input-wrapper">
+        <%= f.text_field :direccion,
+            required: true,
+            class: 'form-control',
+            placeholder: 'Dirección',
+            id: 'user_direccion',
+            onchange: 'this.value=this.value.toUpperCase()' %>
+        <i class="fa-solid fa-house input-icon"></i>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="user_telefonos">Teléfono <span style="color:#ef4444">*</span></label>
+      <div class="input-wrapper">
+        <%= f.text_field :telefonos,
+            required: true,
+            class: 'form-control',
+            placeholder: 'Teléfono',
+            id: 'user_telefonos' %>
+        <i class="fa-solid fa-phone input-icon"></i>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="user_celular">Celular <span style="color:#ef4444">*</span></label>
+      <div class="input-wrapper">
+        <%= f.text_field :celular,
+            required: true,
+            class: 'form-control',
+            placeholder: 'Celular',
+            id: 'user_celular' %>
+        <i class="fa-solid fa-mobile-screen input-icon"></i>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="user_genero">Género <span style="color:#ef4444">*</span></label>
+      <div class="input-wrapper">
+        <%= f.select :genero,
+            options_for_select(select_genero, resource.genero),
+            { include_blank: 'Seleccionar' },
+            required: true,
+            class: 'form-control',
+            id: 'user_genero' %>
+        <i class="fa-solid fa-venus-mars input-icon"></i>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <% if current_user.sign_in_count != 1 %>
+      <%= link_to t(:cancelar), :back, class: 'btn-cancel' %>
+    <% end %>
+    <%= f.submit 'Guardar', class: 'btn-login btn-login--inline' %>
+  </div>
+
+<% end %>
+
+<div class="card-footer-text">
+  IMAH &nbsp;·&nbsp; <%= Time.now.year %>
+</div>

@@ -191,7 +191,7 @@
                     <div class="user-stat-card">
                       <span class="user-stat-label">Estado bloqueo</span>
                       <span class="user-stat-value">
-                        <% if @user.unlock_token.present? %>
+                        <% if user_account_locked?(@user) %>
                           <span class="label label-danger"><i class="fa fa-lock"></i> Bloqueado</span>
                         <% else %>
                           <span class="label label-success"><i class="fa fa-unlock"></i> Activo</span>

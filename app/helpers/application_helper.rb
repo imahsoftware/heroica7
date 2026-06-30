@@ -5,6 +5,16 @@ module ApplicationHelper
     content_for(:title) { page_title }
   end
 
+  def user_account_locked?(user)
+    return false unless user
+
+    user.access_locked? || user.failed_attempts.to_i >= Devise.maximum_attempts
+  end
+
+  def user_account_active?(user)
+    user&.activo.to_s == 'S'
+  end
+
   def irregular_types(type)
     case type
     when 'alert'

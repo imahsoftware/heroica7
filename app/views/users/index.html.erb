@@ -79,7 +79,7 @@
                         <button class="btn btn-xs btn-success btn-accion"><i class="fa fa-check-circle"></i></button>
                       <% end %>
                     <% end %>
-                    <% if user.unlock_token %>
+                    <% if user_account_locked?(user) %>
                       <%= link_to desbloquearusuario_users_path(id: user.id), data: { confirm: '¿Está seguro?' }, title: 'Desbloquear' do %>
                         <button class="btn btn-xs btn-info btn-accion"><i class="fa fa-unlock"></i></button>
                       <% end %>
@@ -119,7 +119,7 @@
                       <button class="btn btn-xs btn-success btn-accion"><i class="fa fa-check-circle"></i></button>
                     <% end %>
                   <% end %>
-                  <% if user.unlock_token %>
+                  <% if user_account_locked?(user) %>
                     <%= link_to desbloquearusuario_users_path(id: user.id), data: { confirm: '¿Está seguro?' }, title: 'Desbloquear' do %>
                       <button class="btn btn-xs btn-info btn-accion"><i class="fa fa-unlock"></i></button>
                     <% end %>

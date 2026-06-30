@@ -27,7 +27,7 @@
     <span class="badge-activo <%= @user.activo == 'S' ? 'si' : 'no' %>">
       <%= @user.activo == 'S' ? 'Activo' : 'Inactivo' %>
     </span>
-    <% if @user.unlock_token.present? %>
+    <% if user_account_locked?(@user) %>
       <span class="badge-activo no" style="margin-left: 4px;">
         <i class="fa fa-lock"></i> Bloqueado
       </span>
@@ -37,7 +37,7 @@
   <!-- Acciones admin (solo etapa Datos) -->
   <% if @user.etapa.to_s == 'A' %>
     <div class="user-section-actions">
-      <% if @user.unlock_token %>
+      <% if user_account_locked?(@user) %>
         <%= link_to desbloquearusuario_users_path(id: @user.id), data: { confirm: '¿Está seguro?' }, title: 'Desbloquear usuario', class: 'user-action-btn info' do %>
           <i class="fa fa-unlock"></i> Desbloquear
         <% end %>
