@@ -66,7 +66,7 @@ class PersonastrapracticasController < ApplicationController
     render pdf: "prueba_practica_#{@personastrapractica.id}",
            template: 'personastrapracticas/personastrapractica_form',
            formats: [:html],
-           layout: 'informes_pdf',
+           layout: 'informes_practica_pdf',
            encoding: 'UTF-8',
            page_size: 'Letter',
            orientation: 'Portrait',

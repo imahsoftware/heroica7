@@ -18,11 +18,23 @@
         font-family: Tahoma, Geneva, Verdana, sans-serif;
       }
       .informe-document {
-        width: 100%;
+        width: 850px;
         max-width: 850px;
         margin: 0 auto;
       }
-      /* Tablas informe: linea negra delgada (override ceasoft .sample outset/inset) */
+      .informe-document > div[align="center"] {
+        width: 850px;
+        margin: 0 auto;
+      }
+      .informe-document table[width="850"],
+      .informe-document table.sample {
+        width: 850px !important;
+        max-width: 850px !important;
+        table-layout: fixed;
+      }
+      .informe-document .no-print {
+        display: none !important;
+      }
       .informe-document table.sample {
         border-collapse: collapse;
         border-spacing: 0;
@@ -47,10 +59,10 @@
         padding: 0;
         vertical-align: top;
       }
-      .imprimirlink { display: none; }
       table { page-break-inside: auto; }
-      tr    { page-break-inside: avoid; page-break-after: auto; }
-      td, th { page-break-inside: avoid; }
+      thead { display: table-header-group; }
+      tr    { page-break-inside: auto; page-break-after: auto; }
+      td, th { page-break-inside: auto; }
     </style>
   </head>
   <body>
