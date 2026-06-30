@@ -30,30 +30,44 @@
         width: 850px !important;
         max-width: 850px !important;
       }
-      .informe-document table.informe-alumno {
+      .informe-document table.practica-alumno-bloque {
         width: 850px !important;
+        max-width: 850px !important;
         table-layout: fixed;
         border-collapse: collapse;
+        margin: 0 auto 6px auto;
       }
-      .informe-document table.informe-alumno td.practica-foto {
-        width: 170px !important;
-        max-width: 170px !important;
+      .informe-document table.practica-alumno-bloque td.practica-foto {
+        width: 150px !important;
+        max-width: 150px !important;
+        padding: 2px;
         vertical-align: top;
-        padding: 4px;
+        text-align: center;
       }
-      .informe-document table.informe-alumno td.practica-datos {
-        width: 680px !important;
-        vertical-align: top;
+      .informe-document table.practica-alumno-bloque td.practica-datos {
+        width: 700px !important;
+        max-width: 700px !important;
         padding: 0;
+        vertical-align: top;
       }
-      .informe-document td.practica-datos table.sample {
+      .informe-document td.practica-foto img {
+        display: block;
+        width: 120px !important;
+        height: 120px !important;
+        max-width: 120px !important;
+        margin: 0 auto;
+      }
+      .informe-document table.practica-datos-tabla {
         width: 100% !important;
-        max-width: 680px !important;
+        max-width: 700px !important;
         table-layout: fixed;
+        border: 0 !important;
       }
-      .informe-document td.practica-datos td {
+      .informe-document table.practica-datos-tabla td {
+        border: 1px solid #000;
         overflow: hidden;
         word-wrap: break-word;
+        padding: 3px 5px;
       }
       .informe-document td.practica-datos input,
       .informe-document td.practica-datos select,
@@ -61,7 +75,7 @@
         width: 100% !important;
         max-width: 100% !important;
         box-sizing: border-box;
-        font-size: 11px;
+        font-size: 10px;
       }
       .informe-document .no-print {
         display: none !important;
@@ -73,6 +87,7 @@
         table-layout: fixed;
         width: 850px !important;
         max-width: 850px !important;
+        margin: 0 auto 6px auto;
       }
       .informe-document table.sample td,
       .informe-document table.sample th {
@@ -98,16 +113,6 @@
       }
       .informe-document table.sample table.sample {
         border: 0;
-      }
-      .informe-document table.informe-bloque {
-        border-collapse: collapse;
-        border-spacing: 0;
-        width: 850px;
-      }
-      .informe-document table.informe-bloque > tbody > tr > td {
-        padding: 0;
-        vertical-align: top;
-        page-break-inside: auto !important;
       }
       .informe-document br {
         display: none;
