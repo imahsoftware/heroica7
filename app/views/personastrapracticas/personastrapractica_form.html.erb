@@ -1,14 +1,20 @@
 <style type="text/css">
-  <!--
-  H1.SaltoDePagina { PAGE-BREAK-AFTER: always  }
-  -->
+  /* Responsive: solo pantalla edicion, no PDF/impresion */
+  @media screen {
+    table.sample,
+    table[width="850"] {
+      width: 100% !important;
+      max-width: 100% !important;
+      table-layout: fixed;
+    }
 
-  /* Responsive: keep layout, no horizontal scroll */
-  table.sample,
-  table[width="850"] {
-    width: 100% !important;
-    max-width: 100% !important;
-    table-layout: fixed;
+    input.campo,
+    textarea.campoMultiLinea,
+    select.span2,
+    input.campodisabled {
+      width: 100% !important;
+      box-sizing: border-box;
+    }
   }
 
   td, th {
@@ -21,21 +27,7 @@
     height: auto;
   }
 
-  /* Inputs: shrink to cell width */
-  input.campo,
-  textarea.campoMultiLinea,
-  select.span2 {
-    width: 100% !important;
-    box-sizing: border-box;
-  }
-
-  /* Common small fields in grid */
-  input.campodisabled {
-    width: 100% !important;
-    box-sizing: border-box;
-  }
-
-  /* Print: mimic legacy Rails2 (fixed 850px, inputs honor size=) */
+  /* Print/PDF: ancho fijo 850px alineado */
   @media print {
     body {
       background: #fff !important;
@@ -61,13 +53,13 @@
 </style>
 
 <%= form_for(@personastrapractica, html: { multipart: true }) do |f| %>
-<% @personastramite = Personastramite.find(@personastrapractica.personastramite_id) %>
+<% @personastramite ||= Personastramite.find(@personastrapractica.personastramite_id) %>
 
   <br/>
   <div align="center">
   <table width="850" border="0" cellpadding="0" cellspacing="0" class="sample">
     <tr>
-      <td width="30%" height="40" rowspan="2" valign="middle"><div align="center"><%= image_tag 'logo_heroica.png', style: 'max-width:220px; max-height:80px;' %></div></td>
+      <td width="30%" height="40" rowspan="2" valign="middle"><div align="center"><%= informe_image_tag 'logo_heroica.png', style: 'max-width:220px; max-height:80px;' %></div></td>
       <td width="45%" height="40" rowspan="2"><div align="center" class="camposDescN16">PRUEBA PRACTICA DE CONDUCCION</div></td>
       <td width="10%" height="40"><div align="center">VERSION</div></td>
       <td width="15%"><div align="center">03</div></td>
@@ -77,17 +69,13 @@
       <td><div align="center">06/01/2011</div></td>
     </tr>
   </table>
-  <table width="850"  border="0" cellspacing="0" cellpadding="0">
+  <table width="850" border="0" cellspacing="0" cellpadding="0" class="informe-bloque">
     <tr>
       <td>
-        <table width="100%"  border="0" cellspacing="0" cellpadding="0">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
           <tr>
             <td width="20%" valign="top"><div align="center">
-              <%  if @personastramite.persona.personasimagen_file_name %>
-                <img src="/system/personasimagenes/<%=@personastramite.persona_id%>/original/<%=@personastramite.persona.personasimagen_file_name rescue nil%>" height="120" width="150" border="0" title="Fotografia" />
-              <%  else %>
-                <img src="/images/noFoto.jpg" border="0" height="100" width="100" title="No Fotografia" />
-              <%  end %>
+              <%= persona_informe_foto(@personastramite.persona, height: 120, width: 150) %>
             </div></td>
             <td width="80%"><table width="100%"  border="0" cellspacing="0" cellpadding="0" class="sample">
               <tr>
@@ -469,7 +457,7 @@
             <td><div align="center" class="camposDescN12"><%=@personastrapractica.cal_destreza rescue 0%></div></td>
             <td><div align="center" class="camposDescN12"><%=@personastrapractica.punt_destreza rescue 0%></div></td>
           </tr>
-        </table><H1 class=SaltoDePagina>&nbsp;</H1>
+        </table><br/>
         <table width="850" border="0" cellspacing="0" cellpadding="0" class="sample">
           <thead>
           <tr>
@@ -664,7 +652,8 @@
           <div style="text-align: right;">
             <%= f.submit "Guardar", data: { disable_with: "Guardando..." }, class: "buttonAsLink" %>
             &nbsp;&nbsp;
-            <a href="javascript:window.print()" class="imprimirlink">Imprimir</a>
+            <%= link_to 'Imprimir', edit_personastrapractica_path(@personastrapractica, format: :pdf),
+                        class: 'imprimirlink', target: '_blank', rel: 'noopener' %>
           </div>
         </div>
       </td>
