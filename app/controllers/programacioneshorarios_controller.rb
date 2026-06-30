@@ -201,8 +201,9 @@ class ProgramacioneshorariosController < ApplicationController
 
   def determine_layout
     return 'ventana' if action_name == 'marcarclase'
+    return 'basico' if action_name == 'horario'
 
-    if %w[horario informe progclases].include?(action_name)
+    if %w[informe progclases].include?(action_name)
       'informes'
     else
       'basico'

@@ -12,21 +12,23 @@
         <div class="col-md-3 col-sm-6">
           <div class="form-group" style="margin-bottom: 8px;">
             <label class="control-label">Fecha inicial</label>
-            <%= calendar_date_select field_namespace, 'inicial',
-                  year_range: 50.years.ago..0.years.ago,
-                  class: 'form-control input-sm',
-                  size: 10,
-                  time: false %>
+            <%= text_field_tag "#{field_namespace}[inicial]",
+                               params.dig(field_namespace.to_sym, :inicial),
+                               class: 'form-control input-sm datepicker',
+                               placeholder: 'YYYY-MM-DD',
+                               autocomplete: 'off',
+                               size: 10 %>
           </div>
         </div>
         <div class="col-md-3 col-sm-6">
           <div class="form-group" style="margin-bottom: 8px;">
             <label class="control-label">Fecha final</label>
-            <%= calendar_date_select field_namespace, 'final',
-                  year_range: 50.years.ago..0.years.ago,
-                  class: 'form-control input-sm',
-                  size: 10,
-                  time: false %>
+            <%= text_field_tag "#{field_namespace}[final]",
+                               params.dig(field_namespace.to_sym, :final),
+                               class: 'form-control input-sm datepicker',
+                               placeholder: 'YYYY-MM-DD',
+                               autocomplete: 'off',
+                               size: 10 %>
           </div>
         </div>
         <div class="col-md-4 col-sm-8">
@@ -34,7 +36,7 @@
             <label class="control-label">Instructor</label>
             <%= select_tag "#{field_namespace}[instructor_id]",
                        options_for_select([['', '']] + @instructores.map { |p| [p.nombre, p.id] }),
-                       class: 'form-control input-sm',
+                       class: 'select2 input-sm',
                        id: "#{field_namespace}_instructor_id" %>
             <script>
               $(function() { $('#<%= "#{field_namespace}_instructor_id" %>').select2(); });
