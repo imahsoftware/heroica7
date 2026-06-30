@@ -29,6 +29,7 @@
               <% end %>
               <li>
                 <%= link_to item.controlador do %>
+                  <i class="<%= modulo_sidebar_icon(item) %>"></i>
                   <span style="font-size: 12px !important; "><%= item.descripcion %></span>
                 <% end %>
               </li>
@@ -51,6 +52,7 @@
               <% end %>
               <li>
                 <%= link_to item.controlador, method: item.metodo.to_s do %>
+                  <i class="<%= modulo_sidebar_icon(item) %>"></i>
                   <span style="font-size: 12px !important; "><%= item.descripcion %></span>
                 <% end %>
               </li>
@@ -73,6 +75,7 @@
               <% end %>
               <li>
                 <%= link_to item.controlador do %>
+                  <i class="<%= modulo_sidebar_icon(item) %>"></i>
                   <span style="font-size: 12px !important; "><%= item.descripcion %></span>
                 <% end %>
               </li>

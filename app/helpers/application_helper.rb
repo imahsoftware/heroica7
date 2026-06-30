@@ -15,6 +15,66 @@ module ApplicationHelper
     user&.activo.to_s == 'S'
   end
 
+  def modulo_sidebar_icon(modulo)
+    imagen = modulo.imagen.to_s.strip
+    if imagen.match?(/\Afa[\s-]/i)
+      return imagen.sub('fa-file-text-o', 'fa-info-circle')
+    end
+
+    path = modulo.controlador.to_s.downcase
+    name = modulo.descripcion.to_s.downcase
+
+    icon =
+      case path
+      when /alertas/ then 'fa-bell'
+      when /combustible/ then 'fa-fire'
+      when /factura/ then 'fa-info-circle'
+      when /horario/ then 'fa-calendar'
+      when /mantenimiento/ then 'fa-wrench'
+      when /nomina/ then 'fa-info-circle'
+      when /parqueadero/ then 'fa-car'
+      when /persona/ then 'fa-users'
+      when /viaje/ then 'fa-road'
+      when /tour/ then 'fa-map-marker'
+      when /user/ then 'fa-user'
+      when /categoria/ then 'fa-tags'
+      when /cobro/ then 'fa-info-circle'
+      when /compra/ then 'fa-shopping-cart'
+      when /concepto/ then 'fa-list-alt'
+      when /egreso/ then 'fa-info-circle'
+      when /empleado/ then 'fa-id-card'
+      when /empresa/ then 'fa-building'
+      when /instructor/ then 'fa-graduation-cap'
+      when /modulo/ then 'fa-cubes'
+      when /objeto/ then 'fa-cube'
+      when /placa/ then 'fa-info-circle'
+      when /producto/ then 'fa-cube'
+      when /proveedor/ then 'fa-truck'
+      when /tramite/ then 'fa-clipboard'
+      else
+        case name
+        when /usuario/ then 'fa-user'
+        when /persona/ then 'fa-users'
+        when /factura/ then 'fa-info-circle'
+        when /tour/ then 'fa-map-marker'
+        when /alerta/ then 'fa-bell'
+        when /combustible/ then 'fa-fire'
+        when /nomina/ then 'fa-info-circle'
+        when /cobro/ then 'fa-info-circle'
+        when /egreso/ then 'fa-info-circle'
+        when /placa/ then 'fa-info-circle'
+        when /parqueadero/ then 'fa-car'
+        when /mantenimiento/ then 'fa-wrench'
+        when /horario/ then 'fa-calendar'
+        else 'fa-circle-o'
+        end
+      end
+
+    icon = 'fa-info-circle' if icon == 'fa-file-text-o'
+
+    "fa #{icon}"
+  end
+
   def irregular_types(type)
     case type
     when 'alert'
