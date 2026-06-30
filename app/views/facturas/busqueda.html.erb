@@ -11,7 +11,7 @@
           <div class="form-group">
             <%= label_tag :buscarident, 'Identificación' %>
             <%= text_field_tag :buscarident, params[:buscarident],
-                  class: 'form-control solo-numeros', inputmode: 'numeric', pattern: '[0-9]*' %>
+                  class: 'form-control' %>
           </div>
         </div>
         <div class="col-md-3">
@@ -25,14 +25,14 @@
           <div class="form-group">
             <%= label_tag :buscarfactura, 'Número de Factura' %>
             <%= text_field_tag :buscarfactura, params[:buscarfactura],
-                  class: 'form-control solo-numeros', inputmode: 'numeric', pattern: '[0-9]*' %>
+                  class: 'form-control' %>
           </div>
         </div>
         <div class="col-md-3">
           <div class="form-group">
             <%= label_tag :buscarabono, 'Número del Abono' %>
             <%= text_field_tag :buscarabono, params[:buscarabono],
-                  class: 'form-control solo-numeros', inputmode: 'numeric', pattern: '[0-9]*' %>
+                  class: 'form-control' %>
           </div>
         </div>
       </div>
@@ -144,22 +144,6 @@
 </div>
 
 <script>
-  // Solo números en campos marcados con .solo-numeros
-  document.addEventListener('DOMContentLoaded', function() {
-    document.querySelectorAll('.solo-numeros').forEach(function(input) {
-      input.addEventListener('keypress', function(e) {
-        if (!/[0-9]/.test(e.key)) e.preventDefault();
-      });
-      input.addEventListener('paste', function(e) {
-        var texto = (e.clipboardData || window.clipboardData).getData('text');
-        if (!/^[0-9]+$/.test(texto)) e.preventDefault();
-      });
-      input.addEventListener('input', function() {
-        this.value = this.value.replace(/[^0-9]/g, '');
-      });
-    });
-  });
-
   function abrirInformePopup(formId, accion) {
     var popup = window.open('', 'heroica_informe',
       'width=1050,height=750,scrollbars=yes,resizable=yes,toolbar=no,menubar=no,location=no');
