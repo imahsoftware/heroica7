@@ -3,8 +3,7 @@
   <i class="fa fa-file-text-o"></i> <%= programacioneshorario.persona&.nombres %>
 
   <% clase_hoy = Personasclase.where(persona_id: programacioneshorario.persona_id, fecha_clase: Time.zone.today).exists? %>
-  <div class="btn-group btn-group-xs horario-botones-<%= programacioneshorario.id %>" role="group"
-       style="<%= 'display:none;' if clase_hoy %>">
+  <div class="btn-group btn-group-xs horario-botones-<%= programacioneshorario.id %>" role="group">
     <%= link_to edit_programacioneshorario_path(programacioneshorario),
                 class: 'btn btn-warning',
                 title: 'Editar',
@@ -12,15 +11,17 @@
       <i class="fa fa-edit"></i>
     <% end %>
 
-    <%= link_to_popup marcarclase_programacioneshorarios_path(id: programacioneshorario.id),
-                      class: 'btn btn-success',
-                      title: 'Marcar clase',
-                      data: {
-                        confirm: '¿Seguro que desea registrar clase el dia de hoy para este usuario?',
-                        toggle: 'tooltip'
-                      },
-                      popup: ['registroclase', 'height=280,width=440,scrollbars=yes'] do %>
-      <i class="fa fa-check"></i>
+    <% unless clase_hoy %>
+      <%= link_to_popup marcarclase_programacioneshorarios_path(id: programacioneshorario.id),
+                        class: 'btn btn-success btn-marcar-clase',
+                        title: 'Marcar clase',
+                        data: {
+                          confirm: '¿Seguro que desea registrar clase el dia de hoy para este usuario?',
+                          toggle: 'tooltip'
+                        },
+                        popup: ['registroclase', 'height=280,width=440,scrollbars=yes'] do %>
+        <i class="fa fa-check"></i>
+      <% end %>
     <% end %>
 
     <a href="#"

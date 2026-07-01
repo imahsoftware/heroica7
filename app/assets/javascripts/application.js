@@ -297,10 +297,13 @@ function generardatos(ident1,transaccion,ruta){
     }
 }
 
-// Oculta los botones de un item de programación después de marcar clase
+// Oculta solo el botón de marcar clase después de confirmar (editar/eliminar permanecen visibles)
 function ocultarBotonesClase(id) {
-  var el = document.querySelector('.horario-botones-' + id);
-  if (el) el.style.display = 'none';
+  var group = document.querySelector('.horario-botones-' + id);
+  if (group) {
+    var btn = group.querySelector('.btn-marcar-clase');
+    if (btn) btn.style.display = 'none';
+  }
 }
 
 $(document).ready(function() {
