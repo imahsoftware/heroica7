@@ -10,7 +10,7 @@ class ProgramacioneshorariosController < ApplicationController
                                              (fecha_captura,programacioneshorario_id,persona_id,tiposhorario_id,placa_id,instructor_id,
                                               fecha_inicial,nro_clases,fecha_final,recoje,user_id,user_actualiza,ph_created_at,ph_updated_at,
                                               observacion,enespera,fecha_teoria,estado,created_at,updated_at)
-                                             select cast(curdate()-1 as date),id,persona_id,tiposhorario_id,placa_id,instructor_id,
+                                             select DATE_SUB(CURDATE(), INTERVAL 1 DAY),id,persona_id,tiposhorario_id,placa_id,instructor_id,
                                                     fecha_inicial,nro_clases,fecha_final,recoje,user_id,user_actualiza,created_at,updated_at,
                                                     observacion,enespera,fecha_teoria,estado,now(),now()
                                              from programacioneshorarios")

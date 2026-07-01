@@ -1,8 +1,13 @@
+<div id="pdf-landscape" style="display:none"></div>
+<style>
+  table { table-layout: fixed; width: 100% !important; }
+  td, th { word-break: break-word; font-size: 10px; }
+</style>
 <div align="center">
   <br/>
-  <table width="760"  border="0" cellspacing="0" cellpadding="1">
+  <table width="100%"  border="0" cellspacing="0" cellpadding="1">
   <tr>
-    <td width="150" valign="center"><div align="center"><%= image_tag Parametro.find(10).valor.to_s, alt: 'Logo', style: 'max-width:140px; max-height:100px;' %></div></td>
+    <td width="20%" valign="center"><div align="center"><%= image_tag Parametro.find(10).valor.to_s, alt: 'Logo', style: 'max-width:140px; max-height:100px;' %></div></td>
     <td><table width="100%"  border="0" cellspacing="0" cellpadding="0">
         <tr>
           <td class="camposDescN12"><div align="center"><%=Parametro.find(1).valor.to_s%></div></td>
@@ -31,14 +36,14 @@
 </div>
 <BR/>
 <div align="center">
-  <table width="850"  border="0" cellspacing="0" cellpadding="0" class="sample">
+  <table width="100%"  border="0" cellspacing="0" cellpadding="0" class="sample">
     <thead>
       <tr>
         <td height="40" colspan="5" class="camposDescN16"><div align="center">INFORME RANGO DE FECHAS   <%=@fch1%> - <%=@fch2%></div></td>
       </tr>
     </thead>
   </table>
-<table width="850" border="0" align="center" cellpadding="0" cellspacing="0" class="sample">
+<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" class="sample">
   <thead>
   <tr valign="middle">
     <td width="30%" class="camposDescN11">Usuario</td>
@@ -61,11 +66,11 @@
     <td class="camposDesc11"><%=programacioneshorario.instructor.nombre rescue nil%></td>
     <td class="camposDesc11"><div align="center"><%=programacioneshorario.fecha_inicial%></div></td>
     <td class="camposDesc11"><div align="center"><%=programacioneshorario.fecha_final%></div></td>
-    <td class="camposDesc11"><div align="center"><%=Personasclase.count(:conditions =>["persona_id = #{programacioneshorario.persona_id}"])%></div></td>
+    <td class="camposDesc11"><div align="center"><%=Personasclase.where("persona_id = ?", programacioneshorario.persona_id).count%></div></td>
  </tr>
 <% end %>
 </table>
-<table width="850"  border="0" cellspacing="0" cellpadding="0">
+<table width="100%"  border="0" cellspacing="0" cellpadding="0">
       <tr>
         <td width="60%" height="20" class="camposDesc11"><div align="left"><%=Time.now.strftime("%Y-%m-%d %X")%> - <%=User.find(is_admin).nombre rescue nil%></div></td>
         <td width="40%" height="20" class="camposDesc11"><div align="right"><a href="javascript:window.print()" class="imprimirlink">Imprimir</a>&nbsp;&nbsp;</div></td>

@@ -23,14 +23,13 @@
       <i class="fa fa-check"></i>
     <% end %>
 
-    <%= link_to programacioneshorario_path(programacioneshorario),
-                class: 'btn btn-danger',
-                title: 'Eliminar',
-                remote: true,
-                method: :delete,
-                data: { confirm: '¿Seguro?', toggle: 'tooltip', turbolinks: true } do %>
+    <a href="#"
+       class="btn btn-danger"
+       title="Eliminar"
+       data-toggle="tooltip"
+       onclick="if(confirm('¿Seguro?')){ $.ajax({ url: '<%= programacioneshorario_path(programacioneshorario) %>', type: 'DELETE', dataType: 'script' }); } return false;">
       <i class="fa fa-trash"></i>
-    <% end %>
+    </a>
   </div>
 
   <% if programacioneshorario.observacion.to_s.present? %>

@@ -69,15 +69,15 @@
                 <%= link_to_popup 'Ver Recibo',
                     show_viajesrecibos_path(viaje_id: @viaje.id),
                     popup: ['new_window', 'height=330,width=700,scrollbars=yes'],
-                    class: 'btn btn-info btn-sm' %>
+                    class: 'btn btn-info' %>
                 <%= link_to 'Anular Recibo',
                     eliminar_viajesrecibos_path(viaje_id: @viaje.id),
-                    class: 'btn btn-danger btn-sm',
+                    class: 'btn btn-danger',
                     data: { confirm: 'Esta seguro?' } %>
               <% else %>
                 <%= link_to 'Generar Recibo',
                     crearrecibo_viajesrecibos_path(viaje_id: @viaje.id, tiposviaje: @viaje.tiposviaje_id),
-                    class: 'btn btn-success btn-sm',
+                    class: 'btn btn-success',
                     data: { confirm: 'Esta seguro?' } %>
               <% end %>
             <% end %>
