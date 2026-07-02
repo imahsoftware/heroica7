@@ -52,12 +52,14 @@
     </div>
 
     <div class="bs-callout" style="margin-top: 16px;">
-      <p class="section-label">Informe de recibos</p>
-      <div class="row">
-        <div class="col-md-12">
-          <%= link_to 'Exportar Informe XLS', informe_viajes_path(format: :xls), class: 'btn btn-success' %>
+      <%= form_tag informe_viajes_path, method: :get do %>
+        <p class="section-label">Informe de recibos</p>
+        <div class="row">
+          <div class="col-md-12">
+            <%= submit_tag 'Exportar Informe XLS', name: 'format', value: 'xls', class: 'btn btn-success' %>
+          </div>
         </div>
-      </div>
+      <% end %>
     </div>
   </div>
 </div>

@@ -35,6 +35,7 @@ class ViajesController < ApplicationController
   def informe
     @viajesrecibos = Viajesrecibo.includes(viaje: :tiposviaje).all
     respond_to do |format|
+      format.html { redirect_to busqueda_viajes_path }
       format.xls do
         response.headers['Content-Type'] = 'application/vnd.ms-excel'
         response.headers['Content-Disposition'] =

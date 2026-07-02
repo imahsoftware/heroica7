@@ -7,12 +7,12 @@
       <% end %>
     <% end %>
     <% if is_auth_e("personasclase") %>
-      <%= link_to persona_personasclase_path(persona, personasclase),
-          remote: true, method: :delete,
-          data: { confirm: '¿Seguro?', toggle: 'tooltip' },
-          title: 'Eliminar' do %>
+      <a href="#"
+         title="Eliminar"
+         data-toggle="tooltip"
+         onclick="if(confirm('¿Seguro?')){ $.ajax({ url: '<%= persona_personasclase_path(persona, personasclase) %>', type: 'DELETE', dataType: 'script' }); } return false;">
         <button class="btn btn-xs btn-danger btn-accion"><i class="fa fa-trash"></i></button>
-      <% end %>
+      </a>
     <% end %>
   </td>
   <td>

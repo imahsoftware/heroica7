@@ -107,7 +107,7 @@ class ProgramacioneshorariosController < ApplicationController
         @placa = Placa.find(@programacioneshorario.placa_id)
         personasclase = Personasclase.new(
           persona_id: @programacioneshorario.persona_id,
-          fecha_clase: Time.zone.now,
+          fecha_clase: Date.current,
           tiposhorario_id: @programacioneshorario.tiposhorario_id,
           placa_id: @programacioneshorario.placa_id,
           instructor_id: @placa.instructor_id,
