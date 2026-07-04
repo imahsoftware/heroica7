@@ -32,7 +32,6 @@ class ProgramacioneshorariosController < ApplicationController
       @personasclases = scope
       @fch1 = params[:ubicacion][:inicial]
       @fch2 = params[:ubicacion][:final]
-      render layout: 'pdf_heroica'
     end
   end
 
@@ -48,7 +47,6 @@ class ProgramacioneshorariosController < ApplicationController
       @programacioneshorarios = scope
       @fch1 = params[:prog_ubicacion][:inicial]
       @fch2 = params[:prog_ubicacion][:final]
-      render layout: 'pdf_heroica'
     end
   end
 
