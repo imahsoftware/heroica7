@@ -1,19 +1,12 @@
 <% mensaje = flash[:personasclase].to_s %>
 <% exito = mensaje.downcase.include?('exito') || mensaje.downcase.include?('éxito') %>
 <% alert_class = exito ? 'alert-success' : 'alert-danger' %>
-<% icon_class = exito ? 'fa-check-circle' : 'fa-exclamation-triangle' %>
+<% icon_class  = exito ? 'fa-check-circle' : 'fa-exclamation-triangle' %>
 
 <div class="marcarclase-ventana">
   <div class="marcarclase-card">
     <div class="marcarclase-header text-center">
       <%= image_tag Parametro.find(10).valor.to_s, alt: 'Logo', class: 'marcarclase-logo' %>
-      <h4 class="marcarclase-titulo">Marcar clase</h4>
-      <% if @programacioneshorario&.persona %>
-        <p class="marcarclase-alumno text-muted">
-          <i class="fa fa-user"></i>
-          <%= @programacioneshorario.persona.nombres %>
-        </p>
-      <% end %>
     </div>
 
     <div class="alert <%= alert_class %> marcarclase-mensaje" role="alert">
@@ -22,26 +15,10 @@
     </div>
 
     <div class="text-center marcarclase-acciones">
-      <button type="button" class="btn btn-primary btn-sm" onclick="cerrarYOcultar();">
+      <button type="button" class="btn btn-primary btn-sm" onclick="window.close();">
         <i class="fa fa-times"></i> Cerrar
       </button>
     </div>
-
-    <script>
-      <% if exito %>
-        // Auto-cerrar y ocultar botones en el padre tras 1.5 segundos
-        setTimeout(function() { cerrarYOcultar(); }, 1500);
-      <% end %>
-
-      function cerrarYOcultar() {
-        <% if exito && @programacioneshorario %>
-          if (window.opener && !window.opener.closed) {
-            window.opener.ocultarBotonesClase(<%= @programacioneshorario.id %>);
-          }
-        <% end %>
-        window.close();
-      }
-    </script>
   </div>
 </div>
 
@@ -55,7 +32,7 @@
   .marcarclase-card {
     background: #fff;
     border-radius: 6px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
     padding: 16px 18px 14px;
     border: 1px solid #d2d6de;
   }
@@ -63,19 +40,7 @@
   .marcarclase-logo {
     max-height: 56px;
     max-width: 100%;
-    margin-bottom: 8px;
-  }
-
-  .marcarclase-titulo {
-    margin: 0 0 4px;
-    font-size: 16px;
-    font-weight: 600;
-    color: #333;
-  }
-
-  .marcarclase-alumno {
-    margin: 0 0 12px;
-    font-size: 12px;
+    margin-bottom: 12px;
   }
 
   .marcarclase-mensaje {
