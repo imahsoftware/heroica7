@@ -255,7 +255,7 @@ class PersonastramitesController < ApplicationController
     respond_to do |format|
       format.html
       format.pdf do
-        redirect_to url_for(format: :html)
+        redirect_to url_for(params.permit!.merge(format: :html))
       end
     end
   end

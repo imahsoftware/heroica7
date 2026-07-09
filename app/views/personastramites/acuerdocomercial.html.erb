@@ -1,214 +1,213 @@
-<br/>
 <div align="center">
 
-  <%# ── Encabezado ─────────────────────────────────────────────────────────── %>
-  <table width="850" height="77" border="0" cellpadding="0" cellspacing="0" class="sample">
-    <tr>
-      <td width="250" rowspan="2" valign="middle">
-        <div align="center">
-          <%= informe_image_tag 'logo_heroica.png', style: 'max-width:220px; max-height:80px;' %>
-        </div>
-      </td>
-      <td width="395" rowspan="2">
-        <div align="center" class="camposDescN16">ACUERDO COMERCIAL</div>
-      </td>
-      <td width="92" height="40">
-        <div align="center">VERSION</div>
-      </td>
-      <td width="113">
-        <div align="center">01</div>
-      </td>
-    </tr>
-    <tr>
-      <td height="40">
-        <div align="center">FECHA</div>
-      </td>
-      <td>
-        <div align="center">18/06/2010</div>
-      </td>
-    </tr>
-  </table>
+      <%# ── Encabezado ─────────────────────────────────────────────────────────── %>
+      <table width="100%" height="77" border="0" cellpadding="0" cellspacing="0" class="sample">
+        <tr>
+          <td width="29%" rowspan="2" valign="middle">
+            <div align="center">
+              <%= informe_image_tag 'logo_heroica.png', style: 'max-width:220px; max-height:80px;' %>
+            </div>
+          </td>
+          <td width="46%" rowspan="2">
+            <div align="center" class="camposDescN16">ACUERDO COMERCIAL</div>
+          </td>
+          <td width="11%" height="40">
+            <div align="center">VERSION</div>
+          </td>
+          <td width="13%">
+            <div align="center">01</div>
+          </td>
+        </tr>
+        <tr>
+          <td height="40">
+            <div align="center">FECHA</div>
+          </td>
+          <td>
+            <div align="center">18/06/2010</div>
+          </td>
+        </tr>
+      </table>
 
-  <%# ── Datos del alumno ───────────────────────────────────────────────────── %>
-  <table width="850" border="0" cellspacing="0" cellpadding="0" class="informe-bloque">
-    <tr>
-      <td width="30%" valign="top">
-        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="sample">
-          <tr>
-            <td width="50%" class="camposDescN11">
-              <div align="center">FOTOGRAFIA</div>
-            </td>
-            <td width="50%" class="camposDescN11">
-              <div align="center">IDENTIFICACION BIOMETRICA</div>
-            </td>
-          </tr>
-          <tr>
-            <td width="50%" height="120" class="camposDescN12">
-              <div align="center">
-                <%= persona_informe_foto(@personastramite.persona, height: 120, width: 120) %>
-              </div>
-            </td>
-            <td width="50%" height="120" class="camposDesc11" valign="bottom">
-              <div align="center">Indice Derecho</div>
-            </td>
-          </tr>
-        </table>
-      </td>
-      <td width="70%">
-        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="sample">
-          <tr>
-            <td width="25%" class="camposDescN12">
-              <div align="left">Consecutivo:</div>
-            </td>
-            <td width="70%" class="camposDesc12">
-              <div align="left">&nbsp;<%= @personastramite.id %></div>
-            </td>
-          </tr>
-          <tr>
-            <td class="camposDescN12">
-              <div align="left">Fecha:</div>
-            </td>
-            <td class="camposDesc12">
-              <div align="left">&nbsp;<%= @personastramite.created_at&.strftime('%Y-%m-%d') %></div>
-            </td>
-          </tr>
-          <tr>
-            <td class="camposDescN12">
-              <div align="left">Alumno:</div>
-            </td>
-            <td class="camposDesc12">
-              <div align="left">
-                &nbsp;<%= @personastramite.persona.identificacion rescue nil %>
-                - <%= @personastramite.persona.nombres rescue nil %>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td class="camposDescN12">
-              <div align="left">Categoria:</div>
-            </td>
-            <td class="camposDesc12">
-              <div align="left">&nbsp;<%= @personastramite.categoria.codigo_nuevo rescue nil %></div>
-            </td>
-          </tr>
-          <tr>
-            <td class="camposDescN12">
-              <div align="left">Precio:</div>
-            </td>
-            <td class="camposDesc12">
-              <div align="left">&nbsp;<%= camponumerico(@personastramite.factura.valor) rescue nil %></div>
-            </td>
-          </tr>
-          <tr>
-            <td class="camposDescN12">
-              <div align="left">Numero de Factura:</div>
-            </td>
-            <td class="camposDesc12">
-              <div align="left">
-                &nbsp;<%= Parametro.find(17).valor.to_s %><%= facturacero(@personastramite.factura.nro_factura) rescue nil %>
-              </div>
-            </td>
-          </tr>
-        </table>
+      <%# ── Datos del alumno ───────────────────────────────────────────────────── %>
+      <table width="100%" border="0" cellspacing="0" cellpadding="0" class="informe-bloque">
+        <tr>
+          <td width="30%" valign="top">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="sample">
+              <tr>
+                <td width="50%" class="camposDescN11">
+                  <div align="center">FOTOGRAFIA</div>
+                </td>
+                <td width="50%" class="camposDescN11">
+                  <div align="center">IDENTIFICACION BIOMETRICA</div>
+                </td>
+              </tr>
+              <tr>
+                <td width="50%" height="120" class="camposDescN12">
+                  <div align="center">
+                    <%= persona_informe_foto(@personastramite.persona, height: 120, width: 120) %>
+                  </div>
+                </td>
+                <td width="50%" height="120" class="camposDesc11" valign="bottom">
+                  <div align="center">Indice Derecho</div>
+                </td>
+              </tr>
+            </table>
+          </td>
+          <td width="70%">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="sample">
+              <tr>
+                <td width="25%" class="camposDescN12">
+                  <div align="left">Consecutivo:</div>
+                </td>
+                <td width="70%" class="camposDesc12">
+                  <div align="left">&nbsp;<%= @personastramite.id %></div>
+                </td>
+              </tr>
+              <tr>
+                <td class="camposDescN12">
+                  <div align="left">Fecha:</div>
+                </td>
+                <td class="camposDesc12">
+                  <div align="left">&nbsp;<%= @personastramite.created_at&.strftime('%Y-%m-%d') %></div>
+                </td>
+              </tr>
+              <tr>
+                <td class="camposDescN12">
+                  <div align="left">Alumno:</div>
+                </td>
+                <td class="camposDesc12">
+                  <div align="left">
+                    &nbsp;<%= @personastramite.persona.identificacion rescue nil %>
+                    - <%= @personastramite.persona.nombres rescue nil %>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td class="camposDescN12">
+                  <div align="left">Categoria:</div>
+                </td>
+                <td class="camposDesc12">
+                  <div align="left">&nbsp;<%= @personastramite.categoria.codigo_nuevo rescue nil %></div>
+                </td>
+              </tr>
+              <tr>
+                <td class="camposDescN12">
+                  <div align="left">Precio:</div>
+                </td>
+                <td class="camposDesc12">
+                  <div align="left">&nbsp;<%= camponumerico(@personastramite.factura.valor) rescue nil %></div>
+                </td>
+              </tr>
+              <tr>
+                <td class="camposDescN12">
+                  <div align="left">Numero de Factura:</div>
+                </td>
+                <td class="camposDesc12">
+                  <div align="left">
+                    &nbsp;<%= Parametro.find(17).valor.to_s %><%= facturacero(@personastramite.factura.nro_factura) rescue nil %>
+                  </div>
+                </td>
+              </tr>
+            </table>
 
-        <%# ── Intensidad horaria por tipo de clase ── %>
-        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="sample">
-          <tr>
-            <td class="camposDescN12">
-              <div align="left">Tipo de Clase</div>
-            </td>
-            <td class="camposDescN12">
-              <div align="center">TEORICAS</div>
-            </td>
-            <td class="camposDescN12">
-              <div align="center">TALLER</div>
-            </td>
-            <td class="camposDescN12">
-              <div align="center">PRÁCTICAS</div>
-            </td>
-          </tr>
-          <tr>
-            <td class="camposDescN12">
-              <div align="left">Intensidad Horaria</div>
-            </td>
-            <td>
-              <div align="center"><%= @teoricas %></div>
-            </td>
-            <td>
-              <div align="center"><%= @taller %></div>
-            </td>
-            <td>
-              <div align="center"><%= @practicas %></div>
-            </td>
-          </tr>
-        </table>
-      </td>
-    </tr>
-  </table>
+            <%# ── Intensidad horaria por tipo de clase ── %>
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="sample">
+              <tr>
+                <td class="camposDescN12">
+                  <div align="left">Tipo de Clase</div>
+                </td>
+                <td class="camposDescN12">
+                  <div align="center">TEORICAS</div>
+                </td>
+                <td class="camposDescN12">
+                  <div align="center">TALLER</div>
+                </td>
+                <td class="camposDescN12">
+                  <div align="center">PRÁCTICAS</div>
+                </td>
+              </tr>
+              <tr>
+                <td class="camposDescN12">
+                  <div align="left">Intensidad Horaria</div>
+                </td>
+                <td>
+                  <div align="center"><%= @teoricas %></div>
+                </td>
+                <td>
+                  <div align="center"><%= @taller %></div>
+                </td>
+                <td>
+                  <div align="center"><%= @practicas %></div>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
 
-  <%# ── Cláusulas importantes ──────────────────────────────────────────────── %>
-  <table width="850" border="0" cellspacing="0" cellpadding="0" class="sample">
-    <tr>
-      <td class="camposDescN12">
-        <div align="center">IMPORTANTE</div>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <div align="justify" class="camposDesc10">
-          - USTED RECIBIÓ UN CORREO DE SOPORTEFABRICAAULAPP CON USUARIO Y CONTRASEÑA QUE LE SERVIRAN PARA INSTALAR LA APLICACIÓN EN SU CELULAR Y PARA REALIZAR EL EXAMEN TEORICO. CON ESTA APLICACIÓN USTED PODRÁ ESTAR AL TANTO DE SU PROGRESO DURANTE EL CURSO DE CONDUCCIÓN.<br/>
-          - PARA CADA CLASE PRACTICA USTED DEBERÁ PORTAR SU DOCUMENTO DE IDENTIDAD ORIGINAL.<br/>
-          - DURANTE LAS CLASES PRACTICAS Y TEORICAS EVITE RECIBIR, HACER LLAMADAS O CHATEAR.<br/>
-          - POR FAVOR ASISTA PUNTUALMENTE A SUS CLASES TEORICAS, TALLER Y PRACTICAS; DEBERÁ PRESENTARSE 15 MINUTOS ANTES DE LA HORA PROGRAMADA, DE LO CONTRARIO PODRÍA PERDER SU CLASE.<br/>
-          - LA PRUEBA PSICOSENSOMETRICA TIENE UNA VIGENCIA DE 180 DÍAS CALENDARIO, SI PERMITE QUE ESTA PRUEBA VENZA DEBERA HACERLA NUEVAMENTE Y CANCELAR EL COSTO TOTAL DE LA MISMA.<br/>
-          - AVISAR CON 24 HORAS DE ANTELACION SI DESEA CANCELAR O APLAZAR SU CLASE PRÁCTICA O TEÓRICA, DE LO CONTRARIO SI SE AUSENTA SIN NOTIFICACION ALGUNA PODRÍA PERDER EL HORARIO ELEGIDO Y SU CUPO PARA CLASE TEÓRICA.<br/>
-          - EL CURSO DE CONDUCCIÓN EN NINGUN CASO PODRÁ DESARROLLARSE EN MAS DE 3 MESES (90 DÍAS), DE LO CONTRARIO DEBERA INICIARLO NUEVAMENTE DESDE CERO Y CANCELAR EL VALOR TOTAL DEL MISMO. ARTICULO 7 DECRETO 1500 DEL 29 DE ABRIL DEL 2009<br/>
-          - EL 25% DEL TOTAL DE LAS CLASES PRÁCTICAS SE DESARROLLARÁN EN PISTA O AREA PRÁCTICA.<br/>
-          - EL 75% DEL TOTAL DE LAS CLASES PRÁCTICAS SE DESARROLLARÁN EN LAS VIAS DE USO PÚBLICO.<br/>
-          - EN EL VEHICULO SOLO DEBERÁN IR EL INSTRUCTOR Y EL ALUMNO.<br/>
-        </div>
-      </td>
-    </tr>
-  </table>
+      <%# ── Cláusulas importantes ──────────────────────────────────────────────── %>
+      <table width="100%" border="0" cellspacing="0" cellpadding="0" class="sample">
+        <tr>
+          <td class="camposDescN12">
+            <div align="center">IMPORTANTE</div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div align="justify" class="camposDesc10">
+              - USTED RECIBIÓ UN CORREO DE SOPORTEFABRICAAULAPP CON USUARIO Y CONTRASEÑA QUE LE SERVIRAN PARA INSTALAR LA APLICACIÓN EN SU CELULAR Y PARA REALIZAR EL EXAMEN TEORICO. CON ESTA APLICACIÓN USTED PODRÁ ESTAR AL TANTO DE SU PROGRESO DURANTE EL CURSO DE CONDUCCIÓN.<br/>
+              - PARA CADA CLASE PRACTICA USTED DEBERÁ PORTAR SU DOCUMENTO DE IDENTIDAD ORIGINAL.<br/>
+              - DURANTE LAS CLASES PRACTICAS Y TEORICAS EVITE RECIBIR, HACER LLAMADAS O CHATEAR.<br/>
+              - POR FAVOR ASISTA PUNTUALMENTE A SUS CLASES TEORICAS, TALLER Y PRACTICAS; DEBERÁ PRESENTARSE 15 MINUTOS ANTES DE LA HORA PROGRAMADA, DE LO CONTRARIO PODRÍA PERDER SU CLASE.<br/>
+              - LA PRUEBA PSICOSENSOMETRICA TIENE UNA VIGENCIA DE 180 DÍAS CALENDARIO, SI PERMITE QUE ESTA PRUEBA VENZA DEBERA HACERLA NUEVAMENTE Y CANCELAR EL COSTO TOTAL DE LA MISMA.<br/>
+              - AVISAR CON 24 HORAS DE ANTELACION SI DESEA CANCELAR O APLAZAR SU CLASE PRÁCTICA O TEÓRICA, DE LO CONTRARIO SI SE AUSENTA SIN NOTIFICACION ALGUNA PODRÍA PERDER EL HORARIO ELEGIDO Y SU CUPO PARA CLASE TEÓRICA.<br/>
+              - EL CURSO DE CONDUCCIÓN EN NINGUN CASO PODRÁ DESARROLLARSE EN MAS DE 3 MESES (90 DÍAS), DE LO CONTRARIO DEBERA INICIARLO NUEVAMENTE DESDE CERO Y CANCELAR EL VALOR TOTAL DEL MISMO. ARTICULO 7 DECRETO 1500 DEL 29 DE ABRIL DEL 2009<br/>
+              - EL 25% DEL TOTAL DE LAS CLASES PRÁCTICAS SE DESARROLLARÁN EN PISTA O AREA PRÁCTICA.<br/>
+              - EL 75% DEL TOTAL DE LAS CLASES PRÁCTICAS SE DESARROLLARÁN EN LAS VIAS DE USO PÚBLICO.<br/>
+              - EN EL VEHICULO SOLO DEBERÁN IR EL INSTRUCTOR Y EL ALUMNO.<br/>
+            </div>
+          </td>
+        </tr>
+      </table>
 
-  <%# ── Firmas ─────────────────────────────────────────────────────────────── %>
-  <table width="850" border="0" cellspacing="0" cellpadding="0">
-    <tr valign="bottom">
-      <td width="416" height="50">
-        <div align="center">______________________________________</div>
-      </td>
-      <td width="43">&nbsp;</td>
-      <td width="391" height="50">
-        <div align="center">______________________________________</div>
-      </td>
-    </tr>
-    <tr>
-      <td class="camposDescN12">
-        <div align="center">FIRMA AUTORIZADO</div>
-      </td>
-      <td>&nbsp;</td>
-      <td class="camposDescN12">
-        <div align="center">FIRMA DEL CLIENTE</div>
-      </td>
-    </tr>
-  </table>
+      <%# ── Firmas ─────────────────────────────────────────────────────────────── %>
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr valign="bottom">
+          <td width="49%" height="50">
+            <div align="center">______________________________________</div>
+          </td>
+          <td width="5%">&nbsp;</td>
+          <td width="46%" height="50">
+            <div align="center">______________________________________</div>
+          </td>
+        </tr>
+        <tr>
+          <td class="camposDescN12">
+            <div align="center">FIRMA AUTORIZADO</div>
+          </td>
+          <td>&nbsp;</td>
+          <td class="camposDescN12">
+            <div align="center">FIRMA DEL CLIENTE</div>
+          </td>
+        </tr>
+      </table>
 
-  <%# ── Pie de página ──────────────────────────────────────────────────────── %>
-  <table width="760" border="0" cellspacing="0" cellpadding="0">
-    <tr>
-      <td width="60%" class="camposDesc11">
-        <div align="left">
-          <%= Time.now.strftime("%Y-%m-%d %X") %> - <%= User.find(is_admin).nombre rescue nil %>
-        </div>
-      </td>
-      <td width="40%" class="camposDesc11">
-        <div align="right">
-          <a href="javascript:window.print()" class="imprimirlink">Imprimir</a>&nbsp;&nbsp;
-        </div>
-      </td>
-    </tr>
-  </table>
+      <%# ── Pie de página ──────────────────────────────────────────────────────── %>
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="60%" class="camposDesc11">
+            <div align="left">
+              <%= Time.now.strftime("%Y-%m-%d %X") %> - <%= User.find(is_admin).nombre rescue nil %>
+            </div>
+          </td>
+          <td width="40%" class="camposDesc11">
+            <div align="right">
+              <a href="javascript:window.print()" class="imprimirlink">Imprimir</a>&nbsp;&nbsp;
+            </div>
+          </td>
+        </tr>
+      </table>
 
+    </div>
 </div>
-<br/>
 <script>window.onload = function() { window.print(); };</script>

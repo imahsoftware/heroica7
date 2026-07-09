@@ -33,8 +33,7 @@
       size: Letter portrait;
       margin: 10mm;
       <% else %>
-      size: 8.5in 5.5in;
-      margin: 0 0.15in 0.1in 0.15in;
+      margin: 8mm;
       <% end %>
     }
 
@@ -227,7 +226,5 @@
   </table>
 </div>
 <% unless pdf_request? %>
-<script>
-  window.onload = function() { window.print(); };
-</script>
+<script>window.onload = function() { window.print(); };</script>
 <% end %>
