@@ -55,7 +55,7 @@
           <tbody>
             <% @audits.order(created_at: :desc).each do |audit| %>
                 <tr>
-                <% if audit.created_at.strftime("%d/%m/%Y") == Time.now.strftime("%d/%m/%Y") %>
+                <% if audit.created_at.strftime("%d/%m/%Y") == Time.current.strftime("%d/%m/%Y") %>
                   <td>Hoy a las <%= audit.created_at.strftime("%H:%M") %></td>
                 <% elsif audit.created_at.strftime("%d/%m/%Y") == Date.yesterday.strftime("%d/%m/%Y") %>
                   <td>Ayer a las <%= audit.created_at.strftime("%H:%M") %></td>

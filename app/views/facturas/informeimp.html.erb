@@ -175,7 +175,7 @@
   <table width="800" border="0" cellspacing="0" cellpadding="0">
     <tr>
       <td width="60%" height="20" class="camposDesc11">
-        <div align="left"><%= Time.now.strftime('%Y-%m-%d %H:%M:%S') %> - <%= User.find(is_admin).nombre rescue nil %></div>
+        <div align="left"><%= Time.current.strftime('%Y-%m-%d %H:%M:%S') %> - <%= User.find(is_admin).nombre rescue nil %></div>
       </td>
       <td width="40%" height="20" class="camposDesc11">
         <div align="right">

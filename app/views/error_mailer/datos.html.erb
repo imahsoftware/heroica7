@@ -2,7 +2,7 @@
 
 <h3>Error 500</h3>
 
-<span><b>Hora: </b><%= Time.now.strftime("%Y-%m-%d %H:%M:%S %p") %></span><br>
+<span><b>Hora: </b><%= Time.current.strftime("%Y-%m-%d %H:%M:%S %p") %></span><br>
 
 <span><b>Usuario: </b><%= User.find(@user_id).nombre %> (<%= @user_id %>)</span><br>
 

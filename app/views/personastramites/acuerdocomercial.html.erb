@@ -197,7 +197,7 @@
         <tr>
           <td width="60%" class="camposDesc11">
             <div align="left">
-              <%= Time.now.strftime("%Y-%m-%d %X") %> - <%= User.find(is_admin).nombre rescue nil %>
+              <%= Time.current.strftime("%Y-%m-%d %X") %> - <%= User.find(is_admin).nombre rescue nil %>
             </div>
           </td>
           <td width="40%" class="camposDesc11">

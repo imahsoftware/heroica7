@@ -146,7 +146,7 @@
       </table>
       <table width="760" border="0" cellspacing="0" cellpadding="0">
         <tr>
-          <td width="60%" height="20" class="camposDesc11"><div align="left"><%=Time.now.strftime("%Y-%m-%d %X")%> - <%=User.find(is_admin).nombre rescue nil%></div></td>
+          <td width="60%" height="20" class="camposDesc11"><div align="left"><%=Time.current.strftime("%Y-%m-%d %X")%> - <%=User.find(is_admin).nombre rescue nil%></div></td>
           <td width="40%" height="20" class="camposDesc11"><div align="right"><a href="javascript:window.print()" class="imprimirlink">Imprimir</a>&nbsp;&nbsp;</div></td>
         </tr>
       </table>
