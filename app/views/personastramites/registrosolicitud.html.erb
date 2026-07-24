@@ -1,3 +1,25 @@
+<style>
+@media print {
+  @page {
+    size: 5.5in 8.5in portrait;
+    margin: 4mm 3mm;
+  }
+  .camposDescN16 { font-size: 14px !important; }
+  .camposDescN14 { font-size: 12px !important; }
+  .camposDesc14  { font-size: 12px !important; }
+  .camposDescN12 { font-size: 10px !important; }
+  .camposDesc12  { font-size: 10px !important; }
+  .camposDescN11 { font-size:  9px !important; }
+  .camposDesc11  { font-size:  9px !important; }
+  .camposDescN10 { font-size:  8px !important; }
+  .camposDesc10  { font-size:  8px !important; }
+  /* Foto más pequeña para ahorrar espacio vertical */
+  td img { max-width: 80px !important; max-height: 80px !important; }
+  /* Firma más compacta */
+  tr td[height="50"] { height: 30px !important; }
+}
+</style>
+
 <div align="center">
 
       <%# ── Encabezado ─────────────────────────────────────────────────────────── %>
@@ -69,7 +91,8 @@
                 </td>
                 <td class="camposDesc12">
                   <div align="left">
-                    &nbsp;<%= @personastramite.persona.identificacion rescue nil %>
+                    &nbsp;<%= @personastramite.persona.tipodocumento rescue nil %>
+                    <%= @personastramite.persona.identificacion rescue nil %>
                     - <%= @personastramite.persona.nombres rescue nil %>
                   </div>
                 </td>
@@ -87,10 +110,24 @@
               </tr>
               <tr>
                 <td class="camposDescN12" height="20">
+                  <div align="left">Ocupacion:</div>
+                </td>
+                <td class="camposDesc12">
+                  <div align="left">
+                    &nbsp;<%= @personastramite.persona.ocupacion rescue nil %>
+                    - <%= @personastramite.persona.nivel_formacion rescue nil %>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td class="camposDescN12" height="20">
                   <div align="left">Direccion:</div>
                 </td>
                 <td class="camposDesc12">
-                  <div align="left">&nbsp;<%= @personastramite.persona.direccion rescue nil %></div>
+                  <div align="left">
+                    &nbsp;<%= @personastramite.persona.direccion rescue nil %>
+                    - <%= @personastramite.persona.lugar_origen rescue nil %>
+                  </div>
                 </td>
               </tr>
               <tr>
@@ -183,7 +220,10 @@
             <div align="center" class="camposDescN14">
               Declaro que toda la informacion que suministrare durante el proceso sera verdadera
               y acepto cumplir con los requisitos para la formacion a la que aspiro y proporcionare
-              cualquier informacion necesaria para la evaluacion.
+              cualquier informacion necesaria para la evaluacion. Asimismo, declaro bajo la gravedad
+              de juramento que los fondos destinados al presente servicio provienen de actividades
+              licitas y fuentes legales y/o que la presente solicitud es requerida para el desarrollo
+              de mis actividades y el cumplimiento de mis obligaciones.
             </div>
           </td>
         </tr>
