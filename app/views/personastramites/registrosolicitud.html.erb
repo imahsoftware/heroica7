@@ -78,76 +78,93 @@
           <td width="70%">
             <table width="100%" border="0" cellspacing="0" cellpadding="0" class="sample">
               <tr>
-                <td width="25%" height="20" class="camposDescN12">
+                <td width="18%" height="18" class="camposDescN12">
                   <div align="left">Consecutivo:</div>
                 </td>
-                <td width="70%" class="camposDesc12">
+                <td width="32%" class="camposDesc12">
                   <div align="left">&nbsp;<%= @personastramite.id %></div>
                 </td>
+                <td width="18%" class="camposDescN12">
+                  <div align="left">Categoria:</div>
+                </td>
+                <td width="32%" class="camposDesc12">
+                  <div align="left">&nbsp;<%= @personastramite.categoria.codigo_nuevo rescue nil %></div>
+                </td>
               </tr>
               <tr>
-                <td class="camposDescN12" height="20">
-                  <div align="left">Alumno:</div>
+                <td class="camposDescN12" height="18">
+                  <div align="left">Tipo Documento:</div>
                 </td>
                 <td class="camposDesc12">
-                  <div align="left">
-                    &nbsp;<%= @personastramite.persona.tipodocumento rescue nil %>
-                    <%= @personastramite.persona.identificacion rescue nil %>
-                    - <%= @personastramite.persona.nombres rescue nil %>
-                  </div>
+                  <div align="left">&nbsp;<%= @personastramite.persona.tipodocumento rescue nil %></div>
+                </td>
+                <td class="camposDescN12">
+                  <div align="left">Numero:</div>
+                </td>
+                <td class="camposDesc12">
+                  <div align="left">&nbsp;<%= @personastramite.persona.identificacion rescue nil %></div>
                 </td>
               </tr>
               <tr>
-                <td class="camposDescN12" height="20">
+                <td class="camposDescN12" height="18">
+                  <div align="left">Nombre:</div>
+                </td>
+                <td class="camposDesc12" colspan="3">
+                  <div align="left">&nbsp;<%= @personastramite.persona.nombres rescue nil %></div>
+                </td>
+              </tr>
+              <tr>
+                <td class="camposDescN12" height="18">
                   <div align="left">Fecha Nacimiento:</div>
                 </td>
                 <td class="camposDesc12">
-                  <div align="left">
-                    &nbsp;<%= @personastramite.persona.fecha_nacimiento rescue nil %>
-                    - <%= @personastramite.persona.lugar_nacimiento rescue nil %>
-                  </div>
+                  <div align="left">&nbsp;<%= @personastramite.persona.fecha_nacimiento rescue nil %></div>
+                </td>
+                <td class="camposDescN12">
+                  <div align="left">Lugar Nacimiento:</div>
+                </td>
+                <td class="camposDesc12">
+                  <div align="left">&nbsp;<%= @personastramite.persona.lugar_nacimiento rescue nil %></div>
                 </td>
               </tr>
               <tr>
-                <td class="camposDescN12" height="20">
+                <td class="camposDescN12" height="18">
                   <div align="left">Ocupacion:</div>
                 </td>
                 <td class="camposDesc12">
-                  <div align="left">
-                    &nbsp;<%= @personastramite.persona.ocupacion rescue nil %>
-                    - <%= @personastramite.persona.nivel_formacion rescue nil %>
-                  </div>
+                  <div align="left">&nbsp;<%= @personastramite.persona.ocupacion rescue nil %></div>
+                </td>
+                <td class="camposDescN12">
+                  <div align="left">Nivel Formacion:</div>
+                </td>
+                <td class="camposDesc12">
+                  <div align="left">&nbsp;<%= @personastramite.persona.nivel_formacion rescue nil %></div>
                 </td>
               </tr>
               <tr>
-                <td class="camposDescN12" height="20">
+                <td class="camposDescN12" height="18">
                   <div align="left">Direccion:</div>
                 </td>
                 <td class="camposDesc12">
-                  <div align="left">
-                    &nbsp;<%= @personastramite.persona.direccion rescue nil %>
-                    - <%= @personastramite.persona.lugar_origen rescue nil %>
-                  </div>
+                  <div align="left">&nbsp;<%= @personastramite.persona.direccion rescue nil %></div>
+                </td>
+                <td class="camposDescN12">
+                  <div align="left">Ciudad:</div>
+                </td>
+                <td class="camposDesc12">
+                  <div align="left">&nbsp;<%= @personastramite.persona.lugar_origen rescue nil %></div>
                 </td>
               </tr>
               <tr>
-                <td class="camposDescN12" height="20">
+                <td class="camposDescN12" height="18">
                   <div align="left">Telefonos:</div>
                 </td>
-                <td class="camposDesc12">
+                <td class="camposDesc12" colspan="3">
                   <div align="left">
                     &nbsp;<%= @personastramite.persona.telefono rescue nil %>
                     - <%= @personastramite.persona.telefono_oficina rescue nil %>
                     - <%= @personastramite.persona.celular rescue nil %>
                   </div>
-                </td>
-              </tr>
-              <tr>
-                <td class="camposDescN12" height="20">
-                  <div align="left">Categoria:</div>
-                </td>
-                <td class="camposDesc12">
-                  <div align="left">&nbsp;<%= @personastramite.categoria.codigo_nuevo rescue nil %></div>
                 </td>
               </tr>
             </table>
