@@ -49,10 +49,10 @@ class FacturasController < ApplicationController
     @fch1    = params[:ubicacion][:inicial]
     @fch2    = params[:ubicacion][:final]
     @facturas = Factura.find_by_sql(
-      "SELECT * FROM facturas WHERE DATE_FORMAT(created_at,'%Y-%m-%d') BETWEEN '#{@fch1}' AND '#{@fch2}'"
+      "SELECT * FROM facturas WHERE DATE_FORMAT(CONVERT_TZ(created_at,'+00:00','-05:00'),'%Y-%m-%d') BETWEEN '#{@fch1}' AND '#{@fch2}'"
     )
     @abonos = Abono.find_by_sql(
-      "SELECT * FROM abonos WHERE DATE_FORMAT(created_at,'%Y-%m-%d') BETWEEN '#{@fch1}' AND '#{@fch2}'"
+      "SELECT * FROM abonos WHERE DATE_FORMAT(CONVERT_TZ(created_at,'+00:00','-05:00'),'%Y-%m-%d') BETWEEN '#{@fch1}' AND '#{@fch2}'"
     )
     @egresos = Egreso.find_by_sql(
       "SELECT * FROM egresos WHERE DATE_FORMAT(fecha,'%Y-%m-%d') BETWEEN '#{@fch1}' AND '#{@fch2}'"
@@ -61,7 +61,7 @@ class FacturasController < ApplicationController
       "SELECT DISTINCT t.descripcion, COUNT(1) cant, SUM(f.valor) val
        FROM facturas f
        JOIN tipostramites t ON f.tipostramite_id = t.id
-       WHERE DATE_FORMAT(f.created_at,'%Y-%m-%d') BETWEEN '#{@fch1}' AND '#{@fch2}'
+       WHERE DATE_FORMAT(CONVERT_TZ(f.created_at,'+00:00','-05:00'),'%Y-%m-%d') BETWEEN '#{@fch1}' AND '#{@fch2}'
        GROUP BY t.descripcion"
     )
     respond_to do |format|
@@ -78,10 +78,10 @@ class FacturasController < ApplicationController
     @fch1    = params[:inicial]
     @fch2    = params[:final]
     @facturas = Factura.find_by_sql(
-      "SELECT * FROM facturas WHERE DATE_FORMAT(created_at,'%Y-%m-%d') BETWEEN '#{@fch1}' AND '#{@fch2}'"
+      "SELECT * FROM facturas WHERE DATE_FORMAT(CONVERT_TZ(created_at,'+00:00','-05:00'),'%Y-%m-%d') BETWEEN '#{@fch1}' AND '#{@fch2}'"
     )
     @abonos = Abono.find_by_sql(
-      "SELECT * FROM abonos WHERE DATE_FORMAT(created_at,'%Y-%m-%d') BETWEEN '#{@fch1}' AND '#{@fch2}'"
+      "SELECT * FROM abonos WHERE DATE_FORMAT(CONVERT_TZ(created_at,'+00:00','-05:00'),'%Y-%m-%d') BETWEEN '#{@fch1}' AND '#{@fch2}'"
     )
     @egresos = Egreso.find_by_sql(
       "SELECT * FROM egresos WHERE DATE_FORMAT(fecha,'%Y-%m-%d') BETWEEN '#{@fch1}' AND '#{@fch2}'"
@@ -90,7 +90,7 @@ class FacturasController < ApplicationController
       "SELECT DISTINCT t.descripcion, COUNT(1) cant, SUM(f.valor) val
        FROM facturas f
        JOIN tipostramites t ON f.tipostramite_id = t.id
-       WHERE DATE_FORMAT(f.created_at,'%Y-%m-%d') BETWEEN '#{@fch1}' AND '#{@fch2}'
+       WHERE DATE_FORMAT(CONVERT_TZ(f.created_at,'+00:00','-05:00'),'%Y-%m-%d') BETWEEN '#{@fch1}' AND '#{@fch2}'
        GROUP BY t.descripcion"
     )
   end
@@ -110,7 +110,7 @@ class FacturasController < ApplicationController
       "SELECT DISTINCT t.descripcion, COUNT(1) cant, SUM(f.valor) val
        FROM facturas f
        JOIN tipostramites t ON f.tipostramite_id = t.id
-       WHERE DATE_FORMAT(f.created_at,'%Y-%m-%d') BETWEEN '#{@fch1}' AND '#{@fch2}'
+       WHERE DATE_FORMAT(CONVERT_TZ(f.created_at,'+00:00','-05:00'),'%Y-%m-%d') BETWEEN '#{@fch1}' AND '#{@fch2}'
        GROUP BY t.descripcion"
     )
     respond_to do |format|
@@ -133,7 +133,7 @@ class FacturasController < ApplicationController
       "SELECT DISTINCT t.descripcion, COUNT(1) cant, SUM(f.valor) val
        FROM facturas f
        JOIN tipostramites t ON f.tipostramite_id = t.id
-       WHERE DATE_FORMAT(f.created_at,'%Y-%m-%d') BETWEEN '#{@fch1}' AND '#{@fch2}'
+       WHERE DATE_FORMAT(CONVERT_TZ(f.created_at,'+00:00','-05:00'),'%Y-%m-%d') BETWEEN '#{@fch1}' AND '#{@fch2}'
        GROUP BY t.descripcion"
     )
   end
@@ -149,7 +149,7 @@ class FacturasController < ApplicationController
     @fch1 = params[:ubicacion][:inicial]
     @fch2 = params[:ubicacion][:final]
     @personastramiteshoras = Personastramiteshora.find_by_sql(
-      "SELECT DATE_FORMAT(t.created_at,'%Y-%m-%d') fch,
+      "SELECT DATE_FORMAT(CONVERT_TZ(t.created_at,'+00:00','-05:00'),'%Y-%m-%d') fch,
               p.identificacion,
               CONCAT(p.primer_nombre,' ',p.segundo_nombre) nombre,
               CONCAT(p.primer_apellido,' ',p.segundo_apellido) apellido,
@@ -161,7 +161,7 @@ class FacturasController < ApplicationController
        JOIN   personastramites t  ON t.persona_id = p.id
        JOIN   personastramiteshoras h ON h.personastramite_id = t.id
        JOIN   categorias c ON t.categoria_id = c.id
-       WHERE  DATE_FORMAT(t.created_at,'%Y-%m-%d') BETWEEN '#{@fch1}' AND '#{@fch2}'
+       WHERE  DATE_FORMAT(CONVERT_TZ(t.created_at,'+00:00','-05:00'),'%Y-%m-%d') BETWEEN '#{@fch1}' AND '#{@fch2}'
        ORDER BY p.identificacion, c.nombre, h.fecha ASC"
     )
     @objetos = Objeto.find_by_sql(sql_informeclases_objetos(@fch1, @fch2))
@@ -183,7 +183,7 @@ class FacturasController < ApplicationController
     @fch1 = params[:ubicacion][:inicial]
     @fch2 = params[:ubicacion][:final]
     @personastramiteshoras = Personastramiteshora.find_by_sql(
-      "SELECT DATE_FORMAT(t.created_at,'%Y-%m-%d') fch,
+      "SELECT DATE_FORMAT(CONVERT_TZ(t.created_at,'+00:00','-05:00'),'%Y-%m-%d') fch,
               p.identificacion,
               CONCAT(p.primer_nombre,' ',p.segundo_nombre) nombre,
               CONCAT(p.primer_apellido,' ',p.segundo_apellido) apellido,
@@ -195,7 +195,7 @@ class FacturasController < ApplicationController
        JOIN   personastramites t  ON t.persona_id = p.id
        JOIN   personastramiteshoras h ON h.personastramite_id = t.id
        JOIN   categorias c ON t.categoria_id = c.id
-       WHERE  DATE_FORMAT(t.created_at,'%Y-%m-%d') BETWEEN '#{@fch1}' AND '#{@fch2}'
+       WHERE  DATE_FORMAT(CONVERT_TZ(t.created_at,'+00:00','-05:00'),'%Y-%m-%d') BETWEEN '#{@fch1}' AND '#{@fch2}'
        ORDER BY p.identificacion, c.nombre, h.fecha ASC"
     )
     @objetos = Objeto.find_by_sql(sql_informeclases_objetos(@fch1, @fch2))
@@ -234,7 +234,7 @@ class FacturasController < ApplicationController
   # Consolidado por alumno+categoría (compatible con MySQL ONLY_FULL_GROUP_BY)
   def sql_informeclases_objetos(fch1, fch2)
     <<~SQL.squish
-      SELECT MIN(DATE_FORMAT(t.created_at,'%Y-%m-%d')) AS fch,
+      SELECT MIN(DATE_FORMAT(CONVERT_TZ(t.created_at,'+00:00','-05:00'),'%Y-%m-%d')) AS fch,
              p.identificacion,
              MAX(CONCAT(p.primer_nombre,' ',IFNULL(p.segundo_nombre,''))) AS nombre,
              MAX(CONCAT(p.primer_apellido,' ',IFNULL(p.segundo_apellido,''))) AS apellido,
@@ -247,7 +247,7 @@ class FacturasController < ApplicationController
       JOIN   personastramites t ON t.persona_id = p.id
       JOIN   personastramiteshoras h ON h.personastramite_id = t.id
       JOIN   categorias c ON t.categoria_id = c.id
-      WHERE  DATE_FORMAT(t.created_at,'%Y-%m-%d') BETWEEN '#{fch1}' AND '#{fch2}'
+      WHERE  DATE_FORMAT(CONVERT_TZ(t.created_at,'+00:00','-05:00'),'%Y-%m-%d') BETWEEN '#{fch1}' AND '#{fch2}'
       GROUP BY p.identificacion, t.categoria_id, c.nombre
       ORDER BY p.identificacion, c.nombre
     SQL
