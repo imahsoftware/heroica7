@@ -1,2 +1,17 @@
 <div class="row">
+  <div class="col-md-4 col-sm-6 col-xs-12">
+    <div class="info-box">
+      <span class="info-box-icon bg-green"><i class="fa fa-calendar-check-o"></i></span>
+      <div class="info-box-content">
+        <span class="info-box-text">Gestión académica</span>
+        <span class="info-box-number">
+          <%= link_to_popup horario_programacioneshorarios_path,
+                            popup: ['new_window', 'height=1000,width=1000,scrollbars=yes'],
+                            title: 'Ver programación' do %>
+            Programación de Horario
+          <% end %>
+        </span>
+      </div>
+    </div>
+  </div>
 </div>
