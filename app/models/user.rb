@@ -107,7 +107,7 @@ class User < ApplicationRecord
   end
 
   def self.search(search, isportafolio, page)
-    paginate(page: page, per_page: 15).where("portafolio_id = #{isportafolio} and (geintac = 'N' or geintac is null) and upper(nombre||username) like upper('%%#{replacespace(search.to_s)}%%')").order('nombre')
+    paginate(page: page, per_page: 15).where("portafolio_id = #{isportafolio} and COALESCE(geintac,'') <> 'S' and upper(nombre||username) like upper('%%#{replacespace(search.to_s)}%%')").order('nombre')
   end
 
   def self.searchgeintac(search, page)

@@ -102,7 +102,7 @@ class PortafoliosController < ApplicationController
 
 
   def usuarios
-    @dato1s = User.where("portafolio_id = #{params[:id]} and (geintac = 'N' or geintac is null)").order(:nombre)
+    @dato1s = User.where("portafolio_id = #{params[:id]} and COALESCE(geintac,'') <> 'S'").order(:nombre)
     respond_to do |format|
       format.xlsx{
         response.headers['Content-Disposition'] = 'attachment; filename="Imah_Usuarios_'+"#{Time.now.strftime("%Y%m%d_%X")}"+'.xlsx"'

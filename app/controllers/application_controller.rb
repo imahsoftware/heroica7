@@ -1259,6 +1259,16 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  # Verifica si el usuario administra usuarios (modulo admin/users) SIN redirigir.
+  # Uso para condicionar vistas/botones.
+  helper_method :puede_admin_usuarios?
+  def puede_admin_usuarios?
+    mod = Modulo.find_by(controlador: '/admin/users')
+    mod.present? && Usersmodulo.where(user_id: is_admin, modulo_id: mod.id).exists?
+  rescue StandardError
+    false
+  end
+
   helper_method :is_estudiante
   def is_estudiante
     is_tipoconsulta.to_s == 'CLIENTE'

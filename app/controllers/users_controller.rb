@@ -211,7 +211,7 @@ class UsersController < ApplicationController
       @blockedusers = locked_scope.where(portafolio_id: isportafolio)
       @q = User.ransack(params[:q])
       @users = @q.result
-                 .where("portafolio_id = ? AND (geintac = 'N' OR geintac IS NULL)", isportafolio)
+                 .where("portafolio_id = ? AND COALESCE(geintac,'') <> 'S'", isportafolio)
                  .paginate(:page => params[:page], :per_page => 10)
     end
   end
@@ -238,7 +238,7 @@ class UsersController < ApplicationController
     else
       @blockedusers = User.where(failed_attempts: 3, portafolio_id: is_portafolio)
       @q = User.ransack(params[:q])
-      @users = @q.result.paginate(:page => params[:page], :per_page => 10).where(["portafolio_id= #{is_portafolio} and (geintac = 'N' or geintac is null)"])
+      @users = @q.result.paginate(:page => params[:page], :per_page => 10).where(["portafolio_id= #{is_portafolio} and COALESCE(geintac,'') <> 'S'"])
       if @users.count == 1
         @user = @users.last
         redirect_to edit_user_path(etapa: "A", id: @user.id)
@@ -586,35 +586,26 @@ class UsersController < ApplicationController
 
   def permisosymodulos
     isportafolio = is_portafolio
-    @datos = Objeto.find_by_sql(["
-                      select u.id,u.identificacion, u.nombre, u.username, u.email, u.tipoconsulta, u.observaciones, decode(u.activo,'S','SI','NO') estado,
+    @datos = Objeto.find_by_sql("
+                      select u.id,u.identificacion, u.nombre, u.username, u.email, u.tipoconsulta, u.observaciones, IF(u.activo='S','SI','NO') estado,
                              'MODULO' proceso, m.descripcion modulo, null permiso, null elimina, null actualiza, null crea,
-                             (select descripcion from portafolioscargos where id = u.portafolioscargo_id) cargo
+                             null cargo
                       from   users u, usersmodulos um, modulos m
-                      where  u.portafolio_id = #{isportafolio} and u.tipoconsulta != 'CLIENTE' AND (u.GEINTAC = 'N' OR u.GEINTAC IS NULL)
+                      where  u.portafolio_id = #{isportafolio} and COALESCE(u.tipoconsulta,'') <> 'CLIENTE' AND COALESCE(u.GEINTAC,'') <> 'S'
                       and    u.id = um.user_id
                       and    um.modulo_id = m.id
                       union
-                      select u.id,u.identificacion, u.nombre, u.username, u.email, u.tipoconsulta, u.observaciones, decode(u.activo,'S','SI','NO') estado,
-                             'PERMISO' proceso,null, m.descripcion_ampliada, decode(up.elimina,'S','SI','NO'), decode(up.actualiza,'S','SI','NO'), decode(up.crea,'S','SI','NO'),
-                             (select descripcion from portafolioscargos where id = u.portafolioscargo_id) cargo
+                      select u.id,u.identificacion, u.nombre, u.username, u.email, u.tipoconsulta, u.observaciones, IF(u.activo='S','SI','NO') estado,
+                             'PERMISO' proceso,null, m.descripcion_ampliada, IF(up.elimina='S','SI','NO'), IF(up.actualiza='S','SI','NO'), IF(up.crea='S','SI','NO'),
+                             null cargo
                       from   users u, userspermisos up, objetos m
-                      where  u.portafolio_id = #{isportafolio} and u.tipoconsulta != 'CLIENTE' AND (u.GEINTAC = 'N' OR u.GEINTAC IS NULL)
+                      where  u.portafolio_id = #{isportafolio} and COALESCE(u.tipoconsulta,'') <> 'CLIENTE' AND COALESCE(u.GEINTAC,'') <> 'S'
                       and    u.id = up.user_id
-                      and    up.objeto_id = m.id"])
-    @datos1 = Objeto.find_by_sql(["
-                      select u.id,u.identificacion, u.nombre, u.username, u.email, to_char(u.current_sign_in_at,'DD-MM-YYYY HH24:MM:SS') current_sign_in_at, u.tipoconsulta, decode(u.activo,'S','SI','NO') estado
+                      and    up.objeto_id = m.id")
+    @datos1 = Objeto.find_by_sql("
+                      select u.id,u.identificacion, u.nombre, u.username, u.email, DATE_FORMAT(u.current_sign_in_at,'%d-%m-%Y %H:%i:%s') current_sign_in_at, u.tipoconsulta, IF(u.activo='S','SI','NO') estado
                       from   users u
-                      where  u.portafolio_id = #{isportafolio} and u.tipoconsulta != 'CLIENTE' AND (u.GEINTAC = 'N' OR u.GEINTAC IS NULL)"])
-    @datos2 = Objeto.find_by_sql(["
-                      select u.id,u.identificacion, u.nombre, u.username, u.email, u.tipoconsulta, to_char(i.updated_at,'DD-MM-YYYY HH24:MM:SS') fchgeneracion,
-                             decode(i.metodo,'download_datacollector','download_datacollector',(select nombre from reportes where metodo = i.metodo)) nombre_informe
-                      from   informes i, users u
-                      where  i.portafolio_id = #{isportafolio}
-                      and    i.user_id = u.id
-                      and    u.portafolio_id = #{isportafolio}
-                      and    u.tipoconsulta != 'CLIENTE' AND (u.GEINTAC = 'N' OR u.GEINTAC IS NULL)
-                      order by u.id, i.updated_at desc"])
+                      where  u.portafolio_id = #{isportafolio} and COALESCE(u.tipoconsulta,'') <> 'CLIENTE' AND COALESCE(u.GEINTAC,'') <> 'S'")
     respond_to do |format|
       format.xlsx{
         response.headers['Content-Disposition'] = 'attachment; filename="Imah_Usuarios_'+"#{Time.now.strftime("%Y%m%d_%X")}"+'.xlsx"'

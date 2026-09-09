@@ -2,7 +2,7 @@
 <% if @user.etapa.to_s == "A" %>
   <div class="user-edit-shell">
     <%= render 'users/user_header' unless @user.new_record? %>
-    <% if is_sygma %>
+    <% if is_sygma || puede_admin_usuarios? %>
       <%= render partial: "form", locals: {user: @user} %>
     <% else %>
       <%= render partial: "formotros", locals: {user: @user} %>

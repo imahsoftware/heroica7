@@ -45,6 +45,7 @@ wd.styles do |style|
                      p.crea,
                      p.cargo], :style => [datosiz,datosiz,datosiz,datosiz,datosiz,datoscent,datoscent,datoscent,datosiz,datosiz,datoscent,datoscent,datoscent, datosiz]
     end
+    sheet.column_widths 10, 16, 32, 20, 32, 16, 24, 10, 12, 24, 12, 12, 12, 10, 18
   end
 
   wd.add_worksheet(:name => "Accesos")  do |sheet|
@@ -66,30 +67,7 @@ wd.styles do |style|
                      p.tipoconsulta,
                      p.estado], :style => [datosiz,datosiz,datosiz,datosiz,datosiz,datoscent,datoscent,datoscent,datosiz]
     end
+    sheet.column_widths 10, 16, 34, 20, 34, 20, 16, 10
   end
-
-  wd.add_worksheet(:name => "Informes")  do |sheet|
-    sheet.add_row ["ID IMAH",
-                   "Identificacion",
-                   "Nombre",
-                   "Usuario",
-                   "Email",
-                   "Tipo de Consulta",
-                   "Fecha Generación",
-                   "Nombre del Informe"], :style => [header,header,header,header,header,header,header,header,header,header]
-    for p in @datos2
-      if p.nombre_informe.to_s != ""
-        sheet.add_row [p.id,
-                       p.identificacion,
-                       p.nombre,
-                       p.username,
-                       p.email,
-                       p.tipoconsulta,
-                       p.fchgeneracion,
-                       p.nombre_informe], :style => [datosiz,datosiz,datosiz,datosiz,datosiz,datosiz,datosiz,datosiz,datosiz]
-      end
-    end
-  end
-
 
 end
