@@ -1,0 +1,171 @@
+<div align="center">
+
+  <%# ── Encabezado ─────────────────────────────────────────────────────────── %>
+  <table width="100%" height="77" border="0" cellpadding="0" cellspacing="0" class="sample">
+    <tr>
+      <td width="29%" rowspan="2" valign="middle">
+        <div align="center">
+          <%= informe_image_tag 'logo_heroica.png', style: 'max-width:220px; max-height:80px;' %>
+        </div>
+      </td>
+      <td width="46%" rowspan="2">
+        <div align="center" class="camposDescN16">CONTRATO</div>
+      </td>
+      <td width="11%" height="40">
+        <div align="center">VERSION</div>
+      </td>
+      <td width="13%">
+        <div align="center">2026</div>
+      </td>
+    </tr>
+    <tr>
+      <td height="40">
+        <div align="center">FECHA</div>
+      </td>
+      <td>
+        <div align="center"><%= Time.current.strftime('%d/%m/%Y') %></div>
+      </td>
+    </tr>
+  </table>
+
+  <%# ── Datos del alumno ───────────────────────────────────────────────────── %>
+  <table width="100%" border="0" cellspacing="0" cellpadding="0" class="sample">
+    <tr>
+      <td width="25%" class="camposDescN12">
+        <div align="left">Consecutivo:</div>
+      </td>
+      <td width="25%" class="camposDesc12">
+        <div align="left">&nbsp;<%= @personastramite.id %></div>
+      </td>
+      <td width="20%" class="camposDescN12">
+        <div align="left">Fecha:</div>
+      </td>
+      <td width="30%" class="camposDesc12">
+        <div align="left">&nbsp;<%= @personastramite.created_at&.strftime('%Y-%m-%d') %></div>
+      </td>
+    </tr>
+    <tr>
+      <td class="camposDescN12">
+        <div align="left">Alumno:</div>
+      </td>
+      <td class="camposDesc12" colspan="3">
+        <div align="left">
+          &nbsp;<%= @personastramite.persona.identificacion rescue nil %>
+          - <%= @personastramite.persona.nombres rescue nil %>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="camposDescN12">
+        <div align="left">Categoria:</div>
+      </td>
+      <td class="camposDesc12">
+        <div align="left">&nbsp;<%= @personastramite.categoria.codigo_nuevo rescue nil %></div>
+      </td>
+      <td class="camposDescN12">
+        <div align="left">Precio:</div>
+      </td>
+      <td class="camposDesc12">
+        <div align="left">&nbsp;<%= camponumerico(@personastramite.factura.valor) rescue nil %></div>
+      </td>
+    </tr>
+  </table>
+
+  <%# ── Cláusulas del contrato ─────────────────────────────────────────────── %>
+  <div align="justify" class="camposDesc10" style="margin-top:8px;">
+          Para realizar el curso de conducción en <strong>CEA LA HEROICA</strong> deberá conocer, aceptar y firmar, cada una de las siguientes clausulas.<br/><br/>
+
+          <strong>1. REQUISITOS:</strong> Todo aspirante/candidato debe cumplir con la documentación exigida en la matricula: Ser mayor de 16 años para categorías particulares o mayor de 18 años para categorías públicas; presentar documento de identidad Original; aceptar y firmar el contrato; estar inscrito en el RUNT; cancelar mínimo el 60% del valor de la matricula; presentar y aprobar el examen de aptitud física y mental de coordinación motriz para la categoría que aspira.<br/><br/>
+
+          <strong>2. HORARIO:</strong> El aprendiz se compromete a agendar la capacitación teórico-práctica en el horario acordado entre el cea y el aprendiz. Atención administrativa: Lunes a viernes de 8:00 a 12:00 am y de 2:00 a 6:00 pm, sábados de 08:00 a 12:00 am. Clases teóricas y taller: Lunes a Viernes de 02:00 a 06:00 pm y de lunes a miércoles de 06:00 a 10:00 pm. Clases Prácticas A2, B1 y C1: Lunes a Sábados de 06:00 am a 06:00 pm. Clases Prácticas C2: Lunes a Sábados de 06:00 am a 10:00 am. Por favor no comunicarse fuera de los horarios establecidos ni a números no autorizados, las líneas autorizadas son Línea exclusiva de agendamientos 3113178707, Correo empresa atencionalcliente@laheroica.net, Correo notificaciones jurídicas cealaheroica@laheroica.net.<br/><br/>
+
+          <strong>3. INSTALACIONES:</strong> Debe conservar el orden, la limpieza y la buena conducta, dentro de las instalaciones, preservar el uso de baños, muebles y vehículos, las instalaciones están protegidas por un circuito cerrado de seguridad. Debe cuidar sus objetos personales, el centro de enseñanza no asume la responsabilidad por perdida de objetos personales.<br/><br/>
+
+          <strong>4. PLATAFORMAS:</strong> El curso de conducción debe ser cargado en 4 plataformas simultaneas; PAYNET, RUNT, SICOV, SIET, debe contemplar que pueden presentar intermitencias o interrupciones de interacción ya que todas dependen de conectividad de luz e internet.<br/><br/>
+
+          <strong>5. ASISTENCIA:</strong> El centro de enseñanza no recoge ni deja aprendices en casa, el aprendiz se compromete a llegar de forma puntual al Centro de Enseñanza donde iniciará y terminará la formación de las clases teórico-prácticas 15 minutos antes, llegar después de los 10 minutos de la hora de clase se considera inasistencia. La cancelación de las clases teórico-prácticas, deberá realizarse de forma escrita por la línea exclusiva de agendamiento de whatsapp 3113178707, mínimo con 24 horas de anticipación de la clase, so pena del costo de la misma y la suspensión de la programación, independientemente de la causa de la inasistencia. Después de la fecha de vencimiento de este contrato el aprendiz perderá el derecho de agendamiento de clases y certificación del proceso.<br/><br/>
+
+          <strong>6. AGENDAMIENTO:</strong> El aprendiz debe preinscribir las clases teóricas y prácticas por la línea exclusiva de agendamiento 3113178707, podrá agendar máximo 4 horas teóricas por día y máximo 2 horas prácticas por día. Para agendar el examen teórico el aprendiz debe revisar su correo electrónico y verificar que le haya llegado un mensaje de (soporte aulapp fabrica), con su usuario y contraseña para poder ingresar a la plataforma, y así poder realizar dicho examen teórico. Para el agendamiento de las clases practicas se debe cancelar el 100% del contrato. La programación práctica en vehículos, instructores y aprendices se organiza con anticipación según la disponibilidad del sistema.<br/><br/>
+
+          <strong>7. PAGOS:</strong> Cancelar oportunamente los pagos estipulados, puede cancelar la totalidad del proceso al inicio o financiado así: 60% inicio, 40% agendamiento práctico.<br/><br/>
+
+          <strong>8. CONDUCTO REGULAR:</strong> El estudiante debe dirigirse a los miembros de la institución con respeto por cualquiera de los medios de comunicación telefónica, presencial o escrita, cualquier oportunidad de mejora, queja, petición o felicitación puede informarla al correo atencionalcliente@laheroica.net; la respuesta será resuelta en máximo 5 días hábiles, el centro de enseñanza podrá suspender su curso por este incumplimiento.<br/><br/>
+
+          <strong>9. CALIFICACIÓN DEL SERVICIO:</strong> El estudiante se compromete a diligenciar la encuesta de calificación del servicio al finalizar el curso. Promovemos la mejora continua, su opinión es muy importante para nosotros.<br/><br/>
+
+          <strong>10. HABEAS DATA LEY 1581/2012:</strong> La información del proceso académico únicamente se puede entregar en dirección administrativa al aprendiz matriculado o su acudiente únicamente si es menor de edad. No se autoriza realizar grabaciones al interior de las instalaciones.<br/><br/>
+
+          <strong>11. CONFLICTO DE INTERESES:</strong> No está permitido a los aprendices ni a los instructores sostener ningún tipo de relación diferente al del proceso de capacitación, no está permitido hacer detenciones en los vehículos no autorizadas en las rutas de aprendizaje, ni a consumir alimentos durante las clases prácticas, ni entregar sus números de celular personal. No se permite traer regalos, presentes ni alimentos a los funcionarios.<br/><br/>
+
+          <strong>12. PROCESO ACADEMICO:</strong> Cumplir con los requisitos y procesos académicos exigidos, las clases son bloques de 90 minutos no se pueden abrir antes ni cerrar después y se dictan en horas pares por programación de plataforma, sin embargo deberá contemplar dos horas más de teoría, taller o práctica por compensación de horas en caso que por alguna razón, la clase no se halla cargado correctamente por intermitencia de luz o internet. En las primeras clases prácticas se incluyen las clases de inspección preoperacional y de adaptación de mecanismos del vehículo, estas clases son indispensables antes de poner en marcha el vehículo, adicionalmente en las primeras rutas en la vía, el instructor deberá iniciar la clases en un lugar despejado de actores de la vía por tal razón el instructor deberá conducir el vehículo a una ruta segura donde entregará el vehículo al aprendiz; este tiempo hace parte de la clase ya que se asigna el instructor y el vehículo para tal fin hasta que el aprendiz valla adquiriendo la habilidad progresivamente y conduzca el vehículo completamente. Aun así el instructor podrá tomar el control del vehículo cuando considere necesario por seguridad o en caso que el aprendiz no siga las instrucciones, el instructor está autorizado a suspender la clase. En caso de accidente es obligatorio el reporte y la asistencia médica por medio del SOAT.<br/><br/>
+
+          <strong>13. DEVOLUCION DINEROS:</strong> En ningún caso el Centro de Enseñanza Automovilística LA HEROICA tiene la obligación de realizar devolución de dineros después de la compra del pin ante la plataforma Paynet, tampoco el pago genera la obligación de certificar y aprobar a un candidato, sin haber culminado y aprobado la totalidad del proceso. El pago es Intransferible y está sujeto al número de documento de la persona que realizó la solicitud. El derecho al retracto del consumidor es de 5 días calendario, únicamente si no se ha iniciado la prestación del servicio por medio de la compra del pin en las plataformas de recaudo. Ley 1480 de 2011 art 5 estatuto del consumidor.<br/><br/>
+
+          <strong>14. REPROGRAMACIÓN:</strong> Acepto que, por razones imprevistas de salud de los instructores, mecánicas, ambientales, sanitarias o locativas, puede ocurrir cancelación o reprogramación de los horarios o de los contenidos de las clases.<br/><br/>
+
+          <strong>15. ACOMPAÑANTES:</strong> Acepto que, por seguridad, durante el proceso de enseñanza no puedo traer acompañantes a las clases Teórico-Prácticas, ni certificación, tampoco se entregará información del proceso a ninguna persona diferente del aprendiz. No está permitido el ingreso de niños, bebes, ni mascotas en ninguna parte del proceso del curso.<br/><br/>
+
+          <strong>16. CONTACTO FISICO - Art 210-A Código Penal:</strong> Fui informado que durante el proceso de aprendizaje práctico puede existir involuntariamente algún contacto físico entre el instructor y aprendiz, lo cual será estrictamente profesional o por seguridad del proceso de aprendizaje. Entiendo que, de sentirme incomodo, hostigado, perseguido o asediado física o verbalmente, podre exponer la situación según el conducto regular.<br/><br/>
+
+          <strong>17. SEGURIDAD SGSST:</strong> En las clases de automóvil o camión debe usar siempre el cinturón de seguridad y no puede hacer uso del teléfono celular, en las clases de motocicleta es obligatorio el casco certificado; jean, zapato cerrado, preferiblemente que cubra el tobillo, uso de guantes cerrados; las rodilleras y coderas serán suministradas por el centro de enseñanza, no traer accesorios que pongan en riesgo la seguridad de la clase.<br/><br/>
+
+          <strong>18. PESV RUTAS SEGURAS:</strong> El aprendiz se compromete a cumplir el rutograma y política de velocidad, el CEA dispone de rutas seguras para el aprendizaje, todos los vehículos se encuentran georreferenciados por GPS y presentan alertas de seguridad en caso de violar las geocercas o cambio de rutas autorizadas, detenciones prolongadas, o velocidades superiores a 50 km. Se podrá suspender la clase e inactivar el aprendiz.<br/><br/>
+
+          <strong>19. ESTADO FISICO Y MENTAL:</strong> No puede asistir a clase con exceso de sueño, ni bajo efectos de alcohol, ni sustancias psicoactivas, si presenta alguna situación de alteración física, emocional o psicológica debe informarnos. Es obligación del aprendiz presentar el certificado Apto del centro de reconocimiento de conductores en la categoría que aspira matricularse para el curso de conducción. El centro de enseñanza no se hace responsable por los resultados ni la información entregada en la evaluación médica del centro de reconocimiento de conductores. La prueba psicosensometrica o examen medico tiene una vigencia de 180 días calendario, si permite que esta prueba venza, deberá hacerla nuevamente y cancelar el costo total de la misma.<br/><br/>
+
+          <strong>20. PLAZOS MAXIMOS Y MINIMOS:</strong> La totalidad del curso y certificación, debe realizarse en el intervalo máximo de 90 días calendario con modalidad intermitente es decir según la disponibilidad de tiempo del aprendiz, en caso de superar ese tiempo se considera vencido el contrato y los términos de responsabilidad del CEA, el aprendiz podrá solicitar al área jurídica de la empresa una reactivación de contrato por un valor de 200.000 por cada categoría vencida, el cual le otorgara 30 días calendario por cada categoría para finalizar el curso. En caso de que la reactivación implique un cambio de año, se realizará el respectivo ajuste del valor del curso en el nuevo año. La práctica no puede superar los 60 días después de haber sido iniciada la primera clase, so pena de que al pasar este tiempo el estudiante queda inactivo en todas las plataformas sin posibilidad de prorrogas.<br/><br/>
+
+          <strong>21. MENORES DE EDAD:</strong> Si el aprendiz es menor de edad debe firmar este contrato con un acudiente mayor de edad.<br/><br/>
+
+          <strong>22. CERTIFICACIÓN:</strong> Para poder ser certificado deberá haber realizado y aprobado la totalidad del curso con mínimo 90% de conocimientos, habilidades y destrezas en conducción. El resultado de la certificación podrá ser APTO O NO APTO, de acuerdo a los resultados totales del proceso de evaluación.<br/><br/>
+
+          <strong>23. CALE-UNAD RES 20253040054055 / 30 DIC 2025:</strong> Fui informado sobre el marco regulatorio del CALE y entiendo que la UNAD tiene la facultad de evaluar todos los conductores que aspiren obtener una licencia de conducción por medio del examen teórico práctico, el cual implica un valor que debe ser cancelado directamente a la UNAD, este requisito será exigido por los organismos de tránsito para realizar la entrega de la licencia de conducción; la presentación, costo y resultado del examen es responsabilidad exclusiva del usuario y debe realizarla cuando ya sea certificado por el CEA.<br/><br/>
+
+          <strong>24. INFORMACIÓN:</strong> Finalmente autorizo al Centro de Enseñanza Automovilística a utilizar la información suministrada durante mi proceso de evaluación para generar datos estadísticos. Manifiesto que el Centro de Enseñanza Automovilística proporciono la descripción vigente y detallada del proceso de certificación, incluida las tarifas, los documentos que contienen los requisitos para la certificación, los derechos y deberes de los usuarios.<br/><br/>
+
+          <strong>25. VERACIDAD:</strong> Declaro al Centro de Enseñanza Automovilística que la información suministrada corresponde estrictamente a la verdad. Igualmente declaro que acepto los requisitos de capacitación en este Centro de Enseñanza Automovilística y acepto que fui informado de la totalidad de las clausulas, confirmo que lo he leído y entendido en su totalidad.<br/><br/>
+
+          <strong>26. ACEPTACIÓN:</strong> Conozco y acepto las anteriores disposiciones. Mediante la firma del presente documento, doy fe de cumplimiento de los requisitos y condiciones mencionados en él y aquellos que se den durante el proceso de certificación del Centro de Enseñanza Automovilística.<br/><br/>
+
+          <strong>27. PRINCIPIO DE CONSERVACIÓN DEL CONTRATO:</strong> Las partes acuerdan que el presente contrato se rige por el principio de conservación del contrato, en virtud del cual, en caso de que una o varias de sus estipulaciones sean declaradas nulas, ineficaces, inexigibles o inválidas total o parcialmente, dicha circunstancia no afectará la validez, existencia ni ejecutabilidad del contrato en su integridad, el cual continuará produciendo plenos efectos jurídicos. En tal evento, las partes se obligan a sustituir la cláusula afectada por otra disposición válida que, en la mayor medida posible, conserve la finalidad económica, jurídica y la intención original de las partes al momento de la celebración del contrato, garantizando su equilibrio y ejecución conforme a la ley.
+  </div>
+
+  <%# ── Firmas ─────────────────────────────────────────────────────────────── %>
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr valign="bottom">
+      <td width="49%" height="50">
+        <div align="center">______________________________________</div>
+      </td>
+      <td width="5%">&nbsp;</td>
+      <td width="46%" height="50">
+        <div align="center">______________________________________</div>
+      </td>
+    </tr>
+    <tr>
+      <td class="camposDescN12">
+        <div align="center">FIRMA AUTORIZADO</div>
+      </td>
+      <td>&nbsp;</td>
+      <td class="camposDescN12">
+        <div align="center">FIRMA DEL APRENDIZ / ACUDIENTE</div>
+      </td>
+    </tr>
+  </table>
+
+  <%# ── Pie de página ──────────────────────────────────────────────────────── %>
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td width="60%" class="camposDesc11">
+        <div align="left">
+          <%= Time.current.strftime("%Y-%m-%d %X") %> - <%= User.find(is_admin).nombre rescue nil %>
+        </div>
+      </td>
+      <td width="40%" class="camposDesc11">
+        <div align="right">
+          <a href="javascript:window.print()" class="imprimirlink">Imprimir</a>&nbsp;&nbsp;
+        </div>
+      </td>
+    </tr>
+  </table>
+
+</div>

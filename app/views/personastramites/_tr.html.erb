@@ -70,6 +70,12 @@
           data: { toggle: 'tooltip', turbo: false } do %>
         <i class="fa fa-info-circle"></i>
       <% end %>
+      <%= link_to_popup contrato_persona_personastramite_path(persona, personastramite, format: :pdf),
+          popup: popup_ventana_grande,
+          class: 'btn btn-xs btn-default', title: 'Contrato',
+          data: { toggle: 'tooltip', turbo: false } do %>
+        <i class="fa fa-file-text-o"></i>
+      <% end %>
 
       <div class="btn-group btn-group-xs">
         <button type="button"
