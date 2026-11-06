@@ -76,6 +76,12 @@
           data: { toggle: 'tooltip', turbo: false } do %>
         <i class="fa fa-file-text-o"></i>
       <% end %>
+      <%= link_to_popup certificado_persona_personastramite_path(persona, personastramite, format: :pdf),
+          popup: popup_ventana_grande,
+          class: 'btn btn-xs btn-default', title: 'Certificado',
+          data: { toggle: 'tooltip', turbo: false } do %>
+        <i class="fa fa-graduation-cap"></i>
+      <% end %>
 
       <div class="btn-group btn-group-xs">
         <button type="button"

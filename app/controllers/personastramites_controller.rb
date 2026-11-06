@@ -4,7 +4,7 @@ class PersonastramitesController < ApplicationController
   before_action :set_persona
   before_action :set_personastramite, only: [:show, :edit, :update, :destroy,
                                              :registroclase, :registrosolicitud,
-                                             :diploma, :acuerdocomercial, :contrato,
+                                             :diploma, :certificado, :acuerdocomercial, :contrato,
                                              :teorico, :practica, :practicam,
                                              :crearfactura]
 
@@ -113,6 +113,11 @@ class PersonastramitesController < ApplicationController
   def diploma
     @nombre = params[:nombredip]
     respond_informe_pdf("diploma_#{@personastramite.id}", orientation: 'Landscape')
+  end
+
+  # GET /personas/:persona_id/personastramites/:id/certificado
+  def certificado
+    respond_informe_pdf("certificado_#{@personastramite.id}", orientation: 'Landscape')
   end
 
   # GET /personas/:persona_id/personastramites/:id/acuerdocomercial
@@ -237,7 +242,7 @@ class PersonastramitesController < ApplicationController
       'basico'
     elsif %w[registroclase registrosolicitud acuerdocomercial contrato].include?(action_name)
       'informes'
-    elsif action_name == 'diploma'
+    elsif %w[diploma certificado].include?(action_name)
       'blank'
     else
       'application_personas'

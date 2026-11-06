@@ -1,0 +1,5 @@
+<%= render partial: 'certificado_imagen', locals: {
+      persona: @personastramite.persona,
+      curso:   (@personastramite.categoria.nombre rescue nil),
+      fecha:   Date.current
+    } %>

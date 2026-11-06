@@ -286,6 +286,7 @@ Rails.application.routes.draw do
         get  'registroclase'
         get  'registrosolicitud'
         get  'diploma'
+        get  'certificado'
         get  'acuerdocomercial'
         get  'contrato'
         get  'teorico'

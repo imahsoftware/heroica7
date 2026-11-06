@@ -1,0 +1,135 @@
+<%#
+  Plantilla de certificado/diploma sobre la imagen de fondo certificado_boceto.jpeg
+  Locals:
+    persona -> objeto Persona (nombres, tipodocumento, identificacion, expedida)
+    curso   -> texto del curso (sobre: ____)
+    fecha   -> Date a imprimir
+%>
+<%
+  meses = %w[enero febrero marzo abril mayo junio julio agosto septiembre octubre noviembre diciembre]
+  dia   = fecha.day
+  mes   = meses[fecha.month - 1]
+  anio  = fecha.year
+%>
+<style>
+  html, body { margin: 0; padding: 0; background: #ffffff; }
+  .cert-wrap { width: 100%; text-align: center; }
+  .cert {
+    position: relative;
+    width: 100%;
+    max-width: 1123px;
+    margin: 0 auto;
+    aspect-ratio: 1999 / 1426;
+    container-type: inline-size;
+  }
+  /* Imagen de fondo como <img> real: SÍ se imprime (a diferencia de background) */
+  .cert .cert-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+    z-index: 0;
+  }
+  .cert .campo {
+    position: absolute;
+    z-index: 1;
+    display: flex;
+    align-items: flex-end;
+    font-family: 'Century Gothic', 'Trebuchet MS', Arial, sans-serif;
+    font-size: 1.55cqw;
+    font-weight: 600;
+    line-height: 1;
+    white-space: nowrap;
+    color: #1a1a1a;
+    overflow: hidden;
+    border: 0 !important;
+    outline: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  .cert .c-left   { justify-content: flex-start; }
+  .cert .c-center { justify-content: center; }
+  .cert .c-upper  { text-transform: uppercase; }
+  .cert .c-small  { font-size: 1.05cqw; }
+  .cert .c-tipo   { font-size: 1.05cqw; }
+  .cert .c-curso  { font-size: 1.30cqw; }
+
+  .btn-imprimir {
+    display: inline-block; margin: 14px auto; padding: 8px 20px;
+    background: #b91c1c; color: #fff; border: none; border-radius: 6px;
+    font-family: Arial, sans-serif; font-size: 14px; cursor: pointer;
+  }
+
+  @media print {
+    @page { size: A4 landscape; margin: 0; }
+    html, body { width: 100%; height: 100%; margin: 0; padding: 0; }
+    .btn-imprimir { display: none; }
+    .cert-wrap { width: 100%; }
+    /* Ajustar por ALTURA para que quepa en una sola hoja horizontal */
+    .cert {
+      width: auto;
+      height: 100vh;
+      max-width: 100vw;
+      margin: 0 auto;
+    }
+  }
+</style>
+
+<div class="cert-wrap">
+  <button type="button" class="btn-imprimir" onclick="window.print()">Imprimir</button>
+
+  <div class="cert">
+    <img class="cert-bg" src="<%= informe_image_data_uri('certificado_boceto.jpeg') %>" alt="">
+
+    <%# Nombre completo (Que ____) %>
+    <div class="campo c-left c-upper"
+         style="left:14.257%; width:67.634%; top:50.912%; height:2.945%;">
+      <%= persona.nombres rescue nil %>
+    </div>
+
+    <%# Tipo de documento (Identificado con ____) %>
+    <div class="campo c-center c-tipo"
+         style="left:24.012%; width:13.507%; top:53.997%; height:2.945%;">
+      <%= persona.tipodocumento rescue nil %>
+    </div>
+
+    <%# Numero de documento (No. ____) %>
+    <div class="campo c-center"
+         style="left:41.270%; width:17.659%; top:53.997%; height:2.945%;">
+      <%= persona.identificacion rescue nil %>
+    </div>
+
+    <%# Lugar de expedicion (Expedida en ____) %>
+    <div class="campo c-center"
+         style="left:68.034%; width:13.857%; top:53.997%; height:2.945%;">
+      <%= persona.expedida rescue nil %>
+    </div>
+
+    <%# Curso (sobre: ____) %>
+    <div class="campo c-left c-upper c-curso"
+         style="left:44.522%; width:37.369%; top:57.013%; height:2.945%;">
+      <%= curso %>
+    </div>
+
+    <%# Dia %>
+    <div class="campo c-center"
+         style="left:27.914%; width:9.005%; top:65.778%; height:2.945%;">
+      <%= dia %>
+    </div>
+
+    <%# Mes en letras %>
+    <div class="campo c-center c-small"
+         style="left:48.024%; width:6.003%; top:65.778%; height:2.945%;">
+      <%= mes %>
+    </div>
+
+    <%# Anio %>
+    <div class="campo c-center"
+         style="left:57.029%; width:5.153%; top:65.778%; height:2.945%;">
+      <%= anio %>
+    </div>
+  </div>
+</div>
