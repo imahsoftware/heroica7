@@ -38,6 +38,20 @@ class Persona < ApplicationRecord
     end
   end
 
+  # Sigla corta del tipo de documento, para certificados (cabe al tamano comun)
+  def sigladocumento
+    case documento.to_s.upcase
+    when 'CC'  then 'C.C.'
+    when 'TI'  then 'T.I.'
+    when 'CE'  then 'C.E.'
+    when 'PAS' then 'PAS.'
+    when 'NIT' then 'NIT'
+    when 'PEP' then 'PEP'
+    when 'PPT' then 'PPT'
+    else documento.to_s.upcase
+    end
+  end
+
   def generos
     case genero.to_s
     when 'true'  then 'MASCULINO'

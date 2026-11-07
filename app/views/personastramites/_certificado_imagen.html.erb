@@ -1,7 +1,7 @@
 <%#
-  Plantilla de certificado/diploma sobre la imagen de fondo certificado_boceto.jpeg
+  Plantilla de certificado/diploma sobre la imagen certificado_boceto.jpeg
   Locals:
-    persona -> objeto Persona (nombres, tipodocumento, identificacion, expedida)
+    persona -> Persona (nombres, sigladocumento, identificacion, expedida)
     curso   -> texto del curso (sobre: ____)
     fecha   -> Date a imprimir
 %>
@@ -21,23 +21,23 @@
     margin: 0 auto;
     aspect-ratio: 1999 / 1426;
     container-type: inline-size;
+
+    /* === Tamano de letra COMUN para todos los campos (fijo) === */
+    /* 1.0cqw = 20px sobre 1999: el mayor al que "septiembre" cabe en su linea */
+    --cert-fs: 1.0cqw;
   }
-  /* Imagen de fondo como <img> real: SÍ se imprime (a diferencia de background) */
   .cert .cert-bg {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: fill;
-    z-index: 0;
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    object-fit: fill; z-index: 0;
   }
+  /* Todos los campos: mismo tamano, fuente, peso y color */
   .cert .campo {
     position: absolute;
     z-index: 1;
     display: flex;
     align-items: flex-end;
     font-family: 'Century Gothic', 'Trebuchet MS', Arial, sans-serif;
-    font-size: 1.55cqw;
+    font-size: var(--cert-fs);
     font-weight: 600;
     line-height: 1;
     white-space: nowrap;
@@ -53,9 +53,6 @@
   .cert .c-left   { justify-content: flex-start; }
   .cert .c-center { justify-content: center; }
   .cert .c-upper  { text-transform: uppercase; }
-  .cert .c-small  { font-size: 1.05cqw; }
-  .cert .c-tipo   { font-size: 1.05cqw; }
-  .cert .c-curso  { font-size: 1.30cqw; }
 
   .btn-imprimir {
     display: inline-block; margin: 14px auto; padding: 8px 20px;
@@ -68,13 +65,7 @@
     html, body { width: 100%; height: 100%; margin: 0; padding: 0; }
     .btn-imprimir { display: none; }
     .cert-wrap { width: 100%; }
-    /* Ajustar por ALTURA para que quepa en una sola hoja horizontal */
-    .cert {
-      width: auto;
-      height: 100vh;
-      max-width: 100vw;
-      margin: 0 auto;
-    }
+    .cert { width: auto; height: 100vh; max-width: 100vw; margin: 0 auto; }
   }
 </style>
 
@@ -84,52 +75,84 @@
   <div class="cert">
     <img class="cert-bg" src="<%= informe_image_data_uri('certificado_boceto.jpeg') %>" alt="">
 
-    <%# Nombre completo (Que ____) %>
+    <%# Nombre (Que ____) — izquierda %>
     <div class="campo c-left c-upper"
          style="left:14.257%; width:67.634%; top:50.912%; height:2.945%;">
       <%= persona.nombres rescue nil %>
     </div>
 
-    <%# Tipo de documento (Identificado con ____) %>
-    <div class="campo c-center c-tipo"
+    <%# Tipo de documento (Identificado con ____) — sigla, centrado %>
+    <div class="campo c-center"
          style="left:24.012%; width:13.507%; top:53.997%; height:2.945%;">
-      <%= persona.tipodocumento rescue nil %>
+      <%= persona.sigladocumento rescue nil %>
     </div>
 
-    <%# Numero de documento (No. ____) %>
+    <%# Numero (No. ____) — centrado %>
     <div class="campo c-center"
          style="left:41.270%; width:17.659%; top:53.997%; height:2.945%;">
       <%= persona.identificacion rescue nil %>
     </div>
 
-    <%# Lugar de expedicion (Expedida en ____) %>
+    <%# Lugar de expedicion (Expedida en ____) — centrado %>
     <div class="campo c-center"
          style="left:68.034%; width:13.857%; top:53.997%; height:2.945%;">
       <%= persona.expedida rescue nil %>
     </div>
 
-    <%# Curso (sobre: ____) %>
+    <%# Curso (sobre: ____) — izquierda; solo este puede reducirse si no cabe %>
     <div class="campo c-left c-upper c-curso"
          style="left:44.522%; width:37.369%; top:57.013%; height:2.945%;">
       <%= curso %>
     </div>
 
-    <%# Dia %>
+    <%# Dia — centrado %>
     <div class="campo c-center"
          style="left:27.914%; width:9.005%; top:65.778%; height:2.945%;">
       <%= dia %>
     </div>
 
-    <%# Mes en letras %>
-    <div class="campo c-center c-small"
-         style="left:48.024%; width:6.003%; top:65.778%; height:2.945%;">
+    <%# Mes en letras — centrado (cuadro ampliado 957-1080 px) %>
+    <div class="campo c-center"
+         style="left:47.874%; width:6.153%; top:65.778%; height:2.945%;">
       <%= mes %>
     </div>
 
-    <%# Anio %>
+    <%# Anio — centrado %>
     <div class="campo c-center"
          style="left:57.029%; width:5.153%; top:65.778%; height:2.945%;">
       <%= anio %>
     </div>
   </div>
 </div>
+
+<script>
+  /* Solo el CURSO se reduce si no cabe: pasos hasta un piso del 80% del tamano
+     comun; si aun asi no cabe, se permite en dos lineas. El resto NUNCA cambia. */
+  (function () {
+    var cert = document.querySelector('.cert');
+    if (!cert) return;
+    function fitCurso() {
+      var curso = cert.querySelector('.c-curso');
+      if (!curso) return;
+      var cw = cert.clientWidth || 1;
+      curso.style.whiteSpace = 'nowrap';
+      curso.style.overflow   = 'hidden';
+      curso.style.fontSize   = '';                               // vuelve al tamano comun
+      var cqw = (parseFloat(getComputedStyle(curso).fontSize) || 0) / cw * 100;
+      var piso = cqw * 0.8;
+      var guard = 0;
+      while (curso.scrollWidth > curso.clientWidth + 1 && cqw > piso && guard < 80) {
+        cqw -= 0.02; guard++;
+        curso.style.fontSize = cqw.toFixed(2) + 'cqw';
+      }
+      if (curso.scrollWidth > curso.clientWidth + 1) {           // ultimo recurso: dos lineas
+        curso.style.whiteSpace = 'normal';
+        curso.style.overflow   = 'visible';
+      }
+    }
+    window.addEventListener('load', fitCurso);
+    window.addEventListener('beforeprint', fitCurso);
+    window.addEventListener('resize', fitCurso);
+    if (document.readyState === 'complete') fitCurso();
+  })();
+</script>
